@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style.php" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="tl_style.invisible.0">
+        <source>Invisible</source>
+        <target>Invisibel</target>
+      </trans-unit>
+      <trans-unit id="tl_style.invisible.1">
+        <source>Do not export the format definition.</source>
+        <target>Betg exportar questa definiziun da formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.0">
+        <source>Selector</source>
+        <target>Selectur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.1">
+        <source>The selector defines to which element(s) the format definition applies.</source>
+        <target>Il selectur definescha per tge element(s) che questa definiziun da formataziun vala.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.0">
+        <source>Category</source>
+        <target>Categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.1">
+        <source>Categories can be used to group format definitions in the back end.</source>
+        <target>Categorias pon vegnir utilisadas per gruppar definiziuns da formataziun en il back-end.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.0">
+        <source>Comment</source>
+        <target>Commentari</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.1">
+        <source>Here you can add a comment.</source>
+        <target>Qua pos ti agiuntar in commentari.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.0">
+        <source>Size</source>
+        <target>Grondezza</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.1">
+        <source>Width, height, min-width, min-height, max-width and max-height.</source>
+        <target>Width, height, min-width, min-height, max-width e max-height.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.0">
+        <source>Width</source>
+        <target>Largezza</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.1">
+        <source>Here you can enter the element's width.</source>
+        <target>Qua pos ti definir la largezza da l'element.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.0">
+        <source>Height</source>
+        <target>Autezza</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.1">
+        <source>Here you can enter the element's height.</source>
+        <target>Qua pos ti definir l'autezza da l'element.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.0">
+        <source>Minimum width</source>
+        <target>Largezza minimala</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.1">
+        <source>Here you can enter the element's minimum width.</source>
+        <target>Qua pos ti endatar la largezza minimala da l'element.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.0">
+        <source>Minimum height</source>
+        <target>Autezza minimala</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.1">
+        <source>Here you can enter the element's minimum height.</source>
+        <target>Qua pos ti endatar l'autezza minimala da l'element. </target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.0">
+        <source>Maximum width</source>
+        <target>Largezza maximala</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.1">
+        <source>Here you can enter the element's maximum width.</source>
+        <target>Qua pos ti endatar la largezza maximala da l'element.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.0">
+        <source>Maximum height</source>
+        <target>Autezza maximala</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.1">
+        <source>Here you can enter the element's maximum height.</source>
+        <target>Qua pos ti endatar l'autezza maximala da l'element.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.0">
+        <source>Position</source>
+        <target>Posiziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.1">
+        <source>Position, float, clear, overflow and display.</source>
+        <target>Position, float, clear, overflow e display.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.0">
+        <source>Position</source>
+        <target>Posiziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.1">
+        <source>Here you can enter the top, right, bottom and left position.</source>
+        <target>Qua pos ti endatar la posiziun sura, a dretga, sut ed a sanestra.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.0">
+        <source>Position type</source>
+        <target>Tip da posiziunar</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.1">
+        <source>Here you can choose the position type.</source>
+        <target>Qua pos ti tscherner il tip da posiziunar</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.0">
+        <source>Float</source>
+        <target>Float</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.1">
+        <source>Here you can choose the float type.</source>
+        <target>Qua pos ti tscherner il tip da float.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.0">
+        <source>Clear</source>
+        <target>Clear</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.1">
+        <source>Here you can choose the clear type.</source>
+        <target>Qua pos ti tscherner il tip da clear.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.0">
+        <source>Overflow</source>
+        <target>Overflow</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.1">
+        <source>Here you can choose the overflow behaviour.</source>
+        <target>Qua pos ti definir il cumportament en cas dad overflow.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.0">
+        <source>Display</source>
+        <target>Display</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.1">
+        <source>Here you can choose the display type.</source>
+        <target>Qua pos ti definir il tip da display.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.0">
+        <source>Margin, padding and alignment</source>
+        <target>Margin, padding ed alignment</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.1">
+        <source>Margin, padding, align, vertical-align, text-align and white-space.</source>
+        <target>Margin, padding, align, vertical-align, text-align ewhite-space.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.0">
+        <source>Margin</source>
+        <target>Margin (distanza dador)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>Qua pos ti endatar la distanza dador sura, a dretga, sut ed a sanestra.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.0">
+        <source>Padding</source>
+        <target>Padding (distanza dadens)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.1">
+        <source>Here you can enter the top, right, bottom and left padding.</source>
+        <target>Qua pos ti endatar la distanza dadens sura, a dretga, sut ed a sanestra.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.0">
+        <source>Element alignment</source>
+        <target>Alingiament da l'element</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.1">
+        <source>To align an element, its left and right margin will be overwritten.</source>
+        <target>Per drizzar ora l'element vegn il 'margin' dretg e sanester surscrit.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.0">
+        <source>Vertical alignment</source>
+        <target>Alingiament vertical</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.1">
+        <source>Here you can choose the vertical alignment.</source>
+        <target>Qua pos ti tscherner l'alingiament vertical</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.0">
+        <source>Text alignment</source>
+        <target>Alingiament dal text</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.1">
+        <source>Here you can choose the horizontal text alignment.</source>
+        <target>Qua pos ti tscherner l'alingiament orizontal dal text.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>White-space</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Qua pos ti definir sco ch'il white-space entaifer in element vegn tractà.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.0">
+        <source>Background</source>
+        <target>Fund davos</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.1">
+        <source>Background-color, background-image, background-position, background-repeat, box-shadow and linear-gradient.</source>
+        <target>Background-color, background-image, background-position, background-repeat, box-shadow e linear-gradient.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.0">
+        <source>Background color and opacity</source>
+        <target>Colur dal fund davos e fermezza da cuvrir</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.1">
+        <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Qua pos ti endatar ina valur hexadecimala per la colur dal fund davos (p. ex. ff0000 per cotschen) sco era opziunal la fermezza da cuvrir en pertschient (p. ex. 75).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.0">
+        <source>Background image</source>
+        <target>Maletg dal fund davos</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.1">
+        <source>Here you can enter the path to a background image.</source>
+        <target>Qua pos ti endatar il decurs ad ina maletg per il fund davos.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.0">
+        <source>Background position</source>
+        <target>Posiziun dal fund davos</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.1">
+        <source>Here you can select the position of the background image.</source>
+        <target>Qua pos ti tscherner la posiziun dal maletg da fund davos.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.0">
+        <source>Background repeat</source>
+        <target>Repeter il fund davos</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.1">
+        <source>Here you can select the repeating mode.</source>
+        <target>Qua pos ti definir sche e co ch'il fund davos duai vegnir repetì.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.0">
+        <source>Shadow size</source>
+        <target>Grondezza da la sumbriva</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.1">
+        <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+        <target>Qua pos ti endatar l'offset en direcziun X ed Y, sco era opziunalmain ina valur per il diffus ed in radios da diffusiun.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.0">
+        <source>Shadow color and opacity</source>
+        <target>Colur ed fermezza da colur da la sumbriva</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.1">
+        <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Qua pos ti endatar ina valur hexadecimala per la colur da la sumbriva (p. ex. ff0000 per cotschen) ed ina fermezza da colur en pertschient (p. ex. 75).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.0">
+        <source>Gradient angle</source>
+        <target>Angul dal decurs</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.1">
+        <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+        <target>Qua pos ti endatar l'angel dal gradient (p. ex. &lt;em&gt;0deg&lt;/em&gt;) ni la direcziun (p. ex. &lt;em&gt;to bottom&lt;/em&gt; u &lt;em&gt;to top right&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.0">
+        <source>Gradient colors</source>
+        <target>Colurs dal decurs</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.1">
+        <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
+        <target>Ti pos endatar enfin quatter colurs cun ina valur en pertschient opziunala (p. ex. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.0">
+        <source>Border</source>
+        <target>Ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.1">
+        <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
+        <target>Border-width, border-style, border-color, border-radius, border-collapse e border-spacing.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.0">
+        <source>Border width</source>
+        <target>Largezza da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.1">
+        <source>Here you can enter the top, right, bottom and left border width.</source>
+        <target>Qua pos ti endatar la largezza da l'ur sura, a dretga, sut ed a sanestra.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.0">
+        <source>Border style</source>
+        <target>Stil da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.1">
+        <source>Here you can choose the border style.</source>
+        <target>Qua pos ti tscherner il stil da l'ur.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.0">
+        <source>Border color and opacity</source>
+        <target>Colur e fermezza da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.1">
+        <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Qua pos ti endatar ina valur hexadecimala per la colur da l'ur (p. ex . ff0000 per cotschen) ed ina fermezza da la colur en pertschient (p. ex. 75).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.0">
+        <source>Border radius</source>
+        <target>Radius da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.1">
+        <source>Here you can enter the top, right, bottom and left border radius.</source>
+        <target>Qua pos ti endatar il radius da l'ur sura sanester, sura dretg, sut dretg e sut sanester.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.0">
+        <source>Border handling</source>
+        <target>Model da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.1">
+        <source>Here you can choose the border handling.</source>
+        <target>Qua pos ti tscherner il model da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.0">
+        <source>Border spacing</source>
+        <target>Distanza da l'ur (border spacing)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.1">
+        <source>Here you can enter the border spacing.</source>
+        <target>Qua pos ti definir la distanza da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.0">
+        <source>Font</source>
+        <target>Scrittira</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.1">
+        <source>Font-family, font-size, font-color, line-height, font-style, text-transform, text-indent, letter-spacing and word-spacing.</source>
+        <target>Font-family, font-size, font-color, line-height, font-style, text-transform, text-indent, letter-spacing e word-spacing.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.0">
+        <source>Font family</source>
+        <target>Scrittiras</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.1">
+        <source>Here you can enter a comma separated list of font types.</source>
+        <target>Qua pos ti endatar ina glista separada entras commas cun las scrittiras.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.0">
+        <source>Font size</source>
+        <target>Grondezza da la scrittira</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.1">
+        <source>Here you can enter the font size.</source>
+        <target>Qua pos ti endatar la grondezza da la scrittira.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.0">
+        <source>Font color and opacity</source>
+        <target>Colur e fermezza</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.1">
+        <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Qua pos ti endatar ina valur hexadecimala per la colur da la scrittira (p. ex . ff0000 per cotschen) ed ina fermezza da la colur en pertschient (p. ex. 75).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.0">
+        <source>Line height</source>
+        <target>Autezza da la lingia</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.1">
+        <source>Here you can define the line height.</source>
+        <target>Qua pos ti definir l'autezza da la lingia</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.0">
+        <source>Font style</source>
+        <target>Stil da la scrittira</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.1">
+        <source>Here you can choose one or more font styles.</source>
+        <target>Qua pos ti tscherner in u plirs stils per la scrittira</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.0">
+        <source>Text transform</source>
+        <target>Text-transform</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.1">
+        <source>Here you can choose a text transformation mode.</source>
+        <target>Qua pos ti tscherner il modus da text-transform.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.0">
+        <source>Text indent</source>
+        <target>Incisiun dal text</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.1">
+        <source>Here you can enter a text indentation.</source>
+        <target>Qua pos ti definir l'incisiun dal text.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.0">
+        <source>Letter spacing</source>
+        <target>Distanza tranter caracters</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.1">
+        <source>Here you can modify the letter spacing (default: 0px).</source>
+        <target>Qua pos ti midar la distanza tranter caracters (standard: 0px).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.0">
+        <source>Word spacing</source>
+        <target>Distanza tranter pleds</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.1">
+        <source>Here you can modify the word spacing (default: 0px).</source>
+        <target>Qua pos ti definir la distanza tranter pleds (standard: 0px).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.0">
+        <source>List</source>
+        <target>Glista</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.1">
+        <source>List-style-type and list-style-image.</source>
+        <target>List-style-type e list-style-image.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.0">
+        <source>List symbol</source>
+        <target>Simbol da la glista</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.1">
+        <source>Here you can choose a list symbol.</source>
+        <target>Qua pos ti tscherner in simbol da glista</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.0">
+        <source>Custom symbol</source>
+        <target>Simbol persunalisà</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.1">
+        <source>Here you can enter the path to an individual symbol.</source>
+        <target>Qua pos ti endatar il decurs ad in simbol persunalisà.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.0">
+        <source>Custom code</source>
+        <target>Code persunalisà</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.1">
+        <source>Here you can enter custom CSS code.</source>
+        <target>Qua pos ti endatar agen code da CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector_legend">
+        <source>Selector and category</source>
+        <target>Selectur e categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size_legend">
+        <source>Size</source>
+        <target>Grondezza</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position_legend">
+        <source>Position</source>
+        <target>Posiziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align_legend">
+        <source>Margin and alignment</source>
+        <target>Distanza ed alingiament</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background_legend">
+        <source>Background settings</source>
+        <target>Opziuns dal fund davos</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border_legend">
+        <source>Border settings</source>
+        <target>Opziuns da l'ur</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font_legend">
+        <source>Font settings</source>
+        <target>Opziuns da la scrittira</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list_legend">
+        <source>List settings</source>
+        <target>Opziuns per glistas</target>
+      </trans-unit>
+      <trans-unit id="tl_style.custom_legend">
+        <source>Custom code</source>
+        <target>Code persunalisà</target>
+      </trans-unit>
+      <trans-unit id="tl_style.normal">
+        <source>normal</source>
+        <target>normal</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bold">
+        <source>bold</source>
+        <target>grass</target>
+      </trans-unit>
+      <trans-unit id="tl_style.italic">
+        <source>italic</source>
+        <target>cursiv</target>
+      </trans-unit>
+      <trans-unit id="tl_style.underline">
+        <source>underlined</source>
+        <target>suttastritgà</target>
+      </trans-unit>
+      <trans-unit id="tl_style.notUnderlined">
+        <source>not underlined</source>
+        <target>betg suttastritgà</target>
+      </trans-unit>
+      <trans-unit id="tl_style.line-through">
+        <source>line-through</source>
+        <target>stritgà tras</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overline">
+        <source>overlined</source>
+        <target>surstritgà</target>
+      </trans-unit>
+      <trans-unit id="tl_style.small-caps">
+        <source>small-caps</source>
+        <target>pitschnas maiusclas</target>
+      </trans-unit>
+      <trans-unit id="tl_style.disc">
+        <source>dot</source>
+        <target>punct</target>
+      </trans-unit>
+      <trans-unit id="tl_style.circle">
+        <source>circle</source>
+        <target>rudè</target>
+      </trans-unit>
+      <trans-unit id="tl_style.square">
+        <source>square</source>
+        <target>quadrat</target>
+      </trans-unit>
+      <trans-unit id="tl_style.decimal">
+        <source>figures</source>
+        <target>cifras</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-roman">
+        <source>upper latin figures</source>
+        <target>cifras grondas romanas</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-roman">
+        <source>lower latin figures</source>
+        <target>cifras latinas pitschnas</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-alpha">
+        <source>upper characters</source>
+        <target>bustabs gronds</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-alpha">
+        <source>lower characters</source>
+        <target>bustabs pitschens</target>
+      </trans-unit>
+      <trans-unit id="tl_style.uppercase">
+        <source>uppercase</source>
+        <target>Maiusclas</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lowercase">
+        <source>lowercase</source>
+        <target>Minusclas</target>
+      </trans-unit>
+      <trans-unit id="tl_style.capitalize">
+        <source>capitalize</source>
+        <target>Emprim bustab grond</target>
+      </trans-unit>
+      <trans-unit id="tl_style.none">
+        <source>none</source>
+        <target>deactivar</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.0">
+        <source>New format definition</source>
+        <target>Nova definiziun da formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.1">
+        <source>Create a new format definition</source>
+        <target>Crear ina nova definiziun da formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.0">
+        <source>Format definition details</source>
+        <target>Detagls da la definiziun da la formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.1">
+        <source>Show the details of format definition ID %s</source>
+        <target>Mussar ils detagls da la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.0">
+        <source>Edit format definition</source>
+        <target>Modifitgar la definiziun da la formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.1">
+        <source>Edit format definition ID %s</source>
+        <target>Modifitgar la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.0">
+        <source>Move format definition</source>
+        <target>Spustar la definiziun da la formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.1">
+        <source>Move format definition ID %s</source>
+        <target>Spustar la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.0">
+        <source>Duplicate format definition</source>
+        <target>Duplitgar la definiziun da la formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.1">
+        <source>Duplicate format definition ID %s</source>
+        <target>Duplitgar la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.0">
+        <source>Delete format definition</source>
+        <target>Stizzar la definiziun da la formataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.1">
+        <source>Delete format definition ID %s</source>
+        <target>Stizzar la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.0">
+        <source>Edit style sheet</source>
+        <target>Modifitgar il style-sheet</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>Modifitgar las opziuns dal style-sheet</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Encollar sura</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.1">
+        <source>Paste after format definition ID %s</source>
+        <target>Encollar suenter la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Crear sura in nov element</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.1">
+        <source>Add new after format definition ID %s</source>
+        <target>Crear in nov element suenter la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Midar la visibilitad</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.1">
+        <source>Toggle the visibility of format definition ID %s</source>
+        <target>Midar la visibilitad la definiziun da la formataziun cun l'ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

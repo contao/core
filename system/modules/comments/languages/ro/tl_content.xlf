@@ -1,0 +1,66 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_content.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="tl_content.com_order.0">
+        <source>Sort order</source>
+        <target>Ordinea de sortare</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_order.1">
+        <source>Please choose the sort order.</source>
+        <target>Alegeţi ordinea de sortare iniţială.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.0">
+        <source>Items per page</source>
+        <target>Rezultate pe pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.1">
+        <source>The number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Introduceţi numărul de comentarii per pagină (0 = anulează paginare).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.0">
+        <source>Moderate</source>
+        <target>Moderează</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Aprobă comentariile înainte de a fi publicate pe website</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Permite BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Permite vizitatorilor să formateze comentariie cu BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Autentificare înainte de comentariu</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Permite doar utilizatorilor autentificaţi să adauge comentarii.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Fără întrebare de securitate</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>Alegeţi această opţiune pentru a trece peste întrebarea de securitate (nerecomandat).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.0">
+        <source>Comments template</source>
+        <target>Şablon pentru comentariu</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.1">
+        <source>Here you can select the comments template.</source>
+        <target>Alegeţi un şablon pentru comentarii. Puteţi adăuga şabloane proprii în directorul &lt;em&gt;templates&lt;/em&gt;. Şabloanele încep cu &lt;em&gt;com_&lt;/em&gt; şi necesită extensia &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.comment_legend">
+        <source>Comment settings</source>
+        <target>Setări comentariu</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,382 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/modules.php" source-language="en" target-language="es">
+    <body>
+      <trans-unit id="MOD.content">
+        <source>Content</source>
+        <target>Contenido</target>
+      </trans-unit>
+      <trans-unit id="MOD.article.0">
+        <source>Articles</source>
+        <target>Artículos</target>
+      </trans-unit>
+      <trans-unit id="MOD.article.1">
+        <source>Manage articles and content elements</source>
+        <target>Los artículos se utilizan como contenedores de elementos de contenido como texto, imágenes o enlaces. Cada artículo se publica en una página concreta. Este módulo te permite la gestión de tus artículos.</target>
+      </trans-unit>
+      <trans-unit id="MOD.form.0">
+        <source>Form generator</source>
+        <target>Generador formularios</target>
+      </trans-unit>
+      <trans-unit id="MOD.form.1">
+        <source>Create custom forms and store or send the submitted data</source>
+        <target>Este módulo te permite crear todo tipo de formularios web.</target>
+      </trans-unit>
+      <trans-unit id="MOD.design">
+        <source>Layout</source>
+        <target>Diseño</target>
+      </trans-unit>
+      <trans-unit id="MOD.themes.0">
+        <source>Themes</source>
+        <target>Temas</target>
+      </trans-unit>
+      <trans-unit id="MOD.themes.1">
+        <source>Manage front end modules, style sheets, page layouts and templates</source>
+        <target>Administrar módulos, hojas de estilos y plantillas.</target>
+      </trans-unit>
+      <trans-unit id="MOD.page.0">
+        <source>Site structure</source>
+        <target>Estructura sitio web</target>
+      </trans-unit>
+      <trans-unit id="MOD.page.1">
+        <source>Set up the site structure of your website(s)</source>
+        <target>Este módulo te permite configurar la estructura de tu sitio web y algunos parámetros de las páginas como idioma, caché o permisos.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.0">
+        <source>Templates</source>
+        <target>Plantillas</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.1">
+        <source>Edit templates in the back end</source>
+        <target>Este módulo permite editar archivos de plantillas en el back end.</target>
+      </trans-unit>
+      <trans-unit id="MOD.accounts">
+        <source>Account manager</source>
+        <target>Gestión de cuentas</target>
+      </trans-unit>
+      <trans-unit id="MOD.member.0">
+        <source>Members</source>
+        <target>Miembros</target>
+      </trans-unit>
+      <trans-unit id="MOD.member.1">
+        <source>Manage member accounts (front end users)</source>
+        <target>Los miembros son usuarios registrados de tu web (por ejemplo clientes de una tienda en linea, miembros de un newsletter o miembros de una zona protegida con contraseña). Este módulo te permite la gestión de estos miembros.</target>
+      </trans-unit>
+      <trans-unit id="MOD.mgroup.0">
+        <source>Member groups</source>
+        <target>Grupos de miembros</target>
+      </trans-unit>
+      <trans-unit id="MOD.mgroup.1">
+        <source>Manage member groups (front end user groups)</source>
+        <target>Los miembros pueden ser asignados a cualquier número de grupos para poder compartir configuraciones concretas. Este módulo te permite la configuración de estos grupos.</target>
+      </trans-unit>
+      <trans-unit id="MOD.user.0">
+        <source>Users</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="MOD.user.1">
+        <source>Manage user accounts (back end users)</source>
+        <target>Este módulo te permite dar de alta nuevos usuarios de Contao y gestionar los usuarios ya existentes.</target>
+      </trans-unit>
+      <trans-unit id="MOD.group.0">
+        <source>User groups</source>
+        <target>Grupos de usuarios</target>
+      </trans-unit>
+      <trans-unit id="MOD.group.1">
+        <source>Manage user groups (back end user groups)</source>
+        <target>Los usuarios del back end pueden ser asignados a cualquier número de grupos para poder compartir configuraciones concretas. Este módulo te permite la configuración de estos grupos.</target>
+      </trans-unit>
+      <trans-unit id="MOD.system">
+        <source>System</source>
+        <target>Sistema</target>
+      </trans-unit>
+      <trans-unit id="MOD.files.0">
+        <source>File manager</source>
+        <target>Gestor de archivos</target>
+      </trans-unit>
+      <trans-unit id="MOD.files.1">
+        <source>Manage files and folders or upload new files to the server</source>
+        <target>Este módulo te permite subir nuevos archivos al servidor o gestionar los archivos y carpetas ya existentes.</target>
+      </trans-unit>
+      <trans-unit id="MOD.log.0">
+        <source>System log</source>
+        <target>Log del sistema</target>
+      </trans-unit>
+      <trans-unit id="MOD.log.1">
+        <source>Browse the system log and analyze the activity on the website</source>
+        <target>Algunos eventos del sistema generan entradas en el archivo log. Este módulo te permite analizar las entradas del log.</target>
+      </trans-unit>
+      <trans-unit id="MOD.settings.0">
+        <source>Settings</source>
+        <target>Ajustes</target>
+      </trans-unit>
+      <trans-unit id="MOD.settings.1">
+        <source>Check and optimize the Contao configuration</source>
+        <target>Este módulo te permite modificar tu instalación local y cambiar parámetros básicos como el formato de la fecha o el juego de caracteres.</target>
+      </trans-unit>
+      <trans-unit id="MOD.maintenance.0">
+        <source>Maintenance</source>
+        <target>Mantenimiento</target>
+      </trans-unit>
+      <trans-unit id="MOD.maintenance.1">
+        <source>Maintain or update Contao</source>
+        <target>Este módulo te permite mantener y actualizar la instalación de Contao.</target>
+      </trans-unit>
+      <trans-unit id="MOD.undo.0">
+        <source>Restore</source>
+        <target>Restaurar</target>
+      </trans-unit>
+      <trans-unit id="MOD.undo.1">
+        <source>Restore deleted records</source>
+        <target>Si un registro de la base de datos fue eliminado por error, este módulo te permite recuperarlo. Eso no incluye archivos ni carpetas.</target>
+      </trans-unit>
+      <trans-unit id="MOD.login.0">
+        <source>Personal data</source>
+        <target>Datos personales</target>
+      </trans-unit>
+      <trans-unit id="MOD.login.1">
+        <source>Change your personal data or set a new password</source>
+        <target>Este módulo permite al usuario actual cambiar su información personal como el nombre, correo electrónico o contraseña.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_style">
+        <source>Style sheets</source>
+        <target>Hojas de estilo</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_style_sheet">
+        <source>Style sheets</source>
+        <target>Hojas de estilo</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_module">
+        <source>Front end modules</source>
+        <target>Módulos del Front end</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_layout">
+        <source>Page layouts</source>
+        <target>Diseño de página</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_image_size">
+        <source>Image sizes</source>
+        <target>Tamaños de imágen</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_image_size_item">
+        <source>Image size media queries</source>
+        <target>Tamaño de imagen tras consultas de medios</target>
+      </trans-unit>
+      <trans-unit id="MOD.css">
+        <source>Style sheets</source>
+        <target>Hojas de estilo</target>
+      </trans-unit>
+      <trans-unit id="MOD.modules">
+        <source>Front end modules</source>
+        <target>Módulos del Front end</target>
+      </trans-unit>
+      <trans-unit id="MOD.layout">
+        <source>Page layouts</source>
+        <target>Diseño de página</target>
+      </trans-unit>
+      <trans-unit id="MOD.image_sizes">
+        <source>Image sizes</source>
+        <target>Tamaños de imágen</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_import">
+        <source>Theme import</source>
+        <target>Importar tema</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_export">
+        <source>Theme export</source>
+        <target>Exportar tema</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigationMenu">
+        <source>Navigation</source>
+        <target>Navegación</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigation.0">
+        <source>Navigation menu</source>
+        <target>Menú de navegación</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigation.1">
+        <source>Generates a navigation menu from the site structure</source>
+        <target>Este módulo genera el menú de navegación de la web.</target>
+      </trans-unit>
+      <trans-unit id="FMD.customnav.0">
+        <source>Custom navigation</source>
+        <target>Menú navegación pesonalizada</target>
+      </trans-unit>
+      <trans-unit id="FMD.customnav.1">
+        <source>Generates a custom navigation menu</source>
+        <target>Este módulo genera un menú de navegación personalizado de una selección de páginas.</target>
+      </trans-unit>
+      <trans-unit id="FMD.breadcrumb.0">
+        <source>Breadcrumb navigation</source>
+        <target>Recorrido navegación</target>
+      </trans-unit>
+      <trans-unit id="FMD.breadcrumb.1">
+        <source>Generates a breadcrumb navigation menu</source>
+        <target>Este módulo añade un menú de recorrido (breadcrumb navigation) en la web.</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicknav.0">
+        <source>Quick navigation</source>
+        <target>Navegación rápida</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicknav.1">
+        <source>Generates a drop-down menu from the site structure</source>
+        <target>Este módulo genera un menú desplegable de todas las páginas que permite saltar a una en particular.</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicklink.0">
+        <source>Quick link</source>
+        <target>Enlace rápido</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicklink.1">
+        <source>Generates a custom drop-down menu</source>
+        <target>Este módulo genera un menú desplegable de una selección de páginas que permite saltar a una en particular.</target>
+      </trans-unit>
+      <trans-unit id="FMD.booknav.0">
+        <source>Book navigation</source>
+        <target>Libro de navegación</target>
+      </trans-unit>
+      <trans-unit id="FMD.booknav.1">
+        <source>Generates a book navigation menu</source>
+        <target>genera un menú libro de navegación.</target>
+      </trans-unit>
+      <trans-unit id="FMD.articlenav.0">
+        <source>Article navigation</source>
+        <target>Navegación de artículos</target>
+      </trans-unit>
+      <trans-unit id="FMD.articlenav.1">
+        <source>Generates a pagination menu to navigate articles</source>
+        <target>generar un menú de paginación para navegar por artículos</target>
+      </trans-unit>
+      <trans-unit id="FMD.sitemap.0">
+        <source>Sitemap</source>
+        <target>Mapa web</target>
+      </trans-unit>
+      <trans-unit id="FMD.sitemap.1">
+        <source>Generates a list of all pages in the site structure</source>
+        <target>Este módulo muestra todas las páginas disponibles.</target>
+      </trans-unit>
+      <trans-unit id="FMD.user">
+        <source>User</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="FMD.login.0">
+        <source>Login form</source>
+        <target>Formulario de conexión</target>
+      </trans-unit>
+      <trans-unit id="FMD.login.1">
+        <source>Generates a login form</source>
+        <target>Este módulo añade un formulario que permite a un miembro conectarse. Una vez que se haya conectado podrá acceder a las páginas protegidas con contraseña.</target>
+      </trans-unit>
+      <trans-unit id="FMD.logout.0">
+        <source>Automatic logout</source>
+        <target>Desconexión automática</target>
+      </trans-unit>
+      <trans-unit id="FMD.logout.1">
+        <source>Automatically logs out a user</source>
+        <target>Este módulo automáticamente desconecta a un usuario.</target>
+      </trans-unit>
+      <trans-unit id="FMD.personalData.0">
+        <source>Personal data</source>
+        <target>Datos personales</target>
+      </trans-unit>
+      <trans-unit id="FMD.personalData.1">
+        <source>Generates a form to edit a user's personal data</source>
+        <target>Este módulo crear un formulario en el front end que permite a un miembro cambiar su datos personales.</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.0">
+        <source>Registration</source>
+        <target>Registro de miembros</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.1">
+        <source>Generates a user registration form</source>
+        <target>Este módulo crea un formulario que permite a los usuarios del front end registrarse en tu web.</target>
+      </trans-unit>
+      <trans-unit id="FMD.changePassword.0">
+        <source>Change password</source>
+        <target>Cambiar contraseña</target>
+      </trans-unit>
+      <trans-unit id="FMD.changePassword.1">
+        <source>Generates a form to change the password</source>
+        <target>Genera un formulario para cambiar la contraseña</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.0">
+        <source>Lost password</source>
+        <target>Contraseña perdida</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.1">
+        <source>Generates a form to request a new password</source>
+        <target>Este módulo crea un formulario que permite a los usuarios del front end hacer una petición de nueva contraseña.</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.0">
+        <source>Close account</source>
+        <target>Eliminar cuenta</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.1">
+        <source>Generates a form to delete a member account</source>
+        <target>Genera un formulario para eliminar la cuenta del miembro.</target>
+      </trans-unit>
+      <trans-unit id="FMD.application">
+        <source>Applications</source>
+        <target>Aplicaciones</target>
+      </trans-unit>
+      <trans-unit id="FMD.form.0">
+        <source>Form</source>
+        <target>Formulario</target>
+      </trans-unit>
+      <trans-unit id="FMD.form.1">
+        <source>Adds a form to the page</source>
+        <target>Este módulo añade un formulario a una web. Los datos de un formulario se pueden enviar por e-mail o puede ser procesados por otros módulo.</target>
+      </trans-unit>
+      <trans-unit id="FMD.search.0">
+        <source>Search engine</source>
+        <target>Buscador</target>
+      </trans-unit>
+      <trans-unit id="FMD.search.1">
+        <source>Adds a search form to the page</source>
+        <target>Este módulo te permite hacer búsquedas en tu web.</target>
+      </trans-unit>
+      <trans-unit id="FMD.articleList.0">
+        <source>Article list</source>
+        <target>Listado de artículos</target>
+      </trans-unit>
+      <trans-unit id="FMD.articleList.1">
+        <source>Generates a list of articles of a column</source>
+        <target>Este módulo muestra un listado de artículos de una columna particular.</target>
+      </trans-unit>
+      <trans-unit id="FMD.miscellaneous">
+        <source>Miscellaneous</source>
+        <target>Varios</target>
+      </trans-unit>
+      <trans-unit id="FMD.flash.0">
+        <source>Flash movie</source>
+        <target>Película Flash</target>
+      </trans-unit>
+      <trans-unit id="FMD.flash.1">
+        <source>Embeds a Flash movie into the page</source>
+        <target>Este módulo añade una película Macromedia Flash en una página web.</target>
+      </trans-unit>
+      <trans-unit id="FMD.randomImage.0">
+        <source>Random image</source>
+        <target>Imagen aleatoria</target>
+      </trans-unit>
+      <trans-unit id="FMD.randomImage.1">
+        <source>Adds a random image to the page</source>
+        <target>Este módulo añade una imágen aleatoria a la página web.</target>
+      </trans-unit>
+      <trans-unit id="FMD.html.0">
+        <source>Custom HTML</source>
+        <target>Código HTML personalizado</target>
+      </trans-unit>
+      <trans-unit id="FMD.html.1">
+        <source>Allows you to add custom HTML code</source>
+        <target>Este módulo permite incluir algún código HTML personalizado.</target>
+      </trans-unit>
+      <trans-unit id="FMD.rss_reader.0">
+        <source>RSS reader</source>
+        <target>Lector RSS</target>
+      </trans-unit>
+      <trans-unit id="FMD.rss_reader.1">
+        <source>Adds an RSS feed to the page</source>
+        <target>Este módulo permite importar datos de RSS feeds.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

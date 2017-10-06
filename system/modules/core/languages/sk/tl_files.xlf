@@ -1,0 +1,253 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_files.php" source-language="en" target-language="sk">
+    <body>
+      <trans-unit id="tl_files.name.0">
+        <source>Name</source>
+        <target>Názov</target>
+      </trans-unit>
+      <trans-unit id="tl_files.name.1">
+        <source>Contao automatically adds the file extension.</source>
+        <target>Vložte, prosím, názov súboru, alebo priečinku (bez prípony)</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>Chránené</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Obmedzený prístup k adresáru cez HTTP. Súbory môžu byť dostupné ako napr. objekty na stiahnutie.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartX.0">
+        <source>Important part x coordinate</source>
+        <target>X súradnica dôležitej časti</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartX.1">
+        <source>Here you can enter the x coordinate of the important part.</source>
+        <target>Tu môžete zadať X súradnicu dôležitej oblasti obrázku.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.0">
+        <source>Important part y coordinate</source>
+        <target>Y súradnica dôležitej časti</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.1">
+        <source>Here you can enter the y coordinate of the important part.</source>
+        <target>Tu môžete zadať Y súradnicu dôležitej oblasti obrázku.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.0">
+        <source>Important part width</source>
+        <target>Šírka dôležitej časti</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.1">
+        <source>Here you can enter the width of the important part.</source>
+        <target>Tu môžete zadať šírku dôležitej oblasti obrázku.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.0">
+        <source>Important part height</source>
+        <target>Výška dôležitej časti</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.1">
+        <source>Here you can enter the height of the important part.</source>
+        <target>Tu môžete zadať výšku dôležitej oblasti obrázku.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.0">
+        <source>Meta information</source>
+        <target>Informácie v Meta tagu</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.1">
+        <source>Here you can enter the file meta information.</source>
+        <target>Tu môžte vložiť súbor s Meta informáciami.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>Ochrana adresáru sa nastaví ak upravíte súbor .htaccess, v ktorom zablokujete prístup k danému adresáru. Vyzerá to tak, že nepoužívate webový server Apache, preto táto funkcia nemusí fungovať správne alebo vyžaduje úpravu nastavení webového serveru. Prosím overte to predtým ako nahráte akékoľvek súbory neverejného charakteru.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.0">
+        <source>File upload</source>
+        <target>Nahranie súboru - upload</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.1">
+        <source>Select the files you want to upload to the server (maximum %s and %s pixels).</source>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.0">
+        <source>Source editor</source>
+        <target>Editor zdrojov</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.1">
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Tu môžete upraviť zdrojový kód súboru (stlačte F11 pre zobrazenie na celú obrazovku).</target>
+      </trans-unit>
+      <trans-unit id="tl_files.upload">
+        <source>Upload files</source>
+        <target>Nahrať súbory</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadNback">
+        <source>Upload files and go back</source>
+        <target>Nahrať súbory a ísť späť</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFF">
+        <source>Edit a file or folder</source>
+        <target>Upraviť súbor alebo priečinok</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadFF">
+        <source>Upload files to folder &quot;%s&quot;</source>
+        <target>Nahrať súbor do priečinka &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFile">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>Upraviť zdrojový súbor &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.browseFiles">
+        <source>Browse files</source>
+        <target>Prehľadávať súbory</target>
+      </trans-unit>
+      <trans-unit id="tl_files.clearList">
+        <source>Clear list</source>
+        <target>Vyprázdniť zoznam</target>
+      </trans-unit>
+      <trans-unit id="tl_files.startUpload">
+        <source>Start upload</source>
+        <target>Začať nahrávanie súborov</target>
+      </trans-unit>
+      <trans-unit id="tl_files.dropzone">
+        <source>Click or drop files here to upload</source>
+        <target>Kliknite, alebo pretiahnite sem súbory, ktoré chcete nahrať</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
+        <target>Umiestnenie súboru: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Bol pridaný súbor alebo priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Bol zaktualizovaný hash súboru alebo priečinku &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Nájdený súbor alebo priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Nájdený súbor alebo priečinok &quot;%s&quot; v &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
+        <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>Presunutý súbor alebo priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>Synchronizácia bola dokončená</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Výsledok:&lt;/strong&gt; %s pridaný | %s modifikovaný | %s nezmenený | %s premiestnený | %s odstránený</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>Zobraziť nezmenené</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.0">
+        <source>New folder</source>
+        <target>Nový adresár</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.1">
+        <source>Create a new folder</source>
+        <target>Vytvoriť nový adresár šablón</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.0">
+        <source>Move file or folder</source>
+        <target>Premiestniť súbor alebo priečinok</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.1">
+        <source>Move file or folder &quot;%s&quot;</source>
+        <target>Premiestniť súbor alebo priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.0">
+        <source>Duplicate file or folder</source>
+        <target>Kopírovať súbor alebo priečinok</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.1">
+        <source>Duplicate file or folder &quot;%s&quot;</source>
+        <target>Kopírovať súbor alebo priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.0">
+        <source>Edit file or folder</source>
+        <target>Upraviť súbor alebo priečinok</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.1">
+        <source>Edit file or folder &quot;%s&quot;</source>
+        <target>Upraviť súbor alebo priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.0">
+        <source>Delete file or folder</source>
+        <target>Odstrániť súbor alebo priečinok</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.1">
+        <source>Delete file or folder &quot;%s&quot;</source>
+        <target>Odstrániť súbor alebo priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+        <target>Detaily súboru alebo priečinku</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder &quot;%s&quot;</source>
+        <target>Zobrazí detaily súboru alebo priečinku &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.0">
+        <source>Edit file</source>
+        <target>Upraviť zdrojový súbor</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.1">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>Upraviť zdrojový súbor &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.0">
+        <source>Protect folder</source>
+        <target>Chrániť priečinok</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.1">
+        <source>Protect folder &quot;%s&quot;</source>
+        <target>Chrániť priečinok &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.0">
+        <source>Remove protection</source>
+        <target>Odstrániť ochranu priečinka</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.1">
+        <source>Unprotect folder &quot;%s&quot;</source>
+        <target>Odstrániť ochranu priečinka &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.0">
+        <source>File upload</source>
+        <target>Nahranie súboru - upload</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.1">
+        <source>Upload files to the server</source>
+        <target>Nahrať súbory na server</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.0">
+        <source>Paste into</source>
+        <target>Vložiť do</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>Vložiť do tohto adresára</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.0">
+        <source>Synchronize</source>
+        <target>Synchronizovať</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.1">
+        <source>Synchronize the file system and the database</source>
+        <target>Synchronizovať systém súborov a databázu</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit_preview_help">
+        <source>Mark the important part of the image with your mouse cursor.</source>
+        <target>Vyznačte dôležitú časť obrázku pomocou kurzora myši.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

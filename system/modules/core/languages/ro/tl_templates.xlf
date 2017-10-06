@@ -1,0 +1,74 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_templates.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="tl_templates.original.0">
+        <source>Original template</source>
+        <target>Şabloane originale</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.original.1">
+        <source>Here you can select the template that you want to customize.</source>
+        <target>Va fi creată o copie a şablonului selectat în directorul &lt;em&gt;templates&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.0">
+        <source>Target folder</source>
+        <target>Director destinaţie</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.1">
+        <source>A copy of the selected template will be stored in the target folder.</source>
+        <target>O copie a şablonului selectat va fi stocat în directorul destinaţie</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.headline">
+        <source>Add a new template</source>
+        <target>Creează şablon</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.newTpl">
+        <source>Create template</source>
+        <target>Editează şablon nou</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.exists">
+        <source>Template &quot;%s&quot; exists already!</source>
+        <target>Un şablon numit &quot;%s&quot; există deja!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.invalid">
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>Director sursă sau destinaţie invalid &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.0">
+        <source>New template</source>
+        <target>Nou şablon</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.1">
+        <source>Create a new template</source>
+        <target>Creează nou şablon</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.0">
+        <source>New folder</source>
+        <target>Şablon nou</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.1">
+        <source>Create a new folder</source>
+        <target>Creează un şablon nou.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.0">
+        <source>Paste into</source>
+        <target>Alipeşte în</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>Alipeşte în acest director</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.0">
+        <source>Compare template</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.1">
+        <source>Compare &quot;%s&quot; with another template</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.overridesAnotherTpl">
+        <source>This template overrides &quot;%s&quot;.</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.pleaseSelect">
+        <source>Please select a template from the list above and click &quot;Show differences&quot;.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

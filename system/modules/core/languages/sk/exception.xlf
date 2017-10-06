@@ -1,0 +1,169 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en" target-language="sk">
+    <body>
+      <trans-unit id="XPT.error">
+        <source>An error occurred</source>
+        <target>Vyskytla sa chyba</target>
+      </trans-unit>
+      <trans-unit id="XPT.matter">
+        <source>What's the matter?</source>
+        <target>Čo sa stalo?</target>
+      </trans-unit>
+      <trans-unit id="XPT.howToFix">
+        <source>How can I fix the issue?</source>
+        <target>Ako môžem odstrániť túto chybu?</target>
+      </trans-unit>
+      <trans-unit id="XPT.more">
+        <source>Tell me more, please</source>
+        <target>Dozvedieť sa viac</target>
+      </trans-unit>
+      <trans-unit id="XPT.hint">
+        <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Pre úpravu danej poznámky vytvorte vlastný súbor predlohy, nazvaný &lt;em&gt;%s&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorOccurred">
+        <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>Pri spúšťaní tohto skriptu došlo k chybe. Niečo nepracuje správnym spôsobom.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixOne">
+        <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Otvorte súbor &lt;code&gt;system/logs/error.log&lt;/code&gt; a nájdite príslušnú chybovú správu (zvyčajne posledná v poradí). Tiež môžete pridať nasledujúci riadok do súboru lokálneho nastavenia a znovu načítať túto stránku: </target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixTwo">
+        <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>Buďte prosím opatrní, pretože potom &lt;strong&gt;ktokoľvek&lt;/strong&gt; môže vidieť chybové hlásenia na Vašej stránke!</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorExplain">
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="XPT.requestToken">
+        <source>Invalid request token</source>
+        <target>Neplatná požiadavka tokenu</target>
+      </trans-unit>
+      <trans-unit id="XPT.invalidToken">
+        <source>The request token could not be verified.</source>
+        <target>Požadovaný token nemohol byť overený.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenRetry">
+        <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Prosím, znovu kliknite na &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;tento odkaz&lt;/a&gt;. Nepoužívajte, prosím, tlačítko pre krok späť vášho prehliadača. </target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainOne">
+        <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Chyba nastane, pokiaľ je nastavený prenos POST bez platného potvrdzovacieho tokenu. V Contau 2.10 bola táto kontrola nahradená tokenovým systémom. Ak pretrváva daný problém, zrejme používate nekompatibilné rozšírenia tretích strán alebo vaša inštalácia Contaa nie je správne zaktualizovaná.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainTwo">
+        <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Viac informácií nájdete na &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; (Často kladené otázky) alebo navštívte &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;stránku podpory Contaa&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incomplete">
+        <source>Incomplete installation</source>
+        <target>Nekompletná inštalácia</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteInstallation">
+        <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>Inštalácia nebola dokončená, Contao nebude môcť fungovať správne.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixOne">
+        <source>Point your browser to the following URL:</source>
+        <target>Nasmerujte váš prehliadač na následujúcu stránku:</target>
+      </trans-unit>
+      <trans-unit id="XPT.installPath">
+        <source>path-to-installation</source>
+        <target>Cesta k inštalácii</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixTwo">
+        <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>Tým sa otvorí inštalačný nástroj Contaa, ktorý vás prevedie procesom inštalácie.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Viac informácií nájdete v &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Návode Contaa&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFound">
+        <source>Page not found</source>
+        <target>Stránka nebola nájdená</target>
+      </trans-unit>
+      <trans-unit id="XPT.pageNotFound">
+        <source>The page you have requested does not exist under this domain.</source>
+        <target>Požadovaná stránka neexistuje pod touto doménou.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFoundFix">
+        <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Skúste &lt;a href=&quot;%s&quot;&gt;prejsť na najvyššiu úroveň stránky&lt;/a&gt; a použite funkciu vyhľadávania (ak existuje) aby ste našli požadovanú stránku. Alebo &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu stránky&lt;/a&gt; a oznámte mu nefunkčnosť stránky.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForward">
+        <source>Forward page not found</source>
+        <target>Nenašla sa stránka kam ste boli presmerovaný</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardPage">
+        <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>Aplikácia bola nakonfigurovaná tak aby presmerovala žiadosť na ďalšiu stránku. Napriek tomu cieľová stránka neexistuje alebo zatiaľ nebola publikovaná.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardFix">
+        <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Tento problém môže opraviť iba správca stránky. Ak ste návštevník, nemôžete s týmto problémom nič spraviť okrem &lt;a href=&quot;%s&quot;&gt;kontaktovania správcu&lt;/a&gt; stránky a oznámením problému.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRoot">
+        <source>No root page found</source>
+        <target>Nebola nájdená žiadna hlavná stránka</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootPage">
+        <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Neexistuje žiadna hlavná stránka, ktorá by sa zhodovala s požadovanou jazykovou verziu alebo doménou stránky.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootFix">
+        <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Ak ste špecifikovali jazyk, skúste &lt;a href=&quot;%s&quot;&gt;prejsť na najvyššiu úroveň web stránky&lt;/a&gt; a overte, či ste správne presmerovaný. V opačnom prípade &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu web stránky&lt;/a&gt; a zašlite mu odkaz o chybe.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayout">
+        <source>No layout specified</source>
+        <target>Nie je špecifikované rozloženie stránky</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutSpecified">
+        <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>K požadovanej stránke nebolo priradené žiadne rozloženie stránky.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutFix">
+        <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Uistite sa, že ste priradili rozloženie stránky (layout) každej hlavnej stránke (root page) v štruktúre stránok.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Pre viac informácii použite &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;manuál Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActive">
+        <source>No active pages found</source>
+        <target>Žiadne aktívne stránky neboli nájdené</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActivePages">
+        <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Požadovaná web stránka zatiaľ neobsahuje žiadne publikované stránky.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActiveFix">
+        <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Web stránka je pravdepodobne stále vo výstavbe a bude dostupná o niekoľko dní. Ak máte pocit, že sa jedná o chybu &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu web stránky&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbidden">
+        <source>Forbidden</source>
+        <target>Odmietnutý prístup</target>
+      </trans-unit>
+      <trans-unit id="XPT.notAuthenticated">
+        <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Nemáte povolenie na prístup k požadovanej stránke.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbiddenFix">
+        <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Ak nie ste prihlásený, skúste prejsť na &lt;a href=&quot;%s&quot;&gt;najvyššiu úroveň web stránky&lt;/a&gt; a prihláste sa. Ak nenájdete možnosť prihlásenia alebo ste už prihlásený &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu web stránky&lt;/a&gt; a zanechajte mu správu o chybe.</target>
+      </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>Stránka bude k dispozícii o niekoľko minút</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Web stránka je momentálne v procese údržby. Navštívte ju prosím za krátky okamih opäť.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

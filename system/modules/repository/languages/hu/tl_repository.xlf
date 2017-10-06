@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_repository.category.0">
+        <source>Category</source>
+        <target>Kategória (Category)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.category.1">
+        <source>Please select the extension category.</source>
+        <target>Válassza ki a kiterjesztés kategóriáját.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.0">
+        <source>Copyright</source>
+        <target>Szerzői jog</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.1">
+        <source>Here you can enter a copyright notice (e.g. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</source>
+        <target>Itt lehet megadni a szerzői jogi figyelmeztetést. (e.g. © 2007,2008 Jerry Miller Webservices Inc).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.0">
+        <source>Description</source>
+        <target>Leírás</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.1">
+        <source>These HTML tags are allowed: %s</source>
+        <target>Ezen HTML elemek használata megengedett: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.0">
+        <source>Extension</source>
+        <target>Kiterjesztés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.1">
+        <source>Name of the extension.</source>
+        <target>Kiterjesztés neve.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.0">
+        <source>Functionality</source>
+        <target>Funkcionalitás</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.1">
+        <source>Does the extension provide the expected functionality?</source>
+        <target>A kiterjesztés biztosítja a várt funkciót?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.0">
+        <source>License</source>
+        <target>Licenc</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.1">
+        <source>Please enter a short license information. You may add full license information in a file LICENSE.txt.</source>
+        <target>Adjon meg egy rövid engedély információt. Lehetőség van teljes licenc adatok megadására egy fájlban: LICENSE.txt.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.0">
+        <source>Name</source>
+        <target>Név</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.1">
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>A kiterjesztés nevének betűvel kell kezdődnie mint a-z, A-Z és 0-9, ahol kisbetűs nevek az előnyösebbek. Továbbá, a _ és - karakterek is megengedettek a névben.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.0">
+        <source>Popularity</source>
+        <target>Népszerűség</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.1">
+        <source>%s/%s (downloads/installs)</source>
+        <target>%s/%s (letöltés/telepítés)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.0">
+        <source>Quality</source>
+        <target>Minőség</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.1">
+        <source>How robust is the extension and how painless is installation and maintenance?</source>
+        <target>Milyen erős a kiterjesztés, és mennyire felhasználóbarát a telepítés és karbantartás?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.0">
+        <source>Release date</source>
+        <target>Kiadás dátuma</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.1">
+        <source>Enter the publishing date of this release in format %s</source>
+        <target>A kiadás megjelenési dátumának megadása ebben a formában: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.0">
+        <source>Version</source>
+        <target>Verzió</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.1">
+        <source>Please select the version</source>
+        <target>Válassza ki a verziót.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.0">
+        <source>Type</source>
+        <target>Típus</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.1">
+        <source>Please select the extension type.</source>
+        <target>Válassza ki a kiterjesztés típusát.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.0">
+        <source>Usability</source>
+        <target>Használhatóság</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.1">
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>A kiterjesztés megfelel a Contao használhatósági és elérhetőségi szabványainak?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.0">
+        <source>Version</source>
+        <target>Verzió</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.1">
+        <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
+        <target>Verziószám a következő formátumú kell legyen: n.n.n s, ahol n egy egész szám, s pedig a következők egyike: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Licenc kulcs</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Adja meg a licenc kulcsot amit az eladótól kapott.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Eltávolítás védelem</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Védelem a kiterjesztés véletlen eltávolítása ellen.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Frissítés védelem</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Védelem a kiterjesztés véletlen frissítése ellen.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.author">
+        <source>Author</source>
+        <target>Szerző</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.build">
+        <source>Build</source>
+        <target>Build</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.cancel">
+        <source>Cancel</source>
+        <target>Mégsem</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.continue">
+        <source>Continue</source>
+        <target>Tovább</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependencies">
+        <source>Dependencies of this extension</source>
+        <target>Kiterjesztés függőségei</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependents">
+        <source>Other extensions depending on this one</source>
+        <target>Más kiterjesztések függnek ettől</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependentsdel">
+        <source>The following extensions are dependent from &lt;em&gt;%s&lt;/em&gt; and may render broken:</source>
+        <target>A következő kiterjesztések állnak függőségben &lt;em&gt;%s&lt;/em&gt;, és tönkre is tehetik::</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.donate">
+        <source>Donate</source>
+        <target>Adomány</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.downloads">
+        <source>Package downloads</source>
+        <target>Csomag letöltések</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extensionnotfound">
+        <source>Extension not found.</source>
+        <target>Kiterjesztés nem található</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.forum">
+        <source>Forum</source>
+        <target>Fórum</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installs">
+        <source>Online installs</source>
+        <target>Online telepítés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.langtrans">
+        <source>%s transl.</source>
+        <target>%s fordító</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.manual">
+        <source>Manual</source>
+        <target>Kézikönyv</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.no">
+        <source>no</source>
+        <target>nem</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.noextensionsfound">
+        <source>No matching extensions found.</source>
+        <target>Nem megfelelő kiterjesztést találtam.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.orderby">
+        <source>Order by</source>
+        <target>Sorba rendezés módja</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.otherlanguages">
+        <source>Other languages</source>
+        <target>Egyéb nyelvek</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.pageof">
+        <source>Page %s of %s</source>
+        <target>%s. oldal a %s-ból</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ratingfmt">
+        <source>%.2f (%d votes)</source>
+        <target>%.2f (%d szavazat)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.reldownloads">
+        <source>Release downloads</source>
+        <target>Kiadás letöltése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasenotesfor">
+        <source>Release notes and change log for %s</source>
+        <target>Kiadási megjegyzések és változtatási napló: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relfunctionality">
+        <source>Release functionality</source>
+        <target>Kiadás funkcionalitása</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relinstalls">
+        <source>Release installs</source>
+        <target>Kiadás telepítés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relquality">
+        <source>Release quality</source>
+        <target>Kiadás minősége</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relrating">
+        <source>Release rating</source>
+        <target>Kiadás értékelése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relupdates">
+        <source>Release updates</source>
+        <target>Kiadás frissítések</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relusability">
+        <source>Release usability</source>
+        <target>Kiadás használhatósága</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.save">
+        <source>Save</source>
+        <target>Ment</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.shop">
+        <source>Shop</source>
+        <target>Bolt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showpicture">
+        <source>Show full size picture</source>
+        <target>Teljes méretű kép megtekintése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.state">
+        <source>State</source>
+        <target>Megye</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.tag">
+        <source>Tag</source>
+        <target>Címke</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.thumbnail">
+        <source>Thumbnail picture</source>
+        <target>Indexkép</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totdownloads">
+        <source>Total downloads</source>
+        <target>Összes letöltés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totfunctionality">
+        <source>Total functionality</source>
+        <target>Teljes funkcionalitása</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totinstalls">
+        <source>Total installs</source>
+        <target>Összes telepítés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totquality">
+        <source>Total quality</source>
+        <target>Teljes minősége</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totrating">
+        <source>Total rating</source>
+        <target>Teljes értékelése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totupdates">
+        <source>Total updates</source>
+        <target>Összes frissítések</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totusability">
+        <source>Total usability</source>
+        <target>Teljes használhatósága</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionfrom">
+        <source>Version from</source>
+        <target>Verziótól</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versions">
+        <source>Other versions</source>
+        <target>Egyéb verziók</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionto">
+        <source>Version to</source>
+        <target>Verzióig</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.yes">
+        <source>yes</source>
+        <target>igen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.action">
+        <source>Action</source>
+        <target>Művelet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsummary">
+        <source>Action summary</source>
+        <target>Művelet összefoglaló</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsuccess">
+        <source>Actions successful.</source>
+        <target>Művelet elkészült.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionfailed">
+        <source>One or more actions failed.</source>
+        <target>Egy vagy több művelet meghíusult.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.apply">
+        <source>Apply</source>
+        <target>Alkalmaz</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.byorder">
+        <source>By %s</source>
+        <target>%s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.checkextension">
+        <source>Check extension</source>
+        <target>Kiterjesztés ellenőrzés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dbuptodate">
+        <source>Database is up to date</source>
+        <target>Adatbázis frissítve</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingdirs">
+        <source>Deleting directories</source>
+        <target>Könyvtárak törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingfiles">
+        <source>Deleting files</source>
+        <target>Fájlok törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.editextension">
+        <source>Edit settings</source>
+        <target>Beállítások szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extinstrecntf">
+        <source>Extension install record not found</source>
+        <target>Kiterjesztés telepítési rekord nem található</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.errdldpkg">
+        <source>Download of package from repository failed</source>
+        <target>Csomag letöltése a tárolóból sikertelen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.failed">
+        <source>failed</source>
+        <target>sikertelen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.fileerrwrite">
+        <source>Error writing file %s</source>
+        <target>Fájl írási hiba: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesdeleted">
+        <source>%s file(s) deleted</source>
+        <target>%s fájl(ok) törölve</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesinstalled">
+        <source>%s file(s) installed</source>
+        <target>%s fájl(ok) telepítve</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesunchanged">
+        <source>%s file(s) unchanged</source>
+        <target>%s fájl(ok) változatlan(ok)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesupdated">
+        <source>%s file(s) updated</source>
+        <target>%s fájl(ok) frissítve</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ftsearch">
+        <source>Fulltext search</source>
+        <target>Teljes szöveges keresés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.goback">
+        <source>Go back</source>
+        <target>Vissza</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.install">
+        <source>Install</source>
+        <target>Telepítés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installextension">
+        <source>Install extension</source>
+        <target>Kiterjesztés telepítése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installingext">
+        <source>Install %s %s build %s</source>
+        <target>Telepítés %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installlogtitle">
+        <source>File installation/update log</source>
+        <target>Fájl telepítési/frissítési napló</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickeyrequired">
+        <source>This extension requires a license key. Please visit the vendor's shop to purchase one.</source>
+        <target>Ehhez a kiterjesztéshez engedély kulcs szükséges. Kérem látogasson el az eladó boltjába a vásárláshoz.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.none">
+        <source>None</source>
+        <target>nincs</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.notfound">
+        <source>not found</source>
+        <target>Nem található</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ok">
+        <source>OK</source>
+        <target>OK</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.okuninstextension">
+        <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
+        <target>Ok, eltávolítja most ezt: &lt;em&gt;%s&lt;/em&gt;?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showdetails">
+        <source>Show details</source>
+        <target>Részletek mutatása</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.stateshint">
+        <source>Check the states to be included.</source>
+        <target>Ellenőrizze a kiadás tartalmát.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.status">
+        <source>Status</source>
+        <target>Státusz</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.success">
+        <source>success</source>
+        <target>siker</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstallextension">
+        <source>Uninstall extension</source>
+        <target>Kiterjesztés eltávolítása</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatedatabase">
+        <source>Update database</source>
+        <target>Adatbázis frissítése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextension">
+        <source>Update extension</source>
+        <target>Kiterjesztés frissítés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextensions">
+        <source>Update checked extensions</source>
+        <target>Kijelölt kiterjesztés(ek) frissítése</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.update">
+        <source>Update</source>
+        <target>Frissítés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updates">
+        <source>Updates</source>
+        <target>Frissítések</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatehint">
+        <source>Check the states to be included at updates.</source>
+        <target>Ellenőrizze a kiadást tartalmaz e frissítést.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatingext">
+        <source>Update %s %s build %s</source>
+        <target>Frissítés %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validate">
+        <source>Repair</source>
+        <target>Javítás</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validatingext">
+        <source>Verify/repair %s %s build %s</source>
+        <target>Ellenőrzés/javítás %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+        <target>Jóváhagyva</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+        <target>Contao %s - %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.missingSoapModule">
+        <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
+        <target>SOAP kiterjesztés nem töltődött be (módosítsa a PHP beállításokat így: --enable-soap)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>A most látható kiterjesztések csak a jelenlegi Contao verzióval kompatibilisek. Módosítsa az adminisztrációs felület beállításait, hogy a keresési találatok tartalmazzák az összes kiterjesztést.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Frissítve</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Nem engedélyezett: %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Nem jóváhagyott: %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Várhatóan összeegyeztethető ezzel: %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Verzió: %s build %s elérhető</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>Hiányzik a szükséges kiterjesztés: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Kiterjesztés nem található a tárolóban</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>Telepített verzió nem található a tárolóan</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Licenc kulcs szükséges, telepítés annak beszerzése előtt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Sérült! Frissítés/javítás szükséges</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.free">
+        <source>Free</source>
+        <target>Ingyenes</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.private">
+        <source>Private</source>
+        <target>Privát</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.commercial">
+        <source>Commercial</source>
+        <target>Kereskedelmi</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.application">
+        <source>Application</source>
+        <target>Application (alkalmazás)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.plugin">
+        <source>Plugin</source>
+        <target>Plugin (beépülő)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.template">
+        <source>Theme</source>
+        <target>Téma</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.utility">
+        <source>Utility</source>
+        <target>Utility (kiegészítés)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.widget">
+        <source>Widget</source>
+        <target>Widget</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.translation">
+        <source>Translation</source>
+        <target>Fordítás</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.bundle">
+        <source>Bundle</source>
+        <target>Csomag</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.other">
+        <source>Other</source>
+        <target>Egyéb</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.core">
+        <source>Core</source>
+        <target>Core</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.reldate">
+        <source>Releasedate</source>
+        <target>Kiadási dátum</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.rating">
+        <source>Rating</source>
+        <target>Értékelés</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.popular">
+        <source>Popularity</source>
+        <target>Népszerűség</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.name">
+        <source>Name</source>
+        <target>Név</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.title">
+        <source>Title</source>
+        <target>Cím</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.author">
+        <source>Author</source>
+        <target>Szerző</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.alpha">
+        <source>Alpha</source>
+        <target>Alpha (korai teszt változat)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.beta">
+        <source>Beta</source>
+        <target>Beta (teszt változat)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.rc">
+        <source>RC</source>
+        <target>RC (kiadásra jelölt változat)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.stable">
+        <source>Stable</source>
+        <target>Stabil (végleges stabil verzió)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

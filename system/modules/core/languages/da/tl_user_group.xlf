@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_user_group.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_user_group.name.0">
+        <source>Title</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.name.1">
+        <source>Please enter the group title.</source>
+        <target>Angiv et unikt gruppenavn.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.0">
+        <source>Allowed fields</source>
+        <target>Ekskluderede felter</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.1">
+        <source>Here you can choose which fields will be editable.</source>
+        <target>Adskillige tabeller indeholder felter der som standard ikke kan redigeres. Her har du mulighed for at tillade den valgte gruppe at redigere sådanne felter.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.0">
+        <source>Deactivate</source>
+        <target>Deaktiver</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.1">
+        <source>Temporarily disable the group.</source>
+        <target>Vælger du denne indstilling deaktiveres den valgte gruppe. Den deaktiveredes gruppes rettigheder kan gælder ikke såleder ikke længere for gruppens medlemmer.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.0">
+        <source>Activate on</source>
+        <target>Aktiver pr.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.1">
+        <source>Automatically activate the group on this day.</source>
+        <target>Hvis du angiver en dato vil gruppen blive aktiveret fra og med denne dag.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.0">
+        <source>Deactivate on</source>
+        <target>Deaktiver pr.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.1">
+        <source>Automatically deactivate the group on this day.</source>
+        <target>Hvis du angiver en dato vil gruppen blive deaktiveret fra og med denne dag.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.title_legend">
+        <source>Title</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.modules_legend">
+        <source>Allowed modules</source>
+        <target>Tilladte moduler</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.pagemounts_legend">
+        <source>Pagemounts</source>
+        <target>Sideadgang</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.filemounts_legend">
+        <source>Filemounts</source>
+        <target>Filadgang</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.forms_legend">
+        <source>Form permissions</source>
+        <target>Formular tilladelser</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.account_legend">
+        <source>Account settings</source>
+        <target>Kontoindstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf_legend">
+        <source>Allowed fields</source>
+        <target>Ekskluderede felter</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.0">
+        <source>New user group</source>
+        <target>Ny brugergruppe</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.1">
+        <source>Create a new user group</source>
+        <target>Opret en ny brugergruppe</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.0">
+        <source>Group details</source>
+        <target>Gruppens detaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.1">
+        <source>Show the details of group ID %s</source>
+        <target>Vis detaljer for gruppe-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.0">
+        <source>Edit group</source>
+        <target>Rediger gruppe</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.1">
+        <source>Edit group ID %s</source>
+        <target>Rediger gruppe-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.0">
+        <source>Duplicate group</source>
+        <target>Dupliker gruppe</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.1">
+        <source>Duplicate group ID %s</source>
+        <target>Dupliker gruppe-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.0">
+        <source>Delete group</source>
+        <target>Slet gruppe</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.1">
+        <source>Delete group ID %s</source>
+        <target>Slet gruppe-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.0">
+        <source>Activate/deactivate group</source>
+        <target>Aktiver/deaktivér gruppe</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.1">
+        <source>Activate/deactivate group ID %s</source>
+        <target>Aktiver/deaktivér gruppe-ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

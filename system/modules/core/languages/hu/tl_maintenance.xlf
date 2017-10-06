@@ -1,0 +1,198 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_maintenance.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_maintenance.cacheTables.0">
+        <source>Purge data</source>
+        <target>Adatok törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheTables.1">
+        <source>Please select the data you want to purge or rebuild.</source>
+        <target>Jelölje ki az adatokat melyeket eltávolítani vagy újraépíteni akar.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.0">
+        <source>Front end user</source>
+        <target>Felhasználói felület felhasználó</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.1">
+        <source>Automatically log in a front end user to index protected pages.</source>
+        <target>Automatikusan belépteti a regisztrált felhasználót a védett oldalakra.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.job">
+        <source>Job</source>
+        <target>Munka</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.description">
+        <source>Description</source>
+        <target>Leírás</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.clearCache">
+        <source>Purge data</source>
+        <target>Adatok törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheCleared">
+        <source>The data has been purged</source>
+        <target>Az adatok törölve</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdate">
+        <source>Live Update</source>
+        <target>Online frissítés</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdateId">
+        <source>Live Update ID</source>
+        <target>Online Frissítés ID (azonosító)</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toLiveUpdate">
+        <source>Go to the Live Update</source>
+        <target>Ugrás az Online frissítéshez</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.upToDate">
+        <source>Your Contao version %s is up to date</source>
+        <target>A Contao verziója %s a legfrissebb</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.newVersion">
+        <source>A newer Contao version %s is available</source>
+        <target>Újabb Contao verzió érhető el: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.notWriteable">
+        <source>The temporary folder (system/tmp) is not writeable</source>
+        <target>Az átmeneti tároló mappa (system/tmp) írásvédett</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.changelog">
+        <source>View the change log</source>
+        <target>Tekintse meg a változtatási napló</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.runLiveUpdate">
+        <source>Run the update</source>
+        <target>Frissítés futtatása</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toc">
+        <source>Content of the update archive</source>
+        <target>Frissítés archívum tartalma</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.backup">
+        <source>Backuped files</source>
+        <target>Visszaállított fájlok</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.update">
+        <source>Updated files</source>
+        <target>Frissített fájlok</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.searchIndex">
+        <source>Rebuild the search index</source>
+        <target>Kereső index újjáépítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexSubmit">
+        <source>Rebuild index</source>
+        <target>Index újjáépítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.noSearchable">
+        <source>No searchable pages found</source>
+        <target>Nem kereshető oldalak találhatók</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexNote">
+        <source>Please wait for the page to load completely before you proceed!</source>
+        <target>Kérem várjon, míg az oldal betöltődése folyik!</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexLoading">
+        <source>Please wait while the search index is being rebuilt.</source>
+        <target>Kérem várjon, míg a kereső index újjáépül.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexComplete">
+        <source>The search index has been rebuilt. You can now proceed.</source>
+        <target>A kereső index újjáépítése kész. Most folytathatja!</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.updateHelp">
+        <source>Please enter your %s here.</source>
+        <target>Kérem írja be ide a %s -t</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.0">
+        <source>Purge the search index</source>
+        <target>Keresési index ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.1">
+        <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
+        <target>Kiüríti a következő táblákat: &lt;em&gt;tl_search&lt;/em&gt;, &lt;em&gt;tl_search_index&lt;/em&gt;. Utána újra kell építeni a kereső indexet. (lásd fentebb)</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.0">
+        <source>Purge the undo table</source>
+        <target>Visszavonás tábla ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.1">
+        <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
+        <target>Kiüríti a &lt;em&gt;tl_undo&lt;/em&gt; táblát, mely tárolja a törölt rekordokat. Ezzel véglegesen törli ezeket a bejegyzéseket.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.0">
+        <source>Purge the version table</source>
+        <target>Verzió táblát ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.1">
+        <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
+        <target>Levágja a &lt;em&gt;tl_version&lt;/em&gt; táblát, amely tárolja a korábbi verziók rekordjait. Ezzel véglegesen törli ezeket a bejegyzéseket.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.0">
+        <source>Purge the system log</source>
+        <target>Rendszer napló kiürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.1">
+        <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Kiüríti a &lt;em&gt;tl_log&lt;/em&gt; táblát, mely tárolja a rendszernapló bejegyzéseket. Ezzel véglegesen törli ezeket a bejegyzéseket.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.0">
+        <source>Purge the image cache</source>
+        <target>Képek gyorsítótár ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.1">
+        <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Eltávolítja az automatikusan generált képeket és megtisztítja az oldal gyorsítótárat, úgy hogy a forrás linkeket nem törli.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.0">
+        <source>Purge the script cache</source>
+        <target>Script gyorsítótár ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.1">
+        <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
+        <target>Eltávolítja az automatikusan generált .css és a .js fájlokat, helyreállítja az eredeti stíluslapokat, majd kitisztítja az oldal gyorsítótárat.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.0">
+        <source>Purge the page cache</source>
+        <target>Oldal gyorsítótár ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.1">
+        <source>Removes the cached versions of the front end pages.</source>
+        <target>Eltávolítja a felhasználói felület oldalainak tárolt változatát.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+        <target>Kereső gyorsítótár ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+        <target>Eltávolítja a keresési eredmények gyorsítótárazott változatát.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.0">
+        <source>Purge the internal cache</source>
+        <target>Belső gyorsítótár ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.1">
+        <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
+        <target>Eltávolítja a tárolt változatát a DCA és a nyelvi fájloknak. Letilthatja a belső gyorsítótárat az adminisztrációs felület beállítások menüpontjában.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.0">
+        <source>Purge the temp folder</source>
+        <target>Temp mappa ürítése</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.1">
+        <source>Removes the temporary files.</source>
+        <target>Eltávolítja az átmeneti tárolóból a fájlokat.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.0">
+        <source>Recreate the XML files</source>
+        <target>XML fájlok helyreállítása</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.1">
+        <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Helyreállítja az XML fájlokat (oldaltérkép és hírfolyam) és törli az oldal gyorsítótárat, úgy hogy a forrás linkeket nem törli.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,114 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_member_group.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_member_group.name.0">
+        <source>Title</source>
+        <target>Virsraksts</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.name.1">
+        <source>Please enter the group title.</source>
+        <target>Ievadiet grupas nosaukumu.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.redirect.0">
+        <source>Redirect on login</source>
+        <target>Virzienmaiņa pieslēdzoties</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.redirect.1">
+        <source>Redirect group members to a custom page when they log in.</source>
+        <target>Novirzīt grupas biedrus uz pielāgotu lapu, kad tie pieslēdzas.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Pārsūtīšanas lapa</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.jumpTo.1">
+        <source>Please choose the page to which the group members will be redirected.</source>
+        <target>Lūdzu izvēlieties lapu uz kuru grupas biedri tiks novirzīti.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.disable.0">
+        <source>Deactivate</source>
+        <target>Deaktivizēt</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.disable.1">
+        <source>Temporarily disable the group.</source>
+        <target>Šeit iespējams uz laiku deaktivizēt grupu.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.start.0">
+        <source>Activate on</source>
+        <target>Aktivizēt</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.start.1">
+        <source>Automatically activate the group on this day.</source>
+        <target>Automātiski aktivizēt grupu norādītajā dienā.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.stop.0">
+        <source>Deactivate on</source>
+        <target>Deaktivizēt</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.stop.1">
+        <source>Automatically deactivate the group on this day.</source>
+        <target>Automātiski deaktivizēt grupu norādītajā dienā.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.title_legend">
+        <source>Title</source>
+        <target>Virsraksts</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.redirect_legend">
+        <source>Auto-redirect</source>
+        <target>Automātiski pārvirzīt</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.disable_legend">
+        <source>Account settings</source>
+        <target>Konta uzstādījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.new.0">
+        <source>New group</source>
+        <target>Jauna grupa</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.new.1">
+        <source>Create a new group</source>
+        <target>Izveidot jaunu grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.show.0">
+        <source>Group details</source>
+        <target>Grupas specifikācija</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.show.1">
+        <source>Show the details of group ID %s</source>
+        <target>Parāda grupas ID %s specifikāciju.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.edit.0">
+        <source>Edit group</source>
+        <target>Rediģēt grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.edit.1">
+        <source>Edit group ID %s</source>
+        <target>Rediģēt ID %s grupu.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.copy.0">
+        <source>Duplicate group</source>
+        <target>Duplicēt grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.copy.1">
+        <source>Duplicate group ID %s</source>
+        <target>Duplicēt ID %s grupu.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.delete.0">
+        <source>Delete group</source>
+        <target>Dzēst grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.delete.1">
+        <source>Delete group ID %s</source>
+        <target>Dzēst ID %s grupu.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.toggle.0">
+        <source>Activate/deactivate group</source>
+        <target>Aktivizēt/Deaktivizēt grupu</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.toggle.1">
+        <source>Activate/deactivate group ID %s</source>
+        <target>Aktivizēt/Deaktivizēt ID %s grupu.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

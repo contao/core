@@ -1,0 +1,242 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="tl_form.title.0">
+        <source>Title</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title.1">
+        <source>Please enter the form title.</source>
+        <target>输入表单标题。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.0">
+        <source>Form alias</source>
+        <target>表单别名</target>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.1">
+        <source>The form alias is a unique reference to the form which can be called instead of its numeric ID.</source>
+        <target>表单别名是指用于替换表单数字型ID的对表单的唯一引用。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.0">
+        <source>Redirect page</source>
+        <target>重定向页面</target>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
+        <target>请选择用户提交表单后重定向的页面。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.0">
+        <source>Send form data via e-mail</source>
+        <target>通过e-mail提交表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.1">
+        <source>Send the submitted data to an e-mail address.</source>
+        <target>发送提交的表单到一个email地址。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.0">
+        <source>Recipient address</source>
+        <target>收件地址</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.1">
+        <source>Separate multiple e-mail addresses with comma.</source>
+        <target>用逗号分隔多个e-mail地址。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.0">
+        <source>Subject</source>
+        <target>主题</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.1">
+        <source>Please enter the e-mail subject.</source>
+        <target>请输入e-mail的主题。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.0">
+        <source>Data format</source>
+        <target>数据格式</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.1">
+        <source>Defines how the form data will be forwarded.</source>
+        <target>定义表单数据如何被后续处理。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.0">
+        <source>Raw data</source>
+        <target>原始数据</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.1">
+        <source>The form data will be sent as plain text message with each field in a new line.</source>
+        <target>表单数据将以每个字段一行的纯文本形式发送。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.0">
+        <source>XML file</source>
+        <target>XML文件</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.1">
+        <source>The form data will be attached to the e-mail as an XML file.</source>
+        <target>表单数据将以XML文件的形式作为邮件附件。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.0">
+        <source>CSV file</source>
+        <target>CSV文件</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.1">
+        <source>The form data will be attached to the e-mail as a CSV file.</source>
+        <target>表单数据将以CSV文件的形式作为邮件附件。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.0">
+        <source>E-mail</source>
+        <target>电子邮件格式</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.1">
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>忽略除&lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; 和 &lt;em&gt;cc&lt;/em&gt; 之外的所有字段，(副本) 像从邮件客户端发送表单数据. 允许文件上传.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.0">
+        <source>Skip empty fields</source>
+        <target>跳过空白页</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.1">
+        <source>Hide empty fields in the e-mail.</source>
+        <target>在邮件中隐藏空白字段。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.0">
+        <source>Store data</source>
+        <target>储存数据</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.1">
+        <source>Store the submitted data in the database.</source>
+        <target>把提交的表单数据储存到数据库。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.0">
+        <source>Target table</source>
+        <target>目标表</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.1">
+        <source>The target table must contain a column for every form field.</source>
+        <target>目标表必须包含与表单每一个字段对应的列。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.0">
+        <source>Submission method</source>
+        <target>表单提交方法</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.1">
+        <source>The default form submission method is POST.</source>
+        <target>表单默认的提交方法是POST。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.0">
+        <source>Disable HTML5 validation</source>
+        <target>禁用HTML5验证</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.1">
+        <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>添加 &lt;em&gt;novalidate&lt;/em&gt; 属性到表单标签中。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.0">
+        <source>CSS ID/class</source>
+        <target>CSS ID/类</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>此处您可以输入一个ID或者一到多个CSS类名。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.0">
+        <source>Form ID</source>
+        <target>表单ID</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.1">
+        <source>The form ID is required to trigger a Contao module.</source>
+        <target>在触发一个TypoLight模块时将需要表单ID。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.0">
+        <source>Tableless layout</source>
+        <target>无表格布局</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>不用表格来渲染表单。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.0">
+        <source>Allow HTML tags</source>
+        <target>支持的HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.1">
+        <source>Allow HTML tags in form fields.</source>
+        <target>表单中允许的HTML标记。</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.0">
+        <source>Revision date</source>
+        <target>修改日期</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>最近修改的日期</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title_legend">
+        <source>Title and redirect page</source>
+        <target>标题和重定向页面</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email_legend">
+        <source>Send form data</source>
+        <target>发送表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.store_legend">
+        <source>Store form data</source>
+        <target>保存表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.expert_legend">
+        <source>Expert settings</source>
+        <target>专家设定</target>
+      </trans-unit>
+      <trans-unit id="tl_form.config_legend">
+        <source>Form configuration</source>
+        <target>表单确认</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.0">
+        <source>New form</source>
+        <target>新表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.1">
+        <source>Create a new form</source>
+        <target>建立一个新表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.0">
+        <source>Form details</source>
+        <target>表单细节</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.1">
+        <source>Show the details of form ID %s</source>
+        <target>显示ID为 %s 的表单细节</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.0">
+        <source>Edit form</source>
+        <target>编辑表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.1">
+        <source>Edit form ID %s</source>
+        <target>编辑ID为 %s 的表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.0">
+        <source>Edit form</source>
+        <target>编辑表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.1">
+        <source>Edit the form settings</source>
+        <target>编辑表单设置</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.0">
+        <source>Duplicate form</source>
+        <target>复制表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.1">
+        <source>Duplicate form ID %s</source>
+        <target>复制ID为 %s 的表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.0">
+        <source>Delete form</source>
+        <target>删除表单</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.1">
+        <source>Delete form ID %s</source>
+        <target>删除ID为 %s 的表单</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

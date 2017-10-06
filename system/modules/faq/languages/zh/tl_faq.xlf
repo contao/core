@@ -1,0 +1,182 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="tl_faq.question.0">
+        <source>Question</source>
+        <target>问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.question.1">
+        <source>Please enter the question.</source>
+        <target>请输入问题。</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.0">
+        <source>FAQ alias</source>
+        <target>FAQ别名</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.1">
+        <source>The FAQ alias is a unique reference to the FAQ which can be called instead of its numeric ID.</source>
+        <target>FAQ别名是FAQ的唯一引用，可以替代数字ID来调用当前FAQ。</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.0">
+        <source>Author</source>
+        <target>作者</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.1">
+        <source>Here you can change the author of the FAQ.</source>
+        <target>您可以在这里变更FAQ的作者</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.0">
+        <source>Answer</source>
+        <target>答案</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.1">
+        <source>Please enter the answer.</source>
+        <target>请输入答案</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.0">
+        <source>Add an image</source>
+        <target>添加一张图片</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.1">
+        <source>Add an image to the FAQ.</source>
+        <target>在FAQ中添加一张图片</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>添加附件</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.1">
+        <source>Add one or more downloadable files to the FAQ.</source>
+        <target>在FAQ中添加一个或多个下载文件。</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.0">
+        <source>Enclosures</source>
+        <target>附件</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>请选择附件文件。</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.0">
+        <source>Disable comments</source>
+        <target>禁用评论</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.1">
+        <source>Do not allow comments for this particular FAQ.</source>
+        <target>不允许评论这个FAQ。</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.0">
+        <source>Publish the FAQ</source>
+        <target>发布FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.1">
+        <source>Make the FAQ publicly visible on the website.</source>
+        <target>发布这条FAQ记录到网站中。</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.title_legend">
+        <source>Title and author</source>
+        <target>标题和作者</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer_legend">
+        <source>Answer</source>
+        <target>答案</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.image_legend">
+        <source>Image settings</source>
+        <target>图片设定</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure_legend">
+        <source>Enclosures</source>
+        <target>附件</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.expert_legend">
+        <source>Expert settings</source>
+        <target>专家设定</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.publish_legend">
+        <source>Publish settings</source>
+        <target>发布设置</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.0">
+        <source>New question</source>
+        <target>新问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.1">
+        <source>Create a new question</source>
+        <target>创建新问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.0">
+        <source>Show question details</source>
+        <target>显示问题详情</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.1">
+        <source>Show the details of question ID %s</source>
+        <target>显示ID为%s的问题详情</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.0">
+        <source>Edit question</source>
+        <target>编辑问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.1">
+        <source>Edit question ID %s</source>
+        <target>编辑ID为%s的问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.0">
+        <source>Duplicate question</source>
+        <target>复制问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.1">
+        <source>Duplicate question ID %s</source>
+        <target>复制ID为%s的问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.0">
+        <source>Move question</source>
+        <target>移动问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.1">
+        <source>Move question ID %s</source>
+        <target>移动ID为%s的问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.0">
+        <source>Delete question</source>
+        <target>删除问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.1">
+        <source>Delete question ID %s</source>
+        <target>删除ID为%s的问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.0">
+        <source>Publish/unpublish question</source>
+        <target>发布/取消问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.1">
+        <source>Publish/unpublish question ID %s</source>
+        <target>发布/取消ID为%s的问题</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.0">
+        <source>Edit category</source>
+        <target>编辑类别</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.1">
+        <source>Edit the category settings</source>
+        <target>编辑类别设置</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>粘贴在头部</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.1">
+        <source>Paste after question ID %s</source>
+        <target>粘帖到ID为%s的问题之后</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.0">
+        <source>Add new at the top</source>
+        <target>新建在头部</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.1">
+        <source>Add new after question ID %s</source>
+        <target>添加到ID为%s的问题之后</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

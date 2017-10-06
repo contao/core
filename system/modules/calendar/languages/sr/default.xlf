@@ -1,0 +1,62 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/default.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="MSC.cal_events">
+        <source>%d event(s)</source>
+        <target>%d дешавање(а)</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_previous">
+        <source>&amp;lt;</source>
+        <target>&amp;lt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_next">
+        <source>&amp;gt;</source>
+        <target>&amp;gt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_timeSeparator">
+        <source>–</source>
+        <target>–</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyDay">
+        <source>There are no events on this day.</source>
+        <target>Данас нема дешавања.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyWeek">
+        <source>There are no events for this week.</source>
+        <target>Нема дешавања ове недеље.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyMonth">
+        <source>There are no events for this month.</source>
+        <target>Нема дешавања овог месеца.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyYear">
+        <source>There are no events for this year.</source>
+        <target>Нема дешавања за ову годину.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_empty">
+        <source>Currently there are no events.</source>
+        <target>Тренутно нема дешавања.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_days">
+        <source>This event is repeated every %s. day</source>
+        <target>Ово дешавање се понавља сваки %s. дан</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_weeks">
+        <source>This event is repeated every %s. week</source>
+        <target>Ово дешавање се понавља сваку %s. недељу.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_months">
+        <source>This event is repeated every %s. month</source>
+        <target>Ово дешавање се понавља сваки %s. месец</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_years">
+        <source>This event is repeated every %s. year</source>
+        <target>Ово дешавање се понавља сваку %s. годину</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_until">
+        <source>until %s</source>
+        <target>до %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

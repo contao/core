@@ -1,0 +1,366 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_install.php" source-language="en" target-language="pl">
+    <body>
+      <trans-unit id="tl_install.installTool.0">
+        <source>Installation</source>
+        <target>Instalator Contao</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installTool.1">
+        <source>Install tool login</source>
+        <target>Login instalatora</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.0">
+        <source>The install tool has been locked</source>
+        <target>Instalator został zablokowany</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.1">
+        <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
+        <target>Z przyczyn bezpieczeństwa, instalator został zablokowany po podaniu błędnego hasła trzy razy pod rząd. Aby odblokować otwórz plik konfiguracji lokalnej (system/config/localconfig.php) i ustaw &lt;em&gt;installCount&lt;/em&gt; na &lt;em&gt;0&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.0">
+        <source>Password</source>
+        <target>Hasło</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.1">
+        <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
+        <target>Wprowadź hasło instalatora. Hasło instalatora nie jest jednocześnie hasłem do panelu zarządzania.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.0">
+        <source>Install tool password</source>
+        <target>Hasło instalatora</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.1">
+        <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
+        <target>Dla dodatkowego zabezpieczenia narzędzia instalacji Contao można zmienić nazwę lub usunąć plik &lt;strong&gt;contao/install.php&lt;/strong&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.0">
+        <source>Generate an encryption key</source>
+        <target>Wygeneruj klucz kodowania</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.1">
+        <source>This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.</source>
+        <target>Klucz kodowania służy do przetrzymywania zaszyfrowanych danych. Należy pamiętać, że zaszyfrowane dane mogą być odczytane jedynie przy pomocy tego klucza. Także, jeśli masz już jakieś zaszyfrowane dane w bazie danych nie zmieniaj tego klucza. Pozostaw to pole puste aby wygenerować losowy klucz.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.0">
+        <source>Check database connection</source>
+        <target>Sprawdź połaczenie z bazą danych</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.1">
+        <source>Please enter your database connection parameters.</source>
+        <target>Wprowadź parametry twojego połączenia z bazą danych.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.0">
+        <source>Collation</source>
+        <target>Collation (kodowanie znaków w bazie danych)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.1">
+        <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
+        <target>Więcej informacji na ten temat &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;w podręczniku MySQL&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.0">
+        <source>Update database tables</source>
+        <target>Uaktualnij tabele bazy danych</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.1">
+        <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
+        <target>Prosimy pamiętać, że asystent aktualizacji był testowany jedynie z MySQL oraz sterownikiem MySQLi. Jeśli używasz innej bazy danych (np. Oracle) być może będziesz musiał zainstalować lub zaktualizować bazę ręcznie. W takim przypadku przejdź do katalogu &lt;strong&gt;system/modules&lt;/strong&gt; i wyszukaj wszystkie pliki &lt;strong&gt;config/database.sql&lt;/strong&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.0">
+        <source>Import a template</source>
+        <target>Importuj szablon</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.1">
+        <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
+        <target>Wybierz plik &lt;em&gt;.sql&lt;/em&gt; z katalogu &lt;em&gt;templates&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.0">
+        <source>Create an admin user</source>
+        <target>Utwórz administratora</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.1">
+        <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
+        <target>Jeśli zaimportowałeś przykładową stronę to nazwą administratora jest &lt;strong&gt;k.jones&lt;/strong&gt; a hasło to &lt;strong&gt;kevinjones&lt;/strong&gt;. Aby dowiedzieć się więcej zobacz stronę startową przykładowej instalacji.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.0">
+        <source>Extension repository</source>
+        <target>Repozytorium rozszerzeń</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.1">
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>Obecnie beta testujemy nową wersję repozytorium rozszerzeń, która używa Composera do zarządzania pakietami. Zainstaluj klienta Composera, aby wziąć udział w beta testach.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.0">
+        <source>Congratulations!</source>
+        <target>gratulacje!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.1">
+        <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
+        <target>Teraz prosimy zalogować się do panelu zarządzania i sprawdzić ustawienia systemowe. Następnie wyświetl stronę webową aby mieć pewność, że Contao pracuje prawidłowo.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.0">
+        <source>Modify files via FTP</source>
+        <target>Modyfikacja plików poprzez FTP</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.1">
+        <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
+        <target>Wprowadź dane swojego FTP aby Contao mógł modyfikować pliki poprzez FTP (Safe Mode Hack).</target>
+      </trans-unit>
+      <trans-unit id="tl_install.accept">
+        <source>Accept license</source>
+        <target>Zaakceptuj licencję</target>
+      </trans-unit>
+      <trans-unit id="tl_install.beLogin">
+        <source>Contao back end login</source>
+        <target>Panel zarządzania Contao</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passError">
+        <source>Please enter a password to prevent unauthorized access!</source>
+        <target>Prosimy zmienić domyślne hasło aby ustrzec się przed nieautoryzowanym dostępem!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passConfirm">
+        <source>A custom password has been set.</source>
+        <target>Domyślne hasło zostało zmienione.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passSave">
+        <source>Save password</source>
+        <target>Zapisz hasło</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyError">
+        <source>Please create an encryption key!</source>
+        <target>Prosimy wygenerować klucz kodowania!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyLength">
+        <source>An encryption key has to be at least 12 characters long!</source>
+        <target>Klucz kodowania musi posiadać co najmniej 12 znaków!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyConfirm">
+        <source>An encryption key has been created.</source>
+        <target>Klucz kodowania został utworzony.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyCreate">
+        <source>Generate encryption key</source>
+        <target>Wygeneruj klucz kodowania</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keySave">
+        <source>Generate or save key</source>
+        <target>Wygeneruj lub zapisz klucz</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbConfirm">
+        <source>Database connection established.</source>
+        <target>Połączenie z bazą danych jest poprawne.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbError">
+        <source>Not connected to a database!</source>
+        <target>Nie można się połączyć z bazą danych!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDriver">
+        <source>Driver</source>
+        <target>Sterownik</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbHost">
+        <source>Host</source>
+        <target>Host</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbUsername">
+        <source>Username</source>
+        <target>Nazwa</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDatabase">
+        <source>Database</source>
+        <target>Baza danych</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPersistent">
+        <source>Persistent connection</source>
+        <target>Stałe połączenie</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCharset">
+        <source>Character set</source>
+        <target>Kodowania znaków dla Contao</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCollation">
+        <source>Collation</source>
+        <target>Collation (kodowanie znaków w bazie danych)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPort">
+        <source>Port number</source>
+        <target>Numer portu</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSocket">
+        <source>Socket file</source>
+        <target>Plik gniazda</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSave">
+        <source>Save database settings</source>
+        <target>Zapisz ustawienia bazy danych</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collationInfo">
+        <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
+        <target>Zmiana parametru collation będzie miała wpływ na szystkie tabele z prefiksem &lt;em&gt;tl_&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateError">
+        <source>The database is not up to date!</source>
+        <target>Baza danych nie jest uaktualniona!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateConfirm">
+        <source>The database is up to date.</source>
+        <target>Baza danych jest uaktualniona.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateSave">
+        <source>Update database</source>
+        <target>Uaktualnij bazę danych</target>
+      </trans-unit>
+      <trans-unit id="tl_install.saveCollation">
+        <source>Change collation</source>
+        <target>Zmień porównywanie</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateX">
+        <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
+        <target>Wygląda na to, że aktualizujesz Contao z wersji %s lub wcześniejszej. Jeśli rzeczywiście tak jest, &lt;strong&gt;musisz uruchomić aktualizację z wersji %s&lt;/strong&gt;, by zachować spójność danych!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrun">
+        <source>Run version %s update</source>
+        <target>Uruchom aktualizację wersji %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrunStep">
+        <source>Run version %s update - step %s</source>
+        <target>Uruchom aktualizację wersji %s - krok %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importException">
+        <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>Import sie nie powiódł! Czy struktura bazy danych jest aktualna i czy plik templatki jest kombatybilny z Twoja wersją Contao?</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importError">
+        <source>Please choose a template file!</source>
+        <target>Wybierz plik szablonu!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importConfirm">
+        <source>Template imported on %s</source>
+        <target>Szablon zaimportowano %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importWarn">
+        <source>Any existing data will be deleted!</source>
+        <target>Wszystkie istniejące dane zostaną skasowane!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.templates">
+        <source>Templates</source>
+        <target>Szablony</target>
+      </trans-unit>
+      <trans-unit id="tl_install.doNotTruncate">
+        <source>Do not truncate tables</source>
+        <target>Nie czyść tabel</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>Nadpisz tabele repozytorium</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importSave">
+        <source>Import template</source>
+        <target>Importuj szablon</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importContinue">
+        <source>Any existing data will be deleted! Do you really want to continue?</source>
+        <target>Wszystkie istniejąca dane zostaną skasowane! Naprawdę chcesz kontynuować?</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminError">
+        <source>Please fill in all fields to create an admin user!</source>
+        <target>Prosimy wypełnić wszystkie pola aby utworzyć administratora!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminConfirm">
+        <source>An admin user has been created.</source>
+        <target>Administrator został utworzony.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminSave">
+        <source>Create admin account</source>
+        <target>Utwórz konto administratora</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryDefault">
+        <source>You are using the default extension repository.</source>
+        <target>Używasz domyślnego repozytorium rozszerzeń.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryComposer">
+        <source>You are using the Composer based extension repository.</source>
+        <target>Używasz repozytorium rozszerzeń opartego na Composer.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryInstall">
+        <source>Install the Composer client</source>
+        <target>Zainstaluj klienta Composer</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installConfirm">
+        <source>You have successfully installed Contao.</source>
+        <target>Pomyślnie zainstalowałeś Contao.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHost">
+        <source>FTP hostname</source>
+        <target>Serwer FTP</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPath">
+        <source>Relative path to Contao directory (e.g. &lt;em&gt;httpdocs/&lt;/em&gt;)</source>
+        <target>Relatywna ścieżka do katalogu Contao (np. &lt;em&gt;httpdocs/&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUser">
+        <source>FTP username</source>
+        <target>Użytkownik FTP</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPass">
+        <source>FTP password</source>
+        <target>Hasło FTP</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSLh4">
+        <source>Secure connection</source>
+        <target>Bezpieczne połączenie</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSL">
+        <source>Connect via FTP-SSL</source>
+        <target>Połącz poprzez FTP-SSL</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPort">
+        <source>FTP port</source>
+        <target>Port FTP</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSave">
+        <source>Save FTP settings</source>
+        <target>Zapisz hasło FTP</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHostError">
+        <source>Could not connect to FTP server %s</source>
+        <target>Nie można się połączyć z serwerem FTP: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUserError">
+        <source>Could not login as &quot;%s&quot;</source>
+        <target>Nie można się zalogować jako &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPathError">
+        <source>Could not locate Contao directory %s</source>
+        <target>Nie można zlokalizować katalogu Contao: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesRenamed">
+        <source>The configured files directory does not exist!</source>
+        <target>Skonfigurowany katalog plików nie istnieje!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesWarning">
+        <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
+        <target>Czy zmieniłeś nazwę katalogu &lt;strong&gt;tl_files&lt;/strong&gt; na &lt;strong&gt;files&lt;/strong&gt;? Nie możesz po prostu zmienić nazwę katalogu ponieważ wszystkie odniesienia do plików w bazie danych oraz arkusze stylów wciąż będą wskazywły poprzednią lokalizację. Jeśli chcesz zmienić nazwę tego katalogu, prosimy to zrobić po wcześniejszej aktualizacji do wersji 3 oraz dostosować bazę danych tym skryptem: %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.CREATE">
+        <source>Create new tables</source>
+        <target>Utwórz nowe tabele</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_ADD">
+        <source>Add new columns</source>
+        <target>Dodaj nowe kolumny</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_CHANGE">
+        <source>Change existing columns</source>
+        <target>Zmień istniejace kolumny</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_DROP">
+        <source>Drop existing columns</source>
+        <target>Usuń istniejące kolumny</target>
+      </trans-unit>
+      <trans-unit id="tl_install.DROP">
+        <source>Drop existing tables</source>
+        <target>Usuń istniejące tabele</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

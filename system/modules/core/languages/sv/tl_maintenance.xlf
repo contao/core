@@ -1,0 +1,198 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_maintenance.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_maintenance.cacheTables.0">
+        <source>Purge data</source>
+        <target>Ta bort sessiondata</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheTables.1">
+        <source>Please select the data you want to purge or rebuild.</source>
+        <target>Välj vilken/vilka cache-tabell(er) som du vill rensa.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.0">
+        <source>Front end user</source>
+        <target>Visa som inloggad medlem</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.1">
+        <source>Automatically log in a front end user to index protected pages.</source>
+        <target>För att indexera skyddade sidor måste du skapa en vanlig användare som är tillåten att komma åt dessa sidor.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.job">
+        <source>Job</source>
+        <target>Åtgärd</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.description">
+        <source>Description</source>
+        <target>Beskrivning</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.clearCache">
+        <source>Purge data</source>
+        <target>Ta bort sessiondata</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheCleared">
+        <source>The data has been purged</source>
+        <target>Cachen har rensats</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdate">
+        <source>Live Update</source>
+        <target>Live Update</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdateId">
+        <source>Live Update ID</source>
+        <target>Live update ID</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toLiveUpdate">
+        <source>Go to the Live Update</source>
+        <target>Gå till Live Update</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.upToDate">
+        <source>Your Contao version %s is up to date</source>
+        <target>Din Contao version %s är den senaste versionen.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.newVersion">
+        <source>A newer Contao version %s is available</source>
+        <target>En nyare Contao-version med versionsnummer %s finns tillgänglig</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.notWriteable">
+        <source>The temporary folder (system/tmp) is not writeable</source>
+        <target>Den temporära mappen (system/tmp) är inte skrivbar</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.changelog">
+        <source>View the change log</source>
+        <target>Visa ändringslogg</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.runLiveUpdate">
+        <source>Run the update</source>
+        <target>Kör uppdateringarna</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toc">
+        <source>Content of the update archive</source>
+        <target>Innehåll i uppdateringsarkivet</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.backup">
+        <source>Backuped files</source>
+        <target>Säkerhetskopierade filer</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.update">
+        <source>Updated files</source>
+        <target>Uppdaterade filer</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.searchIndex">
+        <source>Rebuild the search index</source>
+        <target>Bygg om sökindex</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexSubmit">
+        <source>Rebuild index</source>
+        <target>Bygg om index</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.noSearchable">
+        <source>No searchable pages found</source>
+        <target>Inga sökbara sidor hittades</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexNote">
+        <source>Please wait for the page to load completely before you proceed!</source>
+        <target>Vänligen vänta på att sidan är färdigladdad innan du fortsätter!</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexLoading">
+        <source>Please wait while the search index is being rebuilt.</source>
+        <target>Vänligen vänta på att sökindex byggs om.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexComplete">
+        <source>The search index has been rebuilt. You can now proceed.</source>
+        <target>Sökindex har byggts om. Du kan nu fortsätta.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.updateHelp">
+        <source>Please enter your %s here.</source>
+        <target>Vänligen ange din %s här.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.0">
+        <source>Purge the search index</source>
+        <target>Rensa sökindex</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.1">
+        <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
+        <target>Rensar tabellerna &lt;em&gt;tl_search&lt;/em&gt; och &lt;em&gt;tl_search_index&lt;/em&gt;. Efter detta måste du återbygga sökindex (se ovan).</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.0">
+        <source>Purge the undo table</source>
+        <target>Rensa ångra-tabell</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.1">
+        <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
+        <target>Rensar tabellen &lt;em&gt;tl_undo&lt;/em&gt; som lagrar raderade poster. Detta raderar posterna permanent.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.0">
+        <source>Purge the version table</source>
+        <target>Rensa versionstabell</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.1">
+        <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
+        <target>Rensar tabellen &lt;em&gt;tl_version&lt;/em&gt; som lagrar tidigare versioner av poster. Detta raderar posterna permanent.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.0">
+        <source>Purge the system log</source>
+        <target>Rensa systemlogg</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.1">
+        <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Rensar &lt;em&gt;tl_log-tabellen&lt;/em&gt; som lagrar alla systemloggar. Detta raderar informationen permanent.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.0">
+        <source>Purge the image cache</source>
+        <target>Rensa bild-cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.1">
+        <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Rensar bort de automatiskt genererade bilderna samt sid-cache så att det inte finns några länkningar mot raderade resurser.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.0">
+        <source>Purge the script cache</source>
+        <target>Rensa skript-cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.1">
+        <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
+        <target>Rensar bort de automatiskt genererade .css- och .js-filer och återskapar interna stilmallar samt rensar sid-cache.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.0">
+        <source>Purge the page cache</source>
+        <target>Rensa sid-cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.1">
+        <source>Removes the cached versions of the front end pages.</source>
+        <target>Rensar cache:ade versioner av frontend-sidor.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+        <target>Rensa sök-cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+        <target>Raderar de sparade versionerna av sökresultat.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.0">
+        <source>Purge the internal cache</source>
+        <target>Rensa intern cache</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.1">
+        <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
+        <target>Rensar bort den cache:ade versionerna av DCA och språkfiler. Du kan avaktivera intern cache permanent under backend-inställningar.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.0">
+        <source>Purge the temp folder</source>
+        <target>Rensa temp-folder</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.1">
+        <source>Removes the temporary files.</source>
+        <target>Rensar bort temporära filer.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.0">
+        <source>Recreate the XML files</source>
+        <target>Återskapa XML-filer</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.1">
+        <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Återskapar XML-filer (sidkarta och flöden) samt rensar sid-cache så att det inte finns några länkningar till raderade resurser.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

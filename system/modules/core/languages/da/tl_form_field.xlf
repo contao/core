@@ -1,0 +1,574 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="FFL.headline.0">
+        <source>Headline</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="FFL.headline.1">
+        <source>A custom field to insert a section headline.</source>
+        <target>En overskrift kan bruges til at strukturere en formular ved at separere flere felter med en overskrift. En overskrift kan indeholde HTML-kode.</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.0">
+        <source>Explanation</source>
+        <target>Forklaring</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.1">
+        <source>A custom field to insert an explanation text.</source>
+        <target>En forklaring kan bruges til at indsætte en forklaring eller et spørgsmål for et felt. En forklaring kan indeholde HTML-kode.</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.0">
+        <source>HTML code</source>
+        <target>HTML-kode</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.1">
+        <source>A custom field to insert HTML code.</source>
+        <target>Brug dette felt til at indsætte HTML-kode i formularen.</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.0">
+        <source>Fieldset</source>
+        <target>Feltsæt</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.1">
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>En container til formular elementer med en valgfri forklaring (kun tilgængelig ved tabelløse formularer).</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.0">
+        <source>Text field</source>
+        <target>Tekstfelt</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.1">
+        <source>A single-line input field for a short or medium text.</source>
+        <target>Et tekstfelt er input-felt med en enkelt linje til kort eller mellemlang tekst.</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.0">
+        <source>Password field</source>
+        <target>Adgangskodefelt</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.1">
+        <source>A single-line input field for a password. Contao automatically adds a confirmation field.</source>
+        <target>Et adgangskodefelt er et input-felt med en enkelt linje til et kodeord.</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.0">
+        <source>Textarea</source>
+        <target>Tekstområde</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.1">
+        <source>A multi-line input field for a medium or long text.</source>
+        <target>Et tekstområde er et input-felt med flere linjer til mellemlang eller lang tekst.</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.0">
+        <source>Select menu</source>
+        <target>Rullemenu</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.1">
+        <source>A single- or multi-line drop-down menu.</source>
+        <target>En rullemenu er en rullegardinmenu med en enkelt linje, som indeholder flere muligheder som kan vælges.</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.0">
+        <source>Radio button menu</source>
+        <target>Menu med radioknapper</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.1">
+        <source>A list of multiple options from which one can be selected.</source>
+        <target>En menu med radioknapper er en menu over flere linjer, som indeholder flere muligheder, hvoraf én kan vælges.</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.0">
+        <source>Checkbox menu</source>
+        <target>Menu med afkrydsningsfelter</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.1">
+        <source>A list of multiple options from which any can be selected.</source>
+        <target>En menu med afkrydsningsfelter er en menu over flere linjer, som indeholder flere muligheder, hvoraf én eller flere kan vælges.</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.0">
+        <source>File upload</source>
+        <target>Fil-upload</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.1">
+        <source>A single-line input field to upload a local file to the server.</source>
+        <target>Et fil-upload-felt indeholder en knap til at gennemsøge en lokal harddisk og uploade en fil.</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.0">
+        <source>Hidden field</source>
+        <target>Skjult felt</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.1">
+        <source>A single-line input field that is not visible in the form.</source>
+        <target>Et skjult felt er et felt med en enkelt linie der ikke er synlig i formularen</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.0">
+        <source>Security question</source>
+        <target>Sikkerhedsspørgsmål</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.1">
+        <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
+        <target>Dette felt tilføjer et simpelt matematik spørgsmål som skal besvares for at formularen kan sendes.</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.0">
+        <source>Submit field</source>
+        <target>Send-knap</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.1">
+        <source>A button to submit the form.</source>
+        <target>En knap til at sende formularen med</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.0">
+        <source>Field type</source>
+        <target>Felttype</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.1">
+        <source>Please choose the type of field.</source>
+        <target>Vælg venligst den ønskede felttype</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.0">
+        <source>Field name</source>
+        <target>Feltnavn</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.1">
+        <source>The field name is a unique name to identify the field.</source>
+        <target>Angiv venligst et feltnavn. Dette navn vises ikke for besøgende på dit websted.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.0">
+        <source>Field label</source>
+        <target>Feltmærkat</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.1">
+        <source>The field label will be visible on the website, typically in front of or above the field.</source>
+        <target>Indtast venligst en feltmærkat. Mærkaten vil være synlig for besøgende på dit websted. Hvis du laver et flersproget websted, bør mærkaten oversættes til de respektive sprog.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.0">
+        <source>Text</source>
+        <target>Tekst</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>Indtast venligst overskriften eller forklaring. HTML-tags er tilladte.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Skriv din HTML-kode.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.0">
+        <source>Options</source>
+        <target>Muligheder</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Tildel venligst hver modul til et sideelement. Brug knapper til at tilføje, flytte eller fjerne et modul. Hvis du arbejder uden hjælp fra JavaScript, bør du gemme dine ændringer før du ændrer rækkefølgen.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.0">
+        <source>Mandatory field</source>
+        <target>Obligatorisk felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.1">
+        <source>The form will not submit if the field is empty.</source>
+        <target>Denne mulighed gør det obligatorisk at udfylde dette felt.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.0">
+        <source>Input validation</source>
+        <target>Validering af indtastning</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.1">
+        <source>Validate the input against a regular expression.</source>
+        <target>Valider indtastning i feltet mod en regel</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.0">
+        <source>Numeric characters</source>
+        <target>Numeriske tegn</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.1">
+        <source>Allows numeric characters, minus (-) and full stop (.).</source>
+        <target>tillader tal, minus (-) og punktum (.).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.0">
+        <source>Alphabetic characters</source>
+        <target>Alfabetiske tegn</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.1">
+        <source>Allows alphabetic characters, minus (-), full stop (.) and space ( ).</source>
+        <target>tillader tegn fra alfabetet, minus (-), punktum (.) og mellemrum</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.0">
+        <source>Alphanumeric characters</source>
+        <target>Alfanumeriske tegn</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.1">
+        <source>Allows alphabetic and numeric characters, minus (-), full stop (.), underscore (_) and space ( ).</source>
+        <target>tillader tegn fra alfabetet og tal, minus (-), punktum (.) og mellemrum</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.0">
+        <source>Extended alphanumeric characters</source>
+        <target>Udvidede alfanumeriske tegn</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.1">
+        <source>Allows everything except special characters which are usually encoded for security reasons (#/()&lt;=&gt;).</source>
+        <target>forbyder alle tegn som kodes som standard (#&amp;()/). F.eks. for at undgå problemer med kodeordsfelter.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.0">
+        <source>Date</source>
+        <target>Dato</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.1">
+        <source>Checks whether the input matches the global date format.</source>
+        <target>tjekker om det nuværende input matcher det globale datoformat.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.0">
+        <source>Time</source>
+        <target>Tid</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.1">
+        <source>Checks whether the input matches the global time format.</source>
+        <target>tjekker om det nuværende input matcher det globale datoformat.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.0">
+        <source>Date and time</source>
+        <target>Dato og tid</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.1">
+        <source>Checks whether the input matches the global date and time format.</source>
+        <target>tjekker om det nuværende input matcher det globale dato- og tidsformat.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.0">
+        <source>Phone number</source>
+        <target>Telefonnr.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.1">
+        <source>Allows numeric characters, plus (+), minus (-), slash (/), parentheses () and space ( ).</source>
+        <target>tillader tal, plus (+), minus (-), skråstreg (/), parenteser () og mellemrum.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.0">
+        <source>E-mail address</source>
+        <target>E-mail adresse</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.1">
+        <source>Checks whether the input is a valid e-mail address.</source>
+        <target>kontrollere om den nuværende værdi er en e-postadresse.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.0">
+        <source>URL format</source>
+        <target>URL-format</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.1">
+        <source>Checks whether the input is a valid URL.</source>
+        <target>tjekker om den nuværende værdi er en gyldig URL. En gyldig URL indeholder tegnene A-Za-z ig disse specialtegn(-_.:;/?&amp;=+#). Alle andre specialtegn skal kodes.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.0">
+        <source>Placeholder</source>
+        <target>Placeholder</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.1">
+        <source>Show this text as long as the field is empty (requires HTML5).</source>
+        <target>Vis denne tekst indtil den besøgende begynder at udfyldt det (Kræver HTML5).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Minimum længde</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Påkræv at feltets værdi skal have en længde på et bestemt antal tegn.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.0">
+        <source>Maximum length</source>
+        <target>Maksimal længde</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.1">
+        <source>Limit the field length to a certain number of characters (text) or bytes (file uploads).</source>
+        <target>Hvis du indtaster en numerisk værdi her, vil feltlængden blive begrænset til dette antal tegn. Hvis du opsætter et fil-upload-felt, kan du indtaste den maksimale filstørrelse i Bytes her (1 MB = 1024 kB = 1024000 Bytes).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.0">
+        <source>Rows and columns</source>
+        <target>Række og spalter</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.1">
+        <source>The number of rows and columns of the textarea.</source>
+        <target>Skriv venligst antallet af rækker og antallet af spalter.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.0">
+        <source>Multiple selection</source>
+        <target>Flere valg</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.1">
+        <source>Allow visitors to select more than one option.</source>
+        <target>Tillader at vælge mere end en mulighed.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.0">
+        <source>List size</source>
+        <target>Listestørrelse</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.1">
+        <source>Here you can enter the size of the select box.</source>
+        <target>Indtast størrelsen for valgboksen.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.0">
+        <source>Allowed file types</source>
+        <target>Tilladte filtyper</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.1">
+        <source>A comma separated list of valid file extensions.</source>
+        <target>Indtast venligst en kommasepareret liste over gyldige filendelser. Kun disse filtyper kun uploades til serveren.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.0">
+        <source>Store uploaded files</source>
+        <target>Gem uploadet fil</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.1">
+        <source>Move the uploaded files to a folder on the server.</source>
+        <target>Hvis du vælger denne mulighed, vil uploadede filer blive flyttet til en mappe på din server. Vælg ikke denne mulighed hvis uploadede filer vedhæftes til en e-post og du ikke vil gemme dem.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.0">
+        <source>Target folder</source>
+        <target>Destinationsmappe</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.1">
+        <source>Please select the target folder from the files directory.</source>
+        <target>Vælg venligst en mappe, hvori uploadede filer skal gemmes.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>Brug hjemmemappe</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.1">
+        <source>Store the file in the home directory if there is an authenticated user.</source>
+        <target>Gem filen i brugerens hjemmemappe i stedet for upload-mappen, hvis en bruger er logget ind.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.0">
+        <source>Preserve existing files</source>
+        <target>Overskriv ikke eksisterende filer</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.1">
+        <source>Add a numeric suffix to the new file if the file name already exists.</source>
+        <target>Tilføj numerisk ID til filnavn hvis filen eksisterer i forvejen.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.0">
+        <source>Operation mode</source>
+        <target>Funktion</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.1">
+        <source>Please select the operation mode of the fieldset element.</source>
+        <target>Vælg den ønskede funktion for dette feltgruppe element</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.0">
+        <source>Wrapper start</source>
+        <target>Gruppering start</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.1">
+        <source>Marks the beginning of a fieldset and can contain a legend.</source>
+        <target>Markerer starten på en feltgruppe og kan indeholde en forklaring</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.0">
+        <source>Wrapper stop</source>
+        <target>Gruppering stop</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.1">
+        <source>Marks the end of a fieldset.</source>
+        <target>Markerer slutningen på en feltgruppe</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.0">
+        <source>Default value</source>
+        <target>Værdi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.1">
+        <source>Here you can enter a default value for the field.</source>
+        <target>Hvis du indtaster en værdi her, vil den blive brugt som standardværdi for feltet.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.0">
+        <source>CSS class</source>
+        <target>CSS-klasse</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Her kan du indtaste en eller flere CSS-klasser.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.0">
+        <source>Access key</source>
+        <target>Adgangstaster</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.1">
+        <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+        <target>En tilgangstast er et enkelt tegn, som kan tildeles et formularfelt. Hvis en besøgende samtidigt trykker [ALT]-tasten og tilgangstasten, vil det tilhørende formularfelt komme i fokus.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.0">
+        <source>Tab index</source>
+        <target>Fanebladsnavigation</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.1">
+        <source>The position of the form field in the tabbing order.</source>
+        <target>Feltets position når der navigeres med tab-tasten.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.0">
+        <source>Field size</source>
+        <target>Field size</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.1">
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Her kan du indtaste størrelsen på upload feltet (&lt;em&gt;size&lt;/em&gt; attribute).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+        <target>Speciel skabelon for formular felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+        <target>Her kan du overskrive standard skabelonen for formular felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.0">
+        <source>Add a submit button</source>
+        <target>Tilføj send-knap</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.1">
+        <source>Add a submit button next to the field to create a single line form.</source>
+        <target>Som standard bliver send-knappen tilføjet som et ekstra felt i slutningen af formularen, men hvis du vælger denne mulighed, vil en send-knap blive tilføjet ved siden af det nuværende felt. Brug denne mulighed for at lave en formular på en enkelt linje (f.eks. en søgeformular.)</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.0">
+        <source>Submit button label</source>
+        <target>Send-knap mærkat</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.1">
+        <source>Please enter the label of the submit button.</source>
+        <target>Indtast venligst mærkaten for send-knappen.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.0">
+        <source>Create an image button</source>
+        <target>Send-knap billede</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.1">
+        <source>Use an image submit button instead of the default one.</source>
+        <target>Brug et billede som send-knap i stedet for en send-knap med tekst.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.0">
+        <source>Source file</source>
+        <target>Kildefil</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.1">
+        <source>Please select an image from the files directory.</source>
+        <target>Vælg venligst et billede fra fil-mappen.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type_legend">
+        <source>Field type and name</source>
+        <target>felttype og navn</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text_legend">
+        <source>Text/HTML</source>
+        <target>Tekst/HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fconfig_legend">
+        <source>Field configuration</source>
+        <target>felt-konfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options_legend">
+        <source>Options</source>
+        <target>Muligheder</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.store_legend">
+        <source>Store file</source>
+        <target>Gem fil</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.expert_legend">
+        <source>Expert settings</source>
+        <target>Ekspert indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Række og spalter</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Skabelon indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.submit_legend">
+        <source>Submit button</source>
+        <target>Send-knap</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.image_legend">
+        <source>Image button</source>
+        <target>Billed-knap</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.0">
+        <source>New field</source>
+        <target>Nyt felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.1">
+        <source>Create a new field</source>
+        <target>Opret et nyt felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.0">
+        <source>Field details</source>
+        <target>Feltdataljer</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.1">
+        <source>Show the details of field ID %s</source>
+        <target>Vis detaljer for felt-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.0">
+        <source>Edit field</source>
+        <target>Rediger felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.1">
+        <source>Edit field ID %s</source>
+        <target>Rediger felt-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.0">
+        <source>Move field</source>
+        <target>Flyt felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.1">
+        <source>Move field ID %s</source>
+        <target>Flyt felt-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.0">
+        <source>Duplicate field</source>
+        <target>Dupliker felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.1">
+        <source>Duplicate field ID %s</source>
+        <target>Dupliker felt-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.0">
+        <source>Delete field</source>
+        <target>Slet felt</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.1">
+        <source>Delete field ID %s</source>
+        <target>Slet felt-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.0">
+        <source>Edit form</source>
+        <target>Rediger formular overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.1">
+        <source>Edit the form settings</source>
+        <target>Rediger overskriften for denne formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Indsæt øverst</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.1">
+        <source>Paste after field ID %s</source>
+        <target>Indsæt efter felt-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Opret ny formatdefinition i begyndelsen</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.1">
+        <source>Add new after field ID %s</source>
+        <target>Opret et nyt felt efter felt-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Skift synlighed</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.1">
+        <source>Toggle the visibility of field ID %s</source>
+        <target>Skift synlighed for felt-ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

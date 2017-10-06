@@ -1,0 +1,386 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar_events.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_calendar_events.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title.1">
+        <source>Please enter the event title.</source>
+        <target>Geef een titel voor het evenement op.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.0">
+        <source>Event alias</source>
+        <target>Event alias</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.alias.1">
+        <source>The event alias is a unique reference to the event which can be called instead of its numeric ID.</source>
+        <target>Het evenement alias is een unieke referentie die aangeroepen kan worden i.p.v. zijn numeriek ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.0">
+        <source>Author</source>
+        <target>Auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.author.1">
+        <source>Here you can change the author of the event.</source>
+        <target>Hier kunt u de auteur van het evenement wijzigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.0">
+        <source>Add time</source>
+        <target>Tijd toevoegen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addTime.1">
+        <source>Add a start and end time to the event.</source>
+        <target>Voeg een begin- en eindtijd voor het evenement toe.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.0">
+        <source>Start time</source>
+        <target>Begintijd</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startTime.1">
+        <source>Please enter the start time according to the global time format.</source>
+        <target>Geef de begintijd op volgens het globale tijdsformaat.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.0">
+        <source>End time</source>
+        <target>Eindtijd</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endTime.1">
+        <source>Use the same value for start and end time to create an open-ended event.</source>
+        <target>Geef de eindtijd op volgens het globale tijdsformaat. Laat leeg of gebruik zelfde tijd als begintijd voor open einde.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.0">
+        <source>Start date</source>
+        <target>Begindatum</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.startDate.1">
+        <source>Please enter the start date according to the global date format.</source>
+        <target>Geef de begindatum van de gebeurtenis op.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.0">
+        <source>End date</source>
+        <target>Einddatum</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.endDate.1">
+        <source>Leave blank to create a single day event.</source>
+        <target>Laat leeg om een evenement van slechts één dag aan te maken.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.location.0">
+        <source>Event location</source>
+        <target>Locatie evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.location.1">
+        <source>Here you can enter the event location.</source>
+        <target>Voer hier de evenement locatie in.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.0">
+        <source>Event teaser</source>
+        <target>Teasertekst</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.teaser.1">
+        <source>The event teaser can be shown in an event list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>De teasertekst kan getoond worden i.p.v. het gehele artikel.Een &quot;lees meer...&quot; link wordt automatisch toegevoegd.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.0">
+        <source>Event text</source>
+        <target>Evenement tekst</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details.1">
+        <source>Here you can enter the event text.</source>
+        <target>Voer een evenement tekst in.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.0">
+        <source>Add an image</source>
+        <target>Afbeelding toevoegen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addImage.1">
+        <source>Add an image to the event.</source>
+        <target>Voeg een afbeelding toe aan het evenement.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.0">
+        <source>Repeat event</source>
+        <target>Repeterend evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring.1">
+        <source>Create a recurring event.</source>
+        <target>Herhaal het huidig evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.0">
+        <source>Interval</source>
+        <target>Interval</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEach.1">
+        <source>Here you can set the recurrence interval.</source>
+        <target>Geef het tijdsinterval op.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.0">
+        <source>Recurrences</source>
+        <target>Herhalingen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurrences.1">
+        <source>Set to 0 for unlimited recurrences.</source>
+        <target>Geef het aantal herhalingen op (0 = onbeperkt).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.repeatEnd">
+        <source>End of recurring event</source>
+        <target>Einde van het huidig evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Bijlages toevoegen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.addEnclosure.1">
+        <source>Add one or more downloadable files to the event.</source>
+        <target>Voeg één of meerdere downloadbare bestanden toe aan de gebeurtenis.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.0">
+        <source>Enclosures</source>
+        <target>Bijlagen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Kies het bestand dat u aan het antwoord wil toevoegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.0">
+        <source>Redirect target</source>
+        <target>Doelpagina</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>Geef op naar welke pagina het nieuwsbericht verwijst.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.0">
+        <source>Use default</source>
+        <target>Gebruik standaard</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.default.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the calendar.</source>
+        <target>Door op de &quot;lees meer...&quot; link te klikken worden bezoekers doorverwezen naar de standaardpagina van de kalender.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.0">
+        <source>Page</source>
+        <target>Pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.internal.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an internal page.</source>
+        <target>Door op de &quot;lees meer...&quot; link te klikken worden bezoekers doorverwezen naar een interne pagina van de website.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.0">
+        <source>Article</source>
+        <target>Artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.article.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>Na het klikken op de &quot;lees meer...&quot; link, worden bezoekers verder geleid naar een artikel op deze website.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.0">
+        <source>External URL</source>
+        <target>Externe URL</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.external.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>Door op de &quot;lees meer...&quot; link te klikken worden bezoekers doorverwezen naar een externe website.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Ga naar pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
+        <target>Kies de pagina waarnaar uw bezoekers worden geleid na klikken op een gebeurtenis.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.0">
+        <source>Article</source>
+        <target>Artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the event.</source>
+        <target>Kies het artikel waarnaar uw bezoekers worden geleid na klikken op een evenement.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.0">
+        <source>CSS class</source>
+        <target>CSS klasse</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Hier kunt u een of meerdere CSS classes opgeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.0">
+        <source>Disable comments</source>
+        <target>Reacties uitschakelen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.noComments.1">
+        <source>Do not allow comments for this particular event.</source>
+        <target>Geen reacties toestaan voor dit specifieke evenement.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.0">
+        <source>Publish event</source>
+        <target>Publiceer evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.published.1">
+        <source>Make the event publicly visible on the website.</source>
+        <target>Maak het evenement zichtbaar op uw website.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.0">
+        <source>Show from</source>
+        <target>Weergeven vanaf</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.start.1">
+        <source>Do not show the event on the website before this day.</source>
+        <target>Als u hier een datum invoert zal het huidig evenement niet zichtbaar zijn op de website vóór deze dag.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.0">
+        <source>Show until</source>
+        <target>Weergeven tot</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.stop.1">
+        <source>Do not show the event on the website on and after this day.</source>
+        <target>Evenement niet tonen op de website op en na deze dag.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum van aanpassing</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Geef datum en tijdstip van de laatste aanpassing.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.title_legend">
+        <source>Title and author</source>
+        <target>Titel en auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.date_legend">
+        <source>Date and time</source>
+        <target>Datum en tijd</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.details_legend">
+        <source>Event details</source>
+        <target>Details evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.text_legend">
+        <source>Event text</source>
+        <target>Evenement tekst</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.image_legend">
+        <source>Image settings</source>
+        <target>Afbeeldingseigenschappen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.recurring_legend">
+        <source>Recurrence settings</source>
+        <target>Herhalingsinstellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Bijlagen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.source_legend">
+        <source>Redirect target</source>
+        <target>Doelpagina</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.expert_legend">
+        <source>Expert settings</source>
+        <target>Expert-instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.publish_legend">
+        <source>Publish settings</source>
+        <target>Publicatie-instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.days">
+        <source>day(s)</source>
+        <target>dag(en)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.weeks">
+        <source>week(s)</source>
+        <target>we(e)k(en)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.months">
+        <source>month(s)</source>
+        <target>maand(en)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.years">
+        <source>year(s)</source>
+        <target>ja(a)r(en)</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.0">
+        <source>New event</source>
+        <target>Nieuw evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.new.1">
+        <source>Create a new event</source>
+        <target>Maak een nieuw evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.0">
+        <source>Event details</source>
+        <target>Details evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.show.1">
+        <source>Show the details of event ID %s</source>
+        <target>Toon details van evenement ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.0">
+        <source>Edit event</source>
+        <target>Bewerk evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.edit.1">
+        <source>Edit event ID %s</source>
+        <target>Bewerk evenement ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.0">
+        <source>Duplicate event</source>
+        <target>Kopieer evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.copy.1">
+        <source>Duplicate event ID %s</source>
+        <target>Kopieer evenement ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.0">
+        <source>Move event</source>
+        <target>Verplaats evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.cut.1">
+        <source>Move event ID %s</source>
+        <target>Verplaats evenement ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.0">
+        <source>Delete event</source>
+        <target>Verwijder evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.delete.1">
+        <source>Delete event ID %s</source>
+        <target>Verwijder evenement ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.0">
+        <source>Publish/unpublish event</source>
+        <target>Publiceer/depubliceer evenement</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.toggle.1">
+        <source>Publish/unpublish event ID %s</source>
+        <target>Publiceer/depubliceer evenement ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.0">
+        <source>Edit calendar</source>
+        <target>Bewerk kalender</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editheader.1">
+        <source>Edit the calendar settings</source>
+        <target>Bewerk de huidige kalender</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editmeta.0">
+        <source>Edit event settings</source>
+        <target>Bewerk evenement instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.editmeta.1">
+        <source>Edit the event settings</source>
+        <target>Bewerk de evenement instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.0">
+        <source>Paste into this calendar</source>
+        <target>Plak in deze kalender</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_events.pasteafter.1">
+        <source>Paste after event ID %s</source>
+        <target>Plak achter evenement ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

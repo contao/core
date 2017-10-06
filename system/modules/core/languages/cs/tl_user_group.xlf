@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_user_group.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_user_group.name.0">
+        <source>Title</source>
+        <target>Titulek</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.name.1">
+        <source>Please enter the group title.</source>
+        <target>Zadejte prosím název skupiny.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.0">
+        <source>Allowed fields</source>
+        <target>Vyjmutá pole</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.1">
+        <source>Here you can choose which fields will be editable.</source>
+        <target>Zde můžete určit, jaká pole lze upravovat.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.0">
+        <source>Deactivate</source>
+        <target>Deaktivovat</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.1">
+        <source>Temporarily disable the group.</source>
+        <target>Dočasně deaktivovat skupinu.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.0">
+        <source>Activate on</source>
+        <target>Aktivovat</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.1">
+        <source>Automatically activate the group on this day.</source>
+        <target>Automaticky aktivovat skupinu v tento den.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.0">
+        <source>Deactivate on</source>
+        <target>Deaktivovat</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.1">
+        <source>Automatically deactivate the group on this day.</source>
+        <target>Automaticky deaktivovat skupinu v tento den.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.title_legend">
+        <source>Title</source>
+        <target>Titulek</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.modules_legend">
+        <source>Allowed modules</source>
+        <target>Povolené moduly</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.pagemounts_legend">
+        <source>Pagemounts</source>
+        <target>Přístup ke stránkám</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.filemounts_legend">
+        <source>Filemounts</source>
+        <target>Přístup k souborů</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.forms_legend">
+        <source>Form permissions</source>
+        <target>Přístup k formulářům</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.account_legend">
+        <source>Account settings</source>
+        <target>Nastavení účtu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf_legend">
+        <source>Allowed fields</source>
+        <target>Vyjmutá pole</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.0">
+        <source>New user group</source>
+        <target>Nová uživatelská skupina</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.1">
+        <source>Create a new user group</source>
+        <target>Vytvořit novou uživatelskou skupinu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.0">
+        <source>Group details</source>
+        <target>Zobrazit podrobnosti</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.1">
+        <source>Show the details of group ID %s</source>
+        <target>Zobrazit podrobnosti ke skupině ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.0">
+        <source>Edit group</source>
+        <target>Upravit skupinu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.1">
+        <source>Edit group ID %s</source>
+        <target>Upravit skupinu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.0">
+        <source>Duplicate group</source>
+        <target>Duplikovat skupinu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.1">
+        <source>Duplicate group ID %s</source>
+        <target>Duplikovat skupinu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.0">
+        <source>Delete group</source>
+        <target>Smazat skupinu</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.1">
+        <source>Delete group ID %s</source>
+        <target>Smazat skupinu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.0">
+        <source>Activate/deactivate group</source>
+        <target>Aktivovat / deaktivovat</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.1">
+        <source>Activate/deactivate group ID %s</source>
+        <target>Aktivovat / deaktivovat skupinu ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

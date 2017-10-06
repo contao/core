@@ -1,0 +1,612 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_layout.php" source-language="en" target-language="fi">
+    <body>
+      <trans-unit id="tl_layout.name.0">
+        <source>Title</source>
+        <target>Otsikko</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.name.1">
+        <source>Please enter the layout title.</source>
+        <target>Ole hyvä ja syötä ukoasulle otsikko.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.0">
+        <source>Default layout</source>
+        <target>Oletusulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.1">
+        <source>Make the layout the default layout.</source>
+        <target>Tee tästä oletusulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.0">
+        <source>Rows</source>
+        <target>Rivit</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.1">
+        <source>Please choose the number of rows.</source>
+        <target>Ole hyvä ja valitse rivien lukumäärä</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.0">
+        <source>Main row only</source>
+        <target>Vain päärivi</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.1">
+        <source>Show only one row.</source>
+        <target>Näytä vain yksi rivi.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.0">
+        <source>Header and main row</source>
+        <target>Yläosa ja päärivi</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.1">
+        <source>Show a header above the main row.</source>
+        <target>Näytä yläosa päärivin yläpuolella.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.0">
+        <source>Main row and footer</source>
+        <target>Päärivi ja alaosa</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.1">
+        <source>Show a footer below the main row.</source>
+        <target>Näytä alaosa päärivin alapuolella.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.0">
+        <source>Header, main row and footer</source>
+        <target>Yläosa, päärivi ja alaosa</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.1">
+        <source>Show a header above and a footer below the main row.</source>
+        <target>Näytä päärivi ja sen yläpuolella yläosa ja alapuolella alaosa.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.0">
+        <source>Header height</source>
+        <target>Yläosan korkeus.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.1">
+        <source>Please enter the height of the page header.</source>
+        <target>Ole hyvä ja syötä yläosan korkeus.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.0">
+        <source>Footer height</source>
+        <target>Alaosan korkeus</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.1">
+        <source>Please enter the height of the page footer.</source>
+        <target>Ole hyvä ja syötä alaosalle korkeus.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.0">
+        <source>Columns</source>
+        <target>Sarakkeet</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.1">
+        <source>Please choose the number of columns.</source>
+        <target>Ole hyvä ja valitse sarakkeiden lukumäärä.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.0">
+        <source>Main column only</source>
+        <target>Vain pääsarake</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.1">
+        <source>Show only one column.</source>
+        <target>Näytä vain yksi sarake.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.0">
+        <source>Left and main column</source>
+        <target>Vasen ja oikea sarake</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.1">
+        <source>Show two columns with the main column on the right side.</source>
+        <target>Näytä kaksi saraketta pääsarakkeen jäädessä oikealle.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.0">
+        <source>Main and right column</source>
+        <target>Pääsarake ja oikea sarake</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.1">
+        <source>Show two columns with the main column on the left side.</source>
+        <target>Näytä kaksi saraketta pääsarakkeen jäädessä vasemmalle.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.0">
+        <source>Main, left and right column</source>
+        <target>Pääsarake sekä vasen ja oikea sarake</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.1">
+        <source>Show three columns with the main column in the middle.</source>
+        <target>Näytä kolme saraketta pääsarakkeen jäädessä keskelle.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.0">
+        <source>Left column width</source>
+        <target>Vasemman sarakkeen leveys</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.1">
+        <source>Please enter the width of the left column.</source>
+        <target>Ole hyvä ja anna vasemmalle sarakkeelle leveys.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.0">
+        <source>Right column width</source>
+        <target>Oikean sarakkeen leveys</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.1">
+        <source>Please enter the width of the right column.</source>
+        <target>Ole hyvä ja anna oikealle sarakkeelle leveys.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.0">
+        <source>Custom layout sections</source>
+        <target>Omat osiot ulkoasussa</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.1">
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Tähän voit kirjoittaa pilkuilla erotellun listan omista osioista ulkoasussa.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.0">
+        <source>Custom sections position</source>
+        <target>Omien osioiden sijainnit</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.1">
+        <source>Please select the position of the custom layout sections.</source>
+        <target>Ole hyvä ja valitse omien osioiden sijainti</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.0">
+        <source>Internal style sheets</source>
+        <target>Järjestelmän tyylisivut</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.1">
+        <source>Here you can add internal style sheets to the layout.</source>
+        <target>Tässä voit lisätä järjestelmän tyylisivuja ulkoasuun.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.0">
+        <source>CSS framework</source>
+        <target>CSS-runko</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.1">
+        <source>Here you can activate the components of the Contao CSS framework.</source>
+        <target>Tässä voit ottaa käyttöön Contaon CSS-rungon osia</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.0">
+        <source>Layout builder</source>
+        <target>Ulkoasunrakennustyökalu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.1">
+        <source>Generates a CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+        <target>Mukautuva ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+        <target>Lisää meta viewport -tagin sivun yläosaan ja skaalaa CSS-ulkoasun päätelaitteen näyttökoon mukaan.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>12-sarakkeinen gridi</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.1">
+        <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+        <target>Lisää responsiivisen 12-sarakkeisen gridin joka toimii CSS-luokilla grid1 - grid12 ja offset1 - offset12.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS-alustus</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Poistaa eri selainten epäjohdonmukaisuudet HTML:n tyylittelyssä.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Peruslomake</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Lisää perusmuotoilut lomakkeille ja napeille.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.0">
+        <source>TinyMCE style sheet</source>
+        <target>TinyMCE-tyylisivu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.1">
+        <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
+        <target>Sisällyttää &lt;em&gt;tinymce.css&lt;/em&gt;-tyylisivun upload-kansiostasi.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.0">
+        <source>External style sheets</source>
+        <target>Ulkoiset tyylisivut</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.1">
+        <source>Here you can add external CSS, SCSS or LESS files from the file system.</source>
+        <target>Tässä voit lisätä CSS-, SCSS- tai LESS-tiedostoja tiedostojärjestelmästä.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.0">
+        <source>Sort order</source>
+        <target>Lajittelujärjestys</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.1">
+        <source>The sort order of the style sheets.</source>
+        <target>Tyylisivujen järjestys</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.0">
+        <source>Loading order</source>
+        <target>Latausjärjestys</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.1">
+        <source>Here you can select the loading order of the style sheets.</source>
+        <target>Tässä voit valita tyylisivujen latausjärjestyksen.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external_first">
+        <source>Load external style sheets first</source>
+        <target>Lataa ulkoiset tyylit ensin</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.internal_first">
+        <source>Load internal style sheets first</source>
+        <target>Lataa sisäiset tyylisivut ensin</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.0">
+        <source>Google web fonts</source>
+        <target>Google web-fontit</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.1">
+        <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>Tässä voit lisätä Google web-fontteja sivustollesi. Anna fonttiperheet ilman URLia (esim. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.0">
+        <source>News feeds</source>
+        <target>Uutissyöte</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.1">
+        <source>Please select the news feeds you want to add to the layout.</source>
+        <target>Ole hyvä ja valitse ulkoasuun sisällytettävät uutissyötteet.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.0">
+        <source>Calendar feeds</source>
+        <target>Kalenterisyötteet</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.1">
+        <source>Please select the calendar feeds you want to add to the layout.</source>
+        <target>Ole hyvä ja valitse ulkoasuun sisällytettävät kalenterisyötteet.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.0">
+        <source>Included modules</source>
+        <target>Sisällytetyt moduulit</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Muista tallentaa asetukset, jos JavaScript on kytketty pois.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.0">
+        <source>Page template</source>
+        <target>Sivun mallipohja</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.1">
+        <source>Here you can select the page template.</source>
+        <target>Tässä voit valita sivulle mallipohjan</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.0">
+        <source>Output format</source>
+        <target>Tulostusformaatti</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.1">
+        <source>Here you can set the output format.</source>
+        <target>Tässä voit valita tulostusformaatin.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.0">
+        <source>Body class</source>
+        <target>Body-luokka</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.1">
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Tässä voit lisätä oman CSS-luokan &amp;lt;body&amp;gt;:yn.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+        <target>Viewport</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Tässä voit ylikirjoittaa viewportin sisällön (oletus on &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+        <target>Otsikko-tagi</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootPageTitle}}&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.0">
+        <source>Body onload</source>
+        <target>Bodyn onload-atribuutti</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.1">
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Tässä voit lisätä bodylle &lt;em&gt;onload&lt;/em&gt;-atribuutin.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.0">
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Lisätagit &amp;lt;head&amp;gt;:iin</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.1">
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Tässä voit lisätä tageja sivun &amp;lt;head&amp;gt;-osioon.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.0">
+        <source>Include jQuery</source>
+        <target>Sisällytä jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.1">
+        <source>Include the jQuery library in the layout.</source>
+        <target>Sisällytä ulkoasuun jQuery-kirjasto.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.0">
+        <source>jQuery source</source>
+        <target>jQueryn lähde</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.1">
+        <source>Here you can select from where to load the jQuery script.</source>
+        <target>Tässä voit valita mistä jQuery ladataan.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.0">
+        <source>jQuery templates</source>
+        <target>jQuery-mallipohjat</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.1">
+        <source>Here you can select one or more jQuery templates.</source>
+        <target>Tässä voit valita yhden tai useamman jQuery-mallipohjan.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.0">
+        <source>Include MooTools</source>
+        <target>Sisällytä MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.1">
+        <source>Include the MooTools library in the layout.</source>
+        <target>Sisällytä MooTools-kirjasto ulkoasuun.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.0">
+        <source>MooTools source</source>
+        <target>MooToolsin lähde</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.1">
+        <source>Here you can select from where to load the MooTools scripts.</source>
+        <target>Tässä voit valita mistä MooTools ladataan.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.0">
+        <source>MooTools templates</source>
+        <target>MooTools-mallipohjat</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.1">
+        <source>Here you can select one or more MooTools templates.</source>
+        <target>Tässä voit valita yhden tai useamman MooTools-mallipohjan.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.0">
+        <source>Load the image polyfill</source>
+        <target>Responsiivinen kuvien käsittely</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.1">
+        <source>Include the image polyfill (&lt;em&gt;respimage.js&lt;/em&gt;) in the layout.</source>
+        <target>Sisällytä responsiivinen kuvien käsittely (&lt;em&gt;respimage.js&lt;/em&gt;) ulkoasuun.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.0">
+        <source>Analytics templates</source>
+        <target>Kävijäseurannan mallipohjat</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.1">
+        <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
+        <target>Tässä voit ottaa käyttöön kävijäseurannan mallipohjat (esim. Google Analytics tai Piwik). Huomaa, että sinun on muokattava mallipohjia ja lisättävä niihin oma kävijäseurantatunnisteesi, ennen kuin voit käyttää niitä!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.0">
+        <source>Custom JavaScript code</source>
+        <target>Oma JavaScript-koodi</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.1">
+        <source>The JavaScript code which will be inserted at the bottom of the page.</source>
+        <target>JavaScript-koodi, joka lisätään ennen sivun loppua</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.0">
+        <source>Static layout</source>
+        <target>Staattinen ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.1">
+        <source>Create a static layout with a fixed width and alignment.</source>
+        <target>Tee ulkoasusta staattinen vakioleveydellä ja -tasauksella.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.0">
+        <source>Overall width</source>
+        <target>Kokonaisleveys</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.1">
+        <source>The overall width will be applied to the wrapper element.</source>
+        <target>Kokonaisleveys pätee wrapper-elementtiin.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.0">
+        <source>Alignment</source>
+        <target>Tasaus</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.1">
+        <source>Please select the alignment of the page.</source>
+        <target>Ole hyvä ja valitse miten sivu tasataan</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.title_legend">
+        <source>Title</source>
+        <target>Otsikko</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.header_legend">
+        <source>Rows</source>
+        <target>Rivit</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.column_legend">
+        <source>Columns</source>
+        <target>Sarakkeet</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections_legend">
+        <source>Custom sections</source>
+        <target>Omat osiot ulkoasussa</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Web-fontit</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.style_legend">
+        <source>Style sheets</source>
+        <target>Tyylisivut</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill_legend">
+        <source>Responsive images</source>
+        <target>Mukautuvat kuvat</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.feed_legend">
+        <source>RSS/Atom feeds</source>
+        <target>RSS/Atom-syötteet</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules_legend">
+        <source>Front end modules</source>
+        <target>Sivuston moduulit</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.expert_legend">
+        <source>Expert settings</source>
+        <target>Erikoisasetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script_legend">
+        <source>JavaScript</source>
+        <target>JavaScript</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static_legend">
+        <source>Static layout</source>
+        <target>Staattinen ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery_legend">
+        <source>jQuery</source>
+        <target>jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+        <target>Paikallinen tiedosto</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN paikallisella varatiedostolla</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools_legend">
+        <source>MooTools</source>
+        <target>MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_local">
+        <source>Local file</source>
+        <target>Paikallinen tiedosto</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_googleapis">
+        <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN paikallisella varatiedostolla</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.html5">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_strict">
+        <source>XHTML Strict</source>
+        <target>XHTML Strict</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_trans">
+        <source>XHTML Transitional</source>
+        <target>XHTML Transitional</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+        <target>Ennen wrapperia</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.before">
+        <source>After the page header</source>
+        <target>Yläosan jälkeen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.main">
+        <source>Inside the main column</source>
+        <target>Pääsarakkeen sisällä</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.after">
+        <source>Before the page footer</source>
+        <target>Ennen alaosaa</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
+        <target>Wrapperin jälkeen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_styles">
+        <source>Edit the style sheets</source>
+        <target>Muokkaa tyylisivuja</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_module">
+        <source>Edit the module</source>
+        <target>Muokkaa moduulia</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_google">
+        <source>Google</source>
+        <target>Google</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_piwik">
+        <source>Piwik</source>
+        <target>Piwik</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.0">
+        <source>New layout</source>
+        <target>Uusi ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.1">
+        <source>Create a new layout</source>
+        <target>Luo uusi ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.0">
+        <source>Layout details</source>
+        <target>Ulkoasun tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.1">
+        <source>Show the details of layout ID %s</source>
+        <target>Näytä ulkoasun ID %s tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.0">
+        <source>Edit layout</source>
+        <target>Muokkaa ulkoasua</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.1">
+        <source>Edit layout ID %s</source>
+        <target>Muokkaa ulkoasua ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.0">
+        <source>Move layout</source>
+        <target>Siirrä ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.1">
+        <source>Move layout ID %s</source>
+        <target>Siirrä ulkoasu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.0">
+        <source>Duplicate layout</source>
+        <target>Kopioi ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.1">
+        <source>Duplicate layout ID %s</source>
+        <target>Kopioi ulkoasu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.0">
+        <source>Delete layout</source>
+        <target>Poista ulkoasu</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.1">
+        <source>Delete layout ID %s</source>
+        <target>Poista ulkoasu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.0">
+        <source>Edit theme</source>
+        <target>Muokkaa teema</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>Muokkaa teeman asetuksia</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

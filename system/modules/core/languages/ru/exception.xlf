@@ -1,0 +1,170 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en" target-language="ru">
+    <body>
+      <trans-unit id="XPT.error">
+        <source>An error occurred</source>
+        <target>Произошла ошибка</target>
+      </trans-unit>
+      <trans-unit id="XPT.matter">
+        <source>What's the matter?</source>
+        <target>В чем проблема?</target>
+      </trans-unit>
+      <trans-unit id="XPT.howToFix">
+        <source>How can I fix the issue?</source>
+        <target>Как можно устранить проблему?</target>
+      </trans-unit>
+      <trans-unit id="XPT.more">
+        <source>Tell me more, please</source>
+        <target>Пожалуйста, расскажите мне больше</target>
+      </trans-unit>
+      <trans-unit id="XPT.hint">
+        <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Для настройки этого уведомления создайте файл шаблона с именем &lt;em&gt;%s&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorOccurred">
+        <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>Произошла ошибка при выполнении этого сценария. Что-то не работает как положено.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixOne">
+        <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Откройте файл &lt;code&gt;system/logs/error.log&lt;/code&gt; и найдите соответствующее сообщение об ошибке (как правило, последняя запись). Или добавьте следующую строку в локальный файл конфигурации и перезагрузите эту страницу:</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixTwo">
+        <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>Однако, имейте в виду, что &lt;strong&gt;все&lt;/strong&gt; посетители смогут увидеть сообщения об ошибках на вашем сайте!</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorExplain">
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Выполнение скрипта остановлено, потому, что что-то не работает как положено. Фактическое сообщение об ошибке скрыто этим уведомлением по соображениям безопасности и может быть найдено в файле &lt;code&gt;system/logs/error.log&lt;/code&gt; (см. выше). Если вы не понимаете сообщение об ошибке или не знаете, как решить проблему, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросы и ответы Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.requestToken">
+        <source>Invalid request token</source>
+        <target>Ошибка запроса токена</target>
+      </trans-unit>
+      <trans-unit id="XPT.invalidToken">
+        <source>The request token could not be verified.</source>
+        <target>Запрашиваемый токен не может быть проверен.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenRetry">
+        <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Пожалуйста, &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;нажмите на эту ссылку&lt;/a&gt; и повторите попытку. Не используйте кнопку назад вашего браузера.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainOne">
+        <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Эта ошибка происходит, если есть POST запрос без действительного токена аутентификации. В Contao 2.10, проверка реферера была заменена системой запрос токена. Если проблема сохраняется, возможно, используются несовместимые сторонние расширения или неправильно обновлена установка Contao.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainTwo">
+        <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросах и ответах Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incomplete">
+        <source>Incomplete installation</source>
+        <target>Незавершенная установка</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteInstallation">
+        <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>Установка не завершена, поэтому Contao не cможет работать как положено.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixOne">
+        <source>Point your browser to the following URL:</source>
+        <target>Перейдите в браузере по следующему URL:</target>
+      </trans-unit>
+      <trans-unit id="XPT.installPath">
+        <source>path-to-installation</source>
+        <target>путь к установке</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixTwo">
+        <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>Откроется мастер установки Contao, который поможет вам провести установку.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Инструкции Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFound">
+        <source>Page not found</source>
+        <target>Страница не найдена</target>
+      </trans-unit>
+      <trans-unit id="XPT.pageNotFound">
+        <source>The page you have requested does not exist under this domain.</source>
+        <target>Запрошенная вами страница не существует в этом домене.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFoundFix">
+        <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Попробуйте перейти на &lt;a href=&quot;%s&quot;&gt;уровень выше&lt;/a&gt; и использовать функцию поиска (если она есть), чтобы найти желаемую страницу. Вы можете связаться с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщить о неполадках.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForward">
+        <source>Forward page not found</source>
+        <target>Следующая страница не найдена</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardPage">
+        <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>Приложение настроено на передачу запроса на другую страницу, однако, целевая страница не существует или не была опубликована.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardFix">
+        <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Вероятно, что-то пошло не так и это надо исправить администратору сайта. Если вы гость, то вы ничего не сможете сделать, кроме как связаться с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщить о неполадках.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRoot">
+        <source>No root page found</source>
+        <target>Корневая страница не найдена</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootPage">
+        <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Не найдена корневая страница, которая соответствует запрашиваемому языку и/или доменному имени.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootFix">
+        <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Если вы явно установили язык в адресной строке, попробуйте перейти на &lt;a href=&quot;%s&quot;&gt;уровень выше&lt;/a&gt; и посмотрите будете ли вы перенаправлены. В противном случае, свяжитесь с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщите о неполадках.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayout">
+        <source>No layout specified</source>
+        <target>Не указан макет</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutSpecified">
+        <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>Запрашиваемая страница еще не связана с макетом страниц.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutFix">
+        <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Убедитесь, что вы назначили макет страницы, каждой корневой странице в структуре сайта.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Инструкции Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActive">
+        <source>No active pages found</source>
+        <target>Активные страницы не найдены</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActivePages">
+        <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Ваш запрос был отображен на сайте у которого пока еще нет  опубликованных страниц.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActiveFix">
+        <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Вероятно, сайт находится в стадии разработки и будет доступен через несколько дней. Однако, если вы думаете, что что-то не в порядке, свяжитесь с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщите о неполадках.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbidden">
+        <source>Forbidden</source>
+        <target>Запрещено</target>
+      </trans-unit>
+      <trans-unit id="XPT.notAuthenticated">
+        <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Вы не прошли проверку подлинности или вам запрещен доступ к запрашиваемой странице.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbiddenFix">
+        <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Если вы не авторизовались на сайте, попробуйте перейти на &lt;a href=&quot;%s&quot;&gt;уровень выше&lt;/a&gt; и найти форму входа. Если формы входа нет, то или вы уже зарегистрированы, или свяжитесь с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщите о неполадках.</target>
+      </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>Мы скоро вернемся</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Сейчас веб-сайт закрыт на техническое обслуживание. Пожалуйста, зайдите позже.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

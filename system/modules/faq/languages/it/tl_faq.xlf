@@ -1,0 +1,182 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq.php" source-language="en" target-language="it">
+    <body>
+      <trans-unit id="tl_faq.question.0">
+        <source>Question</source>
+        <target>Domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.question.1">
+        <source>Please enter the question.</source>
+        <target>Inserisci una domanda.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.0">
+        <source>FAQ alias</source>
+        <target>Alias FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.1">
+        <source>The FAQ alias is a unique reference to the FAQ which can be called instead of its numeric ID.</source>
+        <target>Un alias di una FAQ è un riferimento alla domanda che potrai richiamare al posto dell'ID della domanda.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.0">
+        <source>Author</source>
+        <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.1">
+        <source>Here you can change the author of the FAQ.</source>
+        <target>Cambia l'autore della FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.0">
+        <source>Answer</source>
+        <target>Risposta</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.1">
+        <source>Please enter the answer.</source>
+        <target>Inserisci una risposta.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.0">
+        <source>Add an image</source>
+        <target>Aggiungi un'immagine</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.1">
+        <source>Add an image to the FAQ.</source>
+        <target>Aggiungi un immagine alla risposta.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Aggiungi file</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.1">
+        <source>Add one or more downloadable files to the FAQ.</source>
+        <target>Aggiungi uno o più file scaricabile alla FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.0">
+        <source>Enclosures</source>
+        <target>Aggiungi file alla notizia</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Seleziona i file che vuoi allegare.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.0">
+        <source>Disable comments</source>
+        <target>Disabilita commenti</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.1">
+        <source>Do not allow comments for this particular FAQ.</source>
+        <target>Disabilita i commenti relativa a questa particolare FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.0">
+        <source>Publish the FAQ</source>
+        <target>Pubblica FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.1">
+        <source>Make the FAQ publicly visible on the website.</source>
+        <target>Rendi la FAQ visibile sul sito web.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.title_legend">
+        <source>Title and author</source>
+        <target>Titolo ed autore</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer_legend">
+        <source>Answer</source>
+        <target>Risposta</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.image_legend">
+        <source>Image settings</source>
+        <target>Impostazioni immagine</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Aggiungi file alla notizia</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.expert_legend">
+        <source>Expert settings</source>
+        <target>Exporta impostazioni</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.publish_legend">
+        <source>Publish settings</source>
+        <target>Impostazione di pubblicazione</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.0">
+        <source>New question</source>
+        <target>Nuova domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.1">
+        <source>Create a new question</source>
+        <target>Crea una nuova domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.0">
+        <source>Show question details</source>
+        <target>Dettagli domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.1">
+        <source>Show the details of question ID %s</source>
+        <target>Mostra dettagli domanda ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.0">
+        <source>Edit question</source>
+        <target>Modifica domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.1">
+        <source>Edit question ID %s</source>
+        <target>Modifica domanda ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.0">
+        <source>Duplicate question</source>
+        <target>Dupplica domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.1">
+        <source>Duplicate question ID %s</source>
+        <target>Duplica domanda ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.0">
+        <source>Move question</source>
+        <target>Sposta domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.1">
+        <source>Move question ID %s</source>
+        <target>Sposta domanda ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.0">
+        <source>Delete question</source>
+        <target>Elimina domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.1">
+        <source>Delete question ID %s</source>
+        <target>Elimina domanda ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.0">
+        <source>Publish/unpublish question</source>
+        <target>Pubblica/non pubblica domanda</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.1">
+        <source>Publish/unpublish question ID %s</source>
+        <target>Pubblica/non pubblica domanda ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.0">
+        <source>Edit category</source>
+        <target>Modifica categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.1">
+        <source>Edit the category settings</source>
+        <target>Modifica impostazioni categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Incolla in cima</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.1">
+        <source>Paste after question ID %s</source>
+        <target>Incolla dopo la domanda ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Crea una nuova regola css all'inizio</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.1">
+        <source>Add new after question ID %s</source>
+        <target>Crea una nuova domanda dopo la domanda ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

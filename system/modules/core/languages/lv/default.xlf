@@ -1,0 +1,2299 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/default.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="ERR.general">
+        <source>An error occurred!</source>
+        <target>Notikusi kļūda!</target>
+      </trans-unit>
+      <trans-unit id="ERR.unique">
+        <source>This entry already exists!</source>
+        <target>Šis ieraksts jau eksistē!</target>
+      </trans-unit>
+      <trans-unit id="ERR.mandatory">
+        <source>Field &quot;%s&quot; must not be empty!</source>
+        <target>Lauks &quot;%s&quot; nevar būt tukšs!</target>
+      </trans-unit>
+      <trans-unit id="ERR.mdtryNoLabel">
+        <source>This field must not be empty!</source>
+        <target>Šis lauks nevar būt tukšs!</target>
+      </trans-unit>
+      <trans-unit id="ERR.minlength">
+        <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
+        <target>Laukam &quot;%s&quot; jābūt vismaz %d zīmju garam!</target>
+      </trans-unit>
+      <trans-unit id="ERR.maxlength">
+        <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
+        <target>Lauks &quot;%s&quot; nevar būt garāks par %d zīmjēm!</target>
+      </trans-unit>
+      <trans-unit id="ERR.minval">
+        <source>Field &quot;%s&quot; has to be at least %d!</source>
+        <target>Laukam &quot;%s&quot; jābūt vismaz %d!</target>
+      </trans-unit>
+      <trans-unit id="ERR.maxval">
+        <source>Field &quot;%s&quot; must not be greater than %d!</source>
+        <target>Lauks &quot;%s&quot; nevar būt garāks kā %d!</target>
+      </trans-unit>
+      <trans-unit id="ERR.digit">
+        <source>Please enter digits only!</source>
+        <target>Lūdzu ievadiet tikai ciparus!</target>
+      </trans-unit>
+      <trans-unit id="ERR.natural">
+        <source>Please enter natural numbers only!</source>
+        <target>Lūdzu, ievadiet tikai naturālos skaitļus!</target>
+      </trans-unit>
+      <trans-unit id="ERR.prcnt">
+        <source>Please enter a percentage between 0 and 100!</source>
+        <target>Lūdzu ievadiet procentus starp 0 un 100!</target>
+      </trans-unit>
+      <trans-unit id="ERR.alpha">
+        <source>Please enter alphabetic characters only!</source>
+        <target>Lūdzu ievadiet tikai alfabētiskās zīmes!</target>
+      </trans-unit>
+      <trans-unit id="ERR.alnum">
+        <source>Please enter alphanumeric characters only!</source>
+        <target>Lūdzu ievadiet tikai burtciparu zīmes!</target>
+      </trans-unit>
+      <trans-unit id="ERR.phone">
+        <source>Please enter a valid phone number!</source>
+        <target>Lūdzu ievadiet derīgu tālruņa numuru!</target>
+      </trans-unit>
+      <trans-unit id="ERR.extnd">
+        <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
+        <target>Drošibas apstākļu dēļ jūs nevarat šeit izmantot šīs zīmes (=&amp;/()#)!</target>
+      </trans-unit>
+      <trans-unit id="ERR.email">
+        <source>Please enter a valid e-mail address!</source>
+        <target>Lūdzu ievadiet derīgu e-pasta adresi!</target>
+      </trans-unit>
+      <trans-unit id="ERR.emails">
+        <source>There is at least one invalid e-mail address!</source>
+        <target>Ir vismaz viena nederīga e-pasta adrese!</target>
+      </trans-unit>
+      <trans-unit id="ERR.url">
+        <source>Please enter a valid URL format and encode special characters!</source>
+        <target>Lūdzu ievadiet derīgu URL formātu un atkodējiet speciālās zīmes.</target>
+      </trans-unit>
+      <trans-unit id="ERR.locale">
+        <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
+        <target>Lūdzu, ievadiet derīgu lokalizāciju, piemēram, &quot;lv&quot; vai &quot;lv_LV&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.language">
+        <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
+        <target>Lūdzu, ievadiet derīgu valodas kodu, piemēram, &quot;lv&quot; vai &quot;lv_LV&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.alias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
+        <target>Lūdzu, ievadiet tikai burtciparu rakstzīmes un šādas speciālās rakstzīmes: .-_</target>
+      </trans-unit>
+      <trans-unit id="ERR.folderalias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
+        <target>Lūdzu, ievadiet tikai burtciparu rakstzīmes un šādas speciālās rakstzīmes: .-/_</target>
+      </trans-unit>
+      <trans-unit id="ERR.date">
+        <source>Please enter the date as &quot;%s&quot;!</source>
+        <target>Lūdzu ievadiet datumu kā &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.time">
+        <source>Please enter the time as &quot;%s&quot;!</source>
+        <target>Lūdzu ievadiet laiku kā &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.dateTime">
+        <source>Please enter date and time as &quot;%s&quot;!</source>
+        <target>Lūdzu ievadiet datumu un laiku kā &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>Nederīgs datums &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.noSpace">
+        <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
+        <target>Lauks &quot;%s&quot; nedrīkst saturēt tukšās zīmes!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filename">
+        <source>The name of at least one uploaded file contains invalid characters or exceeds the maximum length of 255 characters!</source>
+      </trans-unit>
+      <trans-unit id="ERR.filesize">
+        <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
+        <target>Maksimālais augšupielādējamās datnes lielums ir %s kB!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetype">
+        <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
+        <target>Datņu tips &quot;%s&quot; nav atļauts augšupielādei!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filepartial">
+        <source>File %s was only partially uploaded!</source>
+        <target>Datne %s tika tikai daļēji augšupielādēta!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filewidth">
+        <source>File %s exceeds the maximum image width of %d pixels!</source>
+        <target>Datne %s pārsniedz maksimālo attēla platumu - %d pikseļu!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileheight">
+        <source>File %s exceeds the maximum image height of %d pixels!</source>
+        <target>Datne %s pārsniedz maksimālo attēla augstumu - %d pikseļu!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+        <target>Notika kļūda %s augšupielādējot datni %s!</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
+        <target>Nevar pārvietot %s uz %s, jo mērķis eksistē!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidReferer">
+        <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
+        <target>Piekļuve liegta! Pašreizējā mītnes adrese (% s) neatbilst norādes mītnes adresei (% s)!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidPass">
+        <source>Invalid password!</source>
+        <target>Nederīga parole!</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordLength">
+        <source>A password has to be at least %d characters long!</source>
+        <target>Parolei jābūt vismaz %d zīmju garai!</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordName">
+        <source>Your username and password must not be the same!</source>
+        <target>Jūsu lietotājvārds un parole nedrīkst sakrist!</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordMatch">
+        <source>The passwords did not match!</source>
+        <target>Parole nesakrita!</target>
+      </trans-unit>
+      <trans-unit id="ERR.accountLocked">
+        <source>This account has been locked! You can log in again in %d minutes.</source>
+        <target>Šis konts tika bloķēts! Jūs varēsiet pieslēgties pēc %d minūtēm.</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidLogin">
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Pieslēgšanās neizdevās (ņemiet vērā ka lietotājvārdi un paroles ir reģistrjutīgi)!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidColor">
+        <source>Invalid color format!</source>
+        <target>Nederīgs krāsu formāts!</target>
+      </trans-unit>
+      <trans-unit id="ERR.all_fields">
+        <source>Please select at least one field!</source>
+        <target>Lūdzu izvēlieties vismaz vienu lauku!</target>
+      </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>Lūdzu izvēlieties vismaz vienu datni!</target>
+      </trans-unit>
+      <trans-unit id="ERR.aliasExists">
+        <source>The alias &quot;%s&quot; already exists!</source>
+        <target>Lapas aizstājvārds &quot;%s&quot; jau eksistē!</target>
+      </trans-unit>
+      <trans-unit id="ERR.importFolder">
+        <source>The folder &quot;%s&quot; cannot be imported!</source>
+        <target>Mapi &quot;%s&quot; nevar importēt!</target>
+      </trans-unit>
+      <trans-unit id="ERR.notWriteable">
+        <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
+        <target>Datne &quot;% s&quot; nav rakstāma, tāpēc jūsu veiktās izmaiņas nebūs spēkā!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidName">
+        <source>This file or folder name is invalid!</source>
+        <target>Datnes vai mapes vārds ir nederīgs!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidFile">
+        <source>The file or folder &quot;%s&quot; is invalid!</source>
+        <target>Datne vai mape &quot;%s&quot; ir nederīga!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileExists">
+        <source>The file &quot;%s&quot; already exists!</source>
+        <target>Datne &quot;%s&quot; jau eksistē!</target>
+      </trans-unit>
+      <trans-unit id="ERR.circularReference">
+        <source>Invalid redirect target (circular reference)!</source>
+        <target>Nederīgs novirzīšanas mērķis (riņķveida atsauce)!</target>
+      </trans-unit>
+      <trans-unit id="ERR.ie6warning">
+        <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
+        <target>&lt;strong&gt;Uzmanību!&lt;/strong&gt; Jūsu pārlūks ir %novecojis%s un &lt;strong&gt;jūs nevarēsiet izmantot šis lapas visas iespējas&lt;/strong&gt;.</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackEmpty">
+        <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>Nevienai aktīvās tīmekļa saknes lapai bez skaidra DNS iestatījuma nav iestatīta valodu atpazīšanas opcija, kas nozīmē, ka šīs mājas lapas ir pieejamas tikai vienā valodā, kas jums ir noteiktas lappuses iestatījumos! Apmeklētāji un meklētājprogrammas, ar atšķirīgiem valodas uzstādījumiem, nevarēs pārlūkot jūsu mājas lapu.</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackDns">
+        <source>None of the active website root pages for &lt;strong&gt;%s&lt;/strong&gt; has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>Nevienai aktīvās tīmekļa saknes lapai &lt;strong&gt;%s&lt;/strong&gt; nav iestatīta valodu atpazīšanas opcija, kas nozīmē, ka šīs mājas lapas ir pieejamas tikai vienā valodā, kas jums ir noteiktas lappuses iestatījumos! Apmeklētāji un meklētājprogrammas, ar atšķirīgiem valodas uzstādījumiem, nevarēs pārlūkot jūsu mājas lapu.</target>
+      </trans-unit>
+      <trans-unit id="ERR.multipleFallback">
+        <source>You can only define one website root page per domain as language fallback.</source>
+        <target>Jūs varat noteikt tikai vienu vietnes saknes lapu katrā domēnā valodas atpazīšanai.</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRoot">
+        <source>Top-level pages must be website root pages!</source>
+        <target>Kā augstākā līmeņa lapām jābūt mājas sakņu (root) lapām!</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRegular">
+        <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
+        <target>Eksistē augstākā līmeņa lapas, kas nav mājas saknes lapas. Mājas lapu veidošana bez mājas saknes lapas vairs netiek atbalstīta, tāpēc lūdzam pārliecināties, ka visas lapas tiek grupētas tīmekļa vietnes saknes lapā.</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidTokenUrl">
+        <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
+        <target>Saiti, kuru mēģiniet atvērt, nevar pārbaudīt. Ja saiti esat pats nospiedis vai saņēmis no uzticama avota, varat to apstiprināt zemāk.</target>
+      </trans-unit>
+      <trans-unit id="ERR.version2format">
+        <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
+        <target>Šis elements vēl arvien lieto veco Contao 2 SRC formātu. Vai esat jauninājis datubāzi?</target>
+      </trans-unit>
+      <trans-unit id="ERR.form">
+        <source>The form could not be sent</source>
+        <target>Formulāru nevarēja nosūtīt</target>
+      </trans-unit>
+      <trans-unit id="ERR.captcha">
+        <source>Please answer the security question!</source>
+        <target>Lūdzu atbildiet drošības jautājumu!</target>
+      </trans-unit>
+      <trans-unit id="ERR.download">
+        <source>File &quot;%s&quot; is not available for download!</source>
+        <target>Datne &quot;%s&quot; nav pieejama lejupielādei!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalid">
+        <source>Invalid option value!</source>
+        <target>Nederīga izvēles vērtība!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileNotFoundSync">
+        <source>No database entry found for %s. Please synchronize the file system.</source>
+        <target>Nav atrasts datubāzes ieraksts priekš %s. Lūdzu sinhronizējiet datņu sistēmu.</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>Lūdzu ievadiet ciparisku Google+ ID vai personalizētu vārdu!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidFieldName">
+        <source>Please enter only the following characters: A-Z0-9[]_-</source>
+        <target>Lūdzu, ievadiet tikai šādas rakstzīmes: A-Z0-9[]_-</target>
+      </trans-unit>
+      <trans-unit id="SEC.question1">
+        <source>Please add %d and %d.</source>
+        <target>Lūdzu saskaitiet %d un %d.</target>
+      </trans-unit>
+      <trans-unit id="SEC.question2">
+        <source>What is the sum of %d and %d?</source>
+        <target>Kāda ir %d un %d summa?</target>
+      </trans-unit>
+      <trans-unit id="SEC.question3">
+        <source>Please calculate %d plus %d.</source>
+        <target>Lūdzu izrēķiniet: %d plus %d.</target>
+      </trans-unit>
+      <trans-unit id="CTE.texts">
+        <source>Text elements</source>
+        <target>Teksta elementi</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.0">
+        <source>Headline</source>
+        <target>Virsraksts</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.1">
+        <source>Generates a headline (h1 - h6).</source>
+        <target>Šis elements satur savrupu virsrakstu, kas ir ietverts &lt;H1&gt; tagos.</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.0">
+        <source>Text</source>
+        <target>Teksts</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.1">
+        <source>Generates a rich text element.</source>
+        <target>Šis elements satur RTF standarta tekstu ar hipersaitēm. Pie tam jūs varat pievienot arī attēlu šim elementam.</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.1">
+        <source>Allows you to add custom HTML code.</source>
+        <target>Šis elements satur HTML kodu. Lūdzu ņemiet vērā, ka atsevišķi HTML tagi ir atspējoti dēļ drošības apsvērumiem.</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.0">
+        <source>List</source>
+        <target>Saraksts</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.1">
+        <source>Generates an ordered or unordered list.</source>
+        <target>Šis elements satur sakārtotu vai nesakārtotu sarakstu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.0">
+        <source>Table</source>
+        <target>Tabula</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.1">
+        <source>Generates an optionally sortable table.</source>
+        <target>Šis elements satur tabulu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordion">
+        <source>Accordion</source>
+        <target>Akordeons</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>Wrapper uzsākšana</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>Rada sakuma daļu akordeona ietinumam.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>Wrapper apstādināšna</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>Rada beigu daļu akordeona ietinumam.</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>Viens elements</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>Rada vienu akordeona elementu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.0">
+        <source>Code</source>
+        <target>Kods</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.1">
+        <source>Highlights code snippets and prints them to the screen.</source>
+        <target>Izceļ koda fragmentus un izdrukā tos uz ekrāna.</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>Satura slīdnis</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>Wrapper uzsākšana</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>Rada sakuma daļu slīdņa ietinumam.</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>Wrapper apstādināšna</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>Rada beigu daļu slīdņa ietinumam.</target>
+      </trans-unit>
+      <trans-unit id="CTE.links">
+        <source>Link elements</source>
+        <target>Saites elementi</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.0">
+        <source>Hyperlink</source>
+        <target>Saite</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.1">
+        <source>Generates a link to another website.</source>
+        <target>Šis elements satur saiti uz citu mājas lapu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.0">
+        <source>Top link</source>
+        <target>Saite augšup</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.1">
+        <source>Generates a link to jump to the top of the page.</source>
+        <target>Šis elements ģenerē hipersaiti, kas ļauj pārlekt uz lapas augšu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.media">
+        <source>Media elements</source>
+        <target>Mediju elementi</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.0">
+        <source>Image</source>
+        <target>Attēls</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.1">
+        <source>Generates a stand-alone image.</source>
+        <target>Šis elements satur vienu attēlu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.0">
+        <source>Gallery</source>
+        <target>Attēlu galerija</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.1">
+        <source>Generates a lightbox image gallery.</source>
+        <target>Šis elements satur vairākus sīktēlus, kurus var apskatīt pilnā izmērā nospiežot uz tiem.</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.0">
+        <source>Video/audio</source>
+        <target>Video/audio</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.1">
+        <source>Generates a video or audio player.</source>
+        <target>Rada video vai audio atskaņotāju.</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.0">
+        <source>YouTube</source>
+        <target>YouTube</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.1">
+        <source>Adds a YouTube video.</source>
+        <target>Pievieno YouTube video.</target>
+      </trans-unit>
+      <trans-unit id="CTE.files">
+        <source>File elements</source>
+        <target>Datņu elements</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.0">
+        <source>Download</source>
+        <target>Lejupielādēt</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.1">
+        <source>Generates a link to download a file.</source>
+        <target>Šis elements satur hipersaiti uz datni, kuru lapas apmeklētāji var lejupielādēt.</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.0">
+        <source>Downloads</source>
+        <target>Lejupielādes</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.1">
+        <source>Generates multiple links to download files.</source>
+        <target>Šis elements satur vairākas datnes, kuras lapas apmeklētāji var lejupielādēt.</target>
+      </trans-unit>
+      <trans-unit id="CTE.includes">
+        <source>Include elements</source>
+        <target>Pievienot elementus</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.0">
+        <source>Article</source>
+        <target>Raksta ID</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.1">
+        <source>Includes another article.</source>
+        <target>pievieno vēl vienu rakstu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.0">
+        <source>Content element</source>
+        <target>Satura elements</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.1">
+        <source>Includes another content element.</source>
+        <target>pievieno vēl vienu satura elementu.</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.0">
+        <source>Form</source>
+        <target>Forma</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.1">
+        <source>Includes a form.</source>
+        <target>pievieno formulāru.</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.0">
+        <source>Module</source>
+        <target>Modulis</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.1">
+        <source>Includes a front end module.</source>
+        <target>pievieno priekšgala moduli.</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.0">
+        <source>Article teaser</source>
+        <target>Raksta ievads</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.1">
+        <source>Displays the teaser text of an article.</source>
+        <target>rāda raksta ievada tekstu.</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.0">
+        <source>Regular page</source>
+        <target>Standarta lapa</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.1">
+        <source>A regular page contains articles and content elements. It is the default page type.</source>
+        <target>Standarta lapa satur rakstus un satura elementus. Tas ir noklusējuma lapas tips.</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.0">
+        <source>External redirect</source>
+        <target>Virzienmaiņa uz ārēju URL</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.1">
+        <source>This type of page automatically redirects visitors to an external website. It works like a hyperlink.</source>
+        <target>Šis lapu tips novirza uz ārēju URL. Darbojas tāpat kā hipersaite.</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.0">
+        <source>Internal redirect</source>
+        <target>Pārsūtīt uz citu lapu</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.1">
+        <source>This type of page automatically forwards visitors to another page within the site structure.</source>
+        <target>Šis lapu tips automātiski pārsūta apmeklētāju uz citu lapu. Virziens tiek nomainīts izmantojot lapas ID vai lapas aizstājvārdu.</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.0">
+        <source>Website root</source>
+        <target>Mājas lapas sakne</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.1">
+        <source>This type of page marks the starting point of a new website within the site structure.</source>
+        <target>Šī veida lapa struktūrā iezīmē sākuma punktu jaunai mājas lapai.</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.0">
+        <source>403 Access denied</source>
+        <target>403 Piekļuve liegta</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.1">
+        <source>If a user requests a protected page without permission, a 403 error page will be loaded instead.</source>
+        <target>Ja lietotājs pieprasa aizsargātu lapu bez atļaujas, 403 kļūdas lapa tiks ielādēta vietā.</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.0">
+        <source>404 Page not found</source>
+        <target>404 Lapa netika atrasta</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.1">
+        <source>If a user requests a non-existent page, a 404 error page will be loaded instead.</source>
+        <target>Ja lietotājs pieprasa neesošu lapu, 404 kļūdas lapa tiks ielādēta vietā.</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.0">
+        <source>File operation permissions</source>
+        <target>Datnes operāciju atļaujas</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.1">
+        <source>Here you can select the file operations you want to allow.</source>
+        <target>Datnes operāciju atļaujas pielieto tikai iespējotām mapēm.</target>
+      </trans-unit>
+      <trans-unit id="FOP.f1">
+        <source>Upload files to the server</source>
+        <target>Augšupielādēt datnes uz serveri</target>
+      </trans-unit>
+      <trans-unit id="FOP.f2">
+        <source>Edit, copy or move files and folders</source>
+        <target>Rediģēt, kopēt vai pārvietot datnes un mapes</target>
+      </trans-unit>
+      <trans-unit id="FOP.f3">
+        <source>Delete single files and empty folders</source>
+        <target>Dzēst atsevišķas datnes un tukšas mapes</target>
+      </trans-unit>
+      <trans-unit id="FOP.f4">
+        <source>Delete folders including all files and subfolders (!)</source>
+        <target>Dzēst mapes ieskaitot visas datnes un apakšmapes (!)</target>
+      </trans-unit>
+      <trans-unit id="FOP.f5">
+        <source>Edit files in the source editor</source>
+        <target>Rediģēt datnes ar avota redaktoru</target>
+      </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+        <target>Sinhronizēt datņu sistēmu ar datubāzi</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editpage">
+        <source>Edit page</source>
+        <target>Rediģēt lapu</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editnavigation">
+        <source>Edit page hierarchy</source>
+        <target>Rediģēt lapu hierarhiju</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletepage">
+        <source>Delete page</source>
+        <target>Dzēst lapu</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editarticles">
+        <source>Edit articles</source>
+        <target>Rediģēt rakstus</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.movearticles">
+        <source>Edit article hierarchy</source>
+        <target>Rediģēt rakstu hierarhiju</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletearticles">
+        <source>Delete articles</source>
+        <target>Dzēst rakstus</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cuser">
+        <source>Owner</source>
+        <target>Lietotājs</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cgroup">
+        <source>Group</source>
+        <target>Grupa</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cworld">
+        <source>Everybody</source>
+        <target>Ikviens</target>
+      </trans-unit>
+      <trans-unit id="DAYS.0">
+        <source>Sunday</source>
+        <target>Svētdiena</target>
+      </trans-unit>
+      <trans-unit id="DAYS.1">
+        <source>Monday</source>
+        <target>Pirmdiena</target>
+      </trans-unit>
+      <trans-unit id="DAYS.2">
+        <source>Tuesday</source>
+        <target>Otrdiena</target>
+      </trans-unit>
+      <trans-unit id="DAYS.3">
+        <source>Wednesday</source>
+        <target>Trešdiena</target>
+      </trans-unit>
+      <trans-unit id="DAYS.4">
+        <source>Thursday</source>
+        <target>Ceturtdiena</target>
+      </trans-unit>
+      <trans-unit id="DAYS.5">
+        <source>Friday</source>
+        <target>Piektdiena</target>
+      </trans-unit>
+      <trans-unit id="DAYS.6">
+        <source>Saturday</source>
+        <target>Sestdiena</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.0">
+        <source>Sun</source>
+        <target>Sv</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.1">
+        <source>Mon</source>
+        <target>Pr</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.2">
+        <source>Tue</source>
+        <target>Ot</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.3">
+        <source>Wed</source>
+        <target>Tr</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.4">
+        <source>Thu</source>
+        <target>Ce</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.5">
+        <source>Fri</source>
+        <target>Pk</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.6">
+        <source>Sat</source>
+        <target>Se</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.0">
+        <source>January</source>
+        <target>Janvāris</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.1">
+        <source>February</source>
+        <target>Februāris</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.2">
+        <source>March</source>
+        <target>Marts</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.3">
+        <source>April</source>
+        <target>Aprīlis</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.4">
+        <source>May</source>
+        <target>Maijs</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.5">
+        <source>June</source>
+        <target>Jūnijs</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.6">
+        <source>July</source>
+        <target>Jūlijs</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.7">
+        <source>August</source>
+        <target>Augusts</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.8">
+        <source>September</source>
+        <target>Septembris</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.9">
+        <source>October</source>
+        <target>Oktobris</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.10">
+        <source>November</source>
+        <target>Novembris</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.11">
+        <source>December</source>
+        <target>Decembris</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.0">
+        <source>Jan</source>
+        <target>Jan</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.1">
+        <source>Feb</source>
+        <target>Feb</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.2">
+        <source>Mar</source>
+        <target>Mar</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.3">
+        <source>Apr</source>
+        <target>Apr</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.4">
+        <source>May</source>
+        <target>Maijs</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.5">
+        <source>Jun</source>
+        <target>Jūn</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.6">
+        <source>Jul</source>
+        <target>Jūl</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.7">
+        <source>Aug</source>
+        <target>Aug</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.8">
+        <source>Sep</source>
+        <target>Sep</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.9">
+        <source>Oct</source>
+        <target>Okt</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.10">
+        <source>Nov</source>
+        <target>Nov</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.11">
+        <source>Dec</source>
+        <target>Dec</target>
+      </trans-unit>
+      <trans-unit id="MSC.dayShortLength">
+        <source>3</source>
+        <target>3</target>
+      </trans-unit>
+      <trans-unit id="MSC.monthShortLength">
+        <source>3</source>
+        <target>3</target>
+      </trans-unit>
+      <trans-unit id="MSC.weekOffset">
+        <source>0</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="MSC.titleFormat">
+        <source>%B %d%o, %Y</source>
+        <target>%B %d%o, %Y</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.0">
+        <source>Link target</source>
+        <target>Mērķa URL</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.1">
+        <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
+        <target>Lūdzu, ievadiet web adresi (http://...), e-pasta adresi (mailto:...) vai ievietojiet tagu.</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.0">
+        <source>Open in new window</source>
+        <target>Atvērt jaunā logā</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.1">
+        <source>Open the link in a new browser window.</source>
+        <target>Atvērt saiti jaunā pārlūka logā.</target>
+      </trans-unit>
+      <trans-unit id="MSC.textDirection">
+        <source>ltr</source>
+        <target>ltr</target>
+      </trans-unit>
+      <trans-unit id="MSC.decimalSeparator">
+        <source>.</source>
+        <target>.</target>
+      </trans-unit>
+      <trans-unit id="MSC.thousandsSeparator">
+        <source>,</source>
+        <target>,</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.0">
+        <source>Separator</source>
+        <target>Atdalītājs</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.1">
+        <source>Please choose a field delimiter.</source>
+        <target>Lūdzu izvēlieties rakstzīmi, kas atdalīs vērtības.</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.0">
+        <source>Source files</source>
+        <target>Avota datnes</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.1">
+        <source>Please upload the CSV files to be imported.</source>
+        <target>Lūdzu izvēlieties CSV datnes, kuras vēlaties importēt, no datņu direktorija.</target>
+      </trans-unit>
+      <trans-unit id="MSC.comma">
+        <source>Comma</source>
+        <target>Komats</target>
+      </trans-unit>
+      <trans-unit id="MSC.semicolon">
+        <source>Semicolon</source>
+        <target>Semikols</target>
+      </trans-unit>
+      <trans-unit id="MSC.tabulator">
+        <source>Tabulator</source>
+        <target>Tabulātors</target>
+      </trans-unit>
+      <trans-unit id="MSC.linebreak">
+        <source>Line break</source>
+        <target>Līnijas pārtraukums</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.0">
+        <source>CSV import</source>
+        <target>CSV imports</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.1">
+        <source>Import list items from a CSV file</source>
+        <target>Importēt saraksta vienumus no SCV datnes</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_copy">
+        <source>Duplicate the element</source>
+        <target>Dublicēt elementu</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_up">
+        <source>Move the element one position up</source>
+        <target>Pārvietot elementu vienu pozīciju augšup</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_down">
+        <source>Move the element one position down</source>
+        <target>Pārvietot elementu vienu pozīciju lejup</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_delete">
+        <source>Delete the element</source>
+        <target>Dzēst elementu</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.0">
+        <source>CSV import</source>
+        <target>CSV imports</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.1">
+        <source>Import table items from a CSV file</source>
+        <target>Importēt tabulas vienumus no SCV datnes</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_expand">
+        <source>Increase the input field size</source>
+        <target>Palielināt datu ievades lauku</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_shrink">
+        <source>Decrease the input field size</source>
+        <target>Samazināt datu ievades lauku</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rcopy">
+        <source>Duplicate the row</source>
+        <target>Dublicēt rindu</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rup">
+        <source>Move the row one position up</source>
+        <target>Pārvietot rindu vienu pozīciju augšup</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdown">
+        <source>Move the row one position down</source>
+        <target>Pārvietot rindu vienu pozīciju lejup</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdelete">
+        <source>Delete the row</source>
+        <target>Dzēst rindu</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_ccopy">
+        <source>Duplicate the column</source>
+        <target>Dublicēt kolonnu</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmovel">
+        <source>Move the column one position left</source>
+        <target>Pārvietot kolonnu vienu pozīciju pa kreisi</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmover">
+        <source>Move the column one position right</source>
+        <target>Pārvietot kolonnu vienu pozīciju pa labi</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cdelete">
+        <source>Delete the column</source>
+        <target>Dzēst kolonnu</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_copy">
+        <source>Duplicate the row</source>
+        <target>Dublicēt rindu</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_up">
+        <source>Move the row one position up</source>
+        <target>Pārvietot rindu vienu pozīciju augšup</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_down">
+        <source>Move the row one position down</source>
+        <target>Pārvietot rindu vienu pozīciju lejup</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_delete">
+        <source>Delete the row</source>
+        <target>Dzēst rindu</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_value">
+        <source>Value</source>
+        <target>Vērtība</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_label">
+        <source>Label</source>
+        <target>Etiķete</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_key">
+        <source>Key</source>
+        <target>Atslēga</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_default">
+        <source>Default</source>
+        <target>Noklusējuma</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_group">
+        <source>Group</source>
+        <target>Grupa</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_copy">
+        <source>Duplicate the row</source>
+        <target>Dublicēt rindu</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_up">
+        <source>Move the row one position up</source>
+        <target>Pārvietot rindu vienu pozīciju augšup</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_down">
+        <source>Move the row one position down</source>
+        <target>Pārvietot rindu vienu pozīciju lejup</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_delete">
+        <source>Delete the row</source>
+        <target>Dzēst rindu</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_module">
+        <source>Module</source>
+        <target>Modulis</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_column">
+        <source>Column</source>
+        <target>Kolonna</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>Iespējot/atspējot moduli</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_title">
+        <source>Title</source>
+        <target>Virsraksts</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_link">
+        <source>Link</source>
+        <target>Saite</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_caption">
+        <source>Caption</source>
+        <target>Paraksts</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_delete">
+        <source>Delete the language</source>
+        <target>Dzēst valodu</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_new">
+        <source>Add language</source>
+        <target>Pievienot valodu</target>
+      </trans-unit>
+      <trans-unit id="MSC.image_sizes">
+        <source>Predefined dimensions</source>
+        <target>Iepriekš definēti izmēri</target>
+      </trans-unit>
+      <trans-unit id="MSC.relative">
+        <source>Relative dimensions</source>
+        <target>Relatīvi izmēri</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.0">
+        <source>Proportional</source>
+        <target>Proporcionāls</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Garākā attēla mala ir pielāgota dotajiem izmēriem un attēls tiek mainīts proporcionāli.</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.0">
+        <source>Fit the box</source>
+        <target>Piemērot kastei</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Īsākā attēla mala ir pielāgota dotajiem izmēriem un attēls tiek mainīts proporcionāli.</target>
+      </trans-unit>
+      <trans-unit id="MSC.exact.0">
+        <source>Exact dimensions</source>
+        <target>Tieši izmēri</target>
+      </trans-unit>
+      <trans-unit id="MSC.exact.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>Attēls tiks mainīti uz dotajiem izmēriem. Ja nepieciešams, tas tiks apgriezts.</target>
+      </trans-unit>
+      <trans-unit id="MSC.crop.0">
+        <source>Important part</source>
+        <target>Svarīgā daļa</target>
+      </trans-unit>
+      <trans-unit id="MSC.crop.1">
+        <source>Preserves the important part of an image as specified in the file manager.</source>
+        <target>Saglabā attēla svarīgo daļu, kā norādīts datņu pārvaldniekā.</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.0">
+        <source>Left | Top</source>
+        <target>Augšā pa kreisi</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.1">
+        <source>Preserves the left part of a landscape image and the top part of a portrait image.</source>
+        <target>Augšā pa kreisi</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.0">
+        <source>Center | Top</source>
+        <target>Augšā centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.1">
+        <source>Preserves the center part of a landscape image and the top part of a portrait image.</source>
+        <target>Augšā centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.0">
+        <source>Right | Top</source>
+        <target>Augšā pa labi</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.1">
+        <source>Preserves the right part of a landscape image and the top part of a portrait image.</source>
+        <target>Augšā pa labi</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.0">
+        <source>Left | Center</source>
+        <target>Pa kreisi centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.1">
+        <source>Preserves the left part of a landscape image and the center part of a portrait image.</source>
+        <target>Pa kreisi centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.0">
+        <source>Center | Center</source>
+        <target>Centrā centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.1">
+        <source>Preserves the center part of a landscape image and the center part of a portrait image.</source>
+        <target>Centrā centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.0">
+        <source>Right | Center</source>
+        <target>Pa labi centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.1">
+        <source>Preserves the right part of a landscape image and the center part of a portrait image.</source>
+        <target>Pa labi centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.0">
+        <source>Left | Bottom</source>
+        <target>Apakšā pa kreisi</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.1">
+        <source>Preserves the left part of a landscape image and the bottom part of a portrait image.</source>
+        <target>Apakšā pa kreisi</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.0">
+        <source>Center | Bottom</source>
+        <target>Apakšā centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.1">
+        <source>Preserves the center part of a landscape image and the bottom part of a portrait image.</source>
+        <target>Apakšā centrēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.0">
+        <source>Right | Bottom</source>
+        <target>Apakšā pa labi</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.1">
+        <source>Preserves the right part of a landscape image and the bottom part of a portrait image.</source>
+        <target>Apakšā pa labi</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.0">
+        <source>ID</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.1">
+        <source>Note that changing the ID can break data integrity!</source>
+        <target>Ņem vērā ka mainot ID var salauzt datu integritāti!</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.0">
+        <source>Parent ID</source>
+        <target>Vecāka ID</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.1">
+        <source>Note that changing the parent ID can break data integrity!</source>
+        <target>Ņem vērā ka mainot vecāko ID var salauzt datu integritāti!</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.0">
+        <source>Sorting value</source>
+        <target>Kārtošanas vērtība</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.1">
+        <source>The sorting value is usually assigned automatically.</source>
+        <target>Kārtošanas vērtība tiek izmantota, lai sakārtotu ierakstus noteiktā kārtībā. Kārtošanas vērtības parasti tiek piešķirtas automātiski.</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.0">
+        <source>Edit multiple</source>
+        <target>Rediģēt visus ierakstus</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.1">
+        <source>Edit multiple records at once</source>
+        <target>Rediģēt visus ierakstus</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.0">
+        <source>Override multiple</source>
+        <target>Ignorēt vairākus</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.1">
+        <source>Override multiple records at once</source>
+        <target>Ignorēt vairākus ierakstus vienlaikus</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.0">
+        <source>Available fields</source>
+        <target>Pieejamie lauki</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.1">
+        <source>Please select the fields you want to edit.</source>
+        <target>Lūdzu atlasiet laukus, kurus vēlaties rediģēt.</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.0">
+        <source>Password</source>
+        <target>Parole</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.1">
+        <source>Please enter a password.</source>
+        <target>Lūdzu ievadiet paroli.</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.0">
+        <source>Confirmation</source>
+        <target>Apstipriniet paroli</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.1">
+        <source>Please confirm the password.</source>
+        <target>Lūdzu apstipriniet paroli.</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.0">
+        <source>Date added</source>
+        <target>Pievinošanas datums</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.1">
+        <source>Date added: %s</source>
+        <target>Pievinošanas datums: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+        <target>Iepriekšējā pieslēgšanās</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+        <target>Iepriekšējā pieslēgšanās: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Last login</source>
+        <target>Pēdējā pieslēgšanās</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Last login: %s</source>
+        <target>Pēdējā pieslēgšanās: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>Pieslēgšanās mēģinājumi</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>Bloķēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>Pārvietot vienumu ar vilkšanu un nomešanu</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.0">
+        <source>Move up</source>
+        <target>Pārvietot aušup</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.1">
+        <source>Move the item one position up</source>
+        <target>Pārvietot vienumu vienu pozīciju augstāk</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.0">
+        <source>Move down</source>
+        <target>Pārvietot lejup</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.1">
+        <source>Move the item one position down</source>
+        <target>Pārvietot vienumu vienu pozīciju zemāk</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.0">
+        <source>Files URL</source>
+        <target>Faila URL</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.1">
+        <source>The files URL applies to the &lt;em&gt;files&lt;/em&gt; directory (page speed optimization).</source>
+        <target>Faila URL attiecas uz &lt;em&gt;tl_files&lt;/em&gt; direktoriju un visiem sīktēliem (lapas ātruma optimizācija).</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.0">
+        <source>Assets URL</source>
+        <target>Papildinājuma URL</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.1">
+        <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
+        <target>Papildinājuma URL attiecas uz visiem resursiem &lt;em&gt;plugins&lt;/em&gt; direktorijā (lapas ātruma optimizācija).</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.0">
+        <source>Back end keyboard shortcuts</source>
+        <target>Aizmugures īsinājumtaustiņi</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.1">
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://docs.contao.org/books/manual/current/en/02-administration-area/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.0">
+        <source>Toggle all</source>
+        <target>Pārslēgt visus</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.1">
+        <source>Expand or collapse all nodes</source>
+        <target>Izvērst vai sakļaut visus mezglus</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.0">
+        <source>A Contao account has been locked</source>
+        <target>Contao konts ir bloķēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.1">
+        <source>The following Contao account has been locked for security reasons.
+
+Username: %s
+Real name: %s
+Website: %s
+
+The account has been locked for %d minutes, because the user has entered an invalid password three times in a row. After this period of time, the account will be unlocked automatically.
+
+This e-mail has been generated by Contao. You can not reply to it directly.
+</source>
+        <target>Sekojošais Contao konts ir ticis bloķēts drošības iemeslu dēļ.
+
+Lietotājvārds: %s
+Īstais vārds: %s
+Interneta vietne: %s
+
+Konts tika bloķēts %d minūtes, jo lietotājs ievadīja nederīgu paroli trīs reizes pēc kārtas. Pēc šī laika perioda konts tiks atbloķēts automātiski.
+
+Šo e-pastu ģenerēja Contao. Jūs uz to nevarat atbildēt pa tiešo.
+</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.0">
+        <source>Mobile version</source>
+        <target>Mobilā versija</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.1">
+        <source>Go to the mobile version</source>
+        <target>Iet uz mobilo versiju</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.0">
+        <source>Desktop version</source>
+        <target>Darbavirsmas versija</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.1">
+        <source>Go to the desktop version</source>
+        <target>Iet uz darbavirsmas versiju</target>
+      </trans-unit>
+      <trans-unit id="MSC.feLink">
+        <source>Go to front end</source>
+        <target>Iet uz priekšgalu</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreview">
+        <source>Front end preview</source>
+        <target>Priekšgala priekšskatījums</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreviewTitle">
+        <source>Preview of the website in a new window</source>
+        <target>Priekšskatīt mājas lapu jaunā logā</target>
+      </trans-unit>
+      <trans-unit id="MSC.feUser">
+        <source>Front end user</source>
+        <target>Priekšgala lietotājs</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTop">
+        <source>Back to top</source>
+        <target>Uz augšu</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTopTitle">
+        <source>Go to the top of the page</source>
+        <target>Iet uz lapas augšu</target>
+      </trans-unit>
+      <trans-unit id="MSC.home">
+        <source>Home</source>
+        <target>Mājas</target>
+      </trans-unit>
+      <trans-unit id="MSC.homeTitle">
+        <source>Back to the back end start page</source>
+        <target>Atpakaļ uz aizmugures sākuma lapu</target>
+      </trans-unit>
+      <trans-unit id="MSC.user">
+        <source>User</source>
+        <target>Lietotājs</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginTo">
+        <source>Log into %s</source>
+        <target>Pieslēgties %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginBT">
+        <source>Login</source>
+        <target>Pieslēgties</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBT">
+        <source>Logout</source>
+        <target>Atslēgties</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBTTitle">
+        <source>Close the current session</source>
+        <target>Slēgt pašreizējo sesiju</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBT">
+        <source>Go back</source>
+        <target>Iet atpakaļ</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBTTitle">
+        <source>Back to the previous page</source>
+        <target>Atpakaļ uz iepriekšējo lapu</target>
+      </trans-unit>
+      <trans-unit id="MSC.cancelBT">
+        <source>Cancel</source>
+        <target>Atcelt</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteConfirm">
+        <source>Do you really want to delete entry ID %s?</source>
+        <target>Vai tiešām vēlaties dzēst ierakstu ID %s?</target>
+      </trans-unit>
+      <trans-unit id="MSC.delAllConfirm">
+        <source>Do you really want to delete the selected records?</source>
+        <target>Vai tiešām vēlaties dzēst atlasītos ierakstus?</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteConfirmFile">
+        <source>Do you really want to delete file or folder %s?</source>
+        <target>Vai tiešām vēlaties dzēst datni vai mapi %s?</target>
+      </trans-unit>
+      <trans-unit id="MSC.delAllConfirmFile">
+        <source>Do you really want to delete the selected resources?</source>
+        <target>Vai tiešām vēlaties dzēst atlasītos resursus?</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterRecords">
+        <source>Records</source>
+        <target>Ieraksti</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterAll">
+        <source>All</source>
+        <target>Visi</target>
+      </trans-unit>
+      <trans-unit id="MSC.showRecord">
+        <source>Show the details of record %s</source>
+        <target>Rādīt ieraksta %s detaļas</target>
+      </trans-unit>
+      <trans-unit id="MSC.editRecord">
+        <source>Edit record %s</source>
+        <target>Rediģēt ierakstu %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_info">
+        <source>Edit selected records of table %s</source>
+        <target>Rediģēt visus aktīvos tabulas %s ierakstus</target>
+      </trans-unit>
+      <trans-unit id="MSC.showOnly">
+        <source>Show</source>
+        <target>Rādīt</target>
+      </trans-unit>
+      <trans-unit id="MSC.sortBy">
+        <source>Sort</source>
+        <target>Kārtot</target>
+      </trans-unit>
+      <trans-unit id="MSC.filter">
+        <source>Filter</source>
+        <target>Filtrēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.search">
+        <source>Search</source>
+        <target>Meklēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.noResult">
+        <source>No records found.</source>
+        <target>Netika atrasts neviens ieraksts.</target>
+      </trans-unit>
+      <trans-unit id="MSC.save">
+        <source>Save</source>
+        <target>Saglabāt</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNclose">
+        <source>Save and close</source>
+        <target>Saglabāt un aizvērt</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNedit">
+        <source>Save and edit</source>
+        <target>Saglabāt un rediģēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNback">
+        <source>Save and go back</source>
+        <target>Saglabāt un iet atpakaļ</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNcreate">
+        <source>Save and new</source>
+        <target>Saglabāt un jauns</target>
+      </trans-unit>
+      <trans-unit id="MSC.continue">
+        <source>Continue</source>
+        <target>Turpināt</target>
+      </trans-unit>
+      <trans-unit id="MSC.close">
+        <source>Close</source>
+        <target>Aizvērt</target>
+      </trans-unit>
+      <trans-unit id="MSC.skipNavigation">
+        <source>Skip navigation</source>
+        <target>Pārlēkt navigāciju</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAll">
+        <source>Select all</source>
+        <target>Izvēlēties visu</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_new">
+        <source>Change password</source>
+        <target>Nomainīt paroli</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_change">
+        <source>Please enter a new password</source>
+        <target>Lūdzu ievadiet jaunu paroli</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_changed">
+        <source>The password has been updated.</source>
+        <target>Parole atjaunināta.</target>
+      </trans-unit>
+      <trans-unit id="MSC.fallback">
+        <source>default</source>
+        <target>noklusējuma</target>
+      </trans-unit>
+      <trans-unit id="MSC.view">
+        <source>View in a new window</source>
+        <target>Rādīt jaunā logā</target>
+      </trans-unit>
+      <trans-unit id="MSC.fullsize">
+        <source>Open full size image in a new window</source>
+        <target>Atvērt pilna izmēra attēlu jaunā logā</target>
+      </trans-unit>
+      <trans-unit id="MSC.datepicker">
+        <source>Date picker</source>
+        <target>Datuma atlasītājs</target>
+      </trans-unit>
+      <trans-unit id="MSC.colorpicker">
+        <source>Color picker</source>
+        <target>Krāsas nolasītājs (nepieciešams JavaScript)</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagepicker">
+        <source>Page picker</source>
+        <target>Lapas nolasītājs (nepieciešams JavaScript)</target>
+      </trans-unit>
+      <trans-unit id="MSC.filepicker">
+        <source>File picker</source>
+        <target>Datņu nolasītājs (nepieciešams JavaScript)</target>
+      </trans-unit>
+      <trans-unit id="MSC.ppHeadline">
+        <source>Contao pages</source>
+        <target>TYPOlight lapas</target>
+      </trans-unit>
+      <trans-unit id="MSC.fpHeadline">
+        <source>Contao files</source>
+        <target>TYPOlight datnes</target>
+      </trans-unit>
+      <trans-unit id="MSC.yes">
+        <source>yes</source>
+        <target>jā</target>
+      </trans-unit>
+      <trans-unit id="MSC.no">
+        <source>no</source>
+        <target>nē</target>
+      </trans-unit>
+      <trans-unit id="MSC.goBack">
+        <source>Go back</source>
+        <target>Iet atpakaļ</target>
+      </trans-unit>
+      <trans-unit id="MSC.reload">
+        <source>Reload</source>
+        <target>Pārielādēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.above">
+        <source>above</source>
+        <target>virs</target>
+      </trans-unit>
+      <trans-unit id="MSC.below">
+        <source>below</source>
+        <target>zem</target>
+      </trans-unit>
+      <trans-unit id="MSC.date">
+        <source>Date</source>
+        <target>Datums</target>
+      </trans-unit>
+      <trans-unit id="MSC.tstamp">
+        <source>Revision date</source>
+        <target>Pārskatījuma datums</target>
+      </trans-unit>
+      <trans-unit id="MSC.entry">
+        <source>%s entry</source>
+        <target>%s ieraksts</target>
+      </trans-unit>
+      <trans-unit id="MSC.entries">
+        <source>%s entries</source>
+        <target>%s ieraksti</target>
+      </trans-unit>
+      <trans-unit id="MSC.files">
+        <source>%s file(s)</source>
+        <target>%s datne(s)</target>
+      </trans-unit>
+      <trans-unit id="MSC.left">
+        <source>left</source>
+        <target>pa kreisi</target>
+      </trans-unit>
+      <trans-unit id="MSC.center">
+        <source>center</source>
+        <target>centrēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.right">
+        <source>right</source>
+        <target>pa labi</target>
+      </trans-unit>
+      <trans-unit id="MSC.justify">
+        <source>justified</source>
+        <target>izlīdzināts</target>
+      </trans-unit>
+      <trans-unit id="MSC.filetree">
+        <source>File system</source>
+        <target>Datņu sistēma</target>
+      </trans-unit>
+      <trans-unit id="MSC.male">
+        <source>Male</source>
+        <target>vīrietis</target>
+      </trans-unit>
+      <trans-unit id="MSC.female">
+        <source>Female</source>
+        <target>sieviete</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileSize">
+        <source>File size</source>
+        <target>Datnes izmērs</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileCreated">
+        <source>Created</source>
+        <target>Izveidots</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileModified">
+        <source>Last modified</source>
+        <target>Pēdējo reizi modificets</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileAccessed">
+        <source>Last accessed</source>
+        <target>Pēdējo reizi piekļūts</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileDownload">
+        <source>Download the file</source>
+        <target>Lejupielādēt datni</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>Unikāls ID</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileImageSize">
+        <source>Width/height in pixel</source>
+        <target>Platums/augstums pikseļos</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePath">
+        <source>Relative path</source>
+        <target>Relatīvais ceļš</target>
+      </trans-unit>
+      <trans-unit id="MSC.version">
+        <source>Version</source>
+        <target>Versija</target>
+      </trans-unit>
+      <trans-unit id="MSC.restore">
+        <source>Restore</source>
+        <target>Atjaunot</target>
+      </trans-unit>
+      <trans-unit id="MSC.backendModules">
+        <source>Back end modules</source>
+        <target>Aizmugures moduļi</target>
+      </trans-unit>
+      <trans-unit id="MSC.welcomeTo">
+        <source>%s back end</source>
+        <target>%s aizmugure</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateVersion">
+        <source>Contao version %s available</source>
+        <target>Pieejama TYPOlight versija %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.wordWrap">
+        <source>Word wrap</source>
+        <target>Aplaušana</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveAlert">
+        <source>ATTENTION! You will lose any unsaved changes. Continue?</source>
+        <target>UZMANĪBU! Jūs zaudēsiet visas nesaglabātās izmaiņas. Turpināt?</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleNodes">
+        <source>Toggle all nodes</source>
+        <target>Pārslēgt visus mezglus</target>
+      </trans-unit>
+      <trans-unit id="MSC.expandNode">
+        <source>Expand node</source>
+        <target>Izvērst mezglu</target>
+      </trans-unit>
+      <trans-unit id="MSC.collapseNode">
+        <source>Collapse node</source>
+        <target>Savērst mezglu</target>
+      </trans-unit>
+      <trans-unit id="MSC.loadingData">
+        <source>Loading data</source>
+        <target>Ielādē datus</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteSelected">
+        <source>Delete</source>
+        <target>Dzēst</target>
+      </trans-unit>
+      <trans-unit id="MSC.editSelected">
+        <source>Edit</source>
+        <target>Rediģēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.overrideSelected">
+        <source>Override</source>
+        <target>Aizstāt</target>
+      </trans-unit>
+      <trans-unit id="MSC.moveSelected">
+        <source>Move</source>
+        <target>Pārvietot</target>
+      </trans-unit>
+      <trans-unit id="MSC.copySelected">
+        <source>Copy</source>
+        <target>Kopēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.aliasSelected">
+        <source>Generate aliases</source>
+        <target>Ģenerēt aizstājvārdus</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelected">
+        <source>Change selection</source>
+        <target>Izmainīt atlasīto</target>
+      </trans-unit>
+      <trans-unit id="MSC.resetSelected">
+        <source>Reset selection</source>
+        <target>Atiestatīt atlasīto</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePicker">
+        <source>Switch to file picker</source>
+        <target>Pārslēgties uz datņu atlasītāju</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePicker">
+        <source>Switch to page picker</source>
+        <target>Pārslēgties uz lapu atlasītāju</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileManager">
+        <source>Open the file manager</source>
+        <target>Atvērt datņu pārvaldnieku</target>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
+        <target>Modificēt vietnes struktūru</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>Atpakaļ uz datņu atlasītāju</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>Atpakaļ uz lapu atlasītāju</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Lūdzu ejiet atpakaļ un izvēlieties datni pirms dialoga loga aizvēršanas.</target>
+      </trans-unit>
+      <trans-unit id="MSC.systemMessages">
+        <source>System messages</source>
+        <target>Sistēmas ziņojumi</target>
+      </trans-unit>
+      <trans-unit id="MSC.clearClipboard">
+        <source>Clear clipboard</source>
+        <target>Novākt starpliktuvi</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenElements">
+        <source>Unpublished elements</source>
+        <target>Nepublicēti elementi</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenHide">
+        <source>hide</source>
+        <target>slēpt</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenShow">
+        <source>show</source>
+        <target>rādīt</target>
+      </trans-unit>
+      <trans-unit id="MSC.apply">
+        <source>Apply</source>
+        <target>Pielietot</target>
+      </trans-unit>
+      <trans-unit id="MSC.applyTitle">
+        <source>Apply the changes</source>
+        <target>Pielietot izmaiņas</target>
+      </trans-unit>
+      <trans-unit id="MSC.mandatory">
+        <source>Mandatory field</source>
+        <target>Obligāts lauks</target>
+      </trans-unit>
+      <trans-unit id="MSC.create">
+        <source>Create</source>
+        <target>Izveidot</target>
+      </trans-unit>
+      <trans-unit id="MSC.delete">
+        <source>Delete</source>
+        <target>Dzēst</target>
+      </trans-unit>
+      <trans-unit id="MSC.protected">
+        <source>protected</source>
+        <target>aizsargāts</target>
+      </trans-unit>
+      <trans-unit id="MSC.guests">
+        <source>guests only</source>
+        <target>tikai viesi</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateMode">
+        <source>Update mode</source>
+        <target>Jaunināšanas režīms</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateAdd">
+        <source>Add the selected values</source>
+        <target>Pievienot atlasītās grupas</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateRemove">
+        <source>Remove the selected values</source>
+        <target>Aizvākt atlasītās grupas</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateReplace">
+        <source>Replace the existing entries</source>
+        <target>Aizvietot eksistējošo ievadu</target>
+      </trans-unit>
+      <trans-unit id="MSC.ascending">
+        <source>ascending</source>
+        <target>augoši</target>
+      </trans-unit>
+      <trans-unit id="MSC.descending">
+        <source>descending</source>
+        <target>dilstoši</target>
+      </trans-unit>
+      <trans-unit id="MSC.default">
+        <source>Default</source>
+        <target>Noklusējuma</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizard">
+        <source>Open the help wizard</source>
+        <target>Palīdzības vednis</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizardTitle">
+        <source>Help wizard</source>
+        <target>Palīdzibas vednis</target>
+      </trans-unit>
+      <trans-unit id="MSC.noCookies">
+        <source>You have to allow cookies to use Contao.</source>
+        <target>Jums ir jāatļauj sīkdatnes, lai lietotu Contao.</target>
+      </trans-unit>
+      <trans-unit id="MSC.copyOf">
+        <source>%s (copy)</source>
+        <target>%s (kopija)</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyMode">
+        <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
+        <target>Contao pašlaik darbojas &lt;strong&gt; drošajā režīmā &lt;/ strong&gt;, kurā tiek ielādēti tikai galvenie moduļi. Šis darbības režīms ir piem. aktivizēts pēc Live Update, lai novērstu iespējamās nesaderības ar citu izstrādātāju paplašinājumiem. Jūs varat šo režīmu atslēgt backend uzstādījumos, kad esat pārbaudījis citu izstrādātāju paplašinājumu instalācijas.</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>Atspējot</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao šobrīd atrodas &lt;strong&gt;uzturēšanas režīmā&lt;/strong&gt;, kurā vietnes priekšgals (front end) nav pieejams.  Neatspējojiet to, ja šobrīd uzstādāt vai jaunināt trešās puses moduļus. Tīmekļa vietne varētu nestrādāt pareizi.</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Atspējot</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>&lt;strong&gt;Iekšējā kešatmiņa&lt;/strong&gt; vēl nav ģenerēta. Kešatmiņa uzlabos lietotnes veiktspēju un ir ļoti ieteicama. Ja negribat lietot kešatmiņu, jūs to varat pastāvīgi atslēgt aizmugures iestatījumos.</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+        <target>Veidot kešatmiņu</target>
+      </trans-unit>
+      <trans-unit id="MSC.name">
+        <source>Name</source>
+        <target>Nosaukums</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailAddress">
+        <source>E-mail address</source>
+        <target>E-pasta adrese</target>
+      </trans-unit>
+      <trans-unit id="MSC.register">
+        <source>Register</source>
+        <target>Reģistrēties</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountActivated">
+        <source>Your account has been activated.</source>
+        <target>Jūsu konts tika aktivizēts.</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountError">
+        <source>Unable to process the current request.</source>
+        <target>Nevar apstrādāt ar pašreizējo pieprasījumu.</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailSubject">
+        <source>Your registration on %s</source>
+        <target>Jūsu reģistrācija %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminSubject">
+        <source>New registration on %s</source>
+        <target>Contao :: Jauna reģistrācija %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminText">
+        <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
+        <target>Jauns bierds (ID %s) ir reģistrējies jūsu mājas lapā.%sJa jūs neesat atļāvis aktivizēšanu ar e-pastu, tad jums to ir manuāli jāaktivizē.</target>
+      </trans-unit>
+      <trans-unit id="MSC.requestPassword">
+        <source>Request password</source>
+        <target>Pieprasīt paroli</target>
+      </trans-unit>
+      <trans-unit id="MSC.setNewPassword">
+        <source>Set new password</source>
+        <target>Izveidot jaunu paroli</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPasswordSet">
+        <source>Your password has been updated.</source>
+        <target>Jūsu parole tika atjaunota.</target>
+      </trans-unit>
+      <trans-unit id="MSC.passwordSubject">
+        <source>Your password request for %s</source>
+        <target>Jūsu paroles pierpasījums %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountNotFound">
+        <source>No matching account found</source>
+        <target>Netika atrasts neviens saskanīgs konts</target>
+      </trans-unit>
+      <trans-unit id="MSC.oldPassword">
+        <source>Old password</source>
+        <target>Vecā parole</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPassword">
+        <source>New password</source>
+        <target>Jaunā parole</target>
+      </trans-unit>
+      <trans-unit id="MSC.changePassword">
+        <source>Change password</source>
+        <target>Nomainīt paroli</target>
+      </trans-unit>
+      <trans-unit id="MSC.oldPasswordWrong">
+        <source>The old password is not correct</source>
+        <target>Vecā parole nav pareiza</target>
+      </trans-unit>
+      <trans-unit id="MSC.securityQuestion">
+        <source>Security question</source>
+        <target>Drošības jautājums</target>
+      </trans-unit>
+      <trans-unit id="MSC.closeAccount">
+        <source>Close account</source>
+        <target>Slēgt kontu</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelection">
+        <source>Change selection</source>
+        <target>Izmainīt atlasīto</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentlySelected">
+        <source>Selected</source>
+        <target>Atlasīts</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNode">
+        <source>Only show this node</source>
+        <target>Rādīt tikai šo mezglu</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAllNodes">
+        <source>Show all nodes</source>
+        <target>Rādīt visus mezglus</target>
+      </trans-unit>
+      <trans-unit id="MSC.showDifferences">
+        <source>Show differences</source>
+        <target>Radīt atšķirības</target>
+      </trans-unit>
+      <trans-unit id="MSC.editElement">
+        <source>Edit the element</source>
+        <target>Rediģēt elementu</target>
+      </trans-unit>
+      <trans-unit id="MSC.table">
+        <source>Table</source>
+        <target>Tabula</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
+        <target>Pamata tabula</target>
+      </trans-unit>
+      <trans-unit id="MSC.description">
+        <source>Description</source>
+        <target>Apraksts</target>
+      </trans-unit>
+      <trans-unit id="MSC.noVersions">
+        <source>Currently there are no versions.</source>
+        <target>Pašlaik nav versiju.</target>
+      </trans-unit>
+      <trans-unit id="MSC.latestChanges">
+        <source>Latest changes</source>
+        <target>Pēdējās izmaiņas</target>
+      </trans-unit>
+      <trans-unit id="MSC.identicalVersions">
+        <source>The two selected versions are identical.</source>
+        <target>Izvēlētās versijas ir identiskas.</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNewPosition">
+        <source>Next, please choose the (new) position of the element</source>
+        <target>Nākamais, lūdzu, izvēlieties (jaunu) elementa pozīciju </target>
+      </trans-unit>
+      <trans-unit id="MSC.go">
+        <source>Go</source>
+        <target>Iet</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicknav">
+        <source>Quick navigation</source>
+        <target>Ātrā navigācija</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicklink">
+        <source>Quick link</source>
+        <target>Ātrā saite</target>
+      </trans-unit>
+      <trans-unit id="MSC.username">
+        <source>Username</source>
+        <target>Lietotājvārds</target>
+      </trans-unit>
+      <trans-unit id="MSC.login">
+        <source>Login</source>
+        <target>Pieslēgties</target>
+      </trans-unit>
+      <trans-unit id="MSC.logout">
+        <source>Logout</source>
+        <target>Atslēgties</target>
+      </trans-unit>
+      <trans-unit id="MSC.loggedInAs">
+        <source>You are logged in as %s.</source>
+        <target>Jūs esat pieslēdzies kā %s.</target>
+      </trans-unit>
+      <trans-unit id="MSC.emptyField">
+        <source>Please enter your username and password!</source>
+        <target>Lūdzu ievadiet lietotājvārdu un paroli!</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirmation">
+        <source>Confirmation</source>
+        <target>Apstipriniet paroli</target>
+      </trans-unit>
+      <trans-unit id="MSC.sMatches">
+        <source>%s occurrences for %s</source>
+        <target>%s sastopamības ar %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.sEmpty">
+        <source>No matches for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>Nav sakritību ar &lt;strong&gt;%s&lt;/strong&gt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.sResults">
+        <source>Results %s - %s of %s for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>Rezultāti %s - %s no %s meklējot &lt;strong&gt;%s&lt;/strong&gt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.sNoResult">
+        <source>Your search for &lt;strong&gt;%s&lt;/strong&gt; returned no results.</source>
+        <target>Meklējot &lt;strong&gt;%s&lt;/strong&gt; nav rezultātu.</target>
+      </trans-unit>
+      <trans-unit id="MSC.seconds">
+        <source>seconds</source>
+        <target>sekundes</target>
+      </trans-unit>
+      <trans-unit id="MSC.up">
+        <source>Up</source>
+        <target>Augšup</target>
+      </trans-unit>
+      <trans-unit id="MSC.first">
+        <source>&amp;#171; First</source>
+        <target>« Pirmā</target>
+      </trans-unit>
+      <trans-unit id="MSC.previous">
+        <source>Previous</source>
+        <target>Iepriekšējā</target>
+      </trans-unit>
+      <trans-unit id="MSC.next">
+        <source>Next</source>
+        <target>Nākošā</target>
+      </trans-unit>
+      <trans-unit id="MSC.last">
+        <source>Last &amp;#187;</source>
+        <target>Pēdējā »</target>
+      </trans-unit>
+      <trans-unit id="MSC.goToPage">
+        <source>Go to page %s</source>
+        <target>Iet uz lapu %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.totalPages">
+        <source>Page %s of %s</source>
+        <target>Lapa %s no %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>vispārīgi</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileUploaded">
+        <source>File %s uploaded successfully.</source>
+        <target>Datne %s augšupielādēta veiksmīgi</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileExceeds">
+        <source>Image %s is too big to be resized automatically.</source>
+        <target>Attēls %s ir pārāk liels, lai varētu mainīti automātiski.</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileResized">
+        <source>Image %s was scaled down to the maximum dimensions.</source>
+        <target>Attēls %s tika samazināts līdz maksimāli pieļaujamajiem izmēriem.</target>
+      </trans-unit>
+      <trans-unit id="MSC.searchLabel">
+        <source>Search</source>
+        <target>Meklēt</target>
+      </trans-unit>
+      <trans-unit id="MSC.keywords">
+        <source>Keywords</source>
+        <target>Atslēgvārdi</target>
+      </trans-unit>
+      <trans-unit id="MSC.options">
+        <source>Options</source>
+        <target>Iespējas</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAll">
+        <source>match all words</source>
+        <target>sakritība ar visiem vārdiem</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAny">
+        <source>match any word</source>
+        <target>sakritība ar jebkuru no vārdiem</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveData">
+        <source>Save data</source>
+        <target>Daglabāt datus</target>
+      </trans-unit>
+      <trans-unit id="MSC.savedData">
+        <source>Your data has been saved.</source>
+        <target>Jūsu dati tikuši saglabāti.</target>
+      </trans-unit>
+      <trans-unit id="MSC.printPage">
+        <source>Print this page</source>
+        <target>Drukāt šo lapu</target>
+      </trans-unit>
+      <trans-unit id="MSC.printAsPdf">
+        <source>Save article as PDF</source>
+        <target>Saglabāt rakstu kā PDF</target>
+      </trans-unit>
+      <trans-unit id="MSC.facebookShare">
+        <source>Share on Facebook</source>
+        <target>Ieteikt Facebook</target>
+      </trans-unit>
+      <trans-unit id="MSC.twitterShare">
+        <source>Share on Twitter</source>
+        <target>Ieteikt Twitter</target>
+      </trans-unit>
+      <trans-unit id="MSC.gplusShare">
+        <source>Share on Google+</source>
+        <target>Kopīgot Google+</target>
+      </trans-unit>
+      <trans-unit id="MSC.pleaseWait">
+        <source>Please wait</source>
+        <target>Lūdzu uzgaidiet</target>
+      </trans-unit>
+      <trans-unit id="MSC.loading">
+        <source>Loading …</source>
+        <target>Lejupielādē...</target>
+      </trans-unit>
+      <trans-unit id="MSC.more">
+        <source>Read more …</source>
+        <target>Lasīt tālāk...</target>
+      </trans-unit>
+      <trans-unit id="MSC.readMore">
+        <source>Read the article: %s</source>
+        <target>Lasīt rakstu: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.targetPage">
+        <source>Target page</source>
+        <target>Mērķa lapa</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidPage">
+        <source>Sorry, item &quot;%s&quot; does not exist.</source>
+        <target>Diemžēl lapa &quot;%s&quot; neeksistē.</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_orderBy">
+        <source>Order by %s</source>
+        <target>Kārtot pēc %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_perPage">
+        <source>Results per page</source>
+        <target>Rezultāti lapā</target>
+      </trans-unit>
+      <trans-unit id="MSC.published">
+        <source>Published</source>
+        <target>Publicēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.unpublished">
+        <source>Unpublished</source>
+        <target>Nepublicēts</target>
+      </trans-unit>
+      <trans-unit id="MSC.addComment">
+        <source>Add a comment</source>
+        <target>Pievienot komentāru</target>
+      </trans-unit>
+      <trans-unit id="MSC.autologin">
+        <source>Remember me</source>
+        <target>Atceries mani</target>
+      </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>Izveidots</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activation token</source>
+        <target>Aktivizēšanas marķieris</target>
+      </trans-unit>
+      <trans-unit id="MSC.relevance">
+        <source>%s relevance</source>
+        <target>%s sakarība</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidTokenUrl">
+        <source>Invalid token</source>
+        <target>Nederīga pilnvara</target>
+      </trans-unit>
+      <trans-unit id="MSC.changelog">
+        <source>Changelog</source>
+        <target>Izmaiņu saraksts</target>
+      </trans-unit>
+      <trans-unit id="MSC.dragItemsHint">
+        <source>Drag the items to re-order them</source>
+        <target>Vilkt elementus, lai tos pārkārtotu</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>Tēma %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
+        <target>Vieta</target>
+      </trans-unit>
+      <trans-unit id="MSC.download">
+        <source>Download %s</source>
+        <target>Lejupielādēt %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.metaNoLanguages">
+        <source>You have to add a root page in the site structure to store file meta information.</source>
+      </trans-unit>
+      <trans-unit id="UNITS.0">
+        <source>Byte</source>
+        <target>baits</target>
+      </trans-unit>
+      <trans-unit id="UNITS.1">
+        <source>KiB</source>
+        <target>KiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.2">
+        <source>MiB</source>
+        <target>MiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.3">
+        <source>GiB</source>
+        <target>Iet</target>
+      </trans-unit>
+      <trans-unit id="UNITS.4">
+        <source>TiB</source>
+        <target>TiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.5">
+        <source>PiB</source>
+        <target>PiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.6">
+        <source>EiB</source>
+        <target>EiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.7">
+        <source>ZiB</source>
+        <target>ZiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.8">
+        <source>YiB</source>
+        <target>YiB</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.do">
+        <source>Module</source>
+        <target>Modulis</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.table">
+        <source>Affected table</source>
+        <target>Ietekmētā tabula</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.act">
+        <source>Action</source>
+        <target>Darbība</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.id">
+        <source>Affected record</source>
+        <target>Ietkmētais ieraksts</target>
+      </trans-unit>
+      <trans-unit id="DP.select_a_time">
+        <source>Select a time</source>
+        <target>Izvēlieties laiku</target>
+      </trans-unit>
+      <trans-unit id="DP.use_mouse_wheel">
+        <source>Use the mouse wheel to quickly change value</source>
+        <target>Izmantojiet peles rullīti, lai ātri mainītu vērtības</target>
+      </trans-unit>
+      <trans-unit id="DP.time_confirm_button">
+        <source>OK</source>
+        <target>Labi</target>
+      </trans-unit>
+      <trans-unit id="DP.apply_range">
+        <source>Apply</source>
+        <target>Pielietot</target>
+      </trans-unit>
+      <trans-unit id="DP.cancel">
+        <source>Cancel</source>
+        <target>Atcelt</target>
+      </trans-unit>
+      <trans-unit id="DP.week">
+        <source>Wk</source>
+        <target>Wk</target>
+      </trans-unit>
+      <trans-unit id="COLS.header">
+        <source>Header</source>
+        <target>Galvene</target>
+      </trans-unit>
+      <trans-unit id="COLS.left">
+        <source>Left column</source>
+        <target>Kreisā kolonna</target>
+      </trans-unit>
+      <trans-unit id="COLS.main">
+        <source>Main column</source>
+        <target>Galvenā kolonna</target>
+      </trans-unit>
+      <trans-unit id="COLS.right">
+        <source>Right column</source>
+        <target>Labā kolonna</target>
+      </trans-unit>
+      <trans-unit id="COLS.footer">
+        <source>Footer</source>
+        <target>Kājene</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

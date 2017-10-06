@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en" target-language="it">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Seleziona le newsletter a cui gli utenti possono iscriversi durante la registrazione.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Canali</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Prego selezionare una o più newsletters</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Nascondi newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Non mostrare il menu selezione newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>E-mail iscrizione.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Puoi usare i simboli sostitutivi # &lt;em&gt;##channel##&lt;/em&gt; (nome newsletter), &lt;em&gt;##domain##&lt;/em&gt; (nome del dominio corrente) e &lt;em&gt;##link##&lt;/em&gt; (link di attivazione).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>E-mail cancellare l'iscrizione.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Inserisci i simboli sostitutivi &lt;em&gt;##channel##&lt;/em&gt; (nome newsletter) e &lt;em&gt;##domain##&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Template newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Qui puoi selezionare il template della newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Iscrizione newsletter su %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Ti sei iscritto alla newsletter: ##channel## su ##domain##. Clicca il seguente link di attivazione per completare l'iscrizione: ##link## Se l'iscrizione non è avvenuta per opera tua, ti preghiamo di ignorare questa e-mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Iscrizione newsletter su %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Sei stato cancellato correttamente dalle seguenti newsletter sul dominio ##domain##: ##channel##.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

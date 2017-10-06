@@ -1,0 +1,26 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_user.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_user.newsletters.0">
+        <source>Allowed channels</source>
+        <target>Atļautie kanāli</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletters.1">
+        <source>Here you can grant access to one or more channels.</source>
+        <target>Šeit jūs varat piešķir piekļuvi vienam vai vairākiem kanāliem.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletterp.0">
+        <source>Channel permissions</source>
+        <target>Kanāla atļaujas</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletterp.1">
+        <source>Here you can define the channel permissions.</source>
+        <target>Šeit jūs varat noteikt kanāla atļaujas.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsletter_legend">
+        <source>Newsletter permissions</source>
+        <target>Apkārtrakstu atļaujas</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

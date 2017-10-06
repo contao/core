@@ -1,0 +1,66 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_content.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="tl_content.com_order.0">
+        <source>Sort order</source>
+        <target>並べ替えの順序</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_order.1">
+        <source>Please choose the sort order.</source>
+        <target>並べ替えの順序を選択してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.0">
+        <source>Items per page</source>
+        <target>1ページの項目</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.1">
+        <source>The number of comments per page. Set to 0 to disable pagination.</source>
+        <target>1ページに表示するコメントの数です。0にすると複数ページに分割しません。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.0">
+        <source>Moderate</source>
+        <target>審査</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>ウェブサイトで公開する前にコメントを審査します。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.0">
+        <source>Allow BBCode</source>
+        <target>BBコードを許可</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>コメントの書き込みに、書式を整形するBBコードを使用できるようにします。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.0">
+        <source>Require login to comment</source>
+        <target>コメントにログインを必要</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>ログインしたユーザーにだけコメントの作成を許可します。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>セキュリティ質問を不使用</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>セキュリティ質問を使用しません。(推奨しません。)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.0">
+        <source>Comments template</source>
+        <target>コメントのテンプレート</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.1">
+        <source>Here you can select the comments template.</source>
+        <target>コメントのテンプレートを選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.comment_legend">
+        <source>Comment settings</source>
+        <target>コメントの設定</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

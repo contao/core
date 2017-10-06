@@ -1,0 +1,614 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_layout.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_layout.name.0">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.name.1">
+        <source>Please enter the layout title.</source>
+        <target>Geef een lay-out-naam op.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.0">
+        <source>Default layout</source>
+        <target>Standaard lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.1">
+        <source>Make the layout the default layout.</source>
+        <target>Indien u deze optie kiest zal deze lay-out als standaard worden gebruikt.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.0">
+        <source>Rows</source>
+        <target>Rijen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.1">
+        <source>Please choose the number of rows.</source>
+        <target>Kies het aantal rijen.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.0">
+        <source>Main row only</source>
+        <target>Hoofdrij alleen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.1">
+        <source>Show only one row.</source>
+        <target>Toon slechts een enkele rij.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.0">
+        <source>Header and main row</source>
+        <target>Header en hoofdrij</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.1">
+        <source>Show a header above the main row.</source>
+        <target>Toon een header boven de hoofdrij.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.0">
+        <source>Main row and footer</source>
+        <target>Hoofdrij en footer</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.1">
+        <source>Show a footer below the main row.</source>
+        <target>Toon footer onder de hoofdrij.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.0">
+        <source>Header, main row and footer</source>
+        <target>Header, hoofdrij en footer</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.1">
+        <source>Show a header above and a footer below the main row.</source>
+        <target>Toon een header boven en een footer onder de hoofdrij.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.0">
+        <source>Header height</source>
+        <target>Kop hoogte</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.1">
+        <source>Please enter the height of the page header.</source>
+        <target>Geef de hoogte van de kop op.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.0">
+        <source>Footer height</source>
+        <target>Footer hoogte</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.1">
+        <source>Please enter the height of the page footer.</source>
+        <target>Geef de hoogte van het footer element op.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.0">
+        <source>Columns</source>
+        <target>Kolommen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.1">
+        <source>Please choose the number of columns.</source>
+        <target>Kies het aantal kolommen.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.0">
+        <source>Main column only</source>
+        <target>Eén kolom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.1">
+        <source>Show only one column.</source>
+        <target>Enkel de hoofdkolom wordt getoond.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.0">
+        <source>Left and main column</source>
+        <target>Linker kolom en hoofdkolom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.1">
+        <source>Show two columns with the main column on the right side.</source>
+        <target>Twee kolommen met de hoofdkolom aan de rechterzijde.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.0">
+        <source>Main and right column</source>
+        <target>Hoofdkolom en rechter kolom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.1">
+        <source>Show two columns with the main column on the left side.</source>
+        <target>Twee kolommen met de hoofdkolom aan de linkerzijde.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.0">
+        <source>Main, left and right column</source>
+        <target>Hoofdkolom, linker kolom en rechter kolom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.1">
+        <source>Show three columns with the main column in the middle.</source>
+        <target>Drie kolommen, waarbij de hoofdkolom in het midden wordt weergegeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.0">
+        <source>Left column width</source>
+        <target>Breedte linker kolom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.1">
+        <source>Please enter the width of the left column.</source>
+        <target>Geef de breedte van de linker kolom op.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.0">
+        <source>Right column width</source>
+        <target>Breedte rechter kolom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.1">
+        <source>Please enter the width of the right column.</source>
+        <target>Geef de breedte van de rechter kolom op.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.0">
+        <source>Custom layout sections</source>
+        <target>Aangepaste lay-out secties</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.1">
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Hier kunt u een door komma's gescheiden lijst van eigen lay-out secties opgeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.0">
+        <source>Custom sections position</source>
+        <target>Aangepaste secties positie</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.1">
+        <source>Please select the position of the custom layout sections.</source>
+        <target>Selecteer de positie van uw aangepaste lay-out secties.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.0">
+        <source>Internal style sheets</source>
+        <target>Interne style sheets</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.1">
+        <source>Here you can add internal style sheets to the layout.</source>
+        <target>Voeg hier interne style sheets toe aan de lay-out.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.0">
+        <source>CSS framework</source>
+        <target>CSS framework</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.1">
+        <source>Here you can activate the components of the Contao CSS framework.</source>
+        <target>Activeer hier de componenten van het Contao CSS framework.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.0">
+        <source>Layout builder</source>
+        <target>Lay-out-builder</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.1">
+        <source>Generates a CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Genereert een CSS lay-out op basis van de pagina layout instellingen. Deze component is vereist om de pagina-layout generator te laten werken!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+        <target>Responsive lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+        <target>Voegt een meta viewport tag toe aan de pagina header en schaalt de CSS-lay-out op basis van de breedte van het uitvoerapparaat.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>12-koloms grid</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.1">
+        <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+        <target>Voegt een responsief 12-koloms grid toe dat wordt geactiveerd door de CSS-classes &quot;grid1&quot; naar &quot;grid12&quot; en &quot;offset1&quot; naar &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS reset</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Verwijdert de inconsistente standaard styling van HTML-elementen in verschillende browsers.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Formulieren</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Elementaire opmaak van formulieren en knoppen.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.0">
+        <source>TinyMCE style sheet</source>
+        <target>TinyMCE style sheet</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.1">
+        <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
+        <target>Bevat het &lt;em&gt;tinymce.css&lt;/em&gt; style sheet van uw upload map.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.0">
+        <source>External style sheets</source>
+        <target>Externe style sheets</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.1">
+        <source>Here you can add external CSS, SCSS or LESS files from the file system.</source>
+        <target>Voeg hier externe CSS, SCSS of LESS bestanden toe vanuit het bestandssysteem.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.0">
+        <source>Sort order</source>
+        <target>Sorteer volgorde</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.1">
+        <source>The sort order of the style sheets.</source>
+        <target>Sorteervolgorde van de stylesheets.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.0">
+        <source>Loading order</source>
+        <target>Volgorde van laden</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.1">
+        <source>Here you can select the loading order of the style sheets.</source>
+        <target>Hier kunt u de laadvolgorde van de style sheets selecteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external_first">
+        <source>Load external style sheets first</source>
+        <target>Laad externe style sheets eerst</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.internal_first">
+        <source>Load internal style sheets first</source>
+        <target>Laad interne style sheets eerst</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.0">
+        <source>Google web fonts</source>
+        <target>Google web fonts</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.1">
+        <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>Hier kunt u Google web fonts aan uw website toevoegen. Geef lettertypes zonder de basis-URL (bv. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.0">
+        <source>News feeds</source>
+        <target>Nieuws feeds</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.1">
+        <source>Please select the news feeds you want to add to the layout.</source>
+        <target>Selecteer de RSS/Atom nieuws feeds die u wilt toevoegen aan de huidige lay-out.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.0">
+        <source>Calendar feeds</source>
+        <target>Kalender feeds</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.1">
+        <source>Please select the calendar feeds you want to add to the layout.</source>
+        <target>Selecteer de RSS/Atom kalender feeds die u wilt toevoegen aan de huidige lay-out.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.0">
+        <source>Included modules</source>
+        <target>Gekoppelde modules</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Indien Javascript is uitgeschakeld moet u uw wijzigingen opslaan vooraleer de volgorde te veranderen!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.0">
+        <source>Page template</source>
+        <target>Lay-out template</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.1">
+        <source>Here you can select the page template.</source>
+        <target>Hier kunt u de pagina template selecteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.0">
+        <source>Output format</source>
+        <target>Uitvoer formaat</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.1">
+        <source>Here you can set the output format.</source>
+        <target>Stel hier het uitvoer formaat in.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.0">
+        <source>Body class</source>
+        <target>Body class</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.1">
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Voeg hier hier custom classes toe aan de &amp;lt;body&amp;gt; tag.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+        <target>Viewport</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Overschrijf hier de viewport inhoud (standaard &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+        <target>Titel tag</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootPageTitle}}&lt;/em&gt;).</source>
+        <target>Overschrijf hier de titel tag (standaards naar &lt;em&gt;{{page::pageTitle}} - {{page::rootPageTitle}}&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.0">
+        <source>Body onload</source>
+        <target>Body onload</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.1">
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Voeg hier een body &lt;em&gt;onload&lt;/em&gt; attribute toe.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.0">
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Bijkomende head tags</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.1">
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Voeg hier tags toe aan de &amp;lt;head&amp;gt; sectie van de pagina.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.0">
+        <source>Include jQuery</source>
+        <target>Bevat jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.1">
+        <source>Include the jQuery library in the layout.</source>
+        <target>Bevat de jQuery bibliotheek in de lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.0">
+        <source>jQuery source</source>
+        <target>jQuery bron</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.1">
+        <source>Here you can select from where to load the jQuery script.</source>
+        <target>Hier kunt u kiezen waar vandaan het jQuery script te laden.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.0">
+        <source>jQuery templates</source>
+        <target>jQuery templates</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.1">
+        <source>Here you can select one or more jQuery templates.</source>
+        <target>Hier kunt u één of meerdere jQuery templates selecteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.0">
+        <source>Include MooTools</source>
+        <target>Bevat MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.1">
+        <source>Include the MooTools library in the layout.</source>
+        <target>Bevat de MooTools bibliotheek in de lay-out.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.0">
+        <source>MooTools source</source>
+        <target>MooTools bron</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.1">
+        <source>Here you can select from where to load the MooTools scripts.</source>
+        <target>U kunt het lokale MooTools script gebruiken of van een externe bron laden.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.0">
+        <source>MooTools templates</source>
+        <target>Mootools templates</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.1">
+        <source>Here you can select one or more MooTools templates.</source>
+        <target>Hier kunt u één of meer MooTools templates selecteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.0">
+        <source>Load the image polyfill</source>
+        <target>Laad het image-polyfill</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.1">
+        <source>Include the image polyfill (&lt;em&gt;respimage.js&lt;/em&gt;) in the layout.</source>
+        <target>Image-polyfill (&lt;em&gt;respimage.js&lt;/em&gt;) aan de lay-out toevoegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.0">
+        <source>Analytics templates</source>
+        <target>Analytics templates</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.1">
+        <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
+        <target>Hier activeert u de analytics templates (b.v. voor Google Analytics of Piwik). Bedenk dat u deze templates dient aan te passen en uw analytics ID moet toevoegen voordat u ze kunt gebruiken!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.0">
+        <source>Custom JavaScript code</source>
+        <target>Standaard JavaScript code</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.1">
+        <source>The JavaScript code which will be inserted at the bottom of the page.</source>
+        <target>JavaScript code die wordt ingebracht aan het einde van de pagina.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.0">
+        <source>Static layout</source>
+        <target>Statische lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.1">
+        <source>Create a static layout with a fixed width and alignment.</source>
+        <target>Maak een statische lay-out met een vaste breedte en een vaste positie (links, midden, rechts).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.0">
+        <source>Overall width</source>
+        <target>Algemene breedte</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.1">
+        <source>The overall width will be applied to the wrapper element.</source>
+        <target>Geef de algemene breedte die zal toegekend worden aan het wrapper element.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.0">
+        <source>Alignment</source>
+        <target>Uitlijning</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.1">
+        <source>Please select the alignment of the page.</source>
+        <target>Selecteer de uitlijning van de pagina.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.title_legend">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.header_legend">
+        <source>Rows</source>
+        <target>Rijen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.column_legend">
+        <source>Columns</source>
+        <target>Kolommen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections_legend">
+        <source>Custom sections</source>
+        <target>Aangepaste secties</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Webfonts</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.style_legend">
+        <source>Style sheets</source>
+        <target>Style sheets</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill_legend">
+        <source>Responsive images</source>
+        <target>Responsive afbeeldingen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.feed_legend">
+        <source>RSS/Atom feeds</source>
+        <target>RSS/Atom feeds</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules_legend">
+        <source>Front end modules</source>
+        <target>Front-end modules</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.expert_legend">
+        <source>Expert settings</source>
+        <target>Expert-instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script_legend">
+        <source>JavaScript</source>
+        <target>JavaScript</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static_legend">
+        <source>Static layout</source>
+        <target>Statische lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery_legend">
+        <source>jQuery</source>
+        <target>jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+        <target>Plaatselijk bestand</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN met plaatselijke fallback</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools_legend">
+        <source>MooTools</source>
+        <target>MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_local">
+        <source>Local file</source>
+        <target>Plaatselijk bestand</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_googleapis">
+        <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN met plaatselijke fallback</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.html5">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_strict">
+        <source>XHTML Strict</source>
+        <target>XHTML Strict</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_trans">
+        <source>XHTML Transitional</source>
+        <target>XHTML Transitional</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+        <target>Voor de wrapper</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.before">
+        <source>After the page header</source>
+        <target>Na de pagina header</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.main">
+        <source>Inside the main column</source>
+        <target>In de hoofdkolom</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.after">
+        <source>Before the page footer</source>
+        <target>Voor het footer element</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
+        <target>Na de wrapper</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_styles">
+        <source>Edit the style sheets</source>
+        <target>Bewerk de style sheets</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_module">
+        <source>Edit the module</source>
+        <target>Bewerk de module</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_google">
+        <source>Google</source>
+        <target>Google</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_piwik">
+        <source>Piwik</source>
+        <target>Piwik</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.0">
+        <source>New layout</source>
+        <target>Nieuwe lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.1">
+        <source>Create a new layout</source>
+        <target>Maak een nieuwe lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.0">
+        <source>Layout details</source>
+        <target>Lay-out details</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.1">
+        <source>Show the details of layout ID %s</source>
+        <target>Toon details van lay-out ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.0">
+        <source>Edit layout</source>
+        <target>Wijzig lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.1">
+        <source>Edit layout ID %s</source>
+        <target>Wijzig lay-out ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.0">
+        <source>Move layout</source>
+        <target>Verplaats lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.1">
+        <source>Move layout ID %s</source>
+        <target>Verplaats lay-out ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.0">
+        <source>Duplicate layout</source>
+        <target>Dupliceer lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.1">
+        <source>Duplicate layout ID %s</source>
+        <target>Dupliceer lay-out ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.0">
+        <source>Delete layout</source>
+        <target>Verwijder lay-out</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.1">
+        <source>Delete layout ID %s</source>
+        <target>Verwijder lay-out ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.0">
+        <source>Edit theme</source>
+        <target>Bewerk thema</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>Bewerk de thema instellingen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

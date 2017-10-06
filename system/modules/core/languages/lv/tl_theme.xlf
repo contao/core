@@ -1,0 +1,206 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_theme.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_theme.name.0">
+        <source>Theme title</source>
+        <target>Tēmas nosaukums</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.name.1">
+        <source>Please enter a unique theme title.</source>
+        <target>Lūdzu ievadiet unikālu tēmas nosaukumu</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.0">
+        <source>Author</source>
+        <target>Vārds</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.1">
+        <source>Please enter the name of the theme designer.</source>
+        <target>Lūdzu ievadiet tēmas dizainera vārdu.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.0">
+        <source>Folders</source>
+        <target>Mapes</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.1">
+        <source>Please select the folders that belong to the theme from the files directory.</source>
+        <target>Lūdzu atlasiet mapas no datņu direktorija, kas pieder tēmai.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.0">
+        <source>Templates folder</source>
+        <target>Veidņu mape</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.1">
+        <source>Here you can select a templates folder that will be exported with the theme.</source>
+        <target>Šeit jūs varat atlasīt veidņu mapi, kas tiks eksportēta kopā ar tēmu.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.0">
+        <source>Screenshot</source>
+        <target>Ekrānuzņēmums</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.1">
+        <source>Here you can choose a screenshot of the theme.</source>
+        <target>Šeit jūs varat izvēlēties tēmas ekrānuzņēmumu.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.0">
+        <source>Global variables</source>
+        <target>Globālie mainīgie</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.1">
+        <source>Here you can define global variables for the style sheets of the theme (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>Šeit jūs varat definēt globālos mainīgos tēmas stila lapām (piem. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; vai &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.0">
+        <source>Source files</source>
+        <target>Avota datnes</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.1">
+        <source>Here you can upload one or more .cto files to be imported.</source>
+        <target>Lūdzu izvēlieties vienu vai vairākas .cto datnes no datņu direktorija.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.0">
+        <source>Revision date</source>
+        <target>Pārskatījuma datums</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Pēdējā pārskatījuma datums un laiks</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.title_legend">
+        <source>Title and author</source>
+        <target>Nosaukums un autors</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.config_legend">
+        <source>Configuration</source>
+        <target>Konfigurācija</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars_legend">
+        <source>Global variables</source>
+        <target>Globālie mainīgie</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.theme_imported">
+        <source>Theme &quot;%s&quot; has been imported.</source>
+        <target>Tēma &quot;%s&quot; importēta.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.checking_theme">
+        <source>The theme data is being checked</source>
+        <target>Tēmas dati tiek pārbaudīti</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_fields">
+        <source>Tables and fields</source>
+        <target>Tabulas un lauki</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_field">
+        <source>The field &lt;strong&gt;%s&lt;/strong&gt; is missing in the database and will not be imported.</source>
+        <target>Lauks &lt;strong&gt;%s&lt;/strong&gt; trūkst datubāzē un netiks importēts.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_ok">
+        <source>The tables have been successfully checked.</source>
+        <target>Tabulas tika veiksmīgi pārbaudītas.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_xml">
+        <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
+        <target>Tēma &quot;%s&quot; ir bojāta un to nevar importēt.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.custom_templates">
+        <source>Custom templates</source>
+        <target>Pielāgotas veidnes</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.template_exists">
+        <source>The template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exists and will be overwritten.</source>
+        <target>Veidne &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; eksistē un tiks pārrakstīta.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates_ok">
+        <source>No conflicts detected.</source>
+        <target>Konflikti netika atklāti.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.0">
+        <source>Theme store</source>
+        <target>Tēmu veikals</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.1">
+        <source>Find more themes in the Contao theme store</source>
+        <target>Atrodi vaitāk tēmu Contao tēmu veikalā</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.0">
+        <source>New theme</source>
+        <target>Jauna tēma</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.1">
+        <source>Create a new theme</source>
+        <target>Izveidot jaunu tēmu</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.0">
+        <source>Theme details</source>
+        <target>Tēmas detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.1">
+        <source>Show the details of theme ID %s</source>
+        <target>Rādīt tēmas ID %s detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.0">
+        <source>Edit theme</source>
+        <target>Rediģēt tēmu</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.1">
+        <source>Edit theme ID %s</source>
+        <target>Rediģēt tēmu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.0">
+        <source>Delete theme</source>
+        <target>Dzēst tēmu</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.1">
+        <source>Delete theme ID %s</source>
+        <target>Dzēst tēmu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.0">
+        <source>Style sheets</source>
+        <target>Stila lapas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.1">
+        <source>Edit the style sheets of theme ID %s</source>
+        <target>Rediģēt tēmas ID %s stila lapas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.0">
+        <source>Modules</source>
+        <target>Moduļi</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.1">
+        <source>Edit the front end modules of theme ID %s</source>
+        <target>Rediģēt tēmas ID %s priekšgala moduļus</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.0">
+        <source>Layouts</source>
+        <target>Salikumi</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.1">
+        <source>Edit the page layouts of theme ID %s</source>
+        <target>Rediģēt tēmas ID %s lapas salikumus</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.0">
+        <source>Image sizes</source>
+        <target>Attēla izmēri</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.1">
+        <source>Edit the image sizes of theme ID %s</source>
+        <target>Rediģēt tēmas ID %s attēlu izmērus</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.0">
+        <source>Theme import</source>
+        <target>Tēmu imports</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.1">
+        <source>Import new themes</source>
+        <target>Importēt jaunas tēmas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.0">
+        <source>Export</source>
+        <target>Eksportēt</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.1">
+        <source>Export theme ID %s</source>
+        <target>Eksportēt tēmu ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,210 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_archive.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_news_archive.title.0">
+        <source>Title</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title.1">
+        <source>Please enter a news archive title.</source>
+        <target>Angiv en titel til nyhedsarkivet.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Hop til side</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.1">
+        <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
+        <target>Vælg den side som besøgende skal omdirigeres til når de klikker på en nyhedsartikel.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.0">
+        <source>Enable comments</source>
+        <target>Slå kommentarer til</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.1">
+        <source>Allow visitors to comment news items.</source>
+        <target>Tillad dine besøgende at kommentere nyhedselementer.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.0">
+        <source>Notify</source>
+        <target>Giv besked</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Vælg venligst hvem der skal have besked ved nye kommentarer</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.0">
+        <source>Sort order</source>
+        <target>Rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Som standard sorteres kommentarer stigende, startende med den ældste</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.0">
+        <source>Comments per page</source>
+        <target>Kommentarer pr. side</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Antal kommentarer på side. Sæt til 0 for at vise alle på én side.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.0">
+        <source>Moderate comments</source>
+        <target>Godkend kommentarer</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Godkend kommentarer inden de vises på siden.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Tillad BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Tillad besøgende at formattere kommentarer med BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Login kræves for at kommentere</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Tillad kun kommentarer fra brugere der er logget ind.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Slå sikkerhedsspørgsmål fra</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Vælg kun dette hvis du har begrænset kommentarer til brugere der er logget ind.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.0">
+        <source>Protect archive</source>
+        <target>Beskyt arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.1">
+        <source>Show news items to certain member groups only.</source>
+        <target>Vis kun nyhedselementer til bestemte brugergrupper.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.0">
+        <source>Allowed member groups</source>
+        <target>Tilladte medlemsgrupper</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.1">
+        <source>These groups will be able to see the news items in this archive.</source>
+        <target>Her kan du vælge hvilke grupper der har tilladelse til at se nyhedselementer.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.0">
+        <source>Revision date</source>
+        <target>Revideringsdato</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Dato og tid for sidste revidering.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title_legend">
+        <source>Title and redirect page</source>
+        <target>Titel og hop til side</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments_legend">
+        <source>Comments</source>
+        <target>Kommentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected_legend">
+        <source>Access protection</source>
+        <target>Adgangsbeskyttelse</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>Nyhedsstrøm</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_admin">
+        <source>System administrator</source>
+        <target>Systemadministrator</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_author">
+        <source>Author of the news item</source>
+        <target>Forfatter til nyhedselementet</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_both">
+        <source>Author and system administrator</source>
+        <target>Forfatter og systemadministrator</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_teaser">
+        <source>News teasers</source>
+        <target>Nyheds uddrag</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_text">
+        <source>Full articles</source>
+        <target>Artikler</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.0">
+        <source>New archive</source>
+        <target>Nyt arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.1">
+        <source>Create a new archive</source>
+        <target>Opret et nyt arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.0">
+        <source>Archive details</source>
+        <target>Egenskaber for arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.1">
+        <source>Show the details of archive ID %s</source>
+        <target>Vis egenskaber for arkiv-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.0">
+        <source>Edit archive</source>
+        <target>Rediger arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.1">
+        <source>Edit archive ID %s</source>
+        <target>Rediger arkiv-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.0">
+        <source>Edit archive</source>
+        <target>Rediger arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.1">
+        <source>Edit the archive settings</source>
+        <target>Rediger dette arkivs overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.0">
+        <source>Duplicate archive</source>
+        <target>Duplikér arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.1">
+        <source>Duplicate archive ID %s</source>
+        <target>Duplikér arkiv-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.0">
+        <source>Delete archive</source>
+        <target>Slet arkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.1">
+        <source>Delete archive ID %s</source>
+        <target>Slet arkiv-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.0">
+        <source>Comments</source>
+        <target>Kommentar</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.1">
+        <source>Show comments of archive ID %s</source>
+        <target>Vis kommentarer for arkiv-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.0">
+        <source>RSS feeds</source>
+        <target>RSS feeds</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>Håndter RSS feeds</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

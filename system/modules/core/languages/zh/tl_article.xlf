@@ -1,0 +1,290 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="tl_article.title.0">
+        <source>Title</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title.1">
+        <source>Please enter the article title.</source>
+        <target>请输入文件的标题。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.0">
+        <source>Article alias</source>
+        <target>文章别名</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.1">
+        <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>文章别名是除去以数字ID方式访问文章外的唯一参考。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.0">
+        <source>Author</source>
+        <target>作者</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.1">
+        <source>Here you can change the author of the article.</source>
+        <target>您可以在此处更改文章的作者。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.0">
+        <source>Display in</source>
+        <target>显示位置</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.1">
+        <source>Please choose the layout section you want the article to be displayed in.</source>
+        <target>请选择让文章在布局中显示的区块位置</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.0">
+        <source>Meta keywords</source>
+        <target>关键字</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.1">
+        <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
+        <target>此处您可以输入以逗号分隔的关键字列表，用于诸如Google或者Yahoo之类的搜索引擎进行评估。搜索引擎通常可以接受800个字符。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.0">
+        <source>Teaser CSS ID/class</source>
+        <target>片段的样式表ID/类</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.1">
+        <source>Here you can set an ID and one or more classes for the teaser element.</source>
+        <target>此处您可以为片段元素设定一个ID和一或多个类</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.0">
+        <source>Show teaser</source>
+        <target>显示摘要</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.1">
+        <source>Show the article teaser if there are multiple articles.</source>
+        <target>如果有多篇文章则显示其摘要。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.0">
+        <source>Article teaser</source>
+        <target>文章摘要</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.1">
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>文章摘要也可以被显示为内容元素“文章摘要”。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.0">
+        <source>Syndication</source>
+        <target>可打印的</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.1">
+        <source>Here you can choose which options are available.</source>
+        <target>给文章增加链接以使其可被输出为PDF文件。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>仅向来宾显示</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+        <target>在用户登录之后隐藏文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.0">
+        <source>Custom article template</source>
+        <target>自定义文章模板</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.1">
+        <source>Here you can overwrite the default article template.</source>
+        <target>在这里可以覆盖默认的文章模板。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+        <target>保护文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+        <target>仅对某些特定用户组显示文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>允许的成员组</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+        <target>这些用户组将能够看到该文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.0">
+        <source>CSS ID/class</source>
+        <target>CSS ID/类</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>此处您可以输入一个ID或者一到多个CSS类名。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.0">
+        <source>Space in front and after</source>
+        <target>前后间隔</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.1">
+        <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>此处您可以输入文章前后留白的像素值。您应该尽量避免在页面内嵌入样式，而是在样式表中定义。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.0">
+        <source>Publish article</source>
+        <target>发布</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.1">
+        <source>Make the article publicly visible on the website.</source>
+        <target>使文章在网站中公共可见。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.0">
+        <source>Show from</source>
+        <target>环绕开始</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.1">
+        <source>Do not show the article on the website before this day.</source>
+        <target>此日前不要在网站中显示该篇文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.0">
+        <source>Show until</source>
+        <target>环绕结束</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.1">
+        <source>Do not show the article on the website on and after this day.</source>
+        <target>此日后不要在网站中显示该篇文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.0">
+        <source>Revision date</source>
+        <target>修改日期</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>最近修改的日期</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title_legend">
+        <source>Title and author</source>
+        <target>标题和作者</target>
+      </trans-unit>
+      <trans-unit id="tl_article.layout_legend">
+        <source>Section and keywords</source>
+        <target>章节和关键字</target>
+      </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>可打印的</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser_legend">
+        <source>Article teaser</source>
+        <target>文章摘要</target>
+      </trans-unit>
+      <trans-unit id="tl_article.template_legend">
+        <source>Template settings</source>
+        <target>模板设设置</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>访问保护</target>
+      </trans-unit>
+      <trans-unit id="tl_article.expert_legend">
+        <source>Expert settings</source>
+        <target>专家设定</target>
+      </trans-unit>
+      <trans-unit id="tl_article.publish_legend">
+        <source>Publish settings</source>
+        <target>发布设置</target>
+      </trans-unit>
+      <trans-unit id="tl_article.print">
+        <source>Print the page</source>
+        <target>打印页面</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pdf">
+        <source>Export as PDF</source>
+        <target>导出PDF</target>
+      </trans-unit>
+      <trans-unit id="tl_article.facebook">
+        <source>Share on Facebook</source>
+        <target>在Facebook上共享</target>
+      </trans-unit>
+      <trans-unit id="tl_article.twitter">
+        <source>Share on Twitter</source>
+        <target>在Twitter上共享</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
+        <target>在Google+上共享</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.0">
+        <source>New article</source>
+        <target>新文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.1">
+        <source>Create a new article</source>
+        <target>创建一篇新文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.0">
+        <source>Article details</source>
+        <target>文章详细信息</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.1">
+        <source>Show the details of article ID %s</source>
+        <target>显示ID为%s的文章的详细信息</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.0">
+        <source>Edit article</source>
+        <target>编辑文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.1">
+        <source>Edit article ID %s</source>
+        <target>编辑文章ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.0">
+        <source>Edit article</source>
+        <target>编辑文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.1">
+        <source>Edit the article settings</source>
+        <target>编辑文章设置</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.0">
+        <source>Duplicate article</source>
+        <target>复制文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.1">
+        <source>Duplicate article ID %s</source>
+        <target>复制ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.0">
+        <source>Move article</source>
+        <target>移动文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.1">
+        <source>Move article ID %s</source>
+        <target>移动ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.0">
+        <source>Delete article</source>
+        <target>删除文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.1">
+        <source>Delete article ID %s</source>
+        <target>删除ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>发布/取消文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.1">
+        <source>Publish/unpublish article ID %s</source>
+        <target> 发布/取消ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.0">
+        <source>Paste after</source>
+        <target>在之后粘贴</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.1">
+        <source>Paste after article ID %s</source>
+        <target>在ID为 %s 的文章之后粘贴</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.0">
+        <source>Paste into</source>
+        <target>粘贴进</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>粘贴进ID为 %s 的页面中</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

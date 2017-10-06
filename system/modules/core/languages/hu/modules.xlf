@@ -1,0 +1,382 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/modules.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="MOD.content">
+        <source>Content</source>
+        <target>Tartalom</target>
+      </trans-unit>
+      <trans-unit id="MOD.article.0">
+        <source>Articles</source>
+        <target>Cikkek</target>
+      </trans-unit>
+      <trans-unit id="MOD.article.1">
+        <source>Manage articles and content elements</source>
+        <target>Cikkek és tartalmi elemek kezelése.</target>
+      </trans-unit>
+      <trans-unit id="MOD.form.0">
+        <source>Form generator</source>
+        <target>Űrlaptervező</target>
+      </trans-unit>
+      <trans-unit id="MOD.form.1">
+        <source>Create custom forms and store or send the submitted data</source>
+        <target>Létrehozhat egyedi űrlapokat és tárolhatja vagy továbbíthatja a küldött adatokat.</target>
+      </trans-unit>
+      <trans-unit id="MOD.design">
+        <source>Layout</source>
+        <target>Elrendezés</target>
+      </trans-unit>
+      <trans-unit id="MOD.themes.0">
+        <source>Themes</source>
+        <target>Témák</target>
+      </trans-unit>
+      <trans-unit id="MOD.themes.1">
+        <source>Manage front end modules, style sheets, page layouts and templates</source>
+        <target>Felhasználói felület modulok, stíluslapok, oldal elrendezések és sablonok kezelése.</target>
+      </trans-unit>
+      <trans-unit id="MOD.page.0">
+        <source>Site structure</source>
+        <target>Oldalszerkezet</target>
+      </trans-unit>
+      <trans-unit id="MOD.page.1">
+        <source>Set up the site structure of your website(s)</source>
+        <target>Oldalszerkezet beállítása a honlapon</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.0">
+        <source>Templates</source>
+        <target>Sablonok</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.1">
+        <source>Edit templates in the back end</source>
+        <target>Sablonok szerkesztése az adminisztrációs felületen</target>
+      </trans-unit>
+      <trans-unit id="MOD.accounts">
+        <source>Account manager</source>
+        <target>Fiókkezelő</target>
+      </trans-unit>
+      <trans-unit id="MOD.member.0">
+        <source>Members</source>
+        <target>Tagok</target>
+      </trans-unit>
+      <trans-unit id="MOD.member.1">
+        <source>Manage member accounts (front end users)</source>
+        <target>Tagok fiókjainak kezelése (felhasználói felület felhasználói)</target>
+      </trans-unit>
+      <trans-unit id="MOD.mgroup.0">
+        <source>Member groups</source>
+        <target>Tag csoportok</target>
+      </trans-unit>
+      <trans-unit id="MOD.mgroup.1">
+        <source>Manage member groups (front end user groups)</source>
+        <target>Tag csoportok kezelése (felhasználói felület csoportjai)</target>
+      </trans-unit>
+      <trans-unit id="MOD.user.0">
+        <source>Users</source>
+        <target>Felhasználók</target>
+      </trans-unit>
+      <trans-unit id="MOD.user.1">
+        <source>Manage user accounts (back end users)</source>
+        <target>Felhasználók fiókjainak kezelése (adminisztrációs felület felhasználói)</target>
+      </trans-unit>
+      <trans-unit id="MOD.group.0">
+        <source>User groups</source>
+        <target>Felhasználói csoportok</target>
+      </trans-unit>
+      <trans-unit id="MOD.group.1">
+        <source>Manage user groups (back end user groups)</source>
+        <target>Felhasználó csoportok kezelése (adminisztrációs felület csoportjai)</target>
+      </trans-unit>
+      <trans-unit id="MOD.system">
+        <source>System</source>
+        <target>Rendszer</target>
+      </trans-unit>
+      <trans-unit id="MOD.files.0">
+        <source>File manager</source>
+        <target>Fájlkezelő</target>
+      </trans-unit>
+      <trans-unit id="MOD.files.1">
+        <source>Manage files and folders or upload new files to the server</source>
+        <target>Fájlok és könyvtárak kezelése vagy új fájlok feltöltése a szerverre</target>
+      </trans-unit>
+      <trans-unit id="MOD.log.0">
+        <source>System log</source>
+        <target>Rendszernapló</target>
+      </trans-unit>
+      <trans-unit id="MOD.log.1">
+        <source>Browse the system log and analyze the activity on the website</source>
+        <target>Böngéssze a rendszernaplót és elemezze az aktivitást weboldalán</target>
+      </trans-unit>
+      <trans-unit id="MOD.settings.0">
+        <source>Settings</source>
+        <target>Beállítások</target>
+      </trans-unit>
+      <trans-unit id="MOD.settings.1">
+        <source>Check and optimize the Contao configuration</source>
+        <target>Ellenőrizze és optimalizálja a Contao beállításait</target>
+      </trans-unit>
+      <trans-unit id="MOD.maintenance.0">
+        <source>Maintenance</source>
+        <target>Karbantartás</target>
+      </trans-unit>
+      <trans-unit id="MOD.maintenance.1">
+        <source>Maintain or update Contao</source>
+        <target>Contao karbantartás vagy frissítés</target>
+      </trans-unit>
+      <trans-unit id="MOD.undo.0">
+        <source>Restore</source>
+        <target>Visszaállítás</target>
+      </trans-unit>
+      <trans-unit id="MOD.undo.1">
+        <source>Restore deleted records</source>
+        <target>Törölt rekordok visszaállítása</target>
+      </trans-unit>
+      <trans-unit id="MOD.login.0">
+        <source>Personal data</source>
+        <target>Személyes adatok</target>
+      </trans-unit>
+      <trans-unit id="MOD.login.1">
+        <source>Change your personal data or set a new password</source>
+        <target>Személyes adatok módosítása vagy új jelszó beállítása</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_style">
+        <source>Style sheets</source>
+        <target>Stílus lapok</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_style_sheet">
+        <source>Style sheets</source>
+        <target>Stílus lapok</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_module">
+        <source>Front end modules</source>
+        <target>Felhasználói felület modulok</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_layout">
+        <source>Page layouts</source>
+        <target>Oldal elrendezések</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_image_size">
+        <source>Image sizes</source>
+        <target>Képméret</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_image_size_item">
+        <source>Image size media queries</source>
+        <target>Képméret média lekérdezés</target>
+      </trans-unit>
+      <trans-unit id="MOD.css">
+        <source>Style sheets</source>
+        <target>Stílus lapok</target>
+      </trans-unit>
+      <trans-unit id="MOD.modules">
+        <source>Front end modules</source>
+        <target>Felhasználói felület modulok</target>
+      </trans-unit>
+      <trans-unit id="MOD.layout">
+        <source>Page layouts</source>
+        <target>Oldal elrendezések</target>
+      </trans-unit>
+      <trans-unit id="MOD.image_sizes">
+        <source>Image sizes</source>
+        <target>Képméret</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_import">
+        <source>Theme import</source>
+        <target>Téma importálás</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_export">
+        <source>Theme export</source>
+        <target>Téma export</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigationMenu">
+        <source>Navigation</source>
+        <target>Navigáció</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigation.0">
+        <source>Navigation menu</source>
+        <target>Navigációs menü</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigation.1">
+        <source>Generates a navigation menu from the site structure</source>
+        <target>Navigációs menüt hoz létre az oldalszerkezet alapján</target>
+      </trans-unit>
+      <trans-unit id="FMD.customnav.0">
+        <source>Custom navigation</source>
+        <target>Egyedi navigáció</target>
+      </trans-unit>
+      <trans-unit id="FMD.customnav.1">
+        <source>Generates a custom navigation menu</source>
+        <target>Egyedi navigációs menüt hoz létre</target>
+      </trans-unit>
+      <trans-unit id="FMD.breadcrumb.0">
+        <source>Breadcrumb navigation</source>
+        <target>Breadcrumb navigáció</target>
+      </trans-unit>
+      <trans-unit id="FMD.breadcrumb.1">
+        <source>Generates a breadcrumb navigation menu</source>
+        <target>Breadcrumb navigációt hoz létre</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicknav.0">
+        <source>Quick navigation</source>
+        <target>Gyors navigálás</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicknav.1">
+        <source>Generates a drop-down menu from the site structure</source>
+        <target>Legördülő menüs navigációt hoz létre az oldalszerkezet alapján</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicklink.0">
+        <source>Quick link</source>
+        <target>Gyors link</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicklink.1">
+        <source>Generates a custom drop-down menu</source>
+        <target>Egyedi legördülő menüs navigációt hoz létre</target>
+      </trans-unit>
+      <trans-unit id="FMD.booknav.0">
+        <source>Book navigation</source>
+        <target>Könyv navigáció</target>
+      </trans-unit>
+      <trans-unit id="FMD.booknav.1">
+        <source>Generates a book navigation menu</source>
+        <target>Könyv navigációs menüt hoz létre</target>
+      </trans-unit>
+      <trans-unit id="FMD.articlenav.0">
+        <source>Article navigation</source>
+        <target>Cikk navigáció</target>
+      </trans-unit>
+      <trans-unit id="FMD.articlenav.1">
+        <source>Generates a pagination menu to navigate articles</source>
+        <target>Lapozható menüt hoz létre a cikk navigációhoz</target>
+      </trans-unit>
+      <trans-unit id="FMD.sitemap.0">
+        <source>Sitemap</source>
+        <target>Oldaltérkép</target>
+      </trans-unit>
+      <trans-unit id="FMD.sitemap.1">
+        <source>Generates a list of all pages in the site structure</source>
+        <target>Oldaltérképet hoz létre az oldalszerkezet alapján</target>
+      </trans-unit>
+      <trans-unit id="FMD.user">
+        <source>User</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="FMD.login.0">
+        <source>Login form</source>
+        <target>Bejelentkező ürlap</target>
+      </trans-unit>
+      <trans-unit id="FMD.login.1">
+        <source>Generates a login form</source>
+        <target>Bejelentkező ürlapot hoz létre</target>
+      </trans-unit>
+      <trans-unit id="FMD.logout.0">
+        <source>Automatic logout</source>
+        <target>Automatikus kilépés</target>
+      </trans-unit>
+      <trans-unit id="FMD.logout.1">
+        <source>Automatically logs out a user</source>
+        <target>Automatikusan kilépteti a felhasználót</target>
+      </trans-unit>
+      <trans-unit id="FMD.personalData.0">
+        <source>Personal data</source>
+        <target>Személyes adatok</target>
+      </trans-unit>
+      <trans-unit id="FMD.personalData.1">
+        <source>Generates a form to edit a user's personal data</source>
+        <target>Űrlapot hoz létre a tagok személyes adatainak szerkesztéséhez</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.0">
+        <source>Registration</source>
+        <target>Regisztráció</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.1">
+        <source>Generates a user registration form</source>
+        <target>Tag regisztrációs űrlapot hoz létre</target>
+      </trans-unit>
+      <trans-unit id="FMD.changePassword.0">
+        <source>Change password</source>
+        <target>Jelszócsere</target>
+      </trans-unit>
+      <trans-unit id="FMD.changePassword.1">
+        <source>Generates a form to change the password</source>
+        <target>Létrehoz a játszó változtatásához egy űrlapot</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.0">
+        <source>Lost password</source>
+        <target>Elvesztett jelszó</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.1">
+        <source>Generates a form to request a new password</source>
+        <target>Létrehoz egy új jelszó kérő űrlapot</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.0">
+        <source>Close account</source>
+        <target>Felhasználói fiók törlése</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.1">
+        <source>Generates a form to delete a member account</source>
+        <target>Létrehoz egy űrlapot tag fiók törlésére</target>
+      </trans-unit>
+      <trans-unit id="FMD.application">
+        <source>Applications</source>
+        <target>Alkalmazások</target>
+      </trans-unit>
+      <trans-unit id="FMD.form.0">
+        <source>Form</source>
+        <target>Űrlap</target>
+      </trans-unit>
+      <trans-unit id="FMD.form.1">
+        <source>Adds a form to the page</source>
+        <target>Űrlapot ad az oldalhoz</target>
+      </trans-unit>
+      <trans-unit id="FMD.search.0">
+        <source>Search engine</source>
+        <target>Kereső motor</target>
+      </trans-unit>
+      <trans-unit id="FMD.search.1">
+        <source>Adds a search form to the page</source>
+        <target>Kereső űrlapot ad az oldalhoz</target>
+      </trans-unit>
+      <trans-unit id="FMD.articleList.0">
+        <source>Article list</source>
+        <target>Cikk lista</target>
+      </trans-unit>
+      <trans-unit id="FMD.articleList.1">
+        <source>Generates a list of articles of a column</source>
+        <target>Egy szakasz cikkeiből listát hoz létre</target>
+      </trans-unit>
+      <trans-unit id="FMD.miscellaneous">
+        <source>Miscellaneous</source>
+        <target>Spaciális</target>
+      </trans-unit>
+      <trans-unit id="FMD.flash.0">
+        <source>Flash movie</source>
+        <target>Flash video</target>
+      </trans-unit>
+      <trans-unit id="FMD.flash.1">
+        <source>Embeds a Flash movie into the page</source>
+        <target>Flash videot ágyaz az oldalba</target>
+      </trans-unit>
+      <trans-unit id="FMD.randomImage.0">
+        <source>Random image</source>
+        <target>Véletlen kép</target>
+      </trans-unit>
+      <trans-unit id="FMD.randomImage.1">
+        <source>Adds a random image to the page</source>
+        <target>Véletlenszerűen kiválasztott képet ad az oldalhoz</target>
+      </trans-unit>
+      <trans-unit id="FMD.html.0">
+        <source>Custom HTML</source>
+        <target>Egyedi HTML</target>
+      </trans-unit>
+      <trans-unit id="FMD.html.1">
+        <source>Allows you to add custom HTML code</source>
+        <target>Lehetőséget ad egyedi HTML kód beillesztésére</target>
+      </trans-unit>
+      <trans-unit id="FMD.rss_reader.0">
+        <source>RSS reader</source>
+        <target>RSS olvasó</target>
+      </trans-unit>
+      <trans-unit id="FMD.rss_reader.1">
+        <source>Adds an RSS feed to the page</source>
+        <target>RSS hírfolyam hozzáadása az oldalhoz</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,174 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style_sheet.php" source-language="en" target-language="fr">
+    <body>
+      <trans-unit id="tl_style_sheet.name.0">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.name.1">
+        <source>Please enter the style sheet name.</source>
+        <target>Saisir le nom de la feuille de style.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.0">
+        <source>Disable CSS3PIE</source>
+        <target>Désactiver CSS3PIE</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.1">
+        <source>Do not include the PIE.htc behavior file (adds CSS3 support to older IE versions).</source>
+        <target>Ne pas inclure le fichier PIE.htc (ajoute le support CSS3 aux anciennes versions d'Internet Explorer).</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.0">
+        <source>Embed images up to</source>
+        <target>Taille limite d'intégration des images</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.1">
+        <source>Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.</source>
+        <target>Saisir la taille en octets jusqu'à laquelle les images seront intégrées dans la feuille de style sous la forme data: string. Mettre à 0 pour désactiver la fonction.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.0">
+        <source>Conditional comment</source>
+        <target>Commentaire conditionnel</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.1">
+        <source>Conditional comments allow you to create Internet Explorer specific style sheets (e.g. &lt;em&gt;if lt IE 9&lt;/em&gt;).</source>
+        <target>Les commentaires conditionnels permettent de créer des feuilles de style spécifiques à Internet Explorer (ex. : &lt;em&gt;if lt IE 9&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.0">
+        <source>Media types</source>
+        <target>Types de média</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.1">
+        <source>Here you can choose the media types the style sheet applies to.</source>
+        <target>Choisir un ou plusieurs types de média auxquels s'applique la feuille de style.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.0">
+        <source>Media query</source>
+        <target>Media query</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.1">
+        <source>Here you can define the media type using a media query like &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;. The media types defined above will then be overwritten.</source>
+        <target>Définir le type de média en utilisant une media query comme : &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;. Les types de média définis ci-dessus seront alors écrasés.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.0">
+        <source>Global variables</source>
+        <target>Variables globales</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.1">
+        <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>Définir des variables globales pour la feuille de style (ex. : &lt;em&gt;$rouge&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; ou &lt;em&gt;$marge&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.0">
+        <source>Source files</source>
+        <target>Fichiers sources</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.1">
+        <source>Here you can upload one or more .css files to be imported.</source>
+        <target>Choisir un ou plusieurs fichiers CSS à importer.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.0">
+        <source>Revision date</source>
+        <target>Date de révision</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Date et heure de la dernière révision</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.title_legend">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
+        <target>Paramètres avancés</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media_legend">
+        <source>Media settings</source>
+        <target>Paramètres du média</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars_legend">
+        <source>Global variables</source>
+        <target>Variables globales</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_imported">
+        <source>Style sheet &quot;%s&quot; has been imported.</source>
+        <target>La feuille de style &quot;%s&quot; a été importée.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_renamed">
+        <source>Style sheet &quot;%s&quot; has been imported as &quot;%s&quot;.</source>
+        <target>La feuille de style &quot;%s&quot; a été importée en &quot;%s&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.0">
+        <source>New style sheet</source>
+        <target>Nouvelle feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.1">
+        <source>Create a new style sheet</source>
+        <target>Créer une nouvelle feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.0">
+        <source>Style sheet details</source>
+        <target>Détails de la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.1">
+        <source>Show the details of style sheet ID %s</source>
+        <target>Afficher les détails de la feuille de style ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.0">
+        <source>Edit style sheet</source>
+        <target>Éditer la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.1">
+        <source>Edit style sheet ID %s</source>
+        <target>Éditer la feuille de style ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.0">
+        <source>Edit style sheet</source>
+        <target>Éditer la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>Éditer les paramètres de la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.0">
+        <source>Move style sheet</source>
+        <target>Déplacer la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.1">
+        <source>Move style sheet ID %s</source>
+        <target>Déplacer la feuille de style ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.0">
+        <source>Duplicate style sheet</source>
+        <target>Dupliquer la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.1">
+        <source>Duplicate style sheet ID %s</source>
+        <target>Dupliquer la feuille de style ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.0">
+        <source>Delete style sheet</source>
+        <target>Supprimer la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.1">
+        <source>Delete style sheet ID %s</source>
+        <target>Supprimer la feuille de style ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.0">
+        <source>CSS import</source>
+        <target>Importation de CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.1">
+        <source>Import existing CSS files</source>
+        <target>Importer des fichiers CSS existants</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.0">
+        <source>Export style sheet</source>
+        <target>Exporter la feuille de style</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.1">
+        <source>Export style sheet ID %s</source>
+        <target>Exporter la feuille de style ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

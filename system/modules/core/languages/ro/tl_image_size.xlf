@@ -1,0 +1,162 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="tl_image_size.name.0">
+        <source>Name</source>
+        <target>Nume şi tip media</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.name.1">
+        <source>Please enter the image size name.</source>
+        <target>Introduceţi numele mărimii de imagini.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.0">
+        <source>Width</source>
+        <target>Lăţime</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.1">
+        <source>Here you can enter the width in pixels.</source>
+        <target>Introduceţi lăţimea în pixeli.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.0">
+        <source>Height</source>
+        <target>Înălţime</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.1">
+        <source>Here you can enter the height in pixels.</source>
+        <target>Introduceţi înălţimea în pixeli.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.0">
+        <source>Resize mode</source>
+        <target>Mod de redimensionare</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.1">
+        <source>Only applicable if width and height are specified.</source>
+        <target>Se aplică doar dacă lăţimea şi înălţimea sunt specificate</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.0">
+        <source>Zoom</source>
+        <target>Scalare</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.1">
+        <source>0 = the whole image is visible, 100 = only the important part of the image is visible.</source>
+        <target>0 = întreaga imagine este vizibilă, 100 = doar partea importantă a imaginii este vizibilă.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.0">
+        <source>Sizes attribute</source>
+        <target>Atribut de mărimi</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.1">
+        <source>Here you can define the displayed image width(s), e.g. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</source>
+        <target>Definiţi lăţimile afişate din imagine, de ex. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.0">
+        <source>Pixel densities/scale factors</source>
+        <target>Densităţi de pixeli/factori de scalare</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.1">
+        <source>Here you can define the pixel densities, e.g. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</source>
+        <target>Definiţi densitatea de pixeli, de ex. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.0">
+        <source>Revision date</source>
+        <target>Data revizie</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Data şi ora a ultimei revizii</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.title_legend">
+        <source>Image size settings</source>
+        <target>Setări mărime de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.expert_legend">
+        <source>Expert settings</source>
+        <target>Setări avansate</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.0">
+        <source>Proportional</source>
+        <target>Proporţional</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Partea mai mare a imaginii este adaptată la dimensiunile indicate şi imaginea este redimensionată proporţional.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.0">
+        <source>Fit the box</source>
+        <target>Încadrat</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Partea mai îngustă a imaginii este adaptată la dimensiunile indicate şi imaginea este redimensionată proporţional.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.0">
+        <source>Crop</source>
+        <target>Ajustează</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>Imaginea va fi redimensionată la mărimile date. Dacă este necesar, va fi ajustată.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.0">
+        <source>New image size</source>
+        <target>Nouă mărime de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.1">
+        <source>Create a new image size</source>
+        <target>Creează o nouă mărime de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.0">
+        <source>Image size details</source>
+        <target>Detalii mărime de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.1">
+        <source>Show the details of image size ID %s</source>
+        <target>Arată detaliile pentru mărimea de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.0">
+        <source>Edit image size</source>
+        <target>Editează mărimea de imaginie</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.1">
+        <source>Edit image size ID %s</source>
+        <target>Editează mărimea de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.0">
+        <source>Edit image size</source>
+        <target>Editează mărimea de imaginie</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>Editează setări de mărime imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.0">
+        <source>Move image size</source>
+        <target>Mută mărimea de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.1">
+        <source>Move image size ID %s</source>
+        <target>Mută mărimea de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.0">
+        <source>Duplicate image size</source>
+        <target>Copiază mărimea de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.1">
+        <source>Duplicate image size ID %s</source>
+        <target>Copiază mărimea de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.0">
+        <source>Delete image size</source>
+        <target>Şterge mărimea de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.1">
+        <source>Delete image size ID %s</source>
+        <target>Şterge mărimea de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.picturefill">
+        <source>The &lt;em&gt;%s&lt;/em&gt; option needs to be enabled in the page layout.</source>
+        <target>Opţiunea &lt;em&gt;%s&lt;/em&gt; trebuie să fie activată în ansamblul paginii.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

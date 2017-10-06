@@ -1,0 +1,254 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_files.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="tl_files.name.0">
+        <source>Name</source>
+        <target>名前</target>
+      </trans-unit>
+      <trans-unit id="tl_files.name.1">
+        <source>Contao automatically adds the file extension.</source>
+        <target>Contaoは自動的にファイルの拡張子を追加します。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>保護</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>HTTP経由のフォルダーのアクセスを防止します。引き続き、例えば複数ダウンロードコンテント要素等でファイルを利用できます、</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartX.0">
+        <source>Important part x coordinate</source>
+        <target>重要な部分のX座標</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartX.1">
+        <source>Here you can enter the x coordinate of the important part.</source>
+        <target>重要な部分のX座標を入力できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.0">
+        <source>Important part y coordinate</source>
+        <target>大切なY座標</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.1">
+        <source>Here you can enter the y coordinate of the important part.</source>
+        <target>重要な部分のY座標を入力できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.0">
+        <source>Important part width</source>
+        <target>重要な部分の幅</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.1">
+        <source>Here you can enter the width of the important part.</source>
+        <target>重要な部分の幅を入力できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.0">
+        <source>Important part height</source>
+        <target>重要な部分の高さ</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.1">
+        <source>Here you can enter the height of the important part.</source>
+        <target>重要な部分の高さを入力できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.0">
+        <source>Meta information</source>
+        <target>メタ情報</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.1">
+        <source>Here you can enter the file meta information.</source>
+        <target>ファイルのメタ情報を入力できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>フォルダーの保護はフォルダーのアクセスを拒否する.htaccessファイルを追加することで行っています。Apacheをサーバーに使用していないようですので、この機能はまったく動作しないか、サーバーの構成の調整が必要です。公開を制限するリソースをアップロードする前に、二重にチェックしてください。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.0">
+        <source>File upload</source>
+        <target>ファイルをアップロード</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.1">
+        <source>Select the files you want to upload to the server (maximum %s and %s pixels).</source>
+        <target>サーバーにアップロードしたいファイル(最大で%sと%sピクセル)を選択してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.0">
+        <source>Source editor</source>
+        <target>ソースエディター</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.1">
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>ファイルのソースを編集します。(F11を押すと全画面モードと切り替え)</target>
+      </trans-unit>
+      <trans-unit id="tl_files.upload">
+        <source>Upload files</source>
+        <target>ファイルをアップロード</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadNback">
+        <source>Upload files and go back</source>
+        <target>ファイルをアップロードして戻る</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFF">
+        <source>Edit a file or folder</source>
+        <target>ファイルまたはフォルダーを変更</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadFF">
+        <source>Upload files to folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というフォルダーにファイルをアップロード</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFile">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルを編集</target>
+      </trans-unit>
+      <trans-unit id="tl_files.browseFiles">
+        <source>Browse files</source>
+        <target>ファイルを閲覧</target>
+      </trans-unit>
+      <trans-unit id="tl_files.clearList">
+        <source>Clear list</source>
+        <target>リストを消去</target>
+      </trans-unit>
+      <trans-unit id="tl_files.startUpload">
+        <source>Start upload</source>
+        <target>アップロードを開始</target>
+      </trans-unit>
+      <trans-unit id="tl_files.dropzone">
+        <source>Click or drop files here to upload</source>
+        <target>クリック、またはファイルをドロップしてアップロード</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
+        <target>ファイルの場所: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;を追加しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;のハッシュを更新しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;を発見しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>ファイルまたはフォルダー&quot;%s&quot;を&quot;%s&quot;に発見しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
+        <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルまたはディレクトリを削除しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>同期を完了しました</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;結果:&lt;/strong&gt; %s個を追加 | %s個を修正 | %s個は変更なし | %s個を移動 | %s個を削除</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>変更なしを表示</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.0">
+        <source>New folder</source>
+        <target>新しいフォルダー</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.1">
+        <source>Create a new folder</source>
+        <target>新しくフォルダーを作成</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.0">
+        <source>Move file or folder</source>
+        <target>ファイルやフォルダーを移動</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.1">
+        <source>Move file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルまたはフォルダーを移動</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.0">
+        <source>Duplicate file or folder</source>
+        <target>ファイルやフォルダーを複製</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.1">
+        <source>Duplicate file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルまたはフォルダーを複製</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.0">
+        <source>Edit file or folder</source>
+        <target>ファイルまたはフォルダーを変更</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.1">
+        <source>Edit file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルまたはフォルダーを変更</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.0">
+        <source>Delete file or folder</source>
+        <target>ファイルやフォルダーを削除</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.1">
+        <source>Delete file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルまたはフォルダーを削除</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+        <target>ファイルやフォルダーの詳細</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルまたはフォルダーの詳細</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.0">
+        <source>Edit file</source>
+        <target>ファイルを編集</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.1">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルを編集</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.0">
+        <source>Protect folder</source>
+        <target>フォルダーを保護</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.1">
+        <source>Protect folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というフォルダーに保護を設定</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.0">
+        <source>Remove protection</source>
+        <target>保護を解除</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.1">
+        <source>Unprotect folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というフォルダーの保護を解除</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.0">
+        <source>File upload</source>
+        <target>ファイルをアップロード</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.1">
+        <source>Upload files to the server</source>
+        <target>ファイルをサーバーにアップロード</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.0">
+        <source>Paste into</source>
+        <target>この中に貼り付け</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>このフォルダーの中に貼り付け</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.0">
+        <source>Synchronize</source>
+        <target>同期</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.1">
+        <source>Synchronize the file system and the database</source>
+        <target>ファイルシステムとデータベースを同期</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit_preview_help">
+        <source>Mark the important part of the image with your mouse cursor.</source>
+        <target>画像の重要な部分をマウスカーソルで指し示してください。</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

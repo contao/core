@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_user_group.php" source-language="en" target-language="es">
+    <body>
+      <trans-unit id="tl_user_group.name.0">
+        <source>Title</source>
+        <target>Título</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.name.1">
+        <source>Please enter the group title.</source>
+        <target>Por favor introduce un nombre de grupo único.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.0">
+        <source>Allowed fields</source>
+        <target>Campos excluidos</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf.1">
+        <source>Here you can choose which fields will be editable.</source>
+        <target>Aquí puedes elegir los campos editables.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.0">
+        <source>Deactivate</source>
+        <target>Desactivar</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.disable.1">
+        <source>Temporarily disable the group.</source>
+        <target>Si seleccionas esta opción, se desactivará este grupo. Los permisos de grupo desactivados no se pudran heredar por los miembros del mismo.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.0">
+        <source>Activate on</source>
+        <target>Activar el</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.start.1">
+        <source>Automatically activate the group on this day.</source>
+        <target>Si introduces una fecha aquí, el grupo actual se activará en esa fecha.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.0">
+        <source>Deactivate on</source>
+        <target>Deactivate on</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.stop.1">
+        <source>Automatically deactivate the group on this day.</source>
+        <target>Si introduces una fecha aquí, el grupo actual será desactivado en esa fecha.</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.title_legend">
+        <source>Title</source>
+        <target>Título</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.modules_legend">
+        <source>Allowed modules</source>
+        <target>Módulos permitidos</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.pagemounts_legend">
+        <source>Pagemounts</source>
+        <target>Soportes de páginas</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.filemounts_legend">
+        <source>Filemounts</source>
+        <target>Soportes de archivos</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.forms_legend">
+        <source>Form permissions</source>
+        <target>Permisos de formulario</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.account_legend">
+        <source>Account settings</source>
+        <target>Ajustes de cuenta</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.alexf_legend">
+        <source>Allowed fields</source>
+        <target>Campos excluidos</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.0">
+        <source>New user group</source>
+        <target>Nuevo grupo de usuarios</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.new.1">
+        <source>Create a new user group</source>
+        <target>Crear un grupo de usuarios nuevo</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.0">
+        <source>Group details</source>
+        <target>Detalles grupo</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.show.1">
+        <source>Show the details of group ID %s</source>
+        <target>Mostrar los detalles del grupo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.0">
+        <source>Edit group</source>
+        <target>Editar grupo</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.edit.1">
+        <source>Edit group ID %s</source>
+        <target>Editar grupo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.0">
+        <source>Duplicate group</source>
+        <target>Duplicar grupo</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.copy.1">
+        <source>Duplicate group ID %s</source>
+        <target>Duplicar grupo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.0">
+        <source>Delete group</source>
+        <target>Eliminar grupo</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.delete.1">
+        <source>Delete group ID %s</source>
+        <target>Eliminar grupo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.0">
+        <source>Activate/deactivate group</source>
+        <target>Activar/deshabilitar grupo</target>
+      </trans-unit>
+      <trans-unit id="tl_user_group.toggle.1">
+        <source>Activate/deactivate group ID %s</source>
+        <target>Activar/deshabilitar grupo con ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

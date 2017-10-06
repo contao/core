@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size_item.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_image_size_item.media.0">
+        <source>Media query</source>
+        <target>Medija vaicājums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.media.1">
+        <source>Here you can define when to use the image size, e.g. &lt;em&gt;(max-width: 600px)&lt;/em&gt;.</source>
+        <target>Šeit jūs varat definēt kad izmantot attēla izmēru, piem. &lt;em&gt;(max-width: 600px)&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.invisible.0">
+        <source>Invisible</source>
+        <target>Neredzams</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.invisible.1">
+        <source>Do not use the image size definition.</source>
+        <target>Neizmantot attēla izmēra definīciju.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.0">
+        <source>Revision date</source>
+        <target>Pārskatījuma datums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Pēdējā pārskatījuma datums un laiks</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.title_legend">
+        <source>Image size settings</source>
+        <target>Attēla izmēra iestatījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.expert_legend">
+        <source>Expert settings</source>
+        <target>Eksperta iestatījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.visibility_legend">
+        <source>Visibility</source>
+        <target>Redzamība</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.0">
+        <source>New image size media query</source>
+        <target>Jauns attēla izmēra medija vaicājums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.1">
+        <source>Create a new image size media query</source>
+        <target>Izveidot jaunu attēla izmēra medija vaicājums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.0">
+        <source>Image size media query details</source>
+        <target>Attēla izmēra medija vaicājuma detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.1">
+        <source>Show the details of image size media query ID %s</source>
+        <target>Rādīt attēla izmēra medija vaicājuma IS %s detaļas </target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.0">
+        <source>Edit image size media query</source>
+        <target>Rediģēt attēla izmēra medija vaicājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.1">
+        <source>Edit image size media query ID %s</source>
+        <target>Rediģēt attēla izmēra medija vaicājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.0">
+        <source>Move image size media query</source>
+        <target>Pārvietot attēla izmēra medija vaicājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.1">
+        <source>Move image size media query ID %s</source>
+        <target>Pārvietot attēla izmēra medija vaicājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.0">
+        <source>Duplicate image size media query</source>
+        <target>Dublēt attēla izmēra medija vaicājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.1">
+        <source>Duplicate image size media query ID %s</source>
+        <target>Dublēt attēla izmēra medija vaicājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.0">
+        <source>Delete image size media query</source>
+        <target>Dzēst attēla izmēra medija vaicājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.1">
+        <source>Delete image size media query ID %s</source>
+        <target>Dzēst attēla izmēra medija vaicājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.0">
+        <source>Edit image size</source>
+        <target>Rediģēt attēla izmēru</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>Rediģēt attēla izmēra iestatījumus</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Ielīmēt sākumā</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.1">
+        <source>Paste after image size media query ID %s</source>
+        <target>Ielīmēt pēc attēla izmēra medija vaicājuma ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Pievienot sākumā</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.1">
+        <source>Add new after image size media query ID %s</source>
+        <target>Pievienot jaunu pēc attēla izmēra medija vaicājuma ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Pārslēgt redzamību</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.1">
+        <source>Toggle the visibility of image size media query ID %s</source>
+        <target>Pārslēgt attēla izmēra medija vaicājuma ID %s redzamību</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

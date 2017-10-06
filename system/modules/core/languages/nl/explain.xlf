@@ -1,0 +1,118 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="XPL.insertTags.0.0">
+        <source>Rich text editor</source>
+        <target>Rich text editor</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.0.1">
+        <source>For more information about TinyMCE please visit &lt;a href=&quot;http://www.tinymce.com/&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
+        <target>Voor meer informatie over TinyMCE ga naar &lt;a href=&quot;http://tinymce.moxiecode.com&quot; title=&quot;TinyMCE by moxiecode&quot; target=&quot;_blank&quot;&gt;http://tinymce.moxiecode.com&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.1.0">
+        <source>Insert tags</source>
+        <target>Tags invoegen</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.1.1">
+        <source>For more information on insert tags please visit &lt;a href=&quot;https://docs.contao.org/books/manual/current/en/04-managing-content/insert-tags.html&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://docs.contao.org/books/manual/current/en/04-managing-content/insert-tags.html&lt;/a&gt;.</source>
+        <target>Voor meer info over insert tags ga naar &lt;a href=&quot;https://docs.contao.org/books/manual/current/en/04-managing-content/insert-tags.html&quot; title=&quot;Contao online documentation&quot; target=&quot;_blank&quot;&gt;https://docs.contao.org/books/manual/current/en/04-managing-content/insert-tags.html&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.2.0">
+        <source>Code editor</source>
+        <target>Code editor</target>
+      </trans-unit>
+      <trans-unit id="XPL.insertTags.2.1">
+        <source>For more information about Ace please visit &lt;a href=&quot;http://ace.c9.io&quot; title=&quot;Ace - The High Performance Code Editor for the Web&quot; target=&quot;_blank&quot;&gt;http://ace.c9.io&lt;/a&gt;.</source>
+        <target>Voor meer info over ACE ga naar &lt;a href=&quot;http://ace.c9.io&quot; title=&quot;Ace - The High Performance Code Editor for the Web&quot; target=&quot;_blank&quot;&gt;http://ace.c9.io&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.0.0">
+        <source>colspan</source>
+        <target>colspan</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.0.1">
+        <source>Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.&lt;br&gt;&lt;br&gt;&lt;strong&gt;You can enter variant front end formats in the site structure (website root pages).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Here are some examples of valid date and time formats&lt;/em&gt;:</source>
+        <target>Contao ondersteunt alle datum en tijd formaten die kunnen worden geparsed met de PHP date ()-functie Om er echter zeker van te zijn dat iedere gebruikersinvoer kan omgezet worden in een UNIX tijdnotatie kunt u enkel numerieke datum- en tijdformaten gebruiken (j, d, m, n, y, Y, g, G, h, H, i, s) in het back-end &lt;br&gt;&lt;br&gt;&lt;strong&gt; U kunt varianten van front-end-formaten invoeren in de sitestructuur (website root pagina's).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Hier zijn enkele voorbeelden van geldige datum- en tijd formaten&lt;/em&gt;:</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.1.0">
+        <source>Y-m-d</source>
+        <target>Y-m-d</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.1.1">
+        <source>YYYY-MM-DD, international ISO-8601, e.g. 2005-01-28</source>
+        <target>YYYY-MM-DD, international ISO-8601 bv. 2005-01-28</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.2.0">
+        <source>m/d/Y</source>
+        <target>m/d/Y</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.2.1">
+        <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
+        <target>MM/DD/YYYY, Engelse notatie, b.v. 01/28/2005</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.3.0">
+        <source>d.m.Y</source>
+        <target>d.m.Y</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.3.1">
+        <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
+        <target>DD.MM.YYYY, Duitse notatie bv. 28.01.2005</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.4.0">
+        <source>y-n-j</source>
+        <target>y-n-j</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.4.1">
+        <source>YY-M-D, without leading zeros, e.g. 05-1-28</source>
+        <target>YY-M-D, zonder voorloopnullen bv. 05-1-28</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.5.0">
+        <source>Ymd</source>
+        <target>Ymd</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.5.1">
+        <source>YYYYMMDD, timestamp, e.g. 20050128</source>
+        <target>YYYYMMDD, timestamp, bv. 20050128</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.6.0">
+        <source>H:i:s</source>
+        <target>H:i:s</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.6.1">
+        <source>24 hours, minutes and seconds, e.g. 20:36:59</source>
+        <target>24 uren, minuten en seconden bv. 20:36:59</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.7.0">
+        <source>g:i</source>
+        <target>g:i</target>
+      </trans-unit>
+      <trans-unit id="XPL.dateFormat.7.1">
+        <source>12 hours without leading zeros and minutes, e.g. 8:36</source>
+        <target>12 uren zonder voorloopnullen en minuten bv. 8:36</target>
+      </trans-unit>
+      <trans-unit id="XPL.highlighter.0.0">
+        <source>Rich Text Editor</source>
+        <target>Rich Text Editor</target>
+      </trans-unit>
+      <trans-unit id="XPL.highlighter.0.1">
+        <source>For more information about how to configure the syntax highlighter please visit &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</source>
+        <target>Voor meer info over de configuratie van de syntax tekstmarker ga naar &lt;a href=&quot;http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/#syntaxhighlighterdefaults&quot; title=&quot;SyntaxHighlighter by Alex Gorbatchev&quot; target=&quot;_blank&quot;&gt;http://alexgorbatchev.com&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPL.imageSizeDensities.0.0">
+        <source>Sizes attribute</source>
+        <target>Sizes attribute</target>
+      </trans-unit>
+      <trans-unit id="XPL.imageSizeDensities.0.1">
+        <source>The HTML attribute &lt;code&gt;sizes&lt;/code&gt; defines the displayed width of the image, optionally combined with a media query. You can use any CSS value to define the width.&lt;br&gt;&lt;br&gt;E.g. &lt;code&gt;(max-width: 600px) 100vw, 50vw&lt;/code&gt; means the images width is 100% of the viewport for small screens and 50% of the viewport for larger screens.&lt;br&gt;&lt;br&gt;And &lt;code&gt;(max-width: 600px) calc(100vw - 20px), 500px&lt;/code&gt; means the images width is 20px smaller than the viewport for small screens and 500px for larger screens.&lt;br&gt;&lt;br&gt;For more information about the sizes attribute please visit &lt;a href=&quot;https://www.w3.org/TR/2016/PR-html51-20160915/semantics-embedded-content.html#element-attrdef-img-sizes&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;.</source>
+        <target>HTML attribute &lt;code&gt;sizes&lt;/code&gt; definieert de breedte van het weergegeven beeld, eventueel gecombineerd met een media zoekopdracht. U kunt elke CSS waarde gebruiken om de breedte te bepalen.&lt;br&gt;&lt;br&gt;B.v. &lt;code&gt; (max-width: 600px). 100vw, 50vw &lt;/code&gt; betekent dat de beeldbreedte 100% is van de viewport voor kleine schermen en 50% van de viewport voor grotere schermen.&lt;br&gt;&lt;br&gt; En &lt;code&gt; (max-width: 600px) calc (100vw - 20px), 500px&lt;/code&gt; betekent dat de beeldbreedte 20px kleiner is dan de viewport voor kleine schermen en 500px voor grotere schermen.&lt;br&gt;&lt;br&gt; Voor meer informatie over sizes-attribute kunt u terecht op &lt;a href=&quot;https://www.w3.org/TR/2016/PR-html51-20160915/semantics-embedded-content.html#element-attrdef-img-sizes&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPL.imageSizeDensities.1.0">
+        <source>Pixel densities/&lt;br&gt;scale factors</source>
+        <target>Pixel dichtheid/&lt;br&gt;schaalfactoren</target>
+      </trans-unit>
+      <trans-unit id="XPL.imageSizeDensities.1.1">
+        <source>If the sizes attribute is not defined, this setting simply defines the pixel densities you want to support. The dimensions of the images are adjusted automatically. E.g. &lt;code&gt;1x, 1.5x, 2x&lt;/code&gt; creates the following HTML code:&lt;br&gt;&lt;code&gt;&amp;lt;img srcset=&quot;img-a.jpg 1x, img-b.jpg 1.5x, img-c.jpg 2x&quot;&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;br&gt;If the sizes attribute is defined, the same image sizes get generated but width descriptors are used for the srcset attribute. E.g. a 200 pixel wide image with the densities &lt;code&gt;1x, 1.5x, 2x&lt;/code&gt; creates the following HTML code:&lt;br&gt;&lt;code&gt;&amp;lt;img srcset=&quot;img-a.jpg 200w, img-b.jpg 300w, img-c.jpg 400w&quot;&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;br&gt;For more information about the srcset attribute please visit &lt;a href=&quot;https://www.w3.org/TR/2016/PR-html51-20160915/semantics-embedded-content.html#element-attrdef-img-srcset&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;.</source>
+        <target>Als het sizes-attribute niet is gedefinieerd, legt deze instelling simpel gezegd de pixel-dichtheid vast die u wilt gebruiken. De afmetingen van afbeeldingen worden automatisch aangepast. B.v. &lt;code&gt;1x, 1.5x, 2x&lt;/code&gt; maakt de volgende HTML-code aan:&lt;br&gt;&lt;code&gt;&amp;lt;img srcset=&quot;img-a.jpg 1x, img-b.jpg 1.5x, img-c.jpg 2x&quot;&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;br&gt;Als sizes-atribute wel is gedefinieerd, worden gelijke beeldformaten gegenereerd, er worden voor het srcset-attribute breedte omschrijvingen gebruikt. B.v. een beeld van 200 pixel breed met een pixel-dichtheid &lt;code&gt; 1x, 1.5x, 2x &lt;/ code&gt; maakt de volgende HTML-code aan: &lt;br&gt; &lt;code&gt;&amp;lt;img srcset=&quot;img-a.jpg 200w, img-b.jpg 300w, img-c.jpg 400w&quot;&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;br&gt;Voor meer informatie over het attribute srcset kunt u terecht op &lt;a href=&quot;https://www.w3.org/TR/2016/PR-html51-20160915/semantics-embedded-content.html#element-attrdef-img-srcset&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

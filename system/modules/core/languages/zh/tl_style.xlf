@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="tl_style.invisible.0">
+        <source>Invisible</source>
+        <target>不可见</target>
+      </trans-unit>
+      <trans-unit id="tl_style.invisible.1">
+        <source>Do not export the format definition.</source>
+        <target>不能导出格式定义。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.0">
+        <source>Selector</source>
+        <target>选择器</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.1">
+        <source>The selector defines to which element(s) the format definition applies.</source>
+        <target>选择器定义该格式定义将应用于哪个元素。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.0">
+        <source>Category</source>
+        <target>类别</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.1">
+        <source>Categories can be used to group format definitions in the back end.</source>
+        <target>分类可在后台用来分组格式定义。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.0">
+        <source>Comment</source>
+        <target>评论</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.1">
+        <source>Here you can add a comment.</source>
+        <target>您可以在这里添加一条评论。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.0">
+        <source>Size</source>
+        <target>尺寸</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.1">
+        <source>Width, height, min-width, min-height, max-width and max-height.</source>
+        <target>宽度，高度，最小宽度，最小高度，最大宽度和最大高度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.0">
+        <source>Width</source>
+        <target>宽度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.1">
+        <source>Here you can enter the element's width.</source>
+        <target>您可以在这里输入元素的宽度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.0">
+        <source>Height</source>
+        <target>高度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.1">
+        <source>Here you can enter the element's height.</source>
+        <target>您可以在这里输入元素的高度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.0">
+        <source>Minimum width</source>
+        <target>最小宽度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.1">
+        <source>Here you can enter the element's minimum width.</source>
+        <target>您可以在这里输入元素的最小宽度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.0">
+        <source>Minimum height</source>
+        <target>最小高度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.1">
+        <source>Here you can enter the element's minimum height.</source>
+        <target>您可以在这里输入元素的最小高度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.0">
+        <source>Maximum width</source>
+        <target>最大宽度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.1">
+        <source>Here you can enter the element's maximum width.</source>
+        <target>您可以在这里输入元素的最大宽度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.0">
+        <source>Maximum height</source>
+        <target>最大高度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.1">
+        <source>Here you can enter the element's maximum height.</source>
+        <target>您可以在这里输入元素的最大高度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.0">
+        <source>Position</source>
+        <target>位置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.1">
+        <source>Position, float, clear, overflow and display.</source>
+        <target>位置，浮动，禁用浮动，overflow和显示</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.0">
+        <source>Position</source>
+        <target>位置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.1">
+        <source>Here you can enter the top, right, bottom and left position.</source>
+        <target>您可以在这里输入上，右，下，左的位置。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.0">
+        <source>Position type</source>
+        <target>位置类型</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.1">
+        <source>Here you can choose the position type.</source>
+        <target>您可以在这里选择</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.0">
+        <source>Float</source>
+        <target>浮动</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.1">
+        <source>Here you can choose the float type.</source>
+        <target>您可以在这里选择浮动类型。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.0">
+        <source>Clear</source>
+        <target>禁用浮动</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.1">
+        <source>Here you can choose the clear type.</source>
+        <target>您可以在这里选择禁用浮动类型。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.0">
+        <source>Overflow</source>
+        <target>Overflow</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.1">
+        <source>Here you can choose the overflow behaviour.</source>
+        <target>您可以在这里选择overflow的行为。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.0">
+        <source>Display</source>
+        <target>显示</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.1">
+        <source>Here you can choose the display type.</source>
+        <target>您可以在这里选择显示类型。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.0">
+        <source>Margin, padding and alignment</source>
+        <target>外边距，内边距和对齐</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.1">
+        <source>Margin, padding, align, vertical-align, text-align and white-space.</source>
+        <target>外边距, 内边距, 水平对齐方式, 垂直对齐方式, 文本水平对齐方式和元素内空白。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.0">
+        <source>Margin</source>
+        <target>外边距</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>您可以这这里输入上，右，下和左外边距。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.0">
+        <source>Padding</source>
+        <target>内边距</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.1">
+        <source>Here you can enter the top, right, bottom and left padding.</source>
+        <target>您可以这这里输入上，右，下和左内边距。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.0">
+        <source>Element alignment</source>
+        <target>元素对齐</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.1">
+        <source>To align an element, its left and right margin will be overwritten.</source>
+        <target>要对齐一个元素，其左右空白将被重写。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.0">
+        <source>Vertical alignment</source>
+        <target>垂直对齐</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.1">
+        <source>Here you can choose the vertical alignment.</source>
+        <target>您可以在这里选择垂直对齐。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.0">
+        <source>Text alignment</source>
+        <target>文本对齐</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.1">
+        <source>Here you can choose the horizontal text alignment.</source>
+        <target>此处您可以选择水平对齐文本。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>元素内空白</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>在这里你可以定义如何处理元素内空白。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.0">
+        <source>Background</source>
+        <target>背景</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.1">
+        <source>Background-color, background-image, background-position, background-repeat, box-shadow and linear-gradient.</source>
+        <target>背景颜色，背景图片，背景位置，背景重复，阴影和线性渐变。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.0">
+        <source>Background color and opacity</source>
+        <target>背景颜色和透明度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.1">
+        <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>此处您可以输入一个十六进制的背景颜色代码(例如FF0000表示红色)以及一个可选的透明度百分比(例如75)。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.0">
+        <source>Background image</source>
+        <target>背景图片</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.1">
+        <source>Here you can enter the path to a background image.</source>
+        <target>您可以在这里输入背景图片路径。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.0">
+        <source>Background position</source>
+        <target>背景位置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.1">
+        <source>Here you can select the position of the background image.</source>
+        <target>此处您可以选择背景图片的位置。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.0">
+        <source>Background repeat</source>
+        <target>背景重复</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.1">
+        <source>Here you can select the repeating mode.</source>
+        <target>此处您可以选择重复类型。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.0">
+        <source>Shadow size</source>
+        <target>阴影尺寸</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.1">
+        <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+        <target>此处您可以输入X和Y偏移量，一个可选的模糊大小和扩展半径。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.0">
+        <source>Shadow color and opacity</source>
+        <target>阴影颜色和透明度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.1">
+        <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>此处您可以输入一个十六进制的阴影颜色代码(例如FF0000表示红色)以及一个可选的透明度百分比(例如75)。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.0">
+        <source>Gradient angle</source>
+        <target>渐变角度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.1">
+        <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+        <target>你可以在这里输入渐变的角度(e.g. &lt;em&gt;0deg&lt;/em&gt;)或方向(e.g. &lt;em&gt;to bottom&lt;/em&gt; 或 &lt;em&gt;to top right&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.0">
+        <source>Gradient colors</source>
+        <target>渐变颜色</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.1">
+        <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
+        <target>你可以在这里输入最多四种颜色与可选百分比 (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;)。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.0">
+        <source>Border</source>
+        <target>边框</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.1">
+        <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
+        <target>边框宽度，边框样式，边框颜色，边框半径，边框合并和边框间距。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.0">
+        <source>Border width</source>
+        <target>边框宽度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.1">
+        <source>Here you can enter the top, right, bottom and left border width.</source>
+        <target>您可以在这里输入上，右，下和左边框宽度。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.0">
+        <source>Border style</source>
+        <target>边框样式</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.1">
+        <source>Here you can choose the border style.</source>
+        <target>您可以在这里输入边框样式。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.0">
+        <source>Border color and opacity</source>
+        <target>边框颜色和透明度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.1">
+        <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>你可以在这里录入一个十六进制边框颜色值 (e.g. ff0000 红色) 和一个可选的不透明度百分比值 (e.g. 75).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.0">
+        <source>Border radius</source>
+        <target>边框半径</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.1">
+        <source>Here you can enter the top, right, bottom and left border radius.</source>
+        <target>您可以在这里输入上，右，下和左边框半径。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.0">
+        <source>Border handling</source>
+        <target>边框处理</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.1">
+        <source>Here you can choose the border handling.</source>
+        <target>您可以在这里输入边框距离。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.0">
+        <source>Border spacing</source>
+        <target>边框距离</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.1">
+        <source>Here you can enter the border spacing.</source>
+        <target>您可以在这里输入边框距离。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.0">
+        <source>Font</source>
+        <target>字体</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.1">
+        <source>Font-family, font-size, font-color, line-height, font-style, text-transform, text-indent, letter-spacing and word-spacing.</source>
+        <target>字体系列，字体尺寸，字体颜色，行高，字体样式，字体大小写，文本缩进，字母间距和词间距。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.0">
+        <source>Font family</source>
+        <target>字体系列</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.1">
+        <source>Here you can enter a comma separated list of font types.</source>
+        <target>您可以在这里输入字体类型列表，以逗号分割。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.0">
+        <source>Font size</source>
+        <target>字体尺寸</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.1">
+        <source>Here you can enter the font size.</source>
+        <target>您可以在这里输入字体尺寸。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.0">
+        <source>Font color and opacity</source>
+        <target>文字颜色和不透明度</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.1">
+        <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>你可以在这里录入一个十六进制文字颜色值 (e.g. ff0000 红色) 和一个可选的不透明度百分比值 (e.g. 75).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.0">
+        <source>Line height</source>
+        <target>行高</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.1">
+        <source>Here you can define the line height.</source>
+        <target>您可以在这里定义行高尺寸。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.0">
+        <source>Font style</source>
+        <target>文字样式</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.1">
+        <source>Here you can choose one or more font styles.</source>
+        <target>你可以在这里选择一个或多个文字样式。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.0">
+        <source>Text transform</source>
+        <target>文本变形</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.1">
+        <source>Here you can choose a text transformation mode.</source>
+        <target>此处您可以选择一种文本变形模式。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.0">
+        <source>Text indent</source>
+        <target>文本缩进</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.1">
+        <source>Here you can enter a text indentation.</source>
+        <target>此处您可以输入一个文本缩进值。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.0">
+        <source>Letter spacing</source>
+        <target>字母空白</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.1">
+        <source>Here you can modify the letter spacing (default: 0px).</source>
+        <target>此处您可以修改字母空白(默认:0px).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.0">
+        <source>Word spacing</source>
+        <target>单词空白</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.1">
+        <source>Here you can modify the word spacing (default: 0px).</source>
+        <target>此处您可以修改单词空白(默认:0px).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.0">
+        <source>List</source>
+        <target>列表</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.1">
+        <source>List-style-type and list-style-image.</source>
+        <target>List-style-type和 list-style-image。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.0">
+        <source>List symbol</source>
+        <target>列表前导符号</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.1">
+        <source>Here you can choose a list symbol.</source>
+        <target>此处您可以选择一个列表前导符号。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.0">
+        <source>Custom symbol</source>
+        <target>定制符号</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.1">
+        <source>Here you can enter the path to an individual symbol.</source>
+        <target>你可以这里录入指向一个单独符号的路径。</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.0">
+        <source>Custom code</source>
+        <target>自定义代码</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.1">
+        <source>Here you can enter custom CSS code.</source>
+        <target>您可以在这里输入自定义CSS代码</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector_legend">
+        <source>Selector and category</source>
+        <target>选择器和类别</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size_legend">
+        <source>Size</source>
+        <target>尺寸</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position_legend">
+        <source>Position</source>
+        <target>位置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align_legend">
+        <source>Margin and alignment</source>
+        <target>外边距和对齐</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background_legend">
+        <source>Background settings</source>
+        <target>背景设置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border_legend">
+        <source>Border settings</source>
+        <target>边框设置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font_legend">
+        <source>Font settings</source>
+        <target>字体设置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list_legend">
+        <source>List settings</source>
+        <target>列表设置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.custom_legend">
+        <source>Custom code</source>
+        <target>自定义代码</target>
+      </trans-unit>
+      <trans-unit id="tl_style.normal">
+        <source>normal</source>
+        <target>正常</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bold">
+        <source>bold</source>
+        <target>粗体</target>
+      </trans-unit>
+      <trans-unit id="tl_style.italic">
+        <source>italic</source>
+        <target>斜体</target>
+      </trans-unit>
+      <trans-unit id="tl_style.underline">
+        <source>underlined</source>
+        <target>下划线</target>
+      </trans-unit>
+      <trans-unit id="tl_style.notUnderlined">
+        <source>not underlined</source>
+        <target>去除下划线</target>
+      </trans-unit>
+      <trans-unit id="tl_style.line-through">
+        <source>line-through</source>
+        <target>删除线</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overline">
+        <source>overlined</source>
+        <target>上划线</target>
+      </trans-unit>
+      <trans-unit id="tl_style.small-caps">
+        <source>small-caps</source>
+        <target>小型大写字母字体</target>
+      </trans-unit>
+      <trans-unit id="tl_style.disc">
+        <source>dot</source>
+        <target>点 (dot)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.circle">
+        <source>circle</source>
+        <target>空心圆 (circle)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.square">
+        <source>square</source>
+        <target>实心方块 (square)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.decimal">
+        <source>figures</source>
+        <target>数字</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-roman">
+        <source>upper latin figures</source>
+        <target>大写的拉丁文数字</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-roman">
+        <source>lower latin figures</source>
+        <target>小写的拉丁文数字</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-alpha">
+        <source>upper characters</source>
+        <target>大写</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-alpha">
+        <source>lower characters</source>
+        <target>小写</target>
+      </trans-unit>
+      <trans-unit id="tl_style.uppercase">
+        <source>uppercase</source>
+        <target>大写</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lowercase">
+        <source>lowercase</source>
+        <target>小写</target>
+      </trans-unit>
+      <trans-unit id="tl_style.capitalize">
+        <source>capitalize</source>
+        <target>以大写字母</target>
+      </trans-unit>
+      <trans-unit id="tl_style.none">
+        <source>none</source>
+        <target>无</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.0">
+        <source>New format definition</source>
+        <target>新格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.1">
+        <source>Create a new format definition</source>
+        <target>创建一个新格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.0">
+        <source>Format definition details</source>
+        <target>格式定义详情</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.1">
+        <source>Show the details of format definition ID %s</source>
+        <target>显示ID为%s的格式定义详情</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.0">
+        <source>Edit format definition</source>
+        <target>编辑格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.1">
+        <source>Edit format definition ID %s</source>
+        <target>编辑ID为%s的格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.0">
+        <source>Move format definition</source>
+        <target>移动格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.1">
+        <source>Move format definition ID %s</source>
+        <target>移动ID为%s的格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.0">
+        <source>Duplicate format definition</source>
+        <target>复制格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.1">
+        <source>Duplicate format definition ID %s</source>
+        <target>复制ID为%s的格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.0">
+        <source>Delete format definition</source>
+        <target>删除格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.1">
+        <source>Delete format definition ID %s</source>
+        <target>删除ID为%s的格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.0">
+        <source>Edit style sheet</source>
+        <target>编辑样式表</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>编辑样式表设置</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>粘贴在头部</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.1">
+        <source>Paste after format definition ID %s</source>
+        <target>粘帖ID为%s的格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.0">
+        <source>Add new at the top</source>
+        <target>新建在头部</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.1">
+        <source>Add new after format definition ID %s</source>
+        <target>在ID为%s的格式定义后面添加一个新的格式定义</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.0">
+        <source>Toggle visibility</source>
+        <target>切换可见性</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.1">
+        <source>Toggle the visibility of format definition ID %s</source>
+        <target>切换ID为%s的格式定义的可见度</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

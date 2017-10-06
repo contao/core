@@ -1,0 +1,330 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="tl_news.headline.0">
+        <source>Title</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit id="tl_news.headline.1">
+        <source>Please enter the news title.</source>
+        <target>新闻简介</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.0">
+        <source>News alias</source>
+        <target>新闻别名</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.1">
+        <source>The news alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>新闻别名是此新闻的唯一的别称，可以在别处调用</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.0">
+        <source>Author</source>
+        <target>作者</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.1">
+        <source>Here you can change the author of the news item.</source>
+        <target>您可以在这里变更该新闻的作者。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.0">
+        <source>Date</source>
+        <target>日期</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.1">
+        <source>Please enter the date according to the global date format.</source>
+        <target>请根据全球日期格式输入日期。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.0">
+        <source>Time</source>
+        <target>时间</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.1">
+        <source>Please enter the time according to the global time format.</source>
+        <target>请根据全球时间格式输入时间。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.0">
+        <source>Subheadline</source>
+        <target>副标题</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.1">
+        <source>Here you can enter a subheadline.</source>
+        <target>您可以在这里输入副标题。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.0">
+        <source>News teaser</source>
+        <target>新闻预告</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.1">
+        <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>在新闻列表中显示新闻预告，而不是新闻详情，“阅读更多...”链接将自动添加。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.0">
+        <source>News text</source>
+        <target>新闻内容</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.1">
+        <source>Here you can enter the news text.</source>
+        <target>您可以在这里输入新闻内容。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.0">
+        <source>Add an image</source>
+        <target>添加一张图片</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.1">
+        <source>Add an image to the news item.</source>
+        <target>在新闻中添加图片。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>添加附件</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.1">
+        <source>Add one or more downloadable files to the news item.</source>
+        <target>新增一个或者多个可下载的附件</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.0">
+        <source>Enclosures</source>
+        <target>附件</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>请选择附件文件。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.0">
+        <source>Redirect target</source>
+        <target>目标页面</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>链接到内部页面或者外部网址</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.0">
+        <source>Use default</source>
+        <target>使用默认</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
+        <target>点击&quot;阅读更多 …&quot;之后，访问者将转到新闻存档的默认页面</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.0">
+        <source>Page</source>
+        <target>内部页面</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
+        <target>点击&quot;阅读更多 …&quot;之后，访问者将转到某个内部页面</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.0">
+        <source>Article</source>
+        <target>文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>点击“阅读更多...”按钮，访问者将被重定向到一篇文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.0">
+        <source>External URL</source>
+        <target>外部网址</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>点击&quot;阅读更多 …&quot;之后，访问者将转到某个外部网址</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.0">
+        <source>Redirect page</source>
+        <target>重定向页面</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
+        <target>请选择页面，当访问者点击新闻时会被重定向到该页面。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.0">
+        <source>Article</source>
+        <target>文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
+        <target>请选择文章，当访问者点击新闻时会被重定向到该文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.0">
+        <source>CSS class</source>
+        <target>CSS类</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>可输入一个或者多个CSS类</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.0">
+        <source>Disable comments</source>
+        <target>禁用评论</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.1">
+        <source>Do not allow comments for this particular news item.</source>
+        <target>不允许对特定的新闻发表评论。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.0">
+        <source>Feature item</source>
+        <target>精选记录</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.1">
+        <source>Show the news item in a featured news list.</source>
+        <target>在精选新闻列表中显示。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.0">
+        <source>Publish item</source>
+        <target>已发布</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.1">
+        <source>Make the news item publicly visible on the website.</source>
+        <target>如不选，本新闻将没有人能够看到</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.0">
+        <source>Show from</source>
+        <target>环绕开始</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.1">
+        <source>Do not show the news item on the website before this day.</source>
+        <target>选择一个时间，文章从那时开始可以被访问</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.0">
+        <source>Show until</source>
+        <target>环绕结束</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.1">
+        <source>Do not show the news item on the website on and after this day.</source>
+        <target>选择一个时间，文章从那时开始不能被访问</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.0">
+        <source>Revision date</source>
+        <target>修改日期</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>最近修改的日期</target>
+      </trans-unit>
+      <trans-unit id="tl_news.title_legend">
+        <source>Title and author</source>
+        <target>标题和作者</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date_legend">
+        <source>Date and time</source>
+        <target>日期与时间</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser_legend">
+        <source>Subheadline and teaser</source>
+        <target>子标题和预告内容</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text_legend">
+        <source>News text</source>
+        <target>新闻内容</target>
+      </trans-unit>
+      <trans-unit id="tl_news.image_legend">
+        <source>Image settings</source>
+        <target>图片设定</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure_legend">
+        <source>Enclosures</source>
+        <target>附件</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source_legend">
+        <source>Redirect target</source>
+        <target>目标页面</target>
+      </trans-unit>
+      <trans-unit id="tl_news.expert_legend">
+        <source>Expert settings</source>
+        <target>专家设定</target>
+      </trans-unit>
+      <trans-unit id="tl_news.publish_legend">
+        <source>Publish settings</source>
+        <target>发布设置</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.0">
+        <source>New article</source>
+        <target>新文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.1">
+        <source>Create a new news article</source>
+        <target>创建新新闻文章。</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.0">
+        <source>Article details</source>
+        <target>文章详细信息</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.1">
+        <source>Show the details of news article ID %s</source>
+        <target>显示ID为%s的新闻详情</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.0">
+        <source>Edit article</source>
+        <target>编辑文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.1">
+        <source>Edit news article ID %s</source>
+        <target>编辑ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.0">
+        <source>Duplicate article</source>
+        <target>复制文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.1">
+        <source>Duplicate news article ID %s</source>
+        <target>复制ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.0">
+        <source>Move article</source>
+        <target>移动文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.1">
+        <source>Move news article ID %s</source>
+        <target>移动ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.0">
+        <source>Delete article</source>
+        <target>删除文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.1">
+        <source>Delete news article ID %s</source>
+        <target>删除ID为%s的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>发布/取消文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.1">
+        <source>Publish/unpublish news article ID %s</source>
+        <target>发布/取消ID为%s的新闻</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.0">
+        <source>Feature/unfeature article</source>
+        <target>精选/取消精选文章</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.1">
+        <source>Feature/unfeature news article ID %s</source>
+        <target>精选/取消精选ID为%s的新闻</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.0">
+        <source>Edit archive</source>
+        <target>编辑存档</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.1">
+        <source>Edit the archive settings</source>
+        <target>编辑存档设置</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.0">
+        <source>Edit article settings</source>
+        <target>编辑文章头</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.1">
+        <source>Edit the article settings</source>
+        <target>编辑文章设置</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.0">
+        <source>Paste into this archive</source>
+        <target>粘帖到这个存档</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.1">
+        <source>Paste after news article ID %s</source>
+        <target>粘帖到ID为%s的新闻文章之后</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

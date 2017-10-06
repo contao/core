@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_user.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_user.calendars.0">
+        <source>Allowed calendars</source>
+        <target>Atļautie kalendāri</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars.1">
+        <source>Here you can grant access to one or more calendars.</source>
+        <target>Šeit jūs varat piešķirt piekļuvi vienam vai vairākiem kalendāriem.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.0">
+        <source>Calendar permissions</source>
+        <target>Kalendāra atļaujas</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarp.1">
+        <source>Here you can define the calendar permissions.</source>
+        <target>Šeit jūs varat noteikt kalendāra atļaujas.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>Atļautās RSS barotnes</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeeds.1">
+        <source>Here you can grant access to one or more calendar feeds.</source>
+        <target>Šeit jūs varat dot piekļuvi vienai vai vairākām kalendāra barotnēm.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>RSS barotņes atļaujas</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendarfeedp.1">
+        <source>Here you can define the calendar feed permissions.</source>
+        <target>Šeit jūs varat noteikt jaunumu barotnes atļaujas.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.calendars_legend">
+        <source>Calendar permissions</source>
+        <target>Kalendāra atļaujas</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

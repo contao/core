@@ -1,0 +1,172 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style_sheet.php" source-language="en" target-language="sl">
+    <body>
+      <trans-unit id="tl_style_sheet.name.0">
+        <source>Name</source>
+        <target>Ime in medijski tipi</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.name.1">
+        <source>Please enter the style sheet name.</source>
+        <target>Prosimo, vnesite ime slogovne predloge.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.0">
+        <source>Disable CSS3PIE</source>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.1">
+        <source>Do not include the PIE.htc behavior file (adds CSS3 support to older IE versions).</source>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.0">
+        <source>Embed images up to</source>
+        <target>Vdelaj slike do</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.1">
+        <source>Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.</source>
+        <target>Tu lahko vnesete največjo velikost datoteke v bajtih, ki bo še lahko vdelana v slogovno predlogo kot data: string. Vrednost 0 onemogoči to funkcijo.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.0">
+        <source>Conditional comment</source>
+        <target>Pogojni komentar</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.1">
+        <source>Conditional comments allow you to create Internet Explorer specific style sheets (e.g. &lt;em&gt;if lt IE 9&lt;/em&gt;).</source>
+        <target>Pogojni komentarji omogočajo uporabo slogovnih značilnosti specifičnih za uporabljan Internet Explorer brskalnik.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.0">
+        <source>Media types</source>
+        <target>Medijski tipi za prikaz</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.1">
+        <source>Here you can choose the media types the style sheet applies to.</source>
+        <target>Tu lahko izberete medijske tipe, kjer se bo za prikaz uporabljala slogovna predloga.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.0">
+        <source>Media query</source>
+        <target>Media query</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.1">
+        <source>Here you can define the media type using a media query like &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;. The media types defined above will then be overwritten.</source>
+        <target>Tukaj lahko definirate tip medije z uporabo media query, npr. &lt;em&gt;screen in (min-width: 800px)&lt;/em&gt;. Tipi medije definirane nad tem bodo prepisane.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.0">
+        <source>Global variables</source>
+        <target>Globalne spremenljivke</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.1">
+        <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>Tukaj lahko definirate globalne spremenljivke za CSS (npr. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; sli &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.0">
+        <source>Source files</source>
+        <target>Izvorne datoteke</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.1">
+        <source>Here you can upload one or more .css files to be imported.</source>
+        <target>Prosimo, izberite eno ali več datotek iz datotečnega imenika.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum revizije</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum in ura zadnje revizije</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.title_legend">
+        <source>Name</source>
+        <target>Ime in medijski tipi</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
+        <target>Napredne nastavitve</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media_legend">
+        <source>Media settings</source>
+        <target>Medijske nastavitve</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars_legend">
+        <source>Global variables</source>
+        <target>Globalne spremenljivke</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_imported">
+        <source>Style sheet &quot;%s&quot; has been imported.</source>
+        <target>Slogovna predloga &quot;%s&quot; je bila uvožena.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_renamed">
+        <source>Style sheet &quot;%s&quot; has been imported as &quot;%s&quot;.</source>
+        <target>Slogovna predloga &quot;%s&quot; je bila uvožena kot &quot;%s&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.0">
+        <source>New style sheet</source>
+        <target>Nova slogovna predloga.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.1">
+        <source>Create a new style sheet</source>
+        <target>Ustvari novo slogovno predlogo.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.0">
+        <source>Style sheet details</source>
+        <target>Podrobnosti slogovne predloge.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.1">
+        <source>Show the details of style sheet ID %s</source>
+        <target>Prikaži podrobnosti slogovne predloge z ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.0">
+        <source>Edit style sheet</source>
+        <target>Uredi slogovno predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.1">
+        <source>Edit style sheet ID %s</source>
+        <target>Uredi slogovno predlogo z ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.0">
+        <source>Edit style sheet</source>
+        <target>Uredi slogovno predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>Uredi nastavitve slogovne predloge</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.0">
+        <source>Move style sheet</source>
+        <target>Premakni slogovno predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.1">
+        <source>Move style sheet ID %s</source>
+        <target>Premakni slogovno predlogo z ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.0">
+        <source>Duplicate style sheet</source>
+        <target>Podvoji slogovno predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.1">
+        <source>Duplicate style sheet ID %s</source>
+        <target>Podvoji slogovno predlogo z ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.0">
+        <source>Delete style sheet</source>
+        <target>Izbriši slogovno predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.1">
+        <source>Delete style sheet ID %s</source>
+        <target>Izbriši slogovno predlogo z ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.0">
+        <source>CSS import</source>
+        <target>CSS uvoz</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.1">
+        <source>Import existing CSS files</source>
+        <target>Uvozi obstoječe CSS datoteke</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.0">
+        <source>Export style sheet</source>
+        <target>Izvozi slogovno predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.1">
+        <source>Export style sheet ID %s</source>
+        <target>Izvozi slogovno predlogo ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

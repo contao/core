@@ -1,0 +1,798 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_content.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="tl_content.type.0">
+        <source>Element type</source>
+        <target>元素类型</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type.1">
+        <source>Please choose the type of content element.</source>
+        <target>请选择内容元素的类型</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.0">
+        <source>Headline</source>
+        <target>模块标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.1">
+        <source>Here you can add a headline to the content element.</source>
+        <target>如果您输入了标题，它将被显示在内容的顶部</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.0">
+        <source>Text</source>
+        <target>文字</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>可使用HTML标签格式化文字</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.0">
+        <source>Add an image</source>
+        <target>添加一张图片</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.1">
+        <source>Add an image to the content element.</source>
+        <target>在内容元素中添加一个图片。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.0">
+        <source>Source file</source>
+        <target>图像源文件</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.1">
+        <source>Please select a file or folder from the files directory.</source>
+        <target>请从目录中选择一个文件或一个文件夹。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.0">
+        <source>Alternate text</source>
+        <target>替换文字</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.1">
+        <source>Here you can enter an alternate text for the image (&lt;em&gt;alt&lt;/em&gt; attribute).</source>
+        <target>一个易访问的网站总会为图片和动画提供一个可替换文本来简短描述其内容。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.0">
+        <source>Title</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.1">
+        <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
+        <target>此处您可以设定图片标题 (&lt;em&gt;标题&lt;/em&gt; 属性).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.0">
+        <source>Image size</source>
+        <target>图片尺寸</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>输入宽度或者高度来改变图片的尺寸，或者同时输入二者这来修建它。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.0">
+        <source>Image margin</source>
+        <target>图片边界</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>您可以这这里输入上，右，下和左外边距。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.0">
+        <source>Image link target</source>
+        <target>链接目标</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.1">
+        <source>A custom image link target will override the lightbox link, so the image cannot be viewed fullsize anymore.</source>
+        <target>一个定制的链接目标会覆盖灯箱链接，所以图片不能再被全尺寸查看。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>按原大小查看图片</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>增加一个灯箱链接来查看全尺寸图片。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.0">
+        <source>Image alignment</source>
+        <target>图片对齐</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.1">
+        <source>Please specify how to align the image.</source>
+        <target>请选择图片对齐方式。图片可以被放置在文字的上方，左上方或者是右上方。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.0">
+        <source>Image caption</source>
+        <target>图片标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.1">
+        <source>Here you can enter a short text that will be displayed below the image.</source>
+        <target>此处您可以输入简短文字显示在图片下方。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.0">
+        <source>HTML code</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>可修改后台设置可用的HTML标签</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.0">
+        <source>List type</source>
+        <target>列表类型</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.1">
+        <source>Please choose the type of list.</source>
+        <target>请选择列表的类型。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.0">
+        <source>List items</source>
+        <target>列表项</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>如果Javascript被禁用，请确保在修改顺序前保存变更。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.0">
+        <source>Table items</source>
+        <target>表格项</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>如果Javascript被禁用，请确保在修改顺序前保存变更。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.0">
+        <source>Table summary</source>
+        <target>表格概要</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.1">
+        <source>Please enter a short summary of the table and describe its purpose or structure.</source>
+        <target>请为表格输入一个简短的概要来描述其用途或结构。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.0">
+        <source>Add table header</source>
+        <target>表格头部</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.1">
+        <source>Make the first row of the table the table header.</source>
+        <target>使表格的第一行成为表头。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.0">
+        <source>Add table footer</source>
+        <target>表格尾部</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.1">
+        <source>Make the last row of the table the table footer.</source>
+        <target>使表格的最后一行成为表格尾部。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.0">
+        <source>Use row headers</source>
+        <target>使用行标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.1">
+        <source>Define the left column as row header.</source>
+        <target>定义左列作为行标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.0">
+        <source>Sortable table</source>
+        <target>可排序</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.1">
+        <source>Make the table sortable (requires JavaScript and a table header).</source>
+        <target>使表格可排序（需要Javascript支持，并且要有表头）。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.0">
+        <source>Sort index</source>
+        <target>排序索引</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.1">
+        <source>The number of the default sort column.</source>
+        <target>默认排序列的数量。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.0">
+        <source>Sort order</source>
+        <target>排序顺序</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.1">
+        <source>Please choose the sort order.</source>
+        <target>请选择排序顺序。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.0">
+        <source>Operation mode</source>
+        <target>操作模式</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.1">
+        <source>Please select the operation mode of the accordion element.</source>
+        <target>请选择可折叠元素的操作方式。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.0">
+        <source>Wrapper start</source>
+        <target>封装开始</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.1">
+        <source>Marks the beginning of an accordion pane that spans several content elements.</source>
+        <target>标记跨越几个内容元素的手风琴面板的起始位置。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.0">
+        <source>Wrapper stop</source>
+        <target>封套结束</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.1">
+        <source>Marks the end of an accordion pane that spans several content elements.</source>
+        <target>标记跨越几个内容元素的手风琴面板的结束位置。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.0">
+        <source>Single element</source>
+        <target>单独元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.1">
+        <source>Behaves like a single text element that is inside an accordion pane.</source>
+        <target>其行为与处于一个手风琴面板内单一文本元素类似。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.0">
+        <source>Section headline</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.1">
+        <source>Please enter the headline of the content pane. HTML tags are allowed.</source>
+        <target>输入内容块的标题，支持HTML标签</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.0">
+        <source>CSS format</source>
+        <target>CSS样式</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.1">
+        <source>Here you can format the section headline using CSS code.</source>
+        <target>此处可以定义内容块标题格式，使用什么CSS代码构成</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.0">
+        <source>Element classes</source>
+        <target>样式类名</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.1">
+        <source>Leave blank to use the default classes or enter a custom toggler and accordion class.</source>
+        <target>留空使用默认样式，或者输入内容块的样式</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.0">
+        <source>Configuration</source>
+        <target>配置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.1">
+        <source>Here you can configure the syntax highlighter (e.g. &lt;em&gt;gutter: false;&lt;/em&gt;).</source>
+        <target>设置语法高亮，(例如 &lt;em&gt;gutter: false;&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.0">
+        <source>Syntax highlighting</source>
+        <target>语法高亮</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.1">
+        <source>Please choose a scripting language.</source>
+        <target>请选择一种脚本语言</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.0">
+        <source>Code</source>
+        <target>代码</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.1">
+        <source>Note that the code will not be executed. Use F11 to toggle the fullscreen mode if you are using the code editor.</source>
+        <target>请输入代码</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.0">
+        <source>Link text</source>
+        <target>链接标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.1">
+        <source>The link text will be displayed instead of the target URL.</source>
+        <target>显示链接标题文字，不显示实际目标的url链接</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.0">
+        <source>Link title</source>
+        <target>链接标题</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.1">
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>在HTML标记中作为&lt;em&gt;标题&lt;/em&gt;属性添加链接标题。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.0">
+        <source>Embed the link</source>
+        <target>嵌入式链接</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.1">
+        <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
+        <target>使用&quot;%s&quot;把链接嵌入句子中，(例如 &lt;em&gt;For more information please visit %s&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.0">
+        <source>Lightbox</source>
+        <target>高亮盒</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.1">
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>在这里输入一个&lt;em&gt;rel&lt;/em&gt;属性，用来触发lightbox。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.0">
+        <source>Create an image link</source>
+        <target>图片链接</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.1">
+        <source>Use an image instead of the link title.</source>
+        <target>用图片代表链接地址，不显示链接标题文字</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.0">
+        <source>Source files</source>
+        <target>源文件</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.1">
+        <source>Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.</source>
+        <target>请选择一个或者多个文件或者文件夹。选中文件夹，其中文件也自动被选中。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.0">
+        <source>Sort order</source>
+        <target>排序顺序</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>项目的排序顺序。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>使用用户主目录</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.1">
+        <source>Use the home directory as file source if there is an authenticated user.</source>
+        <target>如果是授权用户，使用主目录作为文件来源</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.0">
+        <source>Thumbnails per row</source>
+        <target>每行缩略图数</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.1">
+        <source>The number of image thumbnails per row.</source>
+        <target>每行缩略图数</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.0">
+        <source>Items per page</source>
+        <target>每页记录数</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>每行缩略图数，设置为0的时候分页不可用</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.0">
+        <source>Total number of images</source>
+        <target>图片总数</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.1">
+        <source>Here you can limit the total number of images. Set to 0 to show all.</source>
+        <target>此处您可以限制图片总数。设置为0以显示所有。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.0">
+        <source>Order by</source>
+        <target>排序字段</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.1">
+        <source>Please choose the sort order.</source>
+        <target>请选择排序顺序。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.0">
+        <source>Ignore files without meta data</source>
+        <target>忽略没有meta数据的文件</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.1">
+        <source>Do not show files without meta data matching the page language.</source>
+        <target>不显示匹配页面语言的没有meta数据的文件</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.0">
+        <source>Gallery template</source>
+        <target>画廊模板</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.1">
+        <source>Here you can select the gallery template.</source>
+        <target>此处您可以选择画廊模板。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+        <target>自定义元素模板</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+        <target>在这里重写默认元素模板</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.0">
+        <source>Video/audio files</source>
+        <target>视频/音频文件</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.1">
+        <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+        <target>如果您正在使用不同的编码，您可以在此处添加视频/音频文件或多个文件。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.0">
+        <source>YouTube ID</source>
+        <target>YouTube帐号</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.1">
+        <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+        <target>请输入YouTube视频ID (例如，&lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.0">
+        <source>Preview image</source>
+        <target>预览图片</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.1">
+        <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>在回放前显示此图片而不是视频文件的第一帧(仅适用于视频)。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.0">
+        <source>Player size</source>
+        <target>播放器大小</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.1">
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>媒体播放器的宽和高（以像素为单位） (如：640x480).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.0">
+        <source>Autoplay</source>
+        <target>自动播放</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.1">
+        <source>Automatically play the video when the page loads.</source>
+        <target>当页面加载完成后自动播放视频。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+        <target>滚动间隔</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>以毫秒表示的滚动间隔(1000 = 1秒)。设置为0将禁用自动滚动。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>过渡速度</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>以毫秒表示的过渡速度(1000=1秒)。默认为300。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+        <target>滑动偏移量</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>你可以在这里设置一个特定滑动作为开始(从0开始计数)。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+        <target>连续的</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>创建连续滑动 (到达最后一张时从头开始).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.0">
+        <source>Referenced element</source>
+        <target>元素ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.1">
+        <source>Please choose the content element you want to insert.</source>
+        <target>请选择您想要插入的内容元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.0">
+        <source>Referenced article</source>
+        <target>文章ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.1">
+        <source>Please choose the article you want to insert.</source>
+        <target>请选择您想要插入的文章</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.0">
+        <source>Article</source>
+        <target>文章</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.1">
+        <source>Please select an article.</source>
+        <target>请选择一篇文章</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.0">
+        <source>Form</source>
+        <target>表单</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.1">
+        <source>Please select a form.</source>
+        <target>请选择一个表单</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.0">
+        <source>Module</source>
+        <target>模组</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.1">
+        <source>Please select a module.</source>
+        <target>请选择一个模块</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.0">
+        <source>Protect element</source>
+        <target>不公开</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.1">
+        <source>Show the content element to certain member groups only.</source>
+        <target>只对特定用户组公开显示内容</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.0">
+        <source>Allowed member groups</source>
+        <target>允许的成员组</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.1">
+        <source>These groups will be able to see the content element.</source>
+        <target>这些用户组可以查看内容</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.0">
+        <source>Show to guests only</source>
+        <target>仅向来宾显示</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.1">
+        <source>Hide the content element if a member is logged in.</source>
+        <target>登陆之后隐藏这些内容</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.0">
+        <source>CSS ID/class</source>
+        <target>CSS ID/类</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>此处您可以输入一个ID或者一到多个CSS类名。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.0">
+        <source>Space in front and after</source>
+        <target>前后间隔</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.1">
+        <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>内容元素前后的空白间隔，单位为像素。也可以用样式表定义。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.0">
+        <source>Invisible</source>
+        <target>不可见</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.1">
+        <source>Hide the element on the website.</source>
+        <target>在网站中隐藏该元素。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.0">
+        <source>Show from</source>
+        <target>环绕开始</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.1">
+        <source>Do not show the element on the website before this day.</source>
+        <target>标记包含多个内容的环绕块开始的地方</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.0">
+        <source>Show until</source>
+        <target>环绕结束</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.1">
+        <source>Do not show the element on the website on and after this day.</source>
+        <target>标记包含多个内容的环绕块结束的地方</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type_legend">
+        <source>Element type</source>
+        <target>元素类型</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text_legend">
+        <source>Text/HTML/Code</source>
+        <target>Text/HTML/Code</target>
+      </trans-unit>
+      <trans-unit id="tl_content.image_legend">
+        <source>Image settings</source>
+        <target>图片设定</target>
+      </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+        <target>滑动设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list_legend">
+        <source>List items</source>
+        <target>列表项</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table_legend">
+        <source>Table items</source>
+        <target>表格项</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tconfig_legend">
+        <source>Table configuration</source>
+        <target>表格设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable_legend">
+        <source>Sorting options</source>
+        <target>分类选项</target>
+      </trans-unit>
+      <trans-unit id="tl_content.moo_legend">
+        <source>Accordion settings</source>
+        <target>内容块选项</target>
+      </trans-unit>
+      <trans-unit id="tl_content.link_legend">
+        <source>Hyperlink settings</source>
+        <target>超链接设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imglink_legend">
+        <source>Image link settings</source>
+        <target>图片链接设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.source_legend">
+        <source>Files and folders</source>
+        <target>文件与文件夹</target>
+      </trans-unit>
+      <trans-unit id="tl_content.dwnconfig_legend">
+        <source>Download settings</source>
+        <target>下载设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.include_legend">
+        <source>Include settings</source>
+        <target>包含设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected_legend">
+        <source>Access protection</source>
+        <target>访问保护</target>
+      </trans-unit>
+      <trans-unit id="tl_content.expert_legend">
+        <source>Expert settings</source>
+        <target>专家设定</target>
+      </trans-unit>
+      <trans-unit id="tl_content.template_legend">
+        <source>Template settings</source>
+        <target>模板设设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.player_legend">
+        <source>Player settings</source>
+        <target>播放器设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.poster_legend">
+        <source>Preview image</source>
+        <target>预览图片</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible_legend">
+        <source>Visibility</source>
+        <target>可见性</target>
+      </trans-unit>
+      <trans-unit id="tl_content.ordered">
+        <source>ordered list</source>
+        <target>有序列表</target>
+      </trans-unit>
+      <trans-unit id="tl_content.unordered">
+        <source>unordered list</source>
+        <target>无序列表</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_asc">
+        <source>File name (ascending)</source>
+        <target>文件名(升序)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_desc">
+        <source>File name (descending)</source>
+        <target>文件名(降序)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_asc">
+        <source>Date (ascending)</source>
+        <target>日期(升序)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_desc">
+        <source>Date (descending)</source>
+        <target>日期(降序)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.custom">
+        <source>Custom order</source>
+        <target>指定顺序</target>
+      </trans-unit>
+      <trans-unit id="tl_content.random">
+        <source>Random order</source>
+        <target>随机顺序</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>模版&lt;em&gt;%s&lt;/em&gt;需要被包含在页面结构中。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>模版&lt;em&gt;%s&lt;/em&gt;或&lt;em&gt;%s&lt;/em&gt;需要被包含在页面结构中。</target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.0">
+        <source>New element</source>
+        <target>新元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.1">
+        <source>Add a new content element</source>
+        <target>创建一个新元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.0">
+        <source>Element details</source>
+        <target>元素详细信息</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.1">
+        <source>Show the details of content element ID %s</source>
+        <target>显示内容元素ID %s的细节</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.0">
+        <source>Move element</source>
+        <target>移动元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.1">
+        <source>Move content element ID %s</source>
+        <target>移动内容元素ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.0">
+        <source>Duplicate element</source>
+        <target>复制元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.1">
+        <source>Duplicate content element ID %s</source>
+        <target>复制内容元素ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.0">
+        <source>Delete element</source>
+        <target>删除元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.1">
+        <source>Delete content element ID %s</source>
+        <target>删除内容元素ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.0">
+        <source>Edit element</source>
+        <target>编辑元素</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.1">
+        <source>Edit content element ID %s</source>
+        <target>编辑内容元素ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.0">
+        <source>Edit article</source>
+        <target>编辑文章</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.1">
+        <source>Edit the article settings</source>
+        <target>编辑文章设置</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>粘贴在头部</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.1">
+        <source>Paste after content element ID %s</source>
+        <target>粘贴在内容元素ID %s之后</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.0">
+        <source>Add new at the top</source>
+        <target>新建在头部</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.1">
+        <source>Add new after content element ID %s</source>
+        <target>在内容元素ID %s之后增加新的</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.0">
+        <source>Toggle visibility</source>
+        <target>切换可见性</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.1">
+        <source>Toggle the visibility of element ID %s</source>
+        <target>切换内容元素ID %s可见不可见</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.0">
+        <source>Edit source element</source>
+        <target>编辑来源内容</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.1">
+        <source>Edit the source element ID %s</source>
+        <target>编辑来源内容元素ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.0">
+        <source>Edit article</source>
+        <target>编辑文章</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.1">
+        <source>Edit article ID %s</source>
+        <target>编辑文章ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list.1">
+        <source>Import list items from a CSV file</source>
+        <target>从CSV文件导入列表项目</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table.1">
+        <source>Import table items from a CSV file</source>
+        <target>从CSV文件导入表格项目</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

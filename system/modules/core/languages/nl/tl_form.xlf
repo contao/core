@@ -1,0 +1,242 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_form.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title.1">
+        <source>Please enter the form title.</source>
+        <target>Geef een titel voor het formulier op.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.0">
+        <source>Form alias</source>
+        <target>Formulier alias</target>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.1">
+        <source>The form alias is a unique reference to the form which can be called instead of its numeric ID.</source>
+        <target>Het formulier alias is een verwijzing naar het formulier welk kan worden aangeroepen in plaats van zijn numerieke ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Ga naar pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
+        <target>Selecteer de pagina waarnaar een gebruiker wordt verder geleid na het versturen van een formulier.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.0">
+        <source>Send form data via e-mail</source>
+        <target>Formuliergegevens via e-mail verzenden</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.1">
+        <source>Send the submitted data to an e-mail address.</source>
+        <target>Indien u deze optie kiest worden formuliergegevens verzonden via e-mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.0">
+        <source>Recipient address</source>
+        <target>Adres van de ontvanger</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.1">
+        <source>Separate multiple e-mail addresses with comma.</source>
+        <target>Geef één of meerdere e-mail adressen op . Meerdere adressen moeten gescheiden worden door een komma.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.0">
+        <source>Subject</source>
+        <target>Onderwerp</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.1">
+        <source>Please enter the e-mail subject.</source>
+        <target>Geef het onderwerp op. Als u geen onderwerp opgeeft vergroot dit de kans dat uw e-mail als SPAM wordt aangezien.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.0">
+        <source>Data format</source>
+        <target>Gegevensformaat</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.1">
+        <source>Defines how the form data will be forwarded.</source>
+        <target>Bepaalt hoe formulier gegevens worden doorgestuurd.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.0">
+        <source>Raw data</source>
+        <target>Raw data</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.1">
+        <source>The form data will be sent as plain text message with each field in a new line.</source>
+        <target>De formuliergegevens worden verzonden als gewone tekst met ieder veld op een nieuwe regel.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.0">
+        <source>XML file</source>
+        <target>XML bestand</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.1">
+        <source>The form data will be attached to the e-mail as an XML file.</source>
+        <target>De formuliergegevens worden als XML bestand aan de e-mail gekoppeld.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.0">
+        <source>CSV file</source>
+        <target>CSV bestand</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.1">
+        <source>The form data will be attached to the e-mail as a CSV file.</source>
+        <target>De formuliergegevens worden als CSV (comma separated values) bestand aan de e-mail gekoppeld.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.0">
+        <source>E-mail</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.1">
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>Negeert alle velden behalve &lt;em&gt;naam&lt;/em&gt;, &lt;em&gt;e-mail&lt;/em&gt;, &lt;em&gt;onderwerp&lt;/em&gt;, &lt;em&gt;bericht&lt;/em&gt; en &lt;em&gt;cc&lt;/em&gt; (carbon copy) en stuurt formulier gegevens alsof deze zijn verzonden vanaf een e-mail cliënt. Het uploaden van bestanden is toegestaan.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.0">
+        <source>Skip empty fields</source>
+        <target>Sla lege velden over</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.1">
+        <source>Hide empty fields in the e-mail.</source>
+        <target>Verberg lege velden in de e-mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.0">
+        <source>Store data</source>
+        <target>Waarden opslaan</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.1">
+        <source>Store the submitted data in the database.</source>
+        <target>Sla de ingediende waarden op in de database.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.0">
+        <source>Target table</source>
+        <target>Doel tabel</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.1">
+        <source>The target table must contain a column for every form field.</source>
+        <target>Kies de tabel waar u de formuliergegevens in wilt opslaan.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.0">
+        <source>Submission method</source>
+        <target>Verwerkingsmethode formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.1">
+        <source>The default form submission method is POST.</source>
+        <target>Standaard formulier verwerkingsmethode is POST.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.0">
+        <source>Disable HTML5 validation</source>
+        <target>HTML5 validatie uitschakelen</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.1">
+        <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>Voeg het &lt;em&gt;novalidate&lt;/em&gt; attribuut toe aan de form tag.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.0">
+        <source>CSS ID/class</source>
+        <target>CSS ID/class</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Hier kunt u een style sheet ID (id attribute) en een of meerdere style sheet classes opgeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.0">
+        <source>Form ID</source>
+        <target>ID van het formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.1">
+        <source>The form ID is required to trigger a Contao module.</source>
+        <target>Het formulier-ID is vereist om een ​​Contao module te activeren.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.0">
+        <source>Tableless layout</source>
+        <target>Lay-out zonder tabellen</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>Maak het formulier zonder HTML tabellen.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.0">
+        <source>Allow HTML tags</source>
+        <target>HTML tags toestaan</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.1">
+        <source>Allow HTML tags in form fields.</source>
+        <target>Sta HTML tags toe in formulier velden.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum van aanpassing</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Geef datum en tijdstip van de laatste aanpassing.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title_legend">
+        <source>Title and redirect page</source>
+        <target>Titel en omleiding pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email_legend">
+        <source>Send form data</source>
+        <target>Verstuur dataformulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.store_legend">
+        <source>Store form data</source>
+        <target>Data opslaan op formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.expert_legend">
+        <source>Expert settings</source>
+        <target>Expert-instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_form.config_legend">
+        <source>Form configuration</source>
+        <target>Configuratie formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.0">
+        <source>New form</source>
+        <target>Nieuw formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.1">
+        <source>Create a new form</source>
+        <target>Maak een nieuw formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.0">
+        <source>Form details</source>
+        <target>Formulier details</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.1">
+        <source>Show the details of form ID %s</source>
+        <target>Toon details van formulier ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.0">
+        <source>Edit form</source>
+        <target>Bewerk formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.1">
+        <source>Edit form ID %s</source>
+        <target>Wijzig formulier ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.0">
+        <source>Edit form</source>
+        <target>Bewerk formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.1">
+        <source>Edit the form settings</source>
+        <target>Bewerk de formulier instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.0">
+        <source>Duplicate form</source>
+        <target>Dupliceer formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.1">
+        <source>Duplicate form ID %s</source>
+        <target>Dupliceer formulier ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.0">
+        <source>Delete form</source>
+        <target>Verwijder formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.1">
+        <source>Delete form ID %s</source>
+        <target>Verwijder formulier ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

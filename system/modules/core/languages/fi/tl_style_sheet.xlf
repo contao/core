@@ -1,0 +1,174 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style_sheet.php" source-language="en" target-language="fi">
+    <body>
+      <trans-unit id="tl_style_sheet.name.0">
+        <source>Name</source>
+        <target>Nimi</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.name.1">
+        <source>Please enter the style sheet name.</source>
+        <target>Ole hyvä ja anna tyylisivulle nimi</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.0">
+        <source>Disable CSS3PIE</source>
+        <target>Poista CSS3PIE käytöstä</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.1">
+        <source>Do not include the PIE.htc behavior file (adds CSS3 support to older IE versions).</source>
+        <target>Älä liitä PIE.htc-tiedostoa (lisää CSS3-tuen vanhempiin IE-selaimiin).</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.0">
+        <source>Embed images up to</source>
+        <target>Liitä kuvat</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.1">
+        <source>Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.</source>
+        <target>Tähän voit määritellä tavuina enimmäiskoon kuville, jotka liitetään tyylisivuun merkkijonona. Arvo 0 poistaa ominaisuuden käytöstä.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.0">
+        <source>Conditional comment</source>
+        <target>Ehdollinen kommentti</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.1">
+        <source>Conditional comments allow you to create Internet Explorer specific style sheets (e.g. &lt;em&gt;if lt IE 9&lt;/em&gt;).</source>
+        <target>Ehdollisilla kommenteilla voi tehdä Interner Explorerille räätälöityjä tyylisivuja (esim. &lt;em&gt;if lt IE 9&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.0">
+        <source>Media types</source>
+        <target>Mediatyypit</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.1">
+        <source>Here you can choose the media types the style sheet applies to.</source>
+        <target>Tässä voit valita mihin mediatyyppeihin tyylisivu pätee.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.0">
+        <source>Media query</source>
+        <target>Mediakysely</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.1">
+        <source>Here you can define the media type using a media query like &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;. The media types defined above will then be overwritten.</source>
+        <target>Tähän voit määritellä päätelaitteen tyypin käyttämällä mediakyselyä, kuten esim. &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;. Tällöin ylempänä valitut mediatyypit ylikirjoitetaan.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.0">
+        <source>Global variables</source>
+        <target>Yleiset muuttujat</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.1">
+        <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>Tähän voit määritellä globaaleja arvoja tyylisivulle (esim. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; tai &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.0">
+        <source>Source files</source>
+        <target>Lähdetiedostot</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.1">
+        <source>Here you can upload one or more .css files to be imported.</source>
+        <target>Tässä voit ladata yhden tai useamman .css-tiedoston tuotavaksi järjestelmään.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.0">
+        <source>Revision date</source>
+        <target>Revisiopäivämäärä</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Revision päivämäärä ja aika</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.title_legend">
+        <source>Name</source>
+        <target>Nimi</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
+        <target>Erikoisasetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media_legend">
+        <source>Media settings</source>
+        <target>Media-asetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars_legend">
+        <source>Global variables</source>
+        <target>Yleiset muuttujat</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_imported">
+        <source>Style sheet &quot;%s&quot; has been imported.</source>
+        <target>Tyylisivu &quot;%s&quot; on tuotu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_renamed">
+        <source>Style sheet &quot;%s&quot; has been imported as &quot;%s&quot;.</source>
+        <target>Tyylisivu &quot;%s&quot; on tuotu nimellä &quot;%s&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.0">
+        <source>New style sheet</source>
+        <target>Uusi tyylisivu</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.1">
+        <source>Create a new style sheet</source>
+        <target>Luo uuden tyylisivun</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.0">
+        <source>Style sheet details</source>
+        <target>Tyylisivun tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.1">
+        <source>Show the details of style sheet ID %s</source>
+        <target>Näyttää tyylisivun ID %s tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.0">
+        <source>Edit style sheet</source>
+        <target>Muokkaa tyylisivua</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.1">
+        <source>Edit style sheet ID %s</source>
+        <target>Muokkaa tyylisivua ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.0">
+        <source>Edit style sheet</source>
+        <target>Muokkaa tyylisivua</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>Muokkaa tyylisivun asetuksia</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.0">
+        <source>Move style sheet</source>
+        <target>Siirrä tyylisivu</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.1">
+        <source>Move style sheet ID %s</source>
+        <target>Siirrä tyylisivu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.0">
+        <source>Duplicate style sheet</source>
+        <target>Kopioi tyylisivu</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.1">
+        <source>Duplicate style sheet ID %s</source>
+        <target>Kopioi tyylisivu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.0">
+        <source>Delete style sheet</source>
+        <target>Poista tyylisivu</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.1">
+        <source>Delete style sheet ID %s</source>
+        <target>Poista tyylisivu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.0">
+        <source>CSS import</source>
+        <target>CSS-tuonti</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.1">
+        <source>Import existing CSS files</source>
+        <target>Tuo valmiita CSS-tiedostoja</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.0">
+        <source>Export style sheet</source>
+        <target>Vie tyylisivu</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.1">
+        <source>Export style sheet ID %s</source>
+        <target>Vie tyylisivu ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

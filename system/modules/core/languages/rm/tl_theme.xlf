@@ -1,0 +1,206 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_theme.php" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="tl_theme.name.0">
+        <source>Theme title</source>
+        <target>Titel dal theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.name.1">
+        <source>Please enter a unique theme title.</source>
+        <target>Endatescha in titel unic per il theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.0">
+        <source>Author</source>
+        <target>Autur</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.1">
+        <source>Please enter the name of the theme designer.</source>
+        <target>Endatescha il num dal designer dal theme.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.0">
+        <source>Folders</source>
+        <target>Ordinaturs</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.1">
+        <source>Please select the folders that belong to the theme from the files directory.</source>
+        <target>Tscherna ils ordinaturs che tutgan tar il theme ord l'ordinatur da datotecas.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.0">
+        <source>Templates folder</source>
+        <target>Ordinatur da templates</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.1">
+        <source>Here you can select a templates folder that will be exported with the theme.</source>
+        <target>Qua pos ti definir in ordinatur da templates che duai vegnir exportà cun il theme.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.0">
+        <source>Screenshot</source>
+        <target>Screenshot</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.1">
+        <source>Here you can choose a screenshot of the theme.</source>
+        <target>Qua pos ti inditgar in screenshot dal theme.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.0">
+        <source>Global variables</source>
+        <target>Variablas globalas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.1">
+        <source>Here you can define global variables for the style sheets of the theme (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>Qua pos ti definir variablas globalas per il theme (p. ex. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; u &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.0">
+        <source>Source files</source>
+        <target>Datotecas da funtauna</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.1">
+        <source>Here you can upload one or more .cto files to be imported.</source>
+        <target>Qua pos ti transferir ina u pliras datotecas da .cto per las importar.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.0">
+        <source>Revision date</source>
+        <target>Data da la versiun</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>La data ed il temp da l'ultima versiun</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.title_legend">
+        <source>Title and author</source>
+        <target>Titel ed autur</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.config_legend">
+        <source>Configuration</source>
+        <target>Configuraziun</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars_legend">
+        <source>Global variables</source>
+        <target>Variablas globalas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.theme_imported">
+        <source>Theme &quot;%s&quot; has been imported.</source>
+        <target>Il theme &quot;%s&quot; è vegnì importà.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.checking_theme">
+        <source>The theme data is being checked</source>
+        <target>Las datas dal theme vegnan controlladas</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_fields">
+        <source>Tables and fields</source>
+        <target>Tabellas e champs</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_field">
+        <source>The field &lt;strong&gt;%s&lt;/strong&gt; is missing in the database and will not be imported.</source>
+        <target>Il champ &lt;strong&gt;%s&lt;/strong&gt; manca en la banca da datas e na vegn betg importà.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_ok">
+        <source>The tables have been successfully checked.</source>
+        <target>Las tabellas èn vegnidas controlladas cun success.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_xml">
+        <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
+        <target>Il theme &quot;%s&quot; è donnegià e na po betg vegnir importà.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.custom_templates">
+        <source>Custom templates</source>
+        <target>Templates persunalisads</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.template_exists">
+        <source>The template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exists and will be overwritten.</source>
+        <target>Il template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exista e vegn surscrit.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates_ok">
+        <source>No conflicts detected.</source>
+        <target>Chattà nagins conflicts</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.0">
+        <source>Theme store</source>
+        <target>Butia da themes</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.1">
+        <source>Find more themes in the Contao theme store</source>
+        <target>Chatta dapli themes en la butia da themes da Contao</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.0">
+        <source>New theme</source>
+        <target>Nov theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.1">
+        <source>Create a new theme</source>
+        <target>Crear in nov theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.0">
+        <source>Theme details</source>
+        <target>Detagls dal theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.1">
+        <source>Show the details of theme ID %s</source>
+        <target>Mussar ils detagls dal theme cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.0">
+        <source>Edit theme</source>
+        <target>Modifitgar il theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.1">
+        <source>Edit theme ID %s</source>
+        <target>Modifitgar il theme cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.0">
+        <source>Delete theme</source>
+        <target>Stizzar il theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.1">
+        <source>Delete theme ID %s</source>
+        <target>Stizzar il theme cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.0">
+        <source>Style sheets</source>
+        <target>Stylesheets</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.1">
+        <source>Edit the style sheets of theme ID %s</source>
+        <target>Modifitgar ils style-sheets dal theme cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.0">
+        <source>Modules</source>
+        <target>Moduls</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.1">
+        <source>Edit the front end modules of theme ID %s</source>
+        <target>Modifitgar ils moduls da front-end dal theme cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.0">
+        <source>Layouts</source>
+        <target>Layouts</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.1">
+        <source>Edit the page layouts of theme ID %s</source>
+        <target>Modifitgar ils layouts da pagina dal theme cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.0">
+        <source>Image sizes</source>
+        <target>Grondezzas dal maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.1">
+        <source>Edit the image sizes of theme ID %s</source>
+        <target>Modifitgar las grondezzas da maletg dal theme cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.0">
+        <source>Theme import</source>
+        <target>Importar theme</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.1">
+        <source>Import new themes</source>
+        <target>Importar novs themes</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.0">
+        <source>Export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.1">
+        <source>Export theme ID %s</source>
+        <target>Exportar il theme cun l'ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

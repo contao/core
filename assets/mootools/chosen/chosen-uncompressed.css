@@ -257,7 +257,7 @@ select.chzn-select {
 /* @group Results */
 .chzn-container .chzn-results {
   margin: 0 4px 4px 0;
-  max-height: 228px; /* PATCH: 228px instead of 190px */
+  max-height: 192px; /* PATCH: 192px instead of 190px (.chzn-results li == 16px) */
   padding: 0 0 0 4px;
   position: relative;
   overflow-x: hidden;
@@ -268,7 +268,7 @@ select.chzn-select {
   padding: 0;
 }
 .chzn-container .chzn-results li {
-  line-height: 1.2; /* PATCH: 1.2 instead of 80% */
+  line-height: 13px; /* PATCH: 13px instead of 80% */
   padding: 1px 7px 2px; /* PATCH: 1px 7px 2px instead of 7px 7px 8px */
   margin: 0;
   list-style: none;

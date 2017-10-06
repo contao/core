@@ -1,0 +1,566 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_page.php" source-language="en" target-language="sk">
+    <body>
+      <trans-unit id="tl_page.title.0">
+        <source>Page name</source>
+        <target>Názov stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_page.title.1">
+        <source>Please enter the page name.</source>
+        <target>Prosím zadajte názov stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.0">
+        <source>Page alias</source>
+        <target>Alias stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.1">
+        <source>The page alias is a unique reference to the page which can be called instead of its numeric ID.</source>
+        <target>Alias stránky slúži ako náhrada ID stránky a taktiež môže byť zadaný v adresovom poli prehliadača.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.type.0">
+        <source>Page type</source>
+        <target>Typ stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_page.type.1">
+        <source>Please choose the page type.</source>
+        <target>Prosím zvoľte typ stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.0">
+        <source>Page title</source>
+        <target>Titulok stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.1">
+        <source>Please enter the page title.</source>
+        <target>Prosím zadajte titulok stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.language.0">
+        <source>Language</source>
+        <target>Jazyk</target>
+      </trans-unit>
+      <trans-unit id="tl_page.language.1">
+        <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English or &quot;en-US&quot; for American English).</source>
+        <target>Prosím zadajte jazyk stránky podľa štandardu ISO-639-1 (napr. &quot;en&quot; pre anglický jazyk alebo &quot;en-US&quot; pre americkú angličtinu).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.0">
+        <source>Robots tag</source>
+        <target>Tag pre vyhľadávacie roboty</target>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.1">
+        <source>Here you can define how search engines handle the page.</source>
+        <target>Tu môžete nastaviť ako majú túto stránku vnímať vyhľadávacie roboty.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.description.0">
+        <source>Page description</source>
+        <target>Popis stránky (description)</target>
+      </trans-unit>
+      <trans-unit id="tl_page.description.1">
+        <source>Here you can enter a short description of the page which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate between 150 and 300 characters.</source>
+        <target>Tu môžte uviesť krátky popis stránky, ktorý je dôležitý pre hodnotenie jej obsahu vyhľadávačmi ako je Google alebo Yahoo. Vyhľadávacie roboty väčšinou akceptujú dĺžku popisu 150 až 300 znakov.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.0">
+        <source>Redirect type</source>
+        <target>Typ presmerovania</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.1">
+        <source>Please choose the redirect type.</source>
+        <target>Zvoľte typ presmerovania.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Presmerovanie na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.</source>
+        <target>Vyberte stránku na ktorú budú návštevníci premerovaní. Ak ponecháte toto pole prázdne budú presmerovaní na úvodnú stránku.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.0">
+        <source>Language fallback</source>
+        <target>Presmerovanie na jazykovú verziu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.1">
+        <source>Show this page if there is none that matches the visitor's language.</source>
+        <target>Ukázať túto stránku, pokiaľ je operačný systém návštěvníka v danom jazyku alebo v nejakom inom, v ktorom nie je ani jedna z jazykových verzí Vašej webovej stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.0">
+        <source>Domain name</source>
+        <target>Názov domény</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.1">
+        <source>Here you can restrict the access to the website to a certain domain name.</source>
+        <target>Tu môžete omedziť prístup na webovú stránku na určité domény.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.0">
+        <source>E-mail address of the website administrator</source>
+        <target>E-mailová adresa administrátora webu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>Prosím zadajte e-mailovú adresu administrátora.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.0">
+        <source>Date format</source>
+        <target>Formát datumu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>Formát dátumu použiteľný PHP funkciou date().</target>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.0">
+        <source>Time format</source>
+        <target>Formátovanie času</target>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>Formát času použiteľný PHP funkciou date().</target>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.0">
+        <source>Date and time format</source>
+        <target>Formátovanie času a dátumu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>Formát dátumu a času použiteľný PHP funkciou date().</target>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.0">
+        <source>Create an XML sitemap</source>
+        <target>Vytvoriť XML mapu stránok</target>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.1">
+        <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
+        <target>Vytvoriť Google XML mapu stránok v koreňovom adresári.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.0">
+        <source>Sitemap file name</source>
+        <target>Názov súboru</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.1">
+        <source>Please enter the name of the sitemap file without extension.</source>
+        <target>Zadajte názov XML súboru mapy stránok (bez prípony).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.0">
+        <source>Use HTTPS in sitemaps</source>
+        <target>Použiť HTTPS v mape stránok</target>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.1">
+        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
+        <target>Vytvorí mapu stránok s internetovými odkazmi začínajúcimi: &lt;em&gt;https://&lt;/em&gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.0">
+        <source>Forward to another page</source>
+        <target>Presmerovať na inú stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.1">
+        <source>Redirect visitors to another page (e.g. a login page).</source>
+        <target>Presmerovať návštevníkov na inú stránku (napr. na prihlasovaciu stránku).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.0">
+        <source>Protect page</source>
+        <target>Chránená stránka</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.1">
+        <source>Restrict page access to certain member groups.</source>
+        <target>Umožniť prístup na stránku len povoleným skupínám členov.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.0">
+        <source>Allowed member groups</source>
+        <target>Povolené skupiny členov</target>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.1">
+        <source>These groups will be able to access the page.</source>
+        <target>Tieto skupiny budú mať povolený prístup na túto stránku.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.0">
+        <source>Assign a layout</source>
+        <target>Priradiť layout</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.1">
+        <source>Assign a page layout to the page and its subpages.</source>
+        <target>Priradiť layout stránke a jej podstránkam.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.0">
+        <source>Page layout</source>
+        <target>Layout stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.1">
+        <source>You can manage page layouts with the &quot;themes&quot; module.</source>
+        <target>Layout stránky môžete nastaviť v časti &quot;Témy vzhľadu&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.0">
+        <source>Mobile page layout</source>
+        <target>Vzhľad stránky pre mobilné zariadenia</target>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.1">
+        <source>This layout will be used if the visitor uses a mobile device.</source>
+        <target>Tento vzhľad sa aktivuje ak návštevník stránky použije mobilné zariadenie.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.0">
+        <source>Set cache timeout</source>
+        <target>Nastaviť dobu cache</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.1">
+        <source>Set a cache timeout value for the page and its subpages.</source>
+        <target>Nastaví, ako dlho budú uložené, navštívené stránky v počítači návštevníka.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.0">
+        <source>Cache timeout</source>
+        <target>Doba uloženia v cache</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.1">
+        <source>After this period, the cached version of the page will expire.</source>
+        <target>Po tejto dobe bude odstránená z cache uložená verzia danej stránky v počítači.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.0">
+        <source>Assign access rights</source>
+        <target>Prideliť prístupové práva</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.1">
+        <source>Access rights determine what back end users can do with the page.</source>
+        <target>Nastaví, čo budú môcť s touto stránkou vykonávať backend užívatelia Contao.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.0">
+        <source>Owner</source>
+        <target>Používateľ</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.1">
+        <source>Please select a user as the owner of the page.</source>
+        <target>Vyberte užívateľa ako vlastníka tejto stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.0">
+        <source>Group</source>
+        <target>Skupina</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.1">
+        <source>Please select a group as the owner of the page.</source>
+        <target>Vyberte skupinu ako vlastníka tejto stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.0">
+        <source>Access rights</source>
+        <target>Prístupové práva</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.1">
+        <source>Please assign the access rights for the page and its subpages.</source>
+        <target>Určite prosím práva pre túto stránku a jej podstránok.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.0">
+        <source>Do not search</source>
+        <target>Nevyhľadávať</target>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.1">
+        <source>Exclude the page from the search index.</source>
+        <target>Vynechať stránku pri vyhľadávaní. Neindexovať túto stránku.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.0">
+        <source>CSS class</source>
+        <target>CSS trieda (class)</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.1">
+        <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+        <target>Tieto štýly budú zahrnuté do navigácie a do tagu &lt;em&gt;body&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.0">
+        <source>Show in sitemap</source>
+        <target>Zobraziť v mape stránok</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.1">
+        <source>Here you can define whether the page is shown in the sitemap.</source>
+        <target>Tu môžte určiť, či sa stránka objaví v mape stránok Vášho webu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.0">
+        <source>Hide from navigation</source>
+        <target>Nezobraziť v navigácii</target>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.1">
+        <source>Hide the page from the navigation menu.</source>
+        <target>Nezobraziť stránku v navigačnom menu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.0">
+        <source>Show to guests only</source>
+        <target>Zobraziť iba bežným návštevníkom</target>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.1">
+        <source>Hide the page if there is an authenticated user.</source>
+        <target>Skryť stránku v navigačnom menu ak je registrovaný užívateľ prihlásený.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.0">
+        <source>Tab index</source>
+        <target>Index tabulátora</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.1">
+        <source>The position of the navigation item in the tabbing order.</source>
+        <target>Prechádzanie navigácie pomocou tabulátora.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.0">
+        <source>Access key</source>
+        <target>Klávesová skratka</target>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.1">
+        <source>A navigation item can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+        <target>Položka navigácie može byť zvolená stlačením klávesy [ALT] alebo [CTRL] a príslušného znaku.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.published.0">
+        <source>Publish page</source>
+        <target>Publikovať stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.published.1">
+        <source>Make the page publicly visible on the website.</source>
+        <target>Zverejniť stránku na webe.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.start.0">
+        <source>Show from</source>
+        <target>Zobrazovať od</target>
+      </trans-unit>
+      <trans-unit id="tl_page.start.1">
+        <source>Do not show the page on the website before this day.</source>
+        <target>Nezobrazovať stránku pred týmto dňom.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.0">
+        <source>Show until</source>
+        <target>Zobrazovať do</target>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.1">
+        <source>Do not show the page on the website on and after this day.</source>
+        <target>Nezobrazovať stránku po tomto dni.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.title_legend">
+        <source>Name and type</source>
+        <target>Názov a typ</target>
+      </trans-unit>
+      <trans-unit id="tl_page.meta_legend">
+        <source>Meta information</source>
+        <target>Informácie v Meta tagu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.system_legend">
+        <source>System settings</source>
+        <target>Nastavenia systému</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect_legend">
+        <source>Redirect settings</source>
+        <target>Nastavenia presmerovania</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns_legend">
+        <source>DNS settings</source>
+        <target>DNS nastavenia</target>
+      </trans-unit>
+      <trans-unit id="tl_page.global_legend">
+        <source>Global settings</source>
+        <target>Všeobecné nastavenia</target>
+      </trans-unit>
+      <trans-unit id="tl_page.mobile_legend">
+        <source>Mobile settings</source>
+        <target>Nastavenie pre mobilné zariadenia</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap_legend">
+        <source>XML sitemap</source>
+        <target>XML mapa stránok</target>
+      </trans-unit>
+      <trans-unit id="tl_page.forward_legend">
+        <source>Auto-forward</source>
+        <target>Automatické presmerovanie</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected_legend">
+        <source>Access protection</source>
+        <target>Chránený prístup</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout_legend">
+        <source>Layout settings</source>
+        <target>Nastavenia layoutu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache_legend">
+        <source>Cache settings</source>
+        <target>Cache nastavenia</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod_legend">
+        <source>Access rights</source>
+        <target>Prístupové práva</target>
+      </trans-unit>
+      <trans-unit id="tl_page.search_legend">
+        <source>Search settings</source>
+        <target>Nastavenia vyhľadávania</target>
+      </trans-unit>
+      <trans-unit id="tl_page.expert_legend">
+        <source>Expert settings</source>
+        <target>Rozšírené nastavenia</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabnav_legend">
+        <source>Keyboard navigation</source>
+        <target>Ovládanie pomocou klávesových skratiek</target>
+      </trans-unit>
+      <trans-unit id="tl_page.publish_legend">
+        <source>Publish settings</source>
+        <target>Nastavenia pre publikovanie</target>
+      </trans-unit>
+      <trans-unit id="tl_page.permanent">
+        <source>301 Permanent redirect</source>
+        <target>301 Trvalé presmerovanie</target>
+      </trans-unit>
+      <trans-unit id="tl_page.temporary">
+        <source>302 Temporary redirect</source>
+        <target>302 Dočasné presmerovanie</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_default">
+        <source>Default</source>
+        <target>Štandardne</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_always">
+        <source>Show always</source>
+        <target>Zobrazovať vždy</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_never">
+        <source>Show never</source>
+        <target>Nikdy nezobrazovať</target>
+      </trans-unit>
+      <trans-unit id="tl_page.new.0">
+        <source>New page</source>
+        <target>Nová stránka</target>
+      </trans-unit>
+      <trans-unit id="tl_page.new.1">
+        <source>Create a new page</source>
+        <target>Vytvoriť novú stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.show.0">
+        <source>Page details</source>
+        <target>Detaily stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_page.show.1">
+        <source>Show the details of page ID %s</source>
+        <target>Zobraziť detaily stránky ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.0">
+        <source>Edit page</source>
+        <target>Upraviť stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.1">
+        <source>Edit page ID %s</source>
+        <target>Upraviť stránku ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.0">
+        <source>Move page</source>
+        <target>Premiestniť stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.1">
+        <source>Move page ID %s</source>
+        <target>Premiestniť stránku ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.0">
+        <source>Duplicate page</source>
+        <target>Kopírovať stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.1">
+        <source>Duplicate page ID %s</source>
+        <target>Kopírovať stránku ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.0">
+        <source>Duplicate with subpages</source>
+        <target>Kopírovať stránku vrátane jej podstránok</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.1">
+        <source>Duplicate page ID %s with its subpages</source>
+        <target>Kopírovať stránku ID %s vrátane jej podstránok</target>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.0">
+        <source>Delete page</source>
+        <target>Odstrániť stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.1">
+        <source>Delete page ID %s</source>
+        <target>Odstrániť stránku ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.0">
+        <source>Publish/unpublish page</source>
+        <target>Zverejniť/nezverejniť stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.1">
+        <source>Publish/unpublish page ID %s</source>
+        <target>Zverejniť/nezverejniť stránku ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.0">
+        <source>Paste after</source>
+        <target>Vložiť za</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.1">
+        <source>Paste after page ID %s</source>
+        <target>Vložiť za stránku ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.0">
+        <source>Paste into</source>
+        <target>Vložiť do</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>Vložiť do stránky ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.0">
+        <source>Edit articles</source>
+        <target>Upraviť články</target>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.1">
+        <source>Edit the articles of page ID %s</source>
+        <target>Upraviť články stránky ID %s</target>
+      </trans-unit>
+      <trans-unit id="CACHE.0">
+        <source>0 (do not cache)</source>
+        <target>0 (bez cache)</target>
+      </trans-unit>
+      <trans-unit id="CACHE.5">
+        <source>5 seconds</source>
+        <target>5 sekúnd</target>
+      </trans-unit>
+      <trans-unit id="CACHE.15">
+        <source>15 seconds</source>
+        <target>15 sekúnd</target>
+      </trans-unit>
+      <trans-unit id="CACHE.30">
+        <source>30 seconds</source>
+        <target>30 sekúnd</target>
+      </trans-unit>
+      <trans-unit id="CACHE.60">
+        <source>60 seconds</source>
+        <target>60 sekúnd</target>
+      </trans-unit>
+      <trans-unit id="CACHE.300">
+        <source>5 minutes</source>
+        <target>5 minút</target>
+      </trans-unit>
+      <trans-unit id="CACHE.900">
+        <source>15 minutes</source>
+        <target>15 minút</target>
+      </trans-unit>
+      <trans-unit id="CACHE.1800">
+        <source>30 minutes</source>
+        <target>30 minút</target>
+      </trans-unit>
+      <trans-unit id="CACHE.3600">
+        <source>60 minutes</source>
+        <target>60 minút</target>
+      </trans-unit>
+      <trans-unit id="CACHE.10800">
+        <source>3 hours</source>
+        <target>3 hodiny</target>
+      </trans-unit>
+      <trans-unit id="CACHE.21600">
+        <source>6 hours</source>
+        <target>6 hodiny</target>
+      </trans-unit>
+      <trans-unit id="CACHE.43200">
+        <source>12 hours</source>
+        <target>12 hodiny</target>
+      </trans-unit>
+      <trans-unit id="CACHE.86400">
+        <source>24 hours</source>
+        <target>24 hodiny</target>
+      </trans-unit>
+      <trans-unit id="CACHE.259200">
+        <source>3 days</source>
+        <target>3 dni</target>
+      </trans-unit>
+      <trans-unit id="CACHE.604800">
+        <source>7 days</source>
+        <target>7 dní</target>
+      </trans-unit>
+      <trans-unit id="CACHE.2592000">
+        <source>30 days</source>
+        <target>30 dní</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

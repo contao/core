@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_style.invisible.0">
+        <source>Invisible</source>
+        <target>Skryté</target>
+      </trans-unit>
+      <trans-unit id="tl_style.invisible.1">
+        <source>Do not export the format definition.</source>
+        <target>Nexportovat formátování.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.0">
+        <source>Selector</source>
+        <target>Selektor</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.1">
+        <source>The selector defines to which element(s) the format definition applies.</source>
+        <target>Selektor určuje, k jakému elementu se dané formátování vztahuje.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.0">
+        <source>Category</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.1">
+        <source>Categories can be used to group format definitions in the back end.</source>
+        <target>Kategorie lze použít k uskupení nadefinovaných styl v backendu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.0">
+        <source>Comment</source>
+        <target>Komentář</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.1">
+        <source>Here you can add a comment.</source>
+        <target>Sem můžete přidat komentář.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.0">
+        <source>Size</source>
+        <target>Rozměry</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.1">
+        <source>Width, height, min-width, min-height, max-width and max-height.</source>
+        <target>max., min. a běžná šířka (min-width, max-width, width), max., min. a běžná výška (min-height, max-height, height)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.0">
+        <source>Width</source>
+        <target>Šířka</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.1">
+        <source>Here you can enter the element's width.</source>
+        <target>Zde můžete zadat šířku elementu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.0">
+        <source>Height</source>
+        <target>Výška</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.1">
+        <source>Here you can enter the element's height.</source>
+        <target>Zde můžete zadat výšku elementu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.0">
+        <source>Minimum width</source>
+        <target>Minimální šířka</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.1">
+        <source>Here you can enter the element's minimum width.</source>
+        <target>Zde můžete určit minimální šířku daného elementu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.0">
+        <source>Minimum height</source>
+        <target>Minimální výška</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.1">
+        <source>Here you can enter the element's minimum height.</source>
+        <target>Zde můžete určit minimální šířku daného elementu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.0">
+        <source>Maximum width</source>
+        <target>Maximální šířka</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.1">
+        <source>Here you can enter the element's maximum width.</source>
+        <target>Zde můžete určit maximální šířku daného elementu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.0">
+        <source>Maximum height</source>
+        <target>Maximální výška</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.1">
+        <source>Here you can enter the element's maximum height.</source>
+        <target>Zde můžete určit maximální výšku daného elementu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.0">
+        <source>Position</source>
+        <target>Umístění</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.1">
+        <source>Position, float, clear, overflow and display.</source>
+        <target>umístění (position), obtékání (float), smazání (clear), přetákání (overflow) a zobrazení (display).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.0">
+        <source>Position</source>
+        <target>Umístění</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.1">
+        <source>Here you can enter the top, right, bottom and left position.</source>
+        <target>Zde můžete určit umístění elementu - nahoře, vpravo, dole nebo vlevo.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.0">
+        <source>Position type</source>
+        <target>Typ umístění</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.1">
+        <source>Here you can choose the position type.</source>
+        <target>Zde můžete zvolit typ umístění.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.0">
+        <source>Float</source>
+        <target>Obtékání (Float)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.1">
+        <source>Here you can choose the float type.</source>
+        <target>Zde můžete zvolit typ obtékání.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.0">
+        <source>Clear</source>
+        <target>Smazání (Clear)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.1">
+        <source>Here you can choose the clear type.</source>
+        <target>Zde můžete zvolit typ smazání (clear).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.0">
+        <source>Overflow</source>
+        <target>Přetékání (Overflow)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.1">
+        <source>Here you can choose the overflow behaviour.</source>
+        <target>Zde můžete zvolit typ přetékání (overflow).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.0">
+        <source>Display</source>
+        <target>Zobrazení (Display)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.1">
+        <source>Here you can choose the display type.</source>
+        <target>Zde můžete vybrat typ zobrazení.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.0">
+        <source>Margin, padding and alignment</source>
+        <target>Odsazení zvenčí, uvnitř a uspořádání</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.1">
+        <source>Margin, padding, align, vertical-align, text-align and white-space.</source>
+        <target>Odsazení zvenčí, zevnitř, vertikální uspořádání, zarovnání textu a zalamování řádků</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.0">
+        <source>Margin</source>
+        <target>Vnější odsazení (margin)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>Zde můžete zadat odsazení zeshora (top), zprava (right), zespodu (bottom) a zleva (left).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.0">
+        <source>Padding</source>
+        <target>Vnitřní odsazení (padding)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.1">
+        <source>Here you can enter the top, right, bottom and left padding.</source>
+        <target>Zde můžete zadat odsazení zeshora (top), zprava (right), zespodu (bottom) a zleva (left).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.0">
+        <source>Element alignment</source>
+        <target>Uspořádání elementu</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.1">
+        <source>To align an element, its left and right margin will be overwritten.</source>
+        <target>Pro uspořádání elementu bude přepsán pravý a levý vnější odstup.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.0">
+        <source>Vertical alignment</source>
+        <target>Vertikální uspořádání</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.1">
+        <source>Here you can choose the vertical alignment.</source>
+        <target>Zde můžete zvolit vertikální uspořádání.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.0">
+        <source>Text alignment</source>
+        <target>Umístění textu</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.1">
+        <source>Here you can choose the horizontal text alignment.</source>
+        <target>Zde můžete zvolit horizontální uspořádání textu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>Zalamování řádků</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Zde můžete určit, jak se bude řešit zalamování řádků uvnitř elementu. </target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.0">
+        <source>Background</source>
+        <target>Pozadí</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.1">
+        <source>Background-color, background-image, background-position, background-repeat, box-shadow and linear-gradient.</source>
+        <target>Barva pozadí (background-color), obrázek pozadí (background-image), umístění pozadí (background-position) a opakování pozadí (background-repeat).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.0">
+        <source>Background color and opacity</source>
+        <target>Barva pozadí</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.1">
+        <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Zde můžete zadat hexidecimální barvu pozadí (např. ff0000 pro červenou).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.0">
+        <source>Background image</source>
+        <target>Obrázek pozadí</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.1">
+        <source>Here you can enter the path to a background image.</source>
+        <target>Zde můžete uvést cestu k obrázku pozadí.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.0">
+        <source>Background position</source>
+        <target>Umístění pozadí</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.1">
+        <source>Here you can select the position of the background image.</source>
+        <target>Zde můžete vybrat pozici obrázku pozadí.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.0">
+        <source>Background repeat</source>
+        <target>Opakování pozadí</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.1">
+        <source>Here you can select the repeating mode.</source>
+        <target>Zde můžete vybrat možnost opakování.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.0">
+        <source>Shadow size</source>
+        <target>Velikost stínu</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.1">
+        <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+        <target>Zde můžete zadat umístění, odsazení a dosah stínu v ose X a Y.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.0">
+        <source>Shadow color and opacity</source>
+        <target>Barva stínu</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.1">
+        <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Zde můžete určit barvu stínu (např. ff0000 pro červenou) a také průhlednost v procentech (např. 75)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.0">
+        <source>Gradient angle</source>
+        <target>Druh přechodu</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.1">
+        <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+        <target>Zde můžete určit druh / průběh přechodu (např. &lt;em&gt;-45deg&lt;/em&gt; nebo jeho začátek (např. &lt;em&gt;top&lt;/em&gt; nebo &lt;em&gt;lef bottom&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.0">
+        <source>Gradient colors</source>
+        <target>Barva přechodu</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.1">
+        <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
+        <target>Zde můžete určit jednotlivé barvy přechodu (např. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.0">
+        <source>Border</source>
+        <target>Rámeček</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.1">
+        <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
+        <target>Šířka rámečku (border-width), Druh rámečku (border-style), barva rámečku (border-color) a chování rámečku (border-collapse).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.0">
+        <source>Border width</source>
+        <target>Velikost rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.1">
+        <source>Here you can enter the top, right, bottom and left border width.</source>
+        <target>Zde můžete zadat šířku rámečku nahoře, vpravo, dole a vlevo.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.0">
+        <source>Border style</source>
+        <target>Styl rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.1">
+        <source>Here you can choose the border style.</source>
+        <target>Zde můžete zvolit styl rámečku.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.0">
+        <source>Border color and opacity</source>
+        <target>Barva rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.1">
+        <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Zde můžete zadat hexidecimální barvu rámečku (např. ff0000 pro červenou).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.0">
+        <source>Border radius</source>
+        <target>Zaoblení rohů rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.1">
+        <source>Here you can enter the top, right, bottom and left border radius.</source>
+        <target>Zde můžete určit poměr zabolení rohů rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.0">
+        <source>Border handling</source>
+        <target>Model rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.1">
+        <source>Here you can choose the border handling.</source>
+        <target>Zde můžete zvolit model rámečku.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.0">
+        <source>Border spacing</source>
+        <target>Odsazení rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.1">
+        <source>Here you can enter the border spacing.</source>
+        <target>Zde můžete určit odsazení rámečku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.0">
+        <source>Font</source>
+        <target>Písmo</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.1">
+        <source>Font-family, font-size, font-color, line-height, font-style, text-transform, text-indent, letter-spacing and word-spacing.</source>
+        <target>Druh písma (font-family), velkost písma (font-size), barva písma (font-color), výška řádku (line-height), formát písma (font-style) a odazení písma (white-space).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.0">
+        <source>Font family</source>
+        <target>Druh písma</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.1">
+        <source>Here you can enter a comma separated list of font types.</source>
+        <target>Zde můžete zadat seznam druhů písma oddělené čárkou.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.0">
+        <source>Font size</source>
+        <target>Velikost písma</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.1">
+        <source>Here you can enter the font size.</source>
+        <target>Zde můžete zadat velikost písma.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.0">
+        <source>Font color and opacity</source>
+        <target>Barva písma</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.1">
+        <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Zde můžete zadat hexidecimální barvu písma (např. ff0000 pro červenou).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.0">
+        <source>Line height</source>
+        <target>Výška řádku</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.1">
+        <source>Here you can define the line height.</source>
+        <target>Zde můžete určit výšku řádku.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.0">
+        <source>Font style</source>
+        <target>Styl písma</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.1">
+        <source>Here you can choose one or more font styles.</source>
+        <target>Zde můžete zvolit jeden nebo více stylů písma.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.0">
+        <source>Text transform</source>
+        <target>Velikost písmen</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.1">
+        <source>Here you can choose a text transformation mode.</source>
+        <target>Zde můžete určit velikost písmen</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.0">
+        <source>Text indent</source>
+        <target>Odsazení textu</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.1">
+        <source>Here you can enter a text indentation.</source>
+        <target>Zde můžete určit odsazení textu (výchozí: 0px)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.0">
+        <source>Letter spacing</source>
+        <target>Odsazení mezi znaky</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.1">
+        <source>Here you can modify the letter spacing (default: 0px).</source>
+        <target>Zde můžete určit odsazení mezi znaky (výchozí: 0px)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.0">
+        <source>Word spacing</source>
+        <target>Odsazení mezi slovy</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.1">
+        <source>Here you can modify the word spacing (default: 0px).</source>
+        <target>Zde můžete určit odsazení mezi slovy (výchozí: 0px)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.0">
+        <source>List</source>
+        <target>Seznam</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.1">
+        <source>List-style-type and list-style-image.</source>
+        <target>Druh vzhledu seznamu (list-style-type) a obrázek místo běžných zarážek (list-style-image).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.0">
+        <source>List symbol</source>
+        <target>Symboly seznamů</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.1">
+        <source>Here you can choose a list symbol.</source>
+        <target>Zde vyberte symbol seznamu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.0">
+        <source>Custom symbol</source>
+        <target>Vlastní symbol</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.1">
+        <source>Here you can enter the path to an individual symbol.</source>
+        <target>Zde můžete zadat cestu k vlastnímu symbolu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.0">
+        <source>Custom code</source>
+        <target>Vlastní kód</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.1">
+        <source>Here you can enter custom CSS code.</source>
+        <target>Zde můžete zadat vlastní kód kaskádovitého stylu.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector_legend">
+        <source>Selector and category</source>
+        <target>Selektor a kategorie</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size_legend">
+        <source>Size</source>
+        <target>Rozměry</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position_legend">
+        <source>Position</source>
+        <target>Umístění</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align_legend">
+        <source>Margin and alignment</source>
+        <target>Odsazení a uspořádání</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background_legend">
+        <source>Background settings</source>
+        <target>Pozadí</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border_legend">
+        <source>Border settings</source>
+        <target>Rám</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font_legend">
+        <source>Font settings</source>
+        <target>Písmo</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list_legend">
+        <source>List settings</source>
+        <target>Seznam</target>
+      </trans-unit>
+      <trans-unit id="tl_style.custom_legend">
+        <source>Custom code</source>
+        <target>Vlastní kód</target>
+      </trans-unit>
+      <trans-unit id="tl_style.normal">
+        <source>normal</source>
+        <target>normální</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bold">
+        <source>bold</source>
+        <target>tučné</target>
+      </trans-unit>
+      <trans-unit id="tl_style.italic">
+        <source>italic</source>
+        <target>kurzíva</target>
+      </trans-unit>
+      <trans-unit id="tl_style.underline">
+        <source>underlined</source>
+        <target>podtržené</target>
+      </trans-unit>
+      <trans-unit id="tl_style.notUnderlined">
+        <source>not underlined</source>
+        <target>nepodtržené</target>
+      </trans-unit>
+      <trans-unit id="tl_style.line-through">
+        <source>line-through</source>
+        <target>přeškrtnuté</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overline">
+        <source>overlined</source>
+        <target>nadtržené</target>
+      </trans-unit>
+      <trans-unit id="tl_style.small-caps">
+        <source>small-caps</source>
+        <target>malé kapitálky</target>
+      </trans-unit>
+      <trans-unit id="tl_style.disc">
+        <source>dot</source>
+        <target>tečka</target>
+      </trans-unit>
+      <trans-unit id="tl_style.circle">
+        <source>circle</source>
+        <target>kruh</target>
+      </trans-unit>
+      <trans-unit id="tl_style.square">
+        <source>square</source>
+        <target>čtverec</target>
+      </trans-unit>
+      <trans-unit id="tl_style.decimal">
+        <source>figures</source>
+        <target>čísla</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-roman">
+        <source>upper latin figures</source>
+        <target>latinská čísla velkými písmeny</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-roman">
+        <source>lower latin figures</source>
+        <target>latinská čísla malými písmeny</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-alpha">
+        <source>upper characters</source>
+        <target>velká písmena</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-alpha">
+        <source>lower characters</source>
+        <target>malá písmena</target>
+      </trans-unit>
+      <trans-unit id="tl_style.uppercase">
+        <source>uppercase</source>
+        <target>velká písmena (majuskule)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lowercase">
+        <source>lowercase</source>
+        <target>všechna malá písmena (miniskule)</target>
+      </trans-unit>
+      <trans-unit id="tl_style.capitalize">
+        <source>capitalize</source>
+        <target>kapitálky</target>
+      </trans-unit>
+      <trans-unit id="tl_style.none">
+        <source>none</source>
+        <target>žádný symbol</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.0">
+        <source>New format definition</source>
+        <target>Nový nadefinovaný styl</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.1">
+        <source>Create a new format definition</source>
+        <target>Vytvořit nový nadefinovaný styl</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.0">
+        <source>Format definition details</source>
+        <target>Zobrazit podrobnosti</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.1">
+        <source>Show the details of format definition ID %s</source>
+        <target>Zobrazit podrobnosti k nadefinovému stylu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.0">
+        <source>Edit format definition</source>
+        <target>Upravit nadefinovaný styl</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.1">
+        <source>Edit format definition ID %s</source>
+        <target>Upravit nadefinovaný styl ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.0">
+        <source>Move format definition</source>
+        <target>Přesunout naformátovaný styl</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.1">
+        <source>Move format definition ID %s</source>
+        <target>Přesunout nadefinovaný styl ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.0">
+        <source>Duplicate format definition</source>
+        <target>Duplikovat nadefinovaný styl</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.1">
+        <source>Duplicate format definition ID %s</source>
+        <target>Duplikovat nadefinovaný styl ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.0">
+        <source>Delete format definition</source>
+        <target>Smazat nadefinovaný styl</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.1">
+        <source>Delete format definition ID %s</source>
+        <target>Smazat nadefinovaný styl ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.0">
+        <source>Edit style sheet</source>
+        <target>Upravit styl</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>Upravit kaskádovité styly</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Vložit nahoru</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.1">
+        <source>Paste after format definition ID %s</source>
+        <target>Vložit za ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Přidat nahoře</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.1">
+        <source>Add new after format definition ID %s</source>
+        <target>Přidat nové formátování za ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Změnit zobrazení</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.1">
+        <source>Toggle the visibility of format definition ID %s</source>
+        <target>Změnit zobrazení formátování ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

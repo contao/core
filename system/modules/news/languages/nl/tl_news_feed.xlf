@@ -1,0 +1,138 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_feed.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_news_feed.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.title.1">
+        <source>Please enter a feed title.</source>
+        <target>Geef een titel voor de feed op.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.alias.0">
+        <source>Feed alias</source>
+        <target>Feed alias</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.alias.1">
+        <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
+        <target>Hier kunt u een unieke bestandsnaam (zonder extensie) opgeven. Het XML-feed bestand wordt automatisch aangemaakt in de &lt;em&gt; share &lt;/em&gt; directory van uw Contao installatie, bv als &lt;em&gt; share/name.xml &lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.language.0">
+        <source>Feed language</source>
+        <target>Taal Feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Geef de feed taal op volgens de ISO-639 standaard (b.v.&lt;em&gt;en&lt;/em&gt; of&lt;em&gt;en-us&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.archives.0">
+        <source>News archives</source>
+        <target>Nieuws archieven</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.archives.1">
+        <source>Here you can choose the news archives to be included in the feed.</source>
+        <target>Kies hier de nieuws archieven welke opgenomen dienen te worden in de feed.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.format.0">
+        <source>Feed format</source>
+        <target>Feed format</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.format.1">
+        <source>Please choose a feed format.</source>
+        <target>Kies een feed format.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.source.0">
+        <source>Export settings</source>
+        <target>Export instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.source.1">
+        <source>Here you can choose what will be exported.</source>
+        <target>Kies wat geëxporteerd moet worden.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.maxItems.0">
+        <source>Maximum number of items</source>
+        <target>Maximaal aantal items</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.maxItems.1">
+        <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>Hier kunt u het aantal feed items beperken.Stel in op 0 om alles te exporteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.feedBase.0">
+        <source>Base URL</source>
+        <target>Basis URL</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.feedBase.1">
+        <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>Geef de basis-URL met protocol (bijvoorbeeld &lt;em&gt;http://&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.description.0">
+        <source>Feed description</source>
+        <target>Beschrijving feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.description.1">
+        <source>Here you can enter a short description of the news feed.</source>
+        <target>Hier kunt u een korte beschrijving van de nieuws feed opgeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.title_legend">
+        <source>Title and language</source>
+        <target>Titel en taal</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.archives_legend">
+        <source>News archives</source>
+        <target>Nieuws archieven</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.config_legend">
+        <source>Feed settings</source>
+        <target>Feed instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.source_teaser">
+        <source>News teasers</source>
+        <target>Teasers van nieuwsberichten</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.source_text">
+        <source>Full articles</source>
+        <target>Volledige nieuwsberichten</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.new.0">
+        <source>New feed</source>
+        <target>Nieuwe feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.new.1">
+        <source>Create a new feed</source>
+        <target>Maak een nieuwe feed aan</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.show.0">
+        <source>Feed details</source>
+        <target>Feed details</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.show.1">
+        <source>Show the details of feed ID %s</source>
+        <target>Toon details van feed ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.edit.0">
+        <source>Edit feed</source>
+        <target>Bewerk feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.edit.1">
+        <source>Edit feed ID %s</source>
+        <target>Bewerk feed ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.copy.0">
+        <source>Duplicate feed</source>
+        <target>Dupliceer feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.copy.1">
+        <source>Duplicate feed ID %s</source>
+        <target>Dupliceer feed ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.delete.0">
+        <source>Delete feed</source>
+        <target>Verwijder feed</target>
+      </trans-unit>
+      <trans-unit id="tl_news_feed.delete.1">
+        <source>Delete feed ID %s</source>
+        <target>Verwijder feed  ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

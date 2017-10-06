@@ -1,0 +1,653 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_settings.php" source-language="en" target-language="sk">
+    <body>
+      <trans-unit id="tl_settings.websiteTitle.0">
+        <source>Website title</source>
+        <target>Nadpis webstránok</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websiteTitle.1">
+        <source>Please enter the title of the website.</source>
+        <target>Prosím zadajte nadpis webstránok.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.0">
+        <source>E-mail address of the system administrator</source>
+        <target>E-mailová adresa administrátora</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>Prosím zadajte e-mailovú adresu administrátora.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.0">
+        <source>Date format</source>
+        <target>Formát datumu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>Formát dátumu použiteľný PHP funkciou date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.0">
+        <source>Time format</source>
+        <target>Formátovanie času</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>Formát času použiteľný PHP funkciou date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.0">
+        <source>Date and time format</source>
+        <target>Formátovanie času a dátumu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>Formát dátumu a času použiteľný PHP funkciou date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.0">
+        <source>Time zone</source>
+        <target>Časová zóna</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.1">
+        <source>Please select the server time zone.</source>
+        <target>Vyberte vašu časovú zónu.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.0">
+        <source>Relative path to the Contao directory</source>
+        <target>Relatívna cesta do Contao adresára</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.1">
+        <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
+        <target>Relatívnu cestu do Contao adresára obvykle automaticky nastaví inštalačný nástroj.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.0">
+        <source>Character set</source>
+        <target>Znaková sada</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.1">
+        <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
+        <target>Doporučujeme používať znakovú sadu UTF-8, aby sa špeciálne znaky zobrazovali správne.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.0">
+        <source>Disable the command scheduler</source>
+        <target>Vypnúťcommand scheduler</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.1">
+        <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
+        <target>Vypne prednastavený periodický plánovač údržby systému. V tom prípade budete musieť sami nastaviť iný plánovač.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.0">
+        <source>Minify the markup</source>
+        <target>Minimalizovať markup</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.1">
+        <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Minimalizuje HTML markup pred odoslaním do prehliadača (vyžaduje rozšírenie »PHP tidy«).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.0">
+        <source>Compress scripts</source>
+        <target>Komprimovať scripty</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.1">
+        <source>Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.</source>
+        <target>Vytvorí zkomprimovanú verziu kaskádových štýlov (CSS) a JavaScriptových súborov. Vyžaduje povolené využívanie .htaccess súboru.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.0">
+        <source>Items per page</source>
+        <target>Počet záznamov na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.1">
+        <source>Here you can define the number of items per page in the back end.</source>
+        <target>Tu môžte zadefinovať počet zobrazených položiek na stránku backendu.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.0">
+        <source>Maximum items per page</source>
+        <target>Maximálny počet položiek na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.1">
+        <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
+        <target>Táto možnosť prepíše požiadavku backend užívateľa, pokiaľ zvolí &quot;zobraziť všetky záznamy&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.0">
+        <source>Exclude folders from synchronization</source>
+        <target>Vynechať adresáre zo synchronizácie</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.1">
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Tu môžete zadať zoznam adresárov oddelených čiarkou, ktoré budú vylúčené zo synchronizácie (napr. &lt;em&gt;prílohy,music_academy&lt;/em&gt;). Upozornenie: Vylúčené adresáre nemôžu byť použité ako zdroj dát pre obrázky alebo súborov na stiahnutie.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.0">
+        <source>Do not collapse elements</source>
+        <target>Nezbaľovať elementy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.1">
+        <source>Do not collapse elements in the back end preview.</source>
+        <target>Ponechá elemety rozbalené v prostredí backendu.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.0">
+        <source>URL suffix</source>
+        <target>Prípona vytvorených stránok</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.1">
+        <source>The URL suffix will be added to the URI string to simulate static documents.</source>
+        <target>Prípona bude pridaná ku každému názvu stránky pri prevode na statické stránky. (napr. nieco.html).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.0">
+        <source>Cache mode</source>
+        <target>Mód cachovania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.1">
+        <source>Here you can select the cache mode.</source>
+        <target>Tu môžete nastaviť mód cachovania.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Dôveryhodné proxy servery</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Tu môžte zadať čiarkami oddelený zoznam IP adries dôveryhodných proxy serverov.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+        <target>SSL proxy doména</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Ak sú vaše webstránky dostupné cez SSL proxy server, tu zadajte svoju doménu (napr. &lt;em&gt;sslsites.de&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.0">
+        <source>Anonymize IP addresses</source>
+        <target>Anonymizovať IP adresy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.1">
+        <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
+        <target>Anonymizuje všetky IP adresy, ktoré sú uložené v databáze, okrem &lt;em&gt;tl_session&lt;/em&gt; tabuľky. Táto IP adresa je spojená s aktuálnou reláciou (session) z bezpečnostných dôvodov.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.0">
+        <source>Anonymize Google Analytics</source>
+        <target>Anonymizovať Google Analytics</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.1">
+        <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
+        <target>Anonymizuje IP adresy, ktoré sa posielajú do Google Analytics.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.0">
+        <source>Rewrite URLs</source>
+        <target>Prepísať URL adresy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.1">
+        <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
+        <target>Contao bude prepisovať všetky stránky do statického kódu HTML (bez fragmentu &lt;em&gt;index.php&lt;/em&gt; v URL adrese). Táto funkcia vyžaduje zapnutý &quot;mod_rewrite&quot;. Premenujte &quot;.htaccess.default&quot; na &quot;.htaccess&quot; a v prípade nutnosti pridajte nastavenia pre RewriteBase.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.0">
+        <source>Add the language to the URL</source>
+        <target>Pridať jazyk do URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.1">
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Pridá jazykový reťazec ako prvý URL parameter (napr. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.0">
+        <source>Do not redirect empty URLs</source>
+        <target>Nepresmerovávať prázdne URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.1">
+        <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+        <target>Namiesto presmerovania na &quot;koreňovú&quot; stránku daného jazyka bude zobrazená prázdná stránka (nedoporučené).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.0">
+        <source>Enable auto_item</source>
+        <target>Použiť auto_item parameter</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.1">
+        <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
+        <target>Preskočí v URL adrese stránky fragment &lt;em&gt;items&lt;/em&gt; alebo &lt;em&gt;events&lt;/em&gt; a pridá do nej hodnotu &lt;em&gt;auto_item&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.0">
+        <source>Disable page alias usage</source>
+        <target>Vypnúť používanie aliasov stránok</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.1">
+        <source>Use the numeric ID of a page or article instead of its alias.</source>
+        <target>Použijú sa číselné ID stránok alebo článkov namiesto ich aliasov.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.0">
+        <source>Enable folder URLs</source>
+        <target>Povoliť URL adresárového typu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.1">
+        <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>Tu môžete povoliť štýl adresárových aliasov ako &lt;em&gt;docs/install/download.html&lt;/em&gt; namiesto &lt;em&gt;docs-install-download.html&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.0">
+        <source>Allowed HTML tags</source>
+        <target>Povolené HTML tagy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.1">
+        <source>Here you can enter a list of allowed HTML tags that will not be stripped.</source>
+        <target>Tu možte upraviť zoznam HTML tagov, ktoré sú povolené používať pri zadávaní HTML kódu.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.0">
+        <source>Enable debug mode</source>
+        <target>Ladiaci mód</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.1">
+        <source>Print certain runtime information like database queries to the screen.</source>
+        <target>Zobrazí na obrazovke určité informácie celého procesu, napr. spojenie s databázou alebo zaslané príkazy.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+        <target>Mód údržby</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Odošle HTTP hlavičku s kódom 503 a zobrazí mód údržby na web stránke.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.0">
+        <source>Bypass the internal cache</source>
+        <target>Nepoužiť interné úložisko (cache)</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.1">
+        <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+        <target>Nepoužívať interné úložisko cache súborov (užitočné napríklad pri vývoji rozšírení)</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.0">
+        <source>Disable request tokens</source>
+        <target>Vypnúť kontrolu zadávateľa</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.1">
+        <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
+        <target>Nekontrolovať adresu zadávateľa pri odosielaní formulára. Upozornenie: možné bezpečnostné riziko!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.0">
+        <source>Account locking time</source>
+        <target>Čakacia doba pre uzamknutie účtu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.1">
+        <source>An account will be locked if a wrong password is entered three times in a row.</source>
+        <target>Účet bude uzamknutý ak užívateľ 3-krát za sebou zadá nesprávne heslo.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.0">
+        <source>Display error messages</source>
+        <target>Zobrazovať chybové správy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.1">
+        <source>Print error messages to the screen (not recommended for productional sites).</source>
+        <target>Zobrazí chybové správy na obrazovke (nedoporučené pre produktívne stránky).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.0">
+        <source>Log error messages</source>
+        <target>Zapisovať chybové hlášky</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.1">
+        <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
+        <target>Zapíše chybové hlášky do log súboru (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.0">
+        <source>Run in safe mode</source>
+        <target>Spustiť v núdzovom režime</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.1">
+        <source>Run Contao in safe mode and load only core modules.</source>
+        <target>Spustí Contao v núdzovom režime -&gt; načíta len základné moduly.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.0">
+        <source>Disable IP check</source>
+        <target>Vypnúť kontrolu IP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.1">
+        <source>Do not bind sessions to IP addresses. Choosing this option is a potential security risk!</source>
+        <target>Nepriradzovať sessions k IP adresám. Upozornenie: táto voľba znamená potencionálne bezpečnostné riziko!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.0">
+        <source>Download file types</source>
+        <target>Typy stiahnuteľných (download) súborov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.1">
+        <source>Here you can enter a comma separated list of downloadable file types.</source>
+        <target>Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné sťahovať zo servera.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.0">
+        <source>Image file types</source>
+        <target>Typy obrázkových súborov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.1">
+        <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
+        <target>Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné ovládať pomocou CSS triedy obrázka.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.0">
+        <source>Editable file types</source>
+        <target>Typy editovateľných súborov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.1">
+        <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
+        <target>Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné upravovať v editore zdrojového kódu.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.0">
+        <source>Template file types</source>
+        <target>Typy súborov šablón</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.1">
+        <source>Here you can enter a comma separated list of supported template file types.</source>
+        <target>Tu môžte zadať, čiarkou oddelený zoznam povolených typov súborov šablón.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.0">
+        <source>Maximum front end width</source>
+        <target>Maximálna šírka vo frontende</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.1">
+        <source>If the width of an image or movie exceeds this value, it will be adjusted automatically. Set to 0 to disable the limit.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.0">
+        <source>JPG thumbnail quality</source>
+        <target>Kvalita JPG miniatúr</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.1">
+        <source>Here you can enter the JPG thumbnail quality in percent.</source>
+        <target>Tu môžte zadať kvalitu JPG miniatúr v percentách.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.0">
+        <source>Maximum GD image width</source>
+        <target>Maximálna šírka GD obrázkov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.1">
+        <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
+        <target>Tu môžte zadať maximálnu šírku obrázkov, ktorú sa pokúsi spracovať GD knižnica.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.0">
+        <source>Maximum GD image height</source>
+        <target>Maximálna výška GD obrázkov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.1">
+        <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
+        <target>Tu môžte zadať maximálnu výšku obrázkov, ktorú sa pokúsi spracovať GD knižnica.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.0">
+        <source>Files directory</source>
+        <target>Priečinok súborov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.1">
+        <source>Here you can set the relative path to the Contao files directory.</source>
+        <target>Tu môžte nastaviť relatívnu cestu k priečinku súborov (prednastavená je tl_files).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.0">
+        <source>Upload file types</source>
+        <target>Typy nahrateľných (upload) súborov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.1">
+        <source>Here you can enter a comma separated list of uploadable file types.</source>
+        <target>Tu môžte zadať, čiarkou oddelený zoznam typov súborov, ktoré bude možné nahrávať na server.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.0">
+        <source>Simultaneous file uploads</source>
+        <target>Počet súbežných nahrávaní súborov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.1">
+        <source>Here you can enter the maximum number of simultaneous file uploads.</source>
+        <target>Tu môžte zadať maximálny počet súborov, ktoré môžu byť nahrávané v rovnakom čase.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.0">
+        <source>Maximum upload file size</source>
+        <target>Maximálna veľkosť nahrávaného súboru</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.1">
+        <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
+        <target>Tu môžte zadať maximálnu veľkosť nahrávaného súboru v bytoch (prednastavené sú 2 MB = 2048 kB = 2048000 bytov).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.0">
+        <source>Maximum image width</source>
+        <target>Maximálna šírka obrázku</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.1">
+        <source>Here you can enter the maximum width for image uploads in pixels.</source>
+        <target>Tu môžte zadať maximálnu šírku nahrávaného obrázku v pixeloch.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.0">
+        <source>Maximum image height</source>
+        <target>Maximálna výška obrázku</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.1">
+        <source>Here you can enter the maximum height for image uploads in pixels.</source>
+        <target>Tu môžte zadať maximálnu výšku nahrávaného obrázku v pixeloch.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.0">
+        <source>Enable searching</source>
+        <target>Aktivovať vyhľadávanie</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.1">
+        <source>Index pages so they can be searched.</source>
+        <target>Indexovanie stránok. Tým sa v nich potom môže vyhľadávať.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.0">
+        <source>Index protected pages</source>
+        <target>Indexovať chránené stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.1">
+        <source>Use this option carefully and always exclude personalized pages from being indexed!</source>
+        <target>Používajte túto možnosť opatrne. Pri jej použití vždy vylúčte personalizované stranky z indexácie!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.0">
+        <source>Send e-mails via SMTP</source>
+        <target>Použiť SMTP na odosielanie e-mailov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.1">
+        <source>Use an SMTP server instead of the PHP mail() function to send e-mails.</source>
+        <target>Použiť SMTP na odosielanie e-mailov namiesto funkcie PHP mail().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>Názov SMTP poskytovateľa</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>Zadajte názov poskytovateľa vašeho SMTP serveru (prednastavený je localhost).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.0">
+        <source>SMTP username</source>
+        <target>Užívateľské meno pre SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>Ak váš SMTP server vyžaduje overenie zadajte užívateľské meno.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.0">
+        <source>SMTP password</source>
+        <target>Heslo pre SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>Ak váš SMTP server vyžaduje overenie, zadajte heslo.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>Šifrovanie SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Tu si môžte vybrať metódu šifrovania (SSL alebo TLS).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>Číslo portu SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>Zadajte číslo portu vášho SMTP servra (prednastavené hodnoty sú 25 alebo 465 pre SSL).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.0">
+        <source>Inactive extensions</source>
+        <target>Nepoužívané rozšírenia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.1">
+        <source>Here you can deactivate unneeded extensions.</source>
+        <target>Tu môžte deaktivovať rozšírenia, ktoré nepotrebujete používať.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.0">
+        <source>Storage time for undo steps</source>
+        <target>Doba uchovania vykonaných zmien</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.1">
+        <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
+        <target>Tu môžte zadať ako dlho (v sekundách) sa majú uchovávať vykonané zmeny, aby ste mali možnosť obnoviť predchádzajúci stav &quot;kroky späť&quot; (24 hodín = 86400 sekúnd).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.0">
+        <source>Storage time for versions</source>
+        <target>Doba uchovania verzií</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.1">
+        <source>Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).</source>
+        <target>Tu môžte zadať ako dlho (v sekundách) sa majú uchovávať rôzne verzie záznamov (90 dní = 7776000 sekúnd).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.0">
+        <source>Storage time for log entries</source>
+        <target>Doba uchovania systémových správ</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.1">
+        <source>Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).</source>
+        <target>Tu môžte zadať ako dlho (v sekundách) sa majú uchovávať správy systému (14 dní = 1209600 sekúnd).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.0">
+        <source>Session timeout</source>
+        <target>Doba platnosti session</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.1">
+        <source>Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).</source>
+        <target>Tu môžte zadať maximálnu dobu platnosti session v sekundách (60 minút = 3600 sekúnd).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.0">
+        <source>Auto login period</source>
+        <target>Doba automatického prihlasovania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.1">
+        <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
+        <target>Tu môžte zadať dobu, v rámci ktorej sa môže člen automaticky prihlasovať vo frontende (90 dní = 7776000 sekúnd).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.0">
+        <source>Default page owner</source>
+        <target>Prednastavený vlastník stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.1">
+        <source>Here you can select a user as the default owner of a page.</source>
+        <target>Tu môžte zvoliť užívateľa, ktorý bude prednastaveným vlastníkom stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.0">
+        <source>Default page group</source>
+        <target>Prednastavená skupina vlastníkov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.1">
+        <source>Here you can select a group as the default owner of a page.</source>
+        <target>Tu môžte zvoliť skupinu, ktorá bude prednastaveným vlastníkom stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.0">
+        <source>Default access rights</source>
+        <target>Prednastavené prístupové práva</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.1">
+        <source>Please assign the default access rights for pages and articles.</source>
+        <target>Zvoľte prosím prednastavené prístupové práva pre stránky a články.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.0">
+        <source>Live Update URL</source>
+        <target>Adresa služby Live Update</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.1">
+        <source>Here you can enter the Live Update URL.</source>
+        <target>Tu môžte zadať URL adresu služby Live Update.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.title_legend">
+        <source>Website title</source>
+        <target>Nadpis webstránok</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.date_legend">
+        <source>Date and time</source>
+        <target>Dátum a čas</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.global_legend">
+        <source>Global configuration</source>
+        <target>Globálne nastavenia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.backend_legend">
+        <source>Back end configuration</source>
+        <target>Nastavenia backendu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.frontend_legend">
+        <source>Front end configuration</source>
+        <target>Nastavenia frontendu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Nastavenie proxy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacy_legend">
+        <source>Privacy settings</source>
+        <target>Nastavenia súkromia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.security_legend">
+        <source>Security settings</source>
+        <target>Bezpečnostné nastavenia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.files_legend">
+        <source>Files and images</source>
+        <target>Súbory a obrázky</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploads_legend">
+        <source>Upload settings</source>
+        <target>Nastavenia prenosu dát</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.search_legend">
+        <source>Search engine settings</source>
+        <target>Nastavenia vyhľadávania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>Nastavenia SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.ftp_legend">
+        <source>Safe Mode Hack</source>
+        <target>Nastavenia Safe Mode Hack</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.modules_legend">
+        <source>Inactive extensions</source>
+        <target>Nepoužívané rozšírenia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
+        <target>Plánovač príkazov</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeout_legend">
+        <source>Timeout values</source>
+        <target>Doba uchovávania dát</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.chmod_legend">
+        <source>Default access rights</source>
+        <target>Prednastavené prístupové práva</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.update_legend">
+        <source>Live Update</source>
+        <target>On-line aktualizácia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.static_legend">
+        <source>Static resources</source>
+        <target>Stabilné zdroje</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.edit">
+        <source>Edit the local configuration</source>
+        <target>Upraviť lokálnu konfiguráciu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.both">
+        <source>Use the server and the browser cache</source>
+        <target>Použiť cache servera a prehliadača</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.server">
+        <source>Use only the server cache</source>
+        <target>Použiť iba cache servera</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.browser">
+        <source>Use only the browser cache</source>
+        <target>Použiť iba cache prehliadača</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.none">
+        <source>Disable caching</source>
+        <target>Vypnúť cachovanie</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

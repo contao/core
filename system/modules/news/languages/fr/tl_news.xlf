@@ -1,0 +1,330 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news.php" source-language="en" target-language="fr">
+    <body>
+      <trans-unit id="tl_news.headline.0">
+        <source>Title</source>
+        <target>Nom du groupe</target>
+      </trans-unit>
+      <trans-unit id="tl_news.headline.1">
+        <source>Please enter the news title.</source>
+        <target>Saisir le titre de l'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.0">
+        <source>News alias</source>
+        <target>Alias d'actualité</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.1">
+        <source>The news alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>Un alias d'actualité est une référence unique qui remplace l'ID numérique de l'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.0">
+        <source>Author</source>
+        <target>Auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.1">
+        <source>Here you can change the author of the news item.</source>
+        <target>Changer l'auteur de l'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.0">
+        <source>Date</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.1">
+        <source>Please enter the date according to the global date format.</source>
+        <target>Saisir la date de l'actualité selon le format de date global.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.0">
+        <source>Time</source>
+        <target>Heure</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.1">
+        <source>Please enter the time according to the global time format.</source>
+        <target>Saisir les heures et minutes de l'actualité selon le format de date global.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.0">
+        <source>Subheadline</source>
+        <target>Sous-titre</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.1">
+        <source>Here you can enter a subheadline.</source>
+        <target>Saisir un sous-titre.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.0">
+        <source>News teaser</source>
+        <target>Accroche</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.1">
+        <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>Une accroche peut être affichée dans la liste des actualités à la place de l'article complet. Elle sera automatiquement suivie du lien &quot;En savoir plus ...&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.0">
+        <source>News text</source>
+        <target>Texte de l'actualité</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.1">
+        <source>Here you can enter the news text.</source>
+        <target>Saisir le texte de l'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.0">
+        <source>Add an image</source>
+        <target>Ajouter une image</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.1">
+        <source>Add an image to the news item.</source>
+        <target>Ajouter une image à l'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Joindre des fichiers</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.1">
+        <source>Add one or more downloadable files to the news item.</source>
+        <target>Ajouter un ou plusieurs fichiers à l'élément d'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.0">
+        <source>Enclosures</source>
+        <target>Fichiers joints</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Choisir le(s) fichier(s) à joindre à la réponse.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.0">
+        <source>Redirect target</source>
+        <target>Cible de redirection</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>Choisir si la cible de redirection est une page interne ou externe.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.0">
+        <source>Use default</source>
+        <target>Utiliser la page par défaut</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
+        <target>En cliquant sur le lien &quot;En savoir plus ...&quot; les visiteurs seront redirigés vers la page par défaut des archives.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.0">
+        <source>Page</source>
+        <target>Page interne</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
+        <target>En cliquant sur le lien &quot;En savoir plus ...&quot; les visiteurs seront redirigés vers une page interne où ils pourront lire l'article en entier.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.0">
+        <source>Article</source>
+        <target>Article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>En cliquant sur le lien &quot;En savoir plus ...&quot; les visiteurs seront redirigés vers un article.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.0">
+        <source>External URL</source>
+        <target>URL externe</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>En cliquant sur le lien &quot;En savoir plus ...&quot; les visiteurs seront redirigés vers un site externe.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Page de redirection</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
+        <target>Choisir la page vers laquelle les visiteurs seront redirigés en cliquant sur l'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.0">
+        <source>Article</source>
+        <target>Article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
+        <target>Choisir l'article vers lequel les visiteurs seront redirigés en cliquant sur l'actualité.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.0">
+        <source>CSS class</source>
+        <target>Classe(s) CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Saisir une ou plusieurs classes CSS.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.0">
+        <source>Disable comments</source>
+        <target>Désactiver les commentaires</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.1">
+        <source>Do not allow comments for this particular news item.</source>
+        <target>Désactiver les commentaires pour cette actualité en particulier.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.0">
+        <source>Feature item</source>
+        <target>Élément vedette</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.1">
+        <source>Show the news item in a featured news list.</source>
+        <target>Afficher l'élément d'actualité dans une liste d'actualités vedettes.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.0">
+        <source>Publish item</source>
+        <target>Publier l'actualité</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.1">
+        <source>Make the news item publicly visible on the website.</source>
+        <target>Rendre l'actualité visible aux visiteurs de votre site.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.0">
+        <source>Show from</source>
+        <target>Afficher à partir du</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.1">
+        <source>Do not show the news item on the website before this day.</source>
+        <target>Ne pas afficher l'actualité sur le site avant ce jour.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.0">
+        <source>Show until</source>
+        <target>Afficher jusqu'au</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.1">
+        <source>Do not show the news item on the website on and after this day.</source>
+        <target>Ne plus afficher l'actualité sur le site après ce jour.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.0">
+        <source>Revision date</source>
+        <target>Date de révision</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Date et heure de la dernière révision</target>
+      </trans-unit>
+      <trans-unit id="tl_news.title_legend">
+        <source>Title and author</source>
+        <target>Titre et auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date_legend">
+        <source>Date and time</source>
+        <target>Date et heure</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser_legend">
+        <source>Subheadline and teaser</source>
+        <target>Sous-titre et accroche</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text_legend">
+        <source>News text</source>
+        <target>Texte de l'actualité</target>
+      </trans-unit>
+      <trans-unit id="tl_news.image_legend">
+        <source>Image settings</source>
+        <target>Paramètres d'image</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Fichiers joints</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source_legend">
+        <source>Redirect target</source>
+        <target>Cible de redirection</target>
+      </trans-unit>
+      <trans-unit id="tl_news.expert_legend">
+        <source>Expert settings</source>
+        <target>Paramètres avancés</target>
+      </trans-unit>
+      <trans-unit id="tl_news.publish_legend">
+        <source>Publish settings</source>
+        <target>Paramètres de publication</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.0">
+        <source>New article</source>
+        <target>Nouvel article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.1">
+        <source>Create a new news article</source>
+        <target>Créer une nouvelle actualité</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.0">
+        <source>Article details</source>
+        <target>Détails de l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.1">
+        <source>Show the details of news article ID %s</source>
+        <target>Afficher les détails de l'actualité ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.0">
+        <source>Edit article</source>
+        <target>Éditer l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.1">
+        <source>Edit news article ID %s</source>
+        <target>Éditer l'actualité ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.0">
+        <source>Duplicate article</source>
+        <target>Dupliquer l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.1">
+        <source>Duplicate news article ID %s</source>
+        <target>Dupliquer l'actualité ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.0">
+        <source>Move article</source>
+        <target>Déplacer l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.1">
+        <source>Move news article ID %s</source>
+        <target>Déplacer l'actualité ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.0">
+        <source>Delete article</source>
+        <target>Supprimer l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.1">
+        <source>Delete news article ID %s</source>
+        <target>Supprimer l'actualité ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>Publier/dé-publier l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.1">
+        <source>Publish/unpublish news article ID %s</source>
+        <target>Publier/dé-publier l'actualité ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.0">
+        <source>Feature/unfeature article</source>
+        <target>Actualité vedette / actualité standard</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.1">
+        <source>Feature/unfeature news article ID %s</source>
+        <target>Actualité ID %s vedette / standard</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.0">
+        <source>Edit archive</source>
+        <target>Éditer l'archive</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.1">
+        <source>Edit the archive settings</source>
+        <target>Éditer les paramètres de l'archive</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.0">
+        <source>Edit article settings</source>
+        <target>Éditer les paramètres de l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.1">
+        <source>Edit the article settings</source>
+        <target>Éditer les paramètres de l'article</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.0">
+        <source>Paste into this archive</source>
+        <target>Coller dans cette archive</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.1">
+        <source>Paste after news article ID %s</source>
+        <target>Coller après l'actualité ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

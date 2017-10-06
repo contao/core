@@ -1,0 +1,566 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_page.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="tl_page.title.0">
+        <source>Page name</source>
+        <target>Nume pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.title.1">
+        <source>Please enter the page name.</source>
+        <target>Numele unei pagini este afişat în meniul de navigare al sitului. Este limitat la 65 caractere.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.0">
+        <source>Page alias</source>
+        <target>Alias pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.alias.1">
+        <source>The page alias is a unique reference to the page which can be called instead of its numeric ID.</source>
+        <target>Page alias este o referinţă către pagina care poate fi apelată în locul ID-ului. Este utilă mai ales dacă Contao foloseşte URL-uri statice.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.type.0">
+        <source>Page type</source>
+        <target>Tip pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.type.1">
+        <source>Please choose the page type.</source>
+        <target>Selectaţi tipul paginii în funcţie de scopul acesteia.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.0">
+        <source>Page title</source>
+        <target>Titlu pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pageTitle.1">
+        <source>Please enter the page title.</source>
+        <target>Titlul paginii este afişat în tag-ul TITLE al sitului dumneavoastră şi în rezultatele căutării. Nu trebuie să conţină mai mult de 65 caractere. Dacă lăsaţi acest câmp necompletat, numele paginii va fi folosit ca titlu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.language.0">
+        <source>Language</source>
+        <target>Limba</target>
+      </trans-unit>
+      <trans-unit id="tl_page.language.1">
+        <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English or &quot;en-US&quot; for American English).</source>
+        <target>Introduceţi limba paginii conform cu ISO-639-1 (ex. &quot;en&quot; pentru Engleză sau &quot;en-US&quot; pentru Engleză Americană).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.0">
+        <source>Robots tag</source>
+        <target>Motoare de căutare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.robots.1">
+        <source>Here you can define how search engines handle the page.</source>
+        <target>Definiţi cum abordează motoarele de căutare pagina.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.description.0">
+        <source>Page description</source>
+        <target>Descrierea paginii</target>
+      </trans-unit>
+      <trans-unit id="tl_page.description.1">
+        <source>Here you can enter a short description of the page which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate between 150 and 300 characters.</source>
+        <target>Puteţi introduce o scurtă descriere a paginii, va fi afişată de motoarele de căutare. Un motor de căutare arată de obicei între 150 şi 300 caractere.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.0">
+        <source>Redirect type</source>
+        <target>Tip de redirectare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect.1">
+        <source>Please choose the redirect type.</source>
+        <target>Redirectările temporare vor trimite un header HTTP 302, cele permanente vor trimite un header HTTP 301.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Avansează la</target>
+      </trans-unit>
+      <trans-unit id="tl_page.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.</source>
+        <target>Alegeţi pagina ţintă din structura de pagini.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.0">
+        <source>Language fallback</source>
+        <target>Limba preferată</target>
+      </trans-unit>
+      <trans-unit id="tl_page.fallback.1">
+        <source>Show this page if there is none that matches the visitor's language.</source>
+        <target>Contao redirectează automat un vizitator către o rădăcină de website în limba sa sau către limba nativă. Dacă nu există o pagină cu limba nativă, este afişat mesajul de eroare &lt;em&gt;Nu am găsit nicio pagină&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.0">
+        <source>Domain name</source>
+        <target>Nume domeniu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns.1">
+        <source>Here you can restrict the access to the website to a certain domain name.</source>
+        <target>Dacă desemnaţi un nume de domeniu unei pagini rădăcină de website, vizitatorii vor fi redirectaţi către acest website când vor introduce numele corespunzător de domeniu (ex. &lt;em&gt;domeniultau.com&lt;/em&gt; sau &lt;em&gt;subdomeniu.domeniultau.com&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.0">
+        <source>E-mail address of the website administrator</source>
+        <target>Email webmaster</target>
+      </trans-unit>
+      <trans-unit id="tl_page.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>Introduceţi email-ul administratorului de sistem.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.0">
+        <source>Date format</source>
+        <target>Format de dată</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>Introduceţi un format de dată aşa cum este folosit de funcţia PHP date().</target>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.0">
+        <source>Time format</source>
+        <target>Format de timp</target>
+      </trans-unit>
+      <trans-unit id="tl_page.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>Introduceţi un format de oră aşa cum este folosit de funcţia PHP date().</target>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.0">
+        <source>Date and time format</source>
+        <target>Format de dată şi timp</target>
+      </trans-unit>
+      <trans-unit id="tl_page.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>Introduceţi un format de dată şi oră aşa cum este folosit de funcţia PHP date().</target>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.0">
+        <source>Create an XML sitemap</source>
+        <target>Creaţi un sitemap XML</target>
+      </trans-unit>
+      <trans-unit id="tl_page.createSitemap.1">
+        <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
+        <target>Creează un Google XML sitemap în directorul &lt;em&gt;share/&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.0">
+        <source>Sitemap file name</source>
+        <target>Nume fişier</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemapName.1">
+        <source>Please enter the name of the sitemap file without extension.</source>
+        <target>Introduceţi un nume prentru fişierul XML (nu includeţi extensia).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.0">
+        <source>Use HTTPS in sitemaps</source>
+        <target>Foloseşte HTTPS în sitemaps</target>
+      </trans-unit>
+      <trans-unit id="tl_page.useSSL.1">
+        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
+        <target>Generează un sitemap cu URL-uri cu &lt;em&gt;https://&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.0">
+        <source>Forward to another page</source>
+        <target>Avansează la o altă pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.autoforward.1">
+        <source>Redirect visitors to another page (e.g. a login page).</source>
+        <target>Dacă folosiţi această opţiune, vizitatorii vor fi trimişi către o altă pagina (ex. o pagină de autentificare sau una de bun venit).</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.0">
+        <source>Protect page</source>
+        <target>Protejează pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected.1">
+        <source>Restrict page access to certain member groups.</source>
+        <target>Dacă alegeţi această opţiune puteţi restricţiona accesul către pagină doar pentru anumite grupuri de membri.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.0">
+        <source>Allowed member groups</source>
+        <target>Grupuri de membri permise</target>
+      </trans-unit>
+      <trans-unit id="tl_page.groups.1">
+        <source>These groups will be able to access the page.</source>
+        <target>Aici puteţi acorda accesul unuia sau mai multor grupuri de utilizatori. Dacă nu alegeţi un grup orice utilizator logat în front-end va putea accesa această pagină.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.0">
+        <source>Assign a layout</source>
+        <target>Desemnează un ansamblu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeLayout.1">
+        <source>Assign a page layout to the page and its subpages.</source>
+        <target>Iniţial o pagină foloseşte acelaşi ansamblu ca şi pagina părinte. Alegând această opţiune puteţi desemna un ansamblu diferit paginii şi subpaginilor sale.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.0">
+        <source>Page layout</source>
+        <target>Ansamblu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout.1">
+        <source>You can manage page layouts with the &quot;themes&quot; module.</source>
+        <target>Alegeţi un ansamblu de pagină. Puteţi edita sau crea ansambluri folosind modulul &lt;em&gt;Ansambluri&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.0">
+        <source>Mobile page layout</source>
+        <target>Ansamblu de pagină pentru portabile</target>
+      </trans-unit>
+      <trans-unit id="tl_page.mobileLayout.1">
+        <source>This layout will be used if the visitor uses a mobile device.</source>
+        <target>Acest ansamblu de pagină se va folosi dacă utilizatorul accesează de pe un portabil</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.0">
+        <source>Set cache timeout</source>
+        <target>Desemnează expirare cache</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeCache.1">
+        <source>Set a cache timeout value for the page and its subpages.</source>
+        <target>Nativ o pagină foloseşte aceeaşi valoare ca şi pagina părinte. Dacă alegeţi aceasta opţiune puteţi desemna o valoare diferită pentru pagina curentă şi subpaginile sale.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.0">
+        <source>Cache timeout</source>
+        <target>Expirare cache</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache.1">
+        <source>After this period, the cached version of the page will expire.</source>
+        <target>În timpul perioadei cache timeout, o pagină va fi încărcată din tabela de cache. Acest lucru va scurta timpul de încărcare al unui site.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.0">
+        <source>Assign access rights</source>
+        <target>Desemnează permisiuni</target>
+      </trans-unit>
+      <trans-unit id="tl_page.includeChmod.1">
+        <source>Access rights determine what back end users can do with the page.</source>
+        <target>Permisiunile vă dau posibilitatea să definiţi în ce măsură un utilizator back-end poate modifica o pagină şi articolele acesteia. Dacă nu alegeţi această opţiune, pagina va folosi aceleaşi permisiuni ca şi pagina părinte.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.0">
+        <source>Owner</source>
+        <target>Utilizator</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cuser.1">
+        <source>Please select a user as the owner of the page.</source>
+        <target>Alegeţi un utilizator ca proprietar al paginii curente.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.0">
+        <source>Group</source>
+        <target>Grup</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cgroup.1">
+        <source>Please select a group as the owner of the page.</source>
+        <target>Alegeţi un grup ca proprietar al paginii curente.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.0">
+        <source>Access rights</source>
+        <target>Drepturi de acces</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod.1">
+        <source>Please assign the access rights for the page and its subpages.</source>
+        <target>Fiecare pagină are trei nivele de acces: una pentru utilizator, una pentru grup şi una pentru toţi ceilalţi. Puteţi acorda permisiuni diferite fiecărui nivel.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.0">
+        <source>Do not search</source>
+        <target>Nu căuta în această pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.noSearch.1">
+        <source>Exclude the page from the search index.</source>
+        <target>Alegând aceasta opţiune pagina curentă va fi exclusă din operaţiunile de căutare din cadrul sitului.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.0">
+        <source>CSS class</source>
+        <target>Clasa CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cssClass.1">
+        <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+        <target>Clasa(clasele) CSS va fi folosită în meniul de navigare şi în &amp;lt;body&amp;gt; .</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.0">
+        <source>Show in sitemap</source>
+        <target>Include în sitemap</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap.1">
+        <source>Here you can define whether the page is shown in the sitemap.</source>
+        <target>Puteţi defini dacă pagina este inclusă în sitemap.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.0">
+        <source>Hide from navigation</source>
+        <target>Ascunde pagina în meniul de navigare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.hide.1">
+        <source>Hide the page from the navigation menu.</source>
+        <target>Dacă alegeţi această opţiune, pagina curentă nu va apare în meniu.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.0">
+        <source>Show to guests only</source>
+        <target>Arată doar vizitatorilor</target>
+      </trans-unit>
+      <trans-unit id="tl_page.guests.1">
+        <source>Hide the page if there is an authenticated user.</source>
+        <target>Ascunde pagina în meniul de navigare dacă un membru este logat.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.0">
+        <source>Tab index</source>
+        <target>Navigare cu TAB</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabindex.1">
+        <source>The position of the navigation item in the tabbing order.</source>
+        <target>Acest număr specifică poziţia elementului de navigare curent în ordinea TAB. Puteţi introduce un număr între 1 şi 32767.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.0">
+        <source>Access key</source>
+        <target>Caracter de acces</target>
+      </trans-unit>
+      <trans-unit id="tl_page.accesskey.1">
+        <source>A navigation item can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+        <target>Un caracter de acces este un caracter care poate fi desemnat unui element de navigaţie. Dacă un vizitator apasă simultan [ALT] şi caracterul respectiv, elementul de navigare este activat.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.published.0">
+        <source>Publish page</source>
+        <target>Publicat</target>
+      </trans-unit>
+      <trans-unit id="tl_page.published.1">
+        <source>Make the page publicly visible on the website.</source>
+        <target>Dacă nu alegeţi această opţiune pagina nu va fi vizibilă vizitatorilor.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.start.0">
+        <source>Show from</source>
+        <target>Publică de la</target>
+      </trans-unit>
+      <trans-unit id="tl_page.start.1">
+        <source>Do not show the page on the website before this day.</source>
+        <target>Dacă introduceţi o dată pagina curentă va fi vizibilă începând cu acea dată.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.0">
+        <source>Show until</source>
+        <target>Publică până la</target>
+      </trans-unit>
+      <trans-unit id="tl_page.stop.1">
+        <source>Do not show the page on the website on and after this day.</source>
+        <target>Dacă introduceţi o dată pagina curentă va fi vizibilă până la acea dată.</target>
+      </trans-unit>
+      <trans-unit id="tl_page.title_legend">
+        <source>Name and type</source>
+        <target>Nume şi tip</target>
+      </trans-unit>
+      <trans-unit id="tl_page.meta_legend">
+        <source>Meta information</source>
+        <target>Metainformaţie</target>
+      </trans-unit>
+      <trans-unit id="tl_page.system_legend">
+        <source>System settings</source>
+        <target>Setări de sistem</target>
+      </trans-unit>
+      <trans-unit id="tl_page.redirect_legend">
+        <source>Redirect settings</source>
+        <target>Setări de redirectare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.dns_legend">
+        <source>DNS settings</source>
+        <target>Setări DNS</target>
+      </trans-unit>
+      <trans-unit id="tl_page.global_legend">
+        <source>Global settings</source>
+        <target>Setări globale</target>
+      </trans-unit>
+      <trans-unit id="tl_page.mobile_legend">
+        <source>Mobile settings</source>
+        <target>Setări pentru portabile</target>
+      </trans-unit>
+      <trans-unit id="tl_page.sitemap_legend">
+        <source>XML sitemap</source>
+        <target>Sitemap XML</target>
+      </trans-unit>
+      <trans-unit id="tl_page.forward_legend">
+        <source>Auto-forward</source>
+        <target>Autocontinuare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.protected_legend">
+        <source>Access protection</source>
+        <target>Restricţionare acces</target>
+      </trans-unit>
+      <trans-unit id="tl_page.layout_legend">
+        <source>Layout settings</source>
+        <target>Setări de aranjare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cache_legend">
+        <source>Cache settings</source>
+        <target>Setări de cache</target>
+      </trans-unit>
+      <trans-unit id="tl_page.chmod_legend">
+        <source>Access rights</source>
+        <target>Drepturi de acces</target>
+      </trans-unit>
+      <trans-unit id="tl_page.search_legend">
+        <source>Search settings</source>
+        <target>Setări de căutare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.expert_legend">
+        <source>Expert settings</source>
+        <target>Setări avansate</target>
+      </trans-unit>
+      <trans-unit id="tl_page.tabnav_legend">
+        <source>Keyboard navigation</source>
+        <target>Navigare prin tastatură</target>
+      </trans-unit>
+      <trans-unit id="tl_page.publish_legend">
+        <source>Publish settings</source>
+        <target>Publicare</target>
+      </trans-unit>
+      <trans-unit id="tl_page.permanent">
+        <source>301 Permanent redirect</source>
+        <target>Redirectare permanentă 301</target>
+      </trans-unit>
+      <trans-unit id="tl_page.temporary">
+        <source>302 Temporary redirect</source>
+        <target>Redirectare temporară 302</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_default">
+        <source>Default</source>
+        <target>Iniţial</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_always">
+        <source>Show always</source>
+        <target>Arată mereu</target>
+      </trans-unit>
+      <trans-unit id="tl_page.map_never">
+        <source>Show never</source>
+        <target>Nu arăta</target>
+      </trans-unit>
+      <trans-unit id="tl_page.new.0">
+        <source>New page</source>
+        <target>Pagină nouă</target>
+      </trans-unit>
+      <trans-unit id="tl_page.new.1">
+        <source>Create a new page</source>
+        <target>Creează o pagină nouă</target>
+      </trans-unit>
+      <trans-unit id="tl_page.show.0">
+        <source>Page details</source>
+        <target>Detalii pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.show.1">
+        <source>Show the details of page ID %s</source>
+        <target>Arată detaliile paginii ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.0">
+        <source>Edit page</source>
+        <target>Editaţi pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_page.edit.1">
+        <source>Edit page ID %s</source>
+        <target>Editează pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.0">
+        <source>Move page</source>
+        <target>Mută pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.cut.1">
+        <source>Move page ID %s</source>
+        <target>Mută pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.0">
+        <source>Duplicate page</source>
+        <target>Copiază pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copy.1">
+        <source>Duplicate page ID %s</source>
+        <target>Copiază pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.0">
+        <source>Duplicate with subpages</source>
+        <target>Copiază pagină cu subpagini</target>
+      </trans-unit>
+      <trans-unit id="tl_page.copyChilds.1">
+        <source>Duplicate page ID %s with its subpages</source>
+        <target>Copiază pagina ID %s inclusiv subpaginile</target>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.0">
+        <source>Delete page</source>
+        <target>Stergeţi pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_page.delete.1">
+        <source>Delete page ID %s</source>
+        <target>Şterge pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.0">
+        <source>Publish/unpublish page</source>
+        <target>Publică pagină</target>
+      </trans-unit>
+      <trans-unit id="tl_page.toggle.1">
+        <source>Publish/unpublish page ID %s</source>
+        <target>Publică pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.0">
+        <source>Paste after</source>
+        <target>Lipeşte după</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteafter.1">
+        <source>Paste after page ID %s</source>
+        <target>Lipeşte după pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.0">
+        <source>Paste into</source>
+        <target>Alipeşte în</target>
+      </trans-unit>
+      <trans-unit id="tl_page.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>Lipeşte în pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.0">
+        <source>Edit articles</source>
+        <target>Editaţi articole</target>
+      </trans-unit>
+      <trans-unit id="tl_page.articles.1">
+        <source>Edit the articles of page ID %s</source>
+        <target>Editează articolele din pagina ID %s</target>
+      </trans-unit>
+      <trans-unit id="CACHE.0">
+        <source>0 (do not cache)</source>
+        <target>0 secunde (fără cache)</target>
+      </trans-unit>
+      <trans-unit id="CACHE.5">
+        <source>5 seconds</source>
+        <target>5 secunde</target>
+      </trans-unit>
+      <trans-unit id="CACHE.15">
+        <source>15 seconds</source>
+        <target>15 secunde</target>
+      </trans-unit>
+      <trans-unit id="CACHE.30">
+        <source>30 seconds</source>
+        <target>30 secunde</target>
+      </trans-unit>
+      <trans-unit id="CACHE.60">
+        <source>60 seconds</source>
+        <target>1 minut</target>
+      </trans-unit>
+      <trans-unit id="CACHE.300">
+        <source>5 minutes</source>
+        <target>5 minute</target>
+      </trans-unit>
+      <trans-unit id="CACHE.900">
+        <source>15 minutes</source>
+        <target>15 minute</target>
+      </trans-unit>
+      <trans-unit id="CACHE.1800">
+        <source>30 minutes</source>
+        <target>20 minute</target>
+      </trans-unit>
+      <trans-unit id="CACHE.3600">
+        <source>60 minutes</source>
+        <target>1 oră</target>
+      </trans-unit>
+      <trans-unit id="CACHE.10800">
+        <source>3 hours</source>
+        <target>3 ore</target>
+      </trans-unit>
+      <trans-unit id="CACHE.21600">
+        <source>6 hours</source>
+        <target>6 ore</target>
+      </trans-unit>
+      <trans-unit id="CACHE.43200">
+        <source>12 hours</source>
+        <target>12 ore</target>
+      </trans-unit>
+      <trans-unit id="CACHE.86400">
+        <source>24 hours</source>
+        <target>1 zi</target>
+      </trans-unit>
+      <trans-unit id="CACHE.259200">
+        <source>3 days</source>
+        <target>3 zile</target>
+      </trans-unit>
+      <trans-unit id="CACHE.604800">
+        <source>7 days</source>
+        <target>7 zile</target>
+      </trans-unit>
+      <trans-unit id="CACHE.2592000">
+        <source>30 days</source>
+        <target>30 zile</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

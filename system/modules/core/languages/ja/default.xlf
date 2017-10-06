@@ -1,0 +1,2304 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/default.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="ERR.general">
+        <source>An error occurred!</source>
+        <target>エラーが発生しました。</target>
+      </trans-unit>
+      <trans-unit id="ERR.unique">
+        <source>This entry already exists!</source>
+        <target>この入力内容は既に存在します。</target>
+      </trans-unit>
+      <trans-unit id="ERR.mandatory">
+        <source>Field &quot;%s&quot; must not be empty!</source>
+        <target>&quot;%s&quot;の欄に入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.mdtryNoLabel">
+        <source>This field must not be empty!</source>
+        <target>この欄に入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.minlength">
+        <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
+        <target>&quot;%s&quot;の欄は少なくとも%d文字以上を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.maxlength">
+        <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
+        <target>&quot;%s&quot;の欄は%d文字以下で入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.minval">
+        <source>Field &quot;%s&quot; has to be at least %d!</source>
+        <target>&quot;%s&quot;の欄は%d以上の値を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.maxval">
+        <source>Field &quot;%s&quot; must not be greater than %d!</source>
+        <target>&quot;%s&quot;の欄は%d未満の値を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.digit">
+        <source>Please enter digits only!</source>
+        <target>数値を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.natural">
+        <source>Please enter natural numbers only!</source>
+        <target>自然数を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.prcnt">
+        <source>Please enter a percentage between 0 and 100!</source>
+        <target>0から100の間のパーセントで入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.alpha">
+        <source>Please enter alphabetic characters only!</source>
+        <target>半角の英文字、マイナス(-)、ドット(.)、スペース( )で入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.alnum">
+        <source>Please enter alphanumeric characters only!</source>
+        <target>半角の英数字、マイナス(-)、ドット(.)、スペース( )で入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.phone">
+        <source>Please enter a valid phone number!</source>
+        <target>半角の数字、プラス(+)、マイナス(-)、丸括弧で電話番号を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.extnd">
+        <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
+        <target>セキュリティ上の理由のため、ここでは以下の文字は使用できせん: =&lt;&gt;&amp;/()#</target>
+      </trans-unit>
+      <trans-unit id="ERR.email">
+        <source>Please enter a valid e-mail address!</source>
+        <target>正しい電子メールアドレスを入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.emails">
+        <source>There is at least one invalid e-mail address!</source>
+        <target>少なくとも1つ、正しくない電子メールアドレスがあります。</target>
+      </trans-unit>
+      <trans-unit id="ERR.url">
+        <source>Please enter a valid URL format and encode special characters!</source>
+        <target>有効なURLの書式で、特殊文字はエンコードして入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.locale">
+        <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
+        <target>&quot;en&quot;や&quot;en_US&quot;のような有効なロケールを入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.language">
+        <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
+        <target>&quot;en&quot;や&quot;en-US&quot;のような有効な言語コードを入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.alias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
+        <target>英数字の文字と次の特殊な文字だけ入力してください: .-_</target>
+      </trans-unit>
+      <trans-unit id="ERR.folderalias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
+        <target>英数字の文字と次の特殊文字だけ入力してください: .-/_</target>
+      </trans-unit>
+      <trans-unit id="ERR.date">
+        <source>Please enter the date as &quot;%s&quot;!</source>
+        <target>日付を&quot;%s&quot;の書式で入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.time">
+        <source>Please enter the time as &quot;%s&quot;!</source>
+        <target>時刻を&quot;%s&quot;の書式で入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.dateTime">
+        <source>Please enter date and time as &quot;%s&quot;!</source>
+        <target>日付と時刻を&quot;%s&quot;の書式で入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>&quot;%s&quot;は正しくない日付です。</target>
+      </trans-unit>
+      <trans-unit id="ERR.noSpace">
+        <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
+        <target>&quot;%s&quot;の欄に空白文字を含めてないでください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.filename">
+        <source>The name of at least one uploaded file contains invalid characters or exceeds the maximum length of 255 characters!</source>
+        <target>アップロードしようとしているファイルに少なくとも1つ、不正な文字か255文字の最大長を越える名前のファイルがあります。</target>
+      </trans-unit>
+      <trans-unit id="ERR.filesize">
+        <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
+        <target>アップロードできるファイルは(Contaoまたはphp.iniの設定により)最大%sまでの大きさです。</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetype">
+        <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
+        <target>ファイル形式&quot;%s&quot;はアップロードを許可していない形式です。</target>
+      </trans-unit>
+      <trans-unit id="ERR.filepartial">
+        <source>File %s was only partially uploaded!</source>
+        <target>%sというファイルは一部だけがアップロードできました。</target>
+      </trans-unit>
+      <trans-unit id="ERR.filewidth">
+        <source>File %s exceeds the maximum image width of %d pixels!</source>
+        <target>%sという画像ファイルは最大の幅の%dピクセルを超えています。</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileheight">
+        <source>File %s exceeds the maximum image height of %d pixels!</source>
+        <target>%sという画像ファイルは最大の高さの%dピクセルを超えています。</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+        <target>%sというエラーが、%sというファイルをアップロードしているときに発生しました。</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
+        <target>移動先が存在するため%sを%sに移動できません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidReferer">
+        <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
+        <target>アクセスを拒否しました。現在のホストのアドレス(%s)がリファラーのホストのアドレス(%s)と一致していません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidPass">
+        <source>Invalid password!</source>
+        <target>パスワードが正しくありません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordLength">
+        <source>A password has to be at least %d characters long!</source>
+        <target>パスワードは少なくとも%d文字以上を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordName">
+        <source>Your username and password must not be the same!</source>
+        <target>ユーザー名とパスワードは同一にはできません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordMatch">
+        <source>The passwords did not match!</source>
+        <target>パスワードが一致しませんでした。</target>
+      </trans-unit>
+      <trans-unit id="ERR.accountLocked">
+        <source>This account has been locked! You can log in again in %d minutes.</source>
+        <target>このアカウントはロックされています。%d分後に再びログインできるようになります。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidLogin">
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>ログインできませんでした。(ユーザー名とパスワードは大文字と小文字を区別することに注意してください。)</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidColor">
+        <source>Invalid color format!</source>
+        <target>色の書式が誤っています。</target>
+      </trans-unit>
+      <trans-unit id="ERR.all_fields">
+        <source>Please select at least one field!</source>
+        <target>少なくとも項目を1つ選択してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>少なくともファイルを1つ選択してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.aliasExists">
+        <source>The alias &quot;%s&quot; already exists!</source>
+        <target>&quot;%s&quot;というエイリアスは既に存在します。</target>
+      </trans-unit>
+      <trans-unit id="ERR.importFolder">
+        <source>The folder &quot;%s&quot; cannot be imported!</source>
+        <target>&quot;%s&quot;はフォルダーなのでインポートできません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.notWriteable">
+        <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
+        <target>&quot;%s&quot;というファイルに書き込みできないため、更新できません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidName">
+        <source>This file or folder name is invalid!</source>
+        <target>このファイルまたはフォルダーの名前が正しくありません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidFile">
+        <source>The file or folder &quot;%s&quot; is invalid!</source>
+        <target>&quot;%s&quot;というファイルまたはフォルダーは無効です。</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileExists">
+        <source>The file &quot;%s&quot; already exists!</source>
+        <target>&quot;%s&quot;というファイルは既に存在します。</target>
+      </trans-unit>
+      <trans-unit id="ERR.circularReference">
+        <source>Invalid redirect target (circular reference)!</source>
+        <target>リダイレクト先が誤って(循環参照して)います。</target>
+      </trans-unit>
+      <trans-unit id="ERR.ie6warning">
+        <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
+        <target>&lt;strong&gt;ご注意ください&lt;/strong&gt;: ご使用しているウェブブラウザーは%sサポートの期限を過ぎたバージョン%sです。&lt;strong&gt;このウェブサイトのすべての機能を利用できないかもしれません&lt;/strong&gt;。</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackEmpty">
+        <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>明示的にDNSの設定をしていない、有効なウェブサイトのルートのページのどれにも言語の代替の選択を設定がありません。結果として、これらのウェブサイトはページの設定で指定した、1つの言語だけで利用可能なことを意味します! その言語を提示してこないサイトの利用者と検索エンジンはサイトを閲覧できません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackDns">
+        <source>None of the active website root pages for &lt;strong&gt;%s&lt;/strong&gt; has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt;用ウェブサイトの、有効なルートのページに言語の代替の選択を設定がありません。結果として、これらのウェブサイトはページの設定で指定した、1つの言語だけで利用可能なことを意味します! その言語を提示してこないサイトの利用者と検索エンジンはサイトを閲覧できません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.multipleFallback">
+        <source>You can only define one website root page per domain as language fallback.</source>
+        <target>言語の代替とするウェブサイトのルートのページは1つだけ設定できます。</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRoot">
+        <source>Top-level pages must be website root pages!</source>
+        <target>最上位のページはウェブサイトのルートでなければなりません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRegular">
+        <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
+        <target>ウェブサイトのルートでない最上位のページがあります。ウェブサイトのルートのページを作成しない、ウェブサイトの作成はサポートしなくなりましたので、すべてのページはウェブサイトのルートのページ以下にまとめているか確認してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidTokenUrl">
+        <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
+        <target>開こうとしているURLを確認できません。あなた自身でクリックしたか、信頼に値する人から受け取ったリンクでしたら、以下を承認して処理を進めて良いでしょう。</target>
+      </trans-unit>
+      <trans-unit id="ERR.version2format">
+        <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
+        <target>この要素は古いContao 2 SRC形式を、まだ使用しています。データベースを更新しましたか?</target>
+      </trans-unit>
+      <trans-unit id="ERR.form">
+        <source>The form could not be sent</source>
+        <target>フォームを送信できませんでした。</target>
+      </trans-unit>
+      <trans-unit id="ERR.captcha">
+        <source>Please answer the security question!</source>
+        <target>回答を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.download">
+        <source>File &quot;%s&quot; is not available for download!</source>
+        <target>&quot;%s&quot;というファイルはダウンロードできません。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalid">
+        <source>Invalid option value!</source>
+        <target>正しくないオプションの値です!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileNotFoundSync">
+        <source>No database entry found for %s. Please synchronize the file system.</source>
+        <target>%sに対応するデータベースの項目がありません。ファイルシステムと同期してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>Google+の数値のIDかバニティ名を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidFieldName">
+        <source>Please enter only the following characters: A-Z0-9[]_-</source>
+        <target>以下の文字だけ使用してください: A-Z0-9[]_-</target>
+      </trans-unit>
+      <trans-unit id="SEC.question1">
+        <source>Please add %d and %d.</source>
+        <target>%dと%dを加算してください。</target>
+      </trans-unit>
+      <trans-unit id="SEC.question2">
+        <source>What is the sum of %d and %d?</source>
+        <target>%dと%dの合計は何ですか?</target>
+      </trans-unit>
+      <trans-unit id="SEC.question3">
+        <source>Please calculate %d plus %d.</source>
+        <target>%dプラス%dを計算してください。</target>
+      </trans-unit>
+      <trans-unit id="CTE.texts">
+        <source>Text elements</source>
+        <target>テキストの要素</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.0">
+        <source>Headline</source>
+        <target>見出し</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.1">
+        <source>Generates a headline (h1 - h6).</source>
+        <target>見出し(h1からh6)を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.0">
+        <source>Text</source>
+        <target>テキスト</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.1">
+        <source>Generates a rich text element.</source>
+        <target>リッチテキスト要素を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.1">
+        <source>Allows you to add custom HTML code.</source>
+        <target>独自のHTMLコードを追加します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.0">
+        <source>List</source>
+        <target>箇条書き</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.1">
+        <source>Generates an ordered or unordered list.</source>
+        <target>順序付きや順序なしの箇条書きを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.0">
+        <source>Table</source>
+        <target>表</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.1">
+        <source>Generates an optionally sortable table.</source>
+        <target>並べ替えも可能な表を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordion">
+        <source>Accordion</source>
+        <target>アコーディオン</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>ラッパーの開始</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>アコーディオンのラッパーを開始する部分を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>ラッパーの終了</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>アコーディオンのラッパーを終了する部分を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>単一の要素</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>1つの要素を含むアコーディオンを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.0">
+        <source>Code</source>
+        <target>コード</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.1">
+        <source>Highlights code snippets and prints them to the screen.</source>
+        <target>コードの抜粋を強調して画面に表示します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+        <target>Markdown</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+        <target>MarkdownのテキストからHTMLを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>コンテントスライダー</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>ラッパーの開始</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>スライダーのラッパーを開始する部分を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>ラッパーの終了</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>スライダーのラッパーを終了する部分を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.links">
+        <source>Link elements</source>
+        <target>リンクの要素</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.0">
+        <source>Hyperlink</source>
+        <target>ハイパーリンク</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.1">
+        <source>Generates a link to another website.</source>
+        <target>他のウェブサイトへのリンクを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.0">
+        <source>Top link</source>
+        <target>トップリンク</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.1">
+        <source>Generates a link to jump to the top of the page.</source>
+        <target>ページの先頭に移動するリンクを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.media">
+        <source>Media elements</source>
+        <target>メディアの要素</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.0">
+        <source>Image</source>
+        <target>画像</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.1">
+        <source>Generates a stand-alone image.</source>
+        <target>単独の画像を生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.0">
+        <source>Gallery</source>
+        <target>画像ギャラリー</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.1">
+        <source>Generates a lightbox image gallery.</source>
+        <target>ライトボックスによる画像のギャラリーを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.0">
+        <source>Video/audio</source>
+        <target>動画や音声</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.1">
+        <source>Generates a video or audio player.</source>
+        <target>動画や音声のプレーヤーを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.0">
+        <source>YouTube</source>
+        <target>YouTube</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.1">
+        <source>Adds a YouTube video.</source>
+        <target>YouTubeの動画を追加します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.files">
+        <source>File elements</source>
+        <target>ファイルの要素</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.0">
+        <source>Download</source>
+        <target>ダウンロード</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.1">
+        <source>Generates a link to download a file.</source>
+        <target>ファイルをダウンロードする単一のリンクを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.0">
+        <source>Downloads</source>
+        <target>複数ダウンロード</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.1">
+        <source>Generates multiple links to download files.</source>
+        <target>ファイルをダウンロードする複数のリンクを生成します。</target>
+      </trans-unit>
+      <trans-unit id="CTE.includes">
+        <source>Include elements</source>
+        <target>要素の取り込み</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.0">
+        <source>Article</source>
+        <target>アーティクル</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.1">
+        <source>Includes another article.</source>
+        <target>他のアーティクルを取り込みます。</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.0">
+        <source>Content element</source>
+        <target>コンテント要素</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.1">
+        <source>Includes another content element.</source>
+        <target>他のコンテント要素を取り込みます。</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.0">
+        <source>Form</source>
+        <target>フォーム</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.1">
+        <source>Includes a form.</source>
+        <target>フォームを含めます。</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.0">
+        <source>Module</source>
+        <target>モジュール</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.1">
+        <source>Includes a front end module.</source>
+        <target>フロントエンドモジュールを含めます。</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.0">
+        <source>Article teaser</source>
+        <target>アーティクルのティーザー</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.1">
+        <source>Displays the teaser text of an article.</source>
+        <target>アーティクルのティーザーのテキストを表示します。</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.0">
+        <source>Regular page</source>
+        <target>通常ページ</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.1">
+        <source>A regular page contains articles and content elements. It is the default page type.</source>
+        <target>通常ページはアーティクルとコンテント要素を含みます。これは初期設定のページの種類です。</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.0">
+        <source>External redirect</source>
+        <target>外部リダイレクト</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.1">
+        <source>This type of page automatically redirects visitors to an external website. It works like a hyperlink.</source>
+        <target>外部リダイレクトのページは、ページをアクセスすると外部のウェブサイトに自動的にリダイレクトします。ハイパーリンクのように機能します。</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.0">
+        <source>Internal redirect</source>
+        <target>内部リダイレクト</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.1">
+        <source>This type of page automatically forwards visitors to another page within the site structure.</source>
+        <target>内部リダイレクトのページは、ページをアクセスするとサイト構造内の別のページに自動的に移動します。</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.0">
+        <source>Website root</source>
+        <target>ウェブサイトのルート</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.1">
+        <source>This type of page marks the starting point of a new website within the site structure.</source>
+        <target>ウェブサイトのルートのページは、サイト構造内で新しいウェブサイトの開始点を示します。</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.0">
+        <source>403 Access denied</source>
+        <target>403 アクセス拒否</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.1">
+        <source>If a user requests a protected page without permission, a 403 error page will be loaded instead.</source>
+        <target>アクセス権のない保護されたページをユーザーが要求すると、代わりに403のエラーページが読み込まれます。</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.0">
+        <source>404 Page not found</source>
+        <target>404 存在しないページ</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.1">
+        <source>If a user requests a non-existent page, a 404 error page will be loaded instead.</source>
+        <target>存在しないページをユーザーが要求すると、代わりに404のエラーページが読み込まれます。</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.0">
+        <source>File operation permissions</source>
+        <target>ファイル操作の権限</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.1">
+        <source>Here you can select the file operations you want to allow.</source>
+        <target>許可するファイル操作を選択します。</target>
+      </trans-unit>
+      <trans-unit id="FOP.f1">
+        <source>Upload files to the server</source>
+        <target>ファイルをサーバーにアップロード</target>
+      </trans-unit>
+      <trans-unit id="FOP.f2">
+        <source>Edit, copy or move files and folders</source>
+        <target>ファイルとフォルダーの編集、コピー、移動</target>
+      </trans-unit>
+      <trans-unit id="FOP.f3">
+        <source>Delete single files and empty folders</source>
+        <target>ファイルや空のフォルダーを1つ削除</target>
+      </trans-unit>
+      <trans-unit id="FOP.f4">
+        <source>Delete folders including all files and subfolders (!)</source>
+        <target>中のファイルや下位のフォルダーを含めたフォルダーの削除(注意!)</target>
+      </trans-unit>
+      <trans-unit id="FOP.f5">
+        <source>Edit files in the source editor</source>
+        <target>ソースエディターでファイルを編集</target>
+      </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+        <target>ファイルシステムとデータベースを同期</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editpage">
+        <source>Edit page</source>
+        <target>ページを編集</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editnavigation">
+        <source>Edit page hierarchy</source>
+        <target>ページ階層の変更</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletepage">
+        <source>Delete page</source>
+        <target>ページを削除</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editarticles">
+        <source>Edit articles</source>
+        <target>アーティクルを編集</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.movearticles">
+        <source>Edit article hierarchy</source>
+        <target>アーティクル階層の変更</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletearticles">
+        <source>Delete articles</source>
+        <target>アーティクルの削除</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cuser">
+        <source>Owner</source>
+        <target>所有者</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cgroup">
+        <source>Group</source>
+        <target>グループ</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cworld">
+        <source>Everybody</source>
+        <target>その他</target>
+      </trans-unit>
+      <trans-unit id="DAYS.0">
+        <source>Sunday</source>
+        <target>日曜日</target>
+      </trans-unit>
+      <trans-unit id="DAYS.1">
+        <source>Monday</source>
+        <target>月曜日</target>
+      </trans-unit>
+      <trans-unit id="DAYS.2">
+        <source>Tuesday</source>
+        <target>火曜日</target>
+      </trans-unit>
+      <trans-unit id="DAYS.3">
+        <source>Wednesday</source>
+        <target>水曜日</target>
+      </trans-unit>
+      <trans-unit id="DAYS.4">
+        <source>Thursday</source>
+        <target>木曜日</target>
+      </trans-unit>
+      <trans-unit id="DAYS.5">
+        <source>Friday</source>
+        <target>金曜日</target>
+      </trans-unit>
+      <trans-unit id="DAYS.6">
+        <source>Saturday</source>
+        <target>土曜日</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.0">
+        <source>Sun</source>
+        <target>日</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.1">
+        <source>Mon</source>
+        <target>月</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.2">
+        <source>Tue</source>
+        <target>火</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.3">
+        <source>Wed</source>
+        <target>水</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.4">
+        <source>Thu</source>
+        <target>木</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.5">
+        <source>Fri</source>
+        <target>金</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.6">
+        <source>Sat</source>
+        <target>土</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.0">
+        <source>January</source>
+        <target>1月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.1">
+        <source>February</source>
+        <target>2月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.2">
+        <source>March</source>
+        <target>3月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.3">
+        <source>April</source>
+        <target>4月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.4">
+        <source>May</source>
+        <target>5月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.5">
+        <source>June</source>
+        <target>6月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.6">
+        <source>July</source>
+        <target>7月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.7">
+        <source>August</source>
+        <target>8月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.8">
+        <source>September</source>
+        <target>9月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.9">
+        <source>October</source>
+        <target>10月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.10">
+        <source>November</source>
+        <target>11月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.11">
+        <source>December</source>
+        <target>12月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.0">
+        <source>Jan</source>
+        <target>1</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.1">
+        <source>Feb</source>
+        <target>2</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.2">
+        <source>Mar</source>
+        <target>3</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.3">
+        <source>Apr</source>
+        <target>4</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.4">
+        <source>May</source>
+        <target>5</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.5">
+        <source>Jun</source>
+        <target>6</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.6">
+        <source>Jul</source>
+        <target>7</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.7">
+        <source>Aug</source>
+        <target>8</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.8">
+        <source>Sep</source>
+        <target>9</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.9">
+        <source>Oct</source>
+        <target>10</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.10">
+        <source>Nov</source>
+        <target>11</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.11">
+        <source>Dec</source>
+        <target>12</target>
+      </trans-unit>
+      <trans-unit id="MSC.dayShortLength">
+        <source>3</source>
+        <target>1</target>
+      </trans-unit>
+      <trans-unit id="MSC.monthShortLength">
+        <source>3</source>
+        <target>1</target>
+      </trans-unit>
+      <trans-unit id="MSC.weekOffset">
+        <source>0</source>
+        <target>1</target>
+      </trans-unit>
+      <trans-unit id="MSC.titleFormat">
+        <source>%B %d%o, %Y</source>
+        <target>%Y年%d月%d日</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.0">
+        <source>Link target</source>
+        <target>リンク先</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.1">
+        <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
+        <target>ウェブアドレス(http://...)、電子メールアドレス(mailto:...)、挿入タグを入力してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.0">
+        <source>Open in new window</source>
+        <target>新しいウィンドウで開く</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.1">
+        <source>Open the link in a new browser window.</source>
+        <target>ブラウザーの新しいウィンドウでリンクを開きます。</target>
+      </trans-unit>
+      <trans-unit id="MSC.textDirection">
+        <source>ltr</source>
+        <target>ltr</target>
+      </trans-unit>
+      <trans-unit id="MSC.decimalSeparator">
+        <source>.</source>
+        <target>.</target>
+      </trans-unit>
+      <trans-unit id="MSC.thousandsSeparator">
+        <source>,</source>
+        <target>,</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.0">
+        <source>Separator</source>
+        <target>区切り</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.1">
+        <source>Please choose a field delimiter.</source>
+        <target>項目の区切り文字を選択してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.0">
+        <source>Source files</source>
+        <target>ソースファイル</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.1">
+        <source>Please upload the CSV files to be imported.</source>
+        <target>インポートするCSVファイルをアップロードしてください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.comma">
+        <source>Comma</source>
+        <target>コンマ</target>
+      </trans-unit>
+      <trans-unit id="MSC.semicolon">
+        <source>Semicolon</source>
+        <target>セミコロン</target>
+      </trans-unit>
+      <trans-unit id="MSC.tabulator">
+        <source>Tabulator</source>
+        <target>タブ</target>
+      </trans-unit>
+      <trans-unit id="MSC.linebreak">
+        <source>Line break</source>
+        <target>改行</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.0">
+        <source>CSV import</source>
+        <target>CSVのインポート</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.1">
+        <source>Import list items from a CSV file</source>
+        <target>CSVファイルから箇条書きの項目をインポート</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_copy">
+        <source>Duplicate the element</source>
+        <target>要素を複製</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_up">
+        <source>Move the element one position up</source>
+        <target>要素を1つ上の位置に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_down">
+        <source>Move the element one position down</source>
+        <target>要素を1つ下の位置に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_delete">
+        <source>Delete the element</source>
+        <target>要素を削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.0">
+        <source>CSV import</source>
+        <target>CSVのインポート</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.1">
+        <source>Import table items from a CSV file</source>
+        <target>CSVファイルから表の項目をインポート</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_expand">
+        <source>Increase the input field size</source>
+        <target>入力欄の大きさを拡大</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_shrink">
+        <source>Decrease the input field size</source>
+        <target>入力欄の大きさを縮小</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rcopy">
+        <source>Duplicate the row</source>
+        <target>行を複製</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rup">
+        <source>Move the row one position up</source>
+        <target>行を1つ上に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdown">
+        <source>Move the row one position down</source>
+        <target>行を1つ下に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdelete">
+        <source>Delete the row</source>
+        <target>行を削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_ccopy">
+        <source>Duplicate the column</source>
+        <target>列を複製</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmovel">
+        <source>Move the column one position left</source>
+        <target>列を1つ左の位置に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmover">
+        <source>Move the column one position right</source>
+        <target>列を1つ右の位置に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cdelete">
+        <source>Delete the column</source>
+        <target>列を削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_copy">
+        <source>Duplicate the row</source>
+        <target>行を複製</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_up">
+        <source>Move the row one position up</source>
+        <target>行を1つ上に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_down">
+        <source>Move the row one position down</source>
+        <target>行を1つ下に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_delete">
+        <source>Delete the row</source>
+        <target>行を削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_value">
+        <source>Value</source>
+        <target>値</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_label">
+        <source>Label</source>
+        <target>ラベル</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_key">
+        <source>Key</source>
+        <target>キー</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_default">
+        <source>Default</source>
+        <target>既定の表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_group">
+        <source>Group</source>
+        <target>グループ</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_copy">
+        <source>Duplicate the row</source>
+        <target>行を複製</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_up">
+        <source>Move the row one position up</source>
+        <target>行を1つ上に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_down">
+        <source>Move the row one position down</source>
+        <target>行を1つ下に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_delete">
+        <source>Delete the row</source>
+        <target>行を削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_module">
+        <source>Module</source>
+        <target>モジュール</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_column">
+        <source>Column</source>
+        <target>列</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>モジュールを有効または無効</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_title">
+        <source>Title</source>
+        <target>題名</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_link">
+        <source>Link</source>
+        <target>リンク</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_caption">
+        <source>Caption</source>
+        <target>キャプション</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_delete">
+        <source>Delete the language</source>
+        <target>言語を削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_new">
+        <source>Add language</source>
+        <target>言語を追加</target>
+      </trans-unit>
+      <trans-unit id="MSC.image_sizes">
+        <source>Predefined dimensions</source>
+        <target>所定の寸法</target>
+      </trans-unit>
+      <trans-unit id="MSC.relative">
+        <source>Relative dimensions</source>
+        <target>相対的な寸法</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.0">
+        <source>Proportional</source>
+        <target>縦横比を保持</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>画像の長い側を指定した寸法に調整して、画像の縦横比を保持して大きさを変更します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.0">
+        <source>Fit the box</source>
+        <target>ボックスに一致</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>画像の短い側を指定した寸法に調整して、画像の縦横比を保持して大きさを変更します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.exact.0">
+        <source>Exact dimensions</source>
+        <target>正確な寸法</target>
+      </trans-unit>
+      <trans-unit id="MSC.exact.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>画像を指定した寸法に変更します。必要な場合は画像を切り取ります。</target>
+      </trans-unit>
+      <trans-unit id="MSC.crop.0">
+        <source>Important part</source>
+        <target>重要な部分</target>
+      </trans-unit>
+      <trans-unit id="MSC.crop.1">
+        <source>Preserves the important part of an image as specified in the file manager.</source>
+        <target>ファイル管理で指定したように画像の重要な部分を保持します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.0">
+        <source>Left | Top</source>
+        <target>左 | 上</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.1">
+        <source>Preserves the left part of a landscape image and the top part of a portrait image.</source>
+        <target>画像の横方向の左側と縦方向の上の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.0">
+        <source>Center | Top</source>
+        <target>中央 | 上</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.1">
+        <source>Preserves the center part of a landscape image and the top part of a portrait image.</source>
+        <target>画像の横方向の中央と縦方向の上の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.0">
+        <source>Right | Top</source>
+        <target>右 | 上</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.1">
+        <source>Preserves the right part of a landscape image and the top part of a portrait image.</source>
+        <target>画像の横方向の右側と縦方向の上の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.0">
+        <source>Left | Center</source>
+        <target>左 | 中央</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.1">
+        <source>Preserves the left part of a landscape image and the center part of a portrait image.</source>
+        <target>画像の横方向の左側と縦方向の中央の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.0">
+        <source>Center | Center</source>
+        <target>中央 | 中央</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.1">
+        <source>Preserves the center part of a landscape image and the center part of a portrait image.</source>
+        <target>画像の横方向の中央とと縦方向の中央の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.0">
+        <source>Right | Center</source>
+        <target>右 | 中央</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.1">
+        <source>Preserves the right part of a landscape image and the center part of a portrait image.</source>
+        <target>画像の横方向の右側と縦方向の中央の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.0">
+        <source>Left | Bottom</source>
+        <target>左 | 下</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.1">
+        <source>Preserves the left part of a landscape image and the bottom part of a portrait image.</source>
+        <target>画像の横方向の左側と縦方向の下の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.0">
+        <source>Center | Bottom</source>
+        <target>中央 | 下</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.1">
+        <source>Preserves the center part of a landscape image and the bottom part of a portrait image.</source>
+        <target>画像の横方向の中央と縦方向の下の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.0">
+        <source>Right | Bottom</source>
+        <target>右 | 下</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.1">
+        <source>Preserves the right part of a landscape image and the bottom part of a portrait image.</source>
+        <target>画像の横方向の右側と縦方向の下の部分を保存します。</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.0">
+        <source>ID</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.1">
+        <source>Note that changing the ID can break data integrity!</source>
+        <target>IDを変更するとデータの完全性を損なう恐れがあるので注意してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.0">
+        <source>Parent ID</source>
+        <target>親のID</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.1">
+        <source>Note that changing the parent ID can break data integrity!</source>
+        <target>親のIDを変更するとデータの完全性を損なう恐れがあるので注意してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.0">
+        <source>Sorting value</source>
+        <target>並べ替えの値</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.1">
+        <source>The sorting value is usually assigned automatically.</source>
+        <target>並べ替えの値は通常自動的に割り当てられます。</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.0">
+        <source>Edit multiple</source>
+        <target>複数を変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.1">
+        <source>Edit multiple records at once</source>
+        <target>複数の項目を一度に変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.0">
+        <source>Override multiple</source>
+        <target>複数を上書き</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.1">
+        <source>Override multiple records at once</source>
+        <target>複数の項目を一度に上書き</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.0">
+        <source>Available fields</source>
+        <target>利用できる項目</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.1">
+        <source>Please select the fields you want to edit.</source>
+        <target>変更したい項目を選択してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.0">
+        <source>Password</source>
+        <target>パスワード</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.1">
+        <source>Please enter a password.</source>
+        <target>パスワードを入力してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.0">
+        <source>Confirmation</source>
+        <target>パスワードの再入力</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.1">
+        <source>Please confirm the password.</source>
+        <target>確認のためにパスワードを再度入力してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.0">
+        <source>Date added</source>
+        <target>追加した日付</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.1">
+        <source>Date added: %s</source>
+        <target>追加した日付: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+        <target>前回のログイン</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+        <target>前回のログイン: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Last login</source>
+        <target>最後のログイン</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Last login: %s</source>
+        <target>最後のログイン: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>ログインの試み</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>ロック状態</target>
+      </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>ドラッグアンドドロップで項目を移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.0">
+        <source>Move up</source>
+        <target>上に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.1">
+        <source>Move the item one position up</source>
+        <target>項目を1つ上の位置に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.0">
+        <source>Move down</source>
+        <target>下に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.1">
+        <source>Move the item one position down</source>
+        <target>項目を1つ下の位置に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.0">
+        <source>Files URL</source>
+        <target>filesのURL</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.1">
+        <source>The files URL applies to the &lt;em&gt;files&lt;/em&gt; directory (page speed optimization).</source>
+        <target>filesのURLは&lt;em&gt;files&lt;/em&gt;のディレクトリとすべての画像のサムネイルに適用します。(Page Speed最適化)</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.0">
+        <source>Assets URL</source>
+        <target>assetsのURL</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.1">
+        <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
+        <target>asstesのURLは&lt;em&gt;assets&lt;/em&gt;のディレクトリに適用します。(Page Speed最適化)</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.0">
+        <source>Back end keyboard shortcuts</source>
+        <target>バックエンドのキーボードのショートカット</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.1">
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://docs.contao.org/books/manual/current/en/02-administration-area/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>&lt;a href=&quot;https://docs.contao.org/books/manual/current/en/02-administration-area/keyboard-shortcuts.html&quot; title=&quot;キーボードのショートカットの概要&quot; target=&quot;_blank&quot;&gt;キーボードのショートカット&lt;/a&gt;を使って、作業の流れを速くする方法を習得しましょう。</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.0">
+        <source>Toggle all</source>
+        <target>すべてを切り替え</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.1">
+        <source>Expand or collapse all nodes</source>
+        <target>すべてのノードの展開または折り畳み</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.0">
+        <source>A Contao account has been locked</source>
+        <target>Contaoのアカウントはロック中</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.1">
+        <source>The following Contao account has been locked for security reasons.
+
+Username: %s
+Real name: %s
+Website: %s
+
+The account has been locked for %d minutes, because the user has entered an invalid password three times in a row. After this period of time, the account will be unlocked automatically.
+
+This e-mail has been generated by Contao. You can not reply to it directly.
+</source>
+        <target>以下のContaoのアカウントはセキュリティ上の理由のためロックしました。
+
+ユーザー名: %s
+氏名: %s
+ウェブサイト: %s
+
+アカウントのロックは、あと%d分続き、ユーザーが正しくないパスワードを連続して3回入力したためです。この期間の後で、アカウントのロックは自動的に解除となります。
+
+この電子メールはContaoが作成しました。直接返信はできません。
+</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.0">
+        <source>Mobile version</source>
+        <target>携帯端末版</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.1">
+        <source>Go to the mobile version</source>
+        <target>携帯端末版に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.0">
+        <source>Desktop version</source>
+        <target>デスクトップ版</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.1">
+        <source>Go to the desktop version</source>
+        <target>デスクトップ版に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.feLink">
+        <source>Go to front end</source>
+        <target>フロントエンドに移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreview">
+        <source>Front end preview</source>
+        <target>フロントエンドをプレビュー</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreviewTitle">
+        <source>Preview of the website in a new window</source>
+        <target>新しいウィンドウでウェブサイトをプレビュー</target>
+      </trans-unit>
+      <trans-unit id="MSC.feUser">
+        <source>Front end user</source>
+        <target>フロントエンドのユーザー</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTop">
+        <source>Back to top</source>
+        <target>先頭に戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTopTitle">
+        <source>Go to the top of the page</source>
+        <target>ページの先頭に移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.home">
+        <source>Home</source>
+        <target>ホーム</target>
+      </trans-unit>
+      <trans-unit id="MSC.homeTitle">
+        <source>Back to the back end start page</source>
+        <target>バックエンドの開始ページに戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.user">
+        <source>User</source>
+        <target>ユーザー</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginTo">
+        <source>Log into %s</source>
+        <target>%sにログイン</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginBT">
+        <source>Login</source>
+        <target>ログイン</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBT">
+        <source>Logout</source>
+        <target>ログアウト</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBTTitle">
+        <source>Close the current session</source>
+        <target>現在のセッションを終了</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBT">
+        <source>Go back</source>
+        <target>戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBTTitle">
+        <source>Back to the previous page</source>
+        <target>前のページに戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.cancelBT">
+        <source>Cancel</source>
+        <target>取り止め</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteConfirm">
+        <source>Do you really want to delete entry ID %s?</source>
+        <target>IDが%sの項目を本当に削除しますか?</target>
+      </trans-unit>
+      <trans-unit id="MSC.delAllConfirm">
+        <source>Do you really want to delete the selected records?</source>
+        <target>選択したレコードを本当に削除しますか?</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteConfirmFile">
+        <source>Do you really want to delete file or folder %s?</source>
+        <target>%sというファイルまたはフォルダーを本当に削除しますか?</target>
+      </trans-unit>
+      <trans-unit id="MSC.delAllConfirmFile">
+        <source>Do you really want to delete the selected resources?</source>
+        <target>選択したリソースを本当に削除しますか?</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterRecords">
+        <source>Records</source>
+        <target>レコード</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterAll">
+        <source>All</source>
+        <target>すべて</target>
+      </trans-unit>
+      <trans-unit id="MSC.showRecord">
+        <source>Show the details of record %s</source>
+        <target>%sのレコードの詳細を表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.editRecord">
+        <source>Edit record %s</source>
+        <target>%sのレコードを変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_info">
+        <source>Edit selected records of table %s</source>
+        <target>テーブル%sの選択したレコードを変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.showOnly">
+        <source>Show</source>
+        <target>表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.sortBy">
+        <source>Sort</source>
+        <target>並べ替え</target>
+      </trans-unit>
+      <trans-unit id="MSC.filter">
+        <source>Filter</source>
+        <target>フィルター</target>
+      </trans-unit>
+      <trans-unit id="MSC.search">
+        <source>Search</source>
+        <target>検索</target>
+      </trans-unit>
+      <trans-unit id="MSC.noResult">
+        <source>No records found.</source>
+        <target>レコードがありません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.save">
+        <source>Save</source>
+        <target>保存</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNclose">
+        <source>Save and close</source>
+        <target>保存して閉じる</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNedit">
+        <source>Save and edit</source>
+        <target>保存して編集</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNback">
+        <source>Save and go back</source>
+        <target>保存して戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNcreate">
+        <source>Save and new</source>
+        <target>保存して新しく作成</target>
+      </trans-unit>
+      <trans-unit id="MSC.continue">
+        <source>Continue</source>
+        <target>続ける</target>
+      </trans-unit>
+      <trans-unit id="MSC.close">
+        <source>Close</source>
+        <target>閉じる</target>
+      </trans-unit>
+      <trans-unit id="MSC.skipNavigation">
+        <source>Skip navigation</source>
+        <target>ナビゲーションを省略</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAll">
+        <source>Select all</source>
+        <target>すべて選択</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_new">
+        <source>Change password</source>
+        <target>パスワードの変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_change">
+        <source>Please enter a new password</source>
+        <target>新しいパスワードを入力してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_changed">
+        <source>The password has been updated.</source>
+        <target>パスワードを更新しました。</target>
+      </trans-unit>
+      <trans-unit id="MSC.fallback">
+        <source>default</source>
+        <target>初期設定</target>
+      </trans-unit>
+      <trans-unit id="MSC.view">
+        <source>View in a new window</source>
+        <target>新しいウィンドウで見る</target>
+      </trans-unit>
+      <trans-unit id="MSC.fullsize">
+        <source>Open full size image in a new window</source>
+        <target>新しいウィンドウにフルサイズの画像を開く</target>
+      </trans-unit>
+      <trans-unit id="MSC.datepicker">
+        <source>Date picker</source>
+        <target>日付選択</target>
+      </trans-unit>
+      <trans-unit id="MSC.colorpicker">
+        <source>Color picker</source>
+        <target>色選択</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagepicker">
+        <source>Page picker</source>
+        <target>ページ選択</target>
+      </trans-unit>
+      <trans-unit id="MSC.filepicker">
+        <source>File picker</source>
+        <target>ファイル選択</target>
+      </trans-unit>
+      <trans-unit id="MSC.ppHeadline">
+        <source>Contao pages</source>
+        <target>Contaoのページ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fpHeadline">
+        <source>Contao files</source>
+        <target>Contaoのファイル</target>
+      </trans-unit>
+      <trans-unit id="MSC.yes">
+        <source>yes</source>
+        <target>はい</target>
+      </trans-unit>
+      <trans-unit id="MSC.no">
+        <source>no</source>
+        <target>いいえ</target>
+      </trans-unit>
+      <trans-unit id="MSC.goBack">
+        <source>Go back</source>
+        <target>戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.reload">
+        <source>Reload</source>
+        <target>再読み込み</target>
+      </trans-unit>
+      <trans-unit id="MSC.above">
+        <source>above</source>
+        <target>上</target>
+      </trans-unit>
+      <trans-unit id="MSC.below">
+        <source>below</source>
+        <target>下</target>
+      </trans-unit>
+      <trans-unit id="MSC.date">
+        <source>Date</source>
+        <target>日付</target>
+      </trans-unit>
+      <trans-unit id="MSC.tstamp">
+        <source>Revision date</source>
+        <target>改訂日</target>
+      </trans-unit>
+      <trans-unit id="MSC.entry">
+        <source>%s entry</source>
+        <target>%s項目</target>
+      </trans-unit>
+      <trans-unit id="MSC.entries">
+        <source>%s entries</source>
+        <target>%s項目</target>
+      </trans-unit>
+      <trans-unit id="MSC.files">
+        <source>%s file(s)</source>
+        <target>%s個のファイル</target>
+      </trans-unit>
+      <trans-unit id="MSC.left">
+        <source>left</source>
+        <target>左</target>
+      </trans-unit>
+      <trans-unit id="MSC.center">
+        <source>center</source>
+        <target>中央</target>
+      </trans-unit>
+      <trans-unit id="MSC.right">
+        <source>right</source>
+        <target>右</target>
+      </trans-unit>
+      <trans-unit id="MSC.justify">
+        <source>justified</source>
+        <target>両端揃え</target>
+      </trans-unit>
+      <trans-unit id="MSC.filetree">
+        <source>File system</source>
+        <target>ファイルシステム</target>
+      </trans-unit>
+      <trans-unit id="MSC.male">
+        <source>Male</source>
+        <target>男性</target>
+      </trans-unit>
+      <trans-unit id="MSC.female">
+        <source>Female</source>
+        <target>女性</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileSize">
+        <source>File size</source>
+        <target>ファイルの大きさ</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileCreated">
+        <source>Created</source>
+        <target>作成日時</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileModified">
+        <source>Last modified</source>
+        <target>最終修正日時</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileAccessed">
+        <source>Last accessed</source>
+        <target>最終アクセス日時</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileDownload">
+        <source>Download the file</source>
+        <target>ファイルをダウンロード</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>ユニークID</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileImageSize">
+        <source>Width/height in pixel</source>
+        <target>ピクセル単位の幅と高さ</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePath">
+        <source>Relative path</source>
+        <target>相対パス</target>
+      </trans-unit>
+      <trans-unit id="MSC.version">
+        <source>Version</source>
+        <target>バージョン</target>
+      </trans-unit>
+      <trans-unit id="MSC.restore">
+        <source>Restore</source>
+        <target>復元</target>
+      </trans-unit>
+      <trans-unit id="MSC.backendModules">
+        <source>Back end modules</source>
+        <target>バックエンドモジュール</target>
+      </trans-unit>
+      <trans-unit id="MSC.welcomeTo">
+        <source>%s back end</source>
+        <target>%sのバックエンド</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateVersion">
+        <source>Contao version %s available</source>
+        <target>Contaoバージョン%sを利用可能</target>
+      </trans-unit>
+      <trans-unit id="MSC.wordWrap">
+        <source>Word wrap</source>
+        <target>ワードラップ</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveAlert">
+        <source>ATTENTION! You will lose any unsaved changes. Continue?</source>
+        <target>注意! 保存していない変更は失われます。続けますか?</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleNodes">
+        <source>Toggle all nodes</source>
+        <target>すべてのノードを切り替え</target>
+      </trans-unit>
+      <trans-unit id="MSC.expandNode">
+        <source>Expand node</source>
+        <target>ノードを展開</target>
+      </trans-unit>
+      <trans-unit id="MSC.collapseNode">
+        <source>Collapse node</source>
+        <target>ノードを折り畳み</target>
+      </trans-unit>
+      <trans-unit id="MSC.loadingData">
+        <source>Loading data</source>
+        <target>データを読み込み中</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteSelected">
+        <source>Delete</source>
+        <target>削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.editSelected">
+        <source>Edit</source>
+        <target>編集</target>
+      </trans-unit>
+      <trans-unit id="MSC.overrideSelected">
+        <source>Override</source>
+        <target>上書き</target>
+      </trans-unit>
+      <trans-unit id="MSC.moveSelected">
+        <source>Move</source>
+        <target>移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.copySelected">
+        <source>Copy</source>
+        <target>コピー</target>
+      </trans-unit>
+      <trans-unit id="MSC.aliasSelected">
+        <source>Generate aliases</source>
+        <target>エイリアスを生成</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelected">
+        <source>Change selection</source>
+        <target>選択を変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.resetSelected">
+        <source>Reset selection</source>
+        <target>選択を解除</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePicker">
+        <source>Switch to file picker</source>
+        <target>ファイル選択に切り替え</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePicker">
+        <source>Switch to page picker</source>
+        <target>ページ選択に切り替え</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileManager">
+        <source>Open the file manager</source>
+        <target>ファイル管理を開く</target>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
+        <target>サイト構造を修正</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>ファイル選択に戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>ページ選択に戻る</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>ページまたはファイル選択に戻って、ダイアログを閉じる前に選択を確定してください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.systemMessages">
+        <source>System messages</source>
+        <target>システムのメッセージ</target>
+      </trans-unit>
+      <trans-unit id="MSC.clearClipboard">
+        <source>Clear clipboard</source>
+        <target>クリップボードを消去</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenElements">
+        <source>Unpublished elements</source>
+        <target>非公開の要素</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenHide">
+        <source>hide</source>
+        <target>表示しない</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenShow">
+        <source>show</source>
+        <target>表示する</target>
+      </trans-unit>
+      <trans-unit id="MSC.apply">
+        <source>Apply</source>
+        <target>適用</target>
+      </trans-unit>
+      <trans-unit id="MSC.applyTitle">
+        <source>Apply the changes</source>
+        <target>変更を適用</target>
+      </trans-unit>
+      <trans-unit id="MSC.mandatory">
+        <source>Mandatory field</source>
+        <target>必須の項目</target>
+      </trans-unit>
+      <trans-unit id="MSC.create">
+        <source>Create</source>
+        <target>作成</target>
+      </trans-unit>
+      <trans-unit id="MSC.delete">
+        <source>Delete</source>
+        <target>削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.protected">
+        <source>protected</source>
+        <target>保護した状態</target>
+      </trans-unit>
+      <trans-unit id="MSC.guests">
+        <source>guests only</source>
+        <target>ゲストだけに表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateMode">
+        <source>Update mode</source>
+        <target>更新の方法</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateAdd">
+        <source>Add the selected values</source>
+        <target>選択した値を追加</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateRemove">
+        <source>Remove the selected values</source>
+        <target>選択した値を削除</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateReplace">
+        <source>Replace the existing entries</source>
+        <target>既存の項目を置き換え</target>
+      </trans-unit>
+      <trans-unit id="MSC.ascending">
+        <source>ascending</source>
+        <target>昇順</target>
+      </trans-unit>
+      <trans-unit id="MSC.descending">
+        <source>descending</source>
+        <target>降順</target>
+      </trans-unit>
+      <trans-unit id="MSC.default">
+        <source>Default</source>
+        <target>既定の表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizard">
+        <source>Open the help wizard</source>
+        <target>ヘルプウィザードを開く</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizardTitle">
+        <source>Help wizard</source>
+        <target>ヘルプウィザード</target>
+      </trans-unit>
+      <trans-unit id="MSC.noCookies">
+        <source>You have to allow cookies to use Contao.</source>
+        <target>Contaoを使用するにはクッキーを許可しなければなりません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.copyOf">
+        <source>%s (copy)</source>
+        <target>%s (複製)</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyMode">
+        <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
+        <target>現在Contaoは&lt;strong&gt;セーフモード&lt;/strong&gt;で動作していて、コアのモジュールだけ読み込んだ状態です。これは(例えば、ライブアップデートの後の)第三者の機能拡張の非互換性による問題を防ぐためです。インストールしてある第三者の機能拡張を確認した後で、バックエンドの設定で通常の動作モードに戻せます。</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>解除</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>現在Contaoは&lt;strong&gt;保守モード&lt;/strong&gt;,で動作していてウェブサイト(フロントエンド)は利用できない状態です。第三者の機能拡張のインストールや更新をしている場合は保守モードを無効にしてはなりません!  ウェブサイトは適切に動作しないかもしれません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>解除</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>まだ&lt;strong&gt;内部キャッシュ&lt;/strong&gt;を作成していません。アプリケーションの性能を向上するので、キャッシュの作成を強くお勧めします。キャッシュを使用したくない場合は、バックエンドの設定で永続的に無効にできます。</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+        <target>キャッシュを作成</target>
+      </trans-unit>
+      <trans-unit id="MSC.name">
+        <source>Name</source>
+        <target>氏名</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailAddress">
+        <source>E-mail address</source>
+        <target>電子メールアドレス</target>
+      </trans-unit>
+      <trans-unit id="MSC.register">
+        <source>Register</source>
+        <target>登録</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountActivated">
+        <source>Your account has been activated.</source>
+        <target>あなたのアカウントは有効になりました。</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountError">
+        <source>Unable to process the current request.</source>
+        <target>現在の要求を処理できません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailSubject">
+        <source>Your registration on %s</source>
+        <target>%sでアカウントの登録を受け付け</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminSubject">
+        <source>New registration on %s</source>
+        <target>%sで新しい登録</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminText">
+        <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
+        <target>ウェブサイトに新しいメンバー(ID %s)を登録しました。%sアクティベーションの電子メールの送信をしていない場合は、バックエンドでアカウントを手作業で有効にしなければなりません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.requestPassword">
+        <source>Request password</source>
+        <target>パスワードを要求</target>
+      </trans-unit>
+      <trans-unit id="MSC.setNewPassword">
+        <source>Set new password</source>
+        <target>新しいパスワードを設定</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPasswordSet">
+        <source>Your password has been updated.</source>
+        <target>パスワードを更新しました。</target>
+      </trans-unit>
+      <trans-unit id="MSC.passwordSubject">
+        <source>Your password request for %s</source>
+        <target>%sのパスワードのリクエスト</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountNotFound">
+        <source>No matching account found</source>
+        <target>一致するアカウントがありません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.oldPassword">
+        <source>Old password</source>
+        <target>現在のパスワード</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPassword">
+        <source>New password</source>
+        <target>新しいパスワード</target>
+      </trans-unit>
+      <trans-unit id="MSC.changePassword">
+        <source>Change password</source>
+        <target>パスワードの変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.oldPasswordWrong">
+        <source>The old password is not correct</source>
+        <target>現在のパスワードが誤っています。</target>
+      </trans-unit>
+      <trans-unit id="MSC.securityQuestion">
+        <source>Security question</source>
+        <target>セキュリティ質問</target>
+      </trans-unit>
+      <trans-unit id="MSC.closeAccount">
+        <source>Close account</source>
+        <target>アカウントの廃止</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelection">
+        <source>Change selection</source>
+        <target>選択を変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentlySelected">
+        <source>Selected</source>
+        <target>選択中</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNode">
+        <source>Only show this node</source>
+        <target>このノードだけを表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAllNodes">
+        <source>Show all nodes</source>
+        <target>すべてのノードを表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.showDifferences">
+        <source>Show differences</source>
+        <target>違いの表示</target>
+      </trans-unit>
+      <trans-unit id="MSC.editElement">
+        <source>Edit the element</source>
+        <target>コンテント要素を編集</target>
+      </trans-unit>
+      <trans-unit id="MSC.table">
+        <source>Table</source>
+        <target>表</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
+        <target>親のテーブル</target>
+      </trans-unit>
+      <trans-unit id="MSC.description">
+        <source>Description</source>
+        <target>説明</target>
+      </trans-unit>
+      <trans-unit id="MSC.noVersions">
+        <source>Currently there are no versions.</source>
+        <target>現在、他のバージョンはありません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.latestChanges">
+        <source>Latest changes</source>
+        <target>最近の変更</target>
+      </trans-unit>
+      <trans-unit id="MSC.identicalVersions">
+        <source>The two selected versions are identical.</source>
+        <target>選択した2つのバージョンは同一です。</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNewPosition">
+        <source>Next, please choose the (new) position of the element</source>
+        <target>次に、要素の(新しい)位置を選択してください</target>
+      </trans-unit>
+      <trans-unit id="MSC.go">
+        <source>Go</source>
+        <target>移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicknav">
+        <source>Quick navigation</source>
+        <target>クイックナビゲーション</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicklink">
+        <source>Quick link</source>
+        <target>クイックリンク</target>
+      </trans-unit>
+      <trans-unit id="MSC.username">
+        <source>Username</source>
+        <target>ユーザー名</target>
+      </trans-unit>
+      <trans-unit id="MSC.login">
+        <source>Login</source>
+        <target>ログイン</target>
+      </trans-unit>
+      <trans-unit id="MSC.logout">
+        <source>Logout</source>
+        <target>ログアウト</target>
+      </trans-unit>
+      <trans-unit id="MSC.loggedInAs">
+        <source>You are logged in as %s.</source>
+        <target>%sというユーザーでログイン中です。</target>
+      </trans-unit>
+      <trans-unit id="MSC.emptyField">
+        <source>Please enter your username and password!</source>
+        <target>ユーザー名とパスワードを入力しください。</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirmation">
+        <source>Confirmation</source>
+        <target>パスワードの再入力</target>
+      </trans-unit>
+      <trans-unit id="MSC.sMatches">
+        <source>%s occurrences for %s</source>
+        <target>%2$sに%1$s件が一致しました。</target>
+      </trans-unit>
+      <trans-unit id="MSC.sEmpty">
+        <source>No matches for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>何も&lt;strong&gt;%s&lt;/strong&gt;に一致しません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.sResults">
+        <source>Results %s - %s of %s for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>検索文字列: &lt;strong&gt;%4$s&lt;/strong&gt;の結果: 全%3$s件の%1$sから%2$s</target>
+      </trans-unit>
+      <trans-unit id="MSC.sNoResult">
+        <source>Your search for &lt;strong&gt;%s&lt;/strong&gt; returned no results.</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt;の検索の結果はありませんでした。</target>
+      </trans-unit>
+      <trans-unit id="MSC.seconds">
+        <source>seconds</source>
+        <target>秒</target>
+      </trans-unit>
+      <trans-unit id="MSC.up">
+        <source>Up</source>
+        <target>上</target>
+      </trans-unit>
+      <trans-unit id="MSC.first">
+        <source>&amp;#171; First</source>
+        <target>≪先頭</target>
+      </trans-unit>
+      <trans-unit id="MSC.previous">
+        <source>Previous</source>
+        <target>前</target>
+      </trans-unit>
+      <trans-unit id="MSC.next">
+        <source>Next</source>
+        <target>次</target>
+      </trans-unit>
+      <trans-unit id="MSC.last">
+        <source>Last &amp;#187;</source>
+        <target>最後≫</target>
+      </trans-unit>
+      <trans-unit id="MSC.goToPage">
+        <source>Go to page %s</source>
+        <target>%sページに移動</target>
+      </trans-unit>
+      <trans-unit id="MSC.totalPages">
+        <source>Page %s of %s</source>
+        <target>%2$sページの%1$sページ目</target>
+      </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>全体</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileUploaded">
+        <source>File %s uploaded successfully.</source>
+        <target>%sというファイルをアップロードしました。</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileExceeds">
+        <source>Image %s is too big to be resized automatically.</source>
+        <target>%sという画像は自動的に大きさを変更するには大きすぎます。</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileResized">
+        <source>Image %s was scaled down to the maximum dimensions.</source>
+        <target>%sという画像を最大の寸法に縮小しました。</target>
+      </trans-unit>
+      <trans-unit id="MSC.searchLabel">
+        <source>Search</source>
+        <target>検索</target>
+      </trans-unit>
+      <trans-unit id="MSC.keywords">
+        <source>Keywords</source>
+        <target>キーワード</target>
+      </trans-unit>
+      <trans-unit id="MSC.options">
+        <source>Options</source>
+        <target>選択肢</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAll">
+        <source>match all words</source>
+        <target>すべての単語に一致</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAny">
+        <source>match any word</source>
+        <target>いずれかの単語に一致</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveData">
+        <source>Save data</source>
+        <target>登録情報を保存</target>
+      </trans-unit>
+      <trans-unit id="MSC.savedData">
+        <source>Your data has been saved.</source>
+        <target>登録情報を保存しました。</target>
+      </trans-unit>
+      <trans-unit id="MSC.printPage">
+        <source>Print this page</source>
+        <target>このページを印刷</target>
+      </trans-unit>
+      <trans-unit id="MSC.printAsPdf">
+        <source>Save article as PDF</source>
+        <target>アーティクルをPDFとして保存</target>
+      </trans-unit>
+      <trans-unit id="MSC.facebookShare">
+        <source>Share on Facebook</source>
+        <target>Facebookで共有</target>
+      </trans-unit>
+      <trans-unit id="MSC.twitterShare">
+        <source>Share on Twitter</source>
+        <target>Twitterで共有</target>
+      </trans-unit>
+      <trans-unit id="MSC.gplusShare">
+        <source>Share on Google+</source>
+        <target>Google+で共有</target>
+      </trans-unit>
+      <trans-unit id="MSC.pleaseWait">
+        <source>Please wait</source>
+        <target>お待ちください</target>
+      </trans-unit>
+      <trans-unit id="MSC.loading">
+        <source>Loading …</source>
+        <target>読み込み中...</target>
+      </trans-unit>
+      <trans-unit id="MSC.more">
+        <source>Read more …</source>
+        <target>続きを読む...</target>
+      </trans-unit>
+      <trans-unit id="MSC.readMore">
+        <source>Read the article: %s</source>
+        <target>アーティクルを読む: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.targetPage">
+        <source>Target page</source>
+        <target>リンク先ページ</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidPage">
+        <source>Sorry, item &quot;%s&quot; does not exist.</source>
+        <target>申し訳ありません、&quot;%s&quot;という項目は存在しません。</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_orderBy">
+        <source>Order by %s</source>
+        <target>%sの順序</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_perPage">
+        <source>Results per page</source>
+        <target>1ページの結果の数</target>
+      </trans-unit>
+      <trans-unit id="MSC.published">
+        <source>Published</source>
+        <target>公開</target>
+      </trans-unit>
+      <trans-unit id="MSC.unpublished">
+        <source>Unpublished</source>
+        <target>非公開</target>
+      </trans-unit>
+      <trans-unit id="MSC.addComment">
+        <source>Add a comment</source>
+        <target>コメントを追加</target>
+      </trans-unit>
+      <trans-unit id="MSC.autologin">
+        <source>Remember me</source>
+        <target>ログイン状態を保持</target>
+      </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>作成した日時</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activation token</source>
+        <target>有効にするトークン</target>
+      </trans-unit>
+      <trans-unit id="MSC.relevance">
+        <source>%s relevance</source>
+        <target>%sの関連性</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidTokenUrl">
+        <source>Invalid token</source>
+        <target>不正なトークン</target>
+      </trans-unit>
+      <trans-unit id="MSC.changelog">
+        <source>Changelog</source>
+        <target>変更履歴</target>
+      </trans-unit>
+      <trans-unit id="MSC.dragItemsHint">
+        <source>Drag the items to re-order them</source>
+        <target>項目をドラッグして並べ替え</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>テーマ %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
+        <target>場所</target>
+      </trans-unit>
+      <trans-unit id="MSC.download">
+        <source>Download %s</source>
+        <target>%sをダウンロード</target>
+      </trans-unit>
+      <trans-unit id="MSC.metaNoLanguages">
+        <source>You have to add a root page in the site structure to store file meta information.</source>
+        <target>ファイルのメタ情報を保存するためには、サイト構造でルートのページを追加しなければなりません。</target>
+      </trans-unit>
+      <trans-unit id="UNITS.0">
+        <source>Byte</source>
+        <target>byte</target>
+      </trans-unit>
+      <trans-unit id="UNITS.1">
+        <source>KiB</source>
+        <target>KiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.2">
+        <source>MiB</source>
+        <target>MiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.3">
+        <source>GiB</source>
+        <target>GiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.4">
+        <source>TiB</source>
+        <target>TiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.5">
+        <source>PiB</source>
+        <target>PiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.6">
+        <source>EiB</source>
+        <target>EiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.7">
+        <source>ZiB</source>
+        <target>ZiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.8">
+        <source>YiB</source>
+        <target>YiB</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.do">
+        <source>Module</source>
+        <target>モジュール</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.table">
+        <source>Affected table</source>
+        <target>影響を受けたテーブル</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.act">
+        <source>Action</source>
+        <target>操作</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.id">
+        <source>Affected record</source>
+        <target>影響を受けたレコード</target>
+      </trans-unit>
+      <trans-unit id="DP.select_a_time">
+        <source>Select a time</source>
+        <target>時刻を選択</target>
+      </trans-unit>
+      <trans-unit id="DP.use_mouse_wheel">
+        <source>Use the mouse wheel to quickly change value</source>
+        <target>迅速に値を変更するにはマウスのホイールを使用してください</target>
+      </trans-unit>
+      <trans-unit id="DP.time_confirm_button">
+        <source>OK</source>
+        <target>確認</target>
+      </trans-unit>
+      <trans-unit id="DP.apply_range">
+        <source>Apply</source>
+        <target>適用</target>
+      </trans-unit>
+      <trans-unit id="DP.cancel">
+        <source>Cancel</source>
+        <target>取り止め</target>
+      </trans-unit>
+      <trans-unit id="DP.week">
+        <source>Wk</source>
+        <target>週</target>
+      </trans-unit>
+      <trans-unit id="COLS.header">
+        <source>Header</source>
+        <target>ヘッダー</target>
+      </trans-unit>
+      <trans-unit id="COLS.left">
+        <source>Left column</source>
+        <target>左の列</target>
+      </trans-unit>
+      <trans-unit id="COLS.main">
+        <source>Main column</source>
+        <target>メインの列</target>
+      </trans-unit>
+      <trans-unit id="COLS.right">
+        <source>Right column</source>
+        <target>右の列</target>
+      </trans-unit>
+      <trans-unit id="COLS.footer">
+        <source>Footer</source>
+        <target>フッター</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

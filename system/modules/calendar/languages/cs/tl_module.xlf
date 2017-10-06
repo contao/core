@@ -1,0 +1,218 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_module.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_module.cal_calendar.0">
+        <source>Calendars</source>
+        <target>Kalendáře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_calendar.1">
+        <source>Please select one or more calendars.</source>
+        <target>Prosím vyberte jeden nebo více kalendářů.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.0">
+        <source>Shortened view</source>
+        <target>Zkrácené zobrazení</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.1">
+        <source>Show events only once even if they span multiple days.</source>
+        <target>Zobrazit události jen jednou, pokud se konají několik dnů po sobě.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.0">
+        <source>Week start day</source>
+        <target>Týden začíná</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>Zde můžete zvolit, jakým dnem začíná týden.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.0">
+        <source>Event list format</source>
+        <target>Formát seznamu událostí</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.1">
+        <source>Here you can choose the event list format.</source>
+        <target>Zde můžete zvolit formát seznamu událostí.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.0">
+        <source>Ignore URL parameters</source>
+        <target>Ignorovat nastavené parametry URL</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.1">
+        <source>Do not switch the time period based on the date/month/year URL parameters.</source>
+        <target>Neměnit časové období, které je založené na parametrech URL zadaných pro datum / měsíc / rok.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.0">
+        <source>Sort order</source>
+        <target>Seřadit podle</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>Zde můžete zvolit typ třídění novinek.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.0">
+        <source>Event reader module</source>
+        <target>Modul čtečka událostí</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.1">
+        <source>Automatically switch to the event reader if an event has been selected.</source>
+        <target>Automaticky přepne na události, pokud událost byla vybrána.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.0">
+        <source>Number of events</source>
+        <target>Počet událostí</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.1">
+        <source>Here you can limit the number of events. Enter 0 to show all.</source>
+        <target>Zde můžete omezit počet zobrazených události. Zadejte 0 pro zobrazení všech.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.0">
+        <source>Event template</source>
+        <target>Šablona událostí</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.1">
+        <source>Here you can select the event template.</source>
+        <target>Prosím zvolte šablonu události. Můžete si přidat vlastní šablonu do složky &lt;em&gt;templates&lt;/em&gt;. Soubory šablon pro události začínají na &lt;em&gt;event_&lt;/em&gt; a vyžadují příponu souboru &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.0">
+        <source>Calendar template</source>
+        <target>Předloha kalendáře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.1">
+        <source>Here you can select the calendar template.</source>
+        <target>Zde můžete vybrat předlohu kalendáře.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.0">
+        <source>Show number of events</source>
+        <target>Zobrazit počet událostí</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.1">
+        <source>Show the number of events of each month in the menu.</source>
+        <target>Zobrazit počet událostí vybraného měsíce</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_list">
+        <source>Event list</source>
+        <target>Seznam událostí</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_day">
+        <source>Day</source>
+        <target>Den</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_month">
+        <source>Month</source>
+        <target>Měsíc</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_year">
+        <source>Year</source>
+        <target>Rok</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_all">
+        <source>All events</source>
+        <target>Všechny události</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_upcoming">
+        <source>Upcoming events</source>
+        <target>Nadcházející události</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_7">
+        <source>+ 1 week</source>
+        <target>+ 1 týden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_14">
+        <source>+ 2 weeks</source>
+        <target>+ 2 týdny</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_30">
+        <source>+ 1 month</source>
+        <target>+ 1 měsíc</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_90">
+        <source>+ 3 months</source>
+        <target>+ 3 měsíce</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_180">
+        <source>+ 6 months</source>
+        <target>+ 6 mesíců</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_365">
+        <source>+ 1 year</source>
+        <target>+ 1 rok</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_two">
+        <source>+ 2 years</source>
+        <target>+ 2 roky</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_month">
+        <source>of the current month</source>
+        <target>na aktuální měsíc</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_year">
+        <source>of the current year</source>
+        <target>na aktuální rok</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_month">
+        <source>of the next month</source>
+        <target>měsíce</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_year">
+        <source>of the next year</source>
+        <target>roku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_all">
+        <source>All upcoming events</source>
+        <target>Všechny nadcházející události</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_past">
+        <source>Past events</source>
+        <target>Proběhlé události</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_7">
+        <source>- 1 week</source>
+        <target>- 1 týden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_14">
+        <source>- 2 weeks</source>
+        <target>- 2 týdny</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_30">
+        <source>- 1 month</source>
+        <target>- 1 měsíc</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_90">
+        <source>- 3 months</source>
+        <target>- 3 měsíce</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_180">
+        <source>- 6 months</source>
+        <target>- 6 měsíců</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_365">
+        <source>- 1 year</source>
+        <target>- 1 rok</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_two">
+        <source>- 2 years</source>
+        <target>- 2 roky</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_month">
+        <source>of the current month</source>
+        <target>na aktuální měsíc</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_year">
+        <source>of the current year</source>
+        <target>na aktuální rok</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_month">
+        <source>of the previous month</source>
+        <target>předešlého měsíce</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_year">
+        <source>of the previous year</source>
+        <target>předešlého roku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_all">
+        <source>All past events</source>
+        <target>Všechny proběhlé události</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

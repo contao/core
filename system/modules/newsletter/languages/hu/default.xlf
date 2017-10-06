@@ -1,0 +1,50 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/default.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="ERR.subscribed">
+        <source>You are subscribed to the selected channels already.</source>
+        <target>Már feliratkozott erre a hírlevélre.</target>
+      </trans-unit>
+      <trans-unit id="ERR.unsubscribed">
+        <source>You are not subscribed to the selected channels.</source>
+        <target>Ön nincs feliratkozva erre a hírlevélre.</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidToken">
+        <source>The activation link is invalid or outdated.</source>
+        <target>Az aktiváló hivatkozás hibás, vagy lejárt.</target>
+      </trans-unit>
+      <trans-unit id="ERR.noChannels">
+        <source>Please select at least one channel.</source>
+        <target>Kérjük, válasszon legalább egy csatornát.</target>
+      </trans-unit>
+      <trans-unit id="MSC.subscribe">
+        <source>Subscribe</source>
+        <target>Feliratkozás</target>
+      </trans-unit>
+      <trans-unit id="MSC.unsubscribe">
+        <source>Unsubscribe</source>
+        <target>Leiratkozás</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_subject">
+        <source>Your subscription on %s</source>
+        <target>Feliratkozás a %s hírlevelére</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_confirm">
+        <source>Thank you for your subscription. You will receive a confirmation e-mail.</source>
+        <target>Köszönjük, hogy feliratkozott. Hamarosan kap egy megerősítő e-mailt.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_activate">
+        <source>Your subscription has been activated.</source>
+        <target>Sikeresen aktiválta a feliratkozást.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_removed">
+        <source>Your subscription has been cancelled.</source>
+        <target>Sikeresen leiratkozott.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_channels">
+        <source>Channels</source>
+        <target>Csatornák</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

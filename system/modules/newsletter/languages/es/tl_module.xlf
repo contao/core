@@ -1,0 +1,86 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en" target-language="es">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Newsletters subscribables</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Por favor seleccione los canales a los que el usuario se puede subscribir durante el proceso de alta.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Canales</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Por favor seleccione uno o más canales.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Esconder el menú de canales</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>No mostrar el menú de selección de canales</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>Mensaje de suscripción</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Puede utilizar los comodines &lt;em&gt;##channel##&lt;/em&gt; (nombres de canal), &lt;em&gt;##domain##&lt;/em&gt; (nombre de dominio) y &lt;em&gt;##link##&lt;/em&gt; (enlace de activacion).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>E-mail de baja de suscripción</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Por favor introduzca el texto del e-mail de baja de suscripción. Puede utilizar los comodines &lt;em&gt;##channel##&lt;/em&gt; (nombre de canal), &lt;em&gt;##domain##&lt;/em&gt; (nombre de dominio actual) y &lt;em&gt;##link##&lt;/em&gt; (enlace de activacion).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Template del Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Aquí puede seleccionar un template para el newsletter.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Su suscripción en %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Se ha suscrito en los siguientes canales en ##domain##:
+
+##channels##
+
+Por favor haga clic en ##link## para compeletar su suscripción. Si no ha solicitado esta suscripción, ignore este e-mail.
+</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Su suscripción en %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Se ha dado de baja su suscripción en ##domain##:
+
+##channel##.
+</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

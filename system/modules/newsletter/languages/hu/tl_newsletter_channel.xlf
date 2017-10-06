@@ -1,0 +1,142 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_channel.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_newsletter_channel.title.0">
+        <source>Title</source>
+        <target>Cím</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title.1">
+        <source>Please enter the title of the channel.</source>
+        <target>Adja meg a csatorna nevét.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Átirányítás</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.1">
+        <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
+        <target>Válassza ki a hírlevél olvasó oldalt, amelyre a látogatók lesznek irányítva, ha rákattintanak a hírlevél.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.0">
+        <source>Custom SMTP server</source>
+        <target>Egyedi SMTP szerver</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.1">
+        <source>Use a custom SMTP server for sending newsletters.</source>
+        <target>Egyedi SMTP szerver használata a hírlevelek kiküldésére.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>SMTP hostname</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>Adja meg az SMTP szerver nevét.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.0">
+        <source>SMTP username</source>
+        <target>SMTP felhasználónév</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>Itt lehet megadni a SMTP felhasználónevet.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.0">
+        <source>SMTP password</source>
+        <target>SMTP jelszó</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>Itt lehet megadni az SMTP-jelszót.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>SMTP titkosítás</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Itt kiválaszthatja a titkosítási módszert (SSL vagy TLS).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>SMTP port száma</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>Adja meg az SMTP szerver port számát.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.0">
+        <source>Revision date</source>
+        <target>Utolsó módosítás dátuma</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Legutóbbi módosítás dátuma és ideje.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title_legend">
+        <source>Title and redirect</source>
+        <target>Cím és átirányítás</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>SMTP beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.0">
+        <source>New channel</source>
+        <target>Új csatorna</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.1">
+        <source>Create a new channel</source>
+        <target>Új csatorna létrehozása</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.0">
+        <source>Channel details</source>
+        <target>Csatorna adatai</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.1">
+        <source>Show the details of channel ID %s</source>
+        <target>Az ID %s csatorna adatainak mutatása</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.0">
+        <source>Edit channel</source>
+        <target>Csatorna szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.1">
+        <source>Edit channel ID %s</source>
+        <target>Az ID %s csatorna szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.0">
+        <source>Edit channel</source>
+        <target>Csatorna szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>Csatorna beállítások szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.0">
+        <source>Duplicate channel</source>
+        <target>Csatorna duplázása</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.1">
+        <source>Duplicate channel ID %s</source>
+        <target>Az ID %s csatorna duplázása</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.0">
+        <source>Delete channel</source>
+        <target>Csatorna törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.1">
+        <source>Delete channel ID %s</source>
+        <target>Az ID %s csatorna törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.0">
+        <source>Edit recipients</source>
+        <target>Címzettek szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.1">
+        <source>Edit the recipients of channel ID %s</source>
+        <target>Az ID %s csatorna címzettjeinek szerkesztése.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

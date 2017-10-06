@@ -1,0 +1,367 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_install.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="tl_install.installTool.0">
+        <source>Installation</source>
+        <target>インストール</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installTool.1">
+        <source>Install tool login</source>
+        <target>インストールツールにログイン</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.0">
+        <source>The install tool has been locked</source>
+        <target>インストールツールはロックされています!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.1">
+        <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
+        <target>セキュリティ上の理由により、連続して3回以上誤ったパスワードを入力した後のインストールツールはロックされています。ロックを解除するには、サイトにローカルな構成ファイルを編集して&lt;em&gt;installCount&lt;/em&gt;を&lt;em&gt;0&lt;/em&gt;にしてください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.0">
+        <source>Password</source>
+        <target>パスワード</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.1">
+        <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
+        <target>インストールツールのパスワードを入力してください。インストールツールのパスワードは、Contaoのバックエンドのパスワードと別のものです。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.0">
+        <source>Install tool password</source>
+        <target>インストールツールのパスワード</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.1">
+        <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
+        <target>Contaoのインストールツールをさらに安全にするには、&lt;strong&gt;contao/install.php&lt;/strong&gt;のファイルの名前を変更するか、完全に削除しても良いでしょう。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.0">
+        <source>Generate an encryption key</source>
+        <target>暗号鍵の生成</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.1">
+        <source>This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.</source>
+        <target>この鍵は暗号化してデータを保存するときに使用します。暗号鍵だけで暗号化したデータを復号できることに注意してください! 従って、どこかに書き留めておいて、暗号化したデータが既に存在する場合は変更してはなりません。空のままにすると、ランダムな鍵を生成します。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.0">
+        <source>Check database connection</source>
+        <target>データベースの接続確認</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.1">
+        <source>Please enter your database connection parameters.</source>
+        <target>データベースの接続の設定値を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.0">
+        <source>Collation</source>
+        <target>照合順序</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.1">
+        <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
+        <target>より詳しい情報は&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQLマニュアル&lt;/a&gt;を参照してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.0">
+        <source>Update database tables</source>
+        <target>データベースのテーブルを更新</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.1">
+        <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
+        <target>この更新の支援はMySQLとMySQLiのドライバーだけでテストしています。異なるデータベース(例えば、Oracle)を使用する場合は、手動でデータベースのインストールや更新が必要になるでしょう。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.0">
+        <source>Import a template</source>
+        <target>テンプレートをインポート</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.1">
+        <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
+        <target>&lt;em&gt;templates&lt;/em&gt;のディレクトリから、予め構成済みのサンプルのウェブサイトの&lt;em&gt;.sql&lt;/em&gt;のファイルをインポートできます。既存のデータを削除します! テーマをインポートしたいだけの場合は、代わりにContaoのバックエンドでテーマ管理を使用してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.0">
+        <source>Create an admin user</source>
+        <target>管理者ユーザーの作成</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.1">
+        <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
+        <target>ウェブサイトの例をインポートした場合は、管理者のユーザー名は&lt;strong&gt;k.jones&lt;/strong&gt;、パスワードは&lt;strong&gt;kevinjones&lt;/strong&gt;となります。より詳しい情報はインポートしたウェブサイト(のフロントエンド)を参照してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.0">
+        <source>Extension repository</source>
+        <target>機能拡張リポジトリ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.1">
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>現在、パッケージの管理にComposerを使用している、機能拡張リポジ
+トリの新しいバージョンのベータテストを行っています。ベータテストに参加したい場合はComposerクライアントをインストールしてください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.0">
+        <source>Congratulations!</source>
+        <target>おめでとうございます!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.1">
+        <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
+        <target>すぐに&lt;a href=&quot;contao/&quot;&gt;Contaoのバックエンド&lt;/a&gt;にログインして、システムの設定を確認してください。それからウェブサイトにアクセスしてContaoが正しく動作していることを確認してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.0">
+        <source>Modify files via FTP</source>
+        <target>ファイルをFTP用いて修正</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.1">
+        <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
+        <target>ウェブサーバーはPHPによるファイルアクセスをサポートしていません。これはPHPがApacheのモジュールで異なるユーザーで動作していると考えられます。そこで、FTPのログイン情報を入力してください、ContaoがファイルをFTPを使用して修正できるようにします。(セーフモード対処)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.accept">
+        <source>Accept license</source>
+        <target>使用許諾の承認</target>
+      </trans-unit>
+      <trans-unit id="tl_install.beLogin">
+        <source>Contao back end login</source>
+        <target>Contaoのバックエンドにログイン</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passError">
+        <source>Please enter a password to prevent unauthorized access!</source>
+        <target>不正なアクセスを防止するため、パスワードを入力してください!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passConfirm">
+        <source>A custom password has been set.</source>
+        <target>入力したパスワードを設定しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passSave">
+        <source>Save password</source>
+        <target>パスワードを保存</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyError">
+        <source>Please create an encryption key!</source>
+        <target>暗号鍵を作成してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyLength">
+        <source>An encryption key has to be at least 12 characters long!</source>
+        <target>暗号鍵は少なくとも12文字の長さが必要です。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyConfirm">
+        <source>An encryption key has been created.</source>
+        <target>暗号鍵を作成しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyCreate">
+        <source>Generate encryption key</source>
+        <target>暗号鍵を生成</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keySave">
+        <source>Generate or save key</source>
+        <target>鍵を生成または保存</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbConfirm">
+        <source>Database connection established.</source>
+        <target>データベースの接続を確立しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbError">
+        <source>Not connected to a database!</source>
+        <target>データベースに接続していません!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDriver">
+        <source>Driver</source>
+        <target>ドライバー</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbHost">
+        <source>Host</source>
+        <target>ホスト</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbUsername">
+        <source>Username</source>
+        <target>ユーザー名</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDatabase">
+        <source>Database</source>
+        <target>データベース名</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPersistent">
+        <source>Persistent connection</source>
+        <target>持続した接続</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCharset">
+        <source>Character set</source>
+        <target>文字セット</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCollation">
+        <source>Collation</source>
+        <target>照合順序</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPort">
+        <source>Port number</source>
+        <target>ポート番号</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSocket">
+        <source>Socket file</source>
+        <target>ソケットファイル</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSave">
+        <source>Save database settings</source>
+        <target>データベースの設定を保存</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collationInfo">
+        <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
+        <target>照合順序の変更は、すべての&lt;em&gt;tl_&lt;/em&gt;から始まるテーブルに影響します。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateError">
+        <source>The database is not up to date!</source>
+        <target>データベースが最新ではありません。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateConfirm">
+        <source>The database is up to date.</source>
+        <target>データベースは最新です。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateSave">
+        <source>Update database</source>
+        <target>データベースを更新</target>
+      </trans-unit>
+      <trans-unit id="tl_install.saveCollation">
+        <source>Change collation</source>
+        <target>照合順序の変更</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateX">
+        <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
+        <target>バージョン%sより前のContaoからアップグレードのようです。その場合、データの完全性を確実にするために&lt;strong&gt;バージョン%sアップデートを実行する必要&lt;/strong&gt;があります。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrun">
+        <source>Run version %s update</source>
+        <target>バージョン%sアップデートを実行</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrunStep">
+        <source>Run version %s update - step %s</source>
+        <target>バージョン%sアップデート - ステップ%s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importException">
+        <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>インポートに失敗しました!  データベースの構造は最新にしていて、テンプレートはContaoのバージョンと互換性がありますか?</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importError">
+        <source>Please choose a template file!</source>
+        <target>テンプレートのファイルを選択してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importConfirm">
+        <source>Template imported on %s</source>
+        <target>%sにテンプレートをインポートしました。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importWarn">
+        <source>Any existing data will be deleted!</source>
+        <target>現在のデータをすべて削除します。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.templates">
+        <source>Templates</source>
+        <target>テンプレート</target>
+      </trans-unit>
+      <trans-unit id="tl_install.doNotTruncate">
+        <source>Do not truncate tables</source>
+        <target>テーブルを切り捨てない</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>リポジトリのテーブルを上書き</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importSave">
+        <source>Import template</source>
+        <target>テンプレートをインポート</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importContinue">
+        <source>Any existing data will be deleted! Do you really want to continue?</source>
+        <target>現在のデータをすべて削除します。本当に続けますか?</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminError">
+        <source>Please fill in all fields to create an admin user!</source>
+        <target>すべての欄に入力して管理者ユーザーを作成してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminConfirm">
+        <source>An admin user has been created.</source>
+        <target>管理者ユーザーを作成しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminSave">
+        <source>Create admin account</source>
+        <target>管理者アカウントを作成</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryDefault">
+        <source>You are using the default extension repository.</source>
+        <target>既定の機能拡張リポジトリを使用しています。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryComposer">
+        <source>You are using the Composer based extension repository.</source>
+        <target>Composerに基づいた機能拡張リポジトリを使用しています。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryInstall">
+        <source>Install the Composer client</source>
+        <target>Composerクライアントをインストール</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installConfirm">
+        <source>You have successfully installed Contao.</source>
+        <target>Contaoのインストールに成功しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHost">
+        <source>FTP hostname</source>
+        <target>FTPのホスト名</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPath">
+        <source>Relative path to Contao directory (e.g. &lt;em&gt;httpdocs/&lt;/em&gt;)</source>
+        <target>Contaoのディレクトリの相対パス(例: &lt;em&gt;httpdocs/&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUser">
+        <source>FTP username</source>
+        <target>FTPのユーザー名</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPass">
+        <source>FTP password</source>
+        <target>FTPのパスワード</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSLh4">
+        <source>Secure connection</source>
+        <target>安全な接続</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSL">
+        <source>Connect via FTP-SSL</source>
+        <target>FTP-SSLで接続</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPort">
+        <source>FTP port</source>
+        <target>FTPのポート</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSave">
+        <source>Save FTP settings</source>
+        <target>FTPの設定を保存</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHostError">
+        <source>Could not connect to FTP server %s</source>
+        <target>%sのFTPサーバーに接続できません。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUserError">
+        <source>Could not login as &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というユーザーでログインできません。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPathError">
+        <source>Could not locate Contao directory %s</source>
+        <target>%sというContaoのディレクトリに移動できません。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesRenamed">
+        <source>The configured files directory does not exist!</source>
+        <target>設定したファイルディレクトリが存在しません。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesWarning">
+        <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
+        <target>バージョン3アップデートの前に&lt;em&gt;tl_files&lt;/em&gt;から&lt;em&gt;files&lt;/em&gt;に名前を変更していませんか? 単にフォルダーの名前を変更はできません、というのもデータベースはすべてのファイルを参照していて、いまだにスタイルシートは以前の場所を指しているからです。フォルダーの名前を変更したい場合は、バージョン3アップデートの後で行い、データベースのデータを以下のスクリプトで調整してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.CREATE">
+        <source>Create new tables</source>
+        <target>新しいテーブルを作成</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_ADD">
+        <source>Add new columns</source>
+        <target>新しい列を追加</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_CHANGE">
+        <source>Change existing columns</source>
+        <target>既存の列を変更</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_DROP">
+        <source>Drop existing columns</source>
+        <target>既存の列を削除</target>
+      </trans-unit>
+      <trans-unit id="tl_install.DROP">
+        <source>Drop existing tables</source>
+        <target>既存のテーブルを削除</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

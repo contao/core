@@ -1,0 +1,170 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en" target-language="sl">
+    <body>
+      <trans-unit id="XPT.error">
+        <source>An error occurred</source>
+        <target>Pojavila se je napaka</target>
+      </trans-unit>
+      <trans-unit id="XPT.matter">
+        <source>What's the matter?</source>
+        <target>Kaj se je zgodilo?</target>
+      </trans-unit>
+      <trans-unit id="XPT.howToFix">
+        <source>How can I fix the issue?</source>
+        <target>Kako lahko odpravim napako?</target>
+      </trans-unit>
+      <trans-unit id="XPT.more">
+        <source>Tell me more, please</source>
+        <target>Želim izvedeti več</target>
+      </trans-unit>
+      <trans-unit id="XPT.hint">
+        <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Če želite spremeniti to sporočilo, ustvarite predlogo z imenom &lt;em&gt;%s&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorOccurred">
+        <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>Med izvajanjem te skripte je prišlo do napake. Nekaj ne deluje pravilno.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixOne">
+        <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Odprite datoteko &lt;code&gt;system/logs/error.log&lt;/code&gt; in v njej poiščite sporočilo o napaki (običajno povsem na koncu). V lokalno konfiguracijsko datoteko lahko dodate tudi spodnjo vrstico in ponovno naložite to stran:</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixTwo">
+        <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>V tem primeru bodite pozorni na dejstvo, da bo lahko &lt;strong&gt;vsakdo&lt;strong&gt; videl sporočila o napaki na vašem spletnem mestu!</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorExplain">
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Izvajanje skripte je bilo ustavljeno, ker nekaj ne deluje pravilno. Dejansko sporočilo napake je skrito zaradi varnostnih razlogov in ga lahko najdete v datoteki &lt;code&gt;system/logs/error.log&lt;/code&gt; (glej zgoraj). Če sporočila o napaki ne razumete ali ne znate kako odpraviti težavo, poiščite odgovor v &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; ali obiščite &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao stran podpore&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.requestToken">
+        <source>Invalid request token</source>
+        <target>Neveljaven žeton</target>
+      </trans-unit>
+      <trans-unit id="XPT.invalidToken">
+        <source>The request token could not be verified.</source>
+        <target>Žetona ni bilo moč preveriti.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenRetry">
+        <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Prosimo, &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;sledite tej povezavi&lt;/a&gt; in poskusite znova. Ne uporabite gumba Nazaj v vašem brskalniku.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainOne">
+        <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Ta napaka se pojavi, kadar je bila POST zahteva izvedena brez veljavnega avtentikacijskega žetona. V Contao 2.10 različici je bilo preverjanje napotitelja zamenjano z žetonskim sistemom. Če se težava ponavlja, je razlog mogoče v nezdružljivem dodatku tretjega ponudnika ali pa Contao namestitev ni bila pravilno posodobljena.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainTwo">
+        <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Za več informacij, preiščite &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; ali obiščite &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao stran za podporo uporabnikom&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incomplete">
+        <source>Incomplete installation</source>
+        <target>Nedokončana namestitev</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteInstallation">
+        <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>Namestitev ni bila zaključena, zato Contao ne bo deloval pravilno.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixOne">
+        <source>Point your browser to the following URL:</source>
+        <target>V brskalniku odprite sledečo lokacijo (URL):</target>
+      </trans-unit>
+      <trans-unit id="XPT.installPath">
+        <source>path-to-installation</source>
+        <target>pot-do-namestitve</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixTwo">
+        <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>S tem se bo odprlo namestitveno orodje za Contao, ki vas bo vodilo skozi celoten proces namestitve.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Za več informacij obiščite &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao priročnik&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFound">
+        <source>Page not found</source>
+        <target>Stran ne obstaja</target>
+      </trans-unit>
+      <trans-unit id="XPT.pageNotFound">
+        <source>The page you have requested does not exist under this domain.</source>
+        <target>Zahtevana stran ne obstaja na tej domeni.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFoundFix">
+        <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Poskušajte &lt;a href=&quot;%s&quot;&gt;na vrhovni ravni&lt;/a&gt; poiskati funkcijo iskanja (če obstaja) in poiščite stran, katero iščete. Lahko tudi &lt;a href=&quot;%s&quot;&gt;kontaktirate administratorja strani&lt;/a&gt; in ga obvestite, da je nekje prišlo do napake.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForward">
+        <source>Forward page not found</source>
+        <target>Preusmeritvene strani ni mogoče najti</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardPage">
+        <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>Aplikacija je bila nastavljena tako, da posreduje zahtevo na drugo stran, žal pa ciljna stran ne obstaja ali še ni bila objavljena.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardFix">
+        <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>To je nekaj, kar mora popraviti administrator spletne strani. Če ste obiskovalec, žal ne morete storiti ničesar, razen da &lt;a href=&quot;%s&quot;&gt;kontaktirate administratorja&lt;/a&gt;, ter ga obvestite, da je nekaj s stranjo narobe.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRoot">
+        <source>No root page found</source>
+        <target>Ne najdem začetne strani.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootPage">
+        <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Ne obstaja korenska stran, ki bi se ujemala z zahtevanim jezikom in/ali imenom domene.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootFix">
+        <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Če ste izrecno nastavili jezik, poskušajte &lt;a href=&quot;%s&quot;&gt;obiskati na najvišji nivo&lt;/a&gt; in preverite ali ste pravilno preusmerjeni. V nasprotnem primeru &lt;a href=&quot;%s&quot;&gt;kontaktirajte administratorja&lt;/a&gt; in ga obvestite, da je nekaj šlo narobe.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayout">
+        <source>No layout specified</source>
+        <target>Postavitev strani ni določena</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutSpecified">
+        <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>Zahtevana stran še ni bila povezana s postavitvijo strani.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutFix">
+        <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Preverite, ali ste določili postavitev strani vsem vrhnjim stranem v strukturi spletnega mesta.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Za več informacij obiščite &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao priročnik&lt;/a&gt;. </target>
+      </trans-unit>
+      <trans-unit id="XPT.noActive">
+        <source>No active pages found</source>
+        <target>Nobena aktivna stran ni najdena.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActivePages">
+        <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Vaša zahteva je povezana s spletno stranjo, ki zaenkrat ne vsebuje objavljenih strani.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActiveFix">
+        <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Najverjetneje je spletna stran še vedno v izgradnji in bo objavljena v nekaj dneh. Če še vedno mislite, da je nekaj narobe, &lt;a href=&quot;%s&quot;&gt;kontaktirajte administratorja&lt;/a&gt; in ga obvestite.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbidden">
+        <source>Forbidden</source>
+        <target>Prepovedano</target>
+      </trans-unit>
+      <trans-unit id="XPT.notAuthenticated">
+        <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Bodisi niste prijavljeni ali pa nimate odobrenega dostopa do zahtevane strani.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbiddenFix">
+        <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Če niste prijavljeni, poskušajte obiskati &lt;a href=&quot;%s&quot;&gt;najvišji nivo&lt;/a&gt; in poiščite prijavni obrazec. Če ne najdete prijavnega obrazca ali če ste že prijavljeni, &lt;a href=&quot;%s&quot;&gt;kontaktirajte administratorja&lt;/a&gt; in ga obvestite, da je nekaj šlo narobe.</target>
+      </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>Kmalu bomo nazaj</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Na spletnem mestu trenutno opravljamo vzdrževalna dela. Prosim, obiščite nas čez nekaj trenutkov.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

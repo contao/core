@@ -1,0 +1,641 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_style.invisible.0">
+        <source>Invisible</source>
+        <target>Usynlig</target>
+      </trans-unit>
+      <trans-unit id="tl_style.invisible.1">
+        <source>Do not export the format definition.</source>
+        <target>Eksporter ikke format-definationen.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.0">
+        <source>Selector</source>
+        <target>Vælger</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector.1">
+        <source>The selector defines to which element(s) the format definition applies.</source>
+        <target>En vælger definerer for hvilke HTML-elementer eller elementgrupper en format-definition gælder.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.0">
+        <source>Category</source>
+        <target>Kategori</target>
+      </trans-unit>
+      <trans-unit id="tl_style.category.1">
+        <source>Categories can be used to group format definitions in the back end.</source>
+        <target>Brug kategorier til at gruppere dine format-definitioner og holde styr på dem.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.0">
+        <source>Comment</source>
+        <target>Kommentar</target>
+      </trans-unit>
+      <trans-unit id="tl_style.comment.1">
+        <source>Here you can add a comment.</source>
+        <target>Kommentarer vil blive vist over definitionen af det tilhørende format.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.0">
+        <source>Size</source>
+        <target>Størrelse og position</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size.1">
+        <source>Width, height, min-width, min-height, max-width and max-height.</source>
+        <target>Redigér størrelse og positionering (bredde, højde, positionering, overløb, flydende, nulstil, visning).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.0">
+        <source>Width</source>
+        <target>Bredde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.width.1">
+        <source>Here you can enter the element's width.</source>
+        <target>Indtast venligst bredden af elementet og enheden.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.0">
+        <source>Height</source>
+        <target>Højde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.height.1">
+        <source>Here you can enter the element's height.</source>
+        <target>Indtast venligst højden af elementet og enheden.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.0">
+        <source>Minimum width</source>
+        <target>Minimum bredde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minwidth.1">
+        <source>Here you can enter the element's minimum width.</source>
+        <target>Her kan du indtaste elementets minimum bredde.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.0">
+        <source>Minimum height</source>
+        <target>Minimum højde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.minheight.1">
+        <source>Here you can enter the element's minimum height.</source>
+        <target>Her kan du indtaste elementets minimum højde.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.0">
+        <source>Maximum width</source>
+        <target>Maksimum bredde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxwidth.1">
+        <source>Here you can enter the element's maximum width.</source>
+        <target>Her kan du indtaste elementets maksimum bredde.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.0">
+        <source>Maximum height</source>
+        <target>Kaksimum højde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.maxheight.1">
+        <source>Here you can enter the element's maximum height.</source>
+        <target>Her kan du indtaste elementets maksimum højde.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.0">
+        <source>Position</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="tl_style.positioning.1">
+        <source>Position, float, clear, overflow and display.</source>
+        <target>Position, float, clear, overflow and display.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.0">
+        <source>Position</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="tl_style.trbl.1">
+        <source>Here you can enter the top, right, bottom and left position.</source>
+        <target>Indtast venligst top, højre, bund og venstre position og enheden.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.0">
+        <source>Position type</source>
+        <target>Positioneringstype</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position.1">
+        <source>Here you can choose the position type.</source>
+        <target>Specificerer en positionstype.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.0">
+        <source>Float</source>
+        <target>Flydende</target>
+      </trans-unit>
+      <trans-unit id="tl_style.floating.1">
+        <source>Here you can choose the float type.</source>
+        <target>Tillader at gøre elementet flydende.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.0">
+        <source>Clear</source>
+        <target>Nulstil</target>
+      </trans-unit>
+      <trans-unit id="tl_style.clear.1">
+        <source>Here you can choose the clear type.</source>
+        <target>Forsæt normalt tekstforløb under et flydendende element.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.0">
+        <source>Overflow</source>
+        <target>Overløb</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overflow.1">
+        <source>Here you can choose the overflow behaviour.</source>
+        <target>Definerer hvordan et element vises, når dets indhold overskriver det størrelse.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.0">
+        <source>Display</source>
+        <target>Visning</target>
+      </trans-unit>
+      <trans-unit id="tl_style.display.1">
+        <source>Here you can choose the display type.</source>
+        <target>Definerer måden hvorpå et element vises.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.0">
+        <source>Margin, padding and alignment</source>
+        <target>Margin, fyld og justering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.alignment.1">
+        <source>Margin, padding, align, vertical-align, text-align and white-space.</source>
+        <target>Margin, padding, align, vertical-align, text-align og whitespace.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.0">
+        <source>Margin</source>
+        <target>Margin</target>
+      </trans-unit>
+      <trans-unit id="tl_style.margin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>Indtast venligst top, højre, bund og venstre margin og enheden. Marginen er afstanden mellem et element og nabo-elementer.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.0">
+        <source>Padding</source>
+        <target>Fyld</target>
+      </trans-unit>
+      <trans-unit id="tl_style.padding.1">
+        <source>Here you can enter the top, right, bottom and left padding.</source>
+        <target>Indtast venligst top, højre, bund og venstre fyld og enheden. Fyld er afstanden mellem et element og dets egen kant.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.0">
+        <source>Element alignment</source>
+        <target>Element-justering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align.1">
+        <source>To align an element, its left and right margin will be overwritten.</source>
+        <target>For at justere et element vil dets højre og venstre margin blive overskrevet.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.0">
+        <source>Vertical alignment</source>
+        <target>Vertikal justering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.verticalalign.1">
+        <source>Here you can choose the vertical alignment.</source>
+        <target>Definerer den vertikale tekstjustering.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.0">
+        <source>Text alignment</source>
+        <target>Tekstjustering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textalign.1">
+        <source>Here you can choose the horizontal text alignment.</source>
+        <target>Definerer den horisontale tekstjustering.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.0">
+        <source>White-space</source>
+        <target>White-space</target>
+      </trans-unit>
+      <trans-unit id="tl_style.whitespace.1">
+        <source>Here you can define how white-space inside an element is handled.</source>
+        <target>Her kan du definere hvordan white-space i et element håndteres.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.0">
+        <source>Background</source>
+        <target>Baggrund</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background.1">
+        <source>Background-color, background-image, background-position, background-repeat, box-shadow and linear-gradient.</source>
+        <target>Redigér baggrundsegenskaber såsom farve, billede, position, gentagelse.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.0">
+        <source>Background color and opacity</source>
+        <target>Baggrundsfarve</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgcolor.1">
+        <source>Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Angiv baggrundsfarve som heksadecimal (f.eks. ff0000 for rød).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.0">
+        <source>Background image</source>
+        <target>Baggrundsbillede</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgimage.1">
+        <source>Here you can enter the path to a background image.</source>
+        <target>Her kan du angive stilen til et baggrundsbillede.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.0">
+        <source>Background position</source>
+        <target>Positionere baggrund</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgposition.1">
+        <source>Here you can select the position of the background image.</source>
+        <target>Vælg positioneringen af baggrundsbilledet.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.0">
+        <source>Background repeat</source>
+        <target>Baggrundsgentagelse</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bgrepeat.1">
+        <source>Here you can select the repeating mode.</source>
+        <target>Vælg venligst gentagelsestilstanden.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.0">
+        <source>Shadow size</source>
+        <target>Skygge størrelse</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowsize.1">
+        <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
+        <target>Her kan du indtaste et X og Y offset, en valgfri blur størrelse og en valgfri spredningsradius.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.0">
+        <source>Shadow color and opacity</source>
+        <target>Skygge farve og opacitet</target>
+      </trans-unit>
+      <trans-unit id="tl_style.shadowcolor.1">
+        <source>Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Her kan du indtaste en hexadecimal skygge farve (f.eks. ff0000 for rød) samt en valgfri opacitet i procent (f.eks. 75).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.0">
+        <source>Gradient angle</source>
+        <target>Gradient vinkel</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientAngle.1">
+        <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
+        <target>Her kan du indtaste en gradient vinkel (f.eks. &lt;em&gt;0deg&lt;/em&gt;) eller retningen (f.eks. &lt;em&gt;to bottom&lt;/em&gt; eller &lt;em&gt;to top right&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.0">
+        <source>Gradient colors</source>
+        <target>Gradient farver</target>
+      </trans-unit>
+      <trans-unit id="tl_style.gradientColors.1">
+        <source>Here you can enter up to four colors with an optional percentage (e.g. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</source>
+        <target>Har kan du indtaste op til fire farver med en valgfri procent (f.eks. &lt;em&gt;ffc 10% | f90 | f00&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.0">
+        <source>Border</source>
+        <target>Kant</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border.1">
+        <source>Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.</source>
+        <target>Rediger egenskaber for kant (bredde, stil, farve, sammenfoldning).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.0">
+        <source>Border width</source>
+        <target>Kantbredde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderwidth.1">
+        <source>Here you can enter the top, right, bottom and left border width.</source>
+        <target>Indtast venligst top, højre, bund og venstre kantbredde og enheden.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.0">
+        <source>Border style</source>
+        <target>Kantstil</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderstyle.1">
+        <source>Here you can choose the border style.</source>
+        <target>Vælg venligst kantstilen.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.0">
+        <source>Border color and opacity</source>
+        <target>Kantfarve</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercolor.1">
+        <source>Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Angiv kantfarve som heksadecimal (f.eks. ff0000 for rød).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.0">
+        <source>Border radius</source>
+        <target>Ramme radius</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderradius.1">
+        <source>Here you can enter the top, right, bottom and left border radius.</source>
+        <target>Angiv top, højre, bund og venstre ramme radius.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.0">
+        <source>Border handling</source>
+        <target>Kanthåndtering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bordercollapse.1">
+        <source>Here you can choose the border handling.</source>
+        <target>Definer venligst om kanter for tilstødende tabelceller skal vises som en kant eller som to separate.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.0">
+        <source>Border spacing</source>
+        <target>Ramme afstand</target>
+      </trans-unit>
+      <trans-unit id="tl_style.borderspacing.1">
+        <source>Here you can enter the border spacing.</source>
+        <target>Angiv ramme afstand.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.0">
+        <source>Font</source>
+        <target>Skrifttype</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font.1">
+        <source>Font-family, font-size, font-color, line-height, font-style, text-transform, text-indent, letter-spacing and word-spacing.</source>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.0">
+        <source>Font family</source>
+        <target>Skrifttype</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontfamily.1">
+        <source>Here you can enter a comma separated list of font types.</source>
+        <target>Indtast venligst en kommasepareret liste af skrifttyper. Brug citationstegn hvis skrifttypenavnet indeholder mellemrum og angiv mindst en generisk skrifttypefamilie (f.eks. &lt;em&gt;sans-serif&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.0">
+        <source>Font size</source>
+        <target>Skriftstørrelse</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontsize.1">
+        <source>Here you can enter the font size.</source>
+        <target>Vælg venligst skriftstørrelsen og enheden.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.0">
+        <source>Font color and opacity</source>
+        <target>Skriftfarve</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontcolor.1">
+        <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
+        <target>Angiv skriftfarve som heksadecimal (f.eks. ff0000 for rød).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.0">
+        <source>Line height</source>
+        <target>Linjehøjde</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lineheight.1">
+        <source>Here you can define the line height.</source>
+        <target>Du kan indtaste linjehøjden for elementet her.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.0">
+        <source>Font style</source>
+        <target>Skriftstil</target>
+      </trans-unit>
+      <trans-unit id="tl_style.fontstyle.1">
+        <source>Here you can choose one or more font styles.</source>
+        <target>Vælg venligst en eller flere skriftstile.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.0">
+        <source>Text transform</source>
+        <target>Tekst transform</target>
+      </trans-unit>
+      <trans-unit id="tl_style.texttransform.1">
+        <source>Here you can choose a text transformation mode.</source>
+        <target>Har kan du vælge en text transformations tilstand.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.0">
+        <source>Text indent</source>
+        <target>Indryk tekst</target>
+      </trans-unit>
+      <trans-unit id="tl_style.textindent.1">
+        <source>Here you can enter a text indentation.</source>
+        <target>Her kan du indtaste hvor meget teksten skal rykkes ind.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.0">
+        <source>Letter spacing</source>
+        <target>Bogstavs spacering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.letterspacing.1">
+        <source>Here you can modify the letter spacing (default: 0px).</source>
+        <target>Her kan du justere spaceringen i mellem bogstaverne (standard: 0px).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.0">
+        <source>Word spacing</source>
+        <target>Ord spacering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.wordspacing.1">
+        <source>Here you can modify the word spacing (default: 0px).</source>
+        <target>Her kan du justere spaceringen i mellem ordene (standard: 0px).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.0">
+        <source>List</source>
+        <target>Liste</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list.1">
+        <source>List-style-type and list-style-image.</source>
+        <target>Redigér egenskaber for liste (stil, type, billede).</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.0">
+        <source>List symbol</source>
+        <target>Listepunkter</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyletype.1">
+        <source>Here you can choose a list symbol.</source>
+        <target>Vælg venligst et punktsymbol til lister.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.0">
+        <source>Custom symbol</source>
+        <target>Individuelt symbol</target>
+      </trans-unit>
+      <trans-unit id="tl_style.liststyleimage.1">
+        <source>Here you can enter the path to an individual symbol.</source>
+        <target>Her kan du angive stien til et individuelt symbol.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.0">
+        <source>Custom code</source>
+        <target>Tilpasset kode</target>
+      </trans-unit>
+      <trans-unit id="tl_style.own.1">
+        <source>Here you can enter custom CSS code.</source>
+        <target>Her kan du skrive tilpasset CSS-kode.</target>
+      </trans-unit>
+      <trans-unit id="tl_style.selector_legend">
+        <source>Selector and category</source>
+        <target>Vælger og kategori</target>
+      </trans-unit>
+      <trans-unit id="tl_style.size_legend">
+        <source>Size</source>
+        <target>Størrelse og position</target>
+      </trans-unit>
+      <trans-unit id="tl_style.position_legend">
+        <source>Position</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="tl_style.align_legend">
+        <source>Margin and alignment</source>
+        <target>Margin og justering</target>
+      </trans-unit>
+      <trans-unit id="tl_style.background_legend">
+        <source>Background settings</source>
+        <target>Indstillinger for Baggrund</target>
+      </trans-unit>
+      <trans-unit id="tl_style.border_legend">
+        <source>Border settings</source>
+        <target>Indstillinger for kant</target>
+      </trans-unit>
+      <trans-unit id="tl_style.font_legend">
+        <source>Font settings</source>
+        <target>Indstillinger for skrift</target>
+      </trans-unit>
+      <trans-unit id="tl_style.list_legend">
+        <source>List settings</source>
+        <target>Indstillinger for liste</target>
+      </trans-unit>
+      <trans-unit id="tl_style.custom_legend">
+        <source>Custom code</source>
+        <target>Tilpasset kode</target>
+      </trans-unit>
+      <trans-unit id="tl_style.normal">
+        <source>normal</source>
+        <target>normal</target>
+      </trans-unit>
+      <trans-unit id="tl_style.bold">
+        <source>bold</source>
+        <target>fed</target>
+      </trans-unit>
+      <trans-unit id="tl_style.italic">
+        <source>italic</source>
+        <target>kursiv</target>
+      </trans-unit>
+      <trans-unit id="tl_style.underline">
+        <source>underlined</source>
+        <target>understreg</target>
+      </trans-unit>
+      <trans-unit id="tl_style.notUnderlined">
+        <source>not underlined</source>
+        <target>ikke undersreget</target>
+      </trans-unit>
+      <trans-unit id="tl_style.line-through">
+        <source>line-through</source>
+        <target>gennemstreget</target>
+      </trans-unit>
+      <trans-unit id="tl_style.overline">
+        <source>overlined</source>
+        <target>streg over</target>
+      </trans-unit>
+      <trans-unit id="tl_style.small-caps">
+        <source>small-caps</source>
+        <target>kapitæler</target>
+      </trans-unit>
+      <trans-unit id="tl_style.disc">
+        <source>dot</source>
+        <target>prik</target>
+      </trans-unit>
+      <trans-unit id="tl_style.circle">
+        <source>circle</source>
+        <target>cirkel</target>
+      </trans-unit>
+      <trans-unit id="tl_style.square">
+        <source>square</source>
+        <target>firkant</target>
+      </trans-unit>
+      <trans-unit id="tl_style.decimal">
+        <source>figures</source>
+        <target>tal</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-roman">
+        <source>upper latin figures</source>
+        <target>store romertal</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-roman">
+        <source>lower latin figures</source>
+        <target>små romertal</target>
+      </trans-unit>
+      <trans-unit id="tl_style.upper-alpha">
+        <source>upper characters</source>
+        <target>store bogstaver</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lower-alpha">
+        <source>lower characters</source>
+        <target>små bogstaver</target>
+      </trans-unit>
+      <trans-unit id="tl_style.uppercase">
+        <source>uppercase</source>
+        <target>STORE BOGSTAVER</target>
+      </trans-unit>
+      <trans-unit id="tl_style.lowercase">
+        <source>lowercase</source>
+        <target>småbogstaver</target>
+      </trans-unit>
+      <trans-unit id="tl_style.capitalize">
+        <source>capitalize</source>
+        <target>Kapitalisere</target>
+      </trans-unit>
+      <trans-unit id="tl_style.none">
+        <source>none</source>
+        <target>ingen punktegn</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.0">
+        <source>New format definition</source>
+        <target>Ny formatdefinition</target>
+      </trans-unit>
+      <trans-unit id="tl_style.new.1">
+        <source>Create a new format definition</source>
+        <target>Opret en ny formatdefinition</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.0">
+        <source>Format definition details</source>
+        <target>Formatdefitionsdetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_style.show.1">
+        <source>Show the details of format definition ID %s</source>
+        <target>Vis detaljer for formatdefinition-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.0">
+        <source>Edit format definition</source>
+        <target>Rediger formatdefinition</target>
+      </trans-unit>
+      <trans-unit id="tl_style.edit.1">
+        <source>Edit format definition ID %s</source>
+        <target>Rediger formatdefinition-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.0">
+        <source>Move format definition</source>
+        <target>Flyt formatdefinition</target>
+      </trans-unit>
+      <trans-unit id="tl_style.cut.1">
+        <source>Move format definition ID %s</source>
+        <target>Flyt formatdefinition-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.0">
+        <source>Duplicate format definition</source>
+        <target>Dupliker formatdefinition</target>
+      </trans-unit>
+      <trans-unit id="tl_style.copy.1">
+        <source>Duplicate format definition ID %s</source>
+        <target>Dupliker formatdefinition-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.0">
+        <source>Delete format definition</source>
+        <target>Slet formatdefinition</target>
+      </trans-unit>
+      <trans-unit id="tl_style.delete.1">
+        <source>Delete format definition ID %s</source>
+        <target>Slet formatdefinition-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.0">
+        <source>Edit style sheet</source>
+        <target>Rediger stilark</target>
+      </trans-unit>
+      <trans-unit id="tl_style.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>Rediger hovedet til dette stilark</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Indsæt øverst</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pasteafter.1">
+        <source>Paste after format definition ID %s</source>
+        <target>Indsæt efter formatdefinition-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Opret ny formatdefinition i begyndelsen</target>
+      </trans-unit>
+      <trans-unit id="tl_style.pastenew.1">
+        <source>Add new after format definition ID %s</source>
+        <target>Opret ny formatdefinition efter formatdefinition-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Skift synlighed</target>
+      </trans-unit>
+      <trans-unit id="tl_style.toggle.1">
+        <source>Toggle the visibility of format definition ID %s</source>
+        <target>Skift synligheden for formatdefinationen ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,330 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_news.headline.0">
+        <source>Title</source>
+        <target>Rubrik</target>
+      </trans-unit>
+      <trans-unit id="tl_news.headline.1">
+        <source>Please enter the news title.</source>
+        <target>Ange en rubrik för nyhetsartikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.0">
+        <source>News alias</source>
+        <target>Nyhetsalias</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.1">
+        <source>The news alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>Nyhetsalias är ett unik referensnamn som kan användas istället för nyhetsartikelns numeriska ID-nummer när man refererar till nyhetsartikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.0">
+        <source>Author</source>
+        <target>Namn</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.1">
+        <source>Here you can change the author of the news item.</source>
+        <target>Här kan du välja författare för nyhetsartikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.0">
+        <source>Date</source>
+        <target>Datum</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.1">
+        <source>Please enter the date according to the global date format.</source>
+        <target>Ange ett datum för artiklen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.0">
+        <source>Time</source>
+        <target>Tid</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.1">
+        <source>Please enter the time according to the global time format.</source>
+        <target>Ange en tidpunkt för artikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.0">
+        <source>Subheadline</source>
+        <target>Underrubrik</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.1">
+        <source>Here you can enter a subheadline.</source>
+        <target>Du kan ange en underrukrik till artikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.0">
+        <source>News teaser</source>
+        <target>Ingress</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.1">
+        <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>En ingress är en kort text som ska locka läsaren att klicka på &quot;Läs mer...&quot;-länken. Ingressen visas som en sammanfattning i nyhetslistor.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.0">
+        <source>News text</source>
+        <target>Nyhetstext</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.1">
+        <source>Here you can enter the news text.</source>
+        <target>Skriv in den detaljerade nyhetstexten.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.0">
+        <source>Add an image</source>
+        <target>Lägg till bild</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.1">
+        <source>Add an image to the news item.</source>
+        <target>Markera detta alternativ för att lägga till en bild i nyhetsartikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Bifoga fil</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.1">
+        <source>Add one or more downloadable files to the news item.</source>
+        <target>Bifoga en eller flera nedladdningsbara filer till nyhetspartikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.0">
+        <source>Enclosures</source>
+        <target>Källfiler</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Välj en eller flera filer från filarkivet som ska bifogas till svaret.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.0">
+        <source>Redirect target</source>
+        <target>Omdirigeringsmål</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>Här kan du åsidosätta standard omdirigeringsmål.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.0">
+        <source>Use default</source>
+        <target>Använd standard</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
+        <target>Genom att klicka på &quot;Läs mer...&quot; knappen kommer besökare att omdirigeras till standardsidan för nyhetsarkivet.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.0">
+        <source>Page</source>
+        <target>Intern sida</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
+        <target>Genom att klicka på &quot;läs mer...&quot; så kommer besökare att vidarebefodras till en intern sida.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.0">
+        <source>Article</source>
+        <target>Artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>Genom att klicka på &quot;läs mer ...&quot; knappen, kommer besökarna att omdirigeras till en artikel.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.0">
+        <source>External URL</source>
+        <target>Extern URL</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>Genom att klicka på &quot;läs mer...&quot; så kommer besökare att vidarebefodras till en extern sida.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Omdirigera till</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
+        <target>Välj vilken sida som besökaren kommer att omdirigeras till efter att ha klickat på en nyhetsartikel.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.0">
+        <source>Article</source>
+        <target>Artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
+        <target>Vänligen välj en artikel som besökare skall bli vidarebefordrade till.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.0">
+        <source>CSS class</source>
+        <target>Stilmallsklass</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Här kan du ange en eller flera stilmallsklasser (CSS-klass)</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.0">
+        <source>Disable comments</source>
+        <target>Avaktivera kommentarer</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.1">
+        <source>Do not allow comments for this particular news item.</source>
+        <target>Tillåt inte kommentarer från besökare för denna nyhetsartikel.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.0">
+        <source>Feature item</source>
+        <target>Viktig nyhet</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.1">
+        <source>Show the news item in a featured news list.</source>
+        <target>Visa nyheten i en viktiga nyheter-lista.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.0">
+        <source>Publish item</source>
+        <target>Publicerad</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.1">
+        <source>Make the news item publicly visible on the website.</source>
+        <target>Markera detta alternativ för att publicera nyhetsartikeln så att den visas för hemsidans besökare..</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.0">
+        <source>Show from</source>
+        <target>Börja visa fr.o.m</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.1">
+        <source>Do not show the news item on the website before this day.</source>
+        <target>Om du anger ett datum så börjar nyheten visas på hemsidan från och med den valda dagen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.0">
+        <source>Show until</source>
+        <target>Sluta visa fr.o.m</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.1">
+        <source>Do not show the news item on the website on and after this day.</source>
+        <target>Om du anger ett datum så slutar nyheten visas på hemsidan från och med den valda dagen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.0">
+        <source>Revision date</source>
+        <target>Ändringsdatum</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum och tid för senaste ändringen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.title_legend">
+        <source>Title and author</source>
+        <target>Titel och upphovsman</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date_legend">
+        <source>Date and time</source>
+        <target>Datum och tid</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser_legend">
+        <source>Subheadline and teaser</source>
+        <target>Underrubrik och ingress</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text_legend">
+        <source>News text</source>
+        <target>Nyhetstext</target>
+      </trans-unit>
+      <trans-unit id="tl_news.image_legend">
+        <source>Image settings</source>
+        <target>Bildinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Källfiler</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source_legend">
+        <source>Redirect target</source>
+        <target>Omdirigeringsmål</target>
+      </trans-unit>
+      <trans-unit id="tl_news.expert_legend">
+        <source>Expert settings</source>
+        <target>Expertinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_news.publish_legend">
+        <source>Publish settings</source>
+        <target>Publiceringsinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.0">
+        <source>New article</source>
+        <target>Skapa artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.1">
+        <source>Create a new news article</source>
+        <target>Skapa en ny nyhetsartikel</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.0">
+        <source>Article details</source>
+        <target>Visa artikeldetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.1">
+        <source>Show the details of news article ID %s</source>
+        <target>Visa detaljer för nyhetsartikel med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.0">
+        <source>Edit article</source>
+        <target>Redigera artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.1">
+        <source>Edit news article ID %s</source>
+        <target>Redigera nyhetsartikel med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.0">
+        <source>Duplicate article</source>
+        <target>Kopiera artiklar</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.1">
+        <source>Duplicate news article ID %s</source>
+        <target>Kopiera nyhetsartikel med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.0">
+        <source>Move article</source>
+        <target>Flytta artiklar</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.1">
+        <source>Move news article ID %s</source>
+        <target>Flytta nyhetsartikel med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.0">
+        <source>Delete article</source>
+        <target>Ta bort artiklar</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.1">
+        <source>Delete news article ID %s</source>
+        <target>Ta bort nyhetsartikel med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>Publicera / avpublicera artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.1">
+        <source>Publish/unpublish news article ID %s</source>
+        <target>Publicera / avpublicera nyhetsartikel med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.0">
+        <source>Feature/unfeature article</source>
+        <target>Växla Viktig / Normal nyhetsartikel</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.1">
+        <source>Feature/unfeature news article ID %s</source>
+        <target>Växla Viktig / Normal för nyhetsartikel med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.0">
+        <source>Edit archive</source>
+        <target>Redigera nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.1">
+        <source>Edit the archive settings</source>
+        <target>Redigera nyhetsarkivinställningarna</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.0">
+        <source>Edit article settings</source>
+        <target>Redigera artikelninställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.1">
+        <source>Edit the article settings</source>
+        <target>Redigera inställningar för artikeln.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.0">
+        <source>Paste into this archive</source>
+        <target>Klistra in i detta nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.1">
+        <source>Paste after news article ID %s</source>
+        <target>Klistra in efter nyhetsartikel med ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

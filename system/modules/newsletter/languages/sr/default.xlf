@@ -1,0 +1,50 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/default.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="ERR.subscribed">
+        <source>You are subscribed to the selected channels already.</source>
+        <target>Већ сте претплаћени на изабране канале.</target>
+      </trans-unit>
+      <trans-unit id="ERR.unsubscribed">
+        <source>You are not subscribed to the selected channels.</source>
+        <target>Нисте претплаћени на изабране канале.</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidToken">
+        <source>The activation link is invalid or outdated.</source>
+        <target>Линк за активацију је неисправан и истекао</target>
+      </trans-unit>
+      <trans-unit id="ERR.noChannels">
+        <source>Please select at least one channel.</source>
+        <target>Изаберите барем један канал</target>
+      </trans-unit>
+      <trans-unit id="MSC.subscribe">
+        <source>Subscribe</source>
+        <target>Претплати се</target>
+      </trans-unit>
+      <trans-unit id="MSC.unsubscribe">
+        <source>Unsubscribe</source>
+        <target>Откажи претплату</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_subject">
+        <source>Your subscription on %s</source>
+        <target>Ваша претплата на %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_confirm">
+        <source>Thank you for your subscription. You will receive a confirmation e-mail.</source>
+        <target>Хвала Вам на томе што сте се претплатили. На Ваш email ће бити послата потврда о претплати.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_activate">
+        <source>Your subscription has been activated.</source>
+        <target>Ваша претплата је активирана.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_removed">
+        <source>Your subscription has been cancelled.</source>
+        <target>Ваша претплата је отказана.</target>
+      </trans-unit>
+      <trans-unit id="MSC.nl_channels">
+        <source>Channels</source>
+        <target>Канали</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

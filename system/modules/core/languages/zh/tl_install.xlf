@@ -1,0 +1,366 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_install.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="tl_install.installTool.0">
+        <source>Installation</source>
+        <target>安装</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installTool.1">
+        <source>Install tool login</source>
+        <target>安装工具登录</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.0">
+        <source>The install tool has been locked</source>
+        <target>安装工具已锁定</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.1">
+        <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
+        <target>出于安全原因考虑，当输入安装工具密码错误3次以上时，该工具会被锁定。为了解锁，请打开本地配置文件，设置&lt;em&gt;installCount&lt;/em&gt;为&lt;em&gt;0&lt;/em&gt;。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.0">
+        <source>Password</source>
+        <target>密码</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.1">
+        <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
+        <target>请输入安装工具登录密码。该密码和Contao后台登录密码是不一样的。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.0">
+        <source>Install tool password</source>
+        <target>安装工具密码</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.1">
+        <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
+        <target>为了确保Contao安装工具安全性，您可以重命名或者完全删除&lt;strong&gt;contao/install.php&lt;/strong&gt;文件。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.0">
+        <source>Generate an encryption key</source>
+        <target>创建一个加密令牌</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.1">
+        <source>This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.</source>
+        <target>此密钥用于保存加密数据。请注意加密数据只能以此密钥来解密！所以请将其摘抄下来，并且在数据数据已存在的情况下不要随意更改密钥。您也可保留空白以使系统生成随机密钥。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.0">
+        <source>Check database connection</source>
+        <target>检查数据库连接</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.1">
+        <source>Please enter your database connection parameters.</source>
+        <target>请输入您的数据库连接参数。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.0">
+        <source>Collation</source>
+        <target>整理</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.1">
+        <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
+        <target>更多信息请参阅&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL手册&lt;/a&gt;。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.0">
+        <source>Update database tables</source>
+        <target>更新数据库中数据表</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.1">
+        <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
+        <target>请注意更新助手仅在MySQL和MySQLi下测试通过。如果您使用了一个不同的数据库(例如Oracle)，您能可需要手动安装或更新您的数据库。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.0">
+        <source>Import a template</source>
+        <target>导入一个模板</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.1">
+        <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
+        <target>此处您可以从&lt;em&gt;templates&lt;/em&gt;目录中导入&lt;em&gt;.sql&lt;/em&gt;格式的文件以安装一个预配置的例子网站。已有数据会被删除！如果您需要导入一个主题，请在Contao后台使用主题管理器来完成。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.0">
+        <source>Create an admin user</source>
+        <target>创建一个管理员</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.1">
+        <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
+        <target>如果您导入样例网站，管理员用户名是&lt;strong&gt;k.jones&lt;/strong&gt;，密码是&lt;strong&gt;kevinjones&lt;/strong&gt;。查看样例网站(前端)以获取更多信息。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.0">
+        <source>Extension repository</source>
+        <target>扩展仓库</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.1">
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>我们正在beta测试一个新版本的扩展仓库，该版本使用Composer管理包，请在beta测试阶段安装Composer客户端进行实践。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.0">
+        <source>Congratulations!</source>
+        <target>恭喜！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.1">
+        <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
+        <target>请登录&lt;a href=&quot;contao/&quot;&gt;Contao后台&lt;/a&gt;并检查系统设置。然后访问您的网站以确保Contao正常运行。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.0">
+        <source>Modify files via FTP</source>
+        <target>通过FTP修改文件</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.1">
+        <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
+        <target>您的服务器不支持PHP的文件直接存取；最有可能的情况是PHP以不同用户身份作为Apache模块的方式在运行。所以请输入您的FTP登录详情，以便Contao能通过FTP进行文件修改(安全模式)。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.accept">
+        <source>Accept license</source>
+        <target>接受许可信息</target>
+      </trans-unit>
+      <trans-unit id="tl_install.beLogin">
+        <source>Contao back end login</source>
+        <target>Contao后台登录</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passError">
+        <source>Please enter a password to prevent unauthorized access!</source>
+        <target>请输入密码，用来防止未经授权的访问！ </target>
+      </trans-unit>
+      <trans-unit id="tl_install.passConfirm">
+        <source>A custom password has been set.</source>
+        <target>自定义密码已设置。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passSave">
+        <source>Save password</source>
+        <target>保存密码</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyError">
+        <source>Please create an encryption key!</source>
+        <target>请输入加密密钥！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyLength">
+        <source>An encryption key has to be at least 12 characters long!</source>
+        <target>加密密钥至少12个字符！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyConfirm">
+        <source>An encryption key has been created.</source>
+        <target>已创建一条加密密钥</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyCreate">
+        <source>Generate encryption key</source>
+        <target>创建加密密钥</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keySave">
+        <source>Generate or save key</source>
+        <target>创建或保存密钥</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbConfirm">
+        <source>Database connection established.</source>
+        <target>数据库连接已创建。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbError">
+        <source>Not connected to a database!</source>
+        <target>不能连接到数据库！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDriver">
+        <source>Driver</source>
+        <target>驱动</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbHost">
+        <source>Host</source>
+        <target>主机</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbUsername">
+        <source>Username</source>
+        <target>用户名</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDatabase">
+        <source>Database</source>
+        <target>数据库</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPersistent">
+        <source>Persistent connection</source>
+        <target>持久连接</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCharset">
+        <source>Character set</source>
+        <target>字符集</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCollation">
+        <source>Collation</source>
+        <target>整理</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPort">
+        <source>Port number</source>
+        <target>端口号</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSocket">
+        <source>Socket file</source>
+        <target>Socket文件</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSave">
+        <source>Save database settings</source>
+        <target>保存数据库设置</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collationInfo">
+        <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
+        <target>变更整理将会影响到所有前缀为&lt;em&gt;tl_&lt;/em&gt;的数据表。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateError">
+        <source>The database is not up to date!</source>
+        <target>数据库不是最新的。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateConfirm">
+        <source>The database is up to date.</source>
+        <target>数据库是最新的。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateSave">
+        <source>Update database</source>
+        <target>更新数据库</target>
+      </trans-unit>
+      <trans-unit id="tl_install.saveCollation">
+        <source>Change collation</source>
+        <target>变更整理</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateX">
+        <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
+        <target>您似乎是从之前的Contao版本升级到%s。如果是这样的话，&lt;strong&gt;您是需要运行版本%s更新&lt;/strong&gt;，以确保数据完整性。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrun">
+        <source>Run version %s update</source>
+        <target>运行版本%s更新</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrunStep">
+        <source>Run version %s update - step %s</source>
+        <target>运行版本%s更新 - 步骤%s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importException">
+        <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>导入失败！数据库结构是否是最新版本，并且模板文件是否与您的Contao版本兼容？</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importError">
+        <source>Please choose a template file!</source>
+        <target>请选择一个模板文件！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importConfirm">
+        <source>Template imported on %s</source>
+        <target>已导入模板 %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importWarn">
+        <source>Any existing data will be deleted!</source>
+        <target>所有的现有数据将会被删除！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.templates">
+        <source>Templates</source>
+        <target>模板</target>
+      </trans-unit>
+      <trans-unit id="tl_install.doNotTruncate">
+        <source>Do not truncate tables</source>
+        <target>不清空数据表</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>覆盖存储库中的表</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importSave">
+        <source>Import template</source>
+        <target>导入模板</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importContinue">
+        <source>Any existing data will be deleted! Do you really want to continue?</source>
+        <target>所有的现有数据将会被删除！您真的要继续该操作？</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminError">
+        <source>Please fill in all fields to create an admin user!</source>
+        <target>请填写所有字段，以创建一位管理员！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminConfirm">
+        <source>An admin user has been created.</source>
+        <target>已创建一位管理员</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminSave">
+        <source>Create admin account</source>
+        <target>创建管理员帐号</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryDefault">
+        <source>You are using the default extension repository.</source>
+        <target>您正在使用默认的扩展仓库</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryComposer">
+        <source>You are using the Composer based extension repository.</source>
+        <target>您正在使用基于扩展仓库的Composer.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryInstall">
+        <source>Install the Composer client</source>
+        <target>安装Composer客户端</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installConfirm">
+        <source>You have successfully installed Contao.</source>
+        <target>Contao安装成功。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHost">
+        <source>FTP hostname</source>
+        <target>FTP主机名</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPath">
+        <source>Relative path to Contao directory (e.g. &lt;em&gt;httpdocs/&lt;/em&gt;)</source>
+        <target>Contao目录相对路径(如：&lt;em&gt;httpdocs/&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUser">
+        <source>FTP username</source>
+        <target>FTP用户名</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPass">
+        <source>FTP password</source>
+        <target>FTP密码</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSLh4">
+        <source>Secure connection</source>
+        <target>安全连接</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSL">
+        <source>Connect via FTP-SSL</source>
+        <target>通过FTP-SSL连接</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPort">
+        <source>FTP port</source>
+        <target>FTP端口</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSave">
+        <source>Save FTP settings</source>
+        <target>保存FTP设置</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHostError">
+        <source>Could not connect to FTP server %s</source>
+        <target>不能连接FTP服务器%s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUserError">
+        <source>Could not login as &quot;%s&quot;</source>
+        <target>无法以&quot;%s&quot;登录</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPathError">
+        <source>Could not locate Contao directory %s</source>
+        <target>无法找到Contao目录%s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesRenamed">
+        <source>The configured files directory does not exist!</source>
+        <target>配置文件目录不存在！</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesWarning">
+        <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
+        <target>您是否将文件夹 &lt;strong&gt;tl_files&lt;/strong&gt; 重命名为&lt;strong&gt;files&lt;/strong&gt;? 您不能仅仅更改文件夹名称，因为数据库和您的样式表中都保存的是文件原有引用信息。如果您需要重命名文件夹，请升级到版本3并确认您已通过以下脚本来调整过数据库: %s。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.CREATE">
+        <source>Create new tables</source>
+        <target>创建新数据表</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_ADD">
+        <source>Add new columns</source>
+        <target>添加新列</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_CHANGE">
+        <source>Change existing columns</source>
+        <target>变更现有列</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_DROP">
+        <source>Drop existing columns</source>
+        <target>删除现有列</target>
+      </trans-unit>
+      <trans-unit id="tl_install.DROP">
+        <source>Drop existing tables</source>
+        <target>删除现有数据表</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

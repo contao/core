@@ -1,0 +1,605 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_layout.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_layout.name.0">
+        <source>Title</source>
+        <target>Cím</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.name.1">
+        <source>Please enter the layout title.</source>
+        <target>Adja meg az elrendezés nevét.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.0">
+        <source>Default layout</source>
+        <target>Alapértelmezett elrendezés</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.1">
+        <source>Make the layout the default layout.</source>
+        <target>Alapértelmezetté teszi ezt az elrendezést.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.0">
+        <source>Rows</source>
+        <target>Fejléc és Lábléc</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.1">
+        <source>Please choose the number of rows.</source>
+        <target>Válassza ki a sorok számát.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.0">
+        <source>Main row only</source>
+        <target>Csak fő sor</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.1">
+        <source>Show only one row.</source>
+        <target>Csak egy sor.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.0">
+        <source>Header and main row</source>
+        <target>Fejléc és fő sor</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.1">
+        <source>Show a header above the main row.</source>
+        <target>Fejléc és fő sor.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.0">
+        <source>Main row and footer</source>
+        <target>Fő sor és lábléc.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.1">
+        <source>Show a footer below the main row.</source>
+        <target>Lábléc és fő sor.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.0">
+        <source>Header, main row and footer</source>
+        <target>Fejléc, fő sor és lábléc</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.1">
+        <source>Show a header above and a footer below the main row.</source>
+        <target>Fejléc, lábléc és fő sor.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.0">
+        <source>Header height</source>
+        <target>Fejléc magassága</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.1">
+        <source>Please enter the height of the page header.</source>
+        <target>Adja meg a fejléc magasságát.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.0">
+        <source>Footer height</source>
+        <target>Lábléc magassága</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.1">
+        <source>Please enter the height of the page footer.</source>
+        <target>Adja meg a lábléc magasságát.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.0">
+        <source>Columns</source>
+        <target>Oszlop beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.1">
+        <source>Please choose the number of columns.</source>
+        <target>Adja meg az oszlopok számát.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.0">
+        <source>Main column only</source>
+        <target>Csak Fő oszlop</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.1">
+        <source>Show only one column.</source>
+        <target>Csak egy oszlop.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.0">
+        <source>Left and main column</source>
+        <target>Baloldali és Fő oszlop</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.1">
+        <source>Show two columns with the main column on the right side.</source>
+        <target>Két oszlopos elrendezés, a Fő oszlop jobb oldalon található.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.0">
+        <source>Main and right column</source>
+        <target>Fő oszlop és Jobboldali oszlop</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.1">
+        <source>Show two columns with the main column on the left side.</source>
+        <target>Két oszlopos elrendezés, a Fő oszlop bal oldalon található.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.0">
+        <source>Main, left and right column</source>
+        <target>Fő oszlop, Jobboldali és Baloldali oszlop</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.1">
+        <source>Show three columns with the main column in the middle.</source>
+        <target>Három oszlopos elrendezés, a Fő oszlop középen található.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.0">
+        <source>Left column width</source>
+        <target>Baloldali oszlop szélessége</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.1">
+        <source>Please enter the width of the left column.</source>
+        <target>Adja meg a baloldali oszlop szélességét.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.0">
+        <source>Right column width</source>
+        <target>Jobboldali oszlop szélessége</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.1">
+        <source>Please enter the width of the right column.</source>
+        <target>Adja meg a jobboldali oszlop szélességét.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.0">
+        <source>Custom layout sections</source>
+        <target>Egyedi elrendezésű részek</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.1">
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Itt megadhatja a vesszővel elválasztott listáját az egyéni elrendezésű szakaszoknak.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.0">
+        <source>Custom sections position</source>
+        <target>Egyedi részek helye</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.1">
+        <source>Please select the position of the custom layout sections.</source>
+        <target>Adja meg az egyedi elrendezésű részek helyét.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.0">
+        <source>Internal style sheets</source>
+        <target>Belső stíluslapok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.1">
+        <source>Here you can add internal style sheets to the layout.</source>
+        <target>Itt adhatóak meg belső stíluslapok az elrendezéshez.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.0">
+        <source>CSS framework</source>
+        <target>CSS keretrendszer</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.1">
+        <source>Here you can activate the components of the Contao CSS framework.</source>
+        <target>Itt aktiválhatja a Contao CSS keretrendszer komponenseit.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.0">
+        <source>Layout builder</source>
+        <target>Elrendezés építő</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.1">
+        <source>Generates a CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Létrehozza a CSS elrendezésen alapuló elrendezés beállításokat. Ez az összetevő szükséges az oldal elrendez szerkesztő működéséhez!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+        <target>Reszponzív elrendezés</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>12 oszlopos rács</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.1">
+        <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+        <target>Létrehoz egy érzékeny 12-oszlopos rácsot ami kiváltja a CSS osztályokat &quot;grid1&quot; - &quot;grid12&quot; és &quot;offset1&quot; - &quot;offset12&quot; jelölésekkel.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>CSS visszaállítás</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Eltávolítja a következetlen alapértelmezett stílus HTML elemeket a különböző böngészőkben.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Alapformák</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Létrehozza az alapvető elemek és gombok formázását.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.0">
+        <source>TinyMCE style sheet</source>
+        <target>TinyMCE stíluslap</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.1">
+        <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
+        <target>Tartalmazza a &lt;em&gt;tinymce.css&lt;/em&gt; stíluslapot a saját upload könyvtára.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.0">
+        <source>External style sheets</source>
+        <target>Külső stíluslapok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.1">
+        <source>Here you can add external CSS, SCSS or LESS files from the file system.</source>
+        <target>Itt adhatóak meg külső CSS, SCSS vagy LESS fájlok a fájlrendszerből.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.0">
+        <source>Sort order</source>
+        <target>Rendezési sorrend</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.1">
+        <source>The sort order of the style sheets.</source>
+        <target>A stíluslapok sorrendje.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.0">
+        <source>Loading order</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.1">
+        <source>Here you can select the loading order of the style sheets.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.external_first">
+        <source>Load external style sheets first</source>
+        <target>Külső stíluslapok betöltése először</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.internal_first">
+        <source>Load internal style sheets first</source>
+        <target>Belső stíluslapok betöltése először</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.0">
+        <source>Google web fonts</source>
+        <target>Google web-betűtípus</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.1">
+        <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>Itt Google web-betűtípusokat adhat az oldalához. A betűcsaládokat baseurl nélkül adja meg. (pl. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.0">
+        <source>News feeds</source>
+        <target>Hírek hírfolyam</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.1">
+        <source>Please select the news feeds you want to add to the layout.</source>
+        <target>Jelölje ki azon hírek hírfolyamokat, amiket hozzá kíván adni az elrendezéshez.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.0">
+        <source>Calendar feeds</source>
+        <target>Naptár hírfolyam</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.1">
+        <source>Please select the calendar feeds you want to add to the layout.</source>
+        <target>Jelölje ki azon naptár hírfolyamokat, amiket hozzá kíván adni az elrendezéshez.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.0">
+        <source>Included modules</source>
+        <target>Felhasznált modulok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Amennyiben a JavaScript tíltva van mentse le módosításait a sorrend megváltoztatása előtt.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.0">
+        <source>Page template</source>
+        <target>Oldalsablon</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.1">
+        <source>Here you can select the page template.</source>
+        <target>Itt tudja kiválasztani az Oldalsablont.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.0">
+        <source>Output format</source>
+        <target>Kimeneti formátum</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.1">
+        <source>Here you can set the output format.</source>
+        <target>Válassza ki a kimeneti formátumot.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.0">
+        <source>Body class</source>
+        <target>Body osztály</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.1">
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Itt lehet megadni a &lt;body&gt; tag osztályait.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootPageTitle}}&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.0">
+        <source>Body onload</source>
+        <target>Body onload</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.1">
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Itt lehet megadni a body &lt;em&gt;onload&lt;/em&gt; attribútumot.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.0">
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>További &lt;head&gt; elemek</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.1">
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Itt tud hozzáadni egyedi parancsokat az oldal &lt;head&gt; részéhez.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.0">
+        <source>Include jQuery</source>
+        <target>JQuery használata</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.1">
+        <source>Include the jQuery library in the layout.</source>
+        <target>A JQuery könyvtár használata az elrendezésben.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.0">
+        <source>jQuery source</source>
+        <target>JQuery forrás</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.1">
+        <source>Here you can select from where to load the jQuery script.</source>
+        <target>Válassza ki honnan töltődjön be a JQuery script.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.0">
+        <source>jQuery templates</source>
+        <target>JQuery sablonok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.1">
+        <source>Here you can select one or more jQuery templates.</source>
+        <target>Válasszon ki egy vagy több JQuery sablont.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.0">
+        <source>Include MooTools</source>
+        <target>MooTools használata</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.1">
+        <source>Include the MooTools library in the layout.</source>
+        <target>A MooTools könyvtár használata az elrendezésben.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.0">
+        <source>MooTools source</source>
+        <target>MooTools forrás</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.1">
+        <source>Here you can select from where to load the MooTools scripts.</source>
+        <target>Válassza ki honnan töltődjön be a JQuery script.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.0">
+        <source>MooTools templates</source>
+        <target>MooTools sablonok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.1">
+        <source>Here you can select one or more MooTools templates.</source>
+        <target>Válasszon ki egy vagy több MooTools sablont.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.0">
+        <source>Load the image polyfill</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.1">
+        <source>Include the image polyfill (&lt;em&gt;respimage.js&lt;/em&gt;) in the layout.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.0">
+        <source>Analytics templates</source>
+        <target>Analitikai sablonok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.1">
+        <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
+        <target>Itt aktiválhatja az analitikai sablonokat( pl.: Google Analytics vagy Piwik). Ne feledje beállítani a sablont és megadni az analitikai ID-t (azonosítót) mielőtt használni kezdené!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.0">
+        <source>Custom JavaScript code</source>
+        <target>Egyedi JavaScript kód</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.1">
+        <source>The JavaScript code which will be inserted at the bottom of the page.</source>
+        <target>A JavaScript kód az oldal aljára lesz beillesztve.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.0">
+        <source>Static layout</source>
+        <target>Statikus Elrendezés</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.1">
+        <source>Create a static layout with a fixed width and alignment.</source>
+        <target>Statikus elrendezést készíthet, fix szélességgel és igazítással.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.0">
+        <source>Overall width</source>
+        <target>Teljes szélesség</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.1">
+        <source>The overall width will be applied to the wrapper element.</source>
+        <target>A teljes szélesség értékét fogja alkalmazni a wrapper elemen.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.0">
+        <source>Alignment</source>
+        <target>Igazítás</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.1">
+        <source>Please select the alignment of the page.</source>
+        <target>Válassza ki az oldal igazítását.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.title_legend">
+        <source>Title</source>
+        <target>Cím</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.header_legend">
+        <source>Rows</source>
+        <target>Fejléc és Lábléc</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.column_legend">
+        <source>Columns</source>
+        <target>Oszlop beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections_legend">
+        <source>Custom sections</source>
+        <target>Egyedi részek</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Web betűk</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.style_legend">
+        <source>Style sheets</source>
+        <target>Stílus lapok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill_legend">
+        <source>Responsive images</source>
+        <target>Reszponzív képek</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.feed_legend">
+        <source>RSS/Atom feeds</source>
+        <target>RSS/Atom hírfolyamok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules_legend">
+        <source>Front end modules</source>
+        <target>Felhasználói felület modulok</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.expert_legend">
+        <source>Expert settings</source>
+        <target>Speciális beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script_legend">
+        <source>JavaScript</source>
+        <target>JavaScript</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static_legend">
+        <source>Static layout</source>
+        <target>Statikus Elrendezés</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery_legend">
+        <source>jQuery</source>
+        <target>jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+        <target>Helyi fájl</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN helyi másolattal</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools_legend">
+        <source>MooTools</source>
+        <target>MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_local">
+        <source>Local file</source>
+        <target>Helyi fájl</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_googleapis">
+        <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN helyi másolattal</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.html5">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_strict">
+        <source>XHTML Strict</source>
+        <target>XHTML Strict</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_trans">
+        <source>XHTML Transitional</source>
+        <target>XHTML Transitional</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+        <target>A csoport előtt</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.before">
+        <source>After the page header</source>
+        <target>Fejléc után</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.main">
+        <source>Inside the main column</source>
+        <target>A Fő oszlopban</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.after">
+        <source>Before the page footer</source>
+        <target>A Lábléc előtt</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
+        <target>A csoport után</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_styles">
+        <source>Edit the style sheets</source>
+        <target>Stílulapok szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_module">
+        <source>Edit the module</source>
+        <target>Modul szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_google">
+        <source>Google</source>
+        <target>Google</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_piwik">
+        <source>Piwik</source>
+        <target>Piwik</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.0">
+        <source>New layout</source>
+        <target>Új elrendezés</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.1">
+        <source>Create a new layout</source>
+        <target>Hozzon létre egy új elrendezést</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.0">
+        <source>Layout details</source>
+        <target>Elrendezés részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.1">
+        <source>Show the details of layout ID %s</source>
+        <target>Mutassa meg az ID %s elrendezés részleteit.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.0">
+        <source>Edit layout</source>
+        <target>Elrendezés szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.1">
+        <source>Edit layout ID %s</source>
+        <target>Az ID %s elrendezés szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.0">
+        <source>Move layout</source>
+        <target>Elrendezés mozgatása</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.1">
+        <source>Move layout ID %s</source>
+        <target>AZ ID %s elrendezés mozgatása</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.0">
+        <source>Duplicate layout</source>
+        <target>Elrendezés duplázása</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.1">
+        <source>Duplicate layout ID %s</source>
+        <target>Az ID %s elrendezés duplázása</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.0">
+        <source>Delete layout</source>
+        <target>Elrendezés törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.1">
+        <source>Delete layout ID %s</source>
+        <target>Az ID %s elrendezés törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.0">
+        <source>Edit theme</source>
+        <target>Téma szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>A Téma szerkesztése</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

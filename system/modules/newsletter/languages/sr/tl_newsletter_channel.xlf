@@ -1,0 +1,142 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_channel.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="tl_newsletter_channel.title.0">
+        <source>Title</source>
+        <target>Наслов</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title.1">
+        <source>Please enter the title of the channel.</source>
+        <target>Унесите назив канала.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Преусмерење странице</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.1">
+        <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
+        <target>Одаберите страницу на којој се налази читач &quot;newsletter&quot;-а и на коју ће посетиоци бити преусмерени кликом на ставку вести.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.0">
+        <source>Custom SMTP server</source>
+        <target>Додатни SMTP сервер</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.1">
+        <source>Use a custom SMTP server for sending newsletters.</source>
+        <target>Користи посебни SMTP сервер за слаље &quot;newsletters&quot;-а.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>SMTP hostname</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>Унесите име хоста SMTP сервера.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.0">
+        <source>SMTP username</source>
+        <target>SMTP username</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>Унесите корисничко име за SMTP.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.0">
+        <source>SMTP password</source>
+        <target>SMTP password</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>Унесите лозинку за SMTP.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>SMTP енкрипција</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Овде можете одабрати метод енкрипције (SSL или TLS).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>SMTP port number</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>Унесите број порта сервера SMTP-а.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.0">
+        <source>Revision date</source>
+        <target>Датум ревизије</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Датум и време последње ревизије</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title_legend">
+        <source>Title and redirect</source>
+        <target>Назив и преусмеравање</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>Конфигурација SMTP-а</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.0">
+        <source>New channel</source>
+        <target>Нови канал</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.1">
+        <source>Create a new channel</source>
+        <target>Креирај нови канал</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.0">
+        <source>Channel details</source>
+        <target>Детаљи канала</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.1">
+        <source>Show the details of channel ID %s</source>
+        <target>Прикажи детаље канала ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.0">
+        <source>Edit channel</source>
+        <target>Уреди канал</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.1">
+        <source>Edit channel ID %s</source>
+        <target>Уреди канал ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.0">
+        <source>Edit channel</source>
+        <target>Уреди канал</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>Уреди подешавања канала</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.0">
+        <source>Duplicate channel</source>
+        <target>Копирај канал</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.1">
+        <source>Duplicate channel ID %s</source>
+        <target>Копирај канал ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.0">
+        <source>Delete channel</source>
+        <target>Обриши канал</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.1">
+        <source>Delete channel ID %s</source>
+        <target>Обриши канал ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.0">
+        <source>Edit recipients</source>
+        <target>Уреди примаоце</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.1">
+        <source>Edit the recipients of channel ID %s</source>
+        <target>Уреди примаоце канала ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

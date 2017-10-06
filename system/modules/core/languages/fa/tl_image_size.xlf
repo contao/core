@@ -1,0 +1,162 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_image_size.name.0">
+        <source>Name</source>
+        <target>نام</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.name.1">
+        <source>Please enter the image size name.</source>
+        <target>لطفا نام اندازه تصویر را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.0">
+        <source>Width</source>
+        <target>عرض</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.1">
+        <source>Here you can enter the width in pixels.</source>
+        <target>اینجا می‌توانید عرض را به پیکسل وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.0">
+        <source>Height</source>
+        <target>ارتفاع</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.1">
+        <source>Here you can enter the height in pixels.</source>
+        <target>اینجا می‌توانید ارتفاع را به پیکسل وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.0">
+        <source>Resize mode</source>
+        <target>روش تغییر اندازه</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.1">
+        <source>Only applicable if width and height are specified.</source>
+        <target>فقط زمانی که عرض و ارتفاع مشخص شده باشند قابل استفاده است.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.0">
+        <source>Zoom</source>
+        <target>بزرگنمایی</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.1">
+        <source>0 = the whole image is visible, 100 = only the important part of the image is visible.</source>
+        <target>0 = همه تصویر قابل مشاهده است، 100 = فقط قسمت مهم تصویر قابل مشاهده است.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.0">
+        <source>Sizes attribute</source>
+        <target>خصوصیت اندازه‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.1">
+        <source>Here you can define the displayed image width(s), e.g. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</source>
+        <target>اینجا می‌توانید عرض(های) تصویر نمایش داده شده را تعریف نمایید، برای نمونه &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.0">
+        <source>Pixel densities/scale factors</source>
+        <target>چگالی‌های پیکسل/عامل‌های مقیاس</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.1">
+        <source>Here you can define the pixel densities, e.g. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</source>
+        <target>اینجا می‌توانید چگالی‌های پیکسل را تعریف نمایید، برای نمونه &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.0">
+        <source>Revision date</source>
+        <target>تاریخ بازنگری</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>تاریخ و ساعت آخرین بازنگری</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.title_legend">
+        <source>Image size settings</source>
+        <target>تنظیمات اندازه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.expert_legend">
+        <source>Expert settings</source>
+        <target>تنطیمات پیشرفته</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.0">
+        <source>Proportional</source>
+        <target>متناسب</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>ضلع بزرگ‌تر تصویر به اندازه داده شده تنظیم شده و تصویر به صورت متناسب تغییر خواهد کرد</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.0">
+        <source>Fit the box</source>
+        <target>تطبیق با جعبه</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>ضلع کوچک‌تر تصویر به اندازه داده شده تنظیم شده و تصویر به صورت متناسب تغییر خواهد کرد</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.0">
+        <source>Crop</source>
+        <target>کوتاه کردن</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>تصویرها به اندازه داده شده تغییر خواهند کرد. اگر لازم باشد بریده خواهند شد.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.0">
+        <source>New image size</source>
+        <target>اندازه تصویر جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.1">
+        <source>Create a new image size</source>
+        <target>ایجاد یک اندازه تصویر جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.0">
+        <source>Image size details</source>
+        <target>جزئیات انداره تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.1">
+        <source>Show the details of image size ID %s</source>
+        <target>نمایش جزئیات اندازه تصویر شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.0">
+        <source>Edit image size</source>
+        <target>ویرایش اندازه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.1">
+        <source>Edit image size ID %s</source>
+        <target>ویرایش اندازه تصویر شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.0">
+        <source>Edit image size</source>
+        <target>ویرایش اندازه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>ویرایش تنظیمات اندازه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.0">
+        <source>Move image size</source>
+        <target>جابجایی اندازه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.1">
+        <source>Move image size ID %s</source>
+        <target>جابجایی اندازه تصویر شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.0">
+        <source>Duplicate image size</source>
+        <target>تکثیر اندازه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.1">
+        <source>Duplicate image size ID %s</source>
+        <target>تکثیر اندازه تصویر شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.0">
+        <source>Delete image size</source>
+        <target>حذف اندازه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.1">
+        <source>Delete image size ID %s</source>
+        <target>حذف اندازه تصویر شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.picturefill">
+        <source>The &lt;em&gt;%s&lt;/em&gt; option needs to be enabled in the page layout.</source>
+        <target>گزینه &lt;em&gt;%s&lt;/em&gt; لازم است که در چیدمان برگه فعال گردد.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

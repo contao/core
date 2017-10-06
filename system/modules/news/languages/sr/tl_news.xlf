@@ -1,0 +1,330 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="tl_news.headline.0">
+        <source>Title</source>
+        <target>Наслов</target>
+      </trans-unit>
+      <trans-unit id="tl_news.headline.1">
+        <source>Please enter the news title.</source>
+        <target>Унесите назив вести.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.0">
+        <source>News alias</source>
+        <target>Алиас вести</target>
+      </trans-unit>
+      <trans-unit id="tl_news.alias.1">
+        <source>The news alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>Алиас вести је јединствена референца на чланак која може да се користи уместо нумеричког  ID-а.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.0">
+        <source>Author</source>
+        <target>Аутор</target>
+      </trans-unit>
+      <trans-unit id="tl_news.author.1">
+        <source>Here you can change the author of the news item.</source>
+        <target>Овде можете променити аутора вести.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.0">
+        <source>Date</source>
+        <target>Датум</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date.1">
+        <source>Please enter the date according to the global date format.</source>
+        <target>Унесите датум у складу са глобалним форматом датума</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.0">
+        <source>Time</source>
+        <target>Време</target>
+      </trans-unit>
+      <trans-unit id="tl_news.time.1">
+        <source>Please enter the time according to the global time format.</source>
+        <target>Унесите време у складу са глобалним форматом датума</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.0">
+        <source>Subheadline</source>
+        <target>Поднаслов</target>
+      </trans-unit>
+      <trans-unit id="tl_news.subheadline.1">
+        <source>Here you can enter a subheadline.</source>
+        <target>Овде можете унети поднаслов.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.0">
+        <source>News teaser</source>
+        <target>Уводник вести</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser.1">
+        <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
+        <target>Уводник вести који представља кратки текст о садржају чланка ,може бити приказан у листи вести уместо пуног чланка. Линк &quot;Детаљније...&quot; у том случају ће бити додат аутоматски.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.0">
+        <source>News text</source>
+        <target>Текст вести</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text.1">
+        <source>Here you can enter the news text.</source>
+        <target>Овде можете унети текст вести.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.0">
+        <source>Add an image</source>
+        <target>Додај слику</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addImage.1">
+        <source>Add an image to the news item.</source>
+        <target>Додај слику уз вест.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Додај прилог</target>
+      </trans-unit>
+      <trans-unit id="tl_news.addEnclosure.1">
+        <source>Add one or more downloadable files to the news item.</source>
+        <target>Додај један или више фајлова за преузимање уз вест.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.0">
+        <source>Enclosures</source>
+        <target>Прилози</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Изаберите фајлове које желите прикачити.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.0">
+        <source>Redirect target</source>
+        <target>Локација преусмерења</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source.1">
+        <source>Here you can override the default redirect target.</source>
+        <target>Овде можете премостити основну локацију преусмерења.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.0">
+        <source>Use default</source>
+        <target>Користи основну поставку</target>
+      </trans-unit>
+      <trans-unit id="tl_news.default.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
+        <target>Кликом на &quot;Детаљније...&quot;, посетиоци ће бити преусмерени на подразумевану страницу архиве вести.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.0">
+        <source>Page</source>
+        <target>Страница</target>
+      </trans-unit>
+      <trans-unit id="tl_news.internal.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
+        <target>Кликом на &quot;Детаљније...&quot;, посетиоци ће бити преусмерени на страницу.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.0">
+        <source>Article</source>
+        <target>Чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.article.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
+        <target>Кликом на &quot;Детаљније...&quot;, посетиоци ће бити преусмерени на чланак.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.0">
+        <source>External URL</source>
+        <target>Екстерни URL</target>
+      </trans-unit>
+      <trans-unit id="tl_news.external.1">
+        <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
+        <target>Кликом на &quot;Детаљније...&quot;, посетиоци ће бити преусмерени према вањском сајту.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Преусмерење странице</target>
+      </trans-unit>
+      <trans-unit id="tl_news.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
+        <target>Изаберите страницу на коју ће посетиоци бити преусмерени кликом на вест.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.0">
+        <source>Article</source>
+        <target>Чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.articleId.1">
+        <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
+        <target>Изаберите чланак на који ће посетиоци бити преусмерени кликом на вест.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.0">
+        <source>CSS class</source>
+        <target>CSS класа</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cssClass.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Овде можете унети једну или више класа.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.0">
+        <source>Disable comments</source>
+        <target>Искључи коментаре</target>
+      </trans-unit>
+      <trans-unit id="tl_news.noComments.1">
+        <source>Do not allow comments for this particular news item.</source>
+        <target>Забрани коментаре за ову вест.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.0">
+        <source>Feature item</source>
+        <target>Истакнута ставка</target>
+      </trans-unit>
+      <trans-unit id="tl_news.featured.1">
+        <source>Show the news item in a featured news list.</source>
+        <target>Прикажи ову вест на листи истакнутих вести.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.0">
+        <source>Publish item</source>
+        <target>Објави вест</target>
+      </trans-unit>
+      <trans-unit id="tl_news.published.1">
+        <source>Make the news item publicly visible on the website.</source>
+        <target>Нека вест буде јавно видљива на сајту.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.0">
+        <source>Show from</source>
+        <target>Прикажи од</target>
+      </trans-unit>
+      <trans-unit id="tl_news.start.1">
+        <source>Do not show the news item on the website before this day.</source>
+        <target>Не приказуј вест на сајту пре наведеног датума.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.0">
+        <source>Show until</source>
+        <target>Прикажи до</target>
+      </trans-unit>
+      <trans-unit id="tl_news.stop.1">
+        <source>Do not show the news item on the website on and after this day.</source>
+        <target>Не приказуј вест на сајту на и после наведеног датума.</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.0">
+        <source>Revision date</source>
+        <target>Датум ревизије</target>
+      </trans-unit>
+      <trans-unit id="tl_news.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Датум и време последње ревизије</target>
+      </trans-unit>
+      <trans-unit id="tl_news.title_legend">
+        <source>Title and author</source>
+        <target>Наслов и аутор</target>
+      </trans-unit>
+      <trans-unit id="tl_news.date_legend">
+        <source>Date and time</source>
+        <target>Датум и време</target>
+      </trans-unit>
+      <trans-unit id="tl_news.teaser_legend">
+        <source>Subheadline and teaser</source>
+        <target>Поднаслов и уводник</target>
+      </trans-unit>
+      <trans-unit id="tl_news.text_legend">
+        <source>News text</source>
+        <target>Текст вести</target>
+      </trans-unit>
+      <trans-unit id="tl_news.image_legend">
+        <source>Image settings</source>
+        <target>Подешавања слике</target>
+      </trans-unit>
+      <trans-unit id="tl_news.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Прилози</target>
+      </trans-unit>
+      <trans-unit id="tl_news.source_legend">
+        <source>Redirect target</source>
+        <target>Локација преусмерења</target>
+      </trans-unit>
+      <trans-unit id="tl_news.expert_legend">
+        <source>Expert settings</source>
+        <target>Напредна подешавања</target>
+      </trans-unit>
+      <trans-unit id="tl_news.publish_legend">
+        <source>Publish settings</source>
+        <target>Објави подешавања</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.0">
+        <source>New article</source>
+        <target>Нови чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.new.1">
+        <source>Create a new news article</source>
+        <target>Креирај нову вест</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.0">
+        <source>Article details</source>
+        <target>Детаљи чланка</target>
+      </trans-unit>
+      <trans-unit id="tl_news.show.1">
+        <source>Show the details of news article ID %s</source>
+        <target>Прикажи детаље вести ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.0">
+        <source>Edit article</source>
+        <target>Уреди чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.edit.1">
+        <source>Edit news article ID %s</source>
+        <target>Уреди детаље вести ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.0">
+        <source>Duplicate article</source>
+        <target>Копирај чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.copy.1">
+        <source>Duplicate news article ID %s</source>
+        <target>Копирај вест ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.0">
+        <source>Move article</source>
+        <target>Помери чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.cut.1">
+        <source>Move news article ID %s</source>
+        <target>Помери вест ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.0">
+        <source>Delete article</source>
+        <target>Обриши чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.delete.1">
+        <source>Delete news article ID %s</source>
+        <target>Обриши вест</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>Објави/сакриј чланак</target>
+      </trans-unit>
+      <trans-unit id="tl_news.toggle.1">
+        <source>Publish/unpublish news article ID %s</source>
+        <target>Објави/сакриј вест ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.0">
+        <source>Feature/unfeature article</source>
+        <target>Постави/уклони истицање вести</target>
+      </trans-unit>
+      <trans-unit id="tl_news.feature.1">
+        <source>Feature/unfeature news article ID %s</source>
+        <target>Постави/уклони истицање вести ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.0">
+        <source>Edit archive</source>
+        <target>Уреди архиву</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editheader.1">
+        <source>Edit the archive settings</source>
+        <target>Уреди подешавања архиве</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.0">
+        <source>Edit article settings</source>
+        <target>Уреди подешавања чланка</target>
+      </trans-unit>
+      <trans-unit id="tl_news.editmeta.1">
+        <source>Edit the article settings</source>
+        <target>Уреди подешавања чланка</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.0">
+        <source>Paste into this archive</source>
+        <target>Налепи у архиву</target>
+      </trans-unit>
+      <trans-unit id="tl_news.pasteafter.1">
+        <source>Paste after news article ID %s</source>
+        <target>Налепи након вести ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,290 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_article.title.0">
+        <source>Title</source>
+        <target>Virsraksts</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title.1">
+        <source>Please enter the article title.</source>
+        <target>Lūdzu ievadiet raksta nosaukumu.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.0">
+        <source>Article alias</source>
+        <target>Raksta aizstājvārds</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.1">
+        <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>Raksta aizstājvārds ir unikāla atsauce uz rakstu, kas var tikt izsaukta jaunuma ID vietā.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.0">
+        <source>Author</source>
+        <target>Vārds</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.1">
+        <source>Here you can change the author of the article.</source>
+        <target>Šeit jūs varat mainīt raksta autoru.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.0">
+        <source>Display in</source>
+        <target>Rādīt</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.1">
+        <source>Please choose the layout section you want the article to be displayed in.</source>
+        <target>Lūdzu izvēlieties salikuma sadaļu, kurā tiks rādīts raksts.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.0">
+        <source>Meta keywords</source>
+        <target>Atslēgvārdi</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.1">
+        <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
+        <target>Jūs varat ievadīt vairākus ar komatu atdalītus atslēgvārdus, kurus izmantos meklētājprogrammas, lai atrastu šo lapu. Meklētājprogramma parasti indeksē līdz 800 zīmēm.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.0">
+        <source>Teaser CSS ID/class</source>
+        <target>Ievada CSS ID/klase</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.1">
+        <source>Here you can set an ID and one or more classes for the teaser element.</source>
+        <target>Šeit jūs varat iestatīt ID un vienu vai varākas klases ievada elementam.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.0">
+        <source>Show teaser</source>
+        <target>Rādīt ievadu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.1">
+        <source>Show the article teaser if there are multiple articles.</source>
+        <target>Rādīt ievada tekstu raksta vietā, ja ir vairāki raksti.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.0">
+        <source>Article teaser</source>
+        <target>Raksta ievads</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.1">
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>Raksta ievads var arī tikt rādīts ar satura elementu &quot;raksta ievads&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.0">
+        <source>Syndication</source>
+        <target>Drukājams</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.1">
+        <source>Here you can choose which options are available.</source>
+        <target>Pievienot saiti raksta eksportam kā PDF datne.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>Rādīt tikai viesiem</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+        <target>Slēpt rakstu, ja biedrs ir pieslēdzies.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.0">
+        <source>Custom article template</source>
+        <target>Pielāgotas raksta veidnes</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.1">
+        <source>Here you can overwrite the default article template.</source>
+        <target>Šeit jūs varat pārrakstīt rakstu noklusējuma veidni.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+        <target>Aizsargāt rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+        <target>Rādīt rakstu tikai noteiktām dalībnieku grupām.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>Atļautās biedru grupas</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+        <target>Šīs grupas varēs redzēt rakstu.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.0">
+        <source>CSS ID/class</source>
+        <target>CSS ID/klase</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Šeit jūs varat ievadīt ID un vienu vai vairākas klases.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.0">
+        <source>Space in front and after</source>
+        <target>Atstarpe pirms un pēc</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.1">
+        <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Lūdzu ievadiet atstarpi pikseļos pirms un pēc raksta. Ieteicams gan atstarpes definēt stila lapā.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.0">
+        <source>Publish article</source>
+        <target>Publicēts</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.1">
+        <source>Make the article publicly visible on the website.</source>
+        <target>Padarīt rakstu publiski redzamu mājas lapā.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.0">
+        <source>Show from</source>
+        <target>Wrapper sākums</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.1">
+        <source>Do not show the article on the website before this day.</source>
+        <target>Nerādīt rakstu mājas lapā pirms šā datuma.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.0">
+        <source>Show until</source>
+        <target>Wrapper beigas</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.1">
+        <source>Do not show the article on the website on and after this day.</source>
+        <target>Nerādīt rakstu mājas lapā šajā un pēc šī datuma.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.0">
+        <source>Revision date</source>
+        <target>Pārskatījuma datums</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Pēdējā pārskatījuma datums un laiks</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title_legend">
+        <source>Title and author</source>
+        <target>Nosaukums un autors</target>
+      </trans-unit>
+      <trans-unit id="tl_article.layout_legend">
+        <source>Section and keywords</source>
+        <target>Sadaļa un atslēgvārdi</target>
+      </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>Drukājams</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser_legend">
+        <source>Article teaser</source>
+        <target>Raksta ievads</target>
+      </trans-unit>
+      <trans-unit id="tl_article.template_legend">
+        <source>Template settings</source>
+        <target>Veidnes uzstadījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>Piekļuves aizsardzība</target>
+      </trans-unit>
+      <trans-unit id="tl_article.expert_legend">
+        <source>Expert settings</source>
+        <target>Eksperta iestatījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_article.publish_legend">
+        <source>Publish settings</source>
+        <target>Publicēšanas uzstādījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_article.print">
+        <source>Print the page</source>
+        <target>Drukāt lapu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pdf">
+        <source>Export as PDF</source>
+        <target>Eksportēt kā PDF</target>
+      </trans-unit>
+      <trans-unit id="tl_article.facebook">
+        <source>Share on Facebook</source>
+        <target>Ieteikt Facebook</target>
+      </trans-unit>
+      <trans-unit id="tl_article.twitter">
+        <source>Share on Twitter</source>
+        <target>Ieteikt Twitter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
+        <target>Kopīgot Google+</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.0">
+        <source>New article</source>
+        <target>Jauns raksts</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.1">
+        <source>Create a new article</source>
+        <target>Izveidot jaunu rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.0">
+        <source>Article details</source>
+        <target>Raksta detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.1">
+        <source>Show the details of article ID %s</source>
+        <target>Rādīt raksta ID %s detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.0">
+        <source>Edit article</source>
+        <target>Rediģēt rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.1">
+        <source>Edit article ID %s</source>
+        <target>Rediģēt rakstu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.0">
+        <source>Edit article</source>
+        <target>Rediģēt rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.1">
+        <source>Edit the article settings</source>
+        <target>Rediģēt raksta iestatījumus</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.0">
+        <source>Duplicate article</source>
+        <target>Dublicēt rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.1">
+        <source>Duplicate article ID %s</source>
+        <target>Dublicēt rakstu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.0">
+        <source>Move article</source>
+        <target>Pārvietot rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.1">
+        <source>Move article ID %s</source>
+        <target>Pārvietot rakstu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.0">
+        <source>Delete article</source>
+        <target>Dzēst rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.1">
+        <source>Delete article ID %s</source>
+        <target>Dzēst rakstu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>Publicet/nepublicēt rakstu</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.1">
+        <source>Publish/unpublish article ID %s</source>
+        <target>Publicet/nepublicēt rakstu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.0">
+        <source>Paste after</source>
+        <target>Ielīmēt pēc</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.1">
+        <source>Paste after article ID %s</source>
+        <target>Ielīmēt pēc raksta ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.0">
+        <source>Paste into</source>
+        <target>Ielīmēt</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>Ielīmēt lapā ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

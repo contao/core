@@ -1,0 +1,242 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_form.title.0">
+        <source>Title</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title.1">
+        <source>Please enter the form title.</source>
+        <target>Angiv formularens titel.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.0">
+        <source>Form alias</source>
+        <target>Form henvisning</target>
+      </trans-unit>
+      <trans-unit id="tl_form.alias.1">
+        <source>The form alias is a unique reference to the form which can be called instead of its numeric ID.</source>
+        <target>Form henvisningen er en unik reference til formen, der kan bruges i stedet for dens ID</target>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Hop til side</target>
+      </trans-unit>
+      <trans-unit id="tl_form.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
+        <target>Data fra en formular sendes normalt til en anden side som behandler disse eller viser en besked, f.eks. &quot;Tak, informationen er modtaget.&quot; Her kan du vælge hvilken side formularen skal sende til.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.0">
+        <source>Send form data via e-mail</source>
+        <target>Send formular-data via e-post</target>
+      </trans-unit>
+      <trans-unit id="tl_form.sendViaEmail.1">
+        <source>Send the submitted data to an e-mail address.</source>
+        <target>Hvis du vælger denne mulighed, vil formulardata blive sendt via e-post.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.0">
+        <source>Recipient address</source>
+        <target>Modtager</target>
+      </trans-unit>
+      <trans-unit id="tl_form.recipient.1">
+        <source>Separate multiple e-mail addresses with comma.</source>
+        <target>Indtast venligst en eller flere modtageres e-postadresser. Adskil flere adresser med komma. Du kan også bruge det &quot;navneformatet&quot; (f.eks. &quot;Navn[navn@domain.dk]&quot;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.0">
+        <source>Subject</source>
+        <target>Emne</target>
+      </trans-unit>
+      <trans-unit id="tl_form.subject.1">
+        <source>Please enter the e-mail subject.</source>
+        <target>Indtast venligst emne. Hvis du ikke indtaster et emne, stiger sandsynligheden for at e-posten bliver identificeret som SPAM.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.0">
+        <source>Data format</source>
+        <target>Dataformat</target>
+      </trans-unit>
+      <trans-unit id="tl_form.format.1">
+        <source>Defines how the form data will be forwarded.</source>
+        <target>Vælg et dataformat.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.0">
+        <source>Raw data</source>
+        <target>Rå data</target>
+      </trans-unit>
+      <trans-unit id="tl_form.raw.1">
+        <source>The form data will be sent as plain text message with each field in a new line.</source>
+        <target>Data fra formularen sendes som en almindelig tekstbesked hvor de enkelte felter adskilles med et linjeskift.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.0">
+        <source>XML file</source>
+        <target>XML-fil</target>
+      </trans-unit>
+      <trans-unit id="tl_form.xml.1">
+        <source>The form data will be attached to the e-mail as an XML file.</source>
+        <target>Data fra formularen vedhæftes e-posten som en XML-fil.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.0">
+        <source>CSV file</source>
+        <target>CSV-fil</target>
+      </trans-unit>
+      <trans-unit id="tl_form.csv.1">
+        <source>The form data will be attached to the e-mail as a CSV file.</source>
+        <target>Data fra formularen vedhæftes e-posten som en CSV-fil (kommasepareret).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.0">
+        <source>E-mail</source>
+        <target>E-postformat</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email.1">
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>Ignorerer alle felter undtagen &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; samt &lt;em&gt;cc&lt;/em&gt; (carbon copy) og sender formular dataen som var det afsendt fra en mail klient. Upload af filer er tilladt.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.0">
+        <source>Skip empty fields</source>
+        <target>Spring tomme felter over</target>
+      </trans-unit>
+      <trans-unit id="tl_form.skipEmtpy.1">
+        <source>Hide empty fields in the e-mail.</source>
+        <target>Inkluder ikke tomme felter i e-posten.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.0">
+        <source>Store data</source>
+        <target>Gem værdier</target>
+      </trans-unit>
+      <trans-unit id="tl_form.storeValues.1">
+        <source>Store the submitted data in the database.</source>
+        <target>Hvis du vælger denne mulighed, vil indsendte værdier blive gemt og genindsat i deres formularfelter.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.0">
+        <source>Target table</source>
+        <target>Modtagelsestabel</target>
+      </trans-unit>
+      <trans-unit id="tl_form.targetTable.1">
+        <source>The target table must contain a column for every form field.</source>
+        <target>Vælg venligst tabellen du vil gemme formularværdierne i.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.0">
+        <source>Submission method</source>
+        <target>Formular indsendelsesmetode</target>
+      </trans-unit>
+      <trans-unit id="tl_form.method.1">
+        <source>The default form submission method is POST.</source>
+        <target>Vælg venligst en formular indsendelsesmetode (standard: POST).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.0">
+        <source>Disable HTML5 validation</source>
+        <target>Deaktiver HTML5 validering</target>
+      </trans-unit>
+      <trans-unit id="tl_form.novalidate.1">
+        <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>Benyt &lt;em&gt;novalidate&lt;/em&gt; attribute på form tagget.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.0">
+        <source>CSS ID/class</source>
+        <target>Stilark-ID og -klasse</target>
+      </trans-unit>
+      <trans-unit id="tl_form.attributes.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Her kan du angive stilark-ID (id-attributten) og eller flere stilark-klasser (class-attributten) for at kunne formatere modulet vha. CSS.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.0">
+        <source>Form ID</source>
+        <target>Formularens ID</target>
+      </trans-unit>
+      <trans-unit id="tl_form.formID.1">
+        <source>The form ID is required to trigger a Contao module.</source>
+        <target>Her kan du indtaste en speciel formular-ID (nogen TYPOlight-udvidelser kunne kræve et specielt formular-ID).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.0">
+        <source>Tableless layout</source>
+        <target>Tabelløs layout</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>Generer form uden HTML tabeller</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.0">
+        <source>Allow HTML tags</source>
+        <target>Tillad HTML-tags</target>
+      </trans-unit>
+      <trans-unit id="tl_form.allowTags.1">
+        <source>Allow HTML tags in form fields.</source>
+        <target>Vælger du denne indstilling bevares visse HTML-mærkater (&lt;em&gt;allowedTags&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.0">
+        <source>Revision date</source>
+        <target>Revideringsdato</target>
+      </trans-unit>
+      <trans-unit id="tl_form.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Dato og tid for sidste revidering.</target>
+      </trans-unit>
+      <trans-unit id="tl_form.title_legend">
+        <source>Title and redirect page</source>
+        <target>Titel og hop til side</target>
+      </trans-unit>
+      <trans-unit id="tl_form.email_legend">
+        <source>Send form data</source>
+        <target>Send formular-data</target>
+      </trans-unit>
+      <trans-unit id="tl_form.store_legend">
+        <source>Store form data</source>
+        <target>Gem formular-data</target>
+      </trans-unit>
+      <trans-unit id="tl_form.expert_legend">
+        <source>Expert settings</source>
+        <target>Ekspert indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_form.config_legend">
+        <source>Form configuration</source>
+        <target>Form konfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.0">
+        <source>New form</source>
+        <target>Ny formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form.new.1">
+        <source>Create a new form</source>
+        <target>Opret en ny formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.0">
+        <source>Form details</source>
+        <target>Formulardetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_form.show.1">
+        <source>Show the details of form ID %s</source>
+        <target>Vis detaljer for formular-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.0">
+        <source>Edit form</source>
+        <target>Rediger formular overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_form.edit.1">
+        <source>Edit form ID %s</source>
+        <target>Rediger formular-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.0">
+        <source>Edit form</source>
+        <target>Rediger formular overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_form.editheader.1">
+        <source>Edit the form settings</source>
+        <target>Rediger overskriften for denne formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.0">
+        <source>Duplicate form</source>
+        <target>Dupliker formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form.copy.1">
+        <source>Duplicate form ID %s</source>
+        <target>Dupliker formular-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.0">
+        <source>Delete form</source>
+        <target>Slet formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form.delete.1">
+        <source>Delete form ID %s</source>
+        <target>Slet formular-ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

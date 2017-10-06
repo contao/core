@@ -1,0 +1,614 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_layout.php" source-language="en" target-language="ru">
+    <body>
+      <trans-unit id="tl_layout.name.0">
+        <source>Title</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.name.1">
+        <source>Please enter the layout title.</source>
+        <target>Введите название макета.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.0">
+        <source>Default layout</source>
+        <target>Макет по умолчанию</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.fallback.1">
+        <source>Make the layout the default layout.</source>
+        <target>Сделать макетом по умолчанию.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.0">
+        <source>Rows</source>
+        <target>Строки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.rows.1">
+        <source>Please choose the number of rows.</source>
+        <target>Выберите количество строк.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.0">
+        <source>Main row only</source>
+        <target>Только основная строка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1rw.1">
+        <source>Show only one row.</source>
+        <target>Показывать только одну строку.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.0">
+        <source>Header and main row</source>
+        <target>Верхний колонтитул и основная строка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwh.1">
+        <source>Show a header above the main row.</source>
+        <target>Показывать верхний колонтитул над основной строкой.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.0">
+        <source>Main row and footer</source>
+        <target>Основная строка и нижний колонтитул</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2rwf.1">
+        <source>Show a footer below the main row.</source>
+        <target>Показывать нижний колонтитул под основной строкой.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.0">
+        <source>Header, main row and footer</source>
+        <target>Верхний колонтитул, основная строка и нижний колонтитул</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3rw.1">
+        <source>Show a header above and a footer below the main row.</source>
+        <target>Показывать верхний колонтитул выше и нижний колонтитул ниже основной строки.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.0">
+        <source>Header height</source>
+        <target>Высота верхнего колонтитула</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.headerHeight.1">
+        <source>Please enter the height of the page header.</source>
+        <target>Введите высоту верхнего колонтитула.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.0">
+        <source>Footer height</source>
+        <target>Высота нижнего колонтитула</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.footerHeight.1">
+        <source>Please enter the height of the page footer.</source>
+        <target>Введите высоту нижнего колонтитула.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.0">
+        <source>Columns</source>
+        <target>Колонки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cols.1">
+        <source>Please choose the number of columns.</source>
+        <target>Выберите количество и расположение колонок.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.0">
+        <source>Main column only</source>
+        <target>Основная колонка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.1cl.1">
+        <source>Show only one column.</source>
+        <target>Показать только основную колонку.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.0">
+        <source>Left and main column</source>
+        <target>Левая и основная колонка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2cll.1">
+        <source>Show two columns with the main column on the right side.</source>
+        <target>Показать две колонки, где основная колонка с правой стороны.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.0">
+        <source>Main and right column</source>
+        <target>Основная и правая колонка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.2clr.1">
+        <source>Show two columns with the main column on the left side.</source>
+        <target>Показать две колонки, где основная колонка с левой стороны.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.0">
+        <source>Main, left and right column</source>
+        <target>Левая, основная и правая колонка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.3cl.1">
+        <source>Show three columns with the main column in the middle.</source>
+        <target>Показать три колонки, где основная колонка посередине, между левой и правой.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.0">
+        <source>Left column width</source>
+        <target>Ширина левой колонки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthLeft.1">
+        <source>Please enter the width of the left column.</source>
+        <target>Введите ширину левой колонки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.0">
+        <source>Right column width</source>
+        <target>Ширина правой колонки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.widthRight.1">
+        <source>Please enter the width of the right column.</source>
+        <target>Введите ширину правой колонки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.0">
+        <source>Custom layout sections</source>
+        <target>Пользовательские секции макета</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections.1">
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Введите через запятую секции, которые хотите использовать при вёрстке.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.0">
+        <source>Custom sections position</source>
+        <target>Позиция пользовательских секций макета</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sPosition.1">
+        <source>Please select the position of the custom layout sections.</source>
+        <target>Выберите позицию пользовательских секций макета</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.0">
+        <source>Internal style sheets</source>
+        <target>Внутренние таблицы стилей</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.stylesheet.1">
+        <source>Here you can add internal style sheets to the layout.</source>
+        <target>Вы можете добавить внутренние таблицы стилей в макет.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.0">
+        <source>CSS framework</source>
+        <target>CSS фреймворк</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.framework.1">
+        <source>Here you can activate the components of the Contao CSS framework.</source>
+        <target>Вы можете активировать компоненты CSS фреймворка Contao.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.0">
+        <source>Layout builder</source>
+        <target>Конструктор макетов</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.layout.css.1">
+        <source>Generates a CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>Создает CSS макет с учетом настроек макета страницы. Компонент необходим для работы генератора макетов страницы!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+        <target>Адаптивный макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+        <target>Добавляет мета-тег viewport в верхний колонтитул страницы и масштабирует CSS макет в зависимости от ширины устройства.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.0">
+        <source>12-column grid</source>
+        <target>12 колоночная сетка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.grid.css.1">
+        <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
+        <target>Добавляет адаптивную сетку из 12 колонок, которая создается CSS классами от &quot;grid1&quot; до &quot;grid12&quot; и от &quot;offset1&quot; до &quot;offset12&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.0">
+        <source>CSS reset</source>
+        <target>Сброс CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.reset.css.1">
+        <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
+        <target>Удаляет несовместимые стили по умолчанию для HTML элементов в разных браузерах.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.0">
+        <source>Basic forms</source>
+        <target>Основные формы </target>
+      </trans-unit>
+      <trans-unit id="tl_layout.form.css.1">
+        <source>Adds basic form elements and buttons formatting.</source>
+        <target>Добавляет форматирование элементов и кнопок основной формы.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.0">
+        <source>TinyMCE style sheet</source>
+        <target>Таблица стилей TinyMCE</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.tinymce.css.1">
+        <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
+        <target>Включает таблицу стилей &lt;em&gt;tinymce.css&lt;/em&gt; из вашего каталога загрузки.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.0">
+        <source>External style sheets</source>
+        <target>Внешние таблицы стилей</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external.1">
+        <source>Here you can add external CSS, SCSS or LESS files from the file system.</source>
+        <target>Вы можете добавить внешние CSS, SCSS или LESS файлы из файловой системы.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.0">
+        <source>Sort order</source>
+        <target>Порядок сортировки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.orderExt.1">
+        <source>The sort order of the style sheets.</source>
+        <target>Порядок сортировки таблиц стилей.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.0">
+        <source>Loading order</source>
+        <target>Порядок загрузки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.1">
+        <source>Here you can select the loading order of the style sheets.</source>
+        <target>Вы можете выбрать порядок загрузки таблиц стилей.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.external_first">
+        <source>Load external style sheets first</source>
+        <target>Сначала загружать внешние таблицы стилей</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.internal_first">
+        <source>Load internal style sheets first</source>
+        <target>Сначала загружать внутренние таблицы стилей</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.0">
+        <source>Google web fonts</source>
+        <target>Веб-шрифты Google</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts.1">
+        <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
+        <target>Вы можете добавить веб-шрифты Google, для использования на веб-сайте. Укажите семейства шрифтов без URL (напр. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.0">
+        <source>News feeds</source>
+        <target>Каналы новостей</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.newsfeeds.1">
+        <source>Please select the news feeds you want to add to the layout.</source>
+        <target>Выберите каналы новостей, которые хотите добавить в макет.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.0">
+        <source>Calendar feeds</source>
+        <target>RSS-каналы календаря</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.calendarfeeds.1">
+        <source>Please select the calendar feeds you want to add to the layout.</source>
+        <target>Выберите каналы календаря, которые хотите добавить в макет.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.0">
+        <source>Included modules</source>
+        <target>Включенные модули</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Если JavaScript отключен, следует сохранить изменения до изменения списка!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.0">
+        <source>Page template</source>
+        <target>Шаблон макета</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.template.1">
+        <source>Here you can select the page template.</source>
+        <target>Вы можете выбрать шаблон макета.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.0">
+        <source>Output format</source>
+        <target>Формат вывода</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.doctype.1">
+        <source>Here you can set the output format.</source>
+        <target>Вы можете выбрать формат вывода.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.0">
+        <source>Body class</source>
+        <target>Body class</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cssClass.1">
+        <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Вы можете добавить атрибуты класса для тега &amp;lt;body&amp;gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+        <target>Viewport</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Вы можете переписать содержимое viewport (по умолчанию &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+        <target>Тэг title (название)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootPageTitle}}&lt;/em&gt;).</source>
+        <target>Вы можете переписать тэг title (название) (по умолчанию &lt;em&gt;{{page::pageTitle}} - {{page::rootPageTitle}}&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.0">
+        <source>Body onload</source>
+        <target>Body onload</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.onload.1">
+        <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Вы можете добавить событие &lt;em&gt;onload&lt;/em&gt; для тега body.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.0">
+        <source>Additional &amp;lt;head&amp;gt; tags</source>
+        <target>Дополнительные теги &amp;lt;head&amp;gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.head.1">
+        <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Вы можете добавить дополнительные теги в раздел &amp;lt;head&amp;gt; страницы.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.0">
+        <source>Include jQuery</source>
+        <target>Включать jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addJQuery.1">
+        <source>Include the jQuery library in the layout.</source>
+        <target>Включать библиотеку jQuery в макет.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.0">
+        <source>jQuery source</source>
+        <target>Источник jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jSource.1">
+        <source>Here you can select from where to load the jQuery script.</source>
+        <target>Вы можете выбрать откуда загружать jQuery скрипт.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.0">
+        <source>jQuery templates</source>
+        <target>Шаблоны jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery.1">
+        <source>Here you can select one or more jQuery templates.</source>
+        <target>Вы можете выбрать один или несколько jQuery шаблонов.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.0">
+        <source>Include MooTools</source>
+        <target>Включать MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.addMooTools.1">
+        <source>Include the MooTools library in the layout.</source>
+        <target>Включать библиотеку MooTools в макет.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.0">
+        <source>MooTools source</source>
+        <target>Источник MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mooSource.1">
+        <source>Here you can select from where to load the MooTools scripts.</source>
+        <target>Вы можете выбрать откуда загружать MooTools скрипт.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.0">
+        <source>MooTools templates</source>
+        <target>Шаблоны MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools.1">
+        <source>Here you can select one or more MooTools templates.</source>
+        <target>Вы можете выбрать один или несколько MooTools шаблонов.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.0">
+        <source>Load the image polyfill</source>
+        <target>Загрузить изображение polyfill (полизаполнение)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill.1">
+        <source>Include the image polyfill (&lt;em&gt;respimage.js&lt;/em&gt;) in the layout.</source>
+        <target>Включить изображение polyfill (полизаполнение) (&lt;em&gt;respimage.js&lt;/em&gt;) в макет.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.0">
+        <source>Analytics templates</source>
+        <target>Шаблоны аналитики</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics.1">
+        <source>Here you can activate the analytics templates (e.g. for Google Analytics or Piwik). Note that you have to adjust those templates and add your analytics ID before you can use them!</source>
+        <target>Вы можете активировать шаблоны аналитики (напр. для Google Analytics или Piwik). Обратите внимание, что вы должны настроить эти шаблоны и добавить ID прежде, чем их использовать!</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.0">
+        <source>Custom JavaScript code</source>
+        <target>Пользовательский JavaScript-код</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script.1">
+        <source>The JavaScript code which will be inserted at the bottom of the page.</source>
+        <target>Пользовательский JavaScript-код будет вставлен в нижней части страницы.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.0">
+        <source>Static layout</source>
+        <target>Статический макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static.1">
+        <source>Create a static layout with a fixed width and alignment.</source>
+        <target>Создайте статической макет с фиксированной шириной и выравниванием.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.0">
+        <source>Overall width</source>
+        <target>Общая ширина макета</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.width.1">
+        <source>The overall width will be applied to the wrapper element.</source>
+        <target>Введите общую ширину, которая будет задана элементу wrapper.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.0">
+        <source>Alignment</source>
+        <target>Выравнивание</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.align.1">
+        <source>Please select the alignment of the page.</source>
+        <target>Выберите выравнивание страницы.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.title_legend">
+        <source>Title</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.header_legend">
+        <source>Rows</source>
+        <target>Строки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.column_legend">
+        <source>Columns</source>
+        <target>Колонки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.sections_legend">
+        <source>Custom sections</source>
+        <target>Пользовательские секции</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Веб-шрифты</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.style_legend">
+        <source>Style sheets</source>
+        <target>Таблицы стилей</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill_legend">
+        <source>Responsive images</source>
+        <target>Адаптивные изображения</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.feed_legend">
+        <source>RSS/Atom feeds</source>
+        <target>RSS/Atom-каналы</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.modules_legend">
+        <source>Front end modules</source>
+        <target>Модули внешнего интерфейса</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.expert_legend">
+        <source>Expert settings</source>
+        <target>Экспертные настройки</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.script_legend">
+        <source>JavaScript</source>
+        <target>JavaScript</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.static_legend">
+        <source>Static layout</source>
+        <target>Статический макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jquery_legend">
+        <source>jQuery</source>
+        <target>jQuery</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+        <target>Локальный файл</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN с локальной копией</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.mootools_legend">
+        <source>MooTools</source>
+        <target>MooTools</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_local">
+        <source>Local file</source>
+        <target>Локальный файл</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_googleapis">
+        <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.moo_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN с локальной копией</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.html5">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_strict">
+        <source>XHTML Strict</source>
+        <target>XHTML Strict</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.xhtml_trans">
+        <source>XHTML Transitional</source>
+        <target>XHTML Transitional</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+        <target>Перед wrapper (обёрткой)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.before">
+        <source>After the page header</source>
+        <target>После верхнего колонтитула</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.main">
+        <source>Inside the main column</source>
+        <target>Основная колонка</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.after">
+        <source>Before the page footer</source>
+        <target>Перед нижним колонтитулом</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
+        <target>После wrapper (обёртки)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_styles">
+        <source>Edit the style sheets</source>
+        <target>Редактировать таблицы стилей</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit_module">
+        <source>Edit the module</source>
+        <target>Редактировать модуль</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_google">
+        <source>Google</source>
+        <target>Google</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.analytics_piwik">
+        <source>Piwik</source>
+        <target>Piwik</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.0">
+        <source>New layout</source>
+        <target>Новый макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.new.1">
+        <source>Create a new layout</source>
+        <target>Создать новый макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.0">
+        <source>Layout details</source>
+        <target>Детали макета</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.show.1">
+        <source>Show the details of layout ID %s</source>
+        <target>Показать детали макета ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.0">
+        <source>Edit layout</source>
+        <target>Редактировать макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.edit.1">
+        <source>Edit layout ID %s</source>
+        <target>Редактировать макет ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.0">
+        <source>Move layout</source>
+        <target>Переместить макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.cut.1">
+        <source>Move layout ID %s</source>
+        <target>Переместить макет ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.0">
+        <source>Duplicate layout</source>
+        <target>Дублировать макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.copy.1">
+        <source>Duplicate layout ID %s</source>
+        <target>Дублировать макет ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.0">
+        <source>Delete layout</source>
+        <target>Удалить макет</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.delete.1">
+        <source>Delete layout ID %s</source>
+        <target>Удалить макет ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.0">
+        <source>Edit theme</source>
+        <target>Редактировать тему</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>Редактировать настройки темы</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

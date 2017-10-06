@@ -1,0 +1,218 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_module.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_module.cal_calendar.0">
+        <source>Calendars</source>
+        <target>Kalendere</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_calendar.1">
+        <source>Please select one or more calendars.</source>
+        <target>Vælg en eller flere kalendere.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.0">
+        <source>Shortened view</source>
+        <target>Avkortet visning</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.1">
+        <source>Show events only once even if they span multiple days.</source>
+        <target>Vis kun en begivenhed én gang selv om den strækker sig over flere dage.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.0">
+        <source>Week start day</source>
+        <target>Ugens startdag</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>Her kan du vælge hvilken dag ugen starter.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.0">
+        <source>Event list format</source>
+        <target>Format</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.1">
+        <source>Here you can choose the event list format.</source>
+        <target>Vælg format til begivenhedslisten.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.0">
+        <source>Ignore URL parameters</source>
+        <target>Ignoér URI parametere</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.1">
+        <source>Do not switch the time period based on the date/month/year URL parameters.</source>
+        <target>Byt ikke om på tidsperioden baseret på dag/måned/år URI parameterne.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.0">
+        <source>Sort order</source>
+        <target>Rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>Her kan du vælge sorteringsrækkefølgen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.0">
+        <source>Event reader module</source>
+        <target>Begivendhedsdetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.1">
+        <source>Automatically switch to the event reader if an event has been selected.</source>
+        <target>Skift automatisk til begivenhedsdetaljer når en begivenhed vælges.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.0">
+        <source>Number of events</source>
+        <target>Antal begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.1">
+        <source>Here you can limit the number of events. Enter 0 to show all.</source>
+        <target>Angiv det maksimale antal begivenheder. Angiv 0 for at vise alle.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.0">
+        <source>Event template</source>
+        <target>Begivenhedsskabelon</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.1">
+        <source>Here you can select the event template.</source>
+        <target>Vælg et begivenhedslayout. Du kan tilføje tilpassede layouts til folderen &lt;em&gt;templates&lt;/em&gt;. Filnavne for begivenhedsskabelonfiler begynder med &lt;em&gt;event_&lt;/em&gt; og skal have filendelse &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.0">
+        <source>Calendar template</source>
+        <target>Kalender skabelon</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.1">
+        <source>Here you can select the calendar template.</source>
+        <target>Her kan du vælge kalender skabelon.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.0">
+        <source>Show number of events</source>
+        <target>Vis antallet af begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.1">
+        <source>Show the number of events of each month in the menu.</source>
+        <target>Vis antallet af begivenheder for hver måned i menuen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_list">
+        <source>Event list</source>
+        <target>Begivenhedsliste</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_day">
+        <source>Day</source>
+        <target>Dag</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_month">
+        <source>Month</source>
+        <target>Måned</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_year">
+        <source>Year</source>
+        <target>År</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_all">
+        <source>All events</source>
+        <target>Alle begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_upcoming">
+        <source>Upcoming events</source>
+        <target>Kommende begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_7">
+        <source>+ 1 week</source>
+        <target>+ 1 uge</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_14">
+        <source>+ 2 weeks</source>
+        <target>+ 2 uger</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_30">
+        <source>+ 1 month</source>
+        <target>+ 1 måned</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_90">
+        <source>+ 3 months</source>
+        <target>+ 3 måneder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_180">
+        <source>+ 6 months</source>
+        <target>+ 6 måneder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_365">
+        <source>+ 1 year</source>
+        <target>+ 1 år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_two">
+        <source>+ 2 years</source>
+        <target>+ 2 år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_month">
+        <source>of the current month</source>
+        <target>i indeværende måned</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_year">
+        <source>of the current year</source>
+        <target>i indeværende år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_month">
+        <source>of the next month</source>
+        <target>af næste måned</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_year">
+        <source>of the next year</source>
+        <target>af næste år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_all">
+        <source>All upcoming events</source>
+        <target>Alle kommende begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_past">
+        <source>Past events</source>
+        <target>Forrige begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_7">
+        <source>- 1 week</source>
+        <target>- 1 uge</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_14">
+        <source>- 2 weeks</source>
+        <target>- 2 uger</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_30">
+        <source>- 1 month</source>
+        <target>- 1 måned</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_90">
+        <source>- 3 months</source>
+        <target>- 3 måneder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_180">
+        <source>- 6 months</source>
+        <target>- 6 måneder</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_365">
+        <source>- 1 year</source>
+        <target>- 1 år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_two">
+        <source>- 2 years</source>
+        <target>- 2 år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_month">
+        <source>of the current month</source>
+        <target>i indeværende måned</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_year">
+        <source>of the current year</source>
+        <target>i indeværende år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_month">
+        <source>of the previous month</source>
+        <target>af forrige måned</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_year">
+        <source>of the previous year</source>
+        <target>af forrige år</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_all">
+        <source>All past events</source>
+        <target>Alle forrige begivenheder</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

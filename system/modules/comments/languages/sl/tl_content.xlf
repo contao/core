@@ -1,0 +1,66 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_content.php" source-language="en" target-language="sl">
+    <body>
+      <trans-unit id="tl_content.com_order.0">
+        <source>Sort order</source>
+        <target>Vrstni red</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_order.1">
+        <source>Please choose the sort order.</source>
+        <target>Prosimo, izberite vrstni red razvrščanja</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.0">
+        <source>Items per page</source>
+        <target>Elementov na stran</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.1">
+        <source>The number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Vnesite število komentarjev na strani (0=onemogoči zaznamovanje strani).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.0">
+        <source>Moderate</source>
+        <target>Odobritev</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Odobrite komentarje preden so objavljeni na strani.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Dovoli BB kodo</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Dovoli obiskovalcem oblikovanje komentarjev z BB kodo.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Zahtevaj prijavo za komentiranje</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Komentiranje dovoli samo prijavljenim uporabnikom.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Onemogoči varnostno vprašanje</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>Tukaj lahko onemogočite varnostno vprašanje (ni priporočljivo).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.0">
+        <source>Comments template</source>
+        <target>Postavitev komentarjev</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.1">
+        <source>Here you can select the comments template.</source>
+        <target>Izberite postavitev komentarjev. Dodate lahko postavitev po meri v mapo &lt;em&gt;templates&lt;/em&gt;. Predloga komentarjev se začne z &lt;em&gt;com_&lt;/em&gt; in vsebuje končnico &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.comment_legend">
+        <source>Comment settings</source>
+        <target>Nastavitve komentarjev</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

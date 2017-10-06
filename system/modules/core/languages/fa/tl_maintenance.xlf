@@ -1,0 +1,198 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_maintenance.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_maintenance.cacheTables.0">
+        <source>Purge data</source>
+        <target>پاک‌سازی داده‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheTables.1">
+        <source>Please select the data you want to purge or rebuild.</source>
+        <target>لطفا داده‌هایی را که می‌خواهید پاک‌سازی شوند را انتخاب کنید.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.0">
+        <source>Front end user</source>
+        <target>کاربر بخش کاربری</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.1">
+        <source>Automatically log in a front end user to index protected pages.</source>
+        <target>ورود خودکار کاربر بخش کاربری برای اندیکس کردن برگه‌ها حفاظت شده.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.job">
+        <source>Job</source>
+        <target>وظیفه</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.description">
+        <source>Description</source>
+        <target>شرح</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.clearCache">
+        <source>Purge data</source>
+        <target>پاک‌سازی داده‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheCleared">
+        <source>The data has been purged</source>
+        <target>داده‌ها پاک‌سازی شدند</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdate">
+        <source>Live Update</source>
+        <target>به‌روزرسانی لایو</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdateId">
+        <source>Live Update ID</source>
+        <target>شناسه به‌روزرسانی لایو</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toLiveUpdate">
+        <source>Go to the Live Update</source>
+        <target>رفتن به به‌روزرسانی لایو</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.upToDate">
+        <source>Your Contao version %s is up to date</source>
+        <target>کانتائو نسخه %s شما به‌روز است</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.newVersion">
+        <source>A newer Contao version %s is available</source>
+        <target>کانتائو نسخه جدیدتر %s موجود است</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.notWriteable">
+        <source>The temporary folder (system/tmp) is not writeable</source>
+        <target>پوشه موقت (system/tmp) قابل نوشتن نمی‌باشد</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.changelog">
+        <source>View the change log</source>
+        <target>مشاهده ثبت تغییر</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.runLiveUpdate">
+        <source>Run the update</source>
+        <target>اجرای به‌روزرسانی</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toc">
+        <source>Content of the update archive</source>
+        <target>محتوای بایگانی به‌روزرسانی</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.backup">
+        <source>Backuped files</source>
+        <target>پرونده‌های پشتیبانی</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.update">
+        <source>Updated files</source>
+        <target>پرونده‌های به‌روزرسانی</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.searchIndex">
+        <source>Rebuild the search index</source>
+        <target>بازسازی ایندکس جستجو</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexSubmit">
+        <source>Rebuild index</source>
+        <target>بازسازی نمایه</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.noSearchable">
+        <source>No searchable pages found</source>
+        <target>برگه‌ قابل جستجویی پیدا نشد</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexNote">
+        <source>Please wait for the page to load completely before you proceed!</source>
+        <target>لطفا صبر کنید تا برگه به طور کامل بارگذاری شود قبل از اینکه شما ادامه دهید!</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexLoading">
+        <source>Please wait while the search index is being rebuilt.</source>
+        <target>لطفا تا زمانی که فهرست جستجو ساخته می‌شود صبر نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexComplete">
+        <source>The search index has been rebuilt. You can now proceed.</source>
+        <target>فهرست جستجو ساخته شد. می‌توانید ادامه دهید.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.updateHelp">
+        <source>Please enter your %s here.</source>
+        <target>لطفا %s خودتان را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.0">
+        <source>Purge the search index</source>
+        <target>پاکسازی نمایه جستجو</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.1">
+        <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
+        <target>جدول‌های &lt;em&gt;tl_search&lt;/em&gt; و &lt;em&gt;tl_search_index&lt;/em&gt; را کوتاه می‌کند. پس، شما باید فهرست جستجو را دوباره بسازید (بالا را ببینید).</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.0">
+        <source>Purge the undo table</source>
+        <target>پاکسازی جدول بازگردانی</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.1">
+        <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
+        <target>جدول &lt;em&gt;tl_undo&lt;/em&gt; که رکوردهای حذف شده را نگهداری می‌کند را کوتاه می‌کند. این کار به صورت همیشگی این رکوردها را پاک می‌کند.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.0">
+        <source>Purge the version table</source>
+        <target>پاک‌سازی جدول نسخه</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.1">
+        <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
+        <target>بریدن جدول &lt;em&gt;tl_version&lt;/em&gt; که نسخه‌های قبلی یک رکورد را ذخیره می‌کند. این عمل این رکوردها را برای همیشه پاک خواهد کرد.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.0">
+        <source>Purge the system log</source>
+        <target>پاک‌سازی گزارش‌های سامانه</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.1">
+        <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>جدول که همه ورودی‌های وقایع سامانه را ذخیره می‌کند را حذف می‌کند. این کار به صورت همیشگی این رکوردها را پاک می‌کند.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.0">
+        <source>Purge the image cache</source>
+        <target>پاکسازی نهان‌گاه تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.1">
+        <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>تصاویری را که به صورت خودکار تولید شده‌اند را حذف  و نهانگاه برگه را را پالایش می‌کند، بنابراین پیوندی برای منابع حذف شده وجود ندارد.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.0">
+        <source>Purge the script cache</source>
+        <target>پاکسازی نهان‌گاه اسکریپت</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.1">
+        <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
+        <target>پرونده‌های .css و .js را که به صورت خودکار تولید شده‌اند را حذف و شیوه‌نامه‌های داخلی را بازتولید کرده و سپس نهان‌گاه برگه را پالایش می نماید.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.0">
+        <source>Purge the page cache</source>
+        <target>پاکسازی نهان‌گاه برگه</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.1">
+        <source>Removes the cached versions of the front end pages.</source>
+        <target>نسخه‌های نهان‌گاه برگه‌های بخش کاربری را پاک می‌کند.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+        <target>پاک‌سازی نهانگاه جستجو</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+        <target>نسخه‌های ذخیره شده نتایج جستجو را حذف می‌کند.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.0">
+        <source>Purge the internal cache</source>
+        <target>پاکسازی نهان‌گاه داخلی</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.1">
+        <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
+        <target>نسخه‌های ذخیره شده پرونده‌های DCA و زبان را حذف می‌کند. شما می‌توانید نهان‌گاه داخلی را در تنظیمات مدیریت برای همیشه غیرفعال نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.0">
+        <source>Purge the temp folder</source>
+        <target>پاکسازی پوشه موقت</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.1">
+        <source>Removes the temporary files.</source>
+        <target>حذف پرونده‌های موقت.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.0">
+        <source>Recreate the XML files</source>
+        <target>بازتولید پرونده‌های XML</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.1">
+        <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>پرونده‌های XML (نقشه‌های وب‌سایت و خوراک‌ها) را بازتولید نموده و سپس نهان‌گاه برگه را پالایش می‌نماید، بنابراین پیوندی به منابع حذف شده وجود نخواهد داشت.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

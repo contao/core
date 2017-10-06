@@ -1,0 +1,174 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_style_sheet.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="tl_style_sheet.name.0">
+        <source>Name</source>
+        <target>氏名</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.name.1">
+        <source>Please enter the style sheet name.</source>
+        <target>スタイルシートの名前を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.0">
+        <source>Disable CSS3PIE</source>
+        <target>CSS3PIEを使用しない</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.disablePie.1">
+        <source>Do not include the PIE.htc behavior file (adds CSS3 support to older IE versions).</source>
+        <target>(CSS3サポートを古いバージョンのInternet Exploreに加える)動作ファイルPIE.htcを含めません。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.0">
+        <source>Embed images up to</source>
+        <target>埋め込み画像の最大値</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.embedImages.1">
+        <source>Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.</source>
+        <target>&quot;data: 文字列&quot;の形式でスタイルシートに埋め込む画像の最大のファイルの大きさを指定します。0にするとこの機能を無効にします。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.0">
+        <source>Conditional comment</source>
+        <target>条件付きコメント</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cc.1">
+        <source>Conditional comments allow you to create Internet Explorer specific style sheets (e.g. &lt;em&gt;if lt IE 9&lt;/em&gt;).</source>
+        <target>条件付きコメントによって、Internet Exploreに特定のスタイルシートを作成できます。(例: &lt;em&gt;if lt IE 9&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.0">
+        <source>Media types</source>
+        <target>メディアタイプ</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media.1">
+        <source>Here you can choose the media types the style sheet applies to.</source>
+        <target>スタイルシートを適用するメディアタイプを選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.0">
+        <source>Media query</source>
+        <target>メディアクエリ</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.mediaQuery.1">
+        <source>Here you can define the media type using a media query like &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;. The media types defined above will then be overwritten.</source>
+        <target>&lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;のようなメディアクエリでメディアタイプを設定できます。先に定義したメディアタイプを上書きします。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.0">
+        <source>Global variables</source>
+        <target>広域変数</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars.1">
+        <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>スタイルシートに広域変数を定義できます。(例: &lt;em&gt;$red&lt;/em&gt; → &lt;em&gt;c00&lt;/em&gt; や &lt;em&gt;$margin&lt;/em&gt; → &lt;em&gt;12px&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.0">
+        <source>Source files</source>
+        <target>ソースファイル</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.source.1">
+        <source>Here you can upload one or more .css files to be imported.</source>
+        <target>インポートする1つ以上の.cssファイルをアップロードしてください。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.0">
+        <source>Revision date</source>
+        <target>改訂日</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>最新のリビジョンの日付と時刻</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.title_legend">
+        <source>Name</source>
+        <target>氏名</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
+        <target>専門的な設定</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.media_legend">
+        <source>Media settings</source>
+        <target>メディアの設定</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.vars_legend">
+        <source>Global variables</source>
+        <target>広域変数</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_imported">
+        <source>Style sheet &quot;%s&quot; has been imported.</source>
+        <target>スタイルシート&quot;%s&quot;をインポートしました。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.css_renamed">
+        <source>Style sheet &quot;%s&quot; has been imported as &quot;%s&quot;.</source>
+        <target>スタイルシート&quot;%s&quot;を&quot;%s&quot;としてインポートしました。</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.0">
+        <source>New style sheet</source>
+        <target>新しいスタイルシート</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.new.1">
+        <source>Create a new style sheet</source>
+        <target>新しくスタイルシートを作成</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.0">
+        <source>Style sheet details</source>
+        <target>スタイルシートの詳細</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.show.1">
+        <source>Show the details of style sheet ID %s</source>
+        <target>ID %sのスタイルシートの詳細を表示</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.0">
+        <source>Edit style sheet</source>
+        <target>スタイルシートを編集</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.edit.1">
+        <source>Edit style sheet ID %s</source>
+        <target>ID %sのスタイルシートを編集</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.0">
+        <source>Edit style sheet</source>
+        <target>スタイルシートを変更</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.editheader.1">
+        <source>Edit the style sheet settings</source>
+        <target>このスタイルシートの設定を変更</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.0">
+        <source>Move style sheet</source>
+        <target>スタイルシートを移動</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.cut.1">
+        <source>Move style sheet ID %s</source>
+        <target>ID %sのスタイルシートを移動</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.0">
+        <source>Duplicate style sheet</source>
+        <target>スタイルシートを複製</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.copy.1">
+        <source>Duplicate style sheet ID %s</source>
+        <target>ID %sのスタイルシートを複製</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.0">
+        <source>Delete style sheet</source>
+        <target>スタイルシートを削除</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.delete.1">
+        <source>Delete style sheet ID %s</source>
+        <target>ID %sのスタイルシートを削除</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.0">
+        <source>CSS import</source>
+        <target>CSSをインポート</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.import.1">
+        <source>Import existing CSS files</source>
+        <target>既存のCSSファイルをインポート</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.0">
+        <source>Export style sheet</source>
+        <target>スタイルシートをエクスポート</target>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.1">
+        <source>Export style sheet ID %s</source>
+        <target>ID %sのスタイルシートをエクスポート</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

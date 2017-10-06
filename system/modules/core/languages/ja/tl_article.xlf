@@ -1,0 +1,290 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="tl_article.title.0">
+        <source>Title</source>
+        <target>題名</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title.1">
+        <source>Please enter the article title.</source>
+        <target>アーティクルの題名を入力してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.0">
+        <source>Article alias</source>
+        <target>アーティクルのエイリアス</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.1">
+        <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>アーティクルのエイリアスは、数値のIDの代わりにアーティクルを参照できる、重複しない名前です。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.0">
+        <source>Author</source>
+        <target>作成者</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.1">
+        <source>Here you can change the author of the article.</source>
+        <target>アーティクルの作成者を変更します。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.0">
+        <source>Display in</source>
+        <target>表示先</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.1">
+        <source>Please choose the layout section you want the article to be displayed in.</source>
+        <target>アーティクルを表示したいレイアウトのセクションを選択してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.0">
+        <source>Meta keywords</source>
+        <target>メタキーワード</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.1">
+        <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
+        <target>コンマで区切ったキーワードを入力できます。しかし、(Googleを含む)殆どの検索エンジンでは、もうキーワードは意味を持ちません。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.0">
+        <source>Teaser CSS ID/class</source>
+        <target>ティーザーのCSSのIDとclass</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.1">
+        <source>Here you can set an ID and one or more classes for the teaser element.</source>
+        <target>ティーザーの要素にIDと1つ以上のclassを設定できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.0">
+        <source>Show teaser</source>
+        <target>ティーザーを表示</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.1">
+        <source>Show the article teaser if there are multiple articles.</source>
+        <target>複数のアーティクルがあると、アーティクルのティーザーを表示します。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.0">
+        <source>Article teaser</source>
+        <target>アーティクルのティーザー</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.1">
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>コンテント要素の「アーティクルのティーザー」でもアーティクルのティーザーは表示できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.0">
+        <source>Syndication</source>
+        <target>シンジケーション</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.1">
+        <source>Here you can choose which options are available.</source>
+        <target>利用できるオプションを選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>ゲストだけに表示</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+        <target>メンバーがログインしている場合はアーティクルを表示しない。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.0">
+        <source>Custom article template</source>
+        <target>独自のアーティクルのテンプレート</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.1">
+        <source>Here you can overwrite the default article template.</source>
+        <target>初期設定のアーティクルのテンプレートを上書きできます。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+        <target>アーティクルの保護</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+        <target>アーティクルを特定のメンバーグループだけに表示します。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>許可するメンバーグループ</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+        <target>これらのグループがアーティクルを見ることができます。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.0">
+        <source>CSS ID/class</source>
+        <target>CSSのIDとclass</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>IDと1つ以上のclassを設定できます。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.0">
+        <source>Space in front and after</source>
+        <target>前後の間隔</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.1">
+        <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>アーティクルの前後の間隔をピクセルで入力できます。但し、このようなインラインのスタイルは避けて、スタイルシートで間隔を設定すべきです。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.0">
+        <source>Publish article</source>
+        <target>アーティクルの公開</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.1">
+        <source>Make the article publicly visible on the website.</source>
+        <target>アーティクルをウェブサイトに公開します。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.0">
+        <source>Show from</source>
+        <target>公開の開始日</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.1">
+        <source>Do not show the article on the website before this day.</source>
+        <target>この日より前はアーティクルをウェブサイトに表示しません。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.0">
+        <source>Show until</source>
+        <target>公開の終了日</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.1">
+        <source>Do not show the article on the website on and after this day.</source>
+        <target>この日から後はアーティクルをウェブサイトに表示しません。</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.0">
+        <source>Revision date</source>
+        <target>改訂日</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>最新のリビジョンの日付と時刻</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title_legend">
+        <source>Title and author</source>
+        <target>題名と作成者</target>
+      </trans-unit>
+      <trans-unit id="tl_article.layout_legend">
+        <source>Section and keywords</source>
+        <target>セクションとキーワード</target>
+      </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>シンジケーション</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser_legend">
+        <source>Article teaser</source>
+        <target>アーティクルのティーザー</target>
+      </trans-unit>
+      <trans-unit id="tl_article.template_legend">
+        <source>Template settings</source>
+        <target>テンプレートの設定</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>アクセスの保護</target>
+      </trans-unit>
+      <trans-unit id="tl_article.expert_legend">
+        <source>Expert settings</source>
+        <target>専門的な設定</target>
+      </trans-unit>
+      <trans-unit id="tl_article.publish_legend">
+        <source>Publish settings</source>
+        <target>公開の設定</target>
+      </trans-unit>
+      <trans-unit id="tl_article.print">
+        <source>Print the page</source>
+        <target>ページを印刷</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pdf">
+        <source>Export as PDF</source>
+        <target>PDFにエクスポート</target>
+      </trans-unit>
+      <trans-unit id="tl_article.facebook">
+        <source>Share on Facebook</source>
+        <target>Facebookで共有</target>
+      </trans-unit>
+      <trans-unit id="tl_article.twitter">
+        <source>Share on Twitter</source>
+        <target>Twitterで共有</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
+        <target>Google+で共有</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.0">
+        <source>New article</source>
+        <target>新しい記事</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.1">
+        <source>Create a new article</source>
+        <target>新しくアーティクルを作成</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.0">
+        <source>Article details</source>
+        <target>記事の詳細</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.1">
+        <source>Show the details of article ID %s</source>
+        <target>ID %sのアーティクルの詳細を表示</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.0">
+        <source>Edit article</source>
+        <target>記事を編集</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.1">
+        <source>Edit article ID %s</source>
+        <target>ID %sのアーティクルを編集</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.0">
+        <source>Edit article</source>
+        <target>記事を編集</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.1">
+        <source>Edit the article settings</source>
+        <target>記事の設定を変更</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.0">
+        <source>Duplicate article</source>
+        <target>記事を複製</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.1">
+        <source>Duplicate article ID %s</source>
+        <target>ID %sのアーティクルを複製</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.0">
+        <source>Move article</source>
+        <target>記事を移動</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.1">
+        <source>Move article ID %s</source>
+        <target>ID %sのアーティクルを移動</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.0">
+        <source>Delete article</source>
+        <target>記事を削除</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.1">
+        <source>Delete article ID %s</source>
+        <target>ID %sのアーティクルを削除</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>記事を公開または非公開</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.1">
+        <source>Publish/unpublish article ID %s</source>
+        <target>ID %sのアーティクルを公開または非公開</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.0">
+        <source>Paste after</source>
+        <target>この後に貼り付け</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.1">
+        <source>Paste after article ID %s</source>
+        <target>ID %sのアーティクルの後に貼り付け</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.0">
+        <source>Paste into</source>
+        <target>この中に貼り付け</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>ID %sのページの中に貼り付け</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,2304 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/default.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="ERR.general">
+        <source>An error occurred!</source>
+        <target>发生了一个错误！</target>
+      </trans-unit>
+      <trans-unit id="ERR.unique">
+        <source>This entry already exists!</source>
+        <target>该记录已存在！</target>
+      </trans-unit>
+      <trans-unit id="ERR.mandatory">
+        <source>Field &quot;%s&quot; must not be empty!</source>
+        <target>请填写输入项“%s”！</target>
+      </trans-unit>
+      <trans-unit id="ERR.mdtryNoLabel">
+        <source>This field must not be empty!</source>
+        <target>此域不允许为空！</target>
+      </trans-unit>
+      <trans-unit id="ERR.minlength">
+        <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
+        <target>输入项“%s”至少应该有%d个字符！</target>
+      </trans-unit>
+      <trans-unit id="ERR.maxlength">
+        <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
+        <target>输入项 &quot;%s&quot; 不能超过 %d 个字符</target>
+      </trans-unit>
+      <trans-unit id="ERR.minval">
+        <source>Field &quot;%s&quot; has to be at least %d!</source>
+        <target>字段“%s”至少应该有%d!</target>
+      </trans-unit>
+      <trans-unit id="ERR.maxval">
+        <source>Field &quot;%s&quot; must not be greater than %d!</source>
+        <target>输入项 &quot;%s&quot; 不能大于 %d!</target>
+      </trans-unit>
+      <trans-unit id="ERR.digit">
+        <source>Please enter digits only!</source>
+        <target>输入项只能包含数字！</target>
+      </trans-unit>
+      <trans-unit id="ERR.natural">
+        <source>Please enter natural numbers only!</source>
+        <target>输入项仅为自然熟！</target>
+      </trans-unit>
+      <trans-unit id="ERR.prcnt">
+        <source>Please enter a percentage between 0 and 100!</source>
+        <target>百分比应该在0~100之间！</target>
+      </trans-unit>
+      <trans-unit id="ERR.alpha">
+        <source>Please enter alphabetic characters only!</source>
+        <target>输入项只能包含字母！</target>
+      </trans-unit>
+      <trans-unit id="ERR.alnum">
+        <source>Please enter alphanumeric characters only!</source>
+        <target>输入项只能包含字母和数字！</target>
+      </trans-unit>
+      <trans-unit id="ERR.phone">
+        <source>Please enter a valid phone number!</source>
+        <target>请输入合法的电话号码！</target>
+      </trans-unit>
+      <trans-unit id="ERR.extnd">
+        <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
+        <target>由于安全原因，在这里您不能使用=&amp;/()#这些字符！</target>
+      </trans-unit>
+      <trans-unit id="ERR.email">
+        <source>Please enter a valid e-mail address!</source>
+        <target>请输入合法的电子邮件地址！</target>
+      </trans-unit>
+      <trans-unit id="ERR.emails">
+        <source>There is at least one invalid e-mail address!</source>
+        <target>有至少一个无效的电子邮件地址！</target>
+      </trans-unit>
+      <trans-unit id="ERR.url">
+        <source>Please enter a valid URL format and encode special characters!</source>
+        <target>请输入合法的URL地址并且将特殊字符进行编码处理！</target>
+      </trans-unit>
+      <trans-unit id="ERR.locale">
+        <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
+        <target>请输入合法的语言地比如&quot;en&quot;或者&quot;en_US&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.language">
+        <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
+        <target>请输入合法的语言代码比如&quot;en&quot;或者&quot;en_US&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.alias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
+        <target>请仅输入文字数字字符和. - _等特殊字符</target>
+      </trans-unit>
+      <trans-unit id="ERR.folderalias">
+        <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
+        <target>请仅输入文字数字字符和. - _等特殊字符</target>
+      </trans-unit>
+      <trans-unit id="ERR.date">
+        <source>Please enter the date as &quot;%s&quot;!</source>
+        <target>请按照“%s”的格式输入日期！</target>
+      </trans-unit>
+      <trans-unit id="ERR.time">
+        <source>Please enter the time as &quot;%s&quot;!</source>
+        <target>请按照“%s”的格式输入时间！</target>
+      </trans-unit>
+      <trans-unit id="ERR.dateTime">
+        <source>Please enter date and time as &quot;%s&quot;!</source>
+        <target>请按照“%s”的格式输入日期时间！</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidDate">
+        <source>Invalid date &quot;%s&quot;!</source>
+        <target>无效日期 &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="ERR.noSpace">
+        <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
+        <target>输入项“%s”不可以包含空格！</target>
+      </trans-unit>
+      <trans-unit id="ERR.filename">
+        <source>The name of at least one uploaded file contains invalid characters or exceeds the maximum length of 255 characters!</source>
+        <target>至少有一个上传文件的文件名包含无效字符或超过255个字符的最大长度</target>
+      </trans-unit>
+      <trans-unit id="ERR.filesize">
+        <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
+        <target>文件上传的最大限制为 %s kB！</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetype">
+        <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
+        <target>“%s”类型的文件被禁止上传！</target>
+      </trans-unit>
+      <trans-unit id="ERR.filepartial">
+        <source>File %s was only partially uploaded!</source>
+        <target>文件%s仅仅有部分被上传！</target>
+      </trans-unit>
+      <trans-unit id="ERR.filewidth">
+        <source>File %s exceeds the maximum image width of %d pixels!</source>
+        <target>图片文件%s的宽度超出了最大限制%d像素！</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileheight">
+        <source>File %s exceeds the maximum image height of %d pixels!</source>
+        <target>图片文件%s的高度超出了最大限制%d像素！</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+        <target>错误%s发生在上传文件%s时！</target>
+      </trans-unit>
+      <trans-unit id="ERR.filetarget">
+        <source>Cannot move %s to %s because the target exists!</source>
+        <target>因目标已经存在，不能移动 %s 到 %s！ </target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidReferer">
+        <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
+        <target>访问被拒绝！当前主机地址(%s)与引用主机地址(%s)不匹配！</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidPass">
+        <source>Invalid password!</source>
+        <target>密码错误！</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordLength">
+        <source>A password has to be at least %d characters long!</source>
+        <target>密码至少应该有%d个字符！</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordName">
+        <source>Your username and password must not be the same!</source>
+        <target>您的用户名和密码不应该相同！</target>
+      </trans-unit>
+      <trans-unit id="ERR.passwordMatch">
+        <source>The passwords did not match!</source>
+        <target>您两次输入的密码不一致！</target>
+      </trans-unit>
+      <trans-unit id="ERR.accountLocked">
+        <source>This account has been locked! You can log in again in %d minutes.</source>
+        <target>当前帐号已经被锁定！请在%d分钟后重新登录。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidLogin">
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>登录失败(注意用户名和密码都区分大小写)</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidColor">
+        <source>Invalid color format!</source>
+        <target>不合法的颜色标识格式！</target>
+      </trans-unit>
+      <trans-unit id="ERR.all_fields">
+        <source>Please select at least one field!</source>
+        <target>请至少选择一个选项！</target>
+      </trans-unit>
+      <trans-unit id="ERR.emptyUpload">
+        <source>Please select at least one file!</source>
+        <target>请至少选择一个文件!</target>
+      </trans-unit>
+      <trans-unit id="ERR.aliasExists">
+        <source>The alias &quot;%s&quot; already exists!</source>
+        <target>页面别名“%s”已经存在！</target>
+      </trans-unit>
+      <trans-unit id="ERR.importFolder">
+        <source>The folder &quot;%s&quot; cannot be imported!</source>
+        <target>无法导入文件夹“%s”！</target>
+      </trans-unit>
+      <trans-unit id="ERR.notWriteable">
+        <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
+        <target>文件 &quot;%s&quot; 不可写入，所以您的更改将不能生效！</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidName">
+        <source>This file or folder name is invalid!</source>
+        <target>文件名或文件夹名非法！</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidFile">
+        <source>The file or folder &quot;%s&quot; is invalid!</source>
+        <target>文件或文件夹 &quot;%s&quot; 非法！</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileExists">
+        <source>The file &quot;%s&quot; already exists!</source>
+        <target>文件 &quot;%s&quot; 已存在！</target>
+      </trans-unit>
+      <trans-unit id="ERR.circularReference">
+        <source>Invalid redirect target (circular reference)!</source>
+        <target>非法的重定向目标（循环引用）！</target>
+      </trans-unit>
+      <trans-unit id="ERR.ie6warning">
+        <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
+        <target>&lt;strong&gt;注意!&lt;/strong&gt; 您的浏览器 %sout of date%s  &lt;strong&gt;您无法使用本网站所有特性&lt;/strong&gt;.</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackEmpty">
+        <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>不具备显式域名的活动网站的首页没有语言后备选项设置，这意味着这些网站仅可使用您在页面设置中定义的那一种语言！使用其他语种的访问者和搜索引擎将无法浏览您的网站。</target>
+      </trans-unit>
+      <trans-unit id="ERR.noFallbackDns">
+        <source>None of the active website root pages for &lt;strong&gt;%s&lt;/strong&gt; has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
+        <target>&lt;strong&gt;%s&lt;/strong&gt;的活动网站首页没有后备语言设置，这意味着这些网站仅可使用您在页面设置中定义的那一种语言！使用其他语种的访问者和搜索引擎将无法浏览您的网站。</target>
+      </trans-unit>
+      <trans-unit id="ERR.multipleFallback">
+        <source>You can only define one website root page per domain as language fallback.</source>
+        <target>每个域名只能定义一个网站跟页面作为语言回退。</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRoot">
+        <source>Top-level pages must be website root pages!</source>
+        <target>顶级页必须是网站根页面！</target>
+      </trans-unit>
+      <trans-unit id="ERR.topLevelRegular">
+        <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
+        <target>有一些不属于站点根页面的页面存在。系统不再支持创建不包含根页面的站点，请确保所有的页面都在一个站点的根页面之下。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidTokenUrl">
+        <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
+        <target>您将要打开的链接未被验证。如果这是您自行点击或者从可信任的人获得此链接，您可以确认以下进程。</target>
+      </trans-unit>
+      <trans-unit id="ERR.version2format">
+        <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
+        <target>该元素仍旧使用旧版本的Contao2 SRC格式。您更新过数据库吗？</target>
+      </trans-unit>
+      <trans-unit id="ERR.form">
+        <source>The form could not be sent</source>
+        <target>表单不能被发送</target>
+      </trans-unit>
+      <trans-unit id="ERR.captcha">
+        <source>Please answer the security question!</source>
+        <target>请回答安全问题!</target>
+      </trans-unit>
+      <trans-unit id="ERR.download">
+        <source>File &quot;%s&quot; is not available for download!</source>
+        <target>文件 &quot;%s&quot; 当前不可下载!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalid">
+        <source>Invalid option value!</source>
+        <target>无效的选项值!</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileNotFoundSync">
+        <source>No database entry found for %s. Please synchronize the file system.</source>
+        <target>没有为%s 发现数据库实体。请同步文件系统。</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>请输入一个Google+的数字ID 或者昵称!</target>
+      </trans-unit>
+      <trans-unit id="ERR.invalidFieldName">
+        <source>Please enter only the following characters: A-Z0-9[]_-</source>
+        <target>请仅输入以下字符: A-Z0-9[]_-</target>
+      </trans-unit>
+      <trans-unit id="SEC.question1">
+        <source>Please add %d and %d.</source>
+        <target>请把%d和%d加起来</target>
+      </trans-unit>
+      <trans-unit id="SEC.question2">
+        <source>What is the sum of %d and %d?</source>
+        <target>%d加%d等于几?</target>
+      </trans-unit>
+      <trans-unit id="SEC.question3">
+        <source>Please calculate %d plus %d.</source>
+        <target>请计算%d乘以%s</target>
+      </trans-unit>
+      <trans-unit id="CTE.texts">
+        <source>Text elements</source>
+        <target>文本元素</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.0">
+        <source>Headline</source>
+        <target>模块标题</target>
+      </trans-unit>
+      <trans-unit id="CTE.headline.1">
+        <source>Generates a headline (h1 - h6).</source>
+        <target>一个独立的简介，由&lt;H1&gt;标签包围</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.0">
+        <source>Text</source>
+        <target>文字</target>
+      </trans-unit>
+      <trans-unit id="CTE.text.1">
+        <source>Generates a rich text element.</source>
+        <target>超链接的文本，您可以附加图片到其中。</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="CTE.html.1">
+        <source>Allows you to add custom HTML code.</source>
+        <target>HTML代码，请注意，为保安全，某些HTML标签被禁用</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.0">
+        <source>List</source>
+        <target>列表</target>
+      </trans-unit>
+      <trans-unit id="CTE.list.1">
+        <source>Generates an ordered or unordered list.</source>
+        <target>有序或者无序的列表</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.0">
+        <source>Table</source>
+        <target>表格</target>
+      </trans-unit>
+      <trans-unit id="CTE.table.1">
+        <source>Generates an optionally sortable table.</source>
+        <target>一个表格</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordion">
+        <source>Accordion</source>
+        <target>手风琴</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.0">
+        <source>Wrapper start</source>
+        <target>封装开始</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStart.1">
+        <source>Generates the opening part of the accordion wrapper.</source>
+        <target>创建可折叠区域的开放部分</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.0">
+        <source>Wrapper stop</source>
+        <target>封套结束</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionStop.1">
+        <source>Generates the closing part of the accordion wrapper.</source>
+        <target>创建可折叠区域的关闭部分</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.0">
+        <source>Single element</source>
+        <target>单独元素</target>
+      </trans-unit>
+      <trans-unit id="CTE.accordionSingle.1">
+        <source>Generates a single accordion element.</source>
+        <target>创建一条单独的手风琴元素。</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.0">
+        <source>Code</source>
+        <target>代码</target>
+      </trans-unit>
+      <trans-unit id="CTE.code.1">
+        <source>Highlights code snippets and prints them to the screen.</source>
+        <target>经过处理的代码片段，只能显示为文本，不能被执行</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+        <target>Markdown</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+        <target>从markdown文本生成HTML代码。</target>
+      </trans-unit>
+      <trans-unit id="CTE.slider">
+        <source>Content slider</source>
+        <target>内容滑块</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.0">
+        <source>Wrapper start</source>
+        <target>封装开始</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStart.1">
+        <source>Generates the opening part of the slider wrapper.</source>
+        <target>创建滑动区域的开放部分</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.0">
+        <source>Wrapper stop</source>
+        <target>封套结束</target>
+      </trans-unit>
+      <trans-unit id="CTE.sliderStop.1">
+        <source>Generates the closing part of the slider wrapper.</source>
+        <target>创建滑动区域的关闭部分</target>
+      </trans-unit>
+      <trans-unit id="CTE.links">
+        <source>Link elements</source>
+        <target>链接元素</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.0">
+        <source>Hyperlink</source>
+        <target>超链接</target>
+      </trans-unit>
+      <trans-unit id="CTE.hyperlink.1">
+        <source>Generates a link to another website.</source>
+        <target>一个连接到其他网址的超链接</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.0">
+        <source>Top link</source>
+        <target>Top链接</target>
+      </trans-unit>
+      <trans-unit id="CTE.toplink.1">
+        <source>Generates a link to jump to the top of the page.</source>
+        <target>一个指向页面顶部的链接</target>
+      </trans-unit>
+      <trans-unit id="CTE.media">
+        <source>Media elements</source>
+        <target>媒体元素</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.0">
+        <source>Image</source>
+        <target>图片</target>
+      </trans-unit>
+      <trans-unit id="CTE.image.1">
+        <source>Generates a stand-alone image.</source>
+        <target>单张图片</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.0">
+        <source>Gallery</source>
+        <target>图库</target>
+      </trans-unit>
+      <trans-unit id="CTE.gallery.1">
+        <source>Generates a lightbox image gallery.</source>
+        <target>包括多个缩略图，点击可查看全尺寸大图</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.0">
+        <source>Video/audio</source>
+        <target>视频/音频</target>
+      </trans-unit>
+      <trans-unit id="CTE.player.1">
+        <source>Generates a video or audio player.</source>
+        <target>生成一个视频或音频播放器。</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.0">
+        <source>YouTube</source>
+        <target>YouTube</target>
+      </trans-unit>
+      <trans-unit id="CTE.youtube.1">
+        <source>Adds a YouTube video.</source>
+        <target>添加一个YouTube视频。</target>
+      </trans-unit>
+      <trans-unit id="CTE.files">
+        <source>File elements</source>
+        <target>文件元素</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.0">
+        <source>Download</source>
+        <target>下载</target>
+      </trans-unit>
+      <trans-unit id="CTE.download.1">
+        <source>Generates a link to download a file.</source>
+        <target>点击可下载的一个文件附件</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.0">
+        <source>Downloads</source>
+        <target>多个下载</target>
+      </trans-unit>
+      <trans-unit id="CTE.downloads.1">
+        <source>Generates multiple links to download files.</source>
+        <target>点击可下载的多个文件附件</target>
+      </trans-unit>
+      <trans-unit id="CTE.includes">
+        <source>Include elements</source>
+        <target>包含元素</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.0">
+        <source>Article</source>
+        <target>文章</target>
+      </trans-unit>
+      <trans-unit id="CTE.article.1">
+        <source>Includes another article.</source>
+        <target>在一篇文章中包括另一篇文章</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.0">
+        <source>Content element</source>
+        <target>别名</target>
+      </trans-unit>
+      <trans-unit id="CTE.alias.1">
+        <source>Includes another content element.</source>
+        <target>包括来自其他文章的内容元素</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.0">
+        <source>Form</source>
+        <target>表单</target>
+      </trans-unit>
+      <trans-unit id="CTE.form.1">
+        <source>Includes a form.</source>
+        <target>在文章中包含一个表单</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.0">
+        <source>Module</source>
+        <target>模组</target>
+      </trans-unit>
+      <trans-unit id="CTE.module.1">
+        <source>Includes a front end module.</source>
+        <target>包含一个模组到文章中，比如文章导航或者Flash影片</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.0">
+        <source>Article teaser</source>
+        <target>文章摘要</target>
+      </trans-unit>
+      <trans-unit id="CTE.teaser.1">
+        <source>Displays the teaser text of an article.</source>
+        <target>显示文章的简短摘要</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.0">
+        <source>Regular page</source>
+        <target>普通页面</target>
+      </trans-unit>
+      <trans-unit id="PTY.regular.1">
+        <source>A regular page contains articles and content elements. It is the default page type.</source>
+        <target>普通页面包含有文章以及内容元素，是默认的页面类型。</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.0">
+        <source>External redirect</source>
+        <target>重定向至外部URL地址</target>
+      </trans-unit>
+      <trans-unit id="PTY.redirect.1">
+        <source>This type of page automatically redirects visitors to an external website. It works like a hyperlink.</source>
+        <target>这个页面会自动将访问重定向到外部的URL地址，就像一个超链接。</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.0">
+        <source>Internal redirect</source>
+        <target>转向另外的页面</target>
+      </trans-unit>
+      <trans-unit id="PTY.forward.1">
+        <source>This type of page automatically forwards visitors to another page within the site structure.</source>
+        <target>这种页面类型会自动地将访问者的请求转向同一网站的另外一个页面，这种转向是使用页面ID或者是页面别名来完成的。</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.0">
+        <source>Website root</source>
+        <target>新网站的主页面</target>
+      </trans-unit>
+      <trans-unit id="PTY.root.1">
+        <source>This type of page marks the starting point of a new website within the site structure.</source>
+        <target>如果你想在同一个页面结构中创建一个以上的网站，那么可以在这里创建一个引导页面，这个页面可以包含一个网络选择入口，或是一个语言选择入口，或是两者兼而有之。</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.0">
+        <source>403 Access denied</source>
+        <target>HTTP错误403(访问被拒绝)</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_403.1">
+        <source>If a user requests a protected page without permission, a 403 error page will be loaded instead.</source>
+        <target>当用户在未被授权的情况下访问一个被保护的页面时，系统将会显示此页面。这个页面将只会在其所属的网站中生效。</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.0">
+        <source>404 Page not found</source>
+        <target>HTTP错误404(页面未找到)</target>
+      </trans-unit>
+      <trans-unit id="PTY.error_404.1">
+        <source>If a user requests a non-existent page, a 404 error page will be loaded instead.</source>
+        <target>当用户访问一个不存在的页面是，系统将会显示此页面。这个页面将只会在其所属的网站中生效。</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.0">
+        <source>File operation permissions</source>
+        <target>文件操作权限</target>
+      </trans-unit>
+      <trans-unit id="FOP.fop.1">
+        <source>Here you can select the file operations you want to allow.</source>
+        <target>文件操作权限仅应用于可用的文件夹。</target>
+      </trans-unit>
+      <trans-unit id="FOP.f1">
+        <source>Upload files to the server</source>
+        <target>将文件上传至服务器</target>
+      </trans-unit>
+      <trans-unit id="FOP.f2">
+        <source>Edit, copy or move files and folders</source>
+        <target>编辑、复制或移动文件和文件夹</target>
+      </trans-unit>
+      <trans-unit id="FOP.f3">
+        <source>Delete single files and empty folders</source>
+        <target>删除文件并清空文件夹</target>
+      </trans-unit>
+      <trans-unit id="FOP.f4">
+        <source>Delete folders including all files and subfolders (!)</source>
+        <target>删除文件夹及其文件和子文件夹(!)</target>
+      </trans-unit>
+      <trans-unit id="FOP.f5">
+        <source>Edit files in the source editor</source>
+        <target>在代码编辑器中编辑文件</target>
+      </trans-unit>
+      <trans-unit id="FOP.f6">
+        <source>Synchronize the file system with the database</source>
+        <target>与数据库系统同步文件系统</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editpage">
+        <source>Edit page</source>
+        <target>编辑页面</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editnavigation">
+        <source>Edit page hierarchy</source>
+        <target>调整页面结构</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletepage">
+        <source>Delete page</source>
+        <target>删除页面</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.editarticles">
+        <source>Edit articles</source>
+        <target>编辑文章</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.movearticles">
+        <source>Edit article hierarchy</source>
+        <target>调整文章结构</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.deletearticles">
+        <source>Delete articles</source>
+        <target>删除文章</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cuser">
+        <source>Owner</source>
+        <target>用户</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cgroup">
+        <source>Group</source>
+        <target>组</target>
+      </trans-unit>
+      <trans-unit id="CHMOD.cworld">
+        <source>Everybody</source>
+        <target>每个用户</target>
+      </trans-unit>
+      <trans-unit id="DAYS.0">
+        <source>Sunday</source>
+        <target>星期日</target>
+      </trans-unit>
+      <trans-unit id="DAYS.1">
+        <source>Monday</source>
+        <target>星期一</target>
+      </trans-unit>
+      <trans-unit id="DAYS.2">
+        <source>Tuesday</source>
+        <target>星期二</target>
+      </trans-unit>
+      <trans-unit id="DAYS.3">
+        <source>Wednesday</source>
+        <target>星期三</target>
+      </trans-unit>
+      <trans-unit id="DAYS.4">
+        <source>Thursday</source>
+        <target>星期四</target>
+      </trans-unit>
+      <trans-unit id="DAYS.5">
+        <source>Friday</source>
+        <target>星期五</target>
+      </trans-unit>
+      <trans-unit id="DAYS.6">
+        <source>Saturday</source>
+        <target>星期六</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.0">
+        <source>Sun</source>
+        <target>日</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.1">
+        <source>Mon</source>
+        <target>一</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.2">
+        <source>Tue</source>
+        <target>二</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.3">
+        <source>Wed</source>
+        <target>三</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.4">
+        <source>Thu</source>
+        <target>四</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.5">
+        <source>Fri</source>
+        <target>五</target>
+      </trans-unit>
+      <trans-unit id="DAYS_SHORT.6">
+        <source>Sat</source>
+        <target>六</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.0">
+        <source>January</source>
+        <target>一月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.1">
+        <source>February</source>
+        <target>二月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.2">
+        <source>March</source>
+        <target>三月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.3">
+        <source>April</source>
+        <target>四月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.4">
+        <source>May</source>
+        <target>五月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.5">
+        <source>June</source>
+        <target>六月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.6">
+        <source>July</source>
+        <target>七月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.7">
+        <source>August</source>
+        <target>八月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.8">
+        <source>September</source>
+        <target>九月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.9">
+        <source>October</source>
+        <target>十月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.10">
+        <source>November</source>
+        <target>十一月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS.11">
+        <source>December</source>
+        <target>十二月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.0">
+        <source>Jan</source>
+        <target>1月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.1">
+        <source>Feb</source>
+        <target>2月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.2">
+        <source>Mar</source>
+        <target>3月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.3">
+        <source>Apr</source>
+        <target>4月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.4">
+        <source>May</source>
+        <target>五月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.5">
+        <source>Jun</source>
+        <target>6月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.6">
+        <source>Jul</source>
+        <target>7月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.7">
+        <source>Aug</source>
+        <target>8月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.8">
+        <source>Sep</source>
+        <target>9月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.9">
+        <source>Oct</source>
+        <target>10月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.10">
+        <source>Nov</source>
+        <target>11月</target>
+      </trans-unit>
+      <trans-unit id="MONTHS_SHORT.11">
+        <source>Dec</source>
+        <target>12月</target>
+      </trans-unit>
+      <trans-unit id="MSC.dayShortLength">
+        <source>3</source>
+        <target>3</target>
+      </trans-unit>
+      <trans-unit id="MSC.monthShortLength">
+        <source>3</source>
+        <target>3</target>
+      </trans-unit>
+      <trans-unit id="MSC.weekOffset">
+        <source>0</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="MSC.titleFormat">
+        <source>%B %d%o, %Y</source>
+        <target>l, dS of F Y</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.0">
+        <source>Link target</source>
+        <target>目标URL地址</target>
+      </trans-unit>
+      <trans-unit id="MSC.url.1">
+        <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
+        <target>请输入完整的目标URL地址，包含网络协议名(例如：&lt;em&gt;http://www.domain.com&lt;/em&gt;)。要指向一个E-mail地址，请输入&lt;em&gt;mailto:name@domain.com&lt;/em&gt;。你也可以使用预定义的插入标签(例如：&lt;em&gt;link_url&lt;/em&gt;)。</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.0">
+        <source>Open in new window</source>
+        <target>在新的浏览器窗口中打开</target>
+      </trans-unit>
+      <trans-unit id="MSC.target.1">
+        <source>Open the link in a new browser window.</source>
+        <target>如果你选择此选项，目标URL地址将在新浏览器窗口中被打开。</target>
+      </trans-unit>
+      <trans-unit id="MSC.textDirection">
+        <source>ltr</source>
+        <target>ltr</target>
+      </trans-unit>
+      <trans-unit id="MSC.decimalSeparator">
+        <source>.</source>
+        <target>.</target>
+      </trans-unit>
+      <trans-unit id="MSC.thousandsSeparator">
+        <source>,</source>
+        <target>,</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.0">
+        <source>Separator</source>
+        <target>分隔符</target>
+      </trans-unit>
+      <trans-unit id="MSC.separator.1">
+        <source>Please choose a field delimiter.</source>
+        <target>请选择用于分隔值得字符。</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.0">
+        <source>Source files</source>
+        <target>源文件</target>
+      </trans-unit>
+      <trans-unit id="MSC.source.1">
+        <source>Please upload the CSV files to be imported.</source>
+        <target>请上传要导入的CSV文件。</target>
+      </trans-unit>
+      <trans-unit id="MSC.comma">
+        <source>Comma</source>
+        <target>逗号</target>
+      </trans-unit>
+      <trans-unit id="MSC.semicolon">
+        <source>Semicolon</source>
+        <target>分号</target>
+      </trans-unit>
+      <trans-unit id="MSC.tabulator">
+        <source>Tabulator</source>
+        <target>制表符</target>
+      </trans-unit>
+      <trans-unit id="MSC.linebreak">
+        <source>Line break</source>
+        <target>换行符</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.0">
+        <source>CSV import</source>
+        <target>CSV导入</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_import.1">
+        <source>Import list items from a CSV file</source>
+        <target>从CSV文件导入列表项目</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_copy">
+        <source>Duplicate the element</source>
+        <target>复制此元素</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_up">
+        <source>Move the element one position up</source>
+        <target>向上移动元素一个位置</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_down">
+        <source>Move the element one position down</source>
+        <target>向下移动元素一个位置</target>
+      </trans-unit>
+      <trans-unit id="MSC.lw_delete">
+        <source>Delete the element</source>
+        <target>删除此元素</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.0">
+        <source>CSV import</source>
+        <target>CSV导入</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_import.1">
+        <source>Import table items from a CSV file</source>
+        <target>从CSV文件导入表格项目</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_expand">
+        <source>Increase the input field size</source>
+        <target>增加输入域大小</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_shrink">
+        <source>Decrease the input field size</source>
+        <target>减少输入域大小</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rcopy">
+        <source>Duplicate the row</source>
+        <target>复制此行</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rup">
+        <source>Move the row one position up</source>
+        <target>向上移动一行</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdown">
+        <source>Move the row one position down</source>
+        <target>向下移动一行</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_rdelete">
+        <source>Delete the row</source>
+        <target>删除此行</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_ccopy">
+        <source>Duplicate the column</source>
+        <target>复制此列</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmovel">
+        <source>Move the column one position left</source>
+        <target>向左移动一列</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cmover">
+        <source>Move the column one position right</source>
+        <target>向右移动一列</target>
+      </trans-unit>
+      <trans-unit id="MSC.tw_cdelete">
+        <source>Delete the column</source>
+        <target>删除此列</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_copy">
+        <source>Duplicate the row</source>
+        <target>复制此行</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_up">
+        <source>Move the row one position up</source>
+        <target>向上移动一行</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_down">
+        <source>Move the row one position down</source>
+        <target>向下移动一行</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_delete">
+        <source>Delete the row</source>
+        <target>删除此行</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_value">
+        <source>Value</source>
+        <target>值</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_label">
+        <source>Label</source>
+        <target>标签</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_key">
+        <source>Key</source>
+        <target>键值</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_default">
+        <source>Default</source>
+        <target>默认的</target>
+      </trans-unit>
+      <trans-unit id="MSC.ow_group">
+        <source>Group</source>
+        <target>组</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_copy">
+        <source>Duplicate the row</source>
+        <target>复制此行</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_up">
+        <source>Move the row one position up</source>
+        <target>向上移动一行</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_down">
+        <source>Move the row one position down</source>
+        <target>向下移动一行</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_delete">
+        <source>Delete the row</source>
+        <target>删除此行</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_module">
+        <source>Module</source>
+        <target>模组</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_column">
+        <source>Column</source>
+        <target>列</target>
+      </trans-unit>
+      <trans-unit id="MSC.mw_enable">
+        <source>Enable/disable the module</source>
+        <target>启用/禁用该模块</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_title">
+        <source>Title</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_link">
+        <source>Link</source>
+        <target>链接</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_caption">
+        <source>Caption</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_delete">
+        <source>Delete the language</source>
+        <target>删除此语言</target>
+      </trans-unit>
+      <trans-unit id="MSC.aw_new">
+        <source>Add language</source>
+        <target>添加语言</target>
+      </trans-unit>
+      <trans-unit id="MSC.image_sizes">
+        <source>Predefined dimensions</source>
+        <target>预定义尺寸</target>
+      </trans-unit>
+      <trans-unit id="MSC.relative">
+        <source>Relative dimensions</source>
+        <target>相对尺寸</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.0">
+        <source>Proportional</source>
+        <target>成比例的</target>
+      </trans-unit>
+      <trans-unit id="MSC.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>图片的长边将被调整到指定尺寸，图片大小也相应地进行整体调整。</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.0">
+        <source>Fit the box</source>
+        <target>适合盒子大小</target>
+      </trans-unit>
+      <trans-unit id="MSC.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>图片的短边调整到给定的尺寸，按比例调整图片大小。</target>
+      </trans-unit>
+      <trans-unit id="MSC.exact.0">
+        <source>Exact dimensions</source>
+        <target>精确尺寸</target>
+      </trans-unit>
+      <trans-unit id="MSC.exact.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>图片会按照指定的尺寸进行调整，该图片会被裁切。</target>
+      </trans-unit>
+      <trans-unit id="MSC.crop.0">
+        <source>Important part</source>
+        <target>重要部分</target>
+      </trans-unit>
+      <trans-unit id="MSC.crop.1">
+        <source>Preserves the important part of an image as specified in the file manager.</source>
+        <target>将图片的指定重要部分保存在文件管理器.</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.0">
+        <source>Left | Top</source>
+        <target>左|上</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_top.1">
+        <source>Preserves the left part of a landscape image and the top part of a portrait image.</source>
+        <target>保留横向图片的左侧部分和纵向图片的顶部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.0">
+        <source>Center | Top</source>
+        <target>中|上</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_top.1">
+        <source>Preserves the center part of a landscape image and the top part of a portrait image.</source>
+        <target>保留横向图片的中部和纵向图片的顶部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.0">
+        <source>Right | Top</source>
+        <target>右|上</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_top.1">
+        <source>Preserves the right part of a landscape image and the top part of a portrait image.</source>
+        <target>保留横向图片的右侧部分和纵向图片的顶部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.0">
+        <source>Left | Center</source>
+        <target>左|中</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_center.1">
+        <source>Preserves the left part of a landscape image and the center part of a portrait image.</source>
+        <target>保留横向图片的左侧部分和纵向图片的中部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.0">
+        <source>Center | Center</source>
+        <target>中|中</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_center.1">
+        <source>Preserves the center part of a landscape image and the center part of a portrait image.</source>
+        <target>保留横向图片的中部和纵向图片的中部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.0">
+        <source>Right | Center</source>
+        <target>右|中</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_center.1">
+        <source>Preserves the right part of a landscape image and the center part of a portrait image.</source>
+        <target>保留横向图片的右侧部分和纵向图片的中部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.0">
+        <source>Left | Bottom</source>
+        <target>左|下</target>
+      </trans-unit>
+      <trans-unit id="MSC.left_bottom.1">
+        <source>Preserves the left part of a landscape image and the bottom part of a portrait image.</source>
+        <target>保留横向图片的左侧部分和纵向图片的底部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.0">
+        <source>Center | Bottom</source>
+        <target>中|下</target>
+      </trans-unit>
+      <trans-unit id="MSC.center_bottom.1">
+        <source>Preserves the center part of a landscape image and the bottom part of a portrait image.</source>
+        <target>保留横向图片的中部和纵向图片的底部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.0">
+        <source>Right | Bottom</source>
+        <target>右|下</target>
+      </trans-unit>
+      <trans-unit id="MSC.right_bottom.1">
+        <source>Preserves the right part of a landscape image and the bottom part of a portrait image.</source>
+        <target>保留横向图片的右侧部分和纵向图片的底部。</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.0">
+        <source>ID</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="MSC.id.1">
+        <source>Note that changing the ID can break data integrity!</source>
+        <target>ID是数据表中每一条记录的一个唯一的标识号码，ID通常是系统自动生成的。由于ID通常是用来进行数据关联的，手动改变ID可能会使数据出错。</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.0">
+        <source>Parent ID</source>
+        <target>父ID</target>
+      </trans-unit>
+      <trans-unit id="MSC.pid.1">
+        <source>Note that changing the parent ID can break data integrity!</source>
+        <target>请注意，更改父ID将破环数据的完整性！</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.0">
+        <source>Sorting value</source>
+        <target>排序方式</target>
+      </trans-unit>
+      <trans-unit id="MSC.sorting.1">
+        <source>The sorting value is usually assigned automatically.</source>
+        <target>排序方式通常会自动指定。</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.0">
+        <source>Edit multiple</source>
+        <target>多项编辑</target>
+      </trans-unit>
+      <trans-unit id="MSC.all.1">
+        <source>Edit multiple records at once</source>
+        <target>同时编辑多条记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.0">
+        <source>Override multiple</source>
+        <target>重写多个</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_override.1">
+        <source>Override multiple records at once</source>
+        <target>一次重写多条记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.0">
+        <source>Available fields</source>
+        <target>可用字段</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_fields.1">
+        <source>Please select the fields you want to edit.</source>
+        <target>请选择您要编辑的字段</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.0">
+        <source>Password</source>
+        <target>密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.password.1">
+        <source>Please enter a password.</source>
+        <target>请输入密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.0">
+        <source>Confirmation</source>
+        <target>确认密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirm.1">
+        <source>Please confirm the password.</source>
+        <target>请输入确认密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.0">
+        <source>Date added</source>
+        <target>增加日期</target>
+      </trans-unit>
+      <trans-unit id="MSC.dateAdded.1">
+        <source>Date added: %s</source>
+        <target>增加日期: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+        <target>上一次登录</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+        <target>上一次登录: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
+        <source>Last login</source>
+        <target>上次登录</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.1">
+        <source>Last login: %s</source>
+        <target>上次登录: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginCount">
+        <source>Login attempts</source>
+        <target>尝试登录次数</target>
+      </trans-unit>
+      <trans-unit id="MSC.locked">
+        <source>Locked</source>
+        <target>已锁定</target>
+      </trans-unit>
+      <trans-unit id="MSC.move">
+        <source>Move the item via drag and drop</source>
+        <target>通过拖拽移动记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.0">
+        <source>Move up</source>
+        <target>上移</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_up.1">
+        <source>Move the item one position up</source>
+        <target>将项目上移一个位置</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.0">
+        <source>Move down</source>
+        <target>下移</target>
+      </trans-unit>
+      <trans-unit id="MSC.move_down.1">
+        <source>Move the item one position down</source>
+        <target>将项目下移一个位置</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.0">
+        <source>Files URL</source>
+        <target>文件链接</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticFiles.1">
+        <source>The files URL applies to the &lt;em&gt;files&lt;/em&gt; directory (page speed optimization).</source>
+        <target>这些文件的URL适用于&lt;em&gt;文件&lt;/em&gt;目录 (页面速度优化)。</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.0">
+        <source>Assets URL</source>
+        <target>资产链接</target>
+      </trans-unit>
+      <trans-unit id="MSC.staticPlugins.1">
+        <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
+        <target>这些资料的URL适用于&lt;em&gt;资料&lt;/em&gt; 目录 (页面速度优化)。</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.0">
+        <source>Back end keyboard shortcuts</source>
+        <target>后台键盘快捷键</target>
+      </trans-unit>
+      <trans-unit id="MSC.shortcuts.1">
+        <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://docs.contao.org/books/manual/current/en/02-administration-area/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>了解更多关于使用&lt;a href=&quot;https://docs.contao.org/books/manual/current/en/02-administration-area/keyboard-shortcuts.html&quot; title=&quot;Keyboard shortcuts overview&quot; target=&quot;_blank&quot;&gt;键盘快捷键&lt;/a&gt;来加快你的工作流程。</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.0">
+        <source>Toggle all</source>
+        <target>标记所有</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleAll.1">
+        <source>Expand or collapse all nodes</source>
+        <target>展开或折叠所有节点</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.0">
+        <source>A Contao account has been locked</source>
+        <target>Contao帐号已被锁定</target>
+      </trans-unit>
+      <trans-unit id="MSC.lockedAccount.1">
+        <source>The following Contao account has been locked for security reasons.
+
+Username: %s
+Real name: %s
+Website: %s
+
+The account has been locked for %d minutes, because the user has entered an invalid password three times in a row. After this period of time, the account will be unlocked automatically.
+
+This e-mail has been generated by Contao. You can not reply to it directly.
+</source>
+        <target>因为安全原因以下Contao账号已被禁用：
+
+用户名: %s
+真实姓名: %s
+网站: %s
+
+该账号已被禁用 %d 分钟, 因为用户密码已连续输入错误三次. 在禁用时间过期之后，该账号将自动解锁。
+
+此邮件由Contao自动生成，请不要回复。
+</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.0">
+        <source>Mobile version</source>
+        <target>移动版本</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleMobile.1">
+        <source>Go to the mobile version</source>
+        <target>转到移动版本</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.0">
+        <source>Desktop version</source>
+        <target>桌面版本</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleDesktop.1">
+        <source>Go to the desktop version</source>
+        <target>转到桌面版本</target>
+      </trans-unit>
+      <trans-unit id="MSC.feLink">
+        <source>Go to front end</source>
+        <target>进入前台</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreview">
+        <source>Front end preview</source>
+        <target>前台预览</target>
+      </trans-unit>
+      <trans-unit id="MSC.fePreviewTitle">
+        <source>Preview of the website in a new window</source>
+        <target>在新窗口预览网站</target>
+      </trans-unit>
+      <trans-unit id="MSC.feUser">
+        <source>Front end user</source>
+        <target>网站用户</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTop">
+        <source>Back to top</source>
+        <target>返回顶部</target>
+      </trans-unit>
+      <trans-unit id="MSC.backToTopTitle">
+        <source>Go to the top of the page</source>
+        <target>转到页面顶部</target>
+      </trans-unit>
+      <trans-unit id="MSC.home">
+        <source>Home</source>
+        <target>首页</target>
+      </trans-unit>
+      <trans-unit id="MSC.homeTitle">
+        <source>Back to the back end start page</source>
+        <target>返回后台起始页面</target>
+      </trans-unit>
+      <trans-unit id="MSC.user">
+        <source>User</source>
+        <target>用户</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginTo">
+        <source>Log into %s</source>
+        <target>登录%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.loginBT">
+        <source>Login</source>
+        <target>登录</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBT">
+        <source>Logout</source>
+        <target>注销</target>
+      </trans-unit>
+      <trans-unit id="MSC.logoutBTTitle">
+        <source>Close the current session</source>
+        <target>关闭当前会话</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBT">
+        <source>Go back</source>
+        <target>返回</target>
+      </trans-unit>
+      <trans-unit id="MSC.backBTTitle">
+        <source>Back to the previous page</source>
+        <target>返回前页</target>
+      </trans-unit>
+      <trans-unit id="MSC.cancelBT">
+        <source>Cancel</source>
+        <target>取消</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteConfirm">
+        <source>Do you really want to delete entry ID %s?</source>
+        <target>是否删除ID为%s的记录？</target>
+      </trans-unit>
+      <trans-unit id="MSC.delAllConfirm">
+        <source>Do you really want to delete the selected records?</source>
+        <target>是否删除选中的记录？</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteConfirmFile">
+        <source>Do you really want to delete file or folder %s?</source>
+        <target>是否删除文件或者文件夹%s？</target>
+      </trans-unit>
+      <trans-unit id="MSC.delAllConfirmFile">
+        <source>Do you really want to delete the selected resources?</source>
+        <target>是否删除选中的资源？</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterRecords">
+        <source>Records</source>
+        <target>记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.filterAll">
+        <source>All</source>
+        <target>全部</target>
+      </trans-unit>
+      <trans-unit id="MSC.showRecord">
+        <source>Show the details of record %s</source>
+        <target>显示记录%s的详细信息</target>
+      </trans-unit>
+      <trans-unit id="MSC.editRecord">
+        <source>Edit record %s</source>
+        <target>编辑记录%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.all_info">
+        <source>Edit selected records of table %s</source>
+        <target>编辑表%s中选中的记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.showOnly">
+        <source>Show</source>
+        <target>显示</target>
+      </trans-unit>
+      <trans-unit id="MSC.sortBy">
+        <source>Sort</source>
+        <target>排序</target>
+      </trans-unit>
+      <trans-unit id="MSC.filter">
+        <source>Filter</source>
+        <target>过滤</target>
+      </trans-unit>
+      <trans-unit id="MSC.search">
+        <source>Search</source>
+        <target>搜索</target>
+      </trans-unit>
+      <trans-unit id="MSC.noResult">
+        <source>No records found.</source>
+        <target>无记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.save">
+        <source>Save</source>
+        <target>保存</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNclose">
+        <source>Save and close</source>
+        <target>保存并关闭</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNedit">
+        <source>Save and edit</source>
+        <target>保存后继续编辑</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNback">
+        <source>Save and go back</source>
+        <target>保存后返回</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveNcreate">
+        <source>Save and new</source>
+        <target>保存后新建</target>
+      </trans-unit>
+      <trans-unit id="MSC.continue">
+        <source>Continue</source>
+        <target>继续</target>
+      </trans-unit>
+      <trans-unit id="MSC.close">
+        <source>Close</source>
+        <target>关闭</target>
+      </trans-unit>
+      <trans-unit id="MSC.skipNavigation">
+        <source>Skip navigation</source>
+        <target>跳过引导</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAll">
+        <source>Select all</source>
+        <target>全选</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_new">
+        <source>Change password</source>
+        <target>更改密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_change">
+        <source>Please enter a new password</source>
+        <target>请输入新密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.pw_changed">
+        <source>The password has been updated.</source>
+        <target>密码已被更新</target>
+      </trans-unit>
+      <trans-unit id="MSC.fallback">
+        <source>default</source>
+        <target>默认</target>
+      </trans-unit>
+      <trans-unit id="MSC.view">
+        <source>View in a new window</source>
+        <target>在新窗口中查看</target>
+      </trans-unit>
+      <trans-unit id="MSC.fullsize">
+        <source>Open full size image in a new window</source>
+        <target>在新窗口中打开原始图片</target>
+      </trans-unit>
+      <trans-unit id="MSC.datepicker">
+        <source>Date picker</source>
+        <target>日期选择器</target>
+      </trans-unit>
+      <trans-unit id="MSC.colorpicker">
+        <source>Color picker</source>
+        <target>拾色器(需要JavaScript支持)</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagepicker">
+        <source>Page picker</source>
+        <target>页面选择(需要JavaScript支持)</target>
+      </trans-unit>
+      <trans-unit id="MSC.filepicker">
+        <source>File picker</source>
+        <target>文件选择(需要JavaScript支持)</target>
+      </trans-unit>
+      <trans-unit id="MSC.ppHeadline">
+        <source>Contao pages</source>
+        <target>TYPOlight页面</target>
+      </trans-unit>
+      <trans-unit id="MSC.fpHeadline">
+        <source>Contao files</source>
+        <target>TYPOlight文件</target>
+      </trans-unit>
+      <trans-unit id="MSC.yes">
+        <source>yes</source>
+        <target>是</target>
+      </trans-unit>
+      <trans-unit id="MSC.no">
+        <source>no</source>
+        <target>不</target>
+      </trans-unit>
+      <trans-unit id="MSC.goBack">
+        <source>Go back</source>
+        <target>返回</target>
+      </trans-unit>
+      <trans-unit id="MSC.reload">
+        <source>Reload</source>
+        <target>重新加载</target>
+      </trans-unit>
+      <trans-unit id="MSC.above">
+        <source>above</source>
+        <target>上</target>
+      </trans-unit>
+      <trans-unit id="MSC.below">
+        <source>below</source>
+        <target>下</target>
+      </trans-unit>
+      <trans-unit id="MSC.date">
+        <source>Date</source>
+        <target>日期</target>
+      </trans-unit>
+      <trans-unit id="MSC.tstamp">
+        <source>Revision date</source>
+        <target>修改日期</target>
+      </trans-unit>
+      <trans-unit id="MSC.entry">
+        <source>%s entry</source>
+        <target>%s条记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.entries">
+        <source>%s entries</source>
+        <target>%s条记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.files">
+        <source>%s file(s)</source>
+        <target>%s 个文件</target>
+      </trans-unit>
+      <trans-unit id="MSC.left">
+        <source>left</source>
+        <target>左</target>
+      </trans-unit>
+      <trans-unit id="MSC.center">
+        <source>center</source>
+        <target>中</target>
+      </trans-unit>
+      <trans-unit id="MSC.right">
+        <source>right</source>
+        <target>右</target>
+      </trans-unit>
+      <trans-unit id="MSC.justify">
+        <source>justified</source>
+        <target>对齐</target>
+      </trans-unit>
+      <trans-unit id="MSC.filetree">
+        <source>File system</source>
+        <target>文件系统</target>
+      </trans-unit>
+      <trans-unit id="MSC.male">
+        <source>Male</source>
+        <target>男</target>
+      </trans-unit>
+      <trans-unit id="MSC.female">
+        <source>Female</source>
+        <target>女</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileSize">
+        <source>File size</source>
+        <target>文件大小</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileCreated">
+        <source>Created</source>
+        <target>创建</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileModified">
+        <source>Last modified</source>
+        <target>上次修改</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileAccessed">
+        <source>Last accessed</source>
+        <target>上次访问</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileDownload">
+        <source>Download the file</source>
+        <target>下载文件</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>唯一ID</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileImageSize">
+        <source>Width/height in pixel</source>
+        <target>以像素表示的宽度/高度</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePath">
+        <source>Relative path</source>
+        <target>相对路径</target>
+      </trans-unit>
+      <trans-unit id="MSC.version">
+        <source>Version</source>
+        <target>版本</target>
+      </trans-unit>
+      <trans-unit id="MSC.restore">
+        <source>Restore</source>
+        <target>撤销</target>
+      </trans-unit>
+      <trans-unit id="MSC.backendModules">
+        <source>Back end modules</source>
+        <target>后台模组</target>
+      </trans-unit>
+      <trans-unit id="MSC.welcomeTo">
+        <source>%s back end</source>
+        <target>%s后台</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateVersion">
+        <source>Contao version %s available</source>
+        <target>TYPOlight新版本%s可用</target>
+      </trans-unit>
+      <trans-unit id="MSC.wordWrap">
+        <source>Word wrap</source>
+        <target>自动换行</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveAlert">
+        <source>ATTENTION! You will lose any unsaved changes. Continue?</source>
+        <target>注意！您将丢失所有未保存的更改，是否继续？</target>
+      </trans-unit>
+      <trans-unit id="MSC.toggleNodes">
+        <source>Toggle all nodes</source>
+        <target>标记所有节点</target>
+      </trans-unit>
+      <trans-unit id="MSC.expandNode">
+        <source>Expand node</source>
+        <target>展开节点</target>
+      </trans-unit>
+      <trans-unit id="MSC.collapseNode">
+        <source>Collapse node</source>
+        <target>收起节点</target>
+      </trans-unit>
+      <trans-unit id="MSC.loadingData">
+        <source>Loading data</source>
+        <target>加载数据</target>
+      </trans-unit>
+      <trans-unit id="MSC.deleteSelected">
+        <source>Delete</source>
+        <target>删除选中项</target>
+      </trans-unit>
+      <trans-unit id="MSC.editSelected">
+        <source>Edit</source>
+        <target>编辑选中项</target>
+      </trans-unit>
+      <trans-unit id="MSC.overrideSelected">
+        <source>Override</source>
+        <target>覆盖</target>
+      </trans-unit>
+      <trans-unit id="MSC.moveSelected">
+        <source>Move</source>
+        <target>移动</target>
+      </trans-unit>
+      <trans-unit id="MSC.copySelected">
+        <source>Copy</source>
+        <target>拷贝</target>
+      </trans-unit>
+      <trans-unit id="MSC.aliasSelected">
+        <source>Generate aliases</source>
+        <target>生成别名</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelected">
+        <source>Change selection</source>
+        <target>更改选项</target>
+      </trans-unit>
+      <trans-unit id="MSC.resetSelected">
+        <source>Reset selection</source>
+        <target>重置选项</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePicker">
+        <source>Switch to file picker</source>
+        <target>切换到文件选择器</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePicker">
+        <source>Switch to page picker</source>
+        <target>切换到页面选择器</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileManager">
+        <source>Open the file manager</source>
+        <target>打开文件管理器</target>
+      </trans-unit>
+      <trans-unit id="MSC.pageManager">
+        <source>Modify the site structure</source>
+        <target>修改站点结构</target>
+      </trans-unit>
+      <trans-unit id="MSC.filePickerHome">
+        <source>Back to the file picker</source>
+        <target>返回文件选择器</target>
+      </trans-unit>
+      <trans-unit id="MSC.pagePickerHome">
+        <source>Back to the page picker</source>
+        <target>返回页面选择器</target>
+      </trans-unit>
+      <trans-unit id="MSC.pickerNoSelection">
+        <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>请在关闭对话框之前返回页面或文件选择器选择。</target>
+      </trans-unit>
+      <trans-unit id="MSC.systemMessages">
+        <source>System messages</source>
+        <target>系统消息</target>
+      </trans-unit>
+      <trans-unit id="MSC.clearClipboard">
+        <source>Clear clipboard</source>
+        <target>清除剪贴板</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenElements">
+        <source>Unpublished elements</source>
+        <target>未发布的内容</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenHide">
+        <source>hide</source>
+        <target>隐藏</target>
+      </trans-unit>
+      <trans-unit id="MSC.hiddenShow">
+        <source>show</source>
+        <target>显示</target>
+      </trans-unit>
+      <trans-unit id="MSC.apply">
+        <source>Apply</source>
+        <target>应用</target>
+      </trans-unit>
+      <trans-unit id="MSC.applyTitle">
+        <source>Apply the changes</source>
+        <target>应用更改</target>
+      </trans-unit>
+      <trans-unit id="MSC.mandatory">
+        <source>Mandatory field</source>
+        <target>必填项</target>
+      </trans-unit>
+      <trans-unit id="MSC.create">
+        <source>Create</source>
+        <target>创建</target>
+      </trans-unit>
+      <trans-unit id="MSC.delete">
+        <source>Delete</source>
+        <target>删除选中项</target>
+      </trans-unit>
+      <trans-unit id="MSC.protected">
+        <source>protected</source>
+        <target>被保护的</target>
+      </trans-unit>
+      <trans-unit id="MSC.guests">
+        <source>guests only</source>
+        <target>只对浏览者开放</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateMode">
+        <source>Update mode</source>
+        <target>更新模式</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateAdd">
+        <source>Add the selected values</source>
+        <target>增加选定的值</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateRemove">
+        <source>Remove the selected values</source>
+        <target>删除选定的值</target>
+      </trans-unit>
+      <trans-unit id="MSC.updateReplace">
+        <source>Replace the existing entries</source>
+        <target>替换选中的条目</target>
+      </trans-unit>
+      <trans-unit id="MSC.ascending">
+        <source>ascending</source>
+        <target>升序</target>
+      </trans-unit>
+      <trans-unit id="MSC.descending">
+        <source>descending</source>
+        <target>降序</target>
+      </trans-unit>
+      <trans-unit id="MSC.default">
+        <source>Default</source>
+        <target>默认的</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizard">
+        <source>Open the help wizard</source>
+        <target>帮助向导</target>
+      </trans-unit>
+      <trans-unit id="MSC.helpWizardTitle">
+        <source>Help wizard</source>
+        <target>帮助向导</target>
+      </trans-unit>
+      <trans-unit id="MSC.noCookies">
+        <source>You have to allow cookies to use Contao.</source>
+        <target>您必须启用“Cookies”支持来使用Contao</target>
+      </trans-unit>
+      <trans-unit id="MSC.copyOf">
+        <source>%s (copy)</source>
+        <target>%s (副本)</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyMode">
+        <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
+        <target>Contao目前正以核心组件已加载的&lt;strong&gt;安全模式&lt;/strong&gt;运行，用以防止第三方扩展带来可能的不兼容性（例如，在一次在线升级之后）。当您检查完已安装的组件后，您可以再次禁用安全模式。</target>
+      </trans-unit>
+      <trans-unit id="MSC.coreOnlyOff">
+        <source>Disable</source>
+        <target>禁用</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao当前正运行于&lt;strong&gt;维护模式&lt;/stong&gt;，网站(前台)不能访问。</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>禁用</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheText">
+        <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>&lt;strong&gt;内部缓存&lt;/strong&gt;还未创建。创建缓存将提高应用的执行效率，极力推荐您创建。如果您不想使用缓存，您可以在后台配置中永久禁用它。</target>
+      </trans-unit>
+      <trans-unit id="MSC.buildCacheLink">
+        <source>Build the cache</source>
+        <target>建立缓存</target>
+      </trans-unit>
+      <trans-unit id="MSC.name">
+        <source>Name</source>
+        <target>名称</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailAddress">
+        <source>E-mail address</source>
+        <target>E-mail地址</target>
+      </trans-unit>
+      <trans-unit id="MSC.register">
+        <source>Register</source>
+        <target>注册</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountActivated">
+        <source>Your account has been activated.</source>
+        <target>您的帐户已被激活。</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountError">
+        <source>Unable to process the current request.</source>
+        <target>无法处理目前的要求。</target>
+      </trans-unit>
+      <trans-unit id="MSC.emailSubject">
+        <source>Your registration on %s</source>
+        <target>您注册的%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminSubject">
+        <source>New registration on %s</source>
+        <target>TYPOlight :: 新注册的%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.adminText">
+        <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
+        <target>新用户(ID %s)已登记在您的网站.%sIf 你没有让电子邮件激活，您已登录到后台，以使帐户启动</target>
+      </trans-unit>
+      <trans-unit id="MSC.requestPassword">
+        <source>Request password</source>
+        <target>忘记密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.setNewPassword">
+        <source>Set new password</source>
+        <target>设置新的密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPasswordSet">
+        <source>Your password has been updated.</source>
+        <target>您的密码已更新</target>
+      </trans-unit>
+      <trans-unit id="MSC.passwordSubject">
+        <source>Your password request for %s</source>
+        <target>您申请的密码%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.accountNotFound">
+        <source>No matching account found</source>
+        <target>没有找到匹配的帐户</target>
+      </trans-unit>
+      <trans-unit id="MSC.oldPassword">
+        <source>Old password</source>
+        <target>旧密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.newPassword">
+        <source>New password</source>
+        <target>新密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.changePassword">
+        <source>Change password</source>
+        <target>更改密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.oldPasswordWrong">
+        <source>The old password is not correct</source>
+        <target>旧密码不正确</target>
+      </trans-unit>
+      <trans-unit id="MSC.securityQuestion">
+        <source>Security question</source>
+        <target>安全问题</target>
+      </trans-unit>
+      <trans-unit id="MSC.closeAccount">
+        <source>Close account</source>
+        <target>关闭帐号</target>
+      </trans-unit>
+      <trans-unit id="MSC.changeSelection">
+        <source>Change selection</source>
+        <target>更改选项</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentlySelected">
+        <source>Selected</source>
+        <target>已选</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNode">
+        <source>Only show this node</source>
+        <target>仅显示该节点</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectAllNodes">
+        <source>Show all nodes</source>
+        <target>显示所有节点</target>
+      </trans-unit>
+      <trans-unit id="MSC.showDifferences">
+        <source>Show differences</source>
+        <target>显示不同之处</target>
+      </trans-unit>
+      <trans-unit id="MSC.editElement">
+        <source>Edit the element</source>
+        <target>编辑元素</target>
+      </trans-unit>
+      <trans-unit id="MSC.table">
+        <source>Table</source>
+        <target>表格</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
+        <target>父表</target>
+      </trans-unit>
+      <trans-unit id="MSC.description">
+        <source>Description</source>
+        <target>描述</target>
+      </trans-unit>
+      <trans-unit id="MSC.noVersions">
+        <source>Currently there are no versions.</source>
+        <target>当前无可用版本。</target>
+      </trans-unit>
+      <trans-unit id="MSC.latestChanges">
+        <source>Latest changes</source>
+        <target>最近更新</target>
+      </trans-unit>
+      <trans-unit id="MSC.identicalVersions">
+        <source>The two selected versions are identical.</source>
+        <target>所选两个版本是相同的。</target>
+      </trans-unit>
+      <trans-unit id="MSC.selectNewPosition">
+        <source>Next, please choose the (new) position of the element</source>
+        <target>下一步，请选择元素的(新)位置</target>
+      </trans-unit>
+      <trans-unit id="MSC.go">
+        <source>Go</source>
+        <target>前往</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicknav">
+        <source>Quick navigation</source>
+        <target>快速导航</target>
+      </trans-unit>
+      <trans-unit id="MSC.quicklink">
+        <source>Quick link</source>
+        <target>快速链接</target>
+      </trans-unit>
+      <trans-unit id="MSC.username">
+        <source>Username</source>
+        <target>用户名</target>
+      </trans-unit>
+      <trans-unit id="MSC.login">
+        <source>Login</source>
+        <target>登录</target>
+      </trans-unit>
+      <trans-unit id="MSC.logout">
+        <source>Logout</source>
+        <target>注销</target>
+      </trans-unit>
+      <trans-unit id="MSC.loggedInAs">
+        <source>You are logged in as %s.</source>
+        <target>您已登入为%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.emptyField">
+        <source>Please enter your username and password!</source>
+        <target>请输入用户名和密码!</target>
+      </trans-unit>
+      <trans-unit id="MSC.confirmation">
+        <source>Confirmation</source>
+        <target>确认密码</target>
+      </trans-unit>
+      <trans-unit id="MSC.sMatches">
+        <source>%s occurrences for %s</source>
+        <target>%s 出现 %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.sEmpty">
+        <source>No matches for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>没有和&lt;strong&gt;%s&lt;/strong&gt;匹配的记录</target>
+      </trans-unit>
+      <trans-unit id="MSC.sResults">
+        <source>Results %s - %s of %s for &lt;strong&gt;%s&lt;/strong&gt;</source>
+        <target>结果 %s - %s of %s 含有 &lt;strong&gt;%s&lt;/strong&gt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.sNoResult">
+        <source>Your search for &lt;strong&gt;%s&lt;/strong&gt; returned no results.</source>
+        <target>搜索&lt;strong&gt;%s&lt;/strong&gt;结果一无所获</target>
+      </trans-unit>
+      <trans-unit id="MSC.seconds">
+        <source>seconds</source>
+        <target>秒</target>
+      </trans-unit>
+      <trans-unit id="MSC.up">
+        <source>Up</source>
+        <target>上</target>
+      </trans-unit>
+      <trans-unit id="MSC.first">
+        <source>&amp;#171; First</source>
+        <target>« 最前</target>
+      </trans-unit>
+      <trans-unit id="MSC.previous">
+        <source>Previous</source>
+        <target>上一条</target>
+      </trans-unit>
+      <trans-unit id="MSC.next">
+        <source>Next</source>
+        <target>下一条</target>
+      </trans-unit>
+      <trans-unit id="MSC.last">
+        <source>Last &amp;#187;</source>
+        <target>最后 »</target>
+      </trans-unit>
+      <trans-unit id="MSC.goToPage">
+        <source>Go to page %s</source>
+        <target>到第%s页</target>
+      </trans-unit>
+      <trans-unit id="MSC.totalPages">
+        <source>Page %s of %s</source>
+        <target>页 %s of %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>全局</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileUploaded">
+        <source>File %s uploaded successfully.</source>
+        <target>文件%s上传成功</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileExceeds">
+        <source>Image %s is too big to be resized automatically.</source>
+        <target>图片%s太大而自动调整尺寸大小.</target>
+      </trans-unit>
+      <trans-unit id="MSC.fileResized">
+        <source>Image %s was scaled down to the maximum dimensions.</source>
+        <target>图片%s被缩小到最大尺寸.</target>
+      </trans-unit>
+      <trans-unit id="MSC.searchLabel">
+        <source>Search</source>
+        <target>搜索</target>
+      </trans-unit>
+      <trans-unit id="MSC.keywords">
+        <source>Keywords</source>
+        <target>关键字</target>
+      </trans-unit>
+      <trans-unit id="MSC.options">
+        <source>Options</source>
+        <target>选项</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAll">
+        <source>match all words</source>
+        <target>全字段匹配</target>
+      </trans-unit>
+      <trans-unit id="MSC.matchAny">
+        <source>match any word</source>
+        <target>部分匹配</target>
+      </trans-unit>
+      <trans-unit id="MSC.saveData">
+        <source>Save data</source>
+        <target>保存数据</target>
+      </trans-unit>
+      <trans-unit id="MSC.savedData">
+        <source>Your data has been saved.</source>
+        <target>数据已经保存。</target>
+      </trans-unit>
+      <trans-unit id="MSC.printPage">
+        <source>Print this page</source>
+        <target>打印该页</target>
+      </trans-unit>
+      <trans-unit id="MSC.printAsPdf">
+        <source>Save article as PDF</source>
+        <target>保存文章为PDF格式</target>
+      </trans-unit>
+      <trans-unit id="MSC.facebookShare">
+        <source>Share on Facebook</source>
+        <target>在Facebook上共享</target>
+      </trans-unit>
+      <trans-unit id="MSC.twitterShare">
+        <source>Share on Twitter</source>
+        <target>在Twitter上共享</target>
+      </trans-unit>
+      <trans-unit id="MSC.gplusShare">
+        <source>Share on Google+</source>
+        <target>在Google+上共享</target>
+      </trans-unit>
+      <trans-unit id="MSC.pleaseWait">
+        <source>Please wait</source>
+        <target>请等待</target>
+      </trans-unit>
+      <trans-unit id="MSC.loading">
+        <source>Loading …</source>
+        <target>载入中 …</target>
+      </trans-unit>
+      <trans-unit id="MSC.more">
+        <source>Read more …</source>
+        <target>阅读更多 …</target>
+      </trans-unit>
+      <trans-unit id="MSC.readMore">
+        <source>Read the article: %s</source>
+        <target>阅读全文</target>
+      </trans-unit>
+      <trans-unit id="MSC.targetPage">
+        <source>Target page</source>
+        <target>目标页</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidPage">
+        <source>Sorry, item &quot;%s&quot; does not exist.</source>
+        <target>对不起，没找到&quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_orderBy">
+        <source>Order by %s</source>
+        <target>按照%s排序</target>
+      </trans-unit>
+      <trans-unit id="MSC.list_perPage">
+        <source>Results per page</source>
+        <target>每页显示结果</target>
+      </trans-unit>
+      <trans-unit id="MSC.published">
+        <source>Published</source>
+        <target>已发布</target>
+      </trans-unit>
+      <trans-unit id="MSC.unpublished">
+        <source>Unpublished</source>
+        <target>未发布</target>
+      </trans-unit>
+      <trans-unit id="MSC.addComment">
+        <source>Add a comment</source>
+        <target>发表评论</target>
+      </trans-unit>
+      <trans-unit id="MSC.autologin">
+        <source>Remember me</source>
+        <target>记住我</target>
+      </trans-unit>
+      <trans-unit id="MSC.createdOn">
+        <source>Created on</source>
+        <target>创建于</target>
+      </trans-unit>
+      <trans-unit id="MSC.activation">
+        <source>Activation token</source>
+        <target>激活令牌</target>
+      </trans-unit>
+      <trans-unit id="MSC.relevance">
+        <source>%s relevance</source>
+        <target>%s 相关性</target>
+      </trans-unit>
+      <trans-unit id="MSC.invalidTokenUrl">
+        <source>Invalid token</source>
+        <target>无效的标记</target>
+      </trans-unit>
+      <trans-unit id="MSC.changelog">
+        <source>Changelog</source>
+        <target>更改日志</target>
+      </trans-unit>
+      <trans-unit id="MSC.dragItemsHint">
+        <source>Drag the items to re-order them</source>
+        <target>拖动项目以重新排序</target>
+      </trans-unit>
+      <trans-unit id="MSC.templatesTheme">
+        <source>Theme %s</source>
+        <target>主题%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.location">
+        <source>Location</source>
+        <target>地点</target>
+      </trans-unit>
+      <trans-unit id="MSC.download">
+        <source>Download %s</source>
+        <target>下载%s</target>
+      </trans-unit>
+      <trans-unit id="MSC.metaNoLanguages">
+        <source>You have to add a root page in the site structure to store file meta information.</source>
+        <target>必须在站点结构中添加一个根页面用来存储文件meta信息</target>
+      </trans-unit>
+      <trans-unit id="UNITS.0">
+        <source>Byte</source>
+        <target>字节</target>
+      </trans-unit>
+      <trans-unit id="UNITS.1">
+        <source>KiB</source>
+        <target>KiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.2">
+        <source>MiB</source>
+        <target>MiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.3">
+        <source>GiB</source>
+        <target>GiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.4">
+        <source>TiB</source>
+        <target>TiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.5">
+        <source>PiB</source>
+        <target>PiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.6">
+        <source>EiB</source>
+        <target>EiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.7">
+        <source>ZiB</source>
+        <target>ZiB</target>
+      </trans-unit>
+      <trans-unit id="UNITS.8">
+        <source>YiB</source>
+        <target>YiB</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.do">
+        <source>Module</source>
+        <target>模组</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.table">
+        <source>Affected table</source>
+        <target>受影响的表格</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.act">
+        <source>Action</source>
+        <target>行动</target>
+      </trans-unit>
+      <trans-unit id="CONFIRM.id">
+        <source>Affected record</source>
+        <target>受影响的记录</target>
+      </trans-unit>
+      <trans-unit id="DP.select_a_time">
+        <source>Select a time</source>
+        <target>选择时间</target>
+      </trans-unit>
+      <trans-unit id="DP.use_mouse_wheel">
+        <source>Use the mouse wheel to quickly change value</source>
+        <target>使用鼠标滚轮来快速更改值</target>
+      </trans-unit>
+      <trans-unit id="DP.time_confirm_button">
+        <source>OK</source>
+        <target>确定</target>
+      </trans-unit>
+      <trans-unit id="DP.apply_range">
+        <source>Apply</source>
+        <target>应用</target>
+      </trans-unit>
+      <trans-unit id="DP.cancel">
+        <source>Cancel</source>
+        <target>取消</target>
+      </trans-unit>
+      <trans-unit id="DP.week">
+        <source>Wk</source>
+        <target>Wk</target>
+      </trans-unit>
+      <trans-unit id="COLS.header">
+        <source>Header</source>
+        <target>头部</target>
+      </trans-unit>
+      <trans-unit id="COLS.left">
+        <source>Left column</source>
+        <target>左边栏</target>
+      </trans-unit>
+      <trans-unit id="COLS.main">
+        <source>Main column</source>
+        <target>主区域</target>
+      </trans-unit>
+      <trans-unit id="COLS.right">
+        <source>Right column</source>
+        <target>右边栏</target>
+      </trans-unit>
+      <trans-unit id="COLS.footer">
+        <source>Footer</source>
+        <target>底部</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

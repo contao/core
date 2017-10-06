@@ -1,0 +1,148 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/default.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="MSC.com_name">
+        <source>Name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_email">
+        <source>E-mail (not published)</source>
+        <target>E-mail (niet gepubliceerd)</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_website">
+        <source>Website</source>
+        <target>Website</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_comment">
+        <source>Comment</source>
+        <target>Commentaar</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notify">
+        <source>Notify me of new comments by e-mail</source>
+        <target>Waarschuw me per e-mail bij nieuwe reacties</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_submit">
+        <source>Submit comment</source>
+        <target>Reactie indienen</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_login">
+        <source>You need to be logged in to add comments.</source>
+        <target>Je moet ingelogd zijn om een reactie te plaatsen.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_by">
+        <source>Comment by</source>
+        <target>Reactie door</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_reply">
+        <source>Reply by</source>
+        <target>Beantwoorden door</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_quote">
+        <source>%s wrote:</source>
+        <target>%s schreef:</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_code">
+        <source>Code:</source>
+        <target>Code:</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_subject">
+        <source>New comment on %s</source>
+        <target>Nieuwe reactie op %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_message">
+        <source>%s has created a new comment on your website.
+
+---
+
+%s
+
+---
+
+View: %s
+Edit: %s
+
+If you are moderating comments, you have to log in to the back end to publish it.</source>
+        <target>%s heeft een nieuwe reactie geplaatst op uw website.
+
+---
+
+%s
+
+---
+
+Bekijk: %s
+Bewerk: %s
+
+Indien u reacties modereert dient u in te loggen in het back-end om deze te publiceren.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_confirm">
+        <source>Your comment has been added and is now pending for approval.</source>
+        <target>Uw reactie is toegevoegd en is in afwachting van goedkeuring.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInConfirm">
+        <source>Your subscription has been activated</source>
+        <target>Uw aanmelding is geactiveerd</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInCancel">
+        <source>Your subscription has been cancelled</source>
+        <target>Uw aanmelding is geannuleerd</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInSubject">
+        <source>Your subscription on %s</source>
+        <target>Uw inschrijving voor nieuwsbrief %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInMessage">
+        <source>Hello %s,
+
+please confirm that you want to be notified of new comments by e-mail on this page:
+
+%s
+
+---
+
+Confirm: %s
+Cancel: %s
+</source>
+        <target>Hallo %s,
+
+bevestig dat u een melding wilt ontvangen van nieuwe reacties via e-mail op deze pagina:
+
+%s
+
+---
+
+Bevestig: %s
+Annuleren: %s
+</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notifySubject">
+        <source>A new comment has been added on %s</source>
+        <target>Een nieuwe reactie is toegevoegd aan %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notifyMessage">
+        <source>Hello %s,
+
+a new comment has been added on a page you have subscribed to:
+
+%s
+
+---
+
+To cancel your subscription, please click here:
+%s
+</source>
+        <target>Hallo %s,
+
+een nieuwe reactie is toegevoegd aan een pagina waarop u geabonneerd bent:
+
+%s
+
+---
+
+Om uw inschrijving te beëindigen klik hier:
+%s
+</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

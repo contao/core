@@ -1,0 +1,366 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_install.php" source-language="en" target-language="sl">
+    <body>
+      <trans-unit id="tl_install.installTool.0">
+        <source>Installation</source>
+        <target>Contao namestitveno orodje</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installTool.1">
+        <source>Install tool login</source>
+        <target>Vpis v namestitveno orodje</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.0">
+        <source>The install tool has been locked</source>
+        <target>Namestitveno orodje je bilo zaklenjeno</target>
+      </trans-unit>
+      <trans-unit id="tl_install.locked.1">
+        <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
+        <target>Zavoljo varnostnih razlogov je bilo namestitveno orodje zaklenjeno, ker ste trikrat zaored vnesli napačno geslo. Da bi ga odklenili, odprite nastavitveno datoteko in nastavite &lt;em&gt;installCount&lt;/em&gt; na &lt;em&gt;0&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.0">
+        <source>Password</source>
+        <target>Geslo</target>
+      </trans-unit>
+      <trans-unit id="tl_install.password.1">
+        <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
+        <target>Vnesite geslo namestitvenega orodja. Omenjeno geslo NI enako geslu za vpis v Contao administracijo.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.0">
+        <source>Install tool password</source>
+        <target>Geslo namestitvenega orodja</target>
+      </trans-unit>
+      <trans-unit id="tl_install.changePass.1">
+        <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
+        <target>Za dodatno zaščito lahko tudi preimenujete ali v celoti odstranite datoteko &lt;strong&gt;contao/install.php&lt;/strong&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.0">
+        <source>Generate an encryption key</source>
+        <target>Ustvari šifrirni ključ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.encryption.1">
+        <source>This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.</source>
+        <target>Šifrirni ključ bo uporabljen za shranjevanje šifriranih podatkov. Vedite, da so lahko ti podatki nato odšifrirani le s tem ključem! Zato vam svetujemo, da si ga zabeležite in ga ne spreminjate, če imate kako vsebino že šifrirano. Pusite prazno za ustvarjanje poljubnega ključa.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.0">
+        <source>Check database connection</source>
+        <target>Preveri povezavo s podatkovno bazo.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.database.1">
+        <source>Please enter your database connection parameters.</source>
+        <target>Prosimo, vnesite parametre za povezavo s podatkovno bazo.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.0">
+        <source>Collation</source>
+        <target>Kodni nabor</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collation.1">
+        <source>For more information see the &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; target=&quot;_blank&quot;&gt;MySQL manual&lt;/a&gt;.</source>
+        <target>Za več informacij obiščite &lt;a href=&quot;http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html&quot; onclick=&quot;window.open(this.href); return false;&quot;&gt;MySQL priročnik&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.0">
+        <source>Update database tables</source>
+        <target>Posodobi tabele podatkovne baze</target>
+      </trans-unit>
+      <trans-unit id="tl_install.update.1">
+        <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
+        <target>Vedite, da je bil pomočnik za posodabljanje preizkušen le z MySQL in MySQLi gonilniki. Če uporabljate drugo podatkovno bazo (npr. Oracle), boste mogoče morali bazo posodobiti ročno. V tem primeru pojdite v &lt;strong&gt;system/modules&lt;/strong&gt; in poiščite vse poddirektorije za &lt;strong&gt;config/database.sql&lt;/strong&gt; datoteke.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.0">
+        <source>Import a template</source>
+        <target>Uvozi predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_install.template.1">
+        <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
+        <target>Prosimo, izberite &lt;em&gt;.sql&lt;/em&gt; datoteko iz imenika &lt;em&gt;templates&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.0">
+        <source>Create an admin user</source>
+        <target>Ustvari skrbniški račun</target>
+      </trans-unit>
+      <trans-unit id="tl_install.admin.1">
+        <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
+        <target>V kolikor ste uvozili vzorčno spletno stran, se uporabniško ime skrbnika glasi &lt;strong&gt;k.jones&lt;/strong&gt; in geslo &lt;strong&gt;kevinjones&lt;/strong&gt;. Za več informacij si oglejte predstavitveni del (front end) spletne strani.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.0">
+        <source>Extension repository</source>
+        <target>Repozitorij razširitev</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.1">
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>Trenutno testiramo beta verzijo novega kataloga razširitev, kateri uporablja Composer za upravljanje s paketi. Prosim namestite Composer dojemalca za sodelovanje v beza testiranju.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.0">
+        <source>Congratulations!</source>
+        <target>Čestitamo!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.completed.1">
+        <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
+        <target>Sedaj se, prosimo, vpišite v Contao administracijo (back end) in preverite sistemske nastavitve. Nato obiščite še predstavitveni del (front end) in preverite, da Contao deluje pravilno.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.0">
+        <source>Modify files via FTP</source>
+        <target>Urejaj datoteke prek FTP protokola</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftp.1">
+        <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
+        <target>Prosimo, vnesite podatke za FTP prijavo, da lahko nato Contao spreminja datoteke prek FTP protokola (Safe Mode Hack).</target>
+      </trans-unit>
+      <trans-unit id="tl_install.accept">
+        <source>Accept license</source>
+        <target>Sprejmi licenčne pogoje</target>
+      </trans-unit>
+      <trans-unit id="tl_install.beLogin">
+        <source>Contao back end login</source>
+        <target>Vpis v Contao administracijo</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passError">
+        <source>Please enter a password to prevent unauthorized access!</source>
+        <target>Prosimo, spremenite privzeto geslo, da se prepreči nepreverjen dostop!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passConfirm">
+        <source>A custom password has been set.</source>
+        <target>Privzeto geslo je bilo spremenjeno.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.passSave">
+        <source>Save password</source>
+        <target>Shrani geslo.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyError">
+        <source>Please create an encryption key!</source>
+        <target>Prosimo, ustvarite šifrirni ključ.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyLength">
+        <source>An encryption key has to be at least 12 characters long!</source>
+        <target>Šifrirni ključ mora biti dolg vsaj 12 znakov!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyConfirm">
+        <source>An encryption key has been created.</source>
+        <target>Šifrirni ključ je bil uspešno ustvarjen.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keyCreate">
+        <source>Generate encryption key</source>
+        <target>Ustvari šifrirni ključ.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.keySave">
+        <source>Generate or save key</source>
+        <target>Ustvari ali shrani ključ.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbConfirm">
+        <source>Database connection established.</source>
+        <target>Povezava s podatkovno bazo je bila uspešna.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbError">
+        <source>Not connected to a database!</source>
+        <target>Povezovanje s podatkovno bazo je bilo neuspešno.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDriver">
+        <source>Driver</source>
+        <target>Gonilnik</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbHost">
+        <source>Host</source>
+        <target>Gostitelj</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbUsername">
+        <source>Username</source>
+        <target>Uporabniško ime</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbDatabase">
+        <source>Database</source>
+        <target>Podatkovna baza</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPersistent">
+        <source>Persistent connection</source>
+        <target>Vztrajaj s povezavo</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCharset">
+        <source>Character set</source>
+        <target>Nabor znakov.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbCollation">
+        <source>Collation</source>
+        <target>Kodni nabor</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbPort">
+        <source>Port number</source>
+        <target>Številka vrat</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSocket">
+        <source>Socket file</source>
+        <target>Vtičnica (socket file)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.dbSave">
+        <source>Save database settings</source>
+        <target>Shrani nastavitve podatkovne baze</target>
+      </trans-unit>
+      <trans-unit id="tl_install.collationInfo">
+        <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
+        <target>Spreminjanje kodnega nabora bo vplivalo na vse tabele s predpono &lt;em&gt;tl_&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateError">
+        <source>The database is not up to date!</source>
+        <target>Podatkovna baza ni posodobljena!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateConfirm">
+        <source>The database is up to date.</source>
+        <target>Podatkovna baza je posodobljena.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateSave">
+        <source>Update database</source>
+        <target>Posodobi podatkovno bazo</target>
+      </trans-unit>
+      <trans-unit id="tl_install.saveCollation">
+        <source>Change collation</source>
+        <target>Spremeni collation</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateX">
+        <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
+        <target>Vse kaže, da nadgrajujete s Contao verzije pred verzijo %s. Če je to res, &lt;strong&gt;potem je potrebno zagnati posodobitev verzije %s&lt;strong&gt; za zagotovitev integritete vaših podatkov!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrun">
+        <source>Run version %s update</source>
+        <target>Zaženi posodobitev verzije %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.updateXrunStep">
+        <source>Run version %s update - step %s</source>
+        <target>Zaženi verzijo %s posodobitev - korak %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importException">
+        <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
+        <target>Uvoz je spodletel! Preverite, da je struktura podatkovne baze osvežena ter da je datoteka s predlogo skladna z vašo različico Contao.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importError">
+        <source>Please choose a template file!</source>
+        <target>Prosimo, izberite datoteko predloge!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importConfirm">
+        <source>Template imported on %s</source>
+        <target>Predloga uvožena na %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importWarn">
+        <source>Any existing data will be deleted!</source>
+        <target>Vsi obstoječi podatki bodo izbrisani!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.templates">
+        <source>Templates</source>
+        <target>Predloge</target>
+      </trans-unit>
+      <trans-unit id="tl_install.doNotTruncate">
+        <source>Do not truncate tables</source>
+        <target>Ne prazni (truncate) tabel</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>Prepiši tabele skladišča</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importSave">
+        <source>Import template</source>
+        <target>Uvozi predlogo</target>
+      </trans-unit>
+      <trans-unit id="tl_install.importContinue">
+        <source>Any existing data will be deleted! Do you really want to continue?</source>
+        <target>Vsi obstoječi podatki bodo izbrisani! Res želite nadaljevati?</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminError">
+        <source>Please fill in all fields to create an admin user!</source>
+        <target>Prosimo, izpolnite vsa polja za ustvarjanje skrbniškega računa!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminConfirm">
+        <source>An admin user has been created.</source>
+        <target>Skrbniški račun je bil ustvarjen.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.adminSave">
+        <source>Create admin account</source>
+        <target>Ustvari skrbniški račun</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryDefault">
+        <source>You are using the default extension repository.</source>
+        <target>Uporabljate privzet katalog razširitev.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryComposer">
+        <source>You are using the Composer based extension repository.</source>
+        <target>Uporabljate Composer različico kataloga razširitev.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryInstall">
+        <source>Install the Composer client</source>
+        <target>Namesite Composer odjemalec</target>
+      </trans-unit>
+      <trans-unit id="tl_install.installConfirm">
+        <source>You have successfully installed Contao.</source>
+        <target>Contao je bil uspešno nameščen.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHost">
+        <source>FTP hostname</source>
+        <target>FTP ime gostitelja</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPath">
+        <source>Relative path to Contao directory (e.g. &lt;em&gt;httpdocs/&lt;/em&gt;)</source>
+        <target>Relativna pot do Contao imenika (npr. &lt;em&gt;httpdocs/&lt;/em&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUser">
+        <source>FTP username</source>
+        <target>FTP uporabniško ime</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPass">
+        <source>FTP password</source>
+        <target>FTP geslo</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSLh4">
+        <source>Secure connection</source>
+        <target>Varna povezava</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSSL">
+        <source>Connect via FTP-SSL</source>
+        <target>Poveži se prek FTP-SSL</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPort">
+        <source>FTP port</source>
+        <target>FTP vrata</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpSave">
+        <source>Save FTP settings</source>
+        <target>Shrani FTP nastavitve</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpHostError">
+        <source>Could not connect to FTP server %s</source>
+        <target>Povezave na FTP strežnik %s ni bilo mogoče vzpostaviti</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpUserError">
+        <source>Could not login as &quot;%s&quot;</source>
+        <target>Ni se bilo mogoče prijaviti kot %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ftpPathError">
+        <source>Could not locate Contao directory %s</source>
+        <target>Ni bilo mogoče najti Contao imenika %s</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesRenamed">
+        <source>The configured files directory does not exist!</source>
+        <target>Nastavljen direktorij datotek ne obstaja!</target>
+      </trans-unit>
+      <trans-unit id="tl_install.filesWarning">
+        <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
+        <target>Ali ste preimenovali mapo &lt;strong&gt;tl_files&lt;/strong&gt; v &lt;strong&gt;files&lt;/strong&gt;? Mape ne morete preimenovati kar tako, ker bodo vse reference datotek v bazi in css-ju še vedno kazale na staro lokacijo. Če želite preimenovati mapo, naredite to po posodobitvi na verzijo 3 in poskrbite, da boste prilagodili podatke baze z naslednjo skripto: %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.CREATE">
+        <source>Create new tables</source>
+        <target>Ustvari nove tabele</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_ADD">
+        <source>Add new columns</source>
+        <target>Dodaj novo vrstico</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_CHANGE">
+        <source>Change existing columns</source>
+        <target>Spremeni obstoječe vrstice</target>
+      </trans-unit>
+      <trans-unit id="tl_install.ALTER_DROP">
+        <source>Drop existing columns</source>
+        <target>Zavrži obstoječe vrstice</target>
+      </trans-unit>
+      <trans-unit id="tl_install.DROP">
+        <source>Drop existing tables</source>
+        <target>Zavrži obstoječe tabele</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

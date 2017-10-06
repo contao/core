@@ -1,0 +1,74 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_templates.php" source-language="en" target-language="fi">
+    <body>
+      <trans-unit id="tl_templates.original.0">
+        <source>Original template</source>
+        <target>Alkuperäinen mallipohja</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.original.1">
+        <source>Here you can select the template that you want to customize.</source>
+        <target>Täällä voit valita muokattavan mallipohjan</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.0">
+        <source>Target folder</source>
+        <target>Kohdehakemisto</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.1">
+        <source>A copy of the selected template will be stored in the target folder.</source>
+        <target>Valitun mallipohjan kopio tallennetaan kohdehakemistoon.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.headline">
+        <source>Add a new template</source>
+        <target>Lisää uusi mallipohja</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.newTpl">
+        <source>Create template</source>
+        <target>Luo mallipohja</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.exists">
+        <source>Template &quot;%s&quot; exists already!</source>
+        <target>Mallipohja &quot;%s&quot; on jo olemassa!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.invalid">
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>Virheellinen kohdehakemisto &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.0">
+        <source>New template</source>
+        <target>Uusi mallipohja</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.1">
+        <source>Create a new template</source>
+        <target>Luo uusi mallipohja</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.0">
+        <source>New folder</source>
+        <target>Uusi hakemisto</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.1">
+        <source>Create a new folder</source>
+        <target>Luo uusi hakemisto</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.0">
+        <source>Paste into</source>
+        <target>Liitä hakemistoon</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>Liitä tähän hakemistoon</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.0">
+        <source>Compare template</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.1">
+        <source>Compare &quot;%s&quot; with another template</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.overridesAnotherTpl">
+        <source>This template overrides &quot;%s&quot;.</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.pleaseSelect">
+        <source>Please select a template from the list above and click &quot;Show differences&quot;.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

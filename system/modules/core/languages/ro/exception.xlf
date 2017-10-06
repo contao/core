@@ -1,0 +1,169 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="XPT.error">
+        <source>An error occurred</source>
+        <target>A avut loc o eroare</target>
+      </trans-unit>
+      <trans-unit id="XPT.matter">
+        <source>What's the matter?</source>
+        <target>Care este problema?</target>
+      </trans-unit>
+      <trans-unit id="XPT.howToFix">
+        <source>How can I fix the issue?</source>
+        <target>Cum pot rezolva problema?</target>
+      </trans-unit>
+      <trans-unit id="XPT.more">
+        <source>Tell me more, please</source>
+        <target>Vă rog sa daţi mai multe detalii</target>
+      </trans-unit>
+      <trans-unit id="XPT.hint">
+        <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Pentru a customiza această notificare creaţi un şablon propriu numit &lt;em&gt;%s&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorOccurred">
+        <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>O eroare a apărut la executarea acestui script. Ceva nu funcţionează corespunzător.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixOne">
+        <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Deschideţi fişierul &lt;code&gt;system/logs/error.log&lt;/code&gt; şi găsiţi mesajul de eroare asociat (de obicei este ultimul). Puteţi în acelaşi timp să adăugaţi următoarea linie la fişierul de configurare local şi să reîncărcaţi pagina:</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixTwo">
+        <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>Totuşi, trebuie să ştiţi că &lt;strong&gt;oricine&lt;/strong&gt; va putea să vadă atunci mesajele de eroare pe website!</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorExplain">
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+      </trans-unit>
+      <trans-unit id="XPT.requestToken">
+        <source>Invalid request token</source>
+        <target>Cheie invalidă pentru operaţie</target>
+      </trans-unit>
+      <trans-unit id="XPT.invalidToken">
+        <source>The request token could not be verified.</source>
+        <target>Cheia pentru validarea operaţiei nu a putut fi verificată.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenRetry">
+        <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Folosiţi acest &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;link&lt;/a&gt; şi încercaţi din nou. Nu folosiţi în browser butonul de acces la pagina precedentă .</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainOne">
+        <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Această eroare apare dacă există o trimitere POST fără o cheie de autentificare validă. În Contao 2.10, verificarea pe bază de referer a fost înlocuită cu un sistem pe bazat pe chei de validare. Dacă problema persistă, se poate să folosiţi o extensie incompatiblă de la terţi sau nu aţi instalat corect versiunea de actualizare Contao.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainTwo">
+        <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Pentru mai multe informaţii, căutaţi &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; sau vizitaţi &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incomplete">
+        <source>Incomplete installation</source>
+        <target>Instalare incompletă</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteInstallation">
+        <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>Instalarea nu este completă şi în consecinţă Contao nu poate funcţiona corespunzător.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixOne">
+        <source>Point your browser to the following URL:</source>
+        <target>Accesaţi cu browserul următoarea adresă URL:</target>
+      </trans-unit>
+      <trans-unit id="XPT.installPath">
+        <source>path-to-installation</source>
+        <target>cale-la-instalare</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixTwo">
+        <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>Acesta va deschide utilitarul Contao de setup, ce vă va ghida prin procesul de instalare.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Pentru mai multe informaţii accesaţi &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Manualul Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFound">
+        <source>Page not found</source>
+        <target>Pagină indisponibilă</target>
+      </trans-unit>
+      <trans-unit id="XPT.pageNotFound">
+        <source>The page you have requested does not exist under this domain.</source>
+        <target>Pagina la care doriţi să ajungeţi  nu există sub acest domeniu.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFoundFix">
+        <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Încercaţi să &lt;a href=&quot;%s&quot;&gt;mergeţi la nivelul de top&lt;/a&gt; şi folosiţi funcţia de search (dacă există) pentru a găsi pagina pe care o căutaţi. Puteţi totodată să &lt;a href=&quot;%s&quot;&gt;contactaţi pe webmaster&lt;/a&gt; şi să lasaţi de înţeles ca e ceva în neregulă.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForward">
+        <source>Forward page not found</source>
+        <target>Redirecţionare spre pagină indisponibilă</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardPage">
+        <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>Aplicaţia a fost configurată să redirecţioneze cererile la o altă pagină, dar, această pagină nu există sau nu a fost publicată încă.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardFix">
+        <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Aceasta se poate repara doar de către administratorul website-ului. Dacă sunteţi vizitator nu puteţi face nimic cu excepţia  faptului de a &lt;a href=&quot;%s&quot;&gt;contacta pe webmaster&lt;/a&gt; pentru a semnala problema.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRoot">
+        <source>No root page found</source>
+        <target>Nu există pagină rădăcină</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootPage">
+        <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Nu există pagină rădăcină pentru website care să se potrivească limbii solicitate de bowser şi/sau numelui de domeniu.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootFix">
+        <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Dacă aţi setat în mod explicit o limbă în browser, încercaţi să &lt;a href=&quot;%s&quot;&gt;mergeţi la nivelul de top&lt;/a&gt; şi să vedeţi dacă sunteţi redirecţionat. Altfel &lt;a href=&quot;%s&quot;&gt;contactaţi pe webmaster&lt;/a&gt; şi semnalaţi problema.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayout">
+        <source>No layout specified</source>
+        <target>Ansamblu nespecificat</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutSpecified">
+        <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>Pagina pe care aţi solicitat-o nu a fost încă asocitată cu un ansamblu.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutFix">
+        <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Verificaţi ca fiecare pagină rădăcină din structura website-ului să aibă desemnat un ansamblu.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Pentru mai multe informaţii accesaţi &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActive">
+        <source>No active pages found</source>
+        <target>Nu există pagini active</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActivePages">
+        <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Cererea dvs. a fost mapată la un website care nu conţine încă pagini publicate.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActiveFix">
+        <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>cel mai probabil website-ul este încă în fază de dezvoltare şi va fi online în scurt timp. Dacă totuşi credeţi că e ceva în neregulă, &lt;a href=&quot;%s&quot;&gt;contactaţi pe webmaster&lt;/a&gt; şi semnalaţi problema.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbidden">
+        <source>Forbidden</source>
+        <target>Nepermis</target>
+      </trans-unit>
+      <trans-unit id="XPT.notAuthenticated">
+        <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Ori nu sunteţi autentificat ori nu aveţi acces la pagina cerută.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbiddenFix">
+        <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Dacă nu sunteţi autentificat, încercaţi să &lt;a href=&quot;%s&quot;&gt;mergeţi la nivelul de top&lt;/a&gt; şi căutaţi formularul de autentificare. Dacă acesta nu există sau dacă sunteţi autentificat deja &lt;a href=&quot;%s&quot;&gt;contactaţi pe webmaster&lt;/a&gt; şi semnalaţi problema.</target>
+      </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>Revenim în scurt timp</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Website-ul este închis pentru mentenanţă. Vă rugăm să reveniţi mai târziu.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

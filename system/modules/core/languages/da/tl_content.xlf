@@ -1,0 +1,798 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_content.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_content.type.0">
+        <source>Element type</source>
+        <target>Element type</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type.1">
+        <source>Please choose the type of content element.</source>
+        <target>Vælg venligst elementtypen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.0">
+        <source>Headline</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.1">
+        <source>Here you can add a headline to the content element.</source>
+        <target>Hvis du indtaster en overskrift, vil den blive vist over indholdselementet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.0">
+        <source>Text</source>
+        <target>Tekst</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>Indtast venligst overskriften eller forklaring. HTML-tags er tilladte.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.0">
+        <source>Add an image</source>
+        <target>Tilføj et billede</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.1">
+        <source>Add an image to the content element.</source>
+        <target>Hvis du vælger denne mulighed, vil et billede blive føjet til elementet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.0">
+        <source>Source file</source>
+        <target>Kildefil</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.1">
+        <source>Please select a file or folder from the files directory.</source>
+        <target>Vælg venligst en fil fra filarkivet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.0">
+        <source>Alternate text</source>
+        <target>Alternativ beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.1">
+        <source>Here you can enter an alternate text for the image (&lt;em&gt;alt&lt;/em&gt; attribute).</source>
+        <target>For at gøre billeder og film tilgængelige bør du altid angive en alternativ beskrivelse med en kort beskrivelse af deres indhold.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.0">
+        <source>Title</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.1">
+        <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
+        <target>Her kan du indtaste billedets title (&lt;em&gt;title&lt;/em&gt; attribute).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.0">
+        <source>Image size</source>
+        <target>Billedstørrelse</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Hvis du angiver kun bredde eller kun højde, vil billedet blive skaleret proportionalt. Hvis du angiver begge mål, vil billedet blive beskåret, hvis det er nødvendigt. Hvis lader begge felter stå tomme, bil den originale størrelse blive vist.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.0">
+        <source>Image margin</source>
+        <target>Billedemargin</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>Indtast venligst top, højre, bund og venstre margin og enheden. Marginen er afstanden mellem et element og nabo-elementer.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.0">
+        <source>Image link target</source>
+        <target>Brug billede som link</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.1">
+        <source>A custom image link target will override the lightbox link, so the image cannot be viewed fullsize anymore.</source>
+        <target>Indtast venligst en fuldstændig URL inklusiv netværksprotokol (f.eks. &lt;em&gt;http://www.domain.dk&lt;/em&gt;) for at bruge billedet som link. Bemærk at det i så fald ikke vil være muligt at se billedet i fuld størrelse længere.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>Fuld størrelse/nyt vindue</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>Åbner billedet i fuld størrelse i lightbox eller i et nyt vindue.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.0">
+        <source>Image alignment</source>
+        <target>Billedejustering</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.1">
+        <source>Please specify how to align the image.</source>
+        <target>Vælg venligst billedjusteringen. Et billede kan blive vist over eller under teksten eller i øverste venstre eller øverste højre hjørne af teksten.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.0">
+        <source>Image caption</source>
+        <target>Billedtekst</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.1">
+        <source>Here you can enter a short text that will be displayed below the image.</source>
+        <target>Hvis du indtaster en kort tekst her, vil den blive vist under billedet. Lad dette felt være tomt for at slå denne funktion fra.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.0">
+        <source>HTML code</source>
+        <target>HTML-kode</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Skriv din HTML-kode.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.0">
+        <source>List type</source>
+        <target>Listetype</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.1">
+        <source>Please choose the type of list.</source>
+        <target>Vælg venligst listetypen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.0">
+        <source>List items</source>
+        <target>Listetyper</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Tildel venligst hver modul til et sideelement. Brug knapper til at tilføje, flytte eller fjerne et modul. Hvis du arbejder uden hjælp fra JavaScript, bør du gemme dine ændringer før du ændrer rækkefølgen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.0">
+        <source>Table items</source>
+        <target>Tabelindgange</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Tildel venligst hver modul til et sideelement. Brug knapper til at tilføje, flytte eller fjerne et modul. Hvis du arbejder uden hjælp fra JavaScript, bør du gemme dine ændringer før du ændrer rækkefølgen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.0">
+        <source>Table summary</source>
+        <target>Tabelopsummering</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.1">
+        <source>Please enter a short summary of the table and describe its purpose or structure.</source>
+        <target>For at gøre tabeller tilgængelige bør du altid angive en kort opsummering af deres indhold.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.0">
+        <source>Add table header</source>
+        <target>Tabelhoved</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.1">
+        <source>Make the first row of the table the table header.</source>
+        <target>Hvis du vælger denne mulighed, vil første række i tabellen blive brugt som tabelhoved.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.0">
+        <source>Add table footer</source>
+        <target>Tabelfod</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.1">
+        <source>Make the last row of the table the table footer.</source>
+        <target>Hvis du vælger denne mulighed, vil sidste række i tabellen blive brugt som tabelfod.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.0">
+        <source>Use row headers</source>
+        <target>Brug rækkehoveder</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.1">
+        <source>Define the left column as row header.</source>
+        <target>Definer venstre kolonne som rækkehoved.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.0">
+        <source>Sortable table</source>
+        <target>Sorterbar</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.1">
+        <source>Make the table sortable (requires JavaScript and a table header).</source>
+        <target>Denne mulighed tillader dig at sortere tabellen ved at klikke på dens kolonne-overskrifter (kræver at &lt;em&gt;tabelhoved&lt;/em&gt; er valgt)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.0">
+        <source>Sort index</source>
+        <target>Sorter indeks</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.1">
+        <source>The number of the default sort column.</source>
+        <target>Vælg venligst nummeret på standardkolonnen du vil sortere efter (første kolonne =0!).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.0">
+        <source>Sort order</source>
+        <target>Rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.1">
+        <source>Please choose the sort order.</source>
+        <target>Vælg venligst den fortrukne sorteringsrækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.0">
+        <source>Operation mode</source>
+        <target>Funktion</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.1">
+        <source>Please select the operation mode of the accordion element.</source>
+        <target>Vælg venligst operationstilstanden for elementet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.0">
+        <source>Wrapper start</source>
+        <target>Gruppering start</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.1">
+        <source>Marks the beginning of an accordion pane that spans several content elements.</source>
+        <target>Angiver begyndelsen af et accordion panel der spænder over flere indholdselementer.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.0">
+        <source>Wrapper stop</source>
+        <target>Gruppering stop</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.1">
+        <source>Marks the end of an accordion pane that spans several content elements.</source>
+        <target>Angiver slutningen af et accordion panel der spænder over flere indholdselementer.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.0">
+        <source>Single element</source>
+        <target>Enkelt element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.1">
+        <source>Behaves like a single text element that is inside an accordion pane.</source>
+        <target>Opfører sig som et enkeltstående tekst element der er inden i et accordion panel.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.0">
+        <source>Section headline</source>
+        <target>Harmonika-overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.1">
+        <source>Please enter the headline of the content pane. HTML tags are allowed.</source>
+        <target>Indtast venligst overskriften for harmonika-indholdsruden.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.0">
+        <source>CSS format</source>
+        <target>Overskriftens CSS-format</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.1">
+        <source>Here you can format the section headline using CSS code.</source>
+        <target>Her kan du indtaste en valgfri CSS-streng for at formatere overskriften.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.0">
+        <source>Element classes</source>
+        <target>Harmonika-klasse-attributter</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.1">
+        <source>Leave blank to use the default classes or enter a custom toggler and accordion class.</source>
+        <target>Hvis du vil have mere end én harmonika pr. side, så bliver du nødt til at ændre klasse-navnet for din til.-fra-knap og din harmonika. Som standard bruger de klassen &lt;em&gt;toggler&lt;/em&gt; og &lt;em&gt;accordion&lt;/em&gt; (lad feltet stå tomt for at bruger standard-klasserne.)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.0">
+        <source>Configuration</source>
+        <target>Konfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.1">
+        <source>Here you can configure the syntax highlighter (e.g. &lt;em&gt;gutter: false;&lt;/em&gt;).</source>
+        <target>Her kan du konfigurere syntax highlighteren (fx &lt;em&gt;gutter:false;&lt;/em&gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.0">
+        <source>Syntax highlighting</source>
+        <target>Syntaks-farvning</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.1">
+        <source>Please choose a scripting language.</source>
+        <target>Vælg venligst et scriptsprog.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.0">
+        <source>Code</source>
+        <target>Kode</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.1">
+        <source>Note that the code will not be executed. Use F11 to toggle the fullscreen mode if you are using the code editor.</source>
+        <target>Indtast kode.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.0">
+        <source>Link text</source>
+        <target>Link-titel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.1">
+        <source>The link text will be displayed instead of the target URL.</source>
+        <target>Link-titlen for et link vil blive vist til besøgende på dit websted i stedet for URL'en eller kilde-filen. Hvis du laver et billed-link, vil billedet blive vist i stedet for link-titlen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.0">
+        <source>Link title</source>
+        <target>Link titel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.1">
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>Link titlen tilføjes som &lt;em&gt;title&lt;/em&gt; attribute i HTML markup'en.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.0">
+        <source>Embed the link</source>
+        <target>Indlejer linket</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.1">
+        <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
+        <target>Hvis du indtaster en udtryk med et wildcard &lt;em&gt;%s&lt;/em&gt;, vil linket blive indlejret i udtrykket. F.eks. &lt;em&gt;besøg vores %s!&lt;/em&gt; vil blive til &lt;em&gt;besøg vores &lt;u&gt;firmas websted&lt;/u&gt;!&lt;/em&gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.0">
+        <source>Lightbox</source>
+        <target>Lightbox</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.1">
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>For at udløse en lightbox, indtast en &lt;em&gt;rel&lt;/em&gt; attribute her.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.0">
+        <source>Create an image link</source>
+        <target>Billed-link</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.1">
+        <source>Use an image instead of the link title.</source>
+        <target>Brug et billede i stedet for link-titlen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.0">
+        <source>Source files</source>
+        <target>Kilde filer</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.1">
+        <source>Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.</source>
+        <target>Vælg venligst en eller flere filer eller mapper (filer i en mappe inkluderes automatisk).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.0">
+        <source>Sort order</source>
+        <target>Rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>Rækkefølgen elementerne skal sorteres i.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>Brug hjemmemappe</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.1">
+        <source>Use the home directory as file source if there is an authenticated user.</source>
+        <target>Hvis en frontend-bruger har logget på, brug da hans hjemmemappe som filkilde.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.0">
+        <source>Thumbnails per row</source>
+        <target>Miniaturebilleder pr. række</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.1">
+        <source>The number of image thumbnails per row.</source>
+        <target>Angiv det antal miniaturebilleder der skal vises pr. række</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.0">
+        <source>Items per page</source>
+        <target>Elementer pr. side</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>Angiv antal poster pr. side (0 = deaktivere sideinddeling).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.0">
+        <source>Total number of images</source>
+        <target>Totalt antal af billeder</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.1">
+        <source>Here you can limit the total number of images. Set to 0 to show all.</source>
+        <target>Her kan du begrænse det totale antal af billeder. Sæt til 0 for at vise alle.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.0">
+        <source>Order by</source>
+        <target>Sortér efter</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.1">
+        <source>Please choose the sort order.</source>
+        <target>Vælg venligst den fortrukne sorteringsrækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.0">
+        <source>Ignore files without meta data</source>
+        <target>Ignorer filer uden meta data</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.1">
+        <source>Do not show files without meta data matching the page language.</source>
+        <target>Vis ikke filer uden meta data der passer sidens sprog.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.0">
+        <source>Gallery template</source>
+        <target>Galleri skabelon</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.1">
+        <source>Here you can select the gallery template.</source>
+        <target>Her kan du vælge galleri skabelonen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+        <target>Speciel element skabelon</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+        <target>Her kan du overskrive standard element skabelonen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.0">
+        <source>Video/audio files</source>
+        <target>Video eller lyd filer</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.1">
+        <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+        <target>Her kan du tilføje video eller lyd filen eller flere filer hvis du benytter andre codecs.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.0">
+        <source>YouTube ID</source>
+        <target>YouTube ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.1">
+        <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+        <target>Indtast venligst YouTube videoens ID (f.eks. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.0">
+        <source>Preview image</source>
+        <target>Video billede</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.1">
+        <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>Vis dette billede i stedet for første fra af videoen, inden afspilning.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.0">
+        <source>Player size</source>
+        <target>Afspillerens størrelse</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.1">
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>Bredte og højde på media afspilleren i pixels (f.eks. 640x480).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.0">
+        <source>Autoplay</source>
+        <target>Autoplay</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.1">
+        <source>Automatically play the video when the page loads.</source>
+        <target>Start automatisk afspilningen af videoen når siden indlæses.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+        <target>Overgangsinterval</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Tiden i millisekunder imellem overgange (1000 = 1s). Sæt til 0 for at deaktivere auto overgang.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>Overgangshastighed</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>Overgangshastigheden i millisekunder (1000 = 1s). Standard er 300.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+        <target>Overgangsforkydning</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Har kan du få overgangen til at state med et specifikt slide (starter ved 0).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+        <target>Loop</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>Få slideren til at køre i loop (starter automatisk forfra ved slutningen).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.0">
+        <source>Referenced element</source>
+        <target>Element-ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.1">
+        <source>Please choose the content element you want to insert.</source>
+        <target>Vælg venligst element-ID for det indholdselement du vil indsætte. ID'et for en post vises, når du redigerer posten.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.0">
+        <source>Referenced article</source>
+        <target>Artikel-ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.1">
+        <source>Please choose the article you want to insert.</source>
+        <target>Vælg venligst ID på den arktikel du vil indsætte.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.0">
+        <source>Article</source>
+        <target>Artikel-ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.1">
+        <source>Please select an article.</source>
+        <target>Vælg venligst ID på den arktikel du vil vise.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.0">
+        <source>Form</source>
+        <target>Formular</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.1">
+        <source>Please select a form.</source>
+        <target>Vælg en formular.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.0">
+        <source>Module</source>
+        <target>Modul</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.1">
+        <source>Please select a module.</source>
+        <target>Vælg venligst det modul du vil inkludere i artiklen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.0">
+        <source>Protect element</source>
+        <target>Beskyt element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.1">
+        <source>Show the content element to certain member groups only.</source>
+        <target>Vis kun indholdselementet for bestemt gruppe medlemmer.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.0">
+        <source>Allowed member groups</source>
+        <target>Tilladte medlemsgrupper</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.1">
+        <source>These groups will be able to see the content element.</source>
+        <target>Her kan du vælge, hvilke grupper som vil få tilladelse til at se indholdselementet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.0">
+        <source>Show to guests only</source>
+        <target>Vis kun til gæster</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.1">
+        <source>Hide the content element if a member is logged in.</source>
+        <target>Skjul indholdselementet, hvis et medlem logger ind.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.0">
+        <source>CSS ID/class</source>
+        <target>Stilark-ID og -klasse</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Her kan du angive stilark-ID (id-attributten) og eller flere stilark-klasser (class-attributten) for at kunne formatere modulet vha. CSS.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.0">
+        <source>Space in front and after</source>
+        <target>Mellemrum før og efter</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.1">
+        <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Indtast venligst mellemrummet før og efter indholdselementet i pixel.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.0">
+        <source>Invisible</source>
+        <target>Usynlig</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.1">
+        <source>Hide the element on the website.</source>
+        <target>Det nuværende element er ikke synligt på dit websted.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.0">
+        <source>Show from</source>
+        <target>Vis fra</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.1">
+        <source>Do not show the element on the website before this day.</source>
+        <target>Vis ikke elementet på websitet før denne dag.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.0">
+        <source>Show until</source>
+        <target>Vis indtil</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.1">
+        <source>Do not show the element on the website on and after this day.</source>
+        <target>Vis ikke elementet på websitet på og efter denne dag.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type_legend">
+        <source>Element type</source>
+        <target>Element type</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text_legend">
+        <source>Text/HTML/Code</source>
+        <target>Tekst/HTML/kode</target>
+      </trans-unit>
+      <trans-unit id="tl_content.image_legend">
+        <source>Image settings</source>
+        <target>Billed indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+        <target>Slider indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list_legend">
+        <source>List items</source>
+        <target>Listetyper</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table_legend">
+        <source>Table items</source>
+        <target>Tabelindgange</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tconfig_legend">
+        <source>Table configuration</source>
+        <target>Tabelkonfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable_legend">
+        <source>Sorting options</source>
+        <target>Muligheder for sortering</target>
+      </trans-unit>
+      <trans-unit id="tl_content.moo_legend">
+        <source>Accordion settings</source>
+        <target>Indstillinger for harmonikavisning</target>
+      </trans-unit>
+      <trans-unit id="tl_content.link_legend">
+        <source>Hyperlink settings</source>
+        <target>Indstillinger for hyperlink</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imglink_legend">
+        <source>Image link settings</source>
+        <target>Indstillinger for billede-hyperlink</target>
+      </trans-unit>
+      <trans-unit id="tl_content.source_legend">
+        <source>Files and folders</source>
+        <target>Filer og mapper</target>
+      </trans-unit>
+      <trans-unit id="tl_content.dwnconfig_legend">
+        <source>Download settings</source>
+        <target>Download indstilling</target>
+      </trans-unit>
+      <trans-unit id="tl_content.include_legend">
+        <source>Include settings</source>
+        <target>Indstillinger for inkludering</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected_legend">
+        <source>Access protection</source>
+        <target>Adgangsbeskyttelse</target>
+      </trans-unit>
+      <trans-unit id="tl_content.expert_legend">
+        <source>Expert settings</source>
+        <target>Ekspert indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_content.template_legend">
+        <source>Template settings</source>
+        <target>Skabelon indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_content.player_legend">
+        <source>Player settings</source>
+        <target>Afspiller indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_content.poster_legend">
+        <source>Preview image</source>
+        <target>Video billede</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible_legend">
+        <source>Visibility</source>
+        <target>Synlighed</target>
+      </trans-unit>
+      <trans-unit id="tl_content.ordered">
+        <source>ordered list</source>
+        <target>liste med rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.unordered">
+        <source>unordered list</source>
+        <target>liste uden rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_asc">
+        <source>File name (ascending)</source>
+        <target>Filnavn (stigende)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_desc">
+        <source>File name (descending)</source>
+        <target>Filnavn (faldende)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_asc">
+        <source>Date (ascending)</source>
+        <target>Dato (stigende)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_desc">
+        <source>Date (descending)</source>
+        <target>Dato (faldende)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.custom">
+        <source>Custom order</source>
+        <target>Brugerdefineret rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.random">
+        <source>Random order</source>
+        <target>Tilfældig rækkefølge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Skabelonen &lt;em&gt;%s&lt;/em&gt; skal inkluderes i side layoutet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Skabelonen &lt;em&gt;%s&lt;/em&gt; eller &lt;em&gt;%s&lt;/em&gt; skal inkluderes i side layoutet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.0">
+        <source>New element</source>
+        <target>Nyt element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.1">
+        <source>Add a new content element</source>
+        <target>Opret et nyt element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.0">
+        <source>Element details</source>
+        <target>Elementdetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.1">
+        <source>Show the details of content element ID %s</source>
+        <target>Viser detaljerne for element-ID %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.0">
+        <source>Move element</source>
+        <target>Flyt element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.1">
+        <source>Move content element ID %s</source>
+        <target>Flyt element-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.0">
+        <source>Duplicate element</source>
+        <target>Duplikér element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.1">
+        <source>Duplicate content element ID %s</source>
+        <target>Duplikér element-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.0">
+        <source>Delete element</source>
+        <target>Slet element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.1">
+        <source>Delete content element ID %s</source>
+        <target>Slet element-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.0">
+        <source>Edit element</source>
+        <target>Rediger element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.1">
+        <source>Edit content element ID %s</source>
+        <target>Rediger element-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.0">
+        <source>Edit article</source>
+        <target>Rediger artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.1">
+        <source>Edit the article settings</source>
+        <target>Rediger artiklens indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Indsæt øverst</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.1">
+        <source>Paste after content element ID %s</source>
+        <target>Indsæt efter element-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Opret ny formatdefinition i begyndelsen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.1">
+        <source>Add new after content element ID %s</source>
+        <target>Opret et nyt indholdselement efter element-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Skift synlighed</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.1">
+        <source>Toggle the visibility of element ID %s</source>
+        <target>Slå synligheden af element-ID %s til eller fra</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.0">
+        <source>Edit source element</source>
+        <target>Rediger kilde-element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.1">
+        <source>Edit the source element ID %s</source>
+        <target>Rediger kilde-element-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.0">
+        <source>Edit article</source>
+        <target>Rediger artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.1">
+        <source>Edit article ID %s</source>
+        <target>Rediger artikel-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list.1">
+        <source>Import list items from a CSV file</source>
+        <target>Importer listepunkter fra en CSV fil</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table.1">
+        <source>Import table items from a CSV file</source>
+        <target>Impoter tabelindhold fra en CSV-fil</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

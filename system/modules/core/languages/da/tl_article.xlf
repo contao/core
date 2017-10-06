@@ -1,0 +1,290 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_article.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_article.title.0">
+        <source>Title</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title.1">
+        <source>Please enter the article title.</source>
+        <target>Indtast artiklens titel.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.0">
+        <source>Article alias</source>
+        <target>Artikelalias</target>
+      </trans-unit>
+      <trans-unit id="tl_article.alias.1">
+        <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
+        <target>Artikelalias er en unik reference til artiklen som kan kaldes i stedet for artikel ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.0">
+        <source>Author</source>
+        <target>Forfatter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.author.1">
+        <source>Here you can change the author of the article.</source>
+        <target>Indtast forfatternavn.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.0">
+        <source>Display in</source>
+        <target>Placer i</target>
+      </trans-unit>
+      <trans-unit id="tl_article.inColumn.1">
+        <source>Please choose the layout section you want the article to be displayed in.</source>
+        <target>Angiv venligst kolonnen, headeren (allerøverst) eller footeren (allernederst), hvor artiklen skal placeres.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.0">
+        <source>Meta keywords</source>
+        <target>Nøgleord</target>
+      </trans-unit>
+      <trans-unit id="tl_article.keywords.1">
+        <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
+        <target>Indtast nøgleord - adskilt af komma. De bruges af søgemaskiner til at finde siden. En søgemaskine viser sædvanligvis op til 800 tegn.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.0">
+        <source>Teaser CSS ID/class</source>
+        <target>Uddrag stilark ID/klasse</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaserCssID.1">
+        <source>Here you can set an ID and one or more classes for the teaser element.</source>
+        <target>Her kan du vælge en ID og en eller flere klasser til uddraget.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.0">
+        <source>Show teaser</source>
+        <target>Vis uddrag</target>
+      </trans-unit>
+      <trans-unit id="tl_article.showTeaser.1">
+        <source>Show the article teaser if there are multiple articles.</source>
+        <target>Vis uddraget i stedet for artiklen, hvis der er flere artikler.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.0">
+        <source>Article teaser</source>
+        <target>Artikel uddrag</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser.1">
+        <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
+        <target>Uddraget kan vises automatisk eller ved hjælp af elementtypen &quot;artikel appetitvækker&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.0">
+        <source>Syndication</source>
+        <target>Udskriftvenlig</target>
+      </trans-unit>
+      <trans-unit id="tl_article.printable.1">
+        <source>Here you can choose which options are available.</source>
+        <target>Tilføj et &quot;udskriv som PDF&quot;-link i artiklens øverst hjørne. Stilark med medietype (media type) &quot;print&quot; og &quot;all&quot; bliver anvendes.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.0">
+        <source>Show to guests only</source>
+        <target>Vis kun til gæster</target>
+      </trans-unit>
+      <trans-unit id="tl_article.guests.1">
+        <source>Hide the article if a member is logged in.</source>
+        <target>Skjul artiklen for medlemmer der er logget ind.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.0">
+        <source>Custom article template</source>
+        <target>Special artikel skabelon</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.1">
+        <source>Here you can overwrite the default article template.</source>
+        <target>Her kan du overskrive standard artikel skabelonen.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.0">
+        <source>Protect article</source>
+        <target>Beskyt artiklen</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected.1">
+        <source>Show the article to certain member groups only.</source>
+        <target>Vis kun artiklen til visse medlemsgrupper.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.0">
+        <source>Allowed member groups</source>
+        <target>Tilladte medlemsgrupper</target>
+      </trans-unit>
+      <trans-unit id="tl_article.groups.1">
+        <source>These groups will be able to see the article.</source>
+        <target>Disse grupper vil kunne se artiklen.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.0">
+        <source>CSS ID/class</source>
+        <target>Stilark-ID og -klasse</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Her kan du angive stilark-ID (id-attributten) og eller flere stilark-klasser (class-attributten) for at kunne formatere modulet vha. CSS.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.0">
+        <source>Space in front and after</source>
+        <target>Mellemrum før og efter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.space.1">
+        <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Angiv venligst mellemrummet før og efter artiklen i pixel.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.0">
+        <source>Publish article</source>
+        <target>Udgivet</target>
+      </trans-unit>
+      <trans-unit id="tl_article.published.1">
+        <source>Make the article publicly visible on the website.</source>
+        <target>Med mindre du vælger denne mulighed vil artiklen ikke være synlig for besøgende på dit websted.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.0">
+        <source>Show from</source>
+        <target>Vis fra</target>
+      </trans-unit>
+      <trans-unit id="tl_article.start.1">
+        <source>Do not show the article on the website before this day.</source>
+        <target>Vis ikke artiklen efter før den angivne dato.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.0">
+        <source>Show until</source>
+        <target>Vis indtil</target>
+      </trans-unit>
+      <trans-unit id="tl_article.stop.1">
+        <source>Do not show the article on the website on and after this day.</source>
+        <target>Vis ikke artiklen på og efter den angivne dato.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.0">
+        <source>Revision date</source>
+        <target>Revideringsdato</target>
+      </trans-unit>
+      <trans-unit id="tl_article.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Dato og tid for sidste revidering.</target>
+      </trans-unit>
+      <trans-unit id="tl_article.title_legend">
+        <source>Title and author</source>
+        <target>Titel og forfatter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.layout_legend">
+        <source>Section and keywords</source>
+        <target>Sektioner og nøgleord</target>
+      </trans-unit>
+      <trans-unit id="tl_article.syndication_legend">
+        <source>Syndication</source>
+        <target>Udskriftvenlig</target>
+      </trans-unit>
+      <trans-unit id="tl_article.teaser_legend">
+        <source>Article teaser</source>
+        <target>Artikel uddrag</target>
+      </trans-unit>
+      <trans-unit id="tl_article.template_legend">
+        <source>Template settings</source>
+        <target>Skabelon indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_article.protected_legend">
+        <source>Access protection</source>
+        <target>Adgangsbeskyttelse</target>
+      </trans-unit>
+      <trans-unit id="tl_article.expert_legend">
+        <source>Expert settings</source>
+        <target>Ekspert indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_article.publish_legend">
+        <source>Publish settings</source>
+        <target>Publiceringsindstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_article.print">
+        <source>Print the page</source>
+        <target>Udskriv siden</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pdf">
+        <source>Export as PDF</source>
+        <target>Eksporter som PDF</target>
+      </trans-unit>
+      <trans-unit id="tl_article.facebook">
+        <source>Share on Facebook</source>
+        <target>Del på Facebook</target>
+      </trans-unit>
+      <trans-unit id="tl_article.twitter">
+        <source>Share on Twitter</source>
+        <target>Del på Twitter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.gplus">
+        <source>Share on Google+</source>
+        <target>Del på Google+</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.0">
+        <source>New article</source>
+        <target>Ny artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.new.1">
+        <source>Create a new article</source>
+        <target>Opret ny artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.0">
+        <source>Article details</source>
+        <target>Artikeldetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_article.show.1">
+        <source>Show the details of article ID %s</source>
+        <target>Vis detaljer for artiklen med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.0">
+        <source>Edit article</source>
+        <target>Rediger artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.edit.1">
+        <source>Edit article ID %s</source>
+        <target>Rediger artikel-ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.0">
+        <source>Edit article</source>
+        <target>Rediger artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.editheader.1">
+        <source>Edit the article settings</source>
+        <target>Rediger artiklens indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.0">
+        <source>Duplicate article</source>
+        <target>Dupliker artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.copy.1">
+        <source>Duplicate article ID %s</source>
+        <target>Dupliker artiklen med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.0">
+        <source>Move article</source>
+        <target>Flyt artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.cut.1">
+        <source>Move article ID %s</source>
+        <target>Flyt artiklen med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.0">
+        <source>Delete article</source>
+        <target>Slet artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.delete.1">
+        <source>Delete article ID %s</source>
+        <target>Slet artiklen med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.0">
+        <source>Publish/unpublish article</source>
+        <target>Udgiv/skjul artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.toggle.1">
+        <source>Publish/unpublish article ID %s</source>
+        <target>Udgiv/skjul artiklen med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.0">
+        <source>Paste after</source>
+        <target>Indsæt efter</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteafter.1">
+        <source>Paste after article ID %s</source>
+        <target>Indsæt efter artiklen med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.0">
+        <source>Paste into</source>
+        <target>Indsæt i</target>
+      </trans-unit>
+      <trans-unit id="tl_article.pasteinto.1">
+        <source>Paste into page ID %s</source>
+        <target>Indsæt i side-ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,653 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_settings.php" source-language="en" target-language="pl">
+    <body>
+      <trans-unit id="tl_settings.websiteTitle.0">
+        <source>Website title</source>
+        <target>Tytuł strony</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websiteTitle.1">
+        <source>Please enter the title of the website.</source>
+        <target>Wprowadź nazwę dla twojego serwisu internetowego.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.0">
+        <source>E-mail address of the system administrator</source>
+        <target>Adres e-mail administratora systemu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>Wprowadź adres e-mail administratora systemu.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.0">
+        <source>Date format</source>
+        <target>Format daty</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>Wprowadź format daty obsługiwany przez funkcję PHP function date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.0">
+        <source>Time format</source>
+        <target>Format czasu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>Wprowadź format czasu obsługiwany przez funkcję PHP function date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.0">
+        <source>Date and time format</source>
+        <target>Format daty i czasu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>Wprowadź format daty i czasu obsługiwany przez funkcję PHP function date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.0">
+        <source>Time zone</source>
+        <target>Strefa czasowa</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.1">
+        <source>Please select the server time zone.</source>
+        <target>Wybierz twoją strefę czasową.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.0">
+        <source>Relative path to the Contao directory</source>
+        <target>Ścieżka relatywna do katalogu Contao</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.1">
+        <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
+        <target>Wprowadź ścieżkę relatywną do katalogu zawierającego pliki Contao (np. jeśli twój panel administracyjny Contao ma adres &lt;em&gt;www.twojadomena.com/twojastrona/contao&lt;/em&gt; relatywną ścieżką będzie &lt;em&gt;/twojastrona&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.0">
+        <source>Character set</source>
+        <target>Kodowania znaków dla Contao</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.1">
+        <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
+        <target>Wpisz rodzaj kodowania znaków. Rekomendowane jest używanie UTF-8, zapewnia to poprawne wyświetlanie znaków specjalnych np. diakrytycznych.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.0">
+        <source>Disable the command scheduler</source>
+        <target>Wyłącz automatyczne zadania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.1">
+        <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
+        <target>Wyłącz wykonywanie zadań automatycznie i wykonuj plik cron.php za pomocą prawdziwego crona (ten musisz włączyć ręcznie).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.0">
+        <source>Minify the markup</source>
+        <target>Minimalizuj kod źródłowy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.1">
+        <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Minimalizuj kod źródłowy HTML zanim zostanie wysłany do przeglądarki.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.0">
+        <source>Compress scripts</source>
+        <target>Kompresuj skrypty</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.1">
+        <source>Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.</source>
+        <target>Tworzy skompresowaną wersję połączonych ze sobą plików CSS i JavaScript. Włączenie tej opcji wymaga dostosowania pliku .htaccess.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.0">
+        <source>Items per page</source>
+        <target>Ilość wyników</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.1">
+        <source>Here you can define the number of items per page in the back end.</source>
+        <target>Ilość wyników na stronie jest używana do ograniczenia wyników zapytań w admin panelu, nie dotyczy to wyszukiwarki.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.0">
+        <source>Maximum items per page</source>
+        <target>Maksymalna ilość pozycji na stronie</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.1">
+        <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
+        <target>Ta opcja ustala maksymalną ilość wyświetlanych rekordów w panelu jeśli użytkownik wybierze opcję &quot;Pokaż wszystkie rekordy&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.0">
+        <source>Exclude folders from synchronization</source>
+        <target>Wyłącz foldery z synchronizacji</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.1">
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Tutaj możesz wprowadźić oddzieloną przecinkami listę folderów, które zostaną wyłączone z synchronizacji (np. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Pamiętaj, że wyłączone źródła nie będą mogły być użyte np. w elementach obrazka lub elementach do pobrania.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.0">
+        <source>Do not collapse elements</source>
+        <target>Nie zwijaj elementów zawartości</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.1">
+        <source>Do not collapse elements in the back end preview.</source>
+        <target>Nie zwijaj elementów zawartości i innych zasobów podczas podglądu w panelu admina.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.0">
+        <source>URL suffix</source>
+        <target>Suffix URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.1">
+        <source>The URL suffix will be added to the URI string to simulate static documents.</source>
+        <target>Suffix URL to rozszerzenie dodawane do adresu zasobu (URI) aby symulować statyczne dokumenty. Domyślnym suffixem URL jest &lt;em&gt;.html&lt;/em&gt;. Pamiętaj, że nie używanie suffixu URL, może mieć negatywny wpływ na pozycję strony w wyszukiwarkach.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.0">
+        <source>Cache mode</source>
+        <target>Tryb pamięci podręcznej</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.1">
+        <source>Here you can select the cache mode.</source>
+        <target>Tu możesz wybrać tryb pamięci podręcznej.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Zaufane serwery proxy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Tutaj możesz wprowadzić oddzieloną przecinkami listę zaufanych serwerów proxy.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+        <target>Domena proxy SSL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Jeśli twoja strona jest dostępna przez serwer proxy SSL, wprowadź jego domenę (np. &lt;em&gt;sslsites.de&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.0">
+        <source>Anonymize IP addresses</source>
+        <target>Anonimizuj adresy IP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.1">
+        <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
+        <target>Anonimizuj każdy adres IP, który jest przechowywane w bazie danych, z wyjątkiem tych w tabeli &lt;em&gt;tl_session&lt;/em&gt; (adres IP jest przypisany do sesji ze względów bezpieczeństwa).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.0">
+        <source>Anonymize Google Analytics</source>
+        <target>Anonimizuj Google Analytics</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.1">
+        <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
+        <target>Anonimizuj adresy IP wysyłane do Google Anayltics.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.0">
+        <source>Rewrite URLs</source>
+        <target>Przyjazne URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.1">
+        <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
+        <target>Włączenie tej opcji pozwala Contao na generowanie statycznych URL bez &quot;index.php&quot;. Opcja wymaga wymaga &quot;mod_rewrite&quot;, zmień nazwę pliku &quot;.htaccess.default&quot; na &quot;.htaccess&quot; i w razie potrzeby dostosuj RewriteBase.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.0">
+        <source>Add the language to the URL</source>
+        <target>Dodaj język do URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.1">
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Dodaj język jako pierwszy parametr URL (np. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.0">
+        <source>Do not redirect empty URLs</source>
+        <target>Nie przekierowuj pustych URLi</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.1">
+        <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+        <target>Dla pustego URLa wyświetl stronę, zamiast przekierowania do punktu startowego języka (niezalecane).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.0">
+        <source>Enable auto_item</source>
+        <target>Używaj parametru auto_item</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.1">
+        <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
+        <target>Pomiń fragment &lt;em&gt;items/&lt;/em&gt; lub &lt;em&gt;events/&lt;/em&gt; w URL i automatycznie załaduj rekord bazując na parametrze &lt;em&gt;auto_item&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.0">
+        <source>Disable page alias usage</source>
+        <target>Wyłącz obsługę aliasów stron</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.1">
+        <source>Use the numeric ID of a page or article instead of its alias.</source>
+        <target>Jeśli wybierzesz tę opcję Contao będzie używać do generowania URLi numerów ID stron zamiast aliasów (np. &lt;em&gt;12.html&lt;/em&gt; zamiast &lt;em&gt;home.html&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.0">
+        <source>Enable folder URLs</source>
+        <target>Włącz foldery URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.1">
+        <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>Tutaj możesz włączyć folderowy styl aliasów stron jak na przykład &lt;em&gt;docs/install/downloads.html&lt;/em&gt; zamiast &lt;em&gt;docs-install-download.html&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.0">
+        <source>Allowed HTML tags</source>
+        <target>Dozwolone tagi HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.1">
+        <source>Here you can enter a list of allowed HTML tags that will not be stripped.</source>
+        <target>Wpisz listę dozwolonych tagów HTML. Wszystkie inne tagi zostaną usunięte z wprowadzanych danych.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.0">
+        <source>Enable debug mode</source>
+        <target>Tryb diagnozowania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.1">
+        <source>Print certain runtime information like database queries to the screen.</source>
+        <target>Po włączeniu tej opcji na ekranie będą wyświetlane aktualne operacje wykonywane przez system (np. zapytania do bazy danych). Opcja ta jest zalecana wyłącznie podczas modyfikacji systemu!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+        <target>Tryb konserwacji</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Wyślij nagłówek 503 HTTP i pokaż stronę konserwacji.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.0">
+        <source>Bypass the internal cache</source>
+        <target>Wyłącz wewnętrzny cache</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.1">
+        <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+        <target>Nie używaj wewnętrznego cacheowania plików (np. użyteczne przy tworzeniu rozszerzeń).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.0">
+        <source>Disable request tokens</source>
+        <target>Wyłącz sprawdzanie poprawności URL (referer check)</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.1">
+        <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
+        <target>Wybierz tę opcję aby wyłączyć w Contao sprawdzanie poprawności adresów URL podczas np. wysyłania formularzy. Pamiętaj, że wyłączenie tej opcji to poważne naruszenie bezpieczeństwa systemu! Typowymi problemami, związanymi z błędnym działaniem sprawdzania poprawności adresów URL, są ustawienia programów zabezpieczających lub innych narzędzi diagnostycznych.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.0">
+        <source>Account locking time</source>
+        <target>Czas oczekiwania na odblokowanie konta</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.1">
+        <source>An account will be locked if a wrong password is entered three times in a row.</source>
+        <target>Wprowadź czas (w sekundach), po którym użytkownik ponownie będzie miał możliwość zalogowania się na swoje konto (domyślnie: 5 minut = 300 sekund). Ta funkcja utrudnia ataki metodą &quot;brutal force&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.0">
+        <source>Display error messages</source>
+        <target>Wyświetl komunikaty błędów</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.1">
+        <source>Print error messages to the screen (not recommended for productional sites).</source>
+        <target>Wybranie tej opcji będzie wyświetlać komunikaty błędów bezpośrednio na ekranie. Opcja ta jest zalecana wyłącznie podczas modyfikacji systemu!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.0">
+        <source>Log error messages</source>
+        <target>Loguj błędy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.1">
+        <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
+        <target>Zapisuj błędy to pliku log (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.0">
+        <source>Run in safe mode</source>
+        <target>Działaj w trybie bezpiecznym</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.1">
+        <source>Run Contao in safe mode and load only core modules.</source>
+        <target>Uruchom Contao w trybie bezpiecznym i ładuj tylko moduły źródłowe.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.0">
+        <source>Disable IP check</source>
+        <target>Wyłącz sprawdzanie IP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.1">
+        <source>Do not bind sessions to IP addresses. Choosing this option is a potential security risk!</source>
+        <target>Nie przypisuj adresu IP do sesji użytkownika. Zaznaczenie tej opcji to potencjalna luka w bezpieczeństwie systemu!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.0">
+        <source>Download file types</source>
+        <target>Poprawne typy pobieranych plików</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.1">
+        <source>Here you can enter a comma separated list of downloadable file types.</source>
+        <target>Wprowadź oddzielone przecinkami rozszerzenia plików, które chcesz udostępniać do pobierania w swoim serwisie. Z przyczyn bezpieczeństwa pobieranie plików ograniczone jest do katalogu &quot;tl_files&quot; i jego podkatalogów.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.0">
+        <source>Image file types</source>
+        <target>Poprawne typy plików graficznych</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.1">
+        <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
+        <target>Wprowadź oddzielone przecinkami rozszerzenia plików graficznych, które chcesz aby były obsługiwane. Nie wprowadzaj takich rodzajów plików, które nie sa obsługiwane przez Contao lub przez twoje własne skrypty.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.0">
+        <source>Editable file types</source>
+        <target>Edytowalne typy plików</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.1">
+        <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
+        <target>Wprowadź oddzielone przecinkami rozszerzenia plików, które mogą być edytowane w edytorze zawartości.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.0">
+        <source>Template file types</source>
+        <target>Pliki typów szablonów</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.1">
+        <source>Here you can enter a comma separated list of supported template file types.</source>
+        <target>Wprowadź oddzielone przecinkami wspierane rozszerzenia plików szablonów.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.0">
+        <source>Maximum front end width</source>
+        <target>Maksymalna szerokość obrazka</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.1">
+        <source>If the width of an image or movie exceeds this value, it will be adjusted automatically. Set to 0 to disable the limit.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.0">
+        <source>JPG thumbnail quality</source>
+        <target>Jakość miniaturek</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.1">
+        <source>Here you can enter the JPG thumbnail quality in percent.</source>
+        <target>Wprowadź jakość miniaturek w procentach (dotyczy tylko plików JPG).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.0">
+        <source>Maximum GD image width</source>
+        <target>Maksymalna długość obrazka GD</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.1">
+        <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
+        <target>Wprowadź maksymalną długość dla obrazka, którą biblioteka GD postara się ujarzmić.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.0">
+        <source>Maximum GD image height</source>
+        <target>Maksymalna wysokość obrazka GD</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.1">
+        <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
+        <target>Wprowadź maksymalną wysokość dla obrazka, którą biblioteka GD postara się ujarzmić.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.0">
+        <source>Files directory</source>
+        <target>Katalog plików</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.1">
+        <source>Here you can set the relative path to the Contao files directory.</source>
+        <target>Wprowadź relatywną ścieżkę do katalogu z plikami (domyślnie: tl_files).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.0">
+        <source>Upload file types</source>
+        <target>Poprawne typy wysyłanych plików</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.1">
+        <source>Here you can enter a comma separated list of uploadable file types.</source>
+        <target>Wprowadź oddzielone przecinkami rozszerzenia plików, które mogą być wysyłane na serwer. Z przyczyn bezpieczeństwa pobieranie plików ograniczone jest do katalogu &quot;tl_files&quot; i jego podkatalogów.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.0">
+        <source>Simultaneous file uploads</source>
+        <target>Jednoczesne wysyłanie plików</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.1">
+        <source>Here you can enter the maximum number of simultaneous file uploads.</source>
+        <target>Wprowadź maksymalną ilość plików jaka może być wysyłana jednocześnie na serwer.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.0">
+        <source>Maximum upload file size</source>
+        <target>Maksymalna wielkość wysyłanego pliku</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.1">
+        <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
+        <target>Wprowadź maksymalną wielkość wysyłanego pliku w bajtach (2 MB = 2048 KB = 2048000 bajty).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.0">
+        <source>Maximum image width</source>
+        <target>Maksymalna szerokość obrazka</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.1">
+        <source>Here you can enter the maximum width for image uploads in pixels.</source>
+        <target>Wprowadź maksymalną szerokość wysyłanego obrazka w pikslach.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.0">
+        <source>Maximum image height</source>
+        <target>Maksymalna wysokość obrazka</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.1">
+        <source>Here you can enter the maximum height for image uploads in pixels.</source>
+        <target>Wprowadź maksymalną wysokość wysyłanego obrazka w pikslach.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.0">
+        <source>Enable searching</source>
+        <target>Włącz silnik wyszukiwania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.1">
+        <source>Index pages so they can be searched.</source>
+        <target>Automatyczna indeksacja stron serwisu, ich wyniki znajdziemy podczas wyszukiwania.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.0">
+        <source>Index protected pages</source>
+        <target>Indeksuj strony zabiezpieczone</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.1">
+        <source>Use this option carefully and always exclude personalized pages from being indexed!</source>
+        <target>Używaj tej opcji z rozwagą i zawsze wykluczaj strony spersonalizowane lub prywatne z indeksowania!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.0">
+        <source>Send e-mails via SMTP</source>
+        <target>Użyj SMTP do wysyłania e-maili</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.1">
+        <source>Use an SMTP server instead of the PHP mail() function to send e-mails.</source>
+        <target>Domyślnie Contao używa funkcji PHP &lt;em&gt;mail()&lt;/em&gt; do wysyłania e-maili. Zamiast tego możesz tutaj wybrać serwer SMTP do wysyłania e-maili.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>Serwer SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>Wprowadź nazwę serwera SMTP (domyślnie jest to localhost).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.0">
+        <source>SMTP username</source>
+        <target>Login SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>Jeśli twój serwer SMTP wymaga autoryzacji, wprowadź tutaj login.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.0">
+        <source>SMTP password</source>
+        <target>Hasło SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>Jeśli twój serwer SMTP wymaga autoryzacji, wprowadź tutaj hasło.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>Szyfrowanie SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Tu możesz wybrać metodę szyfrowania (SSL lub TLS).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>Numer portu SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>Wprowadź numer portu twojego serwera SMTP (domyślnie jest to 25 lub 465 dla połączeń SSL).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.0">
+        <source>Inactive extensions</source>
+        <target>Nieaktywne rozszerzenia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.1">
+        <source>Here you can deactivate unneeded extensions.</source>
+        <target>Tutaj możesz wyłączyć niepotrzebne moduły panelu admina.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.0">
+        <source>Storage time for undo steps</source>
+        <target>Czas przechowywania danych dla operacji &quot;Cofnij&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.1">
+        <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
+        <target>Wprowadź czas (w sekundach) przechowywania danych dla operacji &quot;Cofnij&quot; (domyślnie: 24 godziny = 86400 sekundy).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.0">
+        <source>Storage time for versions</source>
+        <target>Czas przechowywania wersji</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.1">
+        <source>Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).</source>
+        <target>Wprowadź czas (w sekundach) przechowywania wersji zmian (domyślnie: 90 dni = 7776000 sekund).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.0">
+        <source>Storage time for log entries</source>
+        <target>Czas przechowywania logów</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.1">
+        <source>Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).</source>
+        <target>Wprowadź czas (w sekundach) przez jaki przechowywane będą logi systemowe (domyślnie: 14 dni = 1209600 sekund).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.0">
+        <source>Session timeout</source>
+        <target>Żywotność sesji</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.1">
+        <source>Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).</source>
+        <target>Wprowadź maksymalny czas trwania sesji, podaj wartość w sekundach (domyślnie: 60 minut = 3600 sekund). Jeśli w tym przedziale czasu użytkownik będzie nieaktywny, aktualna sesja zostanie przerwana a użytkownik wylogowany.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.0">
+        <source>Auto login period</source>
+        <target>Okres automatycznego logowania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.1">
+        <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
+        <target>Tu możesz ustalić okres automatycznego logowania (90 dni = 7776000 sekund).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.0">
+        <source>Default page owner</source>
+        <target>Domyślna strona użytkownika</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.1">
+        <source>Here you can select a user as the default owner of a page.</source>
+        <target>Domyślnie strona należy do tego samego użytkownika co strona nadrzędna. Jednakże, jeśli żaden użytkownik nie jest przypisany do strony, właścicielem zostaje użytkownik domyślny. Jeśli nie ma przydzielonego użytkownika i dodatkowo nie ma ustalonego domyślnego użytkownika, do strony nie zostaną zastosowane żadne ograniczenia dostępu!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.0">
+        <source>Default page group</source>
+        <target>Domyślna strona grupy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.1">
+        <source>Here you can select a group as the default owner of a page.</source>
+        <target>Domyślnie strona należy do tej samej grupy co strona nadrzędna. Jednakże, jeśli żadna grupa nie jest przydzielona, właścicielem strony zostanie grupa domyślna. Jeśli nie ma przydzielonej grupy i dodatkowo nie ma ustalonej domyślnej grupy, do strony nie zostaną zastosowane żadne ograniczenia dostępu!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.0">
+        <source>Default access rights</source>
+        <target>Domyślne prawa dostępu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.1">
+        <source>Please assign the default access rights for pages and articles.</source>
+        <target>Domyślnie, strona posiada takie same uprawnienia jak strona nadrzędna. Jednakże jeśli żadne uprawnienia nie zostały zdefiniowane, użyte zostaną uprawnienia domyślne.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.0">
+        <source>Live Update URL</source>
+        <target>URL automatycznej aktualizacji</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.1">
+        <source>Here you can enter the Live Update URL.</source>
+        <target>Tutaj możesz wprowadzić URL dla Live Update.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.title_legend">
+        <source>Website title</source>
+        <target>Tytuł strony</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.date_legend">
+        <source>Date and time</source>
+        <target>Data i czas</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.global_legend">
+        <source>Global configuration</source>
+        <target>Konfiguracja globalna</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.backend_legend">
+        <source>Back end configuration</source>
+        <target>Konfiguracja panelu admina</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.frontend_legend">
+        <source>Front end configuration</source>
+        <target>Konfiguracja witryny</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Konfiguracja proxy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacy_legend">
+        <source>Privacy settings</source>
+        <target>Ustawienia prywatności</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.security_legend">
+        <source>Security settings</source>
+        <target>Ustawienia bezpieczeństwa</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.files_legend">
+        <source>Files and images</source>
+        <target>Pliki i obrazki</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploads_legend">
+        <source>Upload settings</source>
+        <target>Ustawienia wysyłania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.search_legend">
+        <source>Search engine settings</source>
+        <target>Ustawienia wyszukiwarki</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>Konfiguracja SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.ftp_legend">
+        <source>Safe Mode Hack</source>
+        <target>Safe Mode Hack</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.modules_legend">
+        <source>Inactive extensions</source>
+        <target>Nieaktywne rozszerzenia</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
+        <target>Automatyczne zadania</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeout_legend">
+        <source>Timeout values</source>
+        <target>Wartości czasowe</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.chmod_legend">
+        <source>Default access rights</source>
+        <target>Domyślne prawa dostępu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.update_legend">
+        <source>Live Update</source>
+        <target>Automatyczna aktualizacja</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.static_legend">
+        <source>Static resources</source>
+        <target>Źródła statyczne</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.edit">
+        <source>Edit the local configuration</source>
+        <target>Edytuj konfigurację</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.both">
+        <source>Use the server and the browser cache</source>
+        <target>Użyj pamięci serwera i przeglądarki</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.server">
+        <source>Use only the server cache</source>
+        <target>Użyj tylko pamięci serwera</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.browser">
+        <source>Use only the browser cache</source>
+        <target>Użyj tylko pamięci przeglądarki</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.none">
+        <source>Disable caching</source>
+        <target>Wyłącz pamięć podręczną</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

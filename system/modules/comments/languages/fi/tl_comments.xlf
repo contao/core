@@ -1,0 +1,186 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_comments.php" source-language="en" target-language="fi">
+    <body>
+      <trans-unit id="tl_comments.source.0">
+        <source>Origin</source>
+        <target>Alkuperä</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.source.1">
+        <source>The associated table.</source>
+        <target>Liittyvä taulukko.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.parent.0">
+        <source>Parent ID</source>
+        <target>Emotunniste</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.parent.1">
+        <source>The associated record.</source>
+        <target>Liittyvä kirjaus.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.date.0">
+        <source>Date</source>
+        <target>Päivämäärä</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.date.1">
+        <source>Please enter the comment date.</source>
+        <target>Syötä kommentin päivämäärä.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.name.0">
+        <source>Author</source>
+        <target>Tekijä</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.name.1">
+        <source>Please enter the author's name.</source>
+        <target>Syötä lähettäjän nimi</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.email.0">
+        <source>E-mail address</source>
+        <target>Sähköpostiosoite</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.email.1">
+        <source>The e-mail address will not be published.</source>
+        <target>Sähköpostiosoitetta ei julkaista.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.website.0">
+        <source>Website</source>
+        <target>Sivusto</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.website.1">
+        <source>Here you can enter a website address.</source>
+        <target>Tässä voidaan syöttää sivuston osoite.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment.0">
+        <source>Comment</source>
+        <target>Kommentti</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment.1">
+        <source>Please enter the comment.</source>
+        <target>Syötä kommentti.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.addReply.0">
+        <source>Add a reply</source>
+        <target>Lisää vastaus</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.addReply.1">
+        <source>Here you can reply to the comment.</source>
+        <target>Tästä voit vastata kommenttiin.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author.0">
+        <source>Author</source>
+        <target>Tekijä</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author.1">
+        <source>Here you can change the author of the reply.</source>
+        <target>Tässä voit vaihtaa vastauksessa näkyvän vastaajan.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply.0">
+        <source>Reply</source>
+        <target>Vastaa</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply.1">
+        <source>Here you can enter the reply.</source>
+        <target>Tässä voit syöttää vastauksen.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.published.0">
+        <source>Publish comment</source>
+        <target>Julkaise kommentti</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.published.1">
+        <source>Make the comment publicly visible on the website.</source>
+        <target>Tee kommentti julkisesti näkyväksi sivustolla.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.0">
+        <source>IP address</source>
+        <target>IP-osoite</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.1">
+        <source>The IP address of the author.</source>
+        <target>Lähettäjän IP-osoite</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.0">
+        <source>Notified</source>
+        <target>Ilmoitettu</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.1">
+        <source>The notification of this comment has been sent.</source>
+        <target>Ilmoitus tästä kommentista on lähetetty.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author_legend">
+        <source>Author</source>
+        <target>Tekijä</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment_legend">
+        <source>Comment</source>
+        <target>Kommentti</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply_legend">
+        <source>Reply</source>
+        <target>Vastaa</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.publish_legend">
+        <source>Publish settings</source>
+        <target>Julkaisuasetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.approved">
+        <source>Approved</source>
+        <target>Hyväksytty</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.pending">
+        <source>Awaiting moderation</source>
+        <target>Odottaa hyväksyntää</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_content">
+        <source>Article</source>
+        <target>Artikkeli</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_page">
+        <source>Page</source>
+        <target>Sivu</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_news">
+        <source>News item</source>
+        <target>Uutiskohta</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_faq">
+        <source>FAQ</source>
+        <target>UKK</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_calendar_events">
+        <source>Event</source>
+        <target>Tapahtuma</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.show.0">
+        <source>Comment details</source>
+        <target>Kommentin lisätiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.show.1">
+        <source>Show the details of comment ID %s</source>
+        <target>Näyttää kommentin lisätietoja ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.edit.0">
+        <source>Edit comment</source>
+        <target>Muokkaa kommenttia</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.edit.1">
+        <source>Edit comment ID %s</source>
+        <target>Muokkaa kommenttia ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.delete.0">
+        <source>Delete comment</source>
+        <target>Poista kommentti</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.delete.1">
+        <source>Delete comment ID %s</source>
+        <target>Poista kommentti ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.toggle.0">
+        <source>Publish/unpublish comment</source>
+        <target>Julkaise/piilota kommentti</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.toggle.1">
+        <source>Publish/unpublish comment ID %s</source>
+        <target>Julkaise/piilota kommentti ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

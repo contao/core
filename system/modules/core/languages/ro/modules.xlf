@@ -1,0 +1,381 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/modules.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="MOD.content">
+        <source>Content</source>
+        <target>Conţinut</target>
+      </trans-unit>
+      <trans-unit id="MOD.article.0">
+        <source>Articles</source>
+        <target>Articole</target>
+      </trans-unit>
+      <trans-unit id="MOD.article.1">
+        <source>Manage articles and content elements</source>
+        <target>Articolele sunt folosite ca un container pentru elemente de gen text, imagini, adrese. Fiecare articol este publicat pe o anumită pagină. Acest modul vă permite să vă gestionaţi articolele.</target>
+      </trans-unit>
+      <trans-unit id="MOD.form.0">
+        <source>Form generator</source>
+        <target>Formulare</target>
+      </trans-unit>
+      <trans-unit id="MOD.form.1">
+        <source>Create custom forms and store or send the submitted data</source>
+        <target>Acest modul vă permite generarea oricărui tip de formular web.</target>
+      </trans-unit>
+      <trans-unit id="MOD.design">
+        <source>Layout</source>
+        <target>Aranjare</target>
+      </trans-unit>
+      <trans-unit id="MOD.themes.0">
+        <source>Themes</source>
+        <target>Teme</target>
+      </trans-unit>
+      <trans-unit id="MOD.themes.1">
+        <source>Manage front end modules, style sheets, page layouts and templates</source>
+        <target>Gestionează module, stiluri, ansambluri şi şabloane</target>
+      </trans-unit>
+      <trans-unit id="MOD.page.0">
+        <source>Site structure</source>
+        <target>Structură</target>
+      </trans-unit>
+      <trans-unit id="MOD.page.1">
+        <source>Set up the site structure of your website(s)</source>
+        <target>Acest modul vă permite aranjarea structurii sitului şi a unor parametri precum limba, permisiuni, caching.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.0">
+        <source>Templates</source>
+        <target>Şabloane</target>
+      </trans-unit>
+      <trans-unit id="MOD.tpl_editor.1">
+        <source>Edit templates in the back end</source>
+        <target>Editează fişierele şablon în back-end.</target>
+      </trans-unit>
+      <trans-unit id="MOD.accounts">
+        <source>Account manager</source>
+        <target>Conturi</target>
+      </trans-unit>
+      <trans-unit id="MOD.member.0">
+        <source>Members</source>
+        <target>Membri</target>
+      </trans-unit>
+      <trans-unit id="MOD.member.1">
+        <source>Manage member accounts (front end users)</source>
+        <target>Membrii sunt utilizatori înregistraţi ai sitului dumneavoastră (ex. clienţii unui magazin online, destinatarii unor eventuale newsletter-e sau membrii unei secţiuni protejate din situl dumneavoastră). Acest modul permite gestionarea membrilor.</target>
+      </trans-unit>
+      <trans-unit id="MOD.mgroup.0">
+        <source>Member groups</source>
+        <target>Grupuri de membri</target>
+      </trans-unit>
+      <trans-unit id="MOD.mgroup.1">
+        <source>Manage member groups (front end user groups)</source>
+        <target>Membrii pot fi încadraţi într-un număr nelimitat de grupuri, pentru a împărţi anumite setări şi permisiuni. Acest modul permite crearea şi gestionarea unor astfel de grupuri.</target>
+      </trans-unit>
+      <trans-unit id="MOD.user.0">
+        <source>Users</source>
+        <target>Utilizatori</target>
+      </trans-unit>
+      <trans-unit id="MOD.user.1">
+        <source>Manage user accounts (back end users)</source>
+        <target>Acest modul permite crearea unui nou cont de utilizator Contao şi gestionarea celor existenţi.</target>
+      </trans-unit>
+      <trans-unit id="MOD.group.0">
+        <source>User groups</source>
+        <target>Grupuri de utilizatori</target>
+      </trans-unit>
+      <trans-unit id="MOD.group.1">
+        <source>Manage user groups (back end user groups)</source>
+        <target>Utilizatorii pot fi încadraţi în orice grupuri pentru a-şi împărţi anumite setări. Acest modul permite crearea acestor grupuri.</target>
+      </trans-unit>
+      <trans-unit id="MOD.system">
+        <source>System</source>
+        <target>Sistem</target>
+      </trans-unit>
+      <trans-unit id="MOD.files.0">
+        <source>File manager</source>
+        <target>Manager fişiere</target>
+      </trans-unit>
+      <trans-unit id="MOD.files.1">
+        <source>Manage files and folders or upload new files to the server</source>
+        <target>Acest modul permite încărcarea fişierelor noi pe server şi gestionarea celor existente.</target>
+      </trans-unit>
+      <trans-unit id="MOD.log.0">
+        <source>System log</source>
+        <target>Jurnale sistem</target>
+      </trans-unit>
+      <trans-unit id="MOD.log.1">
+        <source>Browse the system log and analyze the activity on the website</source>
+        <target>Anumite evenimente de sistem sunt înregistrate în fişiere log. Acest modul permite analiza acestora.</target>
+      </trans-unit>
+      <trans-unit id="MOD.settings.0">
+        <source>Settings</source>
+        <target>Configurare sistem</target>
+      </trans-unit>
+      <trans-unit id="MOD.settings.1">
+        <source>Check and optimize the Contao configuration</source>
+        <target>Acest modul permite modificarea instalării locale şi schimbarea unor parametri de bază precum formatul datei sau setul de caractere.</target>
+      </trans-unit>
+      <trans-unit id="MOD.maintenance.0">
+        <source>Maintenance</source>
+        <target>Mentenanţă sistem</target>
+      </trans-unit>
+      <trans-unit id="MOD.maintenance.1">
+        <source>Maintain or update Contao</source>
+        <target>Acest modul permite gestionarea Contao.</target>
+      </trans-unit>
+      <trans-unit id="MOD.undo.0">
+        <source>Restore</source>
+        <target>Revenire</target>
+      </trans-unit>
+      <trans-unit id="MOD.undo.1">
+        <source>Restore deleted records</source>
+        <target>Dacă o înregistrare din baza de date a fost ştearsă din greşeala acest modul vă permite recuperarea ei. Aceasta nu include fişiere şi directoare.</target>
+      </trans-unit>
+      <trans-unit id="MOD.login.0">
+        <source>Personal data</source>
+        <target>Date personale</target>
+      </trans-unit>
+      <trans-unit id="MOD.login.1">
+        <source>Change your personal data or set a new password</source>
+        <target>Acest modul permite utilizatorului curent să îşi modifice datele precum nume, parola, email.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_style">
+        <source>Style sheets</source>
+        <target>Fişiere de stil</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_style_sheet">
+        <source>Style sheets</source>
+        <target>Fişiere de stil</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_module">
+        <source>Front end modules</source>
+        <target>Module front-end</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_layout">
+        <source>Page layouts</source>
+        <target>Ansambluri</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_image_size">
+        <source>Image sizes</source>
+        <target>Mărimi imagini</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_image_size_item">
+        <source>Image size media queries</source>
+        <target>Mărimi de imagini după interogare media</target>
+      </trans-unit>
+      <trans-unit id="MOD.css">
+        <source>Style sheets</source>
+        <target>Fişiere de stil</target>
+      </trans-unit>
+      <trans-unit id="MOD.modules">
+        <source>Front end modules</source>
+        <target>Module front-end</target>
+      </trans-unit>
+      <trans-unit id="MOD.layout">
+        <source>Page layouts</source>
+        <target>Ansambluri</target>
+      </trans-unit>
+      <trans-unit id="MOD.image_sizes">
+        <source>Image sizes</source>
+        <target>Mărimi imagini</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_import">
+        <source>Theme import</source>
+        <target>Import temă</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_export">
+        <source>Theme export</source>
+        <target>Export temă</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigationMenu">
+        <source>Navigation</source>
+        <target>Navigare</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigation.0">
+        <source>Navigation menu</source>
+        <target>Meniu navigare</target>
+      </trans-unit>
+      <trans-unit id="FMD.navigation.1">
+        <source>Generates a navigation menu from the site structure</source>
+        <target>generează meniul sitului.</target>
+      </trans-unit>
+      <trans-unit id="FMD.customnav.0">
+        <source>Custom navigation</source>
+        <target>Navigare proprie</target>
+      </trans-unit>
+      <trans-unit id="FMD.customnav.1">
+        <source>Generates a custom navigation menu</source>
+        <target>Generează un meniu de navigare personalizată dintr-un anumit număr de pagini.</target>
+      </trans-unit>
+      <trans-unit id="FMD.breadcrumb.0">
+        <source>Breadcrumb navigation</source>
+        <target>Navigare breadcrumb</target>
+      </trans-unit>
+      <trans-unit id="FMD.breadcrumb.1">
+        <source>Generates a breadcrumb navigation menu</source>
+        <target>Generează un meniu de navigare de tip &quot;breadcrumb&quot;.</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicknav.0">
+        <source>Quick navigation</source>
+        <target>Navigare rapidă</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicknav.1">
+        <source>Generates a drop-down menu from the site structure</source>
+        <target>Generează un meniu &quot;drop-down&quot; din toate paginile.</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicklink.0">
+        <source>Quick link</source>
+        <target>Legatură rapidă</target>
+      </trans-unit>
+      <trans-unit id="FMD.quicklink.1">
+        <source>Generates a custom drop-down menu</source>
+        <target>generează un meniu &quot;drop-down&quot; din paginile selectate, permiţând astfel saltul direct.</target>
+      </trans-unit>
+      <trans-unit id="FMD.booknav.0">
+        <source>Book navigation</source>
+        <target>Navigare paginată</target>
+      </trans-unit>
+      <trans-unit id="FMD.booknav.1">
+        <source>Generates a book navigation menu</source>
+        <target>generează un meniu &quot;book&quot; din toate paginile, permiţând astfel saltul direct.</target>
+      </trans-unit>
+      <trans-unit id="FMD.articlenav.0">
+        <source>Article navigation</source>
+        <target>Navigare articole</target>
+      </trans-unit>
+      <trans-unit id="FMD.articlenav.1">
+        <source>Generates a pagination menu to navigate articles</source>
+        <target>generează un meniu de paginare pentru articolele dintr-o anume coloană.</target>
+      </trans-unit>
+      <trans-unit id="FMD.sitemap.0">
+        <source>Sitemap</source>
+        <target>Hartă site</target>
+      </trans-unit>
+      <trans-unit id="FMD.sitemap.1">
+        <source>Generates a list of all pages in the site structure</source>
+        <target>generează o listă cu toate paginile disponibile.</target>
+      </trans-unit>
+      <trans-unit id="FMD.user">
+        <source>User</source>
+        <target>Utilizator</target>
+      </trans-unit>
+      <trans-unit id="FMD.login.0">
+        <source>Login form</source>
+        <target>Formular de autentificare</target>
+      </trans-unit>
+      <trans-unit id="FMD.login.1">
+        <source>Generates a login form</source>
+        <target>generează un formular care permite unui membru autentificarea (odată autentificat, va putea accesa pagini protejate prin parolă).</target>
+      </trans-unit>
+      <trans-unit id="FMD.logout.0">
+        <source>Automatic logout</source>
+        <target>Ieşire automată</target>
+      </trans-unit>
+      <trans-unit id="FMD.logout.1">
+        <source>Automatically logs out a user</source>
+        <target>permite terminarea automată a sesiunii unui membru.</target>
+      </trans-unit>
+      <trans-unit id="FMD.personalData.0">
+        <source>Personal data</source>
+        <target>Date personale</target>
+      </trans-unit>
+      <trans-unit id="FMD.personalData.1">
+        <source>Generates a form to edit a user's personal data</source>
+        <target>generează un formular front-end care permite unui membru să îşi schimbe datele personale.</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.0">
+        <source>Registration</source>
+        <target>Înregistrare</target>
+      </trans-unit>
+      <trans-unit id="FMD.registration.1">
+        <source>Generates a user registration form</source>
+        <target>creează un formular care permite înregistrarea.</target>
+      </trans-unit>
+      <trans-unit id="FMD.changePassword.0">
+        <source>Change password</source>
+        <target>Schimbă parola</target>
+      </trans-unit>
+      <trans-unit id="FMD.changePassword.1">
+        <source>Generates a form to change the password</source>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.0">
+        <source>Lost password</source>
+        <target>Parolă pierdută</target>
+      </trans-unit>
+      <trans-unit id="FMD.lostPassword.1">
+        <source>Generates a form to request a new password</source>
+        <target>creează un formular care permite schimbarea parolei.</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.0">
+        <source>Close account</source>
+        <target>Şterge cont</target>
+      </trans-unit>
+      <trans-unit id="FMD.closeAccount.1">
+        <source>Generates a form to delete a member account</source>
+        <target>creează un formular care permite ştergerea contului de membru.</target>
+      </trans-unit>
+      <trans-unit id="FMD.application">
+        <source>Applications</source>
+        <target>Aplicaţii</target>
+      </trans-unit>
+      <trans-unit id="FMD.form.0">
+        <source>Form</source>
+        <target>Formular</target>
+      </trans-unit>
+      <trans-unit id="FMD.form.1">
+        <source>Adds a form to the page</source>
+        <target>generează un formular într-o pagină web (datele unui formular pot fi trimise via email sau pot fi procesate de un alt modul).</target>
+      </trans-unit>
+      <trans-unit id="FMD.search.0">
+        <source>Search engine</source>
+        <target>Motor căutare</target>
+      </trans-unit>
+      <trans-unit id="FMD.search.1">
+        <source>Adds a search form to the page</source>
+        <target>permite căutarea în website.</target>
+      </trans-unit>
+      <trans-unit id="FMD.articleList.0">
+        <source>Article list</source>
+        <target>Listă articole</target>
+      </trans-unit>
+      <trans-unit id="FMD.articleList.1">
+        <source>Generates a list of articles of a column</source>
+        <target>generează o listă a articolelor dintr-o anume coloană.</target>
+      </trans-unit>
+      <trans-unit id="FMD.miscellaneous">
+        <source>Miscellaneous</source>
+        <target>Diverse</target>
+      </trans-unit>
+      <trans-unit id="FMD.flash.0">
+        <source>Flash movie</source>
+        <target>Animaţie Flash</target>
+      </trans-unit>
+      <trans-unit id="FMD.flash.1">
+        <source>Embeds a Flash movie into the page</source>
+        <target>generează o animaţie Flash în pagină.</target>
+      </trans-unit>
+      <trans-unit id="FMD.randomImage.0">
+        <source>Random image</source>
+        <target>Imagine aleatoare</target>
+      </trans-unit>
+      <trans-unit id="FMD.randomImage.1">
+        <source>Adds a random image to the page</source>
+        <target>include o imagine aleatoare în pagină.</target>
+      </trans-unit>
+      <trans-unit id="FMD.html.0">
+        <source>Custom HTML</source>
+        <target>Cod HTML</target>
+      </trans-unit>
+      <trans-unit id="FMD.html.1">
+        <source>Allows you to add custom HTML code</source>
+        <target>permite includerea de cod sursă HTML.</target>
+      </trans-unit>
+      <trans-unit id="FMD.rss_reader.0">
+        <source>RSS reader</source>
+        <target>Cititor RSS</target>
+      </trans-unit>
+      <trans-unit id="FMD.rss_reader.1">
+        <source>Adds an RSS feed to the page</source>
+        <target>adaugă un flux RSS în pagină</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

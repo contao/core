@@ -1,0 +1,79 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Kiesbare nieuwsbrief abonnementen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Toon deze kanalen in het front-end formulier</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Nieuwsbrieven</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Selecteer één of meerdere nieuwsbriefkanalen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Verberg nieuwsbrieven menu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Menu om nieuwsbriefkanalen te kiezen verbergen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>E-mailbericht inschrijving</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Geef de tekst van de inschrijvings e-mail. U kunt gebruik maken van de wildcards &lt;em&gt;##channel##&lt;/em&gt; (naam nieuwsbrief/kanaal), &lt;em&gt;##domain##&lt;/em&gt; (domeinnaam) en &lt;em&gt;##link##&lt;/em&gt; (activatielink).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>E-mailbericht afmelding</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Geef de tekst van de afmelding e-mail. U kunt gebruik maken van de wildcards &lt;em&gt;##channel##&lt;/em&gt; (naam nieuwsbrief/kanaal) en &lt;em&gt;##domain##&lt;/em&gt; (domeinnaam).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Nieuwsbrief template</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Kies een nieuwsbrief template.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Uw inschrijving voor nieuwsbrief %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>U hebt uzelf ingeschreven voor nieuwsbrief ##channel## op ##domain##. Klik op de volgende link om de inschrijving te activeren: ##link##. Als u zich niet hebt opgegeven, kunt u dit bericht negeren.
+</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Uw inschrijving voor nieuwsbrief %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>U bent succesvol uitgeschreven van de nieuwsbrief ##channel## op ##domain##.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

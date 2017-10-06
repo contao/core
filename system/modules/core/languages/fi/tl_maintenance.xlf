@@ -1,0 +1,198 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_maintenance.php" source-language="en" target-language="fi">
+    <body>
+      <trans-unit id="tl_maintenance.cacheTables.0">
+        <source>Purge data</source>
+        <target>Puhdista tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheTables.1">
+        <source>Please select the data you want to purge or rebuild.</source>
+        <target>Ole hyvä ja valitse puhdistettavat tai uudelleenrakennettavat tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.0">
+        <source>Front end user</source>
+        <target>Sivuston käyttäjä</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.frontendUser.1">
+        <source>Automatically log in a front end user to index protected pages.</source>
+        <target>Kirjaa automaattisesti sisään sivuston käyttäjä suojattujen sivujen indeksoimiseksi.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.job">
+        <source>Job</source>
+        <target>Työ</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.description">
+        <source>Description</source>
+        <target>Kuvaus</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.clearCache">
+        <source>Purge data</source>
+        <target>Puhdista tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.cacheCleared">
+        <source>The data has been purged</source>
+        <target>Tiedot on puhdistettu</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdate">
+        <source>Live Update</source>
+        <target>Live Päivitys</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.liveUpdateId">
+        <source>Live Update ID</source>
+        <target>Live-päivitystunniste</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toLiveUpdate">
+        <source>Go to the Live Update</source>
+        <target>Mene Live-päivitykseen</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.upToDate">
+        <source>Your Contao version %s is up to date</source>
+        <target>Contao-versiosi %s on ajan tasalla.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.newVersion">
+        <source>A newer Contao version %s is available</source>
+        <target>Contaosta on saatavilla uudempi %s-versio.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.notWriteable">
+        <source>The temporary folder (system/tmp) is not writeable</source>
+        <target>Väliaikaisten tiedostojen hakemistoon (system/tmp) ei voi kirjoittaa</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.changelog">
+        <source>View the change log</source>
+        <target>Katsele muutoslokia</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.runLiveUpdate">
+        <source>Run the update</source>
+        <target>Aja päivitys</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.toc">
+        <source>Content of the update archive</source>
+        <target>Päivitysarkiston sisältö</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.backup">
+        <source>Backuped files</source>
+        <target>Varmuuskopioidut tiedostot</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.update">
+        <source>Updated files</source>
+        <target>Päivitetyt tiedostot</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.searchIndex">
+        <source>Rebuild the search index</source>
+        <target>Uudelleenrakenna hakuindeksi</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexSubmit">
+        <source>Rebuild index</source>
+        <target>Uudelleenrakenna indeksi</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.noSearchable">
+        <source>No searchable pages found</source>
+        <target>Sivuja joilta voi hakea ei löytynyt</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexNote">
+        <source>Please wait for the page to load completely before you proceed!</source>
+        <target>Ole hyvä ja odota, että sivu on täysin latautunut, ennen kuin jatkat!</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexLoading">
+        <source>Please wait while the search index is being rebuilt.</source>
+        <target>Ole hyvä ja odota kun hakuindeksiä rakennetaan.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.indexComplete">
+        <source>The search index has been rebuilt. You can now proceed.</source>
+        <target>Hakuindeksi on nyt rakennettu. Voit nyt jatkaa.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance.updateHelp">
+        <source>Please enter your %s here.</source>
+        <target>Ole hyvä ja syötä %s tähän.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.0">
+        <source>Purge the search index</source>
+        <target>Puhdista hakuindeksi</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.index.1">
+        <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
+        <target>Tyhjentää taulut &lt;em&gt;tl_search&lt;/em&gt; ja &lt;em&gt;tl_search_index&lt;/em&gt;. Tämän jälkeen hakuindeksi pitää rakentaa uudelleen (ks. ylh.).</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.0">
+        <source>Purge the undo table</source>
+        <target>Puhdista undo-taulu</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.undo.1">
+        <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
+        <target>Tyhjentää &lt;em&gt;tl_undo&lt;/em&gt;-taulun, joka sisältää poistetut. Tämä poistaa ne lopullisesti.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.0">
+        <source>Purge the version table</source>
+        <target>Puhdista versiotaulu</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.versions.1">
+        <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
+        <target>Tyhjentää &lt;em&gt;tl_version&lt;/em&gt;-taulun jossa on tallennettuna edelliset versiot. Tämä poistaa ne lopullisesti.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.0">
+        <source>Purge the system log</source>
+        <target>Puhdista järjestelmäloki</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.log.1">
+        <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>Tyhjentää &lt;em&gt;tl_log&lt;/em&gt;-taulun, joka sisältää järjestelmälokimerkinnät. Tämä toiminto poistaa ne lopullisesti.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.0">
+        <source>Purge the image cache</source>
+        <target>Tyhjennä kuvavälimuisi</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.images.1">
+        <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Poistaa automaattisesti tuotetut kuvat ja puhdistaa sen jälkeen sivuvälimuistin, ettei linkkejä poistettuihin tietoihin jää.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.0">
+        <source>Purge the script cache</source>
+        <target>Tyhjennä skriptivälimuisti</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.scripts.1">
+        <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
+        <target>Poistaa kaikki automaattisesti tuotetus .css- ja .js-tiedostot, luo uudelleen sisäiset tyylisivut ja sen jälkeen tyhjentää sivuvälimuistin.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.0">
+        <source>Purge the page cache</source>
+        <target>Tyhjennä sivuvälimuisi</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.pages.1">
+        <source>Removes the cached versions of the front end pages.</source>
+        <target>Poistaa sivujen välimuistitetut versiot.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.0">
+        <source>Purge the search cache</source>
+        <target>Tyhjennä hakuvälimuisti</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.search.1">
+        <source>Removes the cached versions of the search results.</source>
+        <target>Poistaa hakutulosten välimuistitetut versiot.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.0">
+        <source>Purge the internal cache</source>
+        <target>Tyhjennä sisäinen välimuisti</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.internal.1">
+        <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
+        <target>Poistaa DCA- ja kielititedostojen välimuistitetut versiot. Sisäisen välimuistin voi poistaa käytöstä kokonaan asetuksissa.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.0">
+        <source>Purge the temp folder</source>
+        <target>Poista väliaikaistiedostot</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.temp.1">
+        <source>Removes the temporary files.</source>
+        <target>Poistaa väliaikaistiedostot.</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.0">
+        <source>Recreate the XML files</source>
+        <target>Luo XML-tiedostot uudelleen</target>
+      </trans-unit>
+      <trans-unit id="tl_maintenance_jobs.xml.1">
+        <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
+        <target>Luo uudelleen XML-tiedostot (sivustokartat ja syötteet) ja tyhjentää sen jälkeen sivuvälimuistin, ettei linkkejä poistettuihin tietoihin jää.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size_item.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="tl_image_size_item.media.0">
+        <source>Media query</source>
+        <target>Interogări media</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.media.1">
+        <source>Here you can define when to use the image size, e.g. &lt;em&gt;(max-width: 600px)&lt;/em&gt;.</source>
+        <target>Aici puteţi defini când se foloseşte mărimea de imagine, de ex. &lt;em&gt;(max-width: 600px)&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.invisible.0">
+        <source>Invisible</source>
+        <target>Invizibil</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.invisible.1">
+        <source>Do not use the image size definition.</source>
+        <target>Nu folosi definirea mărimii de imagine.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.0">
+        <source>Revision date</source>
+        <target>Data revizie</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Data şi ora a ultimei revizii</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.title_legend">
+        <source>Image size settings</source>
+        <target>Setări mărime de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.expert_legend">
+        <source>Expert settings</source>
+        <target>Setări avansate</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.visibility_legend">
+        <source>Visibility</source>
+        <target>Vizibilitate</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.0">
+        <source>New image size media query</source>
+        <target>Nouă interogare media de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.1">
+        <source>Create a new image size media query</source>
+        <target>Creează o nouă interogare media de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.0">
+        <source>Image size media query details</source>
+        <target>Detalii interogare media de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.1">
+        <source>Show the details of image size media query ID %s</source>
+        <target>Arată detaliile interogării media de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.0">
+        <source>Edit image size media query</source>
+        <target>Editează interogare media de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.1">
+        <source>Edit image size media query ID %s</source>
+        <target>Editează interogare media de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.0">
+        <source>Move image size media query</source>
+        <target>Mută interogare media de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.1">
+        <source>Move image size media query ID %s</source>
+        <target>Mută interogare media de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.0">
+        <source>Duplicate image size media query</source>
+        <target>Copiază interogare media de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.1">
+        <source>Duplicate image size media query ID %s</source>
+        <target>Copiază interogare media de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.0">
+        <source>Delete image size media query</source>
+        <target>Şterge interogare media de imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.1">
+        <source>Delete image size media query ID %s</source>
+        <target>Şterge interogare media de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.0">
+        <source>Edit image size</source>
+        <target>Editează mărimea de imaginie</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>Editează setări de mărime imagine</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Lipeşte la început</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.1">
+        <source>Paste after image size media query ID %s</source>
+        <target>Copiază după interogare media de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Creează o nouă definiţie de format la început</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.1">
+        <source>Add new after image size media query ID %s</source>
+        <target>Adaugă nouă interogare media de imagine ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Vizibilitate</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.1">
+        <source>Toggle the visibility of image size media query ID %s</source>
+        <target>Schimă vizibilitatea pentru interogare media de imagine ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

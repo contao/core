@@ -1,0 +1,798 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_content.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_content.type.0">
+        <source>Element type</source>
+        <target>Elem típusa</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type.1">
+        <source>Please choose the type of content element.</source>
+        <target>Válasszon egy tartalmi elem típust.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.0">
+        <source>Headline</source>
+        <target>Szalagcím</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.1">
+        <source>Here you can add a headline to the content element.</source>
+        <target>Itt egy szalagcím adható a tartalmi elemhez.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.0">
+        <source>Text</source>
+        <target>Szöveg</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>Használható HTML tag a szöveg formázására.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.0">
+        <source>Add an image</source>
+        <target>Kép hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.1">
+        <source>Add an image to the content element.</source>
+        <target>Egy kép adható a tartalmi elemhez.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.0">
+        <source>Source file</source>
+        <target>Forrásfájl</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.1">
+        <source>Please select a file or folder from the files directory.</source>
+        <target>Válasszon egy fájlt vagy könyvtárat.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.0">
+        <source>Alternate text</source>
+        <target>Alternatív szöveg</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.1">
+        <source>Here you can enter an alternate text for the image (&lt;em&gt;alt&lt;/em&gt; attribute).</source>
+        <target>Itt megadható egy alternatív szöveg a képekhez (&lt;em&gt;alt&lt;/em&gt; attribútum).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.0">
+        <source>Title</source>
+        <target>Cím</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.1">
+        <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
+        <target>Itt megadható a kép megnevezése (&lt;em&gt;title&lt;/em&gt; attribútum).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.0">
+        <source>Image size</source>
+        <target>Képméret</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Itt beállíthatóak a kép méretei és az átméretezés módját.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.0">
+        <source>Image margin</source>
+        <target>Kép margó</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>Itt megadható a felső, jobb, alsó és bal margó.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.0">
+        <source>Image link target</source>
+        <target>Kép link célpont</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.1">
+        <source>A custom image link target will override the lightbox link, so the image cannot be viewed fullsize anymore.</source>
+        <target>Az egyedi kép link célpont felülbírálja a lightbox linket, így a kép nem lesz megtekinthető teljes méretben többé.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>Teljes méretű nézet/új ablakban</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>A teljes méretű kép megnyitása lightbox-al vagy új böngésző ablakban.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.0">
+        <source>Image alignment</source>
+        <target>Kép igazítás</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.1">
+        <source>Please specify how to align the image.</source>
+        <target>Válassza ki a kép igazítását.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.0">
+        <source>Image caption</source>
+        <target>Kép aláírás</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.1">
+        <source>Here you can enter a short text that will be displayed below the image.</source>
+        <target>Itt megadható egy rövid szöveg, amely megjelenik a kép alatt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.0">
+        <source>HTML code</source>
+        <target>HTML kód</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>A használható HTML elemek listája az adminisztrációs felület beállítások menüpontjában módosítható.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.0">
+        <source>List type</source>
+        <target>Lista típusa</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.1">
+        <source>Please choose the type of list.</source>
+        <target>A lista típusának kiválasztása.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.0">
+        <source>List items</source>
+        <target>Lista elemek</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Amennyiben a JavaScript tíltva van mentse le módosításait a sorrend megváltoztatása előtt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.0">
+        <source>Table items</source>
+        <target>Táblázat elemek</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Amennyiben a JavaScript tíltva van mentse le módosításait a sorrend megváltoztatása előtt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.0">
+        <source>Table summary</source>
+        <target>Táblázat összefoglaló</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.1">
+        <source>Please enter a short summary of the table and describe its purpose or structure.</source>
+        <target>Megadható egy rövid összefoglaló a táblázathoz, és leírható a célja vagy struktúrája.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.0">
+        <source>Add table header</source>
+        <target>Fejrész hozzáadása a táblázathoz</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.1">
+        <source>Make the first row of the table the table header.</source>
+        <target>Ezt kiválasztva a táblázat első sora a fejrész lesz.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.0">
+        <source>Add table footer</source>
+        <target>Lábrész hozzáadása a táblázathoz</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.1">
+        <source>Make the last row of the table the table footer.</source>
+        <target>Ezt kiválasztva a táblázat utolsó sora a lábrész lesz.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.0">
+        <source>Use row headers</source>
+        <target>Használjon sor fejléceket</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.1">
+        <source>Define the left column as row header.</source>
+        <target>Határozza meg a bal oldali oszlopot sor fejlécként.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.0">
+        <source>Sortable table</source>
+        <target>Sorba rendezhető táblázat</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.1">
+        <source>Make the table sortable (requires JavaScript and a table header).</source>
+        <target>Sorba rendezhető táblázatot készít (JavaScript és táblázat fejléc szükséges).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.0">
+        <source>Sort index</source>
+        <target>Rendezési index</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.1">
+        <source>The number of the default sort column.</source>
+        <target>A sorba rendezés alapértelmezett oszlopának száma.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.0">
+        <source>Sort order</source>
+        <target>Rendezési sorrend</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.1">
+        <source>Please choose the sort order.</source>
+        <target>A rendezés módjának kiválasztása.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.0">
+        <source>Operation mode</source>
+        <target>Üzemmód</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.1">
+        <source>Please select the operation mode of the accordion element.</source>
+        <target>Válassza ki a harmonika működési módját.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.0">
+        <source>Wrapper start</source>
+        <target>Csoport eleje</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.1">
+        <source>Marks the beginning of an accordion pane that spans several content elements.</source>
+        <target>Egy harmonika panel elejét jelöli mely összefog több tartalmi elemet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.0">
+        <source>Wrapper stop</source>
+        <target>Csoport vége</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.1">
+        <source>Marks the end of an accordion pane that spans several content elements.</source>
+        <target>Egy harmonika panel végét jelöli mely összefog több tartalmi elemet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.0">
+        <source>Single element</source>
+        <target>Egyedülálló elem</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.1">
+        <source>Behaves like a single text element that is inside an accordion pane.</source>
+        <target>Úgy működik mint egy harmonika panelba helyezett szöveges elem.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.0">
+        <source>Section headline</source>
+        <target>Szakasz fejléc</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.1">
+        <source>Please enter the headline of the content pane. HTML tags are allowed.</source>
+        <target>Adja meg a tartalmi elem fejlécét. HTML címkék használata megengedett.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.0">
+        <source>CSS format</source>
+        <target>CSS formázás</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.1">
+        <source>Here you can format the section headline using CSS code.</source>
+        <target>Itt formázható a szakasz fejléce CSS kód használatával.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.0">
+        <source>Element classes</source>
+        <target>Elem osztályok</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.1">
+        <source>Leave blank to use the default classes or enter a custom toggler and accordion class.</source>
+        <target>Használhatja az alapértelmezett osztályt, vagy megadhat egyedi toggler vagy accordion osztály nevet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.0">
+        <source>Configuration</source>
+        <target>Beállítás</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.1">
+        <source>Here you can configure the syntax highlighter (e.g. &lt;em&gt;gutter: false;&lt;/em&gt;).</source>
+        <target>Itt lehet a szintaxis kiemelést beállítani (pl.: &lt;em&gt;gutter: false;&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.0">
+        <source>Syntax highlighting</source>
+        <target>Szintaxis kiemelés</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.1">
+        <source>Please choose a scripting language.</source>
+        <target>Válassza ki a script nyelvet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.0">
+        <source>Code</source>
+        <target>Kód</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.1">
+        <source>Note that the code will not be executed. Use F11 to toggle the fullscreen mode if you are using the code editor.</source>
+        <target>Ne feledje, hogy a kód nem kerül végrehajtásra. Az F11 gomb használatával teljes képernyős üzemmódra váltható a kódszerkesztő.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.0">
+        <source>Link text</source>
+        <target>Link szöveg</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.1">
+        <source>The link text will be displayed instead of the target URL.</source>
+        <target>A link szöveg fog megjelenni a cél URL helyett.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.0">
+        <source>Link title</source>
+        <target>Link megnevezése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.1">
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>A link megnevezésének hozzáadása, a &lt;em&gt;title&lt;/em&gt; attribútum megadása a HTML forráskódban.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.0">
+        <source>Embed the link</source>
+        <target>Beágyazott link</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.1">
+        <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
+        <target>Használja a &quot;%s&quot; helyettesítő kódot a link beágyazásához a szövegbe (pl.: &lt;em&gt;További információért látogasson ide: %s&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.0">
+        <source>Lightbox</source>
+        <target>Lightbox</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.1">
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>A lightboxot használatához, a &lt;em&gt;rel&lt;/em&gt; attribútum megadása.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.0">
+        <source>Create an image link</source>
+        <target>Kép link készítése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.1">
+        <source>Use an image instead of the link title.</source>
+        <target>Kép használata linkként cím helyett.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.0">
+        <source>Source files</source>
+        <target>Forrásfájlok</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.1">
+        <source>Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.</source>
+        <target>Válasszon egy vagy több fájlt vagy mappát. Mappa választása esetén benne lévő fájlok automatikusan csatolva lesznek.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.0">
+        <source>Sort order</source>
+        <target>Rendezési sorrend</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>Elemek rendezési sorrendje.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>Home könyvtár alkalmazása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.1">
+        <source>Use the home directory as file source if there is an authenticated user.</source>
+        <target>Home könyvtár használata a fájlok forrásaként regisztrált tagok esetén.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.0">
+        <source>Thumbnails per row</source>
+        <target>Miniatűrök soronként</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.1">
+        <source>The number of image thumbnails per row.</source>
+        <target>Miniatűrök száma egy sorban.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.0">
+        <source>Items per page</source>
+        <target>Elem oldalanként</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>Elemek száma oldalanként. 0 beállításával kikapcsolja a lapozást.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.0">
+        <source>Total number of images</source>
+        <target>Összes kép száma</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.1">
+        <source>Here you can limit the total number of images. Set to 0 to show all.</source>
+        <target>Itt korlátozható a képek számát. 0 beállításával az összes képet megmutatja.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.0">
+        <source>Order by</source>
+        <target>Sorba rendezés módja</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.1">
+        <source>Please choose the sort order.</source>
+        <target>A rendezés módjának kiválasztása.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.0">
+        <source>Ignore files without meta data</source>
+        <target>Meta adatok nélküli fájlok kihagyása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.1">
+        <source>Do not show files without meta data matching the page language.</source>
+        <target>Ne mutassa az oldal nyelvéhez illő meta adatok nélküli fájlokat</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.0">
+        <source>Gallery template</source>
+        <target>Galéria sablon</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.1">
+        <source>Here you can select the gallery template.</source>
+        <target>Itt választható ki a galéria sablon.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+        <target>Egyedi elem sablon</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+        <target>Itt felülírhatja az alapértelmezett elem sablont.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.0">
+        <source>Video/audio files</source>
+        <target>Video/audio fájlok</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.1">
+        <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+        <target>Itt vehet fel video/audio fájlt vagy fájlokat ha másfajta kodeket használ.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.0">
+        <source>YouTube ID</source>
+        <target>YouTube ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.1">
+        <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+        <target>YouTube videó ID, azonosító megadása (pl. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.0">
+        <source>Preview image</source>
+        <target>Előnézeti kép</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.1">
+        <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>Ez a kép jelenik meg a videó első képkockájaként a lejátszás előtt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.0">
+        <source>Player size</source>
+        <target>Lejátszó mérete</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.1">
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>A média lejátszó szélessége és magassága pixelben (pl.: 640x480).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.0">
+        <source>Autoplay</source>
+        <target>Automatikus lejátszás</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.1">
+        <source>Automatically play the video when the page loads.</source>
+        <target>A lejátszása automatikusan megkezdődik az oldal betöltésekor.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+        <target>Megjelenítés időtartama</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Az idő ezredmásodpercben a váltások között (1000 = 1s). 0 beállításával kikapcsolja az automatikus váltást.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>Átmenet sebessége</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>Az átmenet sebessége ezredmásodpercben (1000 = 1s). Alapértelmezetten 300.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+        <target>Elem kihagyása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Itt állítható be, hogy a tartalom váltó egy bizonyos elemtől induljon (számlálás 0-tól indul).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+        <target>Folyamatos</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>A tartalom váltó folyamatossá tétele (kezdődik elölről ha a végére ér).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.0">
+        <source>Referenced element</source>
+        <target>Hivatkozott tartalmi elem</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.1">
+        <source>Please choose the content element you want to insert.</source>
+        <target>Tartalmi elem kiválasztása, amelyet be kíván illesztenii.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.0">
+        <source>Referenced article</source>
+        <target>Hivatkozott cikk</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.1">
+        <source>Please choose the article you want to insert.</source>
+        <target>Cikk kiválasztása, amelyet be kíván illeszteni.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.0">
+        <source>Article</source>
+        <target>Cikk</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.1">
+        <source>Please select an article.</source>
+        <target>Cikk kiválasztása.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.0">
+        <source>Form</source>
+        <target>Űrlap</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.1">
+        <source>Please select a form.</source>
+        <target>Űrlap kiválasztása.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.0">
+        <source>Module</source>
+        <target>Modul</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.1">
+        <source>Please select a module.</source>
+        <target>Modul kiválasztása.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.0">
+        <source>Protect element</source>
+        <target>Elem védelem</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.1">
+        <source>Show the content element to certain member groups only.</source>
+        <target>A tartalmi elemet csak bizonyos tag csoportok számára mutatja.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.0">
+        <source>Allowed member groups</source>
+        <target>Engedélyezett tag csoport</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.1">
+        <source>These groups will be able to see the content element.</source>
+        <target>Ezek a csoportok láthatják a tartalmi elemet.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.0">
+        <source>Show to guests only</source>
+        <target>Csak vendégek láthatják</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.1">
+        <source>Hide the content element if a member is logged in.</source>
+        <target>Tartalmi elem elrejtése a bejelentkezett tagok elől.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.0">
+        <source>CSS ID/class</source>
+        <target>CSS ID/osztály</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Itt adható meg egy CSS ID és egy vagy több osztály.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.0">
+        <source>Space in front and after</source>
+        <target>Hely előtte és utána</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.1">
+        <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Itt adható meg a tartalmi elem előtt és után kihagyott hely mérete pixelben. Javasolt a beágyazott stílus helyett a stíluslap használata.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.0">
+        <source>Invisible</source>
+        <target>Elrejt (Invisible)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.1">
+        <source>Hide the element on the website.</source>
+        <target>Az elem elrejtése a weboldalon.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.0">
+        <source>Show from</source>
+        <target>Megjelenítés kezdete</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.1">
+        <source>Do not show the element on the website before this day.</source>
+        <target>Az elem a megadott dátum előtt nem jelenik meg a weboldalon.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.0">
+        <source>Show until</source>
+        <target>Megjelenítés vége</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.1">
+        <source>Do not show the element on the website on and after this day.</source>
+        <target>Az elem a megadott dátum után nem jelenik meg a weboldalon.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type_legend">
+        <source>Element type</source>
+        <target>Elem típusa</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text_legend">
+        <source>Text/HTML/Code</source>
+        <target>Szöveg/HTML/Kód</target>
+      </trans-unit>
+      <trans-unit id="tl_content.image_legend">
+        <source>Image settings</source>
+        <target>Kép beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+        <target>Tartalom váltó beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list_legend">
+        <source>List items</source>
+        <target>Lista elemek</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table_legend">
+        <source>Table items</source>
+        <target>Táblázat elemek</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tconfig_legend">
+        <source>Table configuration</source>
+        <target>Táblázat beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable_legend">
+        <source>Sorting options</source>
+        <target>Rendezési beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.moo_legend">
+        <source>Accordion settings</source>
+        <target>Harmonika beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.link_legend">
+        <source>Hyperlink settings</source>
+        <target>Hiperhivatkozás beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imglink_legend">
+        <source>Image link settings</source>
+        <target>Kép link beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.source_legend">
+        <source>Files and folders</source>
+        <target>Fájlok és könyvtárak</target>
+      </trans-unit>
+      <trans-unit id="tl_content.dwnconfig_legend">
+        <source>Download settings</source>
+        <target>Letöltés beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.include_legend">
+        <source>Include settings</source>
+        <target>Beszúrás beállításai</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected_legend">
+        <source>Access protection</source>
+        <target>Hozzáférési védelem</target>
+      </trans-unit>
+      <trans-unit id="tl_content.expert_legend">
+        <source>Expert settings</source>
+        <target>Speciális beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.template_legend">
+        <source>Template settings</source>
+        <target>Sablon beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.player_legend">
+        <source>Player settings</source>
+        <target>Lejátszó beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_content.poster_legend">
+        <source>Preview image</source>
+        <target>Előnézeti kép</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible_legend">
+        <source>Visibility</source>
+        <target>Láthatóság</target>
+      </trans-unit>
+      <trans-unit id="tl_content.ordered">
+        <source>ordered list</source>
+        <target>rendezett lista</target>
+      </trans-unit>
+      <trans-unit id="tl_content.unordered">
+        <source>unordered list</source>
+        <target>rendezetlen lista</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_asc">
+        <source>File name (ascending)</source>
+        <target>Fájlnév (növekvő sorrend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_desc">
+        <source>File name (descending)</source>
+        <target>Fájlnév (csökkenő sorrend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_asc">
+        <source>Date (ascending)</source>
+        <target>Dátum (növekvő sorrend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_desc">
+        <source>Date (descending)</source>
+        <target>Dátum (csökkenő sorrend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.custom">
+        <source>Custom order</source>
+        <target>Egyedi sorrend</target>
+      </trans-unit>
+      <trans-unit id="tl_content.random">
+        <source>Random order</source>
+        <target>Véletlen sorrend</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>A &lt;em&gt;%s&lt;/em&gt; sablon engedélyezése szükséges az oldal elrendezésben. </target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>A &lt;em&gt;%s&lt;/em&gt; vagy &lt;em&gt;%s&lt;/em&gt; sablon engedélyezése szükséges az oldal elrendezésben. </target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.0">
+        <source>New element</source>
+        <target>Új elem</target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.1">
+        <source>Add a new content element</source>
+        <target>Új tartalmi elem hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.0">
+        <source>Element details</source>
+        <target>Elem részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.1">
+        <source>Show the details of content element ID %s</source>
+        <target>Az ID %s tartalmi elem részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.0">
+        <source>Move element</source>
+        <target>Elem mozgatása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.1">
+        <source>Move content element ID %s</source>
+        <target>Az ID %s tartalmi elem mozgatása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.0">
+        <source>Duplicate element</source>
+        <target>Elem másolása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.1">
+        <source>Duplicate content element ID %s</source>
+        <target>Az ID %s tartalmi elem másolása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.0">
+        <source>Delete element</source>
+        <target>Elem törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.1">
+        <source>Delete content element ID %s</source>
+        <target>Az ID %s tartalmi elem törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.0">
+        <source>Edit element</source>
+        <target>Elem szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.1">
+        <source>Edit content element ID %s</source>
+        <target>Az ID %s tartalmi elem szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.0">
+        <source>Edit article</source>
+        <target>Cikk szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.1">
+        <source>Edit the article settings</source>
+        <target>A cikk beállításainak szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Beillesztés felülre</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.1">
+        <source>Paste after content element ID %s</source>
+        <target>Beillesztés az ID %s tartalmi elem után</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Új hozzáadása felülre</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.1">
+        <source>Add new after content element ID %s</source>
+        <target>Új hozzáadása az ID %s tartalmi elem után</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Láthatóság kapcsolása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.1">
+        <source>Toggle the visibility of element ID %s</source>
+        <target>Az ID %s elem láthatóságának módosítása</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.0">
+        <source>Edit source element</source>
+        <target>Forrás elem szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.1">
+        <source>Edit the source element ID %s</source>
+        <target>Az ID %s forrás elem szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.0">
+        <source>Edit article</source>
+        <target>Cikk szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.1">
+        <source>Edit article ID %s</source>
+        <target>Az ID %s cikk szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list.1">
+        <source>Import list items from a CSV file</source>
+        <target>Lista elemek importálása CSV fájlból</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table.1">
+        <source>Import table items from a CSV file</source>
+        <target>Tábla elemek importálása CSV fájlból</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

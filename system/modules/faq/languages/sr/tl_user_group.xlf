@@ -1,0 +1,10 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_user_group.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="tl_user_group.faq_legend">
+        <source>FAQ permissions</source>
+        <target>Дозволе ЧПП</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Kanaler för nyhetsbrev</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Ange vilka kanaler som användaren kan prenumerera på under registreringsprocessen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Kanaler</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Välj en eller fler kanaler.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Göm kanalmenyn</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Visa inte kanalvalsmenyn</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>Meddelande vid ny prenumeration</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Ange texten i bekräftelse-e-postmeddelandet som skickas till ny prenumerant. Du kan använda wildcards &lt;em&gt;##channels##&lt;/em&gt; (kanalnamn), &lt;em&gt;##domain##&lt;/em&gt; (aktuellt domännamn) och &lt;em&gt;##link##&lt;/em&gt; (aktiveringslänk).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>Meddelande vid avslut av prenumeration</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Ange texten i bekräftelse-e-postmeddelandet som skickas vid avslut av prenumeration. Du kan använda wildcards &lt;em&gt;##channels##&lt;/em&gt; (kanalnamn), &lt;em&gt;##domain##&lt;/em&gt; (aktuellt domännamn)..</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Nyhetsbrevsmall</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Välj en nyhetsbrevsmall. Du kan lägga till egna mallar till mappen &lt;em&gt;templates&lt;/em&gt;. &lt;br /&gt;Nyhetsbrevsmallar startar med &lt;em&gt;nl_&lt;/em&gt; och kräver filändelsen &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Du prenumererar på %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Du har valt att börja prenumerera på följande nyhetsbrevskanaler: ##channels## på ##domain##. Klicka på länken ##link## för att aktivera din prenumeration. Om det inte är du själv som bett om denna prenumeration kan du förbise detta e-postmeddelande. Inga utskick kommer då göras till din e-postadress.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Du prenumererar på %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Din prenumeration på följande nyhetsbrevskanaler: ##channels## på ##domain## har avslutats.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

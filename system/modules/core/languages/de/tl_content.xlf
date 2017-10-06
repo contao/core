@@ -1,0 +1,798 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_content.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_content.type.0">
+        <source>Element type</source>
+        <target>Elementtyp</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type.1">
+        <source>Please choose the type of content element.</source>
+        <target>Bitte wählen Sie den Typ des Inhaltselements.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.0">
+        <source>Headline</source>
+        <target>Überschrift</target>
+      </trans-unit>
+      <trans-unit id="tl_content.headline.1">
+        <source>Here you can add a headline to the content element.</source>
+        <target>Hier können Sie dem Inhaltselement eine Überschrift hinzufügen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.0">
+        <source>Text</source>
+        <target>Text</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>Sie können HTML-Tags verwenden, um den Text zu formatieren.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.0">
+        <source>Add an image</source>
+        <target>Ein Bild hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.addImage.1">
+        <source>Add an image to the content element.</source>
+        <target>Dem Inhaltselement ein Bild hinzufügen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.0">
+        <source>Source file</source>
+        <target>Quelldatei</target>
+      </trans-unit>
+      <trans-unit id="tl_content.singleSRC.1">
+        <source>Please select a file or folder from the files directory.</source>
+        <target>Bitte wählen Sie eine Datei oder einen Ordner aus der Dateiübersicht.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.0">
+        <source>Alternate text</source>
+        <target>Alternativer Text</target>
+      </trans-unit>
+      <trans-unit id="tl_content.alt.1">
+        <source>Here you can enter an alternate text for the image (&lt;em&gt;alt&lt;/em&gt; attribute).</source>
+        <target>Hier können Sie einen alternativen Text für das Bild eingeben (&lt;em&gt;alt&lt;/em&gt;-Attribut).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.title.1">
+        <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
+        <target>Hier können Sie den Titel des Bildes eingeben (&lt;em&gt;title&lt;/em&gt;-Attribut).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.0">
+        <source>Image size</source>
+        <target>Bildgröße</target>
+      </trans-unit>
+      <trans-unit id="tl_content.size.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Hier können Sie die Abmessungen des Bildes und den Skalierungsmodus festlegen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.0">
+        <source>Image margin</source>
+        <target>Bildabstand</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imagemargin.1">
+        <source>Here you can enter the top, right, bottom and left margin.</source>
+        <target>Hier können Sie den oberen, rechten, unteren und linken Außenabstand eingeben.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.0">
+        <source>Image link target</source>
+        <target>Bildlink-Adresse</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imageUrl.1">
+        <source>A custom image link target will override the lightbox link, so the image cannot be viewed fullsize anymore.</source>
+        <target>Eine eigene Bildlink-Adresse überschreibt den Lightbox-Link, so dass das Bild nicht mehr in der Großansicht dargestellt werden kann.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>Großansicht/Neues Fenster</target>
+      </trans-unit>
+      <trans-unit id="tl_content.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>Großansicht des Bildes in einer Lightbox bzw. den Link in einem neuem Browserfenster öffnen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.0">
+        <source>Image alignment</source>
+        <target>Bildausrichtung</target>
+      </trans-unit>
+      <trans-unit id="tl_content.floating.1">
+        <source>Please specify how to align the image.</source>
+        <target>Bitte legen Sie fest, wie das Bild ausgerichtet werden soll.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.0">
+        <source>Image caption</source>
+        <target>Bildunterschrift</target>
+      </trans-unit>
+      <trans-unit id="tl_content.caption.1">
+        <source>Here you can enter a short text that will be displayed below the image.</source>
+        <target>Hier können Sie einen kurzen Text eingeben, der unterhalb des Bildes angezeigt wird.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.0">
+        <source>HTML code</source>
+        <target>HTML-Code</target>
+      </trans-unit>
+      <trans-unit id="tl_content.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Sie können die Liste der erlaubten HTML-Tags in den Backend-Einstellungen ändern.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.0">
+        <source>List type</source>
+        <target>Listentyp</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listtype.1">
+        <source>Please choose the type of list.</source>
+        <target>Bitte wählen Sie den Typ der Liste.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.0">
+        <source>List items</source>
+        <target>Listeneinträge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.listitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.0">
+        <source>Table items</source>
+        <target>Tabelleneinträge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tableitems.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.0">
+        <source>Table summary</source>
+        <target>Zusammenfassung</target>
+      </trans-unit>
+      <trans-unit id="tl_content.summary.1">
+        <source>Please enter a short summary of the table and describe its purpose or structure.</source>
+        <target>Bitte geben Sie eine kurze Zusammenfassung des Inhalts und der Struktur der Tabelle ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.0">
+        <source>Add table header</source>
+        <target>Kopfzeile hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.thead.1">
+        <source>Make the first row of the table the table header.</source>
+        <target>Die erste Reihe der Tabelle als Kopfzeile verwenden.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.0">
+        <source>Add table footer</source>
+        <target>Fußzeile hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tfoot.1">
+        <source>Make the last row of the table the table footer.</source>
+        <target>Die letzte Reihe der Tabelle als Fußzeile verwenden.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.0">
+        <source>Use row headers</source>
+        <target>Reihenüberschriften hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tleft.1">
+        <source>Define the left column as row header.</source>
+        <target>Die linke Spalte als Reihenüberschrift definieren.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.0">
+        <source>Sortable table</source>
+        <target>Sortierbare Tabelle</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable.1">
+        <source>Make the table sortable (requires JavaScript and a table header).</source>
+        <target>Die Tabelle sortierbar machen (benötigt JavaScript und eine Kopfzeile).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.0">
+        <source>Sort index</source>
+        <target>Sortierindex</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortIndex.1">
+        <source>The number of the default sort column.</source>
+        <target>Die Nummer der Spalte, nach der standardmäßig sortiert wird.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.0">
+        <source>Sort order</source>
+        <target>Sortierreihenfolge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortOrder.1">
+        <source>Please choose the sort order.</source>
+        <target>Bitte wählen Sie die Sortierreihenfolge aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.0">
+        <source>Operation mode</source>
+        <target>Betriebsart</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooType.1">
+        <source>Please select the operation mode of the accordion element.</source>
+        <target>Bitte wählen Sie die Betriebsart des Akkordeon-Elements.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.0">
+        <source>Wrapper start</source>
+        <target>Umschlag Anfang</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStart.1">
+        <source>Marks the beginning of an accordion pane that spans several content elements.</source>
+        <target>Markiert den Anfang eines Akkordeon-Fensters, das mehrere Inhaltselemente umfasst.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.0">
+        <source>Wrapper stop</source>
+        <target>Umschlag Ende</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStop.1">
+        <source>Marks the end of an accordion pane that spans several content elements.</source>
+        <target>Markiert das Ende eines Akkordeon-Fensters, das mehrere Inhaltselemente umfasst.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.0">
+        <source>Single element</source>
+        <target>Einzelelement</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooSingle.1">
+        <source>Behaves like a single text element that is inside an accordion pane.</source>
+        <target>Entspricht einem Text-Inhaltselement in einem Akkordeon-Fenster.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.0">
+        <source>Section headline</source>
+        <target>Bereichsüberschrift</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooHeadline.1">
+        <source>Please enter the headline of the content pane. HTML tags are allowed.</source>
+        <target>Bitte geben Sie die Überschrift des Akkordeon-Fensters ein. HTML-Tags sind erlaubt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.0">
+        <source>CSS format</source>
+        <target>CSS-Format</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooStyle.1">
+        <source>Here you can format the section headline using CSS code.</source>
+        <target>Hier können Sie die Bereichsüberschrift mittels CSS-Code formatieren.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.0">
+        <source>Element classes</source>
+        <target>Klassennamen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.mooClasses.1">
+        <source>Leave blank to use the default classes or enter a custom toggler and accordion class.</source>
+        <target>Lassen Sie das Feld leer, um die Standard-Klassennamen zu verwenden, oder geben Sie eigene Toggler- und Accordion-Klassen ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.0">
+        <source>Configuration</source>
+        <target>Konfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_content.shClass.1">
+        <source>Here you can configure the syntax highlighter (e.g. &lt;em&gt;gutter: false;&lt;/em&gt;).</source>
+        <target>Hier können Sie den Syntax-Highlighter konfigurieren (z.B. &lt;em&gt;gutter: false;&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.0">
+        <source>Syntax highlighting</source>
+        <target>Syntaxhervorhebung</target>
+      </trans-unit>
+      <trans-unit id="tl_content.highlight.1">
+        <source>Please choose a scripting language.</source>
+        <target>Bitte wählen Sie eine Skriptsprache aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.0">
+        <source>Code</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="tl_content.code.1">
+        <source>Note that the code will not be executed. Use F11 to toggle the fullscreen mode if you are using the code editor.</source>
+        <target>Beachten Sie, dass der Code nicht ausgeführt wird. Mit F11 können Sie den Vollbildmodus aufrufen, wenn Sie den Code-Editor nutzen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.0">
+        <source>Link text</source>
+        <target>Link-Text</target>
+      </trans-unit>
+      <trans-unit id="tl_content.linkTitle.1">
+        <source>The link text will be displayed instead of the target URL.</source>
+        <target>Der Link-Text wird anstelle der Link-Adresse angezeigt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.0">
+        <source>Link title</source>
+        <target>Link-Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.titleText.1">
+        <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>Der Link-Titel wird als &lt;em&gt;title&lt;/em&gt;-Attribut im HTML-Markup eingefügt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.0">
+        <source>Embed the link</source>
+        <target>Den Link einbetten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.embed.1">
+        <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
+        <target>Verwenden Sie den Platzhalter &quot;%s&quot;, um den Link in einen Text einzubetten (z.B. &lt;em&gt;Für mehr Informationen besuchen Sie %s&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.0">
+        <source>Lightbox</source>
+        <target>Lightbox</target>
+      </trans-unit>
+      <trans-unit id="tl_content.rel.1">
+        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>Hier können Sie ein &lt;em&gt;rel&lt;/em&gt;-Attribut eingeben, um die Lightbox anzusteuern.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.0">
+        <source>Create an image link</source>
+        <target>Einen Bildlink erstellen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useImage.1">
+        <source>Use an image instead of the link title.</source>
+        <target>Ein Bild anstatt des Link-Textes verwenden.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.0">
+        <source>Source files</source>
+        <target>Quelldateien</target>
+      </trans-unit>
+      <trans-unit id="tl_content.multiSRC.1">
+        <source>Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.</source>
+        <target>Bitte wählen Sie eine oder mehr Dateien oder Ordner aus der Dateiübersicht. Wenn Sie einen Ordner auswählen, werden die darin enthaltenen Dateien automatisch eingefügt.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.0">
+        <source>Sort order</source>
+        <target>Sortierreihenfolge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>Die Sortierreihenfolge der Elemente.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>Benutzerverzeichnis verwenden</target>
+      </trans-unit>
+      <trans-unit id="tl_content.useHomeDir.1">
+        <source>Use the home directory as file source if there is an authenticated user.</source>
+        <target>Das Benutzerverzeichnis als Dateiquelle verwenden, wenn sich ein Benutzer angemeldet hat.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.0">
+        <source>Thumbnails per row</source>
+        <target>Vorschaubilder pro Reihe</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perRow.1">
+        <source>The number of image thumbnails per row.</source>
+        <target>Die Anzahl an Vorschaubildern pro Reihe.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.0">
+        <source>Items per page</source>
+        <target>Elemente pro Seite</target>
+      </trans-unit>
+      <trans-unit id="tl_content.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>Die Anzahl an Elementen pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.0">
+        <source>Total number of images</source>
+        <target>Gesamtzahl der Bilder</target>
+      </trans-unit>
+      <trans-unit id="tl_content.numberOfItems.1">
+        <source>Here you can limit the total number of images. Set to 0 to show all.</source>
+        <target>Hier können Sie die Gesamtzahl der Bilder begrenzen. Geben Sie 0 ein, um alle anzuzeigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.0">
+        <source>Order by</source>
+        <target>Sortieren nach</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortBy.1">
+        <source>Please choose the sort order.</source>
+        <target>Bitte wählen Sie die Sortierreihenfolge aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.0">
+        <source>Ignore files without meta data</source>
+        <target>Dateien ohne Metadaten ignorieren</target>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.1">
+        <source>Do not show files without meta data matching the page language.</source>
+        <target>Dateien ohne zur Seitensprache passenden Metadaten nicht anzeigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.0">
+        <source>Gallery template</source>
+        <target>Galerietemplate</target>
+      </trans-unit>
+      <trans-unit id="tl_content.galleryTpl.1">
+        <source>Here you can select the gallery template.</source>
+        <target>Hier können Sie das Galerietemplate auswählen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+        <target>Individuelles Template</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+        <target>Hier können Sie das Standard-Template überschreiben.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.0">
+        <source>Video/audio files</source>
+        <target>Video-/Audio-Dateien</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSRC.1">
+        <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+        <target>Hier können Sie die Video-/Audio-Datei bzw. – wenn Sie verschiedene Codecs verwenden – die Video-/Audio-Dateien hinzufügen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.0">
+        <source>YouTube ID</source>
+        <target>YouTube-ID</target>
+      </trans-unit>
+      <trans-unit id="tl_content.youtube.1">
+        <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+        <target>Bitte geben Sie die YouTube-Video-ID ein (z.B. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.0">
+        <source>Preview image</source>
+        <target>Vorschaubild</target>
+      </trans-unit>
+      <trans-unit id="tl_content.posterSRC.1">
+        <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>Das Bild statt des ersten Frame des Videos vor dem Abspielen anzeigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.0">
+        <source>Player size</source>
+        <target>Player-Größe</target>
+      </trans-unit>
+      <trans-unit id="tl_content.playerSize.1">
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>Breite und Höhe des Mediaplayers in Pixeln (z.B. 640x480).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.0">
+        <source>Autoplay</source>
+        <target>Autoplay</target>
+      </trans-unit>
+      <trans-unit id="tl_content.autoplay.1">
+        <source>Automatically play the video when the page loads.</source>
+        <target>Das Video automatisch beim Laden der Seite abspielen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.0">
+        <source>Sliding interval</source>
+        <target>Slide-Intervall</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderDelay.1">
+        <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>Der Zeitraum in Millisekunden zwischen den Slides (1000 = 1s). 0 deaktiviert den automatischen Wechsel.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.0">
+        <source>Transition speed</source>
+        <target>Übergangsgeschwindigkeit</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderSpeed.1">
+        <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>Die Übergangsgeschwindigkeit in Millisekunden (1000 = 1s). Standard: 300.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.0">
+        <source>Slide offset</source>
+        <target>Slide-Versatz</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderStartSlide.1">
+        <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>Den Slider mit einer bestimmten Folie beginnen (die Zählung beginnt bei 0).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.0">
+        <source>Continuous</source>
+        <target>Kontinuierlich</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sliderContinuous.1">
+        <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>Einen kontinuierlichen Slider erstellen (beim Erreichen des Endes von vorne beginnen).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.0">
+        <source>Referenced element</source>
+        <target>Bezogenes Inhaltselement</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cteAlias.1">
+        <source>Please choose the content element you want to insert.</source>
+        <target>Bitte wählen Sie das Inhaltselement aus, das Sie einfügen möchten.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.0">
+        <source>Referenced article</source>
+        <target>Bezogener Artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.articleAlias.1">
+        <source>Please choose the article you want to insert.</source>
+        <target>Bitte wählen Sie den Artikel aus, den Sie einfügen möchten.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.0">
+        <source>Article</source>
+        <target>Artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_content.article.1">
+        <source>Please select an article.</source>
+        <target>Bitte wählen Sie einen Artikel aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.0">
+        <source>Form</source>
+        <target>Formular</target>
+      </trans-unit>
+      <trans-unit id="tl_content.form.1">
+        <source>Please select a form.</source>
+        <target>Bitte wählen Sie ein Formular.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.0">
+        <source>Module</source>
+        <target>Modul</target>
+      </trans-unit>
+      <trans-unit id="tl_content.module.1">
+        <source>Please select a module.</source>
+        <target>Bitte wählen Sie ein Modul aus.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.0">
+        <source>Protect element</source>
+        <target>Element schützen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected.1">
+        <source>Show the content element to certain member groups only.</source>
+        <target>Das Inhaltselement nur bestimmten Gruppen anzeigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.0">
+        <source>Allowed member groups</source>
+        <target>Erlaubte Mitgliedergruppen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.groups.1">
+        <source>These groups will be able to see the content element.</source>
+        <target>Diese Gruppen können das Inhaltselement sehen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.0">
+        <source>Show to guests only</source>
+        <target>Nur Gästen anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.guests.1">
+        <source>Hide the content element if a member is logged in.</source>
+        <target>Das Inhaltselement verstecken, sobald ein Mitglied angemeldet ist.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.0">
+        <source>CSS ID/class</source>
+        <target>CSS-ID/Klasse</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Hier können Sie eine ID und beliebig viele Klassen eingeben.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.0">
+        <source>Space in front and after</source>
+        <target>Abstand davor und dahinter</target>
+      </trans-unit>
+      <trans-unit id="tl_content.space.1">
+        <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Hier können Sie den Abstand vor und nach dem Inhaltselement in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.0">
+        <source>Invisible</source>
+        <target>Unsichtbar</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible.1">
+        <source>Hide the element on the website.</source>
+        <target>Das Element auf der Webseite nicht anzeigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.0">
+        <source>Show from</source>
+        <target>Anzeigen ab</target>
+      </trans-unit>
+      <trans-unit id="tl_content.start.1">
+        <source>Do not show the element on the website before this day.</source>
+        <target>Das Element erst ab diesem Tag auf der Webseite anzeigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.0">
+        <source>Show until</source>
+        <target>Anzeigen bis</target>
+      </trans-unit>
+      <trans-unit id="tl_content.stop.1">
+        <source>Do not show the element on the website on and after this day.</source>
+        <target>Das Element nur bis zu diesem Tag auf der Webseite anzeigen.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.type_legend">
+        <source>Element type</source>
+        <target>Elementtyp</target>
+      </trans-unit>
+      <trans-unit id="tl_content.text_legend">
+        <source>Text/HTML/Code</source>
+        <target>Text/HTML/Code</target>
+      </trans-unit>
+      <trans-unit id="tl_content.image_legend">
+        <source>Image settings</source>
+        <target>Bild-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.slider_legend">
+        <source>Slider settings</source>
+        <target>Slider-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list_legend">
+        <source>List items</source>
+        <target>Listeneinträge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table_legend">
+        <source>Table items</source>
+        <target>Tabelleneinträge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.tconfig_legend">
+        <source>Table configuration</source>
+        <target>Tabellenkonfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_content.sortable_legend">
+        <source>Sorting options</source>
+        <target>Sortieroptionen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.moo_legend">
+        <source>Accordion settings</source>
+        <target>Akkordeon-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.link_legend">
+        <source>Hyperlink settings</source>
+        <target>Hyperlink-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.imglink_legend">
+        <source>Image link settings</source>
+        <target>Bildlink-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.source_legend">
+        <source>Files and folders</source>
+        <target>Dateien und Ordner</target>
+      </trans-unit>
+      <trans-unit id="tl_content.dwnconfig_legend">
+        <source>Download settings</source>
+        <target>Download-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.include_legend">
+        <source>Include settings</source>
+        <target>Include-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.protected_legend">
+        <source>Access protection</source>
+        <target>Zugriffsschutz</target>
+      </trans-unit>
+      <trans-unit id="tl_content.expert_legend">
+        <source>Expert settings</source>
+        <target>Experten-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.template_legend">
+        <source>Template settings</source>
+        <target>Template-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.player_legend">
+        <source>Player settings</source>
+        <target>Player-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.poster_legend">
+        <source>Preview image</source>
+        <target>Vorschaubild</target>
+      </trans-unit>
+      <trans-unit id="tl_content.invisible_legend">
+        <source>Visibility</source>
+        <target>Sichtbarkeit</target>
+      </trans-unit>
+      <trans-unit id="tl_content.ordered">
+        <source>ordered list</source>
+        <target>nummerierte Liste</target>
+      </trans-unit>
+      <trans-unit id="tl_content.unordered">
+        <source>unordered list</source>
+        <target>unnummerierte Liste</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_asc">
+        <source>File name (ascending)</source>
+        <target>Dateiname (aufsteigend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.name_desc">
+        <source>File name (descending)</source>
+        <target>Dateiname (absteigend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_asc">
+        <source>Date (ascending)</source>
+        <target>Datum (aufsteigend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.date_desc">
+        <source>Date (descending)</source>
+        <target>Datum (absteigend)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.custom">
+        <source>Custom order</source>
+        <target>Individuelle Reihenfolge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.random">
+        <source>Random order</source>
+        <target>Zufällige Reihenfolge</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplate">
+        <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Das &lt;em&gt;%s&lt;/em&gt;-Template muss im Seitenlayout eingebunden sein.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.includeTemplates">
+        <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>Das &lt;em&gt;%s&lt;/em&gt;- oder &lt;em&gt;%s&lt;/em&gt;-Template muss im Seitenlayout eingebunden sein.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.0">
+        <source>New element</source>
+        <target>Neues Element</target>
+      </trans-unit>
+      <trans-unit id="tl_content.new.1">
+        <source>Add a new content element</source>
+        <target>Ein neues Element erstellen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.0">
+        <source>Element details</source>
+        <target>Elementdetails</target>
+      </trans-unit>
+      <trans-unit id="tl_content.show.1">
+        <source>Show the details of content element ID %s</source>
+        <target>Details des Inhaltselements ID %s anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.0">
+        <source>Move element</source>
+        <target>Element verschieben</target>
+      </trans-unit>
+      <trans-unit id="tl_content.cut.1">
+        <source>Move content element ID %s</source>
+        <target>Inhaltselement ID %s verschieben</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.0">
+        <source>Duplicate element</source>
+        <target>Element duplizieren</target>
+      </trans-unit>
+      <trans-unit id="tl_content.copy.1">
+        <source>Duplicate content element ID %s</source>
+        <target>Inhaltselement ID %s duplizieren</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.0">
+        <source>Delete element</source>
+        <target>Element löschen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.delete.1">
+        <source>Delete content element ID %s</source>
+        <target>Inhaltselement ID %s löschen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.0">
+        <source>Edit element</source>
+        <target>Element bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.edit.1">
+        <source>Edit content element ID %s</source>
+        <target>Inhaltselement ID %s bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.0">
+        <source>Edit article</source>
+        <target>Artikel bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editheader.1">
+        <source>Edit the article settings</source>
+        <target>Die Artikeleinstellungen bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Oben einfügen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pasteafter.1">
+        <source>Paste after content element ID %s</source>
+        <target>Nach dem Inhaltselement ID %s einfügen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Neues Element oben erstellen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.pastenew.1">
+        <source>Add new after content element ID %s</source>
+        <target>Neues Element nach dem Inhaltselement ID %s erstellen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Sichtbarkeit ändern</target>
+      </trans-unit>
+      <trans-unit id="tl_content.toggle.1">
+        <source>Toggle the visibility of element ID %s</source>
+        <target>Die Sichtbarkeit des Inhaltselements ID %s ändern</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.0">
+        <source>Edit source element</source>
+        <target>Quellelement bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editalias.1">
+        <source>Edit the source element ID %s</source>
+        <target>Das Quellelement ID %s bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.0">
+        <source>Edit article</source>
+        <target>Artikel bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.editarticle.1">
+        <source>Edit article ID %s</source>
+        <target>Artikel ID %s bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_content.list.1">
+        <source>Import list items from a CSV file</source>
+        <target>Listeneinträge aus einer CSV-Datei importieren</target>
+      </trans-unit>
+      <trans-unit id="tl_content.table.1">
+        <source>Import table items from a CSV file</source>
+        <target>Tabelleneinträge aus einer CSV-Datei importieren</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,574 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="FFL.headline.0">
+        <source>Headline</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="FFL.headline.1">
+        <source>A custom field to insert a section headline.</source>
+        <target>In champ per inserir in titel per ina secziun</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.0">
+        <source>Explanation</source>
+        <target>Decleraziun</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.1">
+        <source>A custom field to insert an explanation text.</source>
+        <target>In champ per inserir in text cun ina decleraziun.</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.0">
+        <source>HTML code</source>
+        <target>Code HTML</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.1">
+        <source>A custom field to insert HTML code.</source>
+        <target>In champ per inserir code da HTML</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.0">
+        <source>Fieldset</source>
+        <target>Set da champs</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.1">
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>In container per champs dal formular cun ina legenda opziunala (be disponibel per formulars senza tabella).</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.0">
+        <source>Text field</source>
+        <target>Champ da text</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.1">
+        <source>A single-line input field for a short or medium text.</source>
+        <target>In champ dad ina lingia per texts curts u mesauns.</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.0">
+        <source>Password field</source>
+        <target>Champ da pled-clav</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.1">
+        <source>A single-line input field for a password. Contao automatically adds a confirmation field.</source>
+        <target>In champ dad ina lingua per in pled-clav. Contao agiunta automaticamain in champ da confermar.</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.0">
+        <source>Textarea</source>
+        <target>Zona da text</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.1">
+        <source>A multi-line input field for a medium or long text.</source>
+        <target>In champ da pliras lingias per endatar text mesaun u lung.</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.0">
+        <source>Select menu</source>
+        <target>Menu per tscherner</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.1">
+        <source>A single- or multi-line drop-down menu.</source>
+        <target>In menu drop-down dad ina u pliras lingias.</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.0">
+        <source>Radio button menu</source>
+        <target>Menu da buttuns d'opziun</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.1">
+        <source>A list of multiple options from which one can be selected.</source>
+        <target>Ina glista da pliras opziuns da qualas be ina po vegnir tschernida.</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.0">
+        <source>Checkbox menu</source>
+        <target>Menu da chaschettas</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.1">
+        <source>A list of multiple options from which any can be selected.</source>
+        <target>Ina glista da diversas opziuns da qualas pliras pon vegnir tschernidas.</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.0">
+        <source>File upload</source>
+        <target>Transferir datoteca</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.1">
+        <source>A single-line input field to upload a local file to the server.</source>
+        <target>In champ d'endataziun dad ina lingia per transferir ina datoteca locala sin il server</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.0">
+        <source>Hidden field</source>
+        <target>Champ zuppà</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.1">
+        <source>A single-line input field that is not visible in the form.</source>
+        <target>In champ d'endataziun dad ina lingia che n'è betg visibel en il formular.</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.0">
+        <source>Security question</source>
+        <target>Dumonda da segirtad</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.1">
+        <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
+        <target>In quint simpel per verifitgar ch'il formular è vegnì emplenì dad in uman (CAPTCHA).</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.0">
+        <source>Submit field</source>
+        <target>Buttun da trametter</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.1">
+        <source>A button to submit the form.</source>
+        <target>In buttun per trametter il formular.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.0">
+        <source>Field type</source>
+        <target>Tip dal champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.1">
+        <source>Please choose the type of field.</source>
+        <target>Tscherna il tip dal champ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.0">
+        <source>Field name</source>
+        <target>Num dal champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.1">
+        <source>The field name is a unique name to identify the field.</source>
+        <target>Quest champ sto cuntegnair in num unic per identifitgar il champ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.0">
+        <source>Field label</source>
+        <target>Descripziun dal champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.1">
+        <source>The field label will be visible on the website, typically in front of or above the field.</source>
+        <target>La descripziun vegn ad esser visibla sin la pagina d'internet, tipicamain avant u sur il champ d'endataziun.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.0">
+        <source>Text</source>
+        <target>Text</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>Ti pos utilisar tags HTML per formatar il text</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Ti pos modifitgar la glista dals tags da HTML lubids en la configuraziun dal back-end.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.0">
+        <source>Options</source>
+        <target>Opziuns</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Sche JavaScript è deactiva stos ti memorisar las midadas avant che midar la successiun.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.0">
+        <source>Mandatory field</source>
+        <target>Champ obligatoric</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.1">
+        <source>The form will not submit if the field is empty.</source>
+        <target>Impussibel da trametter il formular sche quest champ è vid.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.0">
+        <source>Input validation</source>
+        <target>Validaziun da l'endataziun</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.1">
+        <source>Validate the input against a regular expression.</source>
+        <target>Validar l'endataziun cun ina expressiun regulara.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.0">
+        <source>Numeric characters</source>
+        <target>Caracters numerics</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.1">
+        <source>Allows numeric characters, minus (-) and full stop (.).</source>
+        <target>Lubescha caracters numerics, minus (-), e punct puncts (.).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.0">
+        <source>Alphabetic characters</source>
+        <target>Caracters alfabetics</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.1">
+        <source>Allows alphabetic characters, minus (-), full stop (.) and space ( ).</source>
+        <target>Lubescha caracters alfabetics, minus (-), puncts (.) e spazis ( ).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.0">
+        <source>Alphanumeric characters</source>
+        <target>Caracters alfanumerics</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.1">
+        <source>Allows alphabetic and numeric characters, minus (-), full stop (.), underscore (_) and space ( ).</source>
+        <target>Lubescha caracters alfabetics e numerics, minus (-), puncts (.), sutstritg (_) e spazis ( ).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.0">
+        <source>Extended alphanumeric characters</source>
+        <target>Caracters alphanumerics extendids</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.1">
+        <source>Allows everything except special characters which are usually encoded for security reasons (#/()&lt;=&gt;).</source>
+        <target>Lubescha tut auter che caracters che vegnan normalmain codads ord motivs da segirezza (#/()&lt;=&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.0">
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.1">
+        <source>Checks whether the input matches the global date format.</source>
+        <target>Controllescha sche l'endataziun correspunda al format global da datas.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.0">
+        <source>Time</source>
+        <target>Temp</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.1">
+        <source>Checks whether the input matches the global time format.</source>
+        <target>Controllescha sche l'endataziun correspunda al format global da temp.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.0">
+        <source>Date and time</source>
+        <target>Data e temp</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.1">
+        <source>Checks whether the input matches the global date and time format.</source>
+        <target>Controllescha sche l'endataziun correspunda al format global da data e temp.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.0">
+        <source>Phone number</source>
+        <target>Numer da telefon</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.1">
+        <source>Allows numeric characters, plus (+), minus (-), slash (/), parentheses () and space ( ).</source>
+        <target>Lubescha caracters numerics, plus (+), minus (-), stritg diagonal (/), parantesas (()) e segns vids ( ).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.0">
+        <source>E-mail address</source>
+        <target>Adressa d'e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.1">
+        <source>Checks whether the input is a valid e-mail address.</source>
+        <target>Controllescha sche l'endataziun è ina adressa dad e-mail formalmain valida.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.0">
+        <source>URL format</source>
+        <target>Format dad URL</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.1">
+        <source>Checks whether the input is a valid URL.</source>
+        <target>Controllescha sche l'endataziun è formalmain in URL valid.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.0">
+        <source>Placeholder</source>
+        <target>Tegnaplazza</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.1">
+        <source>Show this text as long as the field is empty (requires HTML5).</source>
+        <target>Mussar quest text sche il champ è vid (vegn be mussà en navigaturs che sustegnan HTML5).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Lunghezza minimala</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Pretenda che la valita dal champ è almain in tschert dumber da caracters lunga.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.0">
+        <source>Maximum length</source>
+        <target>Lunghezza maximala</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.1">
+        <source>Limit the field length to a certain number of characters (text) or bytes (file uploads).</source>
+        <target>imitescha la lunghezza dal champ ad in dumber da caracters (text) u bytes (transfers da datotecas).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.0">
+        <source>Rows and columns</source>
+        <target>Lingias e colonnas</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.1">
+        <source>The number of rows and columns of the textarea.</source>
+        <target>Il dumber da lingias e colonnas dal spazi da text.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.0">
+        <source>Multiple selection</source>
+        <target>Selecziun multipla</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.1">
+        <source>Allow visitors to select more than one option.</source>
+        <target>Lubir als visitaders da tscherner dapli che mo ina opziun.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.0">
+        <source>List size</source>
+        <target>Grondezza da la glista</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.1">
+        <source>Here you can enter the size of the select box.</source>
+        <target>Qua pos ti endatar la grondezza da la glista da selecziunar.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.0">
+        <source>Allowed file types</source>
+        <target>Tips da datoteca lubids</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.1">
+        <source>A comma separated list of valid file extensions.</source>
+        <target>Ina glista separada da commas dad extensiuns da datotecas lubidas.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.0">
+        <source>Store uploaded files</source>
+        <target>Memorisar las datotecas transferidas</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.1">
+        <source>Move the uploaded files to a folder on the server.</source>
+        <target>Spustar las datotecas transferidas en in ordinatur sin il server.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.0">
+        <source>Target folder</source>
+        <target>Ordinatur da destinaziun</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.1">
+        <source>Please select the target folder from the files directory.</source>
+        <target>Tscherna la destinaziun da l'ordinatur da datotecas.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>Utilisar l'ordinatur persunal</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.1">
+        <source>Store the file in the home directory if there is an authenticated user.</source>
+        <target>Memorisar la datoteca en l'ordinatur persunal sche l'utilisader è autentifitgà.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.0">
+        <source>Preserve existing files</source>
+        <target>Conservar datotecas existentas</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.1">
+        <source>Add a numeric suffix to the new file if the file name already exists.</source>
+        <target>Agiuntar in suffix numeric a datotecas novas sch'il num da datoteca exista gia.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.0">
+        <source>Operation mode</source>
+        <target>Modus da funcziun</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.1">
+        <source>Please select the operation mode of the fieldset element.</source>
+        <target>Tscherna il modus da funcziun per l'element 'set da champs'</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.0">
+        <source>Wrapper start</source>
+        <target>Cumenzament da l'enveloppa</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.1">
+        <source>Marks the beginning of a fieldset and can contain a legend.</source>
+        <target>Marchescha il cumenzament dal set da champs e po cuntegnair ina legenda.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.0">
+        <source>Wrapper stop</source>
+        <target>Fin da l'enveloppa</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.1">
+        <source>Marks the end of a fieldset.</source>
+        <target>Marchescha la fin dal set da champs.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.0">
+        <source>Default value</source>
+        <target>Valur da standard</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.1">
+        <source>Here you can enter a default value for the field.</source>
+        <target>Qua pos ti endatar ina valur da standard per il champ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.0">
+        <source>CSS class</source>
+        <target>Classa CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Qua pos ti endatar ina u pliras classas.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.0">
+        <source>Access key</source>
+        <target>Scursanida da tasta</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.1">
+        <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+        <target>In champ da formular po vegnir focussà cun smatgar la tasta [ALT] u [CTRL] ed la tasta d'access en il medem mument.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.0">
+        <source>Tab index</source>
+        <target>Index da tab</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.1">
+        <source>The position of the form field in the tabbing order.</source>
+        <target>La posiziun dal champ da formular en la successiun da tabulatur.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.0">
+        <source>Field size</source>
+        <target>Grondezza dal champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.1">
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Qua pos ti endatar la grondezza da datoteca dal champ per transferir (attribut &lt;em&gt;size&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+        <target>Template persunalisà per champs da formular </target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+        <target>Qua pos ti surscriver il template per champs da formular.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.0">
+        <source>Add a submit button</source>
+        <target>Agiuntar in buttun da trametter</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.1">
+        <source>Add a submit button next to the field to create a single line form.</source>
+        <target>Agiuntar in buttun da trametter sper il champ per far in formular dad ina lingia.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.0">
+        <source>Submit button label</source>
+        <target>Descripziun dal buttun da trametter</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.1">
+        <source>Please enter the label of the submit button.</source>
+        <target>Endatescha il text che vegn mussà sin il buttun da trametter.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.0">
+        <source>Create an image button</source>
+        <target>Crear in buttun da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.1">
+        <source>Use an image submit button instead of the default one.</source>
+        <target>Utilisar in maletg sco buttun da trametter.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.0">
+        <source>Source file</source>
+        <target>Datoteca da funtauna</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.1">
+        <source>Please select an image from the files directory.</source>
+        <target>Tscherna in maletg en l'ordinatur da datotecas.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type_legend">
+        <source>Field type and name</source>
+        <target>Tip da champ e num</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text_legend">
+        <source>Text/HTML</source>
+        <target>Text/HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fconfig_legend">
+        <source>Field configuration</source>
+        <target>Configuraziun dal champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options_legend">
+        <source>Options</source>
+        <target>Opziuns</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.store_legend">
+        <source>Store file</source>
+        <target>Memorisar datoteca</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.expert_legend">
+        <source>Expert settings</source>
+        <target>Opziuns dad experts</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Lingias e colonnas</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Configuraziun da templates</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.submit_legend">
+        <source>Submit button</source>
+        <target>Buttun da trametter</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.image_legend">
+        <source>Image button</source>
+        <target>Buttun da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.0">
+        <source>New field</source>
+        <target>Nov champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.1">
+        <source>Create a new field</source>
+        <target>Crear in nov champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.0">
+        <source>Field details</source>
+        <target>Detagls dal champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.1">
+        <source>Show the details of field ID %s</source>
+        <target>Mussar ils detagls dal champ cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.0">
+        <source>Edit field</source>
+        <target>Modifitgar il champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.1">
+        <source>Edit field ID %s</source>
+        <target>Modifitgar il champ cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.0">
+        <source>Move field</source>
+        <target>Spustar il champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.1">
+        <source>Move field ID %s</source>
+        <target>Spustar il champ cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.0">
+        <source>Duplicate field</source>
+        <target>Duplitgar il champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.1">
+        <source>Duplicate field ID %s</source>
+        <target>Duplitgar il champ cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.0">
+        <source>Delete field</source>
+        <target>Stizzar il champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.1">
+        <source>Delete field ID %s</source>
+        <target>Stizzar il champ cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.0">
+        <source>Edit form</source>
+        <target>Modifitgar il formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.1">
+        <source>Edit the form settings</source>
+        <target>Modifitgar la configuraziun dal formular</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Encollar sura</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.1">
+        <source>Paste after field ID %s</source>
+        <target>Encollar suenter il champ cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Crear sura in nov element</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.1">
+        <source>Add new after field ID %s</source>
+        <target>Agiuntar in nov champ suenter il champ cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Midar la visibilitad</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.1">
+        <source>Toggle the visibility of field ID %s</source>
+        <target>Midar la visibilitad dal champ cun l'ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

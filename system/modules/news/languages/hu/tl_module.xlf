@@ -1,0 +1,118 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_module.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_module.news_archives.0">
+        <source>News archives</source>
+        <target>Hírarchívumok</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_archives.1">
+        <source>Please select one or more news archives.</source>
+        <target>Válasszon egy vagy több hírarchívumot.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.0">
+        <source>Featured items</source>
+        <target>Kiemelt bejegyzések</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.1">
+        <source>Here you can choose how featured items are handled.</source>
+        <target>Itt megadhatja, hogyan kezelje a kiemelt híreket.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.0">
+        <source>No period selected</source>
+        <target>Nincs időszak kiválasztva</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.1">
+        <source>Here you can define what to display if no period is selected.</source>
+        <target>Itt lehet megadni, hogyan jelenjen meg ha nincs időszak kiválasztva.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.0">
+        <source>News reader module</source>
+        <target>Hír olvasó modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.1">
+        <source>Automatically switch to the news reader if an item has been selected.</source>
+        <target>Automatikus váltás a hír olvasóra, ha egy elem ki van jelölve.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.0">
+        <source>Meta fields</source>
+        <target>Meta mezők</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.1">
+        <source>Here you can select the meta fields.</source>
+        <target>Itt lehet kiválasztani a meta mezőket.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.0">
+        <source>News template</source>
+        <target>Hír sablon</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.1">
+        <source>Here you can select the news template.</source>
+        <target>Itt lehet kiválasztani a hírek sablont.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.0">
+        <source>Archive format</source>
+        <target>Archívum megjelenése</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.1">
+        <source>Here you can choose the news archive format.</source>
+        <target>Itt lehet kiválasztani a hírarchívum bontási időszakát.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.0">
+        <source>Week start day</source>
+        <target>Hét kezdő napja</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>Itt lehet kiválasztani a hét kezdő napját.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.0">
+        <source>Sort order</source>
+        <target>Rendezési sorrend</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>Itt lehet kiválasztani a rendezési sorrendet.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.0">
+        <source>Show number of items</source>
+        <target>Bejegyzések számának megjelenítése</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.1">
+        <source>Show the number of news items of each month.</source>
+        <target>A megjelent hírek számának mutatása minden hónapnál.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_day">
+        <source>Day</source>
+        <target>Nap</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_month">
+        <source>Month</source>
+        <target>Hónap</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_year">
+        <source>Year</source>
+        <target>Év</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hide_module">
+        <source>Hide the module</source>
+        <target>Modul elrejtése</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show_current">
+        <source>Jump to the current period</source>
+        <target>Ugrás a jelenlegi időszakban</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_items">
+        <source>Show all news items</source>
+        <target>Összes hír mutatása</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured">
+        <source>Show featured news items only</source>
+        <target>Csak kiemelt hírek megjelenítése</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured">
+        <source>Skip featured news items</source>
+        <target>A kiemelt hírek kihagyása</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

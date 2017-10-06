@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_repository.category.0">
+        <source>Category</source>
+        <target>Categorie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.category.1">
+        <source>Please select the extension category.</source>
+        <target>Selecteer de extensie categorie.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.0">
+        <source>Copyright</source>
+        <target>Copyright</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.1">
+        <source>Here you can enter a copyright notice (e.g. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</source>
+        <target>Hier kunt u een auteursrecht kennisgeving invoegen (bv. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.0">
+        <source>Description</source>
+        <target>Omschrijving</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.1">
+        <source>These HTML tags are allowed: %s</source>
+        <target>Deze HTML tags zijn toegestaan: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.0">
+        <source>Extension</source>
+        <target>Extensie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.1">
+        <source>Name of the extension.</source>
+        <target>Naam van de extensie.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.0">
+        <source>Functionality</source>
+        <target>Functionaliteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.1">
+        <source>Does the extension provide the expected functionality?</source>
+        <target>Beschikt de extensie over de verwachte functionaliteit?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.0">
+        <source>License</source>
+        <target>Licentie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.1">
+        <source>Please enter a short license information. You may add full license information in a file LICENSE.txt.</source>
+        <target>Geef korte licentie informatie. U kunt de volledige licentie informatie kwijt in het bestand LICENSE.txt.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.0">
+        <source>Name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.1">
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Namen van extensies moeten beginnen met a-z, A-Z of 0-9, waarbij kleine letters de voorkeur verdienen. De karakters _ en - zijn toegestaan.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.0">
+        <source>Popularity</source>
+        <target>Populariteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.1">
+        <source>%s/%s (downloads/installs)</source>
+        <target>%s/%s (downloads/installaties)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.0">
+        <source>Quality</source>
+        <target>Kwaliteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.1">
+        <source>How robust is the extension and how painless is installation and maintenance?</source>
+        <target>Hoe robuust is de extensie en hoe eenvoudig en logisch is de installatie en het onderhoud?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.0">
+        <source>Release date</source>
+        <target>Publicatiedatum</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.1">
+        <source>Enter the publishing date of this release in format %s</source>
+        <target>Geef de datum van publicatie van deze uitgave in format %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.0">
+        <source>Version</source>
+        <target>Versie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.1">
+        <source>Please select the version</source>
+        <target>Selecteer de versie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.0">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.1">
+        <source>Please select the extension type.</source>
+        <target>Selecteer het extensie type.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.0">
+        <source>Usability</source>
+        <target>Bruikbaarheid</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.1">
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>Voldoet de extensie aan de Contao standaards voor bruikbaarheid en toegankelijkheid?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.0">
+        <source>Version</source>
+        <target>Versie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.1">
+        <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
+        <target>Versie nummers moeten in het formaat n.n.n s, waarbij n cijfers zijn en s één van: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Licentiesleutel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Geef de licentiesleutel die u hebt gekregen van de aanbieder van de extensie.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Bescherming tegen verwijdering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Beveilig extensie tegen abusievelijk verwijderen.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Update bescherming</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Beveilig extensie tegen abusievelijk updaten.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.author">
+        <source>Author</source>
+        <target>Auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.build">
+        <source>Build</source>
+        <target>Aangemaakt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.cancel">
+        <source>Cancel</source>
+        <target>Annuleer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.continue">
+        <source>Continue</source>
+        <target>Ga door</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependencies">
+        <source>Dependencies of this extension</source>
+        <target>Deze extensie heeft nodig</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependents">
+        <source>Other extensions depending on this one</source>
+        <target>Andere extensie(s) afhankelijk van deze</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependentsdel">
+        <source>The following extensions are dependent from &lt;em&gt;%s&lt;/em&gt; and may render broken:</source>
+        <target>De volgende extensies zijn van &lt;em&gt;%s&lt;/em&gt; afhankelijk en functioneren wellicht niet:</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.donate">
+        <source>Donate</source>
+        <target>Doneer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.downloads">
+        <source>Package downloads</source>
+        <target>Componenten downloads</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extensionnotfound">
+        <source>Extension not found.</source>
+        <target>Extensie niet gevonden</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.forum">
+        <source>Forum</source>
+        <target>Forum</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installs">
+        <source>Online installs</source>
+        <target>Online installaties</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.langtrans">
+        <source>%s transl.</source>
+        <target>%s vert.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.manual">
+        <source>Manual</source>
+        <target>Handboek</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.no">
+        <source>no</source>
+        <target>nee</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.noextensionsfound">
+        <source>No matching extensions found.</source>
+        <target>Geen passende extensies gevonden.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.orderby">
+        <source>Order by</source>
+        <target>Sorteer op</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.otherlanguages">
+        <source>Other languages</source>
+        <target>Andere talen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.pageof">
+        <source>Page %s of %s</source>
+        <target>Pagina %s van %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ratingfmt">
+        <source>%.2f (%d votes)</source>
+        <target>%.2f (%d stemmen)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.reldownloads">
+        <source>Release downloads</source>
+        <target>Versie downloads</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasenotesfor">
+        <source>Release notes and change log for %s</source>
+        <target>Versie notities en changelog voor %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relfunctionality">
+        <source>Release functionality</source>
+        <target>Versie functionaliteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relinstalls">
+        <source>Release installs</source>
+        <target>Versie installaties</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relquality">
+        <source>Release quality</source>
+        <target>Versie kwaliteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relrating">
+        <source>Release rating</source>
+        <target>Versie waardering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relupdates">
+        <source>Release updates</source>
+        <target>Versie updates</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relusability">
+        <source>Release usability</source>
+        <target>Versie bruikbaarheid</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.save">
+        <source>Save</source>
+        <target>Opslaan</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.shop">
+        <source>Shop</source>
+        <target>Winkel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showpicture">
+        <source>Show full size picture</source>
+        <target>Toon afbeelding op ware grootte</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.state">
+        <source>State</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.tag">
+        <source>Tag</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.thumbnail">
+        <source>Thumbnail picture</source>
+        <target>Thumbnail afbeelding</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totdownloads">
+        <source>Total downloads</source>
+        <target>Totaal downloads</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totfunctionality">
+        <source>Total functionality</source>
+        <target>Totaal functionaliteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totinstalls">
+        <source>Total installs</source>
+        <target>Totaal installaties</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totquality">
+        <source>Total quality</source>
+        <target>Totaal kwaliteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totrating">
+        <source>Total rating</source>
+        <target>Totaal waardering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totupdates">
+        <source>Total updates</source>
+        <target>Totaal updates</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totusability">
+        <source>Total usability</source>
+        <target>Totaal bruikbaarheid</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionfrom">
+        <source>Version from</source>
+        <target>Versie van</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versions">
+        <source>Other versions</source>
+        <target>Andere versies</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionto">
+        <source>Version to</source>
+        <target>Versie tot</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.yes">
+        <source>yes</source>
+        <target>ja</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.action">
+        <source>Action</source>
+        <target>Actie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsummary">
+        <source>Action summary</source>
+        <target>Samenvatting actie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsuccess">
+        <source>Actions successful.</source>
+        <target>Actie succesvol.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionfailed">
+        <source>One or more actions failed.</source>
+        <target>Een of meer acties zijn mislukt.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.apply">
+        <source>Apply</source>
+        <target>Toepassen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.byorder">
+        <source>By %s</source>
+        <target>Op %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.checkextension">
+        <source>Check extension</source>
+        <target>Controleer extensie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dbuptodate">
+        <source>Database is up to date</source>
+        <target>Database is up to date</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingdirs">
+        <source>Deleting directories</source>
+        <target>Verwijdering mappen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingfiles">
+        <source>Deleting files</source>
+        <target>Verwijdering bestanden</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.editextension">
+        <source>Edit settings</source>
+        <target>Bewerk instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extinstrecntf">
+        <source>Extension install record not found</source>
+        <target>Extensie installatie record niet gevonden</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.errdldpkg">
+        <source>Download of package from repository failed</source>
+        <target>Download pakket van repository mislukt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.failed">
+        <source>failed</source>
+        <target>mislukt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.fileerrwrite">
+        <source>Error writing file %s</source>
+        <target>Fout schrijfactie bestand %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesdeleted">
+        <source>%s file(s) deleted</source>
+        <target>%s bestand(en) gewist</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesinstalled">
+        <source>%s file(s) installed</source>
+        <target>%s bestand(en) geïnstalleerd</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesunchanged">
+        <source>%s file(s) unchanged</source>
+        <target>%s bestand(en) ongewijzigd</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesupdated">
+        <source>%s file(s) updated</source>
+        <target>%s bestand(en) bijgewerkt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ftsearch">
+        <source>Fulltext search</source>
+        <target>Volledige tekst zoeken</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.goback">
+        <source>Go back</source>
+        <target>Ga terug</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.install">
+        <source>Install</source>
+        <target>Installeer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installextension">
+        <source>Install extension</source>
+        <target>Installeer/update extensie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installingext">
+        <source>Install %s %s build %s</source>
+        <target>Installeer %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installlogtitle">
+        <source>File installation/update log</source>
+        <target>Bestand installatie/update log</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickeyrequired">
+        <source>This extension requires a license key. Please visit the vendor's shop to purchase one.</source>
+        <target>Deze extensie vereist een licentiesleutel. Deze is te verkrijgen bij de aanbieder van de extensie.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.none">
+        <source>None</source>
+        <target>Geen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.notfound">
+        <source>not found</source>
+        <target>niet gevonden</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ok">
+        <source>OK</source>
+        <target>OK</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.okuninstextension">
+        <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
+        <target>OK om &lt;em&gt;%s&lt;/em&gt; nu te deïnstalleren?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showdetails">
+        <source>Show details</source>
+        <target>Toon details</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.stateshint">
+        <source>Check the states to be included.</source>
+        <target>Kies gewenste statussen.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.status">
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.success">
+        <source>success</source>
+        <target>succesvol</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstallextension">
+        <source>Uninstall extension</source>
+        <target>Verwijder extensie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatedatabase">
+        <source>Update database</source>
+        <target>Update database</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextension">
+        <source>Update extension</source>
+        <target>Werk extensie bij</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextensions">
+        <source>Update checked extensions</source>
+        <target>Update geselecteerde extensies</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.update">
+        <source>Update</source>
+        <target>Update</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updates">
+        <source>Updates</source>
+        <target>Updates</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatehint">
+        <source>Check the states to be included at updates.</source>
+        <target>Kies de gewenste statussen uit van updates.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatingext">
+        <source>Update %s %s build %s</source>
+        <target>Update %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validate">
+        <source>Repair</source>
+        <target>Repareer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validatingext">
+        <source>Verify/repair %s %s build %s</source>
+        <target>Verifieer/repareer %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+        <target>Goedgekeurd voor</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+        <target>Contao %s to %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.missingSoapModule">
+        <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
+        <target>SOAP extensie niet geladen (configureer PHP met --enable-soap).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Momenteel ziet u extensies welke compatibel zijn met de huidige Contao versie. Wijzig in het back-end de instellingen om de zoekresultaten uit te breiden naar alle extensies.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Actueel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Niet toegestaan voor %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Niet toegestaan met %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Verwacht compatibel te zijn met %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Nieuwe versie %s build %s beschikbaar</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>Ontbrekende benodigde extensie %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Extensie niet gevonden in repository</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>Geïnstalleerde versie niet gevonden in repository</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Licentiesleutel benodigd, installeer extensie eerst</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Beschadigd, update/herstel vereist</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.free">
+        <source>Free</source>
+        <target>Gratis</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.private">
+        <source>Private</source>
+        <target>Besloten</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.commercial">
+        <source>Commercial</source>
+        <target>Commercieel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.application">
+        <source>Application</source>
+        <target>Applicatie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.plugin">
+        <source>Plugin</source>
+        <target>Plugin</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.template">
+        <source>Theme</source>
+        <target>Thema</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.utility">
+        <source>Utility</source>
+        <target>Hulpprogramma</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.widget">
+        <source>Widget</source>
+        <target>Widget</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.translation">
+        <source>Translation</source>
+        <target>Vertaling</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.bundle">
+        <source>Bundle</source>
+        <target>Bundel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.other">
+        <source>Other</source>
+        <target>Ander</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.core">
+        <source>Core</source>
+        <target>Kern</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.reldate">
+        <source>Releasedate</source>
+        <target>Publicatiedatum</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.rating">
+        <source>Rating</source>
+        <target>Waardering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.popular">
+        <source>Popularity</source>
+        <target>Populariteit</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.name">
+        <source>Name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.title">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.author">
+        <source>Author</source>
+        <target>Auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.alpha">
+        <source>Alpha</source>
+        <target>Alpha</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.beta">
+        <source>Beta</source>
+        <target>Bèta</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.rc">
+        <source>RC</source>
+        <target>RC</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.stable">
+        <source>Stable</source>
+        <target>Stabiel</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

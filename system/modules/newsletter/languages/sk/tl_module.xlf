@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en" target-language="sk">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Odoberateľné kanály správ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Zobraziť tieto kanály vo front end formulári.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Kanály</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Prosím vyberte jeden alebo viac kanálov.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Skryť menu kanálov</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Skryť menu pre výber kanálov.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>Prihlasovací e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Zadajte text e-mailu pre potvrdenie prihlásenia. Môžete použiť &lt;em&gt;##channel##&lt;/em&gt; (meno kanála), &lt;em&gt;##domain##&lt;/em&gt; (aktuálna doména) a&lt;em&gt;##link##&lt;/em&gt; (odkaz na aktivačnú stránku).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>Odhlasovací e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Zadajte text e-mailu pre potvrdenie odhlásenia. Môžete použiť &lt;em&gt;##channel##&lt;/em&gt; (meno kanála), &lt;em&gt;##domain##&lt;/em&gt; (aktuálna doména) a&lt;em&gt;##link##&lt;/em&gt; (odkaz na aktivačnú stránku).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Šablóna modulu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Vyberte šablónu modulu. Môžete pridať vlastné šablóny do adresára &lt;em&gt;templates&lt;/em&gt;. Súbory musia začínať &lt;em&gt;nl_&lt;/em&gt; a mať príponu &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Prihlásenie na odber %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Prihlásili ste sa na odber kanála ##channel## na ##domain##. Kliknite na ##link## aby ste mohli dokončiť prihlásenie. Ak ste sa neprihlásili, ignorujte, prosím, tento e-mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Prihlásenie na odber %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Úspešne ste odhlásili odoberanie správ z kanála ##channel##.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

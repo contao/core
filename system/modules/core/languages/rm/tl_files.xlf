@@ -1,0 +1,254 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_files.php" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="tl_files.name.0">
+        <source>Name</source>
+        <target>Num</target>
+      </trans-unit>
+      <trans-unit id="tl_files.name.1">
+        <source>Contao automatically adds the file extension.</source>
+        <target>Contao agiuntescha automaticamain l'extensiun da la datoteca.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.0">
+        <source>Protected</source>
+        <target>Protegì</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protected.1">
+        <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
+        <target>Proteger dad acceder l'ordinatur via HTTP. Las datotecas pon tuttina vegnir distribuidas, p.ex. sur l'element download.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartX.0">
+        <source>Important part x coordinate</source>
+        <target>Coordinata x da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartX.1">
+        <source>Here you can enter the x coordinate of the important part.</source>
+        <target>Qua pos ti endatar la coordinata x da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.0">
+        <source>Important part y coordinate</source>
+        <target>Coordinata y da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.1">
+        <source>Here you can enter the y coordinate of the important part.</source>
+        <target>Qua pos ti endatar la coordinata y da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.0">
+        <source>Important part width</source>
+        <target>Ladezza da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.1">
+        <source>Here you can enter the width of the important part.</source>
+        <target>Qua pos ti endatar la ladezza da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.0">
+        <source>Important part height</source>
+        <target>Autezza da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.1">
+        <source>Here you can enter the height of the important part.</source>
+        <target>Qua pos ti endatar l'autezza da la part impurtanta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.0">
+        <source>Meta information</source>
+        <target>Infurmaziuns meta</target>
+      </trans-unit>
+      <trans-unit id="tl_files.meta.1">
+        <source>Here you can enter the file meta information.</source>
+        <target>Qua pos ti endatar las infurmaziuns meta da la datoteca</target>
+      </trans-unit>
+      <trans-unit id="tl_files.htaccessInfo">
+        <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
+        <target>La protecziun dad ordinaturs vegn realisada entras agiuntar ina datoteca .htaccess che na lubescha betg l'access a l'ordinatur. I para che ti n'utiliseschas betg in server dad Apache, perquai na pudess questa funczun betg funcziunar u basegnar ina adattaziun da la configuraziun da tes server. Controllescha quai avant che transferir resursas betg publicas!</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.0">
+        <source>File upload</source>
+        <target>Transferir datoteca</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileupload.1">
+        <source>Select the files you want to upload to the server (maximum %s and %s pixels).</source>
+        <target>Tscherna las datotecas che ti vuls transferir sin il server (maximum %s e %s pixels).</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.0">
+        <source>Source editor</source>
+        <target>Editur da la funtauna.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editor.1">
+        <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
+        <target>Qua pos ti modifitgar la funtauna da la datoteca (clicca F11 per midar en il modus da maletg entir).</target>
+      </trans-unit>
+      <trans-unit id="tl_files.upload">
+        <source>Upload files</source>
+        <target>Transferir datotecas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadNback">
+        <source>Upload files and go back</source>
+        <target>Transferir las datotecas e turnar</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFF">
+        <source>Edit a file or folder</source>
+        <target>Modifitgar ina datoteca u in ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.uploadFF">
+        <source>Upload files to folder &quot;%s&quot;</source>
+        <target>Transferir datotecas a l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.editFile">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>Modifitgar la datoteca &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.browseFiles">
+        <source>Browse files</source>
+        <target>Navigar en las datotecas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.clearList">
+        <source>Clear list</source>
+        <target>Stizzar la glista</target>
+      </trans-unit>
+      <trans-unit id="tl_files.startUpload">
+        <source>Start upload</source>
+        <target>Cumenzar da transferir</target>
+      </trans-unit>
+      <trans-unit id="tl_files.dropzone">
+        <source>Click or drop files here to upload</source>
+        <target>Clicca u tira na quà per transferir datotecas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
+        <target>Lieu da la datoteca: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncAdded">
+        <source>Added the file or folder &quot;%s&quot;</source>
+        <target>Agiuntà la daoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncChanged">
+        <source>Updated the hash of the file or folder &quot;%s&quot;</source>
+        <target>Actualisà il hash da la datoteca u l'ordinatru &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncUnchanged">
+        <source>Found the file or folder &quot;%s&quot;</source>
+        <target>Chattà la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncMoved">
+        <source>Found the file or folder &quot;%s&quot; at &quot;%s&quot;</source>
+        <target>Chattà la datoteca u l'ordinatur &quot;%s&quot; en &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncDeleted">
+        <source>Removed the file or folder &quot;%s&quot;</source>
+        <target>Allontanà la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncComplete">
+        <source>The synchronization has been completed</source>
+        <target>La sincronisaziun è cumpletada</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncResult">
+        <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
+        <target>&lt;strong&gt;Resultat:&lt;/strong&gt; agiuntà: %s | modifitgà: %s | betg midà: %s | spustà: %s | stizzà: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_files.syncShowUnchanged">
+        <source>Show unchanged</source>
+        <target>Mussar elements senza midadas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.0">
+        <source>New folder</source>
+        <target>Nov ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.new.1">
+        <source>Create a new folder</source>
+        <target>Crear in nov ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.0">
+        <source>Move file or folder</source>
+        <target>Spustar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.cut.1">
+        <source>Move file or folder &quot;%s&quot;</source>
+        <target>Spustar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.0">
+        <source>Duplicate file or folder</source>
+        <target>Duplitgar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.copy.1">
+        <source>Duplicate file or folder &quot;%s&quot;</source>
+        <target>Duplitgar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.0">
+        <source>Edit file or folder</source>
+        <target>Modifitgar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit.1">
+        <source>Edit file or folder &quot;%s&quot;</source>
+        <target>Modifitgar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.0">
+        <source>Delete file or folder</source>
+        <target>Stizzar la datoteca u l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.delete.1">
+        <source>Delete file or folder &quot;%s&quot;</source>
+        <target>Stizzar la datoteca u l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+        <target>Detagls da la datoteca u da l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder &quot;%s&quot;</source>
+        <target>Mussar ils detagls da la datoteca u da l'ordinatur &quot;%s&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.0">
+        <source>Edit file</source>
+        <target>Modifitgar la datoteca</target>
+      </trans-unit>
+      <trans-unit id="tl_files.source.1">
+        <source>Edit file &quot;%s&quot;</source>
+        <target>Modifitgar la datoteca &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.0">
+        <source>Protect folder</source>
+        <target>Proteger l'ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.protect.1">
+        <source>Protect folder &quot;%s&quot;</source>
+        <target>Proteger l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.0">
+        <source>Remove protection</source>
+        <target>Allontanar la protecziun</target>
+      </trans-unit>
+      <trans-unit id="tl_files.unlock.1">
+        <source>Unprotect folder &quot;%s&quot;</source>
+        <target>Betg pli proteger l'ordinatur &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.0">
+        <source>File upload</source>
+        <target>Transferir datoteca</target>
+      </trans-unit>
+      <trans-unit id="tl_files.move.1">
+        <source>Upload files to the server</source>
+        <target>Transmetter datotecas al server</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.0">
+        <source>Paste into</source>
+        <target>Encollar qua</target>
+      </trans-unit>
+      <trans-unit id="tl_files.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>Encollar en quest ordinatur</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.0">
+        <source>Synchronize</source>
+        <target>Sincronisar</target>
+      </trans-unit>
+      <trans-unit id="tl_files.sync.1">
+        <source>Synchronize the file system and the database</source>
+        <target>Sincronisar il sistem da datotecas e la banca da datas</target>
+      </trans-unit>
+      <trans-unit id="tl_files.edit_preview_help">
+        <source>Mark the important part of the image with your mouse cursor.</source>
+        <target>Marcar la part impurtanta dal maletg cun il cursur da la mieur.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

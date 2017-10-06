@@ -1,0 +1,62 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_undo.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_undo.pid.0">
+        <source>User</source>
+        <target>Uživatel</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.pid.1">
+        <source>Name of the associated user</source>
+        <target>Jméno uživatele, kterého se to týká.</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.fromTable.0">
+        <source>Source table</source>
+        <target>Původní tabulka</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.fromTable.1">
+        <source>Name of the original table</source>
+        <target>Jméno originální tabulky</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.affectedRows.0">
+        <source>Affected rows</source>
+        <target>Obsahující záznamy</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.affectedRows.1">
+        <source>Number of records included in the undo step</source>
+        <target>Počet záznamů, které jsou</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.query.0">
+        <source>Details</source>
+        <target>Detaily</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.query.1">
+        <source>Details of the undo step</source>
+        <target>Detaily zpětných kroků.</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.data.0">
+        <source>Data</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.data.1">
+        <source>Raw data of the undo step</source>
+        <target>Čistá data zpětných kroků.</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.show.0">
+        <source>Show details</source>
+        <target>Zobrazit podrobnosti</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.show.1">
+        <source>Show the details of entry ID %s</source>
+        <target>Zobrazit podrobnosti k záznamu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.undo.0">
+        <source>Restore</source>
+        <target>Zpět</target>
+      </trans-unit>
+      <trans-unit id="tl_undo.undo.1">
+        <source>Restore entry ID %s</source>
+        <target>Obnovit záznam ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

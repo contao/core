@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/tl_module.php" source-language="en" target-language="sk">
+    <body>
+      <trans-unit id="tl_module.list_table.0">
+        <source>Table</source>
+        <target>Tabuľka</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_table.1">
+        <source>Please choose the source table.</source>
+        <target>Prosím vyberte tabuľku, z ktorej chcete vytvoriť zoznam.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.0">
+        <source>Fields</source>
+        <target>Polia</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.1">
+        <source>Please enter a comma separated list of the fields you want to list.</source>
+        <target>Prosím zadajte zoznam oddelený čiarkou reprezentujúci názvy políčok tabuľky, ktoré chcete vypísať</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.0">
+        <source>Condition</source>
+        <target>Podmienka</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>Ak chcete vynechať určité záznamy, môžete vytvoriť podmienku (napríklad &lt;em&gt;published=1&lt;/em&gt; alebo &lt;em&gt;type!='admin'&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.0">
+        <source>Searchable fields</source>
+        <target>Vyhľadateľné polia</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.1">
+        <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
+        <target>Prosím, vložte čiarkou oddelený zoznam polí, ktoré chcete spraviť vyhľadávateľnými.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.0">
+        <source>Order by</source>
+        <target>Zoradiť podľa</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.1">
+        <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
+        <target>Prosím, zadajte čiarkou oddelený zoznam políčok, ktoré budú zoradené podľa východzieho nastavenia. Pridajte &lt;em&gt;DESC&lt;/em&gt; za meno políčka pre zostupné zoradie (napríklad &lt;em&gt;meno, date DESC&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.0">
+        <source>Details page fields</source>
+        <target>Polia pri detailnom zobrazení</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.1">
+        <source>Enter a comma separated list of the fields you want to show on the details page. Leave blank to disable the feature.</source>
+        <target>Prosím, vložte čiarkou oddelneý zoznam polí, ktoré chcete zobraziť na stránke podrobností. Nechajte prázdne, ak chcete deaktivovať funkciu stránky podrobností.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.0">
+        <source>Details page condition</source>
+        <target>Filter detailného zobrazenia</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>Ak chcete vynechať určité záznamy, môžete vytvoriť podmienku (napríklad &lt;em&gt;published=1&lt;/em&gt; alebo &lt;em&gt;type!='admin'&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.0">
+        <source>List template</source>
+        <target>Rozloženie zoznamu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.1">
+        <source>Here you can select the list template.</source>
+        <target>Prosím vyberte rozloženie zoznamu. Môžete pridať vlastné rozloženia zoznamu do priečinka &lt;em&gt;templates&lt;/em&gt;. Šablóny rozloženia začínajú prefixom &lt;em&gt;list_&lt;/em&gt; a vyžadujú súborovú príponu &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.0">
+        <source>Details page template</source>
+        <target>Rozloženie stránky detailneho zobrazenia</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.1">
+        <source>Here you can select the details page template.</source>
+        <target>Prosím, vyberte roloženie stránky podrobností. Môžete pridať vlastné rozloženia stránky podrobností do priečinka &lt;em&gt;templates&lt;/em&gt;. Šablóny rozloženia začínajú prefixom &lt;em&gt;info_&lt;/em&gt; a vyžadujú súborovú príponu &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

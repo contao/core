@@ -1,0 +1,160 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_image_size.name.0">
+        <source>Name</source>
+        <target>Nosaukums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.name.1">
+        <source>Please enter the image size name.</source>
+        <target>Lūdzu, ievadiet attēla izmēra nosaukumu.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.0">
+        <source>Width</source>
+        <target>Platums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.1">
+        <source>Here you can enter the width in pixels.</source>
+        <target>Šeit jūs varat ievadīt platumu pikseļos.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.0">
+        <source>Height</source>
+        <target>Augstums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.1">
+        <source>Here you can enter the height in pixels.</source>
+        <target>Šeit jūs varat ievadīt augstumu pikseļos.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.0">
+        <source>Resize mode</source>
+        <target>Izmēru maiņas režīms</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.1">
+        <source>Only applicable if width and height are specified.</source>
+        <target>Tikai derīgs, ja platums un augstums ir norādīti.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.0">
+        <source>Zoom</source>
+        <target>Tālummaiņa</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.1">
+        <source>0 = the whole image is visible, 100 = only the important part of the image is visible.</source>
+        <target>0 = viss attēls ir redzams, 100 = tikai svarīgā daļa no attēla ir redzama.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.0">
+        <source>Sizes attribute</source>
+        <target>Izmēru atribūti</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.1">
+        <source>Here you can define the displayed image width(s), e.g. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</source>
+        <target>Šeit Jūs varat definēt rādāmā attēla platumu(s), piemēram, &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.0">
+        <source>Pixel densities/scale factors</source>
+        <target>Pikseļu blīvuma/mēroga faktori</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.1">
+        <source>Here you can define the pixel densities, e.g. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.0">
+        <source>Revision date</source>
+        <target>Pārskatījuma datums</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Pēdējā pārskatījuma datums un laiks</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.title_legend">
+        <source>Image size settings</source>
+        <target>Attēla izmēra iestatījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.expert_legend">
+        <source>Expert settings</source>
+        <target>Eksperta iestatījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.0">
+        <source>Proportional</source>
+        <target>Proporcionāls</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Garākā attēla mala ir pielāgota dotajiem izmēriem un attēls tiek mainīts proporcionāli.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.0">
+        <source>Fit the box</source>
+        <target>Piemērot kastei</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Īsākā attēla mala ir pielāgota dotajiem izmēriem un attēls tiek mainīts proporcionāli.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.0">
+        <source>Crop</source>
+        <target>Apcirst </target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>Attēls tiks mainīti uz dotajiem izmēriem. Ja nepieciešams, tas tiks apgriezts.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.0">
+        <source>New image size</source>
+        <target>Jauns attēla izmērs</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.1">
+        <source>Create a new image size</source>
+        <target>Izveidot jaunu attēla izmēru</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.0">
+        <source>Image size details</source>
+        <target>Attēla izmēra detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.1">
+        <source>Show the details of image size ID %s</source>
+        <target>Rādīt attēla izmēra ID %s detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.0">
+        <source>Edit image size</source>
+        <target>Rediģēt attēla izmēru</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.1">
+        <source>Edit image size ID %s</source>
+        <target>Rediģēt attēla izmēru ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.0">
+        <source>Edit image size</source>
+        <target>Rediģēt attēla izmēru</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>Rediģēt attēla izmēra iestatījumus</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.0">
+        <source>Move image size</source>
+        <target>Pārvietot attēla izmēru</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.1">
+        <source>Move image size ID %s</source>
+        <target>Pārvietot attēla izmēru ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.0">
+        <source>Duplicate image size</source>
+        <target>Dublēt atēla izmēru</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.1">
+        <source>Duplicate image size ID %s</source>
+        <target>Dublēt atēla izmēru ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.0">
+        <source>Delete image size</source>
+        <target>Dzēst attēla izmēru</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.1">
+        <source>Delete image size ID %s</source>
+        <target>Dzēst attēla izmēru ID %s </target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.picturefill">
+        <source>The &lt;em&gt;%s&lt;/em&gt; option needs to be enabled in the page layout.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

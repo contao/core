@@ -1,0 +1,573 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en" target-language="fi">
+    <body>
+      <trans-unit id="FFL.headline.0">
+        <source>Headline</source>
+        <target>Otsikko</target>
+      </trans-unit>
+      <trans-unit id="FFL.headline.1">
+        <source>A custom field to insert a section headline.</source>
+        <target>Kenttä osion otsikolle</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.0">
+        <source>Explanation</source>
+        <target>Selite</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.1">
+        <source>A custom field to insert an explanation text.</source>
+        <target>Kenttä selitetekstille.</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.0">
+        <source>HTML code</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.1">
+        <source>A custom field to insert HTML code.</source>
+        <target>Kenttä HTML-koodia varten</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.0">
+        <source>Fieldset</source>
+        <target>Kenttäryhmä</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.1">
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Lomake-elementtejä sisältävä elementti, jolla on valinnainen otsikko (käytettävissä ainoastaan jos lomake ei ole taulukkomuotoinen)</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.0">
+        <source>Text field</source>
+        <target>Tekstikenttä</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.1">
+        <source>A single-line input field for a short or medium text.</source>
+        <target>Yksirivinen syötekenttä lyhyelle tai keskipitkälle tekstille.</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.0">
+        <source>Password field</source>
+        <target>Salasanakenttä</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.1">
+        <source>A single-line input field for a password. Contao automatically adds a confirmation field.</source>
+        <target>Yksirivinen syötekenttä salasanalle. Contao lisää varmistuskentän automaattisesti.</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.0">
+        <source>Textarea</source>
+        <target>Tekstialue</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.1">
+        <source>A multi-line input field for a medium or long text.</source>
+        <target>Monirivinen syötekenttä keskipitkälle tai pitkälle tekstille.</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.0">
+        <source>Select menu</source>
+        <target>Alasvetovalikko</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.1">
+        <source>A single- or multi-line drop-down menu.</source>
+        <target>Yksi- tai monivalintainen alasvetovalikko.</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.0">
+        <source>Radio button menu</source>
+        <target>Valintaruutu</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.1">
+        <source>A list of multiple options from which one can be selected.</source>
+        <target>Lista vaihtoehdoista joista voi valita yhden.</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.0">
+        <source>Checkbox menu</source>
+        <target>Monivalintaruutu</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.1">
+        <source>A list of multiple options from which any can be selected.</source>
+        <target>Lista vaihtoehdoista, joista voi valita kuinka monta tahansa.</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.0">
+        <source>File upload</source>
+        <target>Tiedoston lataus</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.1">
+        <source>A single-line input field to upload a local file to the server.</source>
+        <target>Yksirivinen syötekenttä, jolla ladataan paikallinen tiedosto palvelimelle.</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.0">
+        <source>Hidden field</source>
+        <target>Piilokenttä</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.1">
+        <source>A single-line input field that is not visible in the form.</source>
+        <target>Yksirivinen kenttä, jota ei näy lomakkeessa.</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.0">
+        <source>Security question</source>
+        <target>Turvakysymys</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.1">
+        <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
+        <target>Yksinkertainen matematiikkakysymys, jolla varmistetaan, että lomakkeen lähettää ihminen (CAPTCHA).</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.0">
+        <source>Submit field</source>
+        <target>Lähetysnappi</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.1">
+        <source>A button to submit the form.</source>
+        <target>Nappi, joka lähettää lomakkeen.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.0">
+        <source>Field type</source>
+        <target>Kentän tyyppi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.1">
+        <source>Please choose the type of field.</source>
+        <target>Ole hyvä ja valitse kentälle tyyppi.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.0">
+        <source>Field name</source>
+        <target>Kentän nimi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.1">
+        <source>The field name is a unique name to identify the field.</source>
+        <target>Kentän nimi on uniikki tunniste kentälle.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.0">
+        <source>Field label</source>
+        <target>Kentän otsikko</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.1">
+        <source>The field label will be visible on the website, typically in front of or above the field.</source>
+        <target>Kentän otsikko, joka näkyy sivustolla yleensä ennen syötekenttää tai sen yläpuolella.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.0">
+        <source>Text</source>
+        <target>Teksti</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>Voit käyttää HTML-tageja tekstin muotoilussa.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Sallittujen HTML-tagien listaa voi muokata asetuksista.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.0">
+        <source>Options</source>
+        <target>Valinnat</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Muista tallentaa asetukset, jos JavaScript on kytketty pois.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.0">
+        <source>Mandatory field</source>
+        <target>Pakollinen kenttä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.1">
+        <source>The form will not submit if the field is empty.</source>
+        <target>Lomaketta ei lähetetä jos kenttä on tyhjä.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.0">
+        <source>Input validation</source>
+        <target>Syötteen tarkistus</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.1">
+        <source>Validate the input against a regular expression.</source>
+        <target>Tarkista syöte sännöllisellä lausekkeella.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.0">
+        <source>Numeric characters</source>
+        <target>Numerot</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.1">
+        <source>Allows numeric characters, minus (-) and full stop (.).</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.0">
+        <source>Alphabetic characters</source>
+        <target>Aakkoset</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.1">
+        <source>Allows alphabetic characters, minus (-), full stop (.) and space ( ).</source>
+        <target>Sallii aakkoset, miinuksen (-), pisteen (.) ja välilyönnin ( )-</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.0">
+        <source>Alphanumeric characters</source>
+        <target>Numerot ja aakkoset</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.1">
+        <source>Allows alphabetic and numeric characters, minus (-), full stop (.), underscore (_) and space ( ).</source>
+        <target>Sallii, numerot, aakkoset, miinuksen (-), pisteen (.), alaviivan (_) ja välilyönnin ( )-</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.0">
+        <source>Extended alphanumeric characters</source>
+        <target>Laajennettu alfanumeerinen</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.1">
+        <source>Allows everything except special characters which are usually encoded for security reasons (#/()&lt;=&gt;).</source>
+        <target>Sallii kaiken, paitsi turvasyistä enkoodatut erikoismerkit (#/()&lt;=&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.0">
+        <source>Date</source>
+        <target>Päivämäärä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.1">
+        <source>Checks whether the input matches the global date format.</source>
+        <target>Tarkistaa vastaako syöte globaalia päivämäärän muotoa.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.0">
+        <source>Time</source>
+        <target>Aika</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.1">
+        <source>Checks whether the input matches the global time format.</source>
+        <target>Tarkistaa vastaako syöte globaalia ajan muotoa.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.0">
+        <source>Date and time</source>
+        <target>Päivämäärä ja aika</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.1">
+        <source>Checks whether the input matches the global date and time format.</source>
+        <target>Tarkistaa vastaako syöte globaalia päivämäärän ja ajan muotoa.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.0">
+        <source>Phone number</source>
+        <target>Puhelinnumero</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.1">
+        <source>Allows numeric characters, plus (+), minus (-), slash (/), parentheses () and space ( ).</source>
+        <target>Sallii numerot, plussan (+), miinuksen (-), kauttaviivan (/), sulkeet () ja välilyönnin ( ).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.0">
+        <source>E-mail address</source>
+        <target>Sähköpostiosoite</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.1">
+        <source>Checks whether the input is a valid e-mail address.</source>
+        <target>Tarkistaa onko syöte kelvollinen sähköpostiosoite.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.0">
+        <source>URL format</source>
+        <target>URL-muoto</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.1">
+        <source>Checks whether the input is a valid URL.</source>
+        <target>Tarkistaa onko syöte kelvollinen URL.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.0">
+        <source>Placeholder</source>
+        <target>Tyhjän kentän ohjeteksti</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.1">
+        <source>Show this text as long as the field is empty (requires HTML5).</source>
+        <target>Näyttää tämän tekstin kentän ollessa tyhjä (vaatii HTML5-tuen).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Vähimmäispituus</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Vaatii syötteen pituudeksi vähintään tietyn merkkimäärän.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.0">
+        <source>Maximum length</source>
+        <target>Enimmäispituus</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.1">
+        <source>Limit the field length to a certain number of characters (text) or bytes (file uploads).</source>
+        <target>Rajoittaa syötteen pituutta tiettyyn merkki- (teksti) tai tavumäärään (tiedostolataus).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.0">
+        <source>Rows and columns</source>
+        <target>Rivit ja sarakkeet</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.1">
+        <source>The number of rows and columns of the textarea.</source>
+        <target>Tekstialueen rivit ja sarakkeet.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.0">
+        <source>Multiple selection</source>
+        <target>Monivalinta</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.1">
+        <source>Allow visitors to select more than one option.</source>
+        <target>Salli valita useampi vaihtoehto.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.0">
+        <source>List size</source>
+        <target>Listan koko</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.1">
+        <source>Here you can enter the size of the select box.</source>
+        <target>Tähän voit antaa koon valintalaatikolle.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.0">
+        <source>Allowed file types</source>
+        <target>Sallitut tiedostomuodot</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.1">
+        <source>A comma separated list of valid file extensions.</source>
+        <target>Pilkuilla eroteltu lista kelvollisista tiedostopäätteistä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.0">
+        <source>Store uploaded files</source>
+        <target>Tallenna ladatut tiedostot</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.1">
+        <source>Move the uploaded files to a folder on the server.</source>
+        <target>Siirrä palvelimelle ladatut tiedostot pavelimella sijaitsevaan hakemistoon.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.0">
+        <source>Target folder</source>
+        <target>Kohdehakemisto</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.1">
+        <source>Please select the target folder from the files directory.</source>
+        <target>Ole hyvä ja valitse kohdehakemisto.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>Käytä kotihakemistoa</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.1">
+        <source>Store the file in the home directory if there is an authenticated user.</source>
+        <target>Tallenna tiedosto kotihakemistoon jos lataaja on tunnistettu käyttäjä.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.0">
+        <source>Preserve existing files</source>
+        <target>Säilytä olemassaolevat tiedostot</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.1">
+        <source>Add a numeric suffix to the new file if the file name already exists.</source>
+        <target>Numeroi uusi tiedosto, jos tiedostonimi on jo käytössä.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.0">
+        <source>Operation mode</source>
+        <target>Toimintatila</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.1">
+        <source>Please select the operation mode of the fieldset element.</source>
+        <target>Ole hyvä ja valitse kenttäryhmäelementille toimintatapa.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.0">
+        <source>Wrapper start</source>
+        <target>Wrapper alkaa</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.1">
+        <source>Marks the beginning of a fieldset and can contain a legend.</source>
+        <target>Merkitsee kenttätyhmän alun ja voi sisältää otsikon.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.0">
+        <source>Wrapper stop</source>
+        <target>Wrapper alkaa</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.1">
+        <source>Marks the end of a fieldset.</source>
+        <target>Merkitsee kenttäryhmän lopun.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.0">
+        <source>Default value</source>
+        <target>Oletusarvo</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.1">
+        <source>Here you can enter a default value for the field.</source>
+        <target>Tähän voit antaa kentälle oletusarvon.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.0">
+        <source>CSS class</source>
+        <target>CSS luokka</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Tähän voidaan syöttää yksi tai useampi luokka.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.0">
+        <source>Access key</source>
+        <target>Valintanäppäin</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.1">
+        <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+        <target>Kursori voidaan kohdistaa lomake-elementtiin painamalla [ALT]- tai [CTRL]-näppäintä ja valittua näppäintä samanaikaisesti.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.0">
+        <source>Tab index</source>
+        <target>Tabulaattori-indeksi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.1">
+        <source>The position of the form field in the tabbing order.</source>
+        <target>Elementin järjestys tabulaattorilla elementistä toiseen siirryttäessä.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.0">
+        <source>Field size</source>
+        <target>Kentän koko</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.1">
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Tähän voit antaa latauskentän koon (&lt;em&gt;size&lt;/em&gt;-ominaisuus).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+        <target>Vaihtoehtoinen mallipohja lomake-elementille</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+        <target>Tässä voit valita lomake-elementille toisen mallipohjan oletuksen sijasta.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.0">
+        <source>Add a submit button</source>
+        <target>Lisää lähetysnappi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.1">
+        <source>Add a submit button next to the field to create a single line form.</source>
+        <target>Lisää lähetysnappi kentän viereen yksirivisen lomakkeen luomiseksi.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.0">
+        <source>Submit button label</source>
+        <target>Lähetysnapin teksti</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.1">
+        <source>Please enter the label of the submit button.</source>
+        <target>Ole hyvä ja anna lähetysnapin teksti.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.0">
+        <source>Create an image button</source>
+        <target>Tee kuvallinen lähetysnappi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.1">
+        <source>Use an image submit button instead of the default one.</source>
+        <target>Käytä kuvaa lähetysnappina oletuksen sijasta.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.0">
+        <source>Source file</source>
+        <target>Lähdetiedosto</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.1">
+        <source>Please select an image from the files directory.</source>
+        <target>Ole hyvä ja valitse kuva</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type_legend">
+        <source>Field type and name</source>
+        <target>Kentän nimi ja tyyppi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text_legend">
+        <source>Text/HTML</source>
+        <target>Teksti/HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fconfig_legend">
+        <source>Field configuration</source>
+        <target>Kentän asetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options_legend">
+        <source>Options</source>
+        <target>Valinnat</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.store_legend">
+        <source>Store file</source>
+        <target>Tallenna tiedosto</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.expert_legend">
+        <source>Expert settings</source>
+        <target>Erikoisasetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Rivit ja sarakkeet</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Mallin asetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.submit_legend">
+        <source>Submit button</source>
+        <target>Lähetysnappi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.image_legend">
+        <source>Image button</source>
+        <target>Kuvanappi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.0">
+        <source>New field</source>
+        <target>Uusi kenttä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.1">
+        <source>Create a new field</source>
+        <target>Luo uusi kenttä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.0">
+        <source>Field details</source>
+        <target>Kentän tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.1">
+        <source>Show the details of field ID %s</source>
+        <target>Näyttää kentän ID %s tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.0">
+        <source>Edit field</source>
+        <target>Muokkaa kenttä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.1">
+        <source>Edit field ID %s</source>
+        <target>Muokkaa kenttää ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.0">
+        <source>Move field</source>
+        <target>Siirrä kenttä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.1">
+        <source>Move field ID %s</source>
+        <target>Siirrä kenttä ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.0">
+        <source>Duplicate field</source>
+        <target>Kopioi kenttä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.1">
+        <source>Duplicate field ID %s</source>
+        <target>Kopioi kenttä ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.0">
+        <source>Delete field</source>
+        <target>Poista kenttä</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.1">
+        <source>Delete field ID %s</source>
+        <target>Poista kenttä ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.0">
+        <source>Edit form</source>
+        <target>Muokkaa lomaketta</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.1">
+        <source>Edit the form settings</source>
+        <target>Muokkaa lomakkeen asetuksia</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Liitä ylimmäksi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.1">
+        <source>Paste after field ID %s</source>
+        <target>Liitä kentän ID %s perään</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Lisää uusi ylimmäksi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.1">
+        <source>Add new after field ID %s</source>
+        <target>Lisää uusi kentän ID %s perään</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Valitse näkyvyys</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.1">
+        <source>Toggle the visibility of field ID %s</source>
+        <target>Kytke kenttä ID %s päälle tai pois</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

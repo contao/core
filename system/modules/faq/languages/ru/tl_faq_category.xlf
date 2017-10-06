@@ -1,0 +1,174 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq_category.php" source-language="en" target-language="ru">
+    <body>
+      <trans-unit id="tl_faq_category.title.0">
+        <source>Title</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title.1">
+        <source>Please enter the category title.</source>
+        <target>Введите название категории.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.0">
+        <source>Headline</source>
+        <target>Заголовок</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.1">
+        <source>Please enter the category headline.</source>
+        <target>Введите заголовок категории.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Перейти на страницу</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.1">
+        <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
+        <target>Выберите страницу просмотрщика вопросов и ответов, к которой будут перенаправлены посетители при нажатии на вопрос.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.0">
+        <source>Enable comments</source>
+        <target>Включить комментарии</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.1">
+        <source>Allow visitors to comment FAQs.</source>
+        <target>Разрешить посетителям комментировать вопросы и ответы.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.0">
+        <source>Notify</source>
+        <target>Уведомление</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Выберите кого необходимо уведомить при добавлении комментария.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.0">
+        <source>Sort order</source>
+        <target>Порядок сортировки</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>По умолчанию, комментарии отсортированы по возрастанию, начиная с самых старых.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.0">
+        <source>Comments per page</source>
+        <target>Комментариев на страницу</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Количество комментариев на странице. Установите 0 для отключения нумерации.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.0">
+        <source>Moderate comments</source>
+        <target>Модерирование комментариев</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Одобрение комментариев перед публикацией на веб-сайте.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Разрешить BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Разрешить посетителям использовать BBCode в своих комментариях.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Требовать авторизацию для комментирования</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Разрешить только авторизованным пользователям создавать комментарии.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Отключить контрольный вопрос</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Используйте опцию, если вы ограничили количество комментариев авторизованным пользователям.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.0">
+        <source>Revision date</source>
+        <target>Дата изменения</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Дата и время последнего изменения</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title_legend">
+        <source>Title and redirect</source>
+        <target>Название и перенаправление</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.comments_legend">
+        <source>Comments</source>
+        <target>Комментарии</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_admin">
+        <source>System administrator</source>
+        <target>Системный администратор</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_author">
+        <source>Author of the FAQ</source>
+        <target>Автор вопросов и ответов</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_both">
+        <source>Author and system administrator</source>
+        <target>Автор и системный администратор</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.deleteConfirm">
+        <source>Deleting category ID %s will also delete all its FAQs! Continue?</source>
+        <target>Стирание категории ID %s удалит и все вопросы и ответы! Продолжить?</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.0">
+        <source>New category</source>
+        <target>Новая категория</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.1">
+        <source>Create a new category</source>
+        <target>Создать новую категорию</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.0">
+        <source>Category details</source>
+        <target>Детали категории</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.1">
+        <source>Show the details of category ID %s</source>
+        <target>Показать детали категории ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.0">
+        <source>Edit category</source>
+        <target>Редактировать категорию</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.1">
+        <source>Edit category ID %s</source>
+        <target>Редактировать категорию ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.0">
+        <source>Edit category</source>
+        <target>Редактировать категорию</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.1">
+        <source>Edit the category settings</source>
+        <target>Редактировать настройки категории</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.0">
+        <source>Duplicate category</source>
+        <target>Дублировать категорию</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.1">
+        <source>Duplicate category ID %s</source>
+        <target>Дублировать категорию ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.0">
+        <source>Delete category</source>
+        <target>Удалить категорию</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.1">
+        <source>Delete category ID %s</source>
+        <target>Удалить категорию ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

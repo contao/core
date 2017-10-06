@@ -1,0 +1,142 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_channel.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_newsletter_channel.title.0">
+        <source>Title</source>
+        <target>عنوان</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title.1">
+        <source>Please enter the title of the channel.</source>
+        <target>لطفا عنوان کانال وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.0">
+        <source>Redirect page</source>
+        <target>برگه بازگردانی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.1">
+        <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
+        <target>لطفا برگه خبرنامه خوان را که بازدیدکنندگان با انتخاب خبرنامه بازگردانی خواهند شد را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.0">
+        <source>Custom SMTP server</source>
+        <target>سرور اس‌ام‌تی‌پی سفارسی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.1">
+        <source>Use a custom SMTP server for sending newsletters.</source>
+        <target>استفاده از یک سرور اس‌ام‌تی‌پی سفارسی برای ارسال خبرنامه ها.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>میزبان اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>لطفا نام میزبان سرور اس‌ام‌تی‌پی را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.0">
+        <source>SMTP username</source>
+        <target>نام کاربری اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>اینجا می‌توانید نام کاربری اس‌ام‌تی‌پی را وارد نمایید</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.0">
+        <source>SMTP password</source>
+        <target>گذرواژه اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>اینجا می‌توانید گذرواژه اس‌ام‌تی‌پی را وارد نمایید</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>رمزگذاری اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>روش رمز گذاری (SSL یا TLS) را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>شماره درگاه اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>لطفا شماره درگاه سرور اس‌ام‌تی‌پی را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.0">
+        <source>Revision date</source>
+        <target>تاریخ بازنگری</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>تاریخ و ساعت آخرین بازنگری</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title_legend">
+        <source>Title and redirect</source>
+        <target>عنوان و بازگردانی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>تنظیمات اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.0">
+        <source>New channel</source>
+        <target>کانال جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.1">
+        <source>Create a new channel</source>
+        <target>ایجاد یک کانال جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.0">
+        <source>Channel details</source>
+        <target>جزئیات کانال</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.1">
+        <source>Show the details of channel ID %s</source>
+        <target>نمایش جزئیات کانال شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.0">
+        <source>Edit channel</source>
+        <target>ویرایش کانال</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.1">
+        <source>Edit channel ID %s</source>
+        <target>ویرایش کانال شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.0">
+        <source>Edit channel</source>
+        <target>ویرایش کانال</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>ویرایش تنظیمات کانال</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.0">
+        <source>Duplicate channel</source>
+        <target>تکثیر کانال</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.1">
+        <source>Duplicate channel ID %s</source>
+        <target>تکثیر کانال شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.0">
+        <source>Delete channel</source>
+        <target>حذف کانال</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.1">
+        <source>Delete channel ID %s</source>
+        <target>حذف کانال شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.0">
+        <source>Edit recipients</source>
+        <target>ویرایش گیرندگان</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.1">
+        <source>Edit the recipients of channel ID %s</source>
+        <target>ویرایش گیرندگان کانال شناسه‌ی %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

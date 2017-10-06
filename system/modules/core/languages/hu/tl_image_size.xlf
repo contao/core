@@ -1,0 +1,162 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_image_size.name.0">
+        <source>Name</source>
+        <target>Név</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.name.1">
+        <source>Please enter the image size name.</source>
+        <target>Add meg a képméret nevét.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.0">
+        <source>Width</source>
+        <target>Szélesség (Width)</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.1">
+        <source>Here you can enter the width in pixels.</source>
+        <target>Itt add meg a szélességet pixelben.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.0">
+        <source>Height</source>
+        <target>Magasság (Height)</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.1">
+        <source>Here you can enter the height in pixels.</source>
+        <target>Itt add meg a magasságot pixelben.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.0">
+        <source>Resize mode</source>
+        <target>Méretezés módja</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.1">
+        <source>Only applicable if width and height are specified.</source>
+        <target>Csak akkor alkalmazható, ha a szélesség és a magasság meg van adva.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.0">
+        <source>Zoom</source>
+        <target>Nagyítás</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.1">
+        <source>0 = the whole image is visible, 100 = only the important part of the image is visible.</source>
+        <target>0 = a teljes kép látható, 100 = csak a fontos a kép fontos része látható.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.0">
+        <source>Sizes attribute</source>
+        <target>Méret attributumok</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.1">
+        <source>Here you can define the displayed image width(s), e.g. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</source>
+        <target>Itt lehet definiálni a megjelenített kép szélességét(széleségeit), pl.: &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.0">
+        <source>Pixel densities/scale factors</source>
+        <target>Pixel sűrűség/léptéktényezők</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.1">
+        <source>Here you can define the pixel densities, e.g. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</source>
+        <target>Itt lehet definiálni a pixelsűrüséget, pl.: &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.0">
+        <source>Revision date</source>
+        <target>Utolsó módosítás dátuma</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Legutóbbi módosítás dátuma és ideje.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.title_legend">
+        <source>Image size settings</source>
+        <target>Képméret beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.expert_legend">
+        <source>Expert settings</source>
+        <target>Speciális beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.0">
+        <source>Proportional</source>
+        <target>Arányos</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>A kép hosszabbik oldala igazodik a beállítással megadott méretekhez és a kép arányosan átméreteződik.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.0">
+        <source>Fit the box</source>
+        <target>Doboz kitöltése</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>A kép rövidebbik oldala igazodik a beállítással megadott méretekhez és a kép arányosan átméreteződik.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.0">
+        <source>Crop</source>
+        <target>Vágás</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>A képet átméretezi a megadott méretekre. Ha szükséges, akkor meg is vágja.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.0">
+        <source>New image size</source>
+        <target>Új képméret</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.1">
+        <source>Create a new image size</source>
+        <target>Új képméret létrehozása</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.0">
+        <source>Image size details</source>
+        <target>Képméret rélszletei</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.1">
+        <source>Show the details of image size ID %s</source>
+        <target>A %s azonosítójú képméret részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.0">
+        <source>Edit image size</source>
+        <target>Képméret szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.1">
+        <source>Edit image size ID %s</source>
+        <target>A %s azonosítójú képméret szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.0">
+        <source>Edit image size</source>
+        <target>Képméret szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>Képméret beállítások szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.0">
+        <source>Move image size</source>
+        <target>Képméret mozgatása</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.1">
+        <source>Move image size ID %s</source>
+        <target>A %s azonosítójú képméret mozgatása</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.0">
+        <source>Duplicate image size</source>
+        <target>Képméret másolása</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.1">
+        <source>Duplicate image size ID %s</source>
+        <target>A %s azonosítójú képméret másolása</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.0">
+        <source>Delete image size</source>
+        <target>Képméret törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.1">
+        <source>Delete image size ID %s</source>
+        <target>A %s azonosítójú képméret törlése.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.picturefill">
+        <source>The &lt;em&gt;%s&lt;/em&gt; option needs to be enabled in the page layout.</source>
+        <target>A &lt;em&gt;%s&lt;/em&gt; opciót engedélyezni kell az oldalelrendezésben.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,146 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_recipients.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="tl_newsletter_recipients.email.0">
+        <source>E-mail address</source>
+        <target>電子メールアドレス</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.email.1">
+        <source>Please enter the recipient's e-mail address.</source>
+        <target>宛先の電子メールアドレスを入力してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.active.0">
+        <source>Activate recipient</source>
+        <target>宛先を有効</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.active.1">
+        <source>Recipients are usually activated automatically (double-opt-in).</source>
+        <target>宛先は通常は(二重のオプトインの後で)自動的に有効となります。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.addedOn.0">
+        <source>Subscription date</source>
+        <target>購読の開始日</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.addedOn.1">
+        <source>The date of subscription.</source>
+        <target>購読の開始日です。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.ip.0">
+        <source>IP address</source>
+        <target>IPアドレス</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.ip.1">
+        <source>The IP address of the subscriber.</source>
+        <target>購読者のIPアドレスです。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.token.0">
+        <source>Activation token</source>
+        <target>有効にするトークン</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.token.1">
+        <source>The activation token of the subscription.</source>
+        <target>購読を有効にするトークンです。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.confirmed.0">
+        <source>Confirmation date</source>
+        <target>確認した日</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.confirmed.1">
+        <source>The date of confirmation (double opt-in).</source>
+        <target>(二重のオプトインの)確認を行った日です。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.email_legend">
+        <source>E-mail address</source>
+        <target>電子メールアドレス</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.confirm">
+        <source>%s new recipients have been imported.</source>
+        <target>%sつの新しい宛先をインポートしました。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.invalid">
+        <source>%s invalid entries have been skipped.</source>
+        <target>%sつの不正な項目を無視しました。</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.subscribed">
+        <source>subscribed on %s</source>
+        <target>%sに購読開始</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.manually">
+        <source>added manually</source>
+        <target>手作業で追加</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.new.0">
+        <source>Add recipient</source>
+        <target>宛先を追加</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.new.1">
+        <source>Add a new recipient</source>
+        <target>新しく宛先を追加</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.show.0">
+        <source>Recipient details</source>
+        <target>宛先の詳細</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.show.1">
+        <source>Show the details of recipient ID %s</source>
+        <target>ID %sの宛先の詳細を表示</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.edit.0">
+        <source>Edit recipient</source>
+        <target>宛先を変更</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.edit.1">
+        <source>Edit recipient ID %s</source>
+        <target>ID %sの宛先を変更</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.cut.0">
+        <source>Move recipient</source>
+        <target>宛先を移動</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.cut.1">
+        <source>Move recipient ID %s</source>
+        <target>ID %sの宛先を移動</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.copy.0">
+        <source>Duplicate recipient</source>
+        <target>宛先を複製</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.copy.1">
+        <source>Duplicate recipient ID %s</source>
+        <target>ID %sの宛先を複製</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.delete.0">
+        <source>Delete recipient</source>
+        <target>宛先を削除</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.delete.1">
+        <source>Delete recipient ID %s</source>
+        <target>ID %sの宛先を削除</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.editheader.0">
+        <source>Edit channel</source>
+        <target>チャンネルを変更</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>このチャンネルの設定を変更</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.toggle.0">
+        <source>Activate/deactivate recipient</source>
+        <target>宛先を有効または無効に設定</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.toggle.1">
+        <source>Activate/deactivate recipient ID %s</source>
+        <target>ID %sの宛先を有効または無効に設定</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.import.0">
+        <source>CSV import</source>
+        <target>CSVのインポート</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.import.1">
+        <source>Import recipients from a CSV file</source>
+        <target>宛先をCSVファイルからインポート</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

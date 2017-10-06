@@ -1,0 +1,182 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq.php" source-language="en" target-language="lv">
+    <body>
+      <trans-unit id="tl_faq.question.0">
+        <source>Question</source>
+        <target>Jautājums</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.question.1">
+        <source>Please enter the question.</source>
+        <target>Lūdzu ievadiet jautājumu.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.0">
+        <source>FAQ alias</source>
+        <target>BUJ aizstājvārds</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.alias.1">
+        <source>The FAQ alias is a unique reference to the FAQ which can be called instead of its numeric ID.</source>
+        <target>BUJ aizstājvārds ir unikāla atsauce uz BUJ, kas var tikt izsaukta ciparu ID vietā.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.0">
+        <source>Author</source>
+        <target>Vārds</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.author.1">
+        <source>Here you can change the author of the FAQ.</source>
+        <target>Lūdzu izvēlieties autoru.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.0">
+        <source>Answer</source>
+        <target>Atbilde</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer.1">
+        <source>Please enter the answer.</source>
+        <target>Lūdzu ievadiet atbildi</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.0">
+        <source>Add an image</source>
+        <target>Pievienot attēlu</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addImage.1">
+        <source>Add an image to the FAQ.</source>
+        <target>Pievienot attēlu BUJ.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.0">
+        <source>Add enclosures</source>
+        <target>Pievienot pievienojumus</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.addEnclosure.1">
+        <source>Add one or more downloadable files to the FAQ.</source>
+        <target>Pievienojiet vienu vai vairākas lejupielādējamas datnes BUJ.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.0">
+        <source>Enclosures</source>
+        <target>Pievienojumi</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure.1">
+        <source>Please choose the files you want to attach.</source>
+        <target>Lūdzu izvēlieties datnes ko vēlaties pievienot.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.0">
+        <source>Disable comments</source>
+        <target>Atspējot komentārus</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.noComments.1">
+        <source>Do not allow comments for this particular FAQ.</source>
+        <target>Neatļaut komentārus šim BUJ.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.0">
+        <source>Publish the FAQ</source>
+        <target>Publicēts</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.published.1">
+        <source>Make the FAQ publicly visible on the website.</source>
+        <target>Padarīt BUJ publiski redzamu mājas lapā.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.title_legend">
+        <source>Title and author</source>
+        <target>Nosaukums un autors</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.answer_legend">
+        <source>Answer</source>
+        <target>Atbilde</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.image_legend">
+        <source>Image settings</source>
+        <target>Attēla uzstādījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.enclosure_legend">
+        <source>Enclosures</source>
+        <target>Pievienojumi</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.expert_legend">
+        <source>Expert settings</source>
+        <target>Eksperta iestatījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.publish_legend">
+        <source>Publish settings</source>
+        <target>Publicēšanas uzstādījumi</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.0">
+        <source>New question</source>
+        <target>Jauns jautājums</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.new.1">
+        <source>Create a new question</source>
+        <target>Izveidot jaunu jautājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.0">
+        <source>Show question details</source>
+        <target>Rādīt jautājuma detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.show.1">
+        <source>Show the details of question ID %s</source>
+        <target>Rādīt jautājuma ID %s detaļas</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.0">
+        <source>Edit question</source>
+        <target>Rediģēt jautājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.edit.1">
+        <source>Edit question ID %s</source>
+        <target>Rediģēt jautājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.0">
+        <source>Duplicate question</source>
+        <target>Dublicēt jautājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.copy.1">
+        <source>Duplicate question ID %s</source>
+        <target>Dublicēt jautājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.0">
+        <source>Move question</source>
+        <target>Pārvietot jautājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.cut.1">
+        <source>Move question ID %s</source>
+        <target>Pārvietot jautājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.0">
+        <source>Delete question</source>
+        <target>Dzēst jautājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.delete.1">
+        <source>Delete question ID %s</source>
+        <target>Dzēst jautājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.0">
+        <source>Publish/unpublish question</source>
+        <target>Publicēt/nepublicēt jautājumu</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.toggle.1">
+        <source>Publish/unpublish question ID %s</source>
+        <target>Publicēt/nepublicēt jautājumu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.0">
+        <source>Edit category</source>
+        <target>Rediģēt kategoriju</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.editheader.1">
+        <source>Edit the category settings</source>
+        <target>Rediģēt kategorijas iestatījumus</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Ielīmēt sākumā</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pasteafter.1">
+        <source>Paste after question ID %s</source>
+        <target>Ielīmēt aiz jautājuma ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Pievienot sākumā</target>
+      </trans-unit>
+      <trans-unit id="tl_faq.pastenew.1">
+        <source>Add new after question ID %s</source>
+        <target>Pievienot jaunu pēc jautājuma ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

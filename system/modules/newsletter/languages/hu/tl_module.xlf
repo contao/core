@@ -1,0 +1,85 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Előfizethető hírlevelek</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Ezeket a csatornákat mutatja a felhasználói felületen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Csatornák</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Válasszon egy vagy több csatornát.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Elrejtés a csatorna menüből</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Ne jelenjen meg a csatorna kiválasztó menüben.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>Megerősítő levél</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Adja meg a feliratkozáskor kiküldött megerősítő levél szövegét. A következő beillesztéseket használhatja: &lt;em&gt;###channel###&lt;/em&gt; - hírlevél neve, &lt;em&gt;##domain&lt;/em&gt; - a weblap domain neve, és &lt;em&gt;##link##&lt;/em&gt; - aktiváló hivatkozás (link).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>Leiratkozó levél</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Adja meg a leiratkozáskor kiküldött megerősítő levél szövegét. A következő beillesztéseket használhatja: &lt;em&gt;##channel##&lt;/em&gt; - hírlevél neve, és &lt;em&gt;##domain&lt;/em&gt; - a weblap domain neve.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Hírlevél sablon</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Válasszon egy hírlevél sablont.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Feliratkozás a %s hírlevelére</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>Feliratkozott a ##domain## ##channel## hírlevelére.
+Kattintson ide ##link## a feliratkozás megerősítéséhez.
+
+Ha nem ön iratkozott fel, nyugodtan hagyja ezt a levelet figyelmen kívül!
+</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Feliratkozás a %s hírlevelére</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>Sikeresen leiratkozott a  ##domain## oldal alábbi hírleveléről:
+
+##channels##
+</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

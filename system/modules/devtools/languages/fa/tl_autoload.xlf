@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/devtools/languages/en/tl_autoload.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_autoload.headline">
+        <source>Automatically create the autoload.php files</source>
+        <target>ایجاد خودکار پرونده‌های autoload.php</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.emptySelection">
+        <source>Please select at least one module!</source>
+        <target>لطفا دست‌کم یک ماژول را انتخاب نمایید!</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadExists">
+        <source>Module &quot;%s&quot; has an autoload.php file already. Do you want to override?</source>
+        <target>ماژول «%s» هم‌اکنون پرونده autoload.php دارد. آیا می‌خواهید بازنویسی کنید؟</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.available">
+        <source>Available modules</source>
+        <target>ماژول‌های در دسترس</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplAvailable">
+        <source>Please select the modules you want to modify.</source>
+        <target>لطفا ماژول‌هایی را که می‌خواهید تغییر دهید را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.override">
+        <source>Override existing files</source>
+        <target>بازنویسی پرونده‌های موجود</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplOverride">
+        <source>Override existing autoload.php files (use with care).</source>
+        <target>بازنویسی پرونده‌های autoload.php موجود (با احتیاط استفاده کنید).</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoload">
+        <source>Create the autoload files</source>
+        <target>ایجاد پرونده‌های autoload</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadConfirm">
+        <source>The autoload.php file of module &quot;%s&quot; has been written.</source>
+        <target>پرونده autoload.php ماژول «%s» نوشته شده است.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

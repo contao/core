@@ -1,0 +1,118 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_module.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="tl_module.news_archives.0">
+        <source>News archives</source>
+        <target>Arhive de anunţuri</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_archives.1">
+        <source>Please select one or more news archives.</source>
+        <target>Selectaţi una sau mai multe arhive de anunţuri.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.0">
+        <source>Featured items</source>
+        <target>Doar anunţurile speciale</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.1">
+        <source>Here you can choose how featured items are handled.</source>
+        <target>Afişează în listă doar anunţurile speciale.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.0">
+        <source>No period selected</source>
+        <target>Mergi la luna curentă</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.1">
+        <source>Here you can define what to display if no period is selected.</source>
+        <target>Sari automat la arhiva de anunţuri a perioadei curente dacă nu a fost una specificată.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.0">
+        <source>News reader module</source>
+        <target>Modul de citire anunţuri</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.1">
+        <source>Automatically switch to the news reader if an item has been selected.</source>
+        <target>Schimbă automat la cititorul de anunţuri dacă s-a făcut o selectare.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.0">
+        <source>Meta fields</source>
+        <target>Câmpuri meta</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.1">
+        <source>Here you can select the meta fields.</source>
+        <target>Alegeţi câmpurile pe care doriţi să le includeţi în header.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.0">
+        <source>News template</source>
+        <target>Şabloane pentru anunţuri</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.1">
+        <source>Here you can select the news template.</source>
+        <target>Alegeţi un şablon. Puteţi adăuga şabloane pentru anunţuri în directorul &lt;em&gt;templates&lt;/em&gt;. Şabloanele pentru anunţuri încep cu &lt;em&gt;news_&lt;/em&gt; şi necesită extensia &lt;em&gt;.tpl&lt;/em&gt;</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.0">
+        <source>Archive format</source>
+        <target>Format</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.1">
+        <source>Here you can choose the news archive format.</source>
+        <target>Alegeţi un format de arhivă.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.0">
+        <source>Week start day</source>
+        <target>Începutul de săptămână</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>Aici puteţi alege ziua cu care începe săptămâna.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.0">
+        <source>Sort order</source>
+        <target>Ordinea de sortare</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>Alegeţi ordinea de sortare de aici.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.0">
+        <source>Show number of items</source>
+        <target>Arată numărul de înregistrări</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.1">
+        <source>Show the number of news items of each month.</source>
+        <target>Dacă alegeţi această opţiune, numărul de articole pe lună va fi afişat în meniul arhivei.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_day">
+        <source>Day</source>
+        <target>Zi</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_month">
+        <source>Month</source>
+        <target>Lună</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_year">
+        <source>Year</source>
+        <target>An</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hide_module">
+        <source>Hide the module</source>
+        <target>Ascunde modulul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show_current">
+        <source>Jump to the current period</source>
+        <target>Sari la perioada curentă</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_items">
+        <source>Show all news items</source>
+        <target>Arată toate anunţurile</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured">
+        <source>Show featured news items only</source>
+        <target>Arată doar anunţurile speciale</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured">
+        <source>Skip featured news items</source>
+        <target>Sari peste anunţurile speciale</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

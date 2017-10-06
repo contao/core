@@ -1,0 +1,162 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size.php" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="tl_image_size.name.0">
+        <source>Name</source>
+        <target>Num</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.name.1">
+        <source>Please enter the image size name.</source>
+        <target>Endatescha per plaschair in num per questa grondezza da maletg.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.0">
+        <source>Width</source>
+        <target>Largezza</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.1">
+        <source>Here you can enter the width in pixels.</source>
+        <target>Qua pos ti endatar la largezza en pixels.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.0">
+        <source>Height</source>
+        <target>Autezza</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.1">
+        <source>Here you can enter the height in pixels.</source>
+        <target>Qua pos ti endatar l'autezza en pixels.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.0">
+        <source>Resize mode</source>
+        <target>Modus da redimensiunar</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.1">
+        <source>Only applicable if width and height are specified.</source>
+        <target>Be applitgabel sche la largezza ed l'autezza èn spezifitgadas.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.0">
+        <source>Zoom</source>
+        <target>Zoom</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.1">
+        <source>0 = the whole image is visible, 100 = only the important part of the image is visible.</source>
+        <target>0 = l'entir maletg è visibel, 100 = be la part impurtanta dal maletg è visibla.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.0">
+        <source>Sizes attribute</source>
+        <target>Attribut size</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.1">
+        <source>Here you can define the displayed image width(s), e.g. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</source>
+        <target>Qua pos ti definir la(s) largezza(s) mussada(s) dal maletg, p.ex. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.0">
+        <source>Pixel densities/scale factors</source>
+        <target>Spessezza da pixels / facturs da redimensiunar</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.1">
+        <source>Here you can define the pixel densities, e.g. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</source>
+        <target>Qua pos ti definir las las spessezzas da pixels, p.ex. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.0">
+        <source>Revision date</source>
+        <target>Data da la versiun</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>La data ed il temp da l'ultima versiun</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.title_legend">
+        <source>Image size settings</source>
+        <target>Opziuns da la grondezza dal maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.expert_legend">
+        <source>Expert settings</source>
+        <target>Opziuns dad experts</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.0">
+        <source>Proportional</source>
+        <target>Proporziunal</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.proportional.1">
+        <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>La vart lunga dal maletg vegn adattà a las dimensiuns inditgadas ed il maletg empitschnì proporziunalmian.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.0">
+        <source>Fit the box</source>
+        <target>Adattar al rom</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.box.1">
+        <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>La vart pli pitschna dal maletg vegn adattà a las dimensiuns inditgadas ed il maletg vegn empitschnì proporziunalmian.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.0">
+        <source>Crop</source>
+        <target>Retagliar</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.crop.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
+        <target>Il la grondezza dal maletg vegn midà a las dimensiuns dadas. Sche necessari vegnan ils urs dal maletg tagliads.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.0">
+        <source>New image size</source>
+        <target>Nova grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.1">
+        <source>Create a new image size</source>
+        <target>Crear ina nova grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.0">
+        <source>Image size details</source>
+        <target>Detagls da la grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.1">
+        <source>Show the details of image size ID %s</source>
+        <target>Mussar ils detagls da la grondezza da maletg cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.0">
+        <source>Edit image size</source>
+        <target>Modifitgar la grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.1">
+        <source>Edit image size ID %s</source>
+        <target>Modifitgar la grondezza da maletg cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.0">
+        <source>Edit image size</source>
+        <target>Modifitgar la grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>Modifitgar las opziuns da la grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.0">
+        <source>Move image size</source>
+        <target>Spustar la grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.1">
+        <source>Move image size ID %s</source>
+        <target>Spustar la grondezza da maletg cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.0">
+        <source>Duplicate image size</source>
+        <target>Duplitgar la grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.1">
+        <source>Duplicate image size ID %s</source>
+        <target>Duplitgar la grondezza da maletg cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.0">
+        <source>Delete image size</source>
+        <target>Stizzar la grondezza da maletg</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.1">
+        <source>Delete image size ID %s</source>
+        <target>Stizzar la grondezza da maletg cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.picturefill">
+        <source>The &lt;em&gt;%s&lt;/em&gt; option needs to be enabled in the page layout.</source>
+        <target>La opziun  &lt;em&gt;%s&lt;/em&gt; sto vegnir activada en il layout da la pagina</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
