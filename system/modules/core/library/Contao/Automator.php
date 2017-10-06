@@ -113,6 +113,7 @@ class Automator extends \System
 	 */
 	public function purgeSystemLog()
 	{
+		
 		$objDatabase = \Database::getInstance();
 
 		// Truncate the table
