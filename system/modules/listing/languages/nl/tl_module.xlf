@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/tl_module.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_module.list_table.0">
+        <source>Table</source>
+        <target>Tabel</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_table.1">
+        <source>Please choose the source table.</source>
+        <target>Geef de naam van de database-tabel die u wilt weergeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.0">
+        <source>Fields</source>
+        <target>Velden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.1">
+        <source>Please enter a comma separated list of the fields you want to list.</source>
+        <target>Geef een door komma's gescheiden lijst van de velden die u wilt weergeven.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.0">
+        <source>Condition</source>
+        <target>Voorwaarde</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>Als u bepaalde records wilt uitsluiten kunt u hier een voorwaarde opgeven (bv. &lt;em&gt;published=1&lt;/em&gt; of &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.0">
+        <source>Searchable fields</source>
+        <target>Doorzoekbare velden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.1">
+        <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
+        <target>Geef een door komma's gescheiden lijst op van velden die u wilt doorzoeken.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.0">
+        <source>Order by</source>
+        <target>Sorteer op</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.1">
+        <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
+        <target>Geef een door komma's gescheiden lijst op van velden die gebruikt zullen worden om de resultaten te sorteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.0">
+        <source>Details page fields</source>
+        <target>Detailpagina velden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.1">
+        <source>Enter a comma separated list of the fields you want to show on the details page. Leave blank to disable the feature.</source>
+        <target>Geef een door komma's gescheiden lijst van de velden die u wilt tonen op de detailpagina. Laat dit veld leeg als u geen detailpagina wenst.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.0">
+        <source>Details page condition</source>
+        <target>Detailpagina voorwaarden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>Als u bepaalde records wilt uitsluiten kunt u hier een voorwaarde opgeven (bv. &lt;em&gt;published=1&lt;/em&gt; of &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.0">
+        <source>List template</source>
+        <target>Opsomming template</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.1">
+        <source>Here you can select the list template.</source>
+        <target>Kies een opsomming lay-out. </target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.0">
+        <source>Details page template</source>
+        <target>Detailpagina template</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.1">
+        <source>Here you can select the details page template.</source>
+        <target>Kies een detailpagina template.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

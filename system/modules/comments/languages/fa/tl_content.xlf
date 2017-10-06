@@ -1,0 +1,66 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_content.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_content.com_order.0">
+        <source>Sort order</source>
+        <target>ترتیب مرتب‌سازی</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_order.1">
+        <source>Please choose the sort order.</source>
+        <target>لطفا ترتیب مرتب‌سازی را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.0">
+        <source>Items per page</source>
+        <target>موارد هر برگه</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_perPage.1">
+        <source>The number of comments per page. Set to 0 to disable pagination.</source>
+        <target>تعداد دیدگاه‌ها در هر برگه. 0 را برای غیرفعال کردن برگه‌گذاری قرار دهید.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.0">
+        <source>Moderate</source>
+        <target>نیاز به تائید مدیریت</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>تایید دیدگاه‌ها قبل از انتشار در وب‌سایت.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.0">
+        <source>Allow BBCode</source>
+        <target>اجازه BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>اجازه دادن به کاربران برای دیدگاه دادن با BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.0">
+        <source>Require login to comment</source>
+        <target>برای دیدگاه نیاز به ورود است</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>اجازه دادن به کاربران تایید شده برای ایجاد دیدگاه‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>غیرفعال کردن سوال امنیتی</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>اینجا می‌توانید سوال امنیتی را غیرفعال نمایید (توصیه نمی‌شود).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.0">
+        <source>Comments template</source>
+        <target>قالب دیدگاه‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_content.com_template.1">
+        <source>Here you can select the comments template.</source>
+        <target>اینجا می‌توانید قالب دیدگاه‌ها را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.comment_legend">
+        <source>Comment settings</source>
+        <target>تنظیمات دیدگاه</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

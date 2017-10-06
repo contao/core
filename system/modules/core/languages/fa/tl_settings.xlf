@@ -1,0 +1,653 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_settings.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_settings.websiteTitle.0">
+        <source>Website title</source>
+        <target>عنوان وب‌سایت</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websiteTitle.1">
+        <source>Please enter the title of the website.</source>
+        <target>لطفا عنوان وب‌سایت را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.0">
+        <source>E-mail address of the system administrator</source>
+        <target>نشانی ایمیل مدیر سامانه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>پیغام‌های خودکار مانند ایمیل تایید عضویت به این نشانی فرستاده خواهند شد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.0">
+        <source>Date format</source>
+        <target>ساختار تاریخ</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>رشته ساختار تاریخ که توسط تابع PHP date () استفاده خواهد شد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.0">
+        <source>Time format</source>
+        <target>ساختار زمان</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>رشته ساختار زمان که توسط تابع PHP date () استفاده خواهد شد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.0">
+        <source>Date and time format</source>
+        <target>ساختار تاریخ و زمان</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>رشته ساختار تاریخ و زمان که توسط تابع PHP date () استفاده خواهد شد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.0">
+        <source>Time zone</source>
+        <target>منطقه زمانی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.1">
+        <source>Please select the server time zone.</source>
+        <target>لطفا منطقه زمانی سرور را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.0">
+        <source>Relative path to the Contao directory</source>
+        <target>مسیر نسبی پوشه کانتائو</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.1">
+        <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
+        <target>مسیر نسبی پوشه کانتائو معمولاً به صورت خودکار توسط ابزار نصب تنظیم می‌شود.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.0">
+        <source>Character set</source>
+        <target>مجموعه نویسه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.1">
+        <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
+        <target>استفاده از UTF-8 به خاطر اینکه نویسه‌های ویژه درست نمایش داده می‌شوند توصیه می‌شود.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.0">
+        <source>Disable the command scheduler</source>
+        <target>غیرفعال کردن زمان‌بندی دستور</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.1">
+        <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
+        <target>زمان‌بندی دستور دوره‌ای را غیرفعال کرده و اسکریپت cron.php را توسط کار کرن واقعی اجرا می کند (که شما باید به صورت دستی تنظیم نمایید).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.0">
+        <source>Minify the markup</source>
+        <target>کوچک کردن نشانه‌گذاری</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.1">
+        <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>نشانه‌گذاری اچ‌تی‌ام‌ال را قبل از ارسال به مرورگر کوچک می‌کند.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.0">
+        <source>Compress scripts</source>
+        <target>فشرده کردن اسکریپ‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.1">
+        <source>Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.</source>
+        <target>ایجاد نسخه فشرده از پرونده‌های سی‌اس‌اس و جاوا اسکریپت. به تنظیم پرونده .htaccess نیاز دارد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.0">
+        <source>Items per page</source>
+        <target>موارد هر برگه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.1">
+        <source>Here you can define the number of items per page in the back end.</source>
+        <target>اینجا می‌توانید تعداد آیتم در برگه بخش مدیریت را تعریف نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.0">
+        <source>Maximum items per page</source>
+        <target>بیشترین موردها در هر برگه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.1">
+        <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
+        <target>این محدودسازی کلی گزینه «مشاهده همه رکوردها» را اگر کاربر انتخاب کند تحت تاثیر قرار می‌دهد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.0">
+        <source>Exclude folders from synchronization</source>
+        <target>استثناء کردن پوشه‌ها از هماهنگ‌سازی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.1">
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از پوشه‌هایی از هماهنگ‌سازی پرونده‌ها باید معاف شوند (برای نمونه، &lt;em&gt;attachments,music_academy&lt;/em&gt;) را وارد نمایید. توجه کنید منابع مستثنی شده نمی‌توانند برای نمونه در عنصر‌های تصویر یا دانلود استفاده شوند.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.0">
+        <source>Do not collapse elements</source>
+        <target>جمع نکردن عنصر‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.1">
+        <source>Do not collapse elements in the back end preview.</source>
+        <target>عنصر‌ها را در پیش‌نمایش بخش مدیریت جمع نمی‌کند.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.0">
+        <source>URL suffix</source>
+        <target>پسوند نشانی وب</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.1">
+        <source>The URL suffix will be added to the URI string to simulate static documents.</source>
+        <target>پسوند نشانی وب که باید به رشته نشانی وب اضافه شود تا اسناد ایستا را شبیه‌سازی نماید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.0">
+        <source>Cache mode</source>
+        <target>حال نهانگاه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.1">
+        <source>Here you can select the cache mode.</source>
+        <target>اینجا می‌توانید نوع نهان‌گاه را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>سرور‌های پروکسی قابل اعتماد</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از نشانی‌های IP سرور پروکسی قابل اعتماد را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+        <target>دامنه پروکسی اس‌اس‌ال</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>اگر وب‌سایت شما از طریق سرور پروکسی SSL قابل دسترسی است، لطفا دامنه (برای نمونه &lt;em&gt;sslsites.de&lt;/em&gt;) آن را اینجا وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.0">
+        <source>Anonymize IP addresses</source>
+        <target>نشانی‌های آی‌پی ناشناس</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.1">
+        <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
+        <target>نشناس کردن هر آی‌پی که در پایگاه داده ذخیره می شود، به غیر از جدول &lt;em&gt;tl_session&lt;/em&gt; (نشانی آی‌پی به دلایل امنیتی به نشست مربوط است).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.0">
+        <source>Anonymize Google Analytics</source>
+        <target>گمنام کردن Google Analytics</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.1">
+        <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
+        <target>گمنام کردن نشانی‌های IP که برای Google Analytics فرستاده می‌شود.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.0">
+        <source>Rewrite URLs</source>
+        <target>بازنویسی نشانی‌های وب</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.1">
+        <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
+        <target>کانتائو را وادار می‌کند تا نشانی‌های وب بودن قطعه index.php ایجاد نماید. این ویژگی &quot;mod_rewrite&quot; را لازم دارد، پرونده &quot;.htaccess.default&quot; را به &quot;.htaccess&quot; تغییر نام دهید و RewriteBase را در صورت لزوم تنظیم نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.0">
+        <source>Add the language to the URL</source>
+        <target>افزودن زبان به نشانی وب</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.1">
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>رشته زبانی را به عنوان پارامتر اول نشانی وب (برای نمونه &lt;em&gt;http://example.com/en/&lt;/em&gt;) اضافه می‌نماید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.0">
+        <source>Do not redirect empty URLs</source>
+        <target>عدم بازگردانی نشانی‌های وب خالی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.1">
+        <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+        <target>برای نشانی وب خالی، وب‌سایت را به جای بازگردانی به برگه ریشه زبانی، نمایش می‌دهد (توصیه نمی‌شود).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.0">
+        <source>Enable auto_item</source>
+        <target>فعال کردن auto_item</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.1">
+        <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
+        <target>قطعه &lt;em&gt;items/&lt;/em&gt; یا &lt;em&gt;events/&lt;/em&gt; در نشانی وب در نظر نمی‌گیرد و المان را به صورت خودکار از پارامتر &lt;em&gt;auto_item&lt;/em&gt; تشخیص می‌دهد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.0">
+        <source>Disable page alias usage</source>
+        <target>غیرفعال کردن استفاده از نامک</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.1">
+        <source>Use the numeric ID of a page or article instead of its alias.</source>
+        <target>استفاده از شناسه عددی برگه یا نوشته به جای نامک</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.0">
+        <source>Enable folder URLs</source>
+        <target>فعال کردن نشانی‌های وب پوشه‌ای</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.1">
+        <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>در اینجا می‌توانید نامک برگه شبیه-پوشه مانند &lt;em&gt;docs/install/download.html&lt;/em&gt; را به جای &lt;em&gt;docs-install-download.html&lt;/em&gt; فعال نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.0">
+        <source>Allowed HTML tags</source>
+        <target>برچسب‌های اچ‌تی‌ام‌ال مجاز</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.1">
+        <source>Here you can enter a list of allowed HTML tags that will not be stripped.</source>
+        <target>اینجا می‌توانید فهرستی از برچسب‌های اچ‌تی‌ام‌ال مجاز که نباید حذف شوند را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.0">
+        <source>Enable debug mode</source>
+        <target>فعال کردن حالت اشکال‌زادیی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.1">
+        <source>Print certain runtime information like database queries to the screen.</source>
+        <target>چاپ اطلاعات خاص زمان-اجراء مانند پرسش‌های پایگاه داده در برگه نمایش.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+        <target>وضعیت نگهداشت</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>سربرگ اچ‌تی‌پی 503 را ارسال می‌کند و یک برگه نگهداشت را در بخش کاربری نمایش می‌دهد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.0">
+        <source>Bypass the internal cache</source>
+        <target>کنار گذاشتن نهانگاه داخلی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.1">
+        <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+        <target>استفاده نکردن از پرونده‌های نهانگاه داخلی (مناسب برای توسعه افزونه‌ها).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.0">
+        <source>Disable request tokens</source>
+        <target>غیرفعال کردن تکون‌های درخواست</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.1">
+        <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
+        <target>توکن درخواستی که وقتی فرمی ارسال می‌شود را بررسی نمی‌کند. توجه: خطر امنیتی بالقوه!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.0">
+        <source>Account locking time</source>
+        <target>زمان قفل ماندن حساب کاربری</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.1">
+        <source>An account will be locked if a wrong password is entered three times in a row.</source>
+        <target>اگر کاربری بیش از سه بار پشت سر هم گذرواژه اشتباه وارد نمایید قفل خواهد شد.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.0">
+        <source>Display error messages</source>
+        <target>نمایش پیغام‌های خطاء</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.1">
+        <source>Print error messages to the screen (not recommended for productional sites).</source>
+        <target>چاپ پیغام‌های خطاء در برگه نمایش (برای وب‌سایت‌های تولیدی توصیه نمی‌شود).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.0">
+        <source>Log error messages</source>
+        <target>ثبت پیغام‌های خطاء</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.1">
+        <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
+        <target>نوشتن پیغام‌های خطاء در پرونده لاگ خطاء (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.0">
+        <source>Run in safe mode</source>
+        <target>اجراء در حالت امن (safe mode)</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.1">
+        <source>Run Contao in safe mode and load only core modules.</source>
+        <target>اجرای کانتائو در حالت امن و بارگذاری فقط ماژول‌های هسته.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.0">
+        <source>Disable IP check</source>
+        <target>غیرفعال کردن بررسی آی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.1">
+        <source>Do not bind sessions to IP addresses. Choosing this option is a potential security risk!</source>
+        <target>متصل نکردن نشست‌ها به نشانی‌های آی‌پی. انتخاب این گزینه یک خطر امنیتی بالقوه است!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.0">
+        <source>Download file types</source>
+        <target>گونه‌های پرونده‌ قابل دانلود</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.1">
+        <source>Here you can enter a comma separated list of downloadable file types.</source>
+        <target>اینجا باید فهرست جدا شده با کامل از گونه‌ی‌های پرونده‌ قابل دانلود را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.0">
+        <source>Image file types</source>
+        <target>گونه‌های پرونده تصویر</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.1">
+        <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از گونه‌های پرونده‌ که می‌تواند توسط کلاس تصویر به کار گرفته شود را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.0">
+        <source>Editable file types</source>
+        <target>گونه‌های پرونده قابل ویرایش</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.1">
+        <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از گونه‌های پرونده‌ که می‌تواند توسط ویرایشگر منبع ویرایش شوند را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.0">
+        <source>Template file types</source>
+        <target>گونه‌های پرونده قالب</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.1">
+        <source>Here you can enter a comma separated list of supported template file types.</source>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از گونه‌های پرونده‌ قالب پشتیبانی شده را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.0">
+        <source>Maximum front end width</source>
+        <target>عرض بیشینه در بخش کاربری</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.1">
+        <source>If the width of an image or movie exceeds this value, it will be adjusted automatically. Set to 0 to disable the limit.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.0">
+        <source>JPG thumbnail quality</source>
+        <target>کیفیت تصویر بندانگشتی JPG</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.1">
+        <source>Here you can enter the JPG thumbnail quality in percent.</source>
+        <target>اینجا می‌توانید کیفیت تصویر بندانگشتی JPG را به صورت درصد وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.0">
+        <source>Maximum GD image width</source>
+        <target>عرض بیشینه تصویر GD</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.1">
+        <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
+        <target>اینجا می‌توانید بیشینه عرض تصویر که کتابخانه GD بایستی سعی به کارگیری کند را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.0">
+        <source>Maximum GD image height</source>
+        <target>ارتفاع بیشینه تصویر GD</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.1">
+        <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
+        <target>اینجا می‌توانیدبیشترین ارتفاع تصویر که کتابخانه GD بایستی سعی به کارگیری کند را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.0">
+        <source>Files directory</source>
+        <target>فهرست پرونده‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.1">
+        <source>Here you can set the relative path to the Contao files directory.</source>
+        <target>اینجا می‌توانید مسیر نسبی فهرست پرونده‌های کانتائو را تنظیم کنید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.0">
+        <source>Upload file types</source>
+        <target>گونه‌های پرونده بارگزاری</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.1">
+        <source>Here you can enter a comma separated list of uploadable file types.</source>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از گونه‌های پرونده قابل بارگزاری را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.0">
+        <source>Simultaneous file uploads</source>
+        <target>بازگذاری‌های همزمان پرونده</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.1">
+        <source>Here you can enter the maximum number of simultaneous file uploads.</source>
+        <target>اینجا می‌توانید بیشترین تعداد بارگزاری پرونده همزمان را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.0">
+        <source>Maximum upload file size</source>
+        <target>بیشینه اندازه پرونده بارگزاری</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.1">
+        <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
+        <target>اینجا می‌توانید بیشترین اندازه پرونده بارگزاری در واحد بایت (1 MB = 1000 kB = 1000000 byte) وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.0">
+        <source>Maximum image width</source>
+        <target>عرض تصویر بیشینه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.1">
+        <source>Here you can enter the maximum width for image uploads in pixels.</source>
+        <target>اینجا می‌توانید بیشترین عرض برای بارگزاری تصویر در واحد پیکسل وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.0">
+        <source>Maximum image height</source>
+        <target>ارتفاع تصویر بیشینه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.1">
+        <source>Here you can enter the maximum height for image uploads in pixels.</source>
+        <target>اینجا می‌توانید بیشترین ارتفاع برای بارگزاری تصویر در واحد پیکسل وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.0">
+        <source>Enable searching</source>
+        <target>فعال کردن جستجو</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.1">
+        <source>Index pages so they can be searched.</source>
+        <target>برگه‌ها را فهرست می‌کند تا بتوانند جستجو شوند.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.0">
+        <source>Index protected pages</source>
+        <target>فهرست کردن برگه‌های محافظت شده</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.1">
+        <source>Use this option carefully and always exclude personalized pages from being indexed!</source>
+        <target>این گزینه را با احتیاط استفاده کنید و همیشه برگه‌های شخصی از فهرست شدن مستثنی کنید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.0">
+        <source>Send e-mails via SMTP</source>
+        <target>ارسال ایمیل از طریق اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.1">
+        <source>Use an SMTP server instead of the PHP mail() function to send e-mails.</source>
+        <target>از یک سرور اس‌ام‌تی‌پی به جای تابع mail() پی‌اچ‌پی برای ارسال ایمیل استفاده می‌نماید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>میزبان اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>لطفا نام میزبان سرور اس‌ام‌تی‌پی را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.0">
+        <source>SMTP username</source>
+        <target>نام کاربری اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>اینجا می‌توانید نام کاربری اس‌ام‌تی‌پی را وارد نمایید</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.0">
+        <source>SMTP password</source>
+        <target>گذرواژه اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>اینجا می‌توانید گذرواژه اس‌ام‌تی‌پی را وارد نمایید</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>رمزگذاری اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>روش رمز گذاری (SSL یا TLS) را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>شماره درگاه اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>لطفا شماره درگاه سرور اس‌ام‌تی‌پی را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.0">
+        <source>Inactive extensions</source>
+        <target>افزونه‌های غیرفعال</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.1">
+        <source>Here you can deactivate unneeded extensions.</source>
+        <target>اینجا می‌توانید افزونه‌های غیر لازم را غیرفعال نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.0">
+        <source>Storage time for undo steps</source>
+        <target>زمان ذخیره‌سازی برای بازگردانی مراحل</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.1">
+        <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
+        <target>اینجا می‌توانید زمان ذخیره‌سازی بازگردانی مراحل را به ثانیه وارد نمایید (۲۴ ساعت = ۸۶۴۰۰ ثانیه).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.0">
+        <source>Storage time for versions</source>
+        <target>زمان ذخیره مانند برای نسخه‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.1">
+        <source>Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).</source>
+        <target>اینجا می‌توانید زمان ذخیره‌سازی نسخه‌های مختلف یک رکورد را به ثانیه وارد نمایید (۹۰ روز = ۷۷۷۶۰۰ ثانیه).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.0">
+        <source>Storage time for log entries</source>
+        <target>مدت زمان ذخیره برای ورودی های لاگ</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.1">
+        <source>Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).</source>
+        <target>اینجا می‌توانید زمان ذخیره‌سازی ورودی‌های گزارش را به ثانیه وارد نمایید (۱۴ روز = ۱۲۰۹۶۰۰ ثانیه).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.0">
+        <source>Session timeout</source>
+        <target>مهلت نشست</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.1">
+        <source>Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).</source>
+        <target>اینجا می‌توانید بیشترین زمان یک نشست  را به ثانیه وارد نمایید (۶۰ دقیقه = ۳۶۰۰ ثانیه).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.0">
+        <source>Auto login period</source>
+        <target>زمان ورود خودکار</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.1">
+        <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
+        <target>اینجا می‌توانید دوره ورود خودکار بخش کاربری را تنظیم نمایید (۹۰ روز = ۷۷۷۶۰۰۰ ثانیه).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.0">
+        <source>Default page owner</source>
+        <target>صاحب پیش‌فرض برگه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.1">
+        <source>Here you can select a user as the default owner of a page.</source>
+        <target>اینجا می‌توانید کاربری را به عنوان صاحب پیش‌فرض هر برگه انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.0">
+        <source>Default page group</source>
+        <target>گروه پیش‌فرض برگه</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.1">
+        <source>Here you can select a group as the default owner of a page.</source>
+        <target>اینجا می‌توانید گروهی را به عنوان صاحب پیش‌فرض هر برگه انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.0">
+        <source>Default access rights</source>
+        <target>سطوح دسترسی پیش‌فرض</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.1">
+        <source>Please assign the default access rights for pages and articles.</source>
+        <target>لطفا قوانین دسترسی پیش‌فرض به برگه‌ها و نوشته‌ها اختصاص دهید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.0">
+        <source>Live Update URL</source>
+        <target>نشانی وب به‌روزرسانی لایو</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.1">
+        <source>Here you can enter the Live Update URL.</source>
+        <target>اینجا می‌توانید نشانی وب به‌روزرسانی لایو را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.title_legend">
+        <source>Website title</source>
+        <target>عنوان وب‌سایت</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.date_legend">
+        <source>Date and time</source>
+        <target>تاریخ و ساعت</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.global_legend">
+        <source>Global configuration</source>
+        <target>پیکربندی کلی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.backend_legend">
+        <source>Back end configuration</source>
+        <target>پیکربندی بخش مدیریت</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.frontend_legend">
+        <source>Front end configuration</source>
+        <target>پیکربندی بخش کاربری</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>پیکربندی پروکسی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacy_legend">
+        <source>Privacy settings</source>
+        <target>تنظیمات پنهان‌سازی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.security_legend">
+        <source>Security settings</source>
+        <target>تنظیمات امنیتی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.files_legend">
+        <source>Files and images</source>
+        <target>پرونده‌ها و تصاویر</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploads_legend">
+        <source>Upload settings</source>
+        <target>تنطیمات بارگزاری</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.search_legend">
+        <source>Search engine settings</source>
+        <target>تنظیمات موتور جستجو</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>تنظیمات اس‌ام‌تی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.ftp_legend">
+        <source>Safe Mode Hack</source>
+        <target>هک حالت سالم</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.modules_legend">
+        <source>Inactive extensions</source>
+        <target>افزونه‌های غیرفعال</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
+        <target>زمان‌بندی دستور</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeout_legend">
+        <source>Timeout values</source>
+        <target>مقادیر انقضاء</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.chmod_legend">
+        <source>Default access rights</source>
+        <target>سطوح دسترسی پیش‌فرض</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.update_legend">
+        <source>Live Update</source>
+        <target>به‌روزرسانی لایو</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.static_legend">
+        <source>Static resources</source>
+        <target>منابع استاتیک</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.edit">
+        <source>Edit the local configuration</source>
+        <target>ویرایش پیکربندی محلی</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.both">
+        <source>Use the server and the browser cache</source>
+        <target>استفاده از نهانگاه سرور و مرورگر</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.server">
+        <source>Use only the server cache</source>
+        <target>استفاده فقط از نهانگاه سرور</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.browser">
+        <source>Use only the browser cache</source>
+        <target>استفاده فقط از نهانگاه مرورگر</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.none">
+        <source>Disable caching</source>
+        <target>غیرفعال کردن نهانگاه</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

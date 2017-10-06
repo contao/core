@@ -1,0 +1,148 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/default.php" source-language="en" target-language="zh">
+    <body>
+      <trans-unit id="MSC.com_name">
+        <source>Name</source>
+        <target>名称</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_email">
+        <source>E-mail (not published)</source>
+        <target>电子邮件(未发布)</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_website">
+        <source>Website</source>
+        <target>网站</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_comment">
+        <source>Comment</source>
+        <target>评论</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notify">
+        <source>Notify me of new comments by e-mail</source>
+        <target>新评论邮件通知</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_submit">
+        <source>Submit comment</source>
+        <target>提交评论</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_login">
+        <source>You need to be logged in to add comments.</source>
+        <target>您需要登录后来添加评论.</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_by">
+        <source>Comment by</source>
+        <target>评论</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_reply">
+        <source>Reply by</source>
+        <target>回复</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_quote">
+        <source>%s wrote:</source>
+        <target>%s 写到:</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_code">
+        <source>Code:</source>
+        <target>代码：</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_subject">
+        <source>New comment on %s</source>
+        <target>%s的新评论</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_message">
+        <source>%s has created a new comment on your website.
+
+---
+
+%s
+
+---
+
+View: %s
+Edit: %s
+
+If you are moderating comments, you have to log in to the back end to publish it.</source>
+        <target>%s 已在您的网站创建一个新的评论.
+
+---
+
+%s
+
+---
+
+查看: %s
+编辑: %s
+
+如果您正在审核评论，您需要登录到后台将其发布。</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_confirm">
+        <source>Your comment has been added and is now pending for approval.</source>
+        <target>您的评论已被添加，正在等待批准。</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInConfirm">
+        <source>Your subscription has been activated</source>
+        <target>您的订阅已激活</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInCancel">
+        <source>Your subscription has been cancelled</source>
+        <target>您的订阅已取消</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInSubject">
+        <source>Your subscription on %s</source>
+        <target>您的订阅的 %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_optInMessage">
+        <source>Hello %s,
+
+please confirm that you want to be notified of new comments by e-mail on this page:
+
+%s
+
+---
+
+Confirm: %s
+Cancel: %s
+</source>
+        <target>您好 %s,
+
+请确认在此页有新评论时您需要得到邮件通知:
+
+%s
+
+---
+
+确认: %s
+取消: %s
+</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notifySubject">
+        <source>A new comment has been added on %s</source>
+        <target>一个新评论已被添加于 %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.com_notifyMessage">
+        <source>Hello %s,
+
+a new comment has been added on a page you have subscribed to:
+
+%s
+
+---
+
+To cancel your subscription, please click here:
+%s
+</source>
+        <target>您好 %s,
+
+您订阅的页面已有新的评论:
+
+%s
+
+---
+
+要取消订阅，请点击此处:
+%s
+</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

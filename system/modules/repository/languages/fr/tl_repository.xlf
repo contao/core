@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en" target-language="fr">
+    <body>
+      <trans-unit id="tl_repository.category.0">
+        <source>Category</source>
+        <target>Catégorie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.category.1">
+        <source>Please select the extension category.</source>
+        <target>Sélectionner la catégorie de l'extension</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.0">
+        <source>Copyright</source>
+        <target>Copyright</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.1">
+        <source>Here you can enter a copyright notice (e.g. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</source>
+        <target>Saisir vos informations de droit d'auteur (ex. : &amp;copy; 2007,2008 Jerry Miller Webservices Inc).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.0">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.1">
+        <source>These HTML tags are allowed: %s</source>
+        <target>Ces balises HTML sont autorisées : %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.0">
+        <source>Extension</source>
+        <target>Extension</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.1">
+        <source>Name of the extension.</source>
+        <target>Nom de l'extension.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.0">
+        <source>Functionality</source>
+        <target>Fonctionnalité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.1">
+        <source>Does the extension provide the expected functionality?</source>
+        <target>Est-ce que l'extension remplit toutes ses fonctions ?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.0">
+        <source>License</source>
+        <target>Licence</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.1">
+        <source>Please enter a short license information. You may add full license information in a file LICENSE.txt.</source>
+        <target>Saisir une courte information concernant la licence. Vous pouvez ajouter des informations plus complètes dans un fichier LICENSE.txt.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.0">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.1">
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Les noms d'extension doivent commencer par a-z, A-Z ou 0-9. Les noms en minuscules sont préférables. En outre, les caractères _ et - sont autorisés dans le nom.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.0">
+        <source>Popularity</source>
+        <target>Popularité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.1">
+        <source>%s/%s (downloads/installs)</source>
+        <target>%s/%s (téléchargements/installations)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.0">
+        <source>Quality</source>
+        <target>Qualité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.1">
+        <source>How robust is the extension and how painless is installation and maintenance?</source>
+        <target>L'extension est-elle robuste ? L'installation et la maintenance se font-elles facilement ?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.0">
+        <source>Release date</source>
+        <target>Date de publication</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.1">
+        <source>Enter the publishing date of this release in format %s</source>
+        <target>Saisir la date de publication de l'extension au format %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.0">
+        <source>Version</source>
+        <target>Version</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.1">
+        <source>Please select the version</source>
+        <target>Saisir la version</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.0">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.1">
+        <source>Please select the extension type.</source>
+        <target>Sélectionner le type d'extension.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.0">
+        <source>Usability</source>
+        <target>Utilisabilité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.1">
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>Est-ce que l'extension est conforme aux standards de Contao concernant l'utilisabilité et l'accessibilité ?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.0">
+        <source>Version</source>
+        <target>Version</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.1">
+        <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
+        <target>Les numéros de version doivent être au format n.n.n s, ou n est un entier et s un terme parmi ceux-ci : alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Clé d'enregistrement</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Saisir la clé d'enregistrement que le vendeur de l'extension vous a fourni.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Protéger contre la désinstallation</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Protéger l'extension contre une désinstallation accidentelle.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Protéger contre les mises à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Protéger l'extension contre une mise à jour accidentelle.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.author">
+        <source>Author</source>
+        <target>Auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.build">
+        <source>Build</source>
+        <target>Révision</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.cancel">
+        <source>Cancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.continue">
+        <source>Continue</source>
+        <target>Continuer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependencies">
+        <source>Dependencies of this extension</source>
+        <target>Dépendances de cette extension</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependents">
+        <source>Other extensions depending on this one</source>
+        <target>Autres extensions dépendant de celle-ci</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependentsdel">
+        <source>The following extensions are dependent from &lt;em&gt;%s&lt;/em&gt; and may render broken:</source>
+        <target>Les extensions suivantes sont dépendantes de &lt;em&gt;%s&lt;/em&gt; et pourraient ne plus fonctionner :</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.donate">
+        <source>Donate</source>
+        <target>Faire un don</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.downloads">
+        <source>Package downloads</source>
+        <target>Téléchargements du paquet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extensionnotfound">
+        <source>Extension not found.</source>
+        <target>Extension non trouvée.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.forum">
+        <source>Forum</source>
+        <target>Forum</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installs">
+        <source>Online installs</source>
+        <target>Installations en ligne</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.langtrans">
+        <source>%s transl.</source>
+        <target>%s trad.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.manual">
+        <source>Manual</source>
+        <target>Manuel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.no">
+        <source>no</source>
+        <target>non</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.noextensionsfound">
+        <source>No matching extensions found.</source>
+        <target>Aucune extension trouvée.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.orderby">
+        <source>Order by</source>
+        <target>Trier par</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.otherlanguages">
+        <source>Other languages</source>
+        <target>Autres langues</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.pageof">
+        <source>Page %s of %s</source>
+        <target>Page %s de %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ratingfmt">
+        <source>%.2f (%d votes)</source>
+        <target>%.2f (%d votes)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.reldownloads">
+        <source>Release downloads</source>
+        <target>Téléchargements</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasenotesfor">
+        <source>Release notes and change log for %s</source>
+        <target>Notes de publication et changements pour %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relfunctionality">
+        <source>Release functionality</source>
+        <target>Fonctionnalité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relinstalls">
+        <source>Release installs</source>
+        <target>Installations</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relquality">
+        <source>Release quality</source>
+        <target>Qualité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relrating">
+        <source>Release rating</source>
+        <target>Avis</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relupdates">
+        <source>Release updates</source>
+        <target>Mises à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relusability">
+        <source>Release usability</source>
+        <target>Utilisabilité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.save">
+        <source>Save</source>
+        <target>Sauvegarder</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.shop">
+        <source>Shop</source>
+        <target>Achat</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showpicture">
+        <source>Show full size picture</source>
+        <target>Afficher l'image en taille réelle</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.state">
+        <source>State</source>
+        <target>Département/État</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.tag">
+        <source>Tag</source>
+        <target>Mot clé</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.thumbnail">
+        <source>Thumbnail picture</source>
+        <target>Vignette</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totdownloads">
+        <source>Total downloads</source>
+        <target>Total téléchargements</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totfunctionality">
+        <source>Total functionality</source>
+        <target>Total fonctionnalité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totinstalls">
+        <source>Total installs</source>
+        <target>Total installations</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totquality">
+        <source>Total quality</source>
+        <target>Total qualité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totrating">
+        <source>Total rating</source>
+        <target>Total des avis</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totupdates">
+        <source>Total updates</source>
+        <target>Total de mises à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totusability">
+        <source>Total usability</source>
+        <target>Total utilisabilité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionfrom">
+        <source>Version from</source>
+        <target>de la version</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versions">
+        <source>Other versions</source>
+        <target>Autres versions</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionto">
+        <source>Version to</source>
+        <target>à la version</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.yes">
+        <source>yes</source>
+        <target>oui</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.action">
+        <source>Action</source>
+        <target>Action</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsummary">
+        <source>Action summary</source>
+        <target>Résumé de l'action</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsuccess">
+        <source>Actions successful.</source>
+        <target>Actions effectuées avec succès.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionfailed">
+        <source>One or more actions failed.</source>
+        <target>Une ou plusieurs actions ont échouées.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.apply">
+        <source>Apply</source>
+        <target>Appliquer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.byorder">
+        <source>By %s</source>
+        <target>Par %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.checkextension">
+        <source>Check extension</source>
+        <target>Vérifier l'extension</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dbuptodate">
+        <source>Database is up to date</source>
+        <target>La base de données est à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingdirs">
+        <source>Deleting directories</source>
+        <target>Suppression des répertoires</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingfiles">
+        <source>Deleting files</source>
+        <target>Suppression des fichiers</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.editextension">
+        <source>Edit settings</source>
+        <target>Éditer les paramètres</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extinstrecntf">
+        <source>Extension install record not found</source>
+        <target>L'enregistrement de l'installation de l'extension n'a pas été trouvé</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.errdldpkg">
+        <source>Download of package from repository failed</source>
+        <target>Le téléchargement du paquet à partir du référentiel a échoué</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.failed">
+        <source>failed</source>
+        <target>échoué</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.fileerrwrite">
+        <source>Error writing file %s</source>
+        <target>Erreur lors de l'écriture du fichier %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesdeleted">
+        <source>%s file(s) deleted</source>
+        <target>%s fichier(s) supprimé(s)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesinstalled">
+        <source>%s file(s) installed</source>
+        <target>%s fichier(s) installé(s)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesunchanged">
+        <source>%s file(s) unchanged</source>
+        <target>%s fichier(s) inchangé(s)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesupdated">
+        <source>%s file(s) updated</source>
+        <target>%s fichier(s) mis à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ftsearch">
+        <source>Fulltext search</source>
+        <target>Recherche plein texte</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.goback">
+        <source>Go back</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.install">
+        <source>Install</source>
+        <target>Installer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installextension">
+        <source>Install extension</source>
+        <target>Installer/mettre à jour une extension</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installingext">
+        <source>Install %s %s build %s</source>
+        <target>Installer %s %s révision %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installlogtitle">
+        <source>File installation/update log</source>
+        <target>Journal d'installation/mise à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickeyrequired">
+        <source>This extension requires a license key. Please visit the vendor's shop to purchase one.</source>
+        <target>Cette extension nécessite une clé d'enregistrement. Veuillez visiter le site du vendeur pour en acheter une.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.none">
+        <source>None</source>
+        <target>Aucun</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.notfound">
+        <source>not found</source>
+        <target>non trouvé</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ok">
+        <source>OK</source>
+        <target>OK</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.okuninstextension">
+        <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
+        <target>Êtes-vous d'accord pour désinstaller &lt;em&gt;%s&lt;/em&gt; maintenant ?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showdetails">
+        <source>Show details</source>
+        <target>Afficher les détails</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.stateshint">
+        <source>Check the states to be included.</source>
+        <target>Sélectionnez les états à inclure.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.status">
+        <source>Status</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.success">
+        <source>success</source>
+        <target>succès</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstallextension">
+        <source>Uninstall extension</source>
+        <target>Désinstaller l'extension</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatedatabase">
+        <source>Update database</source>
+        <target>Mettre à jour la base de données</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextension">
+        <source>Update extension</source>
+        <target>Mettre à jour l'extension</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextensions">
+        <source>Update checked extensions</source>
+        <target>Mettre à jour les extensions sélectionnées</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.update">
+        <source>Update</source>
+        <target>Mettre à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updates">
+        <source>Updates</source>
+        <target>Mises à jour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatehint">
+        <source>Check the states to be included at updates.</source>
+        <target>Vérifier/réparer %s %s révision %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatingext">
+        <source>Update %s %s build %s</source>
+        <target>Mettre à jour %s %s révision %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validate">
+        <source>Repair</source>
+        <target>Réparer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validatingext">
+        <source>Verify/repair %s %s build %s</source>
+        <target>Vérifier/réparer %s %s révision %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+        <target>Approuvé pour</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+        <target>Contao %s à %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.missingSoapModule">
+        <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
+        <target>L'extension SOAP n'est pas chargée (configurer PHP avec --enable-soap).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Vous consultez actuellement les extensions compatibles avec la version actuelle de Contao seulement. Modifiez les paramètres du back office afin d'étendre les résultats de la recherche en affichant toutes les extensions.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Dernière version installée</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Non approuvé pour %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Non approuvé avec %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Devrait être compatible avec %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Nouvelle version %s révision %s disponible.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>L'extension requise %s est manquante.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Extension non trouvée dans le référentiel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>La version installée n'a pas été trouvée dans le référentiel.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Clé d'enregistrement nécessaire, installez l'extension d'abord.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Échec de l'installation, mise à jour et/ou réparation conseillée.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.free">
+        <source>Free</source>
+        <target>Libre</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.private">
+        <source>Private</source>
+        <target>Privé</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.commercial">
+        <source>Commercial</source>
+        <target>Commercial</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.application">
+        <source>Application</source>
+        <target>Application</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.plugin">
+        <source>Plugin</source>
+        <target>Plugin</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.template">
+        <source>Theme</source>
+        <target>Thème</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.utility">
+        <source>Utility</source>
+        <target>Utilitaire</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.widget">
+        <source>Widget</source>
+        <target>Widget</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.translation">
+        <source>Translation</source>
+        <target>Traduction</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.bundle">
+        <source>Bundle</source>
+        <target>Bundle</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.other">
+        <source>Other</source>
+        <target>Autre</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.core">
+        <source>Core</source>
+        <target>Core</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.reldate">
+        <source>Releasedate</source>
+        <target>Date de sortie</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.rating">
+        <source>Rating</source>
+        <target>Note</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.popular">
+        <source>Popularity</source>
+        <target>Popularité</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.name">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.title">
+        <source>Title</source>
+        <target>Nom du groupe</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.author">
+        <source>Author</source>
+        <target>Auteur</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.alpha">
+        <source>Alpha</source>
+        <target>Alpha</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.beta">
+        <source>Beta</source>
+        <target>Beta</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.rc">
+        <source>RC</source>
+        <target>RC (Release Candidate)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.stable">
+        <source>Stable</source>
+        <target>Stable</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,768 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_module.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_module.name.0">
+        <source>Title</source>
+        <target>Titulek</target>
+      </trans-unit>
+      <trans-unit id="tl_module.name.1">
+        <source>Please enter the module title.</source>
+        <target>Zadejte unikátní jméno modulu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.0">
+        <source>Headline</source>
+        <target>Hlavička</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.1">
+        <source>Here you can add a headline to the module.</source>
+        <target>Pokud zadáte hlavičku, bude zobrazena nahoře modulu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.0">
+        <source>Module type</source>
+        <target>Typ modulu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.1">
+        <source>Please choose the type of module.</source>
+        <target>Zvolte typ tohoto modulu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.0">
+        <source>Start level</source>
+        <target>Startovací úroveň</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.1">
+        <source>Enter a value greater than 0 to show only submenu items.</source>
+        <target>Zadejte hodnotu větší než 0 pro zobrazení položek podmenu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.0">
+        <source>Stop level</source>
+        <target>Zastavovací úroveň</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.1">
+        <source>Enter a value greater than 0 to limit the nesting level of the menu.</source>
+        <target>Zadejte hodnotu větší než 0, abyste omezili podúrovně menu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.0">
+        <source>Hard limit</source>
+        <target>Tvrdý limit</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.1">
+        <source>Never show any menu items beyond the stop level.</source>
+        <target>Nikdy nezobrazovat součásti menu mimo úroveň stopu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.0">
+        <source>Show protected items</source>
+        <target>Ukázat chráněné elementy</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.1">
+        <source>Show items that are usually only visible to authenticated users.</source>
+        <target>Zobrazit elementy, které mohou jinak vidět jen autorizovaní uživatelé.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.0">
+        <source>Set a reference page</source>
+        <target>Určit referenční stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.1">
+        <source>Define a custom source or target page for the module.</source>
+        <target>Přiřadit vlastní zdroj nebo cílovou stránku modulu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.0">
+        <source>Reference page</source>
+        <target>Referenční stránka</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.1">
+        <source>Please choose the reference page from the site structure.</source>
+        <target>Zvolte prosím stránku ze struktury stránek.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.0">
+        <source>Navigation template</source>
+        <target>Předloha navigace</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.1">
+        <source>Here you can select the navigation template.</source>
+        <target>Zde můžete vybrat předlohu navigace</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+        <target>Vlastní předloha modulu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+        <target>Zde můžete přepsat výchozí předlohu modulu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.0">
+        <source>Pages</source>
+        <target>Stránky</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.1">
+        <source>Please choose one or more pages from the site structure.</source>
+        <target>Vyberte prosím jednu nebo více stránek ze struktury stránek.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.0">
+        <source>Show hidden items</source>
+        <target>Ukázat skryté elementy</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.1">
+        <source>Show items that are usually hidden in the navigation menu.</source>
+        <target>Ukázat elementy v navigaci, které jsou jinak skryté.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.0">
+        <source>Custom label</source>
+        <target>Vlastní údaj</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.1">
+        <source>Here you can enter a custom label for the drop-down menu.</source>
+        <target>Zde můžete zadat vlastní údaj pro rozbalovací menu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.0">
+        <source>Allow auto login</source>
+        <target>Povolit automatické přihlášení</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.1">
+        <source>Allow members to log into the front end automatically.</source>
+        <target>Povolí členům automatické přihlášení do frontendu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Přesměrovat na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking a link or submitting a form.</source>
+        <target>Zvolte prosím stránku, na kterou bude přesměrovaný návštěvník poté, co kliknul na tlačítko odeslat.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.0">
+        <source>Redirect to last page visited</source>
+        <target>Přesměrování na poslední navštívenou stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.1">
+        <source>Redirect the user back to the last page visited instead of the redirect page.</source>
+        <target>Přesměrovat uživatele na poslední navštívenou stránku místo na stránku určenou k přesměrování.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.0">
+        <source>Number of columns</source>
+        <target>Počet sloupců</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.1">
+        <source>Please choose the number of columns of the form.</source>
+        <target>Zvolte prosím počet sloupců pro zobrazení formuláře v backendu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.0">
+        <source>One column</source>
+        <target>Jeden sloupec</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.1">
+        <source>Show the label above the input field.</source>
+        <target>zobrazit popisek nad polem.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.0">
+        <source>Two columns</source>
+        <target>Dva sloupce</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.1">
+        <source>Show the label on the left side of the input field.</source>
+        <target>zobrazit popisek vlevo vedle pole.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.0">
+        <source>Editable fields</source>
+        <target>Upravitelná pole</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.1">
+        <source>Show these fields in the front end form.</source>
+        <target>Zobrazit tato pole ve formuláři ve frontendu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.0">
+        <source>Form template</source>
+        <target>Předloha formuláře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.1">
+        <source>Here you can select the form template.</source>
+        <target>Zde můžete zvolit předlohu formuláře.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.0">
+        <source>Tableless layout</source>
+        <target>Bez tabulky</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>Formulář bude naformátovaný bez tabulky.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.0">
+        <source>Form</source>
+        <target>Formulář</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.1">
+        <source>Please select a form.</source>
+        <target>Zvolte prosím formulář.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.0">
+        <source>Default query type</source>
+        <target>Výchozí typ dotazu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.1">
+        <source>Please select the default query type.</source>
+        <target>Zvolte prosím výchozí typ dotazu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.0">
+        <source>Find all words</source>
+        <target>Vyhledej všechna slova</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.1">
+        <source>Returns only pages that contain all keywords.</source>
+        <target>najde jen ty stránky, které obsahují dané slovo.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.0">
+        <source>Find any word</source>
+        <target>Vyhledej jakýkoliv slovo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.1">
+        <source>Returns all pages that contain any of the keywords.</source>
+        <target>najde všechny stránky, které obsahují dané slovo.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.0">
+        <source>Fuzzy search</source>
+        <target>Nepřesné vyhledávání</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.1">
+        <source>Will find &quot;Contao&quot; if you search for &quot;con&quot; (equal to a wildcard search).</source>
+        <target>Najde např. &quot;Contao&quot; při zadání slova &quot;con&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.0">
+        <source>Simple form</source>
+        <target>Jednoduchý formulář</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.1">
+        <source>Contains a single input field only.</source>
+        <target>obsahuje jen jedno pole.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.0">
+        <source>Advanced form</source>
+        <target>Pokročilejší formulář</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.1">
+        <source>Contains an input field and a radio button menu to choose the query type.</source>
+        <target>obsahuje jedno pole a jedno výběrové tlačítko pro volbu typu dotazu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.0">
+        <source>Context range</source>
+        <target>Rozpětí vyhledaného záznamů</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.1">
+        <source>The number of characters on the left and right side of each keyword that are used as context.</source>
+        <target>Počet znaků, které lze použít nalevo a napravo hledaného výrazu jako kontextu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.0">
+        <source>Maximum context length</source>
+        <target>Maximální délka nalezených záznamů</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.1">
+        <source>Here you can limit the overall context length per result.</source>
+        <target>Zde můžete zadat maximální délku pro každý výsledek vyhledávání.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.0">
+        <source>Items per page</source>
+        <target>Počet záznamů na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>Počet záznamů na stránku. Zadejte 0, pokud chcete vypnout zalamování stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.0">
+        <source>Search form layout</source>
+        <target>Vzhled vyhledávacího formuláře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.1">
+        <source>Here you can select the search form layout.</source>
+        <target>Zde můžete zvolit vzhled vyhledávacího formuláře.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.0">
+        <source>Search results template</source>
+        <target>Předloha pro výsledky vyhledávání</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.1">
+        <source>Here you can select the search results template.</source>
+        <target>Zde můžete vybrat předlohu pro výsledky vyhledávání.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.0">
+        <source>Column</source>
+        <target>Sloupec</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.1">
+        <source>Please choose the column whose articles you want to list.</source>
+        <target>Vyberte prosím sloupec, jehož články chcete zobrazit v seznamu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.0">
+        <source>Skip items</source>
+        <target>Přeskočit elementy</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.1">
+        <source>Here you can define how many items will be skipped.</source>
+        <target>Zde můžete učit, kolik elementů se má přeskočit.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.0">
+        <source>Load the first item</source>
+        <target>Nahrát první element</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.1">
+        <source>Automatically redirect to the first item if none is selected.</source>
+        <target>Automaticky přesměrovat k prvnímu elementu, pokud není již vybraný nějaký jiný.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.0">
+        <source>Width and height</source>
+        <target>Šírka a výška</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.1">
+        <source>Please enter the width and height in pixel.</source>
+        <target>Zadejte prosím šířku a výšku v pixelech.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.0">
+        <source>Transparent movie</source>
+        <target>Průhlednost filmu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.1">
+        <source>Make the Flash movie transparent (wmode = transparent).</source>
+        <target>nastavit míru průhlednosti flashového filmu (wmode = průhledný)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.0">
+        <source>FlashVars</source>
+        <target>FlashVars</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.1">
+        <source>Pass variables to the Flash movie (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;).</source>
+        <target>Předat flashi proměnlivé (&lt;em&gt;var1=value1&amp;var2=value2&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.0">
+        <source>Flash player version</source>
+        <target>Verze Flashového přehrávače</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.1">
+        <source>Please enter the required Flash player version (e.g. 6.0.12).</source>
+        <target>Zadejte prosím požadovanou verzi Flash player (např. 6.0.12).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.0">
+        <source>Alternate content</source>
+        <target>Alternativní obsah</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.1">
+        <source>The alternate content will be shown if the movie cannot be loaded. HTML tags are allowed.</source>
+        <target>Alternativní obsah se zobrazí místo flasha, pokud je flashový obsah zakázaný nebo pokud není nainstalované potřebné rozšíření.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.0">
+        <source>Source</source>
+        <target>Zdroj</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.1">
+        <source>Whether to use a file on the server or point to an external URL.</source>
+        <target>Použít soubor uložený na serveru nebo externí internetovou adresu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.0">
+        <source>Source file</source>
+        <target>Zdrojový soubor</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.1">
+        <source>Please select a file from the files directory.</source>
+        <target>Vyberte soubor z adresáře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.0">
+        <source>URL</source>
+        <target>Internetová adresa</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.1">
+        <source>Please enter the URL (http://…) of the Flash movie.</source>
+        <target>Zadejte prosím internetovou adresu (http://...) daného flashového videa.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.0">
+        <source>Make interactive</source>
+        <target>Přidat interativní funkcionalitu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.1">
+        <source>Make the Flash movie interact with the browser (requires JavaScript).</source>
+        <target>Přidat snímku interaktivní funkcionalitu, kterou lze využít v prohlížeči (vyžaduje JavaScript).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.0">
+        <source>Flash movie ID</source>
+        <target>Flashové video ID</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.1">
+        <source>Please enter a unique Flash movie ID.</source>
+        <target>Zadejte prosím jednoznačné ID flashového videa.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.0">
+        <source>JavaScript _DoFSCommand(command, args) {</source>
+        <target>JavaScript _DoFSCommand(command, args) {</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.1">
+        <source>Please enter the JavaScript code.</source>
+        <target>Zadejte prosím kód JavaScriptu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>Zobrazit v plné velikost v lightboxu/nové okno</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>Zobrazit obrázek v maximální velikosti v rozevíracím rámu lightboxu - stane se tak po kliknutí na obrázek.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.0">
+        <source>Image size</source>
+        <target>Velikost obrázku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Zde můžete zadat rozměry a metodu zobrazení obrázku.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.0">
+        <source>Show caption</source>
+        <target>Zobrazit popisek</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.1">
+        <source>Display the image name or caption below the image.</source>
+        <target>Zobrazit název nebo popisek obrázku pod ním.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.0">
+        <source>Source files</source>
+        <target>Zdroj souborů</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.1">
+        <source>Please select one or more files from the files directory.</source>
+        <target>Vyberte jeden nebo více souborů z adresáře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.0">
+        <source>Sort order</source>
+        <target>Seřadit podle</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>Způsob řazení položek.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.0">
+        <source>HTML code</source>
+        <target>Kód HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Seznam povolených znaků HTML můžete upravit v nastaveních systému.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.0">
+        <source>Cache timeout</source>
+        <target>Doba ukládání do cache</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.1">
+        <source>Here you can define how long the RSS feed is being cached.</source>
+        <target>Zde můžete určit, jak dlouho bude RSS kanál uložen ve vyrovnávací paměti.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.0">
+        <source>Feed URLs</source>
+        <target>URL kanálu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.1">
+        <source>Please enter the URL of one or more RSS feeds.</source>
+        <target>Prosím vložte URL jednoho nebo více RSS kanálů.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.0">
+        <source>Feed template</source>
+        <target>Šablona kanálu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.1">
+        <source>Here you can select the feed template.</source>
+        <target>Zde můžete vybrat šablonu kanálu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.0">
+        <source>Number of items</source>
+        <target>Počet položek</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.1">
+        <source>Here you can limit the number of items. Set to 0 to show all.</source>
+        <target>Zde můžete omezit počet položek. Zadejte 0, pokud chcete zobrazit všechny položky.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.0">
+        <source>Protect module</source>
+        <target>Chránit modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.1">
+        <source>Show the module to certain member groups only.</source>
+        <target>Ukázat modul jen některým členům skupiny.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.0">
+        <source>Allowed member groups</source>
+        <target>Povolené členské skupiny</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.1">
+        <source>These groups will be able to see the module.</source>
+        <target>Zvolená skupina bude smět vidět daný modul.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.0">
+        <source>Show to guests only</source>
+        <target>Ukázat pouze hostům</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.1">
+        <source>Hide the module if a member is logged in.</source>
+        <target>Skrýt modul, pokud je přihlášený alespoň jeden z členů.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.0">
+        <source>CSS ID/class</source>
+        <target>Kaskádovitý styl ID/class</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Zde můžete zadat ID nebo jednu nebo více tříd (class) kaskádovitých stylů.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.0">
+        <source>Space in front and after</source>
+        <target>Odsazení před a po</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.1">
+        <source>Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Zde můžete zadat odsazení před a po modulu v pixelích. Měli byste se ale vyvarovat jakýchkoli stylů nenadefinovaných centrálně v sekci &quot;Styly&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Vypnout bezpečnostní otázku.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>Zde můžete vypnout bezpečnostní otázku (nedoporučeno).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.0">
+        <source>Member groups</source>
+        <target>Skupiny členů</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.1">
+        <source>Here you can assign the user to one or more groups.</source>
+        <target>Zde můžete zvolit skupinu, ke které bude nový uživatel patřit.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.0">
+        <source>Allow login</source>
+        <target>Povolit přihlášení</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.1">
+        <source>Allow the new user to log into the front end.</source>
+        <target>Pokud vyberete tuto volbu, nový uživatelé budou schopni se přihlásit pod svým uživatelským jménem a heslem.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.0">
+        <source>Skip username</source>
+        <target>Neptat se na uživatelské jméno</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.1">
+        <source>Do not require the username to request a new password.</source>
+        <target>Nebude požadováno zadání uživatelského jména.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.0">
+        <source>Mode</source>
+        <target>Způsob</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.1">
+        <source>Here you can define how to handle the deletion.</source>
+        <target>Zde určíte, jakým způsobem bude provedeno smazání.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.0">
+        <source>Create a home directory</source>
+        <target>Vytvořit domovský adresář.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.1">
+        <source>Create a home directory from the registered username.</source>
+        <target>Vyberte tuto volbu k automatickému vytváření domovského adresáře uživatele.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.0">
+        <source>Home directory path</source>
+        <target>Domovský adresář</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.1">
+        <source>Please select the parent folder from the files directory.</source>
+        <target>Prosím vyberte rodičovský adresář k uživatelským adresářům.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.0">
+        <source>Send activation e-mail</source>
+        <target>Poslat aktivační e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.1">
+        <source>Send an activation e-mail to the registered e-mail address.</source>
+        <target>Vyberte tuto volbu pokud chcete poslat aktivační e-mail registrovaným uživatelům.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.0">
+        <source>Confirmation page</source>
+        <target>Stránka s potvrzením</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.1">
+        <source>Please choose the page to which users will be redirected after the request has been completed.</source>
+        <target>Vyberte prosím stránku, na níž bude uživatel přesměrován po úspěšném přihlášení.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.0">
+        <source>Activation message</source>
+        <target>Aktivační e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any input field (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>Můžete použít &lt;em&gt;##domain##&lt;/em&gt; (jméno domény), &lt;em&gt;##link##&lt;/em&gt; (aktivační link) a jakékoliv pole &quot;input&quot; (např. &lt;em&gt;##příjmení##&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.0">
+        <source>Password message</source>
+        <target>Mail s heslem</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any user property (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>Můžete použít &lt;em&gt;##domain##&lt;/em&gt; (jméno domény), &lt;em&gt;##link##&lt;/em&gt; (aktivační link) a jakékoliv pole &quot;input&quot; (např. &lt;em&gt;##příjmení##&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_legend">
+        <source>Title and type</source>
+        <target>Název a typ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nav_legend">
+        <source>Navigation settings</source>
+        <target>Nastavení navigace</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reference_legend">
+        <source>Reference page</source>
+        <target>Referenční stránka</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirect_legend">
+        <source>Redirect settings</source>
+        <target>Přesměrování</target>
+      </trans-unit>
+      <trans-unit id="tl_module.template_legend">
+        <source>Template settings</source>
+        <target>Předloha komentáře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>Nastavení obrázku</target>
+      </trans-unit>
+      <trans-unit id="tl_module.config_legend">
+        <source>Module configuration</source>
+        <target>Nastavení mudulu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.include_legend">
+        <source>Include settings</source>
+        <target>Zahrnout nastavení</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source_legend">
+        <source>Files and folders</source>
+        <target>Soubory a adresáře</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interact_legend">
+        <source>Interactive Flash movie</source>
+        <target>Interaktivní flashová videa</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html_legend">
+        <source>Text/HTML</source>
+        <target>Text/HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected_legend">
+        <source>Access protection</source>
+        <target>Chráněný přístup</target>
+      </trans-unit>
+      <trans-unit id="tl_module.expert_legend">
+        <source>Expert settings</source>
+        <target>Rozšířená nastavení</target>
+      </trans-unit>
+      <trans-unit id="tl_module.email_legend">
+        <source>E-mail settings</source>
+        <target>Nastavení e-mailu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.account_legend">
+        <source>Account settings</source>
+        <target>Nastavení účtu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.0">
+        <source>Your registration on %s</source>
+        <target>Vaše registrace na %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.1">
+        <source>Thank you for your registration on ##domain##.
+
+Please click ##link## to complete your registration and to activate your account. If you did not request an account, please ignore this e-mail.
+</source>
+        <target>Děkujeme Vám za to, že jste se registrovali na naší ##domain## stránce. Pro dokončení registrace klikněte prosím na tento odkaz ##link##, aby se mohl zaktivovat Váš účet. Pokud tak nechcete učinit, ignorujte prosím tento mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.0">
+        <source>Your password request on %s</source>
+        <target>Vyžádání Vašeho hesla na %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.1">
+        <source>You have requested a new password for ##domain##.
+
+Please click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.
+</source>
+        <target>Požádali jste o zaslání nového hesla pro ##domain##. Pro odeslání nového hesla kliknětě prosím na následující odkaz ##link##. Nedostanete-li tento mail, obraťte se prosím na správce webu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.internal">
+        <source>Internal file</source>
+        <target>Vnitřní soubor</target>
+      </trans-unit>
+      <trans-unit id="tl_module.external">
+        <source>External URL</source>
+        <target>Externí internetová adresa</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_deactivate">
+        <source>Deactivate account</source>
+        <target>Vypnutí účtu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_delete">
+        <source>Irrevocably delete account</source>
+        <target>Nenávratné smazání účtu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.0">
+        <source>Add module</source>
+        <target>Přidat modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.1">
+        <source>Add a module</source>
+        <target>Přidat modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.0">
+        <source>Module details</source>
+        <target>Zobrazit podrobnosti</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.1">
+        <source>Show the details of module ID %s</source>
+        <target>Zobrazit podrobnosti k modulu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.0">
+        <source>Edit module</source>
+        <target>Editovat modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.1">
+        <source>Edit module ID %s</source>
+        <target>Editovat modul ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.0">
+        <source>Move module</source>
+        <target>Přesunout modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.1">
+        <source>Move module ID %s</source>
+        <target>Přesunout modul ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.0">
+        <source>Duplicate module</source>
+        <target>Duplikovat modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.1">
+        <source>Duplicate module ID %s</source>
+        <target>Duplikovat modul ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.0">
+        <source>Delete module</source>
+        <target>Smazat modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.1">
+        <source>Delete module ID %s</source>
+        <target>Smazat modul ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.0">
+        <source>Edit theme</source>
+        <target>Úprava vzhledu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>Upravit nastavení vzhledu</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.0">
+        <source>Paste here</source>
+        <target>Vložit sem</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.1">
+        <source>Paste after module ID %s</source>
+        <target>Vložit za modul ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

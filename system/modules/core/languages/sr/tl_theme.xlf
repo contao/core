@@ -1,0 +1,206 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_theme.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="tl_theme.name.0">
+        <source>Theme title</source>
+        <target>Назив теме</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.name.1">
+        <source>Please enter a unique theme title.</source>
+        <target>Унесите јединствено име за тему.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.0">
+        <source>Author</source>
+        <target>Аутор</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.1">
+        <source>Please enter the name of the theme designer.</source>
+        <target>Унесите име дизајнера који је направио тему.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.0">
+        <source>Folders</source>
+        <target>Фолдери</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.1">
+        <source>Please select the folders that belong to the theme from the files directory.</source>
+        <target>Изаберите фолдере из директоријума фајлова који припадају теми.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.0">
+        <source>Templates folder</source>
+        <target>фолдер тема</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.1">
+        <source>Here you can select a templates folder that will be exported with the theme.</source>
+        <target>Овде можете изабрати фолдер тема који ће бити извезен заједно са темом.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.0">
+        <source>Screenshot</source>
+        <target>Screenshot</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.1">
+        <source>Here you can choose a screenshot of the theme.</source>
+        <target>Овде можете изабрати screenshot теме.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.0">
+        <source>Global variables</source>
+        <target>Глобалне варијабле</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.1">
+        <source>Here you can define global variables for the style sheets of the theme (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>Овде можете дефинисати глобалне варијабле стилова који се користе у оквиру теме (нпр. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; или &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.0">
+        <source>Source files</source>
+        <target>Изворни фајл</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.1">
+        <source>Here you can upload one or more .cto files to be imported.</source>
+        <target>Овде можете изабрати један или више .cto које ћете копирати на сервер, а затим ћете бити у могућности да вршите увоз теме из тих фајлова.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.0">
+        <source>Revision date</source>
+        <target>Датум ревизије</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Датум и време последње ревизије</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.title_legend">
+        <source>Title and author</source>
+        <target>Наслов и аутор</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.config_legend">
+        <source>Configuration</source>
+        <target>Конфигурација</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars_legend">
+        <source>Global variables</source>
+        <target>Глобалне варијабле</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.theme_imported">
+        <source>Theme &quot;%s&quot; has been imported.</source>
+        <target>Тема &quot;%s&quot; је успешно увезена.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.checking_theme">
+        <source>The theme data is being checked</source>
+        <target>Подаци из теме се проверавају</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_fields">
+        <source>Tables and fields</source>
+        <target>Табеле и поља</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_field">
+        <source>The field &lt;strong&gt;%s&lt;/strong&gt; is missing in the database and will not be imported.</source>
+        <target>Поље &lt;strong&gt;%s&lt;/strong&gt; недостаје у бази података и неће бити увезено.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_ok">
+        <source>The tables have been successfully checked.</source>
+        <target>Табеле су успешно проверене.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_xml">
+        <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
+        <target>Тема &quot;%s&quot; је оштећена и није могућ њен увоз.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.custom_templates">
+        <source>Custom templates</source>
+        <target>Прилагођени шаблони</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.template_exists">
+        <source>The template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exists and will be overwritten.</source>
+        <target>Шаблон &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; већ постоји и биће прегажен.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates_ok">
+        <source>No conflicts detected.</source>
+        <target>Нису детектовани конфликти.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.0">
+        <source>Theme store</source>
+        <target>Продавница тема</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.1">
+        <source>Find more themes in the Contao theme store</source>
+        <target>Пронађите више тема у Contao продавници тема</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.0">
+        <source>New theme</source>
+        <target>Нова тема</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.1">
+        <source>Create a new theme</source>
+        <target>Креирај нову тему</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.0">
+        <source>Theme details</source>
+        <target>Детаљи теме</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.1">
+        <source>Show the details of theme ID %s</source>
+        <target>Прикажи детаље теме  ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.0">
+        <source>Edit theme</source>
+        <target>Уреди тему</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.1">
+        <source>Edit theme ID %s</source>
+        <target>Уреди тему  ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.0">
+        <source>Delete theme</source>
+        <target>Обриши тему</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.1">
+        <source>Delete theme ID %s</source>
+        <target>Обриши тему  ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.0">
+        <source>Style sheets</source>
+        <target>Стилови</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.1">
+        <source>Edit the style sheets of theme ID %s</source>
+        <target>Уреди стилове у оквиру теме  ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.0">
+        <source>Modules</source>
+        <target>Модули</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.1">
+        <source>Edit the front end modules of theme ID %s</source>
+        <target>Уреди ФронтЕнд модуле у оквиру теме  ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.0">
+        <source>Layouts</source>
+        <target>Изгледи</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.1">
+        <source>Edit the page layouts of theme ID %s</source>
+        <target>Уреди изгледе страница у оквиру теме  ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.0">
+        <source>Image sizes</source>
+        <target>Величина слике</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.1">
+        <source>Edit the image sizes of theme ID %s</source>
+        <target>Уреди величину слике теме ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.0">
+        <source>Theme import</source>
+        <target>Увоз теме</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.1">
+        <source>Import new themes</source>
+        <target>Увези нове теме</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.0">
+        <source>Export</source>
+        <target>Извоз</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.1">
+        <source>Export theme ID %s</source>
+        <target>Извоз теме  ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

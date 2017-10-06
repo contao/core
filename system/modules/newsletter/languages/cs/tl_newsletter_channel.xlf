@@ -1,0 +1,142 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_channel.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_newsletter_channel.title.0">
+        <source>Title</source>
+        <target>Titulek</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title.1">
+        <source>Please enter the title of the channel.</source>
+        <target>Zadejte prosím název distribuce Zpravodajů.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Přesměrovat na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.1">
+        <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
+        <target>Vyberte prosím stránku, na níž se nachází Zpravodaj, aby na ní mohl být přesměrován návštěvník po kliknutí na příslušný odkaz.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.0">
+        <source>Custom SMTP server</source>
+        <target>Vlastní server SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.1">
+        <source>Use a custom SMTP server for sending newsletters.</source>
+        <target>Použít vlastní server SMTP pro rozeslání Zpravodajů.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>Jméno poskytovatel SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>Zadejte jméno poskytovatele Vašeho SMTP serveru (výchozí je localhost)</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.0">
+        <source>SMTP username</source>
+        <target>Uživatelské jméno pro SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>Pokud váš SMTP server vyžaduje autentizaci zadejte uživatelské jméno</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.0">
+        <source>SMTP password</source>
+        <target>Heslo pro SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>Pokud váš SMTP server vyžaduje autentizaci zadejte heslo</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>Zabezpečení SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Zde můžete zvolit zabezpečovací metodu přenosu dat (SSL nebo TLS).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>Číslo portu SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>Zadejte číslo portu vašeho SMTP serveru (výchozí je 25 nebo 465 pro SSL)</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum změny</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum a čas poslední změny</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title_legend">
+        <source>Title and redirect</source>
+        <target>Název a přesměrování</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>Nastavení SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.0">
+        <source>New channel</source>
+        <target>Nová distribuce Zpravodaje</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.1">
+        <source>Create a new channel</source>
+        <target>Vytvořit novou distribuci.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.0">
+        <source>Channel details</source>
+        <target>Zobrazit podrobnosti</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.1">
+        <source>Show the details of channel ID %s</source>
+        <target>Zobrazit podrobnosti k distribuci ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.0">
+        <source>Edit channel</source>
+        <target>Upravit distribuci</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.1">
+        <source>Edit channel ID %s</source>
+        <target>Upravit distribuci ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.0">
+        <source>Edit channel</source>
+        <target>Upravit distribuci</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>Upraví nastavení distribuce</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.0">
+        <source>Duplicate channel</source>
+        <target>Duplikovat distribuci</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.1">
+        <source>Duplicate channel ID %s</source>
+        <target>Duplikovat distribuci ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.0">
+        <source>Delete channel</source>
+        <target>Smazat distribuci</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.1">
+        <source>Delete channel ID %s</source>
+        <target>Smazat distribuci ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.0">
+        <source>Edit recipients</source>
+        <target>Upravit příjemce</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.1">
+        <source>Edit the recipients of channel ID %s</source>
+        <target>Upravit příjemce distribuce ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

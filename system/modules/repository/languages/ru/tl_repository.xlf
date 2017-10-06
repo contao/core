@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en" target-language="ru">
+    <body>
+      <trans-unit id="tl_repository.category.0">
+        <source>Category</source>
+        <target>Категория</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.category.1">
+        <source>Please select the extension category.</source>
+        <target>Выберите категорию расширений.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.0">
+        <source>Copyright</source>
+        <target>Авторские права (Copyright)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.1">
+        <source>Here you can enter a copyright notice (e.g. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</source>
+        <target>Введите информацию об авторских правах (напр. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.0">
+        <source>Description</source>
+        <target>Описание</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.1">
+        <source>These HTML tags are allowed: %s</source>
+        <target>Разрешенные HTML-теги: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.0">
+        <source>Extension</source>
+        <target>Расширение</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.1">
+        <source>Name of the extension.</source>
+        <target>Выберите имя расширения.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.0">
+        <source>Functionality</source>
+        <target>Функциональность</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.1">
+        <source>Does the extension provide the expected functionality?</source>
+        <target>Обеспечивает ли расширение ожидаемый функционал?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.0">
+        <source>License</source>
+        <target>Лицензия</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.1">
+        <source>Please enter a short license information. You may add full license information in a file LICENSE.txt.</source>
+        <target>Введите короткие сведения о лицензии. Вы можете добавить полный текст лицензии в файл LICENSE.txt.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.0">
+        <source>Name</source>
+        <target>Имя</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.1">
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Имена расширений должны начинаться с a-z, A-Z или 0-9, нижний регистр более предпочтителен. Символы &quot;_&quot; и &quot;-&quot; также разрешены в имени.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.0">
+        <source>Popularity</source>
+        <target>Популярность</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.1">
+        <source>%s/%s (downloads/installs)</source>
+        <target>%s/%s (загрузок/установок)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.0">
+        <source>Quality</source>
+        <target>Качество</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.1">
+        <source>How robust is the extension and how painless is installation and maintenance?</source>
+        <target>Насколько надежным является расширение и как безболезненна его установка и техническое обслуживание?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.0">
+        <source>Release date</source>
+        <target>Дата выпуска</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.1">
+        <source>Enter the publishing date of this release in format %s</source>
+        <target>Введите дату публикации этой версии в формате %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.0">
+        <source>Version</source>
+        <target>Версия</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.1">
+        <source>Please select the version</source>
+        <target>Выберите версию</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.0">
+        <source>Type</source>
+        <target>Тип</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.1">
+        <source>Please select the extension type.</source>
+        <target>Выберите тип расширения.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.0">
+        <source>Usability</source>
+        <target>Удобство</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.1">
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>Расширение соответствует стандартам Contao по удобству, простоте использования и доступности?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.0">
+        <source>Version</source>
+        <target>Версия</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.1">
+        <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
+        <target>Номера версий должны быть в формате n.n.n s, где n - целое число, а s - одно из: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Лицензионный ключ</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Введите лицензионный ключ полученный от поставщика расширения.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Защита от деинсталляции</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Защита расширения от случайной деинсталляции.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Защита от обновления</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Защита расширения от случайного обновления.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.author">
+        <source>Author</source>
+        <target>Автор</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.build">
+        <source>Build</source>
+        <target>Build</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.cancel">
+        <source>Cancel</source>
+        <target>Отмена</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.continue">
+        <source>Continue</source>
+        <target>Продолжить</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependencies">
+        <source>Dependencies of this extension</source>
+        <target>Зависимости этого расширения</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependents">
+        <source>Other extensions depending on this one</source>
+        <target>Расширения зависимые от этого</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependentsdel">
+        <source>The following extensions are dependent from &lt;em&gt;%s&lt;/em&gt; and may render broken:</source>
+        <target>Указанные ниже расширения зависят от &lt;em&gt;%s&lt;/em&gt; и могут быть сломаны или неработоспособны:</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.donate">
+        <source>Donate</source>
+        <target>Пожертвовать</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.downloads">
+        <source>Package downloads</source>
+        <target>Загрузка дистрибутива</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extensionnotfound">
+        <source>Extension not found.</source>
+        <target>Расширение не найдено.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.forum">
+        <source>Forum</source>
+        <target>Форум</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installs">
+        <source>Online installs</source>
+        <target>Онлайн установок</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.langtrans">
+        <source>%s transl.</source>
+        <target>%s перевод</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.manual">
+        <source>Manual</source>
+        <target>Руководство</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.no">
+        <source>no</source>
+        <target>нет</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.noextensionsfound">
+        <source>No matching extensions found.</source>
+        <target>Расширения не найдены.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.orderby">
+        <source>Order by</source>
+        <target>Сортировать по</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.otherlanguages">
+        <source>Other languages</source>
+        <target>Другие языки</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.pageof">
+        <source>Page %s of %s</source>
+        <target>Страница %s из %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ratingfmt">
+        <source>%.2f (%d votes)</source>
+        <target>%.2f (голосов: %d)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.reldownloads">
+        <source>Release downloads</source>
+        <target>Загрузок версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasenotesfor">
+        <source>Release notes and change log for %s</source>
+        <target>Информация и журнал изменений для версии %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relfunctionality">
+        <source>Release functionality</source>
+        <target>Функционал версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relinstalls">
+        <source>Release installs</source>
+        <target>Установок версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relquality">
+        <source>Release quality</source>
+        <target>Качество версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relrating">
+        <source>Release rating</source>
+        <target>Рейтинг версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relupdates">
+        <source>Release updates</source>
+        <target>Обновлений версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relusability">
+        <source>Release usability</source>
+        <target>Удобство версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.save">
+        <source>Save</source>
+        <target>Сохранить</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.shop">
+        <source>Shop</source>
+        <target>Магазин</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showpicture">
+        <source>Show full size picture</source>
+        <target>Показать полноразмерное изображение</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.state">
+        <source>State</source>
+        <target>Стадия</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.tag">
+        <source>Tag</source>
+        <target>Тег</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.thumbnail">
+        <source>Thumbnail picture</source>
+        <target>Миниатюра</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totdownloads">
+        <source>Total downloads</source>
+        <target>Всего загрузок</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totfunctionality">
+        <source>Total functionality</source>
+        <target>Общий функционал</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totinstalls">
+        <source>Total installs</source>
+        <target>Всего установок</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totquality">
+        <source>Total quality</source>
+        <target>Общее качество</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totrating">
+        <source>Total rating</source>
+        <target>Общий рейтинг</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totupdates">
+        <source>Total updates</source>
+        <target>Всего обновлений</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totusability">
+        <source>Total usability</source>
+        <target>Общее удобство</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionfrom">
+        <source>Version from</source>
+        <target>от версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versions">
+        <source>Other versions</source>
+        <target>Другие версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionto">
+        <source>Version to</source>
+        <target>до версии</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.yes">
+        <source>yes</source>
+        <target>да</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.action">
+        <source>Action</source>
+        <target>Действие</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsummary">
+        <source>Action summary</source>
+        <target>Итог действия</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsuccess">
+        <source>Actions successful.</source>
+        <target>Действие успешно выполнено.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionfailed">
+        <source>One or more actions failed.</source>
+        <target>Ошибка одного или нескольких действий.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.apply">
+        <source>Apply</source>
+        <target>Применить</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.byorder">
+        <source>By %s</source>
+        <target>по %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.checkextension">
+        <source>Check extension</source>
+        <target>Проверить расширение</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dbuptodate">
+        <source>Database is up to date</source>
+        <target>База данных обновлена</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingdirs">
+        <source>Deleting directories</source>
+        <target>Удаление каталогов</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingfiles">
+        <source>Deleting files</source>
+        <target>Удаление файлов</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.editextension">
+        <source>Edit settings</source>
+        <target>Редактировать настройки</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extinstrecntf">
+        <source>Extension install record not found</source>
+        <target>Не найдена запись установщика расширения</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.errdldpkg">
+        <source>Download of package from repository failed</source>
+        <target>Ошибка загрузки дистрибутива из хранилища</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.failed">
+        <source>failed</source>
+        <target>ошибка</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.fileerrwrite">
+        <source>Error writing file %s</source>
+        <target>Ошибка записи файла %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesdeleted">
+        <source>%s file(s) deleted</source>
+        <target>%s файл(ов) удалено</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesinstalled">
+        <source>%s file(s) installed</source>
+        <target>%s файл(ов) установлено</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesunchanged">
+        <source>%s file(s) unchanged</source>
+        <target>%s файл(ов) не изменено</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesupdated">
+        <source>%s file(s) updated</source>
+        <target>%s файл(ов) обновлено</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ftsearch">
+        <source>Fulltext search</source>
+        <target>Полнотекстовый поиск</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.goback">
+        <source>Go back</source>
+        <target>Назад</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.install">
+        <source>Install</source>
+        <target>Установить</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installextension">
+        <source>Install extension</source>
+        <target>Установка расширений</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installingext">
+        <source>Install %s %s build %s</source>
+        <target>Установка %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installlogtitle">
+        <source>File installation/update log</source>
+        <target>Журнал установки/обновления</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickeyrequired">
+        <source>This extension requires a license key. Please visit the vendor's shop to purchase one.</source>
+        <target>Расширение требует лицензионный ключ. Посетите поставщика расширения для приобретения.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.none">
+        <source>None</source>
+        <target>Ни одного</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.notfound">
+        <source>not found</source>
+        <target>не найден</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ok">
+        <source>OK</source>
+        <target>OK</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.okuninstextension">
+        <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
+        <target>Деинсталлировать расширение &lt;em&gt;%s&lt;/em&gt;?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showdetails">
+        <source>Show details</source>
+        <target>Показать детали</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.stateshint">
+        <source>Check the states to be included.</source>
+        <target>Отметьте стадию разработки для включения.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.status">
+        <source>Status</source>
+        <target>Статус</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.success">
+        <source>success</source>
+        <target>успешно</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstallextension">
+        <source>Uninstall extension</source>
+        <target>Деинсталляция расширения</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatedatabase">
+        <source>Update database</source>
+        <target>Обновление базы данных</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextension">
+        <source>Update extension</source>
+        <target>Обновление расширения</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextensions">
+        <source>Update checked extensions</source>
+        <target>Обновление выбранных расширений</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.update">
+        <source>Update</source>
+        <target>Обновить</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updates">
+        <source>Updates</source>
+        <target>Обновления</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatehint">
+        <source>Check the states to be included at updates.</source>
+        <target>Отметьте стадию разработки для включения в обновление.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatingext">
+        <source>Update %s %s build %s</source>
+        <target>Обновление %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validate">
+        <source>Repair</source>
+        <target>Исправить</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validatingext">
+        <source>Verify/repair %s %s build %s</source>
+        <target>Проверка/исправление %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+        <target>Одобрен для</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+        <target>Contao %s до %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.missingSoapModule">
+        <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
+        <target>SOAP расширение не загружено (переконфигурируйте PHP с ключом --enable-soap).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Сейчас вы просматриваете расширения, совместимые только с текущей версией Contao. Измените настройки в панели управления, для просмотра полного списка расширений.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Обновлено</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Не согласовано с %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Не согласовано с %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Предположительно совместимо с %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Доступна новая версия %s build %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>Отсутствует требуемое расширение %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Расширение не найдено в хранилище.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>Установленная версия не найдена в хранилище.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Требуется лицензионный ключ перед установкой расширения</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Ошибка установки, требуется обновление/исправление.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.free">
+        <source>Free</source>
+        <target>Бесплатное</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.private">
+        <source>Private</source>
+        <target>Частное</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.commercial">
+        <source>Commercial</source>
+        <target>Коммерческое</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.application">
+        <source>Application</source>
+        <target>Приложение</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.plugin">
+        <source>Plugin</source>
+        <target>Плагин</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.template">
+        <source>Theme</source>
+        <target>Шаблон</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.utility">
+        <source>Utility</source>
+        <target>Утилита</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.widget">
+        <source>Widget</source>
+        <target>Виджет</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.translation">
+        <source>Translation</source>
+        <target>Локализация</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.bundle">
+        <source>Bundle</source>
+        <target>Комплект</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.other">
+        <source>Other</source>
+        <target>Другое</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.core">
+        <source>Core</source>
+        <target>Ядро</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.reldate">
+        <source>Releasedate</source>
+        <target>Дата выпуска</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.rating">
+        <source>Rating</source>
+        <target>Рейтинг</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.popular">
+        <source>Popularity</source>
+        <target>Популярность</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.name">
+        <source>Name</source>
+        <target>Имя</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.title">
+        <source>Title</source>
+        <target>Название</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.author">
+        <source>Author</source>
+        <target>Автор</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.alpha">
+        <source>Alpha</source>
+        <target>Alpha</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.beta">
+        <source>Beta</source>
+        <target>Beta</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.rc">
+        <source>RC</source>
+        <target>RC</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.stable">
+        <source>Stable</source>
+        <target>Stable</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

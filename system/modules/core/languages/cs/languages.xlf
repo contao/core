@@ -1,0 +1,1190 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/languages.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="LNG.aa">
+        <source>Afar</source>
+        <target>Afarština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ab">
+        <source>Abkhazian</source>
+        <target>Abcházština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ae">
+        <source>Avestan</source>
+        <target>Avestánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.af">
+        <source>Afrikaans</source>
+        <target>Afrikánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.af_ZA">
+        <source>Afrikaans (South Africa)</source>
+        <target>Afrikánština (Jižní Afrika)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ak">
+        <source>Akan</source>
+        <target>Akanština</target>
+      </trans-unit>
+      <trans-unit id="LNG.am">
+        <source>Amharic</source>
+        <target>Amharština</target>
+      </trans-unit>
+      <trans-unit id="LNG.am_ET">
+        <source>Amharic (Ethiopia)</source>
+        <target>Amharičtina (Etiopie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.an">
+        <source>Aragonese</source>
+        <target>Aragónština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ar">
+        <source>Arabic</source>
+        <target>Arabština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ar_AA">
+        <source>Arabic (Unitag)</source>
+        <target>Arabština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ar_SA">
+        <source>Arabic (Saudi Arabia)</source>
+        <target>Arabština (Saudská Arábie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.as">
+        <source>Assamese</source>
+        <target>Asámština</target>
+      </trans-unit>
+      <trans-unit id="LNG.as_IN">
+        <source>Assamese (India)</source>
+        <target>Asamenština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.av">
+        <source>Avaric</source>
+        <target>Avarština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ay">
+        <source>Aymara</source>
+        <target>Aymarština</target>
+      </trans-unit>
+      <trans-unit id="LNG.az">
+        <source>Azerbaijani</source>
+        <target>Azerbajdžánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.az_AZ">
+        <source>Azerbaijani (Azerbaijan)</source>
+        <target>Azerbájčtina (Ázerbajdžán)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ba">
+        <source>Bashkir</source>
+        <target>Baskírština</target>
+      </trans-unit>
+      <trans-unit id="LNG.be">
+        <source>Belarusian</source>
+        <target>Běloruština</target>
+      </trans-unit>
+      <trans-unit id="LNG.be_BY">
+        <source>Belarusian (Belarus)</source>
+        <target>Běloruština (Bělorusko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.bg">
+        <source>Bulgarian</source>
+        <target>Bulharština</target>
+      </trans-unit>
+      <trans-unit id="LNG.bg_BG">
+        <source>Bulgarian (Bulgaria)</source>
+        <target>Bulharština (Bulharsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.bh">
+        <source>Bahrain</source>
+        <target>Bahrajn</target>
+      </trans-unit>
+      <trans-unit id="LNG.bi">
+        <source>Bislama</source>
+        <target>Bislama</target>
+      </trans-unit>
+      <trans-unit id="LNG.bm">
+        <source>Bambara</source>
+        <target>Bambarština</target>
+      </trans-unit>
+      <trans-unit id="LNG.bn">
+        <source>Bengali</source>
+        <target>Bengálština</target>
+      </trans-unit>
+      <trans-unit id="LNG.bn_BD">
+        <source>Bengali (Bangladesh)</source>
+        <target>Bengálština (Bangladéž)</target>
+      </trans-unit>
+      <trans-unit id="LNG.bn_ID">
+        <source>Bengali (India)</source>
+        <target>Bengálština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.bo">
+        <source>Tibetan</source>
+        <target>Tibetština</target>
+      </trans-unit>
+      <trans-unit id="LNG.bo_CN">
+        <source>Tibetan (China)</source>
+        <target>Tibetština (Čína)</target>
+      </trans-unit>
+      <trans-unit id="LNG.br">
+        <source>Breton</source>
+        <target>Bretónština</target>
+      </trans-unit>
+      <trans-unit id="LNG.bs">
+        <source>Bosnian</source>
+        <target>Bosenština</target>
+      </trans-unit>
+      <trans-unit id="LNG.bs_BA">
+        <source>Bosnian (Bosnia and Herzegovina)</source>
+        <target>Bosenština (Bosna a Hercegovina)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ca">
+        <source>Catalan</source>
+        <target>Katalánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ca_ES">
+        <source>Catalan (Spain)</source>
+        <target>Katalánština (Španělsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ce">
+        <source>Chechen</source>
+        <target>Čečénština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ch">
+        <source>Chamorro</source>
+        <target>Chamorro</target>
+      </trans-unit>
+      <trans-unit id="LNG.co">
+        <source>Corsican</source>
+        <target>Korsičtina</target>
+      </trans-unit>
+      <trans-unit id="LNG.cr">
+        <source>Cree</source>
+        <target>Kríjčtina</target>
+      </trans-unit>
+      <trans-unit id="LNG.cs">
+        <source>Czech</source>
+        <target>Čeština</target>
+      </trans-unit>
+      <trans-unit id="LNG.cs_CZ">
+        <source>Czech (Czech Republic)</source>
+        <target>Čeština (Česká republika)</target>
+      </trans-unit>
+      <trans-unit id="LNG.cu">
+        <source>Church Slavic</source>
+        <target>Církevní slovanština</target>
+      </trans-unit>
+      <trans-unit id="LNG.cv">
+        <source>Chuvash</source>
+        <target>Čuvaština</target>
+      </trans-unit>
+      <trans-unit id="LNG.cy">
+        <source>Welsh</source>
+        <target>Waleština</target>
+      </trans-unit>
+      <trans-unit id="LNG.cy_GB">
+        <source>Welsh (United Kingdom)</source>
+        <target>Velština (Spojené království)</target>
+      </trans-unit>
+      <trans-unit id="LNG.da">
+        <source>Danish</source>
+        <target>Dánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.da_DK">
+        <source>Danish (Denmark)</source>
+        <target>Dánština (Dánsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.de">
+        <source>German</source>
+        <target>Němčina</target>
+      </trans-unit>
+      <trans-unit id="LNG.de_AT">
+        <source>German (Austria)</source>
+        <target>Němčina (Rakousko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.de_CH">
+        <source>German (Switzerland)</source>
+        <target>Němčina (Švýcarsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.de_DE">
+        <source>German (Germany)</source>
+        <target>Němčina (SRN)</target>
+      </trans-unit>
+      <trans-unit id="LNG.dv">
+        <source>Divehi</source>
+        <target>Maledivština</target>
+      </trans-unit>
+      <trans-unit id="LNG.dz">
+        <source>Dzongkha</source>
+        <target>Dzongkä</target>
+      </trans-unit>
+      <trans-unit id="LNG.dz_BT">
+        <source>Dzongkha (Bhutan)</source>
+        <target>Dzongkä (Bhútán)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ee">
+        <source>Ewe</source>
+        <target>Eveština</target>
+      </trans-unit>
+      <trans-unit id="LNG.el">
+        <source>Greek</source>
+        <target>Řečtina</target>
+      </trans-unit>
+      <trans-unit id="LNG.el_GR">
+        <source>Greek (Greece)</source>
+        <target>Řečtina (Řecko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.en">
+        <source>English</source>
+        <target>Angličtina</target>
+      </trans-unit>
+      <trans-unit id="LNG.en_AU">
+        <source>English (Australia)</source>
+        <target>Angličtina (Austrálie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.en_CA">
+        <source>English (Canada)</source>
+        <target>Angličtina (Kanada)</target>
+      </trans-unit>
+      <trans-unit id="LNG.en_GB">
+        <source>English (United Kingdom)</source>
+        <target>Angličtina (Spojené království)</target>
+      </trans-unit>
+      <trans-unit id="LNG.en_IE">
+        <source>English (Ireland)</source>
+        <target>Angličtina (Irsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.en_US">
+        <source>English (United States)</source>
+        <target>Angličtina (USA)</target>
+      </trans-unit>
+      <trans-unit id="LNG.en_ZA">
+        <source>English (South Africa)</source>
+        <target>Angličtina (JAR) </target>
+      </trans-unit>
+      <trans-unit id="LNG.eo">
+        <source>Esperanto</source>
+        <target>Esperanto</target>
+      </trans-unit>
+      <trans-unit id="LNG.es">
+        <source>Spanish</source>
+        <target>Španělština</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_AR">
+        <source>Spanish (Argentina)</source>
+        <target>Španělština (Argentina)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_BO">
+        <source>Spanish (Bolivia)</source>
+        <target>Španělština (Bolívie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_CL">
+        <source>Spanish (Chile)</source>
+        <target>Španělština (Čile)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_CO">
+        <source>Spanish (Colombia)</source>
+        <target>Španělština (Kolumbie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_CR">
+        <source>Spanish (Costa Rica)</source>
+        <target>Španělština (Costa Rica)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_DO">
+        <source>Spanish (Dominican Republic)</source>
+        <target>Španělština (Dominikánská republika)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_EC">
+        <source>Spanish (Ecuador)</source>
+        <target>Španělština (Ekvádor)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_ES">
+        <source>Spanish (Spain)</source>
+        <target>Španělština (Španělsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_MX">
+        <source>Spanish (Mexico)</source>
+        <target>Španělština (Mexiko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_NI">
+        <source>Spanish (Nicaragua)</source>
+        <target>Španělština (Nikaragua)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_PA">
+        <source>Spanish (Panama)</source>
+        <target>Španělština (Panama)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_PE">
+        <source>Spanish (Peru)</source>
+        <target>Španělština (Peru)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_PR">
+        <source>Spanish (Puerto Rico)</source>
+        <target>Španělština (Puerto Rico)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_PY">
+        <source>Spanish (Paraguay)</source>
+        <target>Španělština (Paraguay)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_SV">
+        <source>Spanish (El Salvador)</source>
+        <target>Španělština (El Salvador)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_UY">
+        <source>Spanish (Uruguay)</source>
+        <target>Španělština (Uruguay)</target>
+      </trans-unit>
+      <trans-unit id="LNG.es_VE">
+        <source>Spanish (Venezuela)</source>
+        <target>Španělština (Venezuela)</target>
+      </trans-unit>
+      <trans-unit id="LNG.et">
+        <source>Estonian</source>
+        <target>Estónština</target>
+      </trans-unit>
+      <trans-unit id="LNG.et_EE">
+        <source>Estonian (Estonia)</source>
+        <target>Estónština (Estónsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.eu">
+        <source>Basque</source>
+        <target>Baskičtina</target>
+      </trans-unit>
+      <trans-unit id="LNG.eu_ES">
+        <source>Basque (Spain)</source>
+        <target>Baskydština (Španělsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.fa">
+        <source>Persian</source>
+        <target>Perzština</target>
+      </trans-unit>
+      <trans-unit id="LNG.fa_IR">
+        <source>Persian (Iran)</source>
+        <target>Perština (Irán)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ff">
+        <source>Fulah</source>
+        <target>Fulbánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.fi">
+        <source>Finnish</source>
+        <target>Fínština</target>
+      </trans-unit>
+      <trans-unit id="LNG.fi_FI">
+        <source>Finnish (Finland)</source>
+        <target>Finština (Finsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.fj">
+        <source>Fijian</source>
+        <target>Fidžijština</target>
+      </trans-unit>
+      <trans-unit id="LNG.fo">
+        <source>Faroese</source>
+        <target>Faerština</target>
+      </trans-unit>
+      <trans-unit id="LNG.fo_FO">
+        <source>Faroese (Faroe Islands)</source>
+        <target>Faroenština (Faroenské ostrovy)</target>
+      </trans-unit>
+      <trans-unit id="LNG.fr">
+        <source>French</source>
+        <target>Francouzština</target>
+      </trans-unit>
+      <trans-unit id="LNG.fr_CA">
+        <source>French (Canada)</source>
+        <target>Francouzština (Kanada)</target>
+      </trans-unit>
+      <trans-unit id="LNG.fr_CH">
+        <source>French (Switzerland)</source>
+        <target>Francouzština (Švýcarsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.fr_FR">
+        <source>French (France)</source>
+        <target>Francouzština (Francie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.fy">
+        <source>Western Frisian</source>
+        <target>Západofríština</target>
+      </trans-unit>
+      <trans-unit id="LNG.fy_NL">
+        <source>Western Frisian (Netherlands)</source>
+        <target>Západofríština (Nizozemí)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ga">
+        <source>Irish</source>
+        <target>Írština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ga_IE">
+        <source>Irish (Ireland)</source>
+        <target>Irština (Irsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.gd">
+        <source>Scottish Gaelic</source>
+        <target>Skotská galština</target>
+      </trans-unit>
+      <trans-unit id="LNG.gl">
+        <source>Galician</source>
+        <target>Galicijština</target>
+      </trans-unit>
+      <trans-unit id="LNG.gl_ES">
+        <source>Galician (Spain)</source>
+        <target>Galicijština (Španělsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.gn">
+        <source>Guaraní</source>
+        <target>Guaraní</target>
+      </trans-unit>
+      <trans-unit id="LNG.gu">
+        <source>Gujarati</source>
+        <target>Gujarati</target>
+      </trans-unit>
+      <trans-unit id="LNG.gu_IN">
+        <source>Gujarati (India)</source>
+        <target>Gujaratiština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.gv">
+        <source>Manx</source>
+        <target>Manština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ha">
+        <source>Hausa</source>
+        <target>Hausa</target>
+      </trans-unit>
+      <trans-unit id="LNG.he">
+        <source>Hebrew</source>
+        <target>Hebrejština</target>
+      </trans-unit>
+      <trans-unit id="LNG.he_IL">
+        <source>Hebrew (Israel)</source>
+        <target>Hebrejština (Izrael)</target>
+      </trans-unit>
+      <trans-unit id="LNG.hi">
+        <source>Hindi</source>
+        <target>Hindština</target>
+      </trans-unit>
+      <trans-unit id="LNG.hi_IN">
+        <source>Hindi (India)</source>
+        <target>Hindština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ho">
+        <source>Hiri Motu</source>
+        <target>Hiri Motu</target>
+      </trans-unit>
+      <trans-unit id="LNG.hr">
+        <source>Croatian</source>
+        <target>Chorvatština</target>
+      </trans-unit>
+      <trans-unit id="LNG.hr_HR">
+        <source>Croatian (Croatia)</source>
+        <target>Chorvatština (Chorvatsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ht">
+        <source>Haitian Creole</source>
+        <target>Haitská kreolština</target>
+      </trans-unit>
+      <trans-unit id="LNG.hu">
+        <source>Hungarian</source>
+        <target>Maďarština</target>
+      </trans-unit>
+      <trans-unit id="LNG.hu_HU">
+        <source>Hungarian (Hungary)</source>
+        <target>Maďarština (Maďarsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.hy">
+        <source>Armenian</source>
+        <target>Arménština</target>
+      </trans-unit>
+      <trans-unit id="LNG.hy_AM">
+        <source>Armenian (Armenia)</source>
+        <target>Arménština (Arménie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.hz">
+        <source>Herero</source>
+        <target>Hererénština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ia">
+        <source>Interlingua</source>
+        <target>Interlingua</target>
+      </trans-unit>
+      <trans-unit id="LNG.id">
+        <source>Indonesian</source>
+        <target>Indonézština</target>
+      </trans-unit>
+      <trans-unit id="LNG.id_ID">
+        <source>Indonesian (Indonesia)</source>
+        <target>Indonéština (Indonézie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ie">
+        <source>Interlingue</source>
+        <target>Interlingue</target>
+      </trans-unit>
+      <trans-unit id="LNG.ig">
+        <source>Igbo</source>
+        <target>Igbonština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ii">
+        <source>Sichuan Yi</source>
+        <target>Yi</target>
+      </trans-unit>
+      <trans-unit id="LNG.ik">
+        <source>Inupiaq</source>
+        <target>Inuitština</target>
+      </trans-unit>
+      <trans-unit id="LNG.io">
+        <source>Ido</source>
+        <target>Ido</target>
+      </trans-unit>
+      <trans-unit id="LNG.is">
+        <source>Icelandic</source>
+        <target>Islandština</target>
+      </trans-unit>
+      <trans-unit id="LNG.is_IS">
+        <source>Icelandic (Iceland)</source>
+        <target>Islandština (Island)</target>
+      </trans-unit>
+      <trans-unit id="LNG.it">
+        <source>Italian</source>
+        <target>Italština</target>
+      </trans-unit>
+      <trans-unit id="LNG.it_CH">
+        <source>Italian (Switzerland)</source>
+        <target>Italština (Švýcarsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.it_IT">
+        <source>Italian (Italy)</source>
+        <target>Italština (Itálie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.iu">
+        <source>Inuktitut</source>
+        <target>Inuktitutština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ja">
+        <source>Japanese</source>
+        <target>Japonština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ja_JP">
+        <source>Japanese (Japan)</source>
+        <target>Japonština (Japonsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.jv">
+        <source>Javanese</source>
+        <target>Javanese</target>
+      </trans-unit>
+      <trans-unit id="LNG.ka">
+        <source>Georgian</source>
+        <target>Gruzínština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ka_GE">
+        <source>Georgian (Georgia)</source>
+        <target>Gruzínština (Gruzie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.kg">
+        <source>Kongo</source>
+        <target>Kongonština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ki">
+        <source>Kikuyu</source>
+        <target>Kikujština</target>
+      </trans-unit>
+      <trans-unit id="LNG.kj">
+        <source>Kuanyama</source>
+        <target>Kuanyama</target>
+      </trans-unit>
+      <trans-unit id="LNG.kk">
+        <source>Kazakh</source>
+        <target>Kazaština</target>
+      </trans-unit>
+      <trans-unit id="LNG.kk_KZ">
+        <source>Kazakh (Kazakhstan)</source>
+        <target>Kazachstánština (Kazachstán)</target>
+      </trans-unit>
+      <trans-unit id="LNG.kl">
+        <source>Kalaallisut</source>
+        <target>Grónština</target>
+      </trans-unit>
+      <trans-unit id="LNG.km">
+        <source>Khmer</source>
+        <target>Khmerština</target>
+      </trans-unit>
+      <trans-unit id="LNG.kn">
+        <source>Kannada</source>
+        <target>Kannadština</target>
+      </trans-unit>
+      <trans-unit id="LNG.kn_IN">
+        <source>Kannada (India)</source>
+        <target>Kanndština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ko">
+        <source>Korean</source>
+        <target>Kórejština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ko_KR">
+        <source>Korean (Korea)</source>
+        <target>Korejština (Korea)</target>
+      </trans-unit>
+      <trans-unit id="LNG.kr">
+        <source>Kanuri</source>
+        <target>Kanuri</target>
+      </trans-unit>
+      <trans-unit id="LNG.ks">
+        <source>Kashmiri</source>
+        <target>Kašmírština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ks_IN">
+        <source>Kashmiri (India)</source>
+        <target>Kašmírština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ku">
+        <source>Kurdish</source>
+        <target>Kurdština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ku_IQ">
+        <source>Kurdish (Iraq)</source>
+        <target>Kurština (Irák)</target>
+      </trans-unit>
+      <trans-unit id="LNG.kv">
+        <source>Komi</source>
+        <target>Komi</target>
+      </trans-unit>
+      <trans-unit id="LNG.kw">
+        <source>Cornish</source>
+        <target>Korniština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ky">
+        <source>Kyrgyz</source>
+        <target>Kyrgyzština</target>
+      </trans-unit>
+      <trans-unit id="LNG.la">
+        <source>Latin</source>
+        <target>Latinština</target>
+      </trans-unit>
+      <trans-unit id="LNG.lb">
+        <source>Luxembourgish</source>
+        <target>Luxemburština</target>
+      </trans-unit>
+      <trans-unit id="LNG.lg">
+        <source>Ganda</source>
+        <target>Ganština</target>
+      </trans-unit>
+      <trans-unit id="LNG.li">
+        <source>Limburgish</source>
+        <target>Limburgština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ln">
+        <source>Lingala</source>
+        <target>Lingala</target>
+      </trans-unit>
+      <trans-unit id="LNG.lo">
+        <source>Lao</source>
+        <target>Lao</target>
+      </trans-unit>
+      <trans-unit id="LNG.lo_LA">
+        <source>Lao (Laos)</source>
+        <target>Laoština (Laos)</target>
+      </trans-unit>
+      <trans-unit id="LNG.lt">
+        <source>Lithuanian</source>
+        <target>Litevština</target>
+      </trans-unit>
+      <trans-unit id="LNG.lt_LT">
+        <source>Lithuanian (Lithuania)</source>
+        <target>Litevština (Litva)</target>
+      </trans-unit>
+      <trans-unit id="LNG.lu">
+        <source>Luba-Katanga</source>
+        <target>Luba-Katanga</target>
+      </trans-unit>
+      <trans-unit id="LNG.lv">
+        <source>Latvian</source>
+        <target>Lotyština</target>
+      </trans-unit>
+      <trans-unit id="LNG.lv_LV">
+        <source>Latvian (Latvia)</source>
+        <target>Lotyština (Lotyšsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.mg">
+        <source>Malagasy</source>
+        <target>Malagajština</target>
+      </trans-unit>
+      <trans-unit id="LNG.mh">
+        <source>Marshallese</source>
+        <target>Maršálština</target>
+      </trans-unit>
+      <trans-unit id="LNG.mi">
+        <source>Maori</source>
+        <target>Maorijština</target>
+      </trans-unit>
+      <trans-unit id="LNG.mk">
+        <source>Macedonian</source>
+        <target>Macedónština</target>
+      </trans-unit>
+      <trans-unit id="LNG.mk_MK">
+        <source>Macedonian (Macedonia)</source>
+        <target>Makedónština (Makedónsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ml">
+        <source>Malayalam</source>
+        <target>Malajálamština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ml_IN">
+        <source>Malayalam (India)</source>
+        <target>Malajálamština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.mn">
+        <source>Mongolian</source>
+        <target>Mongolština</target>
+      </trans-unit>
+      <trans-unit id="LNG.mn_MN">
+        <source>Mongolian (Mongolia)</source>
+        <target>Monglólština (Mongolsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.mr">
+        <source>Marathi</source>
+        <target>Máráthština</target>
+      </trans-unit>
+      <trans-unit id="LNG.mr_IN">
+        <source>Marathi (India)</source>
+        <target>Maráthí (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ms">
+        <source>Malay</source>
+        <target>Malajština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ms_MY">
+        <source>Malay (Malaysia)</source>
+        <target>Malajština (Malázie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.mt">
+        <source>Maltese</source>
+        <target>Maltština</target>
+      </trans-unit>
+      <trans-unit id="LNG.mt_MT">
+        <source>Maltese (Malta)</source>
+        <target>Malténština (Malta)</target>
+      </trans-unit>
+      <trans-unit id="LNG.my">
+        <source>Burmese</source>
+        <target>Barmština</target>
+      </trans-unit>
+      <trans-unit id="LNG.my_MM">
+        <source>Burmese (Myanmar)</source>
+        <target>Barmština (Myanmar)</target>
+      </trans-unit>
+      <trans-unit id="LNG.na">
+        <source>Nauru</source>
+        <target>Nauru</target>
+      </trans-unit>
+      <trans-unit id="LNG.nb">
+        <source>Norwegian Bokmål</source>
+        <target>Bokmål</target>
+      </trans-unit>
+      <trans-unit id="LNG.nd">
+        <source>North Ndebele</source>
+        <target>Severní ndebelenština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ne">
+        <source>Nepali</source>
+        <target>Nepálština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ne_NP">
+        <source>Nepali (Nepal)</source>
+        <target>Nepálština (Nepál)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ng">
+        <source>Ndonga</source>
+        <target>Ndondština</target>
+      </trans-unit>
+      <trans-unit id="LNG.nl">
+        <source>Dutch</source>
+        <target>Holandština</target>
+      </trans-unit>
+      <trans-unit id="LNG.nl_BE">
+        <source>Dutch (Belgium)</source>
+        <target>Nizozemština (Belgie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.nl_NL">
+        <source>Dutch (Netherlands)</source>
+        <target>Nizozemština (Nizozemí)</target>
+      </trans-unit>
+      <trans-unit id="LNG.nn">
+        <source>Norwegian Nynorsk</source>
+        <target>Nynorsk</target>
+      </trans-unit>
+      <trans-unit id="LNG.nr">
+        <source>South Ndebele</source>
+        <target>Jižní ndondština</target>
+      </trans-unit>
+      <trans-unit id="LNG.nv">
+        <source>Navajo</source>
+        <target>Navahánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ny">
+        <source>Nyanja</source>
+        <target>Čičevština</target>
+      </trans-unit>
+      <trans-unit id="LNG.oc">
+        <source>Occitan</source>
+        <target>Okcitánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.oj">
+        <source>Ojibwa</source>
+        <target>Odžibvština</target>
+      </trans-unit>
+      <trans-unit id="LNG.om">
+        <source>Oromo</source>
+        <target>Oromonština</target>
+      </trans-unit>
+      <trans-unit id="LNG.or">
+        <source>Oriya</source>
+        <target>Oriyanština</target>
+      </trans-unit>
+      <trans-unit id="LNG.or_IN">
+        <source>Oriya (India)</source>
+        <target>Urijština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.os">
+        <source>Ossetic</source>
+        <target>Osetština</target>
+      </trans-unit>
+      <trans-unit id="LNG.pa">
+        <source>Punjabi</source>
+        <target>Pandžábština</target>
+      </trans-unit>
+      <trans-unit id="LNG.pa_IN">
+        <source>Punjabi (India)</source>
+        <target>Paňdžábština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.pi">
+        <source>Pali</source>
+        <target>Palština</target>
+      </trans-unit>
+      <trans-unit id="LNG.pl">
+        <source>Polish</source>
+        <target>Polština</target>
+      </trans-unit>
+      <trans-unit id="LNG.pl_PL">
+        <source>Polish (Poland)</source>
+        <target>Polština (Polsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ps">
+        <source>Pashto</source>
+        <target>Paštština</target>
+      </trans-unit>
+      <trans-unit id="LNG.pt">
+        <source>Portuguese</source>
+        <target>Portugalština</target>
+      </trans-unit>
+      <trans-unit id="LNG.pt_BR">
+        <source>Portuguese (Brazil)</source>
+        <target>Portugalština (Brazílie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.pt_PT">
+        <source>Portuguese (Portugal)</source>
+        <target>Portugalština (Portugalsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.qu">
+        <source>Quechua</source>
+        <target>Kečuánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.rm">
+        <source>Romansh</source>
+        <target>Rétorománština</target>
+      </trans-unit>
+      <trans-unit id="LNG.rn">
+        <source>Rundi</source>
+        <target>Rundština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ro">
+        <source>Romanian</source>
+        <target>Rumunština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ro_RO">
+        <source>Romanian (Romania)</source>
+        <target>Rumunština (Rumunsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ru">
+        <source>Russian</source>
+        <target>Ruština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ru_RU">
+        <source>Russian (Russia)</source>
+        <target>Ruština (Rusko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.rw">
+        <source>Kinyarwanda</source>
+        <target>Kinyarwanda</target>
+      </trans-unit>
+      <trans-unit id="LNG.sa">
+        <source>Sanskrit</source>
+        <target>Sanskrit</target>
+      </trans-unit>
+      <trans-unit id="LNG.sc">
+        <source>Sardinian</source>
+        <target>Sardiština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sd">
+        <source>Sindhi</source>
+        <target>Sindhština</target>
+      </trans-unit>
+      <trans-unit id="LNG.se">
+        <source>Northern Sami</source>
+        <target>Severní samiština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sg">
+        <source>Sango</source>
+        <target>Sango</target>
+      </trans-unit>
+      <trans-unit id="LNG.si">
+        <source>Sinhala</source>
+        <target>Sinhálština</target>
+      </trans-unit>
+      <trans-unit id="LNG.si_LK">
+        <source>Sinhala (Sri Lanka)</source>
+        <target>Sinhálština (Srí Lanka)</target>
+      </trans-unit>
+      <trans-unit id="LNG.sk">
+        <source>Slovak</source>
+        <target>Slovenština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sk_SK">
+        <source>Slovak (Slovakia)</source>
+        <target>Slovenština (Slovensko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.sl">
+        <source>Slovenian</source>
+        <target>Slovinština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sl_SI">
+        <source>Slovenian (Slovenia)</source>
+        <target>Slovinština (Slovinsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.sm">
+        <source>Samoan</source>
+        <target>Samojština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sn">
+        <source>Shona</source>
+        <target>Shona</target>
+      </trans-unit>
+      <trans-unit id="LNG.so">
+        <source>Somali</source>
+        <target>Somálština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sq">
+        <source>Albanian</source>
+        <target>Albánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sq_AL">
+        <source>Albanian (Albania)</source>
+        <target>Albánština (Albánie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.sr">
+        <source>Serbian</source>
+        <target>Srbština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sr_RS">
+        <source>Serbian (Serbia)</source>
+        <target>Srbština (Srbsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ss">
+        <source>Swati</source>
+        <target>Svatština</target>
+      </trans-unit>
+      <trans-unit id="LNG.st">
+        <source>Southern Sotho</source>
+        <target>Jižní sotština</target>
+      </trans-unit>
+      <trans-unit id="LNG.st_ZA">
+        <source>Southern Sotho (South Africa)</source>
+        <target>Jižní sotština (Afrika)</target>
+      </trans-unit>
+      <trans-unit id="LNG.su">
+        <source>Sudanese</source>
+        <target>Sudánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sv">
+        <source>Swedish</source>
+        <target>Švédština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sv_FI">
+        <source>Swedish (Finland)</source>
+        <target>Švédština (Finsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.sv_SE">
+        <source>Swedish (Sweden)</source>
+        <target>Švédština (Švédsko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.sw">
+        <source>Swahili</source>
+        <target>Swahilština</target>
+      </trans-unit>
+      <trans-unit id="LNG.sw_CD">
+        <source>Swahili (Congo)</source>
+        <target>Svahilština (Kongo)</target>
+      </trans-unit>
+      <trans-unit id="LNG.sw_KE">
+        <source>Swahili (Kenya)</source>
+        <target>Svahilština (Keňa)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ta">
+        <source>Tamil</source>
+        <target>Tamilština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ta_IN">
+        <source>Tamil (India)</source>
+        <target>Tamilština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ta_LK">
+        <source>Tamil (Sri Lanka)</source>
+        <target>Tamilština (Srí Lanka)</target>
+      </trans-unit>
+      <trans-unit id="LNG.te">
+        <source>Telugu</source>
+        <target>Telugština</target>
+      </trans-unit>
+      <trans-unit id="LNG.te_IN">
+        <source>Telugu (India)</source>
+        <target>Telugština (Indie)</target>
+      </trans-unit>
+      <trans-unit id="LNG.tg">
+        <source>Tajik</source>
+        <target>Tajik</target>
+      </trans-unit>
+      <trans-unit id="LNG.tg_TJ">
+        <source>Tajik (Tajikistan)</source>
+        <target>Tajikština (Tajikistán)</target>
+      </trans-unit>
+      <trans-unit id="LNG.th">
+        <source>Thai</source>
+        <target>Thajština</target>
+      </trans-unit>
+      <trans-unit id="LNG.th_TH">
+        <source>Thai (Thailand)</source>
+        <target>Thaiština (Thaisko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ti">
+        <source>Tigrinya</source>
+        <target>Tigrinya</target>
+      </trans-unit>
+      <trans-unit id="LNG.tk">
+        <source>Turkmen</source>
+        <target>Turkménština</target>
+      </trans-unit>
+      <trans-unit id="LNG.tn">
+        <source>Tswana</source>
+        <target>Tswanština</target>
+      </trans-unit>
+      <trans-unit id="LNG.to">
+        <source>Tongan</source>
+        <target>Tongánština</target>
+      </trans-unit>
+      <trans-unit id="LNG.tr">
+        <source>Turkish</source>
+        <target>Turečtina</target>
+      </trans-unit>
+      <trans-unit id="LNG.tr_TR">
+        <source>Turkish (Turkey)</source>
+        <target>Turečtina (Turecko)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ts">
+        <source>Tsonga</source>
+        <target>Tsonga</target>
+      </trans-unit>
+      <trans-unit id="LNG.tt">
+        <source>Tatar</source>
+        <target>Tatarština</target>
+      </trans-unit>
+      <trans-unit id="LNG.ug">
+        <source>Uyghur</source>
+        <target>Ujgurština</target>
+      </trans-unit>
+      <trans-unit id="LNG.uk">
+        <source>Ukrainian</source>
+        <target>Ukrajinština</target>
+      </trans-unit>
+      <trans-unit id="LNG.uk_UA">
+        <source>Ukrainian (Ukraine)</source>
+        <target>Ukrajinština (Ukrajina)</target>
+      </trans-unit>
+      <trans-unit id="LNG.ur">
+        <source>Urdu</source>
+        <target>Urdu</target>
+      </trans-unit>
+      <trans-unit id="LNG.ur_PK">
+        <source>Urdu (Pakistan)</source>
+        <target>Urduština (Pákistán)</target>
+      </trans-unit>
+      <trans-unit id="LNG.uz">
+        <source>Uzbek</source>
+        <target>Uzbečtina</target>
+      </trans-unit>
+      <trans-unit id="LNG.ve">
+        <source>Venda</source>
+        <target>Vendština</target>
+      </trans-unit>
+      <trans-unit id="LNG.vi">
+        <source>Vietnamese</source>
+        <target>Vietnamština</target>
+      </trans-unit>
+      <trans-unit id="LNG.vi_VN">
+        <source>Vietnamese (Vietnam)</source>
+        <target>Vietnamština (Vietnam)</target>
+      </trans-unit>
+      <trans-unit id="LNG.vo">
+        <source>Volapuk</source>
+        <target>Volapuk</target>
+      </trans-unit>
+      <trans-unit id="LNG.wa">
+        <source>Walloon</source>
+        <target>Valonština</target>
+      </trans-unit>
+      <trans-unit id="LNG.wo">
+        <source>Wolof</source>
+        <target>Wolof</target>
+      </trans-unit>
+      <trans-unit id="LNG.wo_SN">
+        <source>Wolof (Senegal)</source>
+        <target>Wolofština (Senegal)</target>
+      </trans-unit>
+      <trans-unit id="LNG.xh">
+        <source>Xhosa</source>
+        <target>Xhosa</target>
+      </trans-unit>
+      <trans-unit id="LNG.yi">
+        <source>Yiddish</source>
+        <target>Jidiš</target>
+      </trans-unit>
+      <trans-unit id="LNG.yo">
+        <source>Yoruba</source>
+        <target>Yoruba</target>
+      </trans-unit>
+      <trans-unit id="LNG.za">
+        <source>Zhuang</source>
+        <target>Zhuang</target>
+      </trans-unit>
+      <trans-unit id="LNG.zh">
+        <source>Chinese</source>
+        <target>Čínština</target>
+      </trans-unit>
+      <trans-unit id="LNG.zh_CN">
+        <source>Chinese (China)</source>
+        <target>Čínština (Čína)</target>
+      </trans-unit>
+      <trans-unit id="LNG.zh_HK">
+        <source>Chinese (Hong Kong)</source>
+        <target>Čína (Hong Kong)</target>
+      </trans-unit>
+      <trans-unit id="LNG.zh_TW">
+        <source>Chinese (Taiwan)</source>
+        <target>Čínština (Taiwan)</target>
+      </trans-unit>
+      <trans-unit id="LNG.zu">
+        <source>Zulu</source>
+        <target>Zulu</target>
+      </trans-unit>
+      <trans-unit id="LNG.zu_ZA">
+        <source>Zulu (South Africa)</source>
+        <target>Zulunština (Jižní Afrika)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

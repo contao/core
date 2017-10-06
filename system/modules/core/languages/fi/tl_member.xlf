@@ -1,0 +1,298 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_member.php" source-language="en" target-language="fi">
+    <body>
+      <trans-unit id="tl_member.firstname.0">
+        <source>First name</source>
+        <target>Etunimi</target>
+      </trans-unit>
+      <trans-unit id="tl_member.firstname.1">
+        <source>Please enter the first name.</source>
+        <target>Ole hyvä ja anna etunimi.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.lastname.0">
+        <source>Last name</source>
+        <target>Sukunimi</target>
+      </trans-unit>
+      <trans-unit id="tl_member.lastname.1">
+        <source>Please enter the last name.</source>
+        <target>Ole hyvä ja anna sukunimi.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.dateOfBirth.0">
+        <source>Date of birth</source>
+        <target>Syntymäaika</target>
+      </trans-unit>
+      <trans-unit id="tl_member.dateOfBirth.1">
+        <source>Please enter the date of birth.</source>
+        <target>Ole hyvä ja anna syntymäaika.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.gender.0">
+        <source>Gender</source>
+        <target>Sukupuoli</target>
+      </trans-unit>
+      <trans-unit id="tl_member.gender.1">
+        <source>Please choose the gender.</source>
+        <target>Ole hyvä ja valitse sukupuoli.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.company.0">
+        <source>Company</source>
+        <target>Yritys</target>
+      </trans-unit>
+      <trans-unit id="tl_member.company.1">
+        <source>Here you can enter a company name.</source>
+        <target>Tähän voit antaa yrityksen nimen.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.street.0">
+        <source>Street</source>
+        <target>Osoite</target>
+      </trans-unit>
+      <trans-unit id="tl_member.street.1">
+        <source>Please enter the street name and number.</source>
+        <target>Ole hyvä ja anna osoite</target>
+      </trans-unit>
+      <trans-unit id="tl_member.postal.0">
+        <source>Postal code</source>
+        <target>Postinumero</target>
+      </trans-unit>
+      <trans-unit id="tl_member.postal.1">
+        <source>Please enter the postal code.</source>
+        <target>Ole hyvä ja syötä postinumero.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.city.0">
+        <source>City</source>
+        <target>Postitoimipaikka</target>
+      </trans-unit>
+      <trans-unit id="tl_member.city.1">
+        <source>Plase enter the name of the city.</source>
+        <target>Ole hyvä ja anna postitoimipaikka</target>
+      </trans-unit>
+      <trans-unit id="tl_member.state.0">
+        <source>State</source>
+        <target>Osavaltio</target>
+      </trans-unit>
+      <trans-unit id="tl_member.state.1">
+        <source>Plase enter the name of the state.</source>
+        <target>Ole hyvä ja anna osavaltio</target>
+      </trans-unit>
+      <trans-unit id="tl_member.country.0">
+        <source>Country</source>
+        <target>Maa</target>
+      </trans-unit>
+      <trans-unit id="tl_member.country.1">
+        <source>Please select the country.</source>
+        <target>Ole hyvä ja anna maa</target>
+      </trans-unit>
+      <trans-unit id="tl_member.phone.0">
+        <source>Phone number</source>
+        <target>Puhelinnumero</target>
+      </trans-unit>
+      <trans-unit id="tl_member.phone.1">
+        <source>Please enter the phone number.</source>
+        <target>Ole hyvä ja anna puhelinnumero</target>
+      </trans-unit>
+      <trans-unit id="tl_member.mobile.0">
+        <source>Cell phone number</source>
+        <target>Matkapuhelinnumero</target>
+      </trans-unit>
+      <trans-unit id="tl_member.mobile.1">
+        <source>Please enter the cell phone number.</source>
+        <target>Ole hyvä ja anna matkapuhelinnumero.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.fax.0">
+        <source>Fax number</source>
+        <target>Faksinumero</target>
+      </trans-unit>
+      <trans-unit id="tl_member.fax.1">
+        <source>Please enter the fax number.</source>
+        <target>Ole hyvä ja anna faksinumero.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.email.0">
+        <source>E-mail address</source>
+        <target>Sähköpostiosoite</target>
+      </trans-unit>
+      <trans-unit id="tl_member.email.1">
+        <source>Please enter a valid e-mail address.</source>
+        <target>Ole hyvä ja anna kelvollinen sähköpostiosoite.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.website.0">
+        <source>Website</source>
+        <target>Sivusto</target>
+      </trans-unit>
+      <trans-unit id="tl_member.website.1">
+        <source>Here you can enter a web address.</source>
+        <target>Tähän voit antaa web-osoitteen.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.language.0">
+        <source>Language</source>
+        <target>Kieli</target>
+      </trans-unit>
+      <trans-unit id="tl_member.language.1">
+        <source>Please select the language.</source>
+        <target>Ole hyvä ja valitse kieli.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups.0">
+        <source>Member groups</source>
+        <target>Jäsenryhmät</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups.1">
+        <source>Here you can assign the member to one or more groups.</source>
+        <target>Tässä voit määrätä jäsenen ryhmät.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login.0">
+        <source>Allow login</source>
+        <target>Salli kirjautuminen.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login.1">
+        <source>Allow the member to log into the front end.</source>
+        <target>Salli käyttäjän kirjautua sivustolle</target>
+      </trans-unit>
+      <trans-unit id="tl_member.username.0">
+        <source>Username</source>
+        <target>Käyttäjänimi</target>
+      </trans-unit>
+      <trans-unit id="tl_member.username.1">
+        <source>Please enter a unique username.</source>
+        <target>Ole hyvä ja anna yksilöllinen käyttäjänimi.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.assignDir.0">
+        <source>Set home directory</source>
+        <target>Aseta kotihakemisto</target>
+      </trans-unit>
+      <trans-unit id="tl_member.assignDir.1">
+        <source>Define a home directory for the member.</source>
+        <target>Aseta jäsenelle kotihakemisto.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homeDir.0">
+        <source>Home directory</source>
+        <target>Kotihakemisto</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homeDir.1">
+        <source>Please select a folder from the files directory.</source>
+        <target>Ole hyvä ja valitse hakemisto.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.disable.0">
+        <source>Deactivate</source>
+        <target>Poista käytöstä</target>
+      </trans-unit>
+      <trans-unit id="tl_member.disable.1">
+        <source>Temporarily disable the account.</source>
+        <target>Poista tili väliaikaisesti käytöstä</target>
+      </trans-unit>
+      <trans-unit id="tl_member.start.0">
+        <source>Activate on</source>
+        <target>Ota käyttöön ajastetusti</target>
+      </trans-unit>
+      <trans-unit id="tl_member.start.1">
+        <source>Automatically activate the account on this day.</source>
+        <target>Ota tili automaattisesti käyttöön tänä ajankohtana.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.stop.0">
+        <source>Deactivate on</source>
+        <target>Poista käytöstä ajastetusti</target>
+      </trans-unit>
+      <trans-unit id="tl_member.stop.1">
+        <source>Automatically deactivate the account on this day.</source>
+        <target>Poista tili automaattisesti käytöstä tänä ajankohtana.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.personal_legend">
+        <source>Personal data</source>
+        <target>Omat tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.address_legend">
+        <source>Address details</source>
+        <target>Osoitetiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.contact_legend">
+        <source>Contact details</source>
+        <target>Yhteystiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups_legend">
+        <source>Member groups</source>
+        <target>Jäsenryhmät</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login_legend">
+        <source>Login details</source>
+        <target>Kirjautumistiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homedir_legend">
+        <source>Home directory</source>
+        <target>Kotihakemisto</target>
+      </trans-unit>
+      <trans-unit id="tl_member.account_legend">
+        <source>Account settings</source>
+        <target>Tilin asetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_member.personalData">
+        <source>Personal data</source>
+        <target>Omat tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.addressDetails">
+        <source>Address details</source>
+        <target>Osoitetiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.contactDetails">
+        <source>Contact details</source>
+        <target>Yhteystiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.loginDetails">
+        <source>Login details</source>
+        <target>Kirjautumistiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.new.0">
+        <source>New member</source>
+        <target>Uusi jäsen</target>
+      </trans-unit>
+      <trans-unit id="tl_member.new.1">
+        <source>Create a new member</source>
+        <target>Luo uusi jäsen</target>
+      </trans-unit>
+      <trans-unit id="tl_member.show.0">
+        <source>Member details</source>
+        <target>Jäsenen lisätiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.show.1">
+        <source>Show the details of member ID %s</source>
+        <target>Näytä jäsenen ID %s tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member.edit.0">
+        <source>Edit member</source>
+        <target>Muokkaa jäsentä</target>
+      </trans-unit>
+      <trans-unit id="tl_member.edit.1">
+        <source>Edit member ID %s</source>
+        <target>Muokkaa jäsentä ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.copy.0">
+        <source>Duplicate member</source>
+        <target>Kopioi jäsen</target>
+      </trans-unit>
+      <trans-unit id="tl_member.copy.1">
+        <source>Duplicate member ID %s</source>
+        <target>Kopioi jäsen ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.delete.0">
+        <source>Delete member</source>
+        <target>Poista jäsen</target>
+      </trans-unit>
+      <trans-unit id="tl_member.delete.1">
+        <source>Delete member ID %s</source>
+        <target>Poista jäsen ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.toggle.0">
+        <source>Activate/deactivate member</source>
+        <target>Ota käyttöön / poista käytöstä jäsenen tili </target>
+      </trans-unit>
+      <trans-unit id="tl_member.toggle.1">
+        <source>Activate/deactivate member ID %s</source>
+        <target>Ota käyttöön / poista käytöstä jäsenen ID %s tili </target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.0">
+        <source>Front end preview</source>
+        <target>Sivuston esikatselu</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.1">
+        <source>Preview the front end as member ID %s</source>
+        <target>Esikatsele sivustoa jäsenenä ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

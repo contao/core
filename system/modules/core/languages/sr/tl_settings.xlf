@@ -1,0 +1,654 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_settings.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="tl_settings.websiteTitle.0">
+        <source>Website title</source>
+        <target>Назив сајта</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websiteTitle.1">
+        <source>Please enter the title of the website.</source>
+        <target>Унесите назив сајта</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.0">
+        <source>E-mail address of the system administrator</source>
+        <target>E-mail адреса системског администратора</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.adminEmail.1">
+        <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
+        <target>Аутоматски генерисане поруке попут потврда о претплати биће послате на ову адресу.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.0">
+        <source>Date format</source>
+        <target>Формат датума</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.dateFormat.1">
+        <source>The date format string will be parsed with the PHP date() function.</source>
+        <target>Формат датума биће прослеђен преко функције PHP date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.0">
+        <source>Time format</source>
+        <target>Формат времена</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeFormat.1">
+        <source>The time format string will be parsed with the PHP date() function.</source>
+        <target>Формат времена биће прослеђен преко функције PHP date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.0">
+        <source>Date and time format</source>
+        <target>Формат датума и времена</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.datimFormat.1">
+        <source>The date and time format string will be parsed with the PHP date() function.</source>
+        <target>Формат датума и времена биће прослеђен преко функције PHP date().</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.0">
+        <source>Time zone</source>
+        <target>Временска зона</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeZone.1">
+        <source>Please select the server time zone.</source>
+        <target>Изаберите временску зону сервера.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.0">
+        <source>Relative path to the Contao directory</source>
+        <target>Релативна путања према Contao директоријуму</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.websitePath.1">
+        <source>The relative path to the Contao directory is usually set automatically by the install tool.</source>
+        <target>Релативна путања до Contao директоријума је обично постављена аутоматски приликом инсталације система.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.0">
+        <source>Character set</source>
+        <target>Character set</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.characterSet.1">
+        <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
+        <target>Препорука је да се користи UTF-8, тако да ће специфични знакови бити приказивани исправно.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.0">
+        <source>Disable the command scheduler</source>
+        <target>Онемогући командни распоред</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableCron.1">
+        <source>Disable the periodic command scheduler and execute the cron.php script by a real cron job (which you have to set up manually).</source>
+        <target>Онемогући периодично извршавање команди и изврши cron.php скрипту правим cron job-ом (који сте дефинисали ручно).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.0">
+        <source>Minify the markup</source>
+        <target>Минимизуј означавање</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.minifyMarkup.1">
+        <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Минимизуј HTML ознаке прије него што буду послате у интернет прегледач.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.0">
+        <source>Compress scripts</source>
+        <target>Компресуј скрипте</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gzipScripts.1">
+        <source>Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.</source>
+        <target>Креирај компресоване верзије комбинација фајлова CSS-а и JavaScript-а. Потребно је подесити фајл .htaccess.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.0">
+        <source>Items per page</source>
+        <target>Ставки по страници</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.resultsPerPage.1">
+        <source>Here you can define the number of items per page in the back end.</source>
+        <target>Овде можете дефинисати број ставки по страници у БекЕнду.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.0">
+        <source>Maximum items per page</source>
+        <target>Максималан број ставки по страници</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxResultsPerPage.1">
+        <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
+        <target>Овај свеукупни лимит постаје битан ако корисник изабере опцију &quot;прикажи све записе&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.0">
+        <source>Exclude folders from synchronization</source>
+        <target>Искључи фолдере из сингронизације</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.fileSyncExclude.1">
+        <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>Овде можете унети, раздвојене зарезом, листу фајлова који ће бити изузети из синхронизације (нпр. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Имајте на уму да изузети ресурси не могу бити кориштени у елементима као што су нпр. слике или преузимања!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.0">
+        <source>Do not collapse elements</source>
+        <target>Не сажимај елементе</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotCollapse.1">
+        <source>Do not collapse elements in the back end preview.</source>
+        <target>Не сажимај елементе у прегледу БекЕнда.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.0">
+        <source>URL suffix</source>
+        <target>URL суфикса</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.urlSuffix.1">
+        <source>The URL suffix will be added to the URI string to simulate static documents.</source>
+        <target>URL суфикс ће бити додат на URI стринг како би изгледао као статичка адреса.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.0">
+        <source>Cache mode</source>
+        <target>Мод кеша</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cacheMode.1">
+        <source>Here you can select the cache mode.</source>
+        <target>Овде можете изабрати мод кеша.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Проверени прокси сервери</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Овде можете унети, зарезом раздвојене, IP адресе поузданих прокси сервера.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+        <target>SSL прокси домен</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Ако је ваш сајт доступан преко SSL proxy сервера, унесите његов домен овде (нпр. &lt;em&gt;sslsites.de&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.0">
+        <source>Anonymize IP addresses</source>
+        <target>Сакриј IP адресу</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeIp.1">
+        <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
+        <target>Сакриј све IP адресе које су сачуване у бази података, изузев табеле &lt;em&gt;tl_session&lt;/em&gt;  (IP адреса је повезана са сесијом из сигурносних разлога).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.0">
+        <source>Anonymize Google Analytics</source>
+        <target>Анонимни Google Analytics</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacyAnonymizeGA.1">
+        <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
+        <target>Прилагоди IP адресе које се шаљу Google Analytics-у тако да се не шаље комплетна IP адреса.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.0">
+        <source>Rewrite URLs</source>
+        <target>Препиши URL-ове</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.rewriteURL.1">
+        <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
+        <target>Овом опцијом можете искључити уметање фрагмента &quot;index.php&quot; у статички URL. Ова опција захтева &quot;mod_rewrite&quot;, преименовање фајла &quot;.htaccess.default&quot; у &quot;.htaccess&quot; и подешавање параметра &quot;RewriteBase&quot; ако је потребно.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.0">
+        <source>Add the language to the URL</source>
+        <target>Додај језик у URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.addLanguageToUrl.1">
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Додај ознаку језика као први параметар URL-а (нпр. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.0">
+        <source>Do not redirect empty URLs</source>
+        <target>Не преусмеравај празне URL-ове</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.doNotRedirectEmpty.1">
+        <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+        <target>Ако је URL празан, прикажи сајт уместо преусмеравања на почетну страницу за изабрани језик (није препоручљиво).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.0">
+        <source>Enable auto_item</source>
+        <target>Омогући auto_item</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useAutoItem.1">
+        <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
+        <target>Изостави &lt;em&gt;items/&lt;/em&gt; или &lt;em&gt;events/&lt;/em&gt; фрагменте унутар URL-а и аутоматски препознај ставку базирану на параметру &lt;em&gt;auto_item&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.0">
+        <source>Disable page alias usage</source>
+        <target>Онемогући кориштењњ алиаса страница</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableAlias.1">
+        <source>Use the numeric ID of a page or article instead of its alias.</source>
+        <target>Корисити нумерички ID странице или чланка уместо њиховог алиаса.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.0">
+        <source>Enable folder URLs</source>
+        <target>Омогући URL-ове фолдера</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.folderUrl.1">
+        <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>Овде можете омогићити алиасе страница у стилу фолдера као што је &lt;em&gt;docs/install/download.html&lt;/em&gt; уместо &lt;em&gt;docs-install-download.html&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.0">
+        <source>Allowed HTML tags</source>
+        <target>Дозвољени HTML тагови</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedTags.1">
+        <source>Here you can enter a list of allowed HTML tags that will not be stripped.</source>
+        <target>Унесите листу дозвољених HTML тагова. Сви остали тагови ће бити избрисани из уноса корисника.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.0">
+        <source>Enable debug mode</source>
+        <target>Омогући мод за дебагирање</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.debugMode.1">
+        <source>Print certain runtime information like database queries to the screen.</source>
+        <target>Штампај на екран одређене информације о раду система као што су упити у бази података.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+        <target>Мод одржавања</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Пошаљите 503 HTTP заглавље и прикажите страницу одржавања на ФронтЕнду.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.0">
+        <source>Bypass the internal cache</source>
+        <target>Премости интерни кеш</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.bypassCache.1">
+        <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
+        <target>Не користи интерни кеш (нпр. корисно код развоја екстензија).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.0">
+        <source>Disable request tokens</source>
+        <target>Онемогући захтевање токена</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableRefererCheck.1">
+        <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
+        <target>Не проверавај токене када се шаље формулар. Пажња: ово представља потенцијални сигурносни ризик!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.0">
+        <source>Account locking time</source>
+        <target>Време закључавања налога</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.lockPeriod.1">
+        <source>An account will be locked if a wrong password is entered three times in a row.</source>
+        <target>Налог ће бити закључан ако се три пута узастопно унесе погрешна лозинка.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.0">
+        <source>Display error messages</source>
+        <target>Прикажи поруке о грешкама</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.displayErrors.1">
+        <source>Print error messages to the screen (not recommended for productional sites).</source>
+        <target>Прикажи поруке о грешкама на екрану (није препоручљиво за сајтове у употреви).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.0">
+        <source>Log error messages</source>
+        <target>Евиденција порука о грешкама</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logErrors.1">
+        <source>Write error messages to the error log file (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</source>
+        <target>Записуј грешке у посебан фајл (&lt;em&gt;system/logs/error.log&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.0">
+        <source>Run in safe mode</source>
+        <target>Покрени сејф-мод.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.coreOnlyMode.1">
+        <source>Run Contao in safe mode and load only core modules.</source>
+        <target>Покрени Contao у сејф-моду и учитај само основне модуле.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.0">
+        <source>Disable IP check</source>
+        <target>Искључи проверу IP адреса</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.disableIpCheck.1">
+        <source>Do not bind sessions to IP addresses. Choosing this option is a potential security risk!</source>
+        <target>Не везуј сесије са IP адресама. Кориштење ове опције може представљати сигурносни ризик!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.0">
+        <source>Download file types</source>
+        <target>Дозвољене врсте фајлова који се могу преузимати</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.allowedDownload.1">
+        <source>Here you can enter a comma separated list of downloadable file types.</source>
+        <target>Унесите, зарезом раздвојене, врсте фајлова које ће моћи да се преузму са сајта.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.0">
+        <source>Image file types</source>
+        <target>Врсте слика</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.validImageTypes.1">
+        <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
+        <target>Унесите, зарезом раздвојене, врсте слика које ће моћи да буду обрађиване употребом image класе.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.0">
+        <source>Editable file types</source>
+        <target>Фајлови које је могуће уређивати</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.editableFiles.1">
+        <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
+        <target>Унесите, зарезом раздвојене, врсте фајлова који ће моћи да се уређују у уређивачу изворног кода.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.0">
+        <source>Template file types</source>
+        <target>Врсте шаблонских фајлова</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.templateFiles.1">
+        <source>Here you can enter a comma separated list of supported template file types.</source>
+        <target>Унесите, зарезом раздвојене, врсте шаблонских фајлова које ће бити доступне.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.0">
+        <source>Maximum front end width</source>
+        <target>Максимална ФронтЕнд ширина</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxImageWidth.1">
+        <source>If the width of an image or movie exceeds this value, it will be adjusted automatically. Set to 0 to disable the limit.</source>
+        <target>Уколико је ширина слике или видеа већа од ове вредности, биће аутоматски прилагођена. Поставите 0 да искључите ограничење.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.0">
+        <source>JPG thumbnail quality</source>
+        <target>Квалитет JPG thumbnail сличица</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.jpgQuality.1">
+        <source>Here you can enter the JPG thumbnail quality in percent.</source>
+        <target>Унесите вредност квалитета JPG thumbnail сличица, у процентима.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.0">
+        <source>Maximum GD image width</source>
+        <target>Максимална GD ширина слике</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgWidth.1">
+        <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
+        <target>Овде можете да унесете максималну ширину слике коју ће GD библиотека покушати да обради.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.0">
+        <source>Maximum GD image height</source>
+        <target>Максимална GD висина слике</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.gdMaxImgHeight.1">
+        <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
+        <target>Овде можете да унесете максималну висину слике коју ће GD библиотека покушати да обради.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.0">
+        <source>Files directory</source>
+        <target>Директоријум фајлова</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadPath.1">
+        <source>Here you can set the relative path to the Contao files directory.</source>
+        <target>Овде можете поставити релативну путању према Contao директоријуму фајлова.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.0">
+        <source>Upload file types</source>
+        <target>Подешавање постављања фајлова</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadTypes.1">
+        <source>Here you can enter a comma separated list of uploadable file types.</source>
+        <target>Унесите, зарезом раздвојене, врсте фајлова које ће моћи да се копирају на сајт.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.0">
+        <source>Simultaneous file uploads</source>
+        <target>Симултано копирање фајлова на сервер</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploadFields.1">
+        <source>Here you can enter the maximum number of simultaneous file uploads.</source>
+        <target>Овде можете унети број фајлова који ће моћи да се истовремено копирају на сервер.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.0">
+        <source>Maximum upload file size</source>
+        <target>Максимална величина фајла који се копира на сервер</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maxFileSize.1">
+        <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
+        <target>Овде можете унети максималну величину фајла који се копира на сервер у бајтима (1 MB = 1000 kB = 1000000 бајтова).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.0">
+        <source>Maximum image width</source>
+        <target>Максимална ширина слике</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageWidth.1">
+        <source>Here you can enter the maximum width for image uploads in pixels.</source>
+        <target>Овде можете унети максималну ширину слике која се копира на сервер</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.0">
+        <source>Maximum image height</source>
+        <target>Максимална висина слике</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.imageHeight.1">
+        <source>Here you can enter the maximum height for image uploads in pixels.</source>
+        <target>Овде можете унети максималну висину слике, у пикселима, која се копира на сервер</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.0">
+        <source>Enable searching</source>
+        <target>Омогући птретраживање</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.enableSearch.1">
+        <source>Index pages so they can be searched.</source>
+        <target>Индексирај странице тако да могу да се претражују.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.0">
+        <source>Index protected pages</source>
+        <target>Индексирај заштићене странице</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.indexProtected.1">
+        <source>Use this option carefully and always exclude personalized pages from being indexed!</source>
+        <target>Користите ову опцију пажљиво и увек искључите странице са приватним детаљима из индексирања!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.0">
+        <source>Send e-mails via SMTP</source>
+        <target>Шаљи email-ове преко SMTP</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.useSMTP.1">
+        <source>Use an SMTP server instead of the PHP mail() function to send e-mails.</source>
+        <target>За слање email-ова, користи SMTP сервер уместо уграђене PHP mail() функције .</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>SMTP hostname</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>Унесите име хоста SMTP сервера.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.0">
+        <source>SMTP username</source>
+        <target>SMTP username</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>Унесите корисничко име за SMTP.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.0">
+        <source>SMTP password</source>
+        <target>SMTP password</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>Унесите лозинку за SMTP.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>SMTP енкрипција</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Овде можете одабрати метод енкрипције (SSL или TLS).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>SMTP port number</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>Унесите број порта сервера SMTP-а.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.0">
+        <source>Inactive extensions</source>
+        <target>Неактивне екстензије</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.1">
+        <source>Here you can deactivate unneeded extensions.</source>
+        <target>Овде можете деактивирати непотребне екстензије.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.0">
+        <source>Storage time for undo steps</source>
+        <target>Време чувања урађених акција</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.undoPeriod.1">
+        <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
+        <target>Овде можете унети време чувања урађених акција  (24 сата = 86400 секунди).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.0">
+        <source>Storage time for versions</source>
+        <target>Време чувања верзија</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.versionPeriod.1">
+        <source>Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).</source>
+        <target>Овде можете унети време чувања различитих верзија  (90 дана = 7776000 секунди).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.0">
+        <source>Storage time for log entries</source>
+        <target>Време чувања записа лога</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.logPeriod.1">
+        <source>Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).</source>
+        <target>Овде можете унети време чувања записа лога (14 дана = 1209600 секунди).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.0">
+        <source>Session timeout</source>
+        <target>Трајање сесије</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sessionTimeout.1">
+        <source>Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).</source>
+        <target>Овде можете унети максимално време трајања сесије (60 минута = 3600 секунди).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.0">
+        <source>Auto login period</source>
+        <target>Период аутоматске пријаве</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.autologin.1">
+        <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
+        <target>Овде можете подесити време аутоматске пријаве у ФронтЕнду (90 дана = 7776000 секунди).</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.0">
+        <source>Default page owner</source>
+        <target>Подразумевани власник странице</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultUser.1">
+        <source>Here you can select a user as the default owner of a page.</source>
+        <target>Овде можете одабрати подразумеваног власника странице.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.0">
+        <source>Default page group</source>
+        <target>Подразумевана група странице</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultGroup.1">
+        <source>Here you can select a group as the default owner of a page.</source>
+        <target>Овде можете одредити групу као подразумеваног власника странице.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.0">
+        <source>Default access rights</source>
+        <target>Подразумевана права приступа</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.defaultChmod.1">
+        <source>Please assign the default access rights for pages and articles.</source>
+        <target>Доделите подразумевана права приступа страницама и чланцима.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.0">
+        <source>Live Update URL</source>
+        <target>Live Update URL</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.liveUpdateBase.1">
+        <source>Here you can enter the Live Update URL.</source>
+        <target>Овде можете унети Live Update URL.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.title_legend">
+        <source>Website title</source>
+        <target>Назив сајта</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.date_legend">
+        <source>Date and time</source>
+        <target>Датум и време</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.global_legend">
+        <source>Global configuration</source>
+        <target>Глобална подешавања</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.backend_legend">
+        <source>Back end configuration</source>
+        <target>Конфигурација БекЕнда</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.frontend_legend">
+        <source>Front end configuration</source>
+        <target>Конфигурација ФронтЕнда</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Конфигурација проксија</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.privacy_legend">
+        <source>Privacy settings</source>
+        <target>Подешавања приватности</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.security_legend">
+        <source>Security settings</source>
+        <target>Подешавања сигурности</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.files_legend">
+        <source>Files and images</source>
+        <target>Фајлови и слике</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.uploads_legend">
+        <source>Upload settings</source>
+        <target>Подешавања постављања фајлова</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.search_legend">
+        <source>Search engine settings</source>
+        <target>Подешавања претраживача</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>Конфигурација SMTP-а</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.ftp_legend">
+        <source>Safe Mode Hack</source>
+        <target>Safe Mode Hack</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.modules_legend">
+        <source>Inactive extensions</source>
+        <target>Неактивне екстензије</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
+        <target>Командни распоред</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.timeout_legend">
+        <source>Timeout values</source>
+        <target>Вредности тајмаута</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.chmod_legend">
+        <source>Default access rights</source>
+        <target>Подразумевана права приступа</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.update_legend">
+        <source>Live Update</source>
+        <target>Live Update</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.static_legend">
+        <source>Static resources</source>
+        <target>Статички ресурси</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.edit">
+        <source>Edit the local configuration</source>
+        <target>Уреди локалну конфигурацију</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.both">
+        <source>Use the server and the browser cache</source>
+        <target>Користи серверски и прегледачки кеш</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.server">
+        <source>Use only the server cache</source>
+        <target>Користи само кеш сервера</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.browser">
+        <source>Use only the browser cache</source>
+        <target>Користи само кеш интернет прегледача</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.none">
+        <source>Disable caching</source>
+        <target>Искључи кеширање</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

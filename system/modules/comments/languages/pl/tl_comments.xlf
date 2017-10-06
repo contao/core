@@ -1,0 +1,186 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/comments/languages/en/tl_comments.php" source-language="en" target-language="pl">
+    <body>
+      <trans-unit id="tl_comments.source.0">
+        <source>Origin</source>
+        <target>Pochodzenie</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.source.1">
+        <source>The associated table.</source>
+        <target>Powiązana tabela.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.parent.0">
+        <source>Parent ID</source>
+        <target>Nadrzędne ID</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.parent.1">
+        <source>The associated record.</source>
+        <target>Powiązany rekord.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.date.0">
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.date.1">
+        <source>Please enter the comment date.</source>
+        <target>Wprowadź datę komentarza.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.name.0">
+        <source>Author</source>
+        <target>Imię</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.name.1">
+        <source>Please enter the author's name.</source>
+        <target>Wpisz swoje imię.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.email.0">
+        <source>E-mail address</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.email.1">
+        <source>The e-mail address will not be published.</source>
+        <target>Wprowadź swój adres e-mail (nie będzie on opublikowany).</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.website.0">
+        <source>Website</source>
+        <target>Strona www</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.website.1">
+        <source>Here you can enter a website address.</source>
+        <target>Opcjonalnie możesz wprowadzić adres swojej strony internetowej.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment.0">
+        <source>Comment</source>
+        <target>Komentarz</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment.1">
+        <source>Please enter the comment.</source>
+        <target>Wpisz komentarz</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.addReply.0">
+        <source>Add a reply</source>
+        <target>Dodaj odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.addReply.1">
+        <source>Here you can reply to the comment.</source>
+        <target>Tutaj możesz odpowiedzieć na komentarz.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author.0">
+        <source>Author</source>
+        <target>Imię</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author.1">
+        <source>Here you can change the author of the reply.</source>
+        <target>Wybierz autora komentarza.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply.0">
+        <source>Reply</source>
+        <target>Odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply.1">
+        <source>Here you can enter the reply.</source>
+        <target>Wprowadź odpowiedź na komentarz.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.published.0">
+        <source>Publish comment</source>
+        <target>Opublikowany</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.published.1">
+        <source>Make the comment publicly visible on the website.</source>
+        <target>Tylko opublikowane komentarze będą widoczne na stronie.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.0">
+        <source>IP address</source>
+        <target>Adres IP</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.ip.1">
+        <source>The IP address of the author.</source>
+        <target>Adres IP autora.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.0">
+        <source>Notified</source>
+        <target>Powiadomiony</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.notified.1">
+        <source>The notification of this comment has been sent.</source>
+        <target>Powiadomienie o tym komentarzu zostało wysłane.</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.author_legend">
+        <source>Author</source>
+        <target>Imię</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.comment_legend">
+        <source>Comment</source>
+        <target>Komentarz</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.reply_legend">
+        <source>Reply</source>
+        <target>Odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.publish_legend">
+        <source>Publish settings</source>
+        <target>Ustawinia publikacji</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.approved">
+        <source>Approved</source>
+        <target>Zatwierdzony</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.pending">
+        <source>Awaiting moderation</source>
+        <target>Oczekuje na moderację</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_content">
+        <source>Article</source>
+        <target>ID artykułu</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_page">
+        <source>Page</source>
+        <target>Wewnętrzna strona</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_news">
+        <source>News item</source>
+        <target>Element aktualności</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_faq">
+        <source>FAQ</source>
+        <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.tl_calendar_events">
+        <source>Event</source>
+        <target>Wydarzenie</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.show.0">
+        <source>Comment details</source>
+        <target>Szczegóły komentarza</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.show.1">
+        <source>Show the details of comment ID %s</source>
+        <target>Pokaż szczegóły komentarza ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.edit.0">
+        <source>Edit comment</source>
+        <target>Edytuj komentarz</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.edit.1">
+        <source>Edit comment ID %s</source>
+        <target>Edytuj komentarz ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.delete.0">
+        <source>Delete comment</source>
+        <target>Usuń komentarz</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.delete.1">
+        <source>Delete comment ID %s</source>
+        <target>Usuń komentarz ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.toggle.0">
+        <source>Publish/unpublish comment</source>
+        <target>Publikuj/nie publikuj komentarz</target>
+      </trans-unit>
+      <trans-unit id="tl_comments.toggle.1">
+        <source>Publish/unpublish comment ID %s</source>
+        <target>Publikuj/nie publikuj komentarz ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

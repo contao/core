@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_templates.php" source-language="en" target-language="it">
+    <body>
+      <trans-unit id="tl_templates.original.0">
+        <source>Original template</source>
+        <target>Template originali</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.original.1">
+        <source>Here you can select the template that you want to customize.</source>
+        <target>Scegliere il file template che desidera adattare. Una copia locale sarà generata nella cartella &lt;em&gt;templates&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.0">
+        <source>Target folder</source>
+        <target>Cartella di destinazione</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.1">
+        <source>A copy of the selected template will be stored in the target folder.</source>
+        <target>Una copia del modello selezionato verrà memorizzato nella cartella di destinazione.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.headline">
+        <source>Add a new template</source>
+        <target>Template Editor</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.newTpl">
+        <source>Create template</source>
+        <target>Crea un template</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.exists">
+        <source>Template &quot;%s&quot; exists already!</source>
+        <target>Un template personalizzato di nome &quot;%s&quot; esiste già!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.invalid">
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>La cartella di origine o di destinazione &quot;%s&quot; non è valida!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.0">
+        <source>New template</source>
+        <target>Nuovo template</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.1">
+        <source>Create a new template</source>
+        <target>Crea un nuovo template</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.0">
+        <source>New folder</source>
+        <target>Nuova cartella</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.1">
+        <source>Create a new folder</source>
+        <target>Crea una nuova cartella</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.0">
+        <source>Paste into</source>
+        <target>Incolla all'interno</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>Incolla all'interno della cartella</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.0">
+        <source>Compare template</source>
+        <target>Confronta template</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.1">
+        <source>Compare &quot;%s&quot; with another template</source>
+        <target>Confronta il template &quot;%s&quot;  con un altro template</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.overridesAnotherTpl">
+        <source>This template overrides &quot;%s&quot;.</source>
+        <target>Questo template sovrascriverà &quot;%s&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pleaseSelect">
+        <source>Please select a template from the list above and click &quot;Show differences&quot;.</source>
+        <target>Selezionare il template dalla lista e cliccare su &quot;Mostra le differenze&quot;.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

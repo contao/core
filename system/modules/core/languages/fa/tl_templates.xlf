@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_templates.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_templates.original.0">
+        <source>Original template</source>
+        <target>قالب اصلی</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.original.1">
+        <source>Here you can select the template that you want to customize.</source>
+        <target>اینجا می‌توانید قالبی را که می‌خواهید سفارشی کنید را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.0">
+        <source>Target folder</source>
+        <target>پوشه مقصد</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.target.1">
+        <source>A copy of the selected template will be stored in the target folder.</source>
+        <target>یک کپی از قالب انتخاب شده در پوشه ذخیره خواهد شد.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.headline">
+        <source>Add a new template</source>
+        <target>ایجاد یک قالب جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.newTpl">
+        <source>Create template</source>
+        <target>ساخت قالب</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.exists">
+        <source>Template &quot;%s&quot; exists already!</source>
+        <target>قالب &quot;%s&quot; در حال حاضر وجود دارد!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.invalid">
+        <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>منبع با پوشه مقصد نامعتبر &quot;%s&quot;!</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.0">
+        <source>New template</source>
+        <target>قالب جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new_tpl.1">
+        <source>Create a new template</source>
+        <target>ایجاد یک قالب جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.0">
+        <source>New folder</source>
+        <target>پوشه جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.new.1">
+        <source>Create a new folder</source>
+        <target>ایجاد یک قالب جدید</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.0">
+        <source>Paste into</source>
+        <target>جاگذاری در</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pasteinto.1">
+        <source>Paste into this folder</source>
+        <target>جاگذاری در این پوشه</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.0">
+        <source>Compare template</source>
+        <target>مقایسه قالب</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.1">
+        <source>Compare &quot;%s&quot; with another template</source>
+        <target>مقایسه &quot;%s&quot; با قالب دیگر</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.overridesAnotherTpl">
+        <source>This template overrides &quot;%s&quot;.</source>
+        <target>این قالب &quot;%s&quot; را لغو می‌کند.</target>
+      </trans-unit>
+      <trans-unit id="tl_templates.pleaseSelect">
+        <source>Please select a template from the list above and click &quot;Show differences&quot;.</source>
+        <target>لطفا قالبی از فهرست فوق انتخاب نموده و «نمایش تفاوت‌ها» را کلیک نمایید</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

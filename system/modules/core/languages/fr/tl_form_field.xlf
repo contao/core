@@ -1,0 +1,574 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_form_field.php" source-language="en" target-language="fr">
+    <body>
+      <trans-unit id="FFL.headline.0">
+        <source>Headline</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="FFL.headline.1">
+        <source>A custom field to insert a section headline.</source>
+        <target>Champ personnalisé pour insérer un titre de section.</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.0">
+        <source>Explanation</source>
+        <target>Explication</target>
+      </trans-unit>
+      <trans-unit id="FFL.explanation.1">
+        <source>A custom field to insert an explanation text.</source>
+        <target>Champ personnalisé pour insérer un texte d'explication.</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.0">
+        <source>HTML code</source>
+        <target>Code HTML</target>
+      </trans-unit>
+      <trans-unit id="FFL.html.1">
+        <source>A custom field to insert HTML code.</source>
+        <target>Champ personnalisé pour insérer du code HTML.</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.0">
+        <source>Fieldset</source>
+        <target>Fieldset</target>
+      </trans-unit>
+      <trans-unit id="FFL.fieldset.1">
+        <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Un conteneur pour les champs avec une légende en option (uniquement disponible pour les formulaires sans tableau).</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.0">
+        <source>Text field</source>
+        <target>Champ texte</target>
+      </trans-unit>
+      <trans-unit id="FFL.text.1">
+        <source>A single-line input field for a short or medium text.</source>
+        <target>Champ d'une ligne pour la saisie d'un texte court ou moyen.</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.0">
+        <source>Password field</source>
+        <target>Champ &quot;mot de passe&quot;</target>
+      </trans-unit>
+      <trans-unit id="FFL.password.1">
+        <source>A single-line input field for a password. Contao automatically adds a confirmation field.</source>
+        <target>Champ d'une ligne pour la saisie d'un mot de passe. Contao ajoute automatiquement un champ de confirmation.</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.0">
+        <source>Textarea</source>
+        <target>Zone de texte</target>
+      </trans-unit>
+      <trans-unit id="FFL.textarea.1">
+        <source>A multi-line input field for a medium or long text.</source>
+        <target>Champ comportant plusieurs lignes pour la saisie d'un texte moyen ou long.</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.0">
+        <source>Select menu</source>
+        <target>Liste déroulante</target>
+      </trans-unit>
+      <trans-unit id="FFL.select.1">
+        <source>A single- or multi-line drop-down menu.</source>
+        <target>Liste déroulante pour la sélection d'un ou plusieurs choix.</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.0">
+        <source>Radio button menu</source>
+        <target>Bouton radio</target>
+      </trans-unit>
+      <trans-unit id="FFL.radio.1">
+        <source>A list of multiple options from which one can be selected.</source>
+        <target>Liste de plusieurs options dont une seule peut être sélectionnée.</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.0">
+        <source>Checkbox menu</source>
+        <target>Case à cocher</target>
+      </trans-unit>
+      <trans-unit id="FFL.checkbox.1">
+        <source>A list of multiple options from which any can be selected.</source>
+        <target>Liste de plusieurs options dont chacune peut être sélectionnée.</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.0">
+        <source>File upload</source>
+        <target>Envoi de fichier</target>
+      </trans-unit>
+      <trans-unit id="FFL.upload.1">
+        <source>A single-line input field to upload a local file to the server.</source>
+        <target>Champ d'une ligne pour l'envoi d'un fichier local vers le serveur.</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.0">
+        <source>Hidden field</source>
+        <target>Champ caché</target>
+      </trans-unit>
+      <trans-unit id="FFL.hidden.1">
+        <source>A single-line input field that is not visible in the form.</source>
+        <target>Champ d'une ligne non visible dans le formulaire.</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.0">
+        <source>Security question</source>
+        <target>Question de sécurité</target>
+      </trans-unit>
+      <trans-unit id="FFL.captcha.1">
+        <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
+        <target>Question simple d'arithmétique pour vérifier que le formulaire est bien soumis par un individu (CAPTCHA).</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.0">
+        <source>Submit field</source>
+        <target>Bouton d'envoi</target>
+      </trans-unit>
+      <trans-unit id="FFL.submit.1">
+        <source>A button to submit the form.</source>
+        <target>Bouton d'envoi du formulaire.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.0">
+        <source>Field type</source>
+        <target>Type de champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type.1">
+        <source>Please choose the type of field.</source>
+        <target>Choisir le type du champ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.0">
+        <source>Field name</source>
+        <target>Nom du champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.name.1">
+        <source>The field name is a unique name to identify the field.</source>
+        <target>Le nom de champ est un nom unique qui sert à identifier le champ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.0">
+        <source>Field label</source>
+        <target>Intitulé du champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.label.1">
+        <source>The field label will be visible on the website, typically in front of or above the field.</source>
+        <target>L'intitulé du champ sera visible sur le site, en général devant ou au-dessus du champ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.0">
+        <source>Text</source>
+        <target>Texte</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text.1">
+        <source>You can use HTML tags to format the text.</source>
+        <target>Utiliser des balises HTML pour formater le texte.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.0">
+        <source>HTML</source>
+        <target>HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Modifier la liste des balises HTML autorisées dans la configuration du back office.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.0">
+        <source>Options</source>
+        <target>Options</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options.1">
+        <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
+        <target>Si JavaScript est désactivé, assurez-vous de sauvegarder vos changements avant de modifier l'ordre.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.0">
+        <source>Mandatory field</source>
+        <target>Champ obligatoire</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mandatory.1">
+        <source>The form will not submit if the field is empty.</source>
+        <target>Le formulaire ne pourra être soumis si le champ est vide.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.0">
+        <source>Input validation</source>
+        <target>Validation de la saisie</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.rgxp.1">
+        <source>Validate the input against a regular expression.</source>
+        <target>Contrôle de la saisie par rapport à une expression régulière.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.0">
+        <source>Numeric characters</source>
+        <target>Caractères numériques</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.digit.1">
+        <source>Allows numeric characters, minus (-) and full stop (.).</source>
+        <target>Autorise les caractères numériques, le signe moins (-) et le point (.).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.0">
+        <source>Alphabetic characters</source>
+        <target>Caractères alphabétiques</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alpha.1">
+        <source>Allows alphabetic characters, minus (-), full stop (.) and space ( ).</source>
+        <target>Autorise les caractères alphabétiques, le signe moins (-), le point (.) et l'espace ( ).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.0">
+        <source>Alphanumeric characters</source>
+        <target>Caractères alphanumériques</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.alnum.1">
+        <source>Allows alphabetic and numeric characters, minus (-), full stop (.), underscore (_) and space ( ).</source>
+        <target>Autorise les caractères alphabétiques et numériques, le signe moins (-), le point (.) et l'espace ( ).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.0">
+        <source>Extended alphanumeric characters</source>
+        <target>Caractères alphanumériques étendus</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extnd.1">
+        <source>Allows everything except special characters which are usually encoded for security reasons (#/()&lt;=&gt;).</source>
+        <target>Autorise tout caractère hormis des caractères spéciaux qui sont habituellement encodés pour des raisons de sécurité (#/()&lt;=&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.0">
+        <source>Date</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.date.1">
+        <source>Checks whether the input matches the global date format.</source>
+        <target>Contrôle si la saisie correspond au format global de date.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.0">
+        <source>Time</source>
+        <target>Heure</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.time.1">
+        <source>Checks whether the input matches the global time format.</source>
+        <target>Contrôle si la saisie correspond au format global d'heure.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.0">
+        <source>Date and time</source>
+        <target>Date et heure</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.datim.1">
+        <source>Checks whether the input matches the global date and time format.</source>
+        <target>Contrôle si la saisie correspond au format global de date et d'heure.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.0">
+        <source>Phone number</source>
+        <target>Numéro de téléphone</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.phone.1">
+        <source>Allows numeric characters, plus (+), minus (-), slash (/), parentheses () and space ( ).</source>
+        <target>Autorise les caractères numériques, le plus (+), le moins (-), la barre oblique (/), les parenthèses () et l'espace ( ).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.0">
+        <source>E-mail address</source>
+        <target>Adresse e-mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.email.1">
+        <source>Checks whether the input is a valid e-mail address.</source>
+        <target>Contrôle si la saisie est une adresse e-mail valide.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.0">
+        <source>URL format</source>
+        <target>Format d'URL</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.url.1">
+        <source>Checks whether the input is a valid URL.</source>
+        <target>Contrôle si la saisie est un URL valide.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.0">
+        <source>Placeholder</source>
+        <target>Placeholder</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.placeholder.1">
+        <source>Show this text as long as the field is empty (requires HTML5).</source>
+        <target>Afficher ce texte tant que le champ est vide (HTML5 requis).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Longueur minimale</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Exiger que la valeur du champ ait un certain nombre de caractères.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.0">
+        <source>Maximum length</source>
+        <target>Longueur maximale</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.maxlength.1">
+        <source>Limit the field length to a certain number of characters (text) or bytes (file uploads).</source>
+        <target>Limite la longueur du champ à un certain nombre de caractères (texte) ou octets (envoi de fichiers).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.0">
+        <source>Rows and columns</source>
+        <target>Rangs et colonnes</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size.1">
+        <source>The number of rows and columns of the textarea.</source>
+        <target>Le nombre de lignes et de colonnes de la zone de texte.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.0">
+        <source>Multiple selection</source>
+        <target>Sélection multiple</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.multiple.1">
+        <source>Allow visitors to select more than one option.</source>
+        <target>Permet aux visiteurs de sélectionner plus d'une option.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.0">
+        <source>List size</source>
+        <target>Taille de la liste</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.mSize.1">
+        <source>Here you can enter the size of the select box.</source>
+        <target>Indiquer la taille de la boîte de sélection.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.0">
+        <source>Allowed file types</source>
+        <target>Types de fichier autorisés</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.extensions.1">
+        <source>A comma separated list of valid file extensions.</source>
+        <target>Une liste des extensions de fichiers autorisées, séparées par une virgule.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.0">
+        <source>Store uploaded files</source>
+        <target>Enregistrer les fichiers envoyés</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.storeFile.1">
+        <source>Move the uploaded files to a folder on the server.</source>
+        <target>Envoyer les fichiers dans un dossier sur le serveur.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.0">
+        <source>Target folder</source>
+        <target>Dossier ciblé</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.uploadFolder.1">
+        <source>Please select the target folder from the files directory.</source>
+        <target>Choisir le dossier ciblé dans le répertoire de fichiers.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.0">
+        <source>Use home directory</source>
+        <target>Utiliser le répertoire personnel</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.useHomeDir.1">
+        <source>Store the file in the home directory if there is an authenticated user.</source>
+        <target>Enregistrer le fichier dans le répertoire personnel si l'utilisateur est authentifié.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.0">
+        <source>Preserve existing files</source>
+        <target>Conserver les fichiers existants</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.doNotOverwrite.1">
+        <source>Add a numeric suffix to the new file if the file name already exists.</source>
+        <target>Ajouter un suffixe numérique au nouveau fichier si le nom de fichier existe déjà.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.0">
+        <source>Operation mode</source>
+        <target>Mode de fonctionnement</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsType.1">
+        <source>Please select the operation mode of the fieldset element.</source>
+        <target>Sélectionner le mode de fonctionnement de l'élément &quot;Fieldset&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.0">
+        <source>Wrapper start</source>
+        <target>Début de l'enveloppe</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStart.1">
+        <source>Marks the beginning of a fieldset and can contain a legend.</source>
+        <target>Marque le début d'un &quot;fieldset&quot; et peut contenir une légende.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.0">
+        <source>Wrapper stop</source>
+        <target>Fin de l'enveloppe</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fsStop.1">
+        <source>Marks the end of a fieldset.</source>
+        <target>Marque la fin d'un &quot;fieldset&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.0">
+        <source>Default value</source>
+        <target>Valeur par défaut</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.value.1">
+        <source>Here you can enter a default value for the field.</source>
+        <target>Saisir une valeur par défaut pour le champ.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.0">
+        <source>CSS class</source>
+        <target>Classe(s) CSS</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.class.1">
+        <source>Here you can enter one or more classes.</source>
+        <target>Saisir une ou plusieurs classes CSS.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.0">
+        <source>Access key</source>
+        <target>Touche de raccourci</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.accesskey.1">
+        <source>A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.</source>
+        <target>Le curseur peut être positionné directement sur un champ de formulaire déterminé en pressant la touche [ALT] ou [CTRL] simultanément avec la touche de raccourci.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.0">
+        <source>Tab index</source>
+        <target>Index de tabulation</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.tabindex.1">
+        <source>The position of the form field in the tabbing order.</source>
+        <target>La position du champ de formulaire dans l'ordre de tabulation.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.0">
+        <source>Field size</source>
+        <target>Taille du champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fSize.1">
+        <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Saisir la taille du champ d'envoi de fichier (attribut &lt;em&gt;size&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+        <target>Modèle personnalisé du champ de formulaire</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+        <target>Ici, vous pouvez remplacer le modèle du champ de formulaire par défaut.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.0">
+        <source>Add a submit button</source>
+        <target>Ajouter un bouton d'envoi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.addSubmit.1">
+        <source>Add a submit button next to the field to create a single line form.</source>
+        <target>Ajouter un bouton d'envoi à côté du champ pour créer un formulaire mono-ligne.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.0">
+        <source>Submit button label</source>
+        <target>Intitulé du bouton d'envoi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.slabel.1">
+        <source>Please enter the label of the submit button.</source>
+        <target>Saisir l'intitulé du bouton d'envoi.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.0">
+        <source>Create an image button</source>
+        <target>Bouton d'envoi image</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.imageSubmit.1">
+        <source>Use an image submit button instead of the default one.</source>
+        <target>Utiliser une image comme bouton de soumission au lieu du bouton par défaut.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.0">
+        <source>Source file</source>
+        <target>Fichier source</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.singleSRC.1">
+        <source>Please select an image from the files directory.</source>
+        <target>Sélectionner une image dans le répertoire de fichiers.</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.type_legend">
+        <source>Field type and name</source>
+        <target>Type et nom du champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.text_legend">
+        <source>Text/HTML</source>
+        <target>Texte/HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.fconfig_legend">
+        <source>Field configuration</source>
+        <target>Configuration du champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.options_legend">
+        <source>Options</source>
+        <target>Options</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.store_legend">
+        <source>Store file</source>
+        <target>Enregistrer le fichier</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.expert_legend">
+        <source>Expert settings</source>
+        <target>Paramètres avancés</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Rangs et colonnes</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Paramètres des modèles</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.submit_legend">
+        <source>Submit button</source>
+        <target>Bouton d'envoi</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.image_legend">
+        <source>Image button</source>
+        <target>Bouton image</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.0">
+        <source>New field</source>
+        <target>Nouveau champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.new.1">
+        <source>Create a new field</source>
+        <target>Créer un nouveau champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.0">
+        <source>Field details</source>
+        <target>Détails du champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.show.1">
+        <source>Show the details of field ID %s</source>
+        <target>Afficher les détails du champ ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.0">
+        <source>Edit field</source>
+        <target>Éditer le champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.edit.1">
+        <source>Edit field ID %s</source>
+        <target>Éditer le champ ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.0">
+        <source>Move field</source>
+        <target>Déplacer le champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.cut.1">
+        <source>Move field ID %s</source>
+        <target>Déplacer le champ ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.0">
+        <source>Duplicate field</source>
+        <target>Dupliquer le champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.copy.1">
+        <source>Duplicate field ID %s</source>
+        <target>Dupliquer le champ ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.0">
+        <source>Delete field</source>
+        <target>Supprimer le champ</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.delete.1">
+        <source>Delete field ID %s</source>
+        <target>Supprimer le champ ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.0">
+        <source>Edit form</source>
+        <target>Éditer le formulaire</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.editheader.1">
+        <source>Edit the form settings</source>
+        <target>Éditer les paramètres du formulaire</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Coller au début</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pasteafter.1">
+        <source>Paste after field ID %s</source>
+        <target>Coller après le champ ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Créer une nouvelle définition de formatage au début</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.pastenew.1">
+        <source>Add new after field ID %s</source>
+        <target>Créer un nouveau champ après le champ ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Basculer la visibilité</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.toggle.1">
+        <source>Toggle the visibility of field ID %s</source>
+        <target>Basculer la visibilité du champ ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

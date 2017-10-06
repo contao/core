@@ -1,0 +1,138 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar_feed.php" source-language="en" target-language="pl">
+    <body>
+      <trans-unit id="tl_calendar_feed.title.0">
+        <source>Title</source>
+        <target>Nagłówek</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.title.1">
+        <source>Please enter a feed title.</source>
+        <target>Wprowadź tytuł kanału.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.alias.0">
+        <source>Feed alias</source>
+        <target>Alias kanału</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.alias.1">
+        <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
+        <target>Tutaj możesz wprowadzić unikalną nazwę pliku (bez rozszerzenia). Plik XML kanału zostanie automatycznie wygenerowany w katalogu &lt;em&gt;share&lt;/em&gt; w instalacji Contao, np. &lt;em&gt;share/name.xml&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.language.0">
+        <source>Feed language</source>
+        <target>Język kanału</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.language.1">
+        <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
+        <target>Wprowadź język kanału zgodnie ze standardem ISO-639 (np. &lt;em&gt;en&lt;/em&gt; lub &lt;em&gt;en-us&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.calendars.0">
+        <source>Calendars</source>
+        <target>Kalendarze</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.calendars.1">
+        <source>Here you can choose the calendars to be included in the feed.</source>
+        <target>Tutaj możesz wybrać kalendarze, które mają zostać użyte w kanale.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.format.0">
+        <source>Feed format</source>
+        <target>Format kanału</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.format.1">
+        <source>Please choose a feed format.</source>
+        <target>Wybierz format kanału.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source.0">
+        <source>Export settings</source>
+        <target>Ustawienia eksportu</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source.1">
+        <source>Here you can choose what will be exported.</source>
+        <target>Tutaj możesz wybrać, co zostanie wyeksportowane.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.maxItems.0">
+        <source>Maximum number of items</source>
+        <target>Maksymalna liczba rekordów</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.maxItems.1">
+        <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
+        <target>Tutaj możesz ograniczyć maksymalną liczbę rekordów kanału. Wprowadź 0, aby wyeksportować wszystkie.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.feedBase.0">
+        <source>Base URL</source>
+        <target>Podstawowy URL</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.feedBase.1">
+        <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
+        <target>Wprowadź podstawowy URL z protokołem (np. &lt;em&gt;http://&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.description.0">
+        <source>Feed description</source>
+        <target>Opis kanału</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.description.1">
+        <source>Here you can enter a short description of the calendar feed.</source>
+        <target>Tutaj możesz wprowadzić krótki opis kanału kalendarza.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.title_legend">
+        <source>Title and language</source>
+        <target>Tytuł i język</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.calendars_legend">
+        <source>Calendars</source>
+        <target>Kalendarze</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.config_legend">
+        <source>Feed settings</source>
+        <target>Ustawienia kanału</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source_teaser">
+        <source>Event teasers</source>
+        <target>Zajawki wydarzeń</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.source_text">
+        <source>Full articles</source>
+        <target>Pełna aktualność</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.new.0">
+        <source>New feed</source>
+        <target>Nowy kanał</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.new.1">
+        <source>Create a new feed</source>
+        <target>Utwórz nowy kanał</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.show.0">
+        <source>Feed details</source>
+        <target>Szczegóły kanału</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.show.1">
+        <source>Show the details of feed ID %s</source>
+        <target>Wyświetl szczegóły kanału ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.edit.0">
+        <source>Edit feed</source>
+        <target>Edytuj kanał</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.edit.1">
+        <source>Edit feed ID %s</source>
+        <target>Edytuj kanał ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.copy.0">
+        <source>Duplicate feed</source>
+        <target>Duplikuj kanał</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.copy.1">
+        <source>Duplicate feed ID %s</source>
+        <target>Duplikuj kanał ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.delete.0">
+        <source>Delete feed</source>
+        <target>Usuń kanał</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar_feed.delete.1">
+        <source>Delete feed ID %s</source>
+        <target>Usuń kanał ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

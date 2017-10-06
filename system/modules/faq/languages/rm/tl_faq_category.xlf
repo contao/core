@@ -1,0 +1,174 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/faq/languages/en/tl_faq_category.php" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="tl_faq_category.title.0">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title.1">
+        <source>Please enter the category title.</source>
+        <target>Endatar il titel da la categoria.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.0">
+        <source>Headline</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.headline.1">
+        <source>Please enter the category headline.</source>
+        <target>Endatar la «lingia grossa» da la categoria.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Pagina per renviar</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.jumpTo.1">
+        <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
+        <target>Tscherner ina pagina da lectur a la quala ils visitaders vegnan renviads sch'els cliccan sin in FAQ.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.0">
+        <source>Enable comments</source>
+        <target>Activar commentaris</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.allowComments.1">
+        <source>Allow visitors to comment FAQs.</source>
+        <target>Lubescha a visitaders da commentar FAQs.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.0">
+        <source>Notify</source>
+        <target>Avisar</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Tscherna tgi che duai vegnir avisà sche commentaris vegnan agiuntads.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.0">
+        <source>Sort order</source>
+        <target>Successiun per zavrar</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Sco standard vegnan ils commentaris zavrads ascendentamain, l'entschatta fa l'endataziun la pli veglia.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.0">
+        <source>Comments per page</source>
+        <target>Commentaris per pagina</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Dumber dals commentaris per pagina. 0 munta da betg far paginas.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.0">
+        <source>Moderate comments</source>
+        <target>Moderar ils commentaris</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Approvar ils commentaris avant ch'els vegnan publitgads sin la website.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Lubir BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Lubir als visitaders da formatar ils commentaris cun BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Annunzia necessaria per commentar</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Lubir be ad utilisaders annunziads da crear commentaris.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Deactivar la dumonda da segirezza</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Recumandaziun: Be utilisar questa opziun sche vus avais limità ils commentaris ad utilisaders annunziads.</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.0">
+        <source>Revision date</source>
+        <target>Data da la versiun</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>La data ed il temp da l'ultima versiun</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.title_legend">
+        <source>Title and redirect</source>
+        <target>Titel e renviar</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.comments_legend">
+        <source>Comments</source>
+        <target>Commentaris</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_admin">
+        <source>System administrator</source>
+        <target>Administratur dal sistem</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_author">
+        <source>Author of the FAQ</source>
+        <target>Autur dal FAQ</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.notify_both">
+        <source>Author and system administrator</source>
+        <target>Autur ed administratur dal sistem</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.deleteConfirm">
+        <source>Deleting category ID %s will also delete all its FAQs! Continue?</source>
+        <target>Stizzar la categoria cun l'ID %s vegn era a stizzar tut ils FAQs cumpigliads. Cuntinuar?</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.0">
+        <source>New category</source>
+        <target>Nova categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.new.1">
+        <source>Create a new category</source>
+        <target>Crear ina nova categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.0">
+        <source>Category details</source>
+        <target>Detagls da categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.show.1">
+        <source>Show the details of category ID %s</source>
+        <target>Mussar ils detagls da la categoria cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.0">
+        <source>Edit category</source>
+        <target>Modifitgar la categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.edit.1">
+        <source>Edit category ID %s</source>
+        <target>Modifitgar la categoria cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.0">
+        <source>Edit category</source>
+        <target>Modifitgar la categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.editheader.1">
+        <source>Edit the category settings</source>
+        <target>Modifitgar las opziuns da la categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.0">
+        <source>Duplicate category</source>
+        <target>Duplitgar la categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.copy.1">
+        <source>Duplicate category ID %s</source>
+        <target>Duplitgar la categoria cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.0">
+        <source>Delete category</source>
+        <target>Stizzar la categoria</target>
+      </trans-unit>
+      <trans-unit id="tl_faq_category.delete.1">
+        <source>Delete category ID %s</source>
+        <target>Stizzar la categoria cun l'ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

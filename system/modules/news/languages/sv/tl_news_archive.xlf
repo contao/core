@@ -1,0 +1,210 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_archive.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_news_archive.title.0">
+        <source>Title</source>
+        <target>Rubrik</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title.1">
+        <source>Please enter a news archive title.</source>
+        <target>Ange en titel på nyhetsarkivet.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Omdirigera till</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.1">
+        <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
+        <target>Ange vilken sida som besökare ska förflyttas till när de klickar på en nyhetsartikel.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.0">
+        <source>Enable comments</source>
+        <target>Aktivera kommentarer</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.1">
+        <source>Allow visitors to comment news items.</source>
+        <target>Tillåt dina besökare att kommentera nyhetsartiklar.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.0">
+        <source>Notify</source>
+        <target>Meddela</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Ange vem som ska meddelas när någon skrivit en ny kommentar.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.0">
+        <source>Sort order</source>
+        <target>Sorteringsordning</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Som standard är kommentarerna sorterade i stigande ordning och börjar med den äldsta.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.0">
+        <source>Comments per page</source>
+        <target>Kommentarer per sida</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Ange antal kommentarer per sida (0=avaktivera paginering).</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.0">
+        <source>Moderate comments</source>
+        <target>Granska kommentarer</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Godkänn kommentarer innan dom publiceras på hemsidan.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Tillåt BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Tillåt besökare att formatera sina kommentarer med BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Kräv inloggning för att kommentera</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Tillåt att endast inloggade medlemmar kan skapa kommentarer.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Avaktivera säkerhetsfrågan</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Använd detta alternativ endast om du har begränsat kommentarer till godkända användare.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.0">
+        <source>Protect archive</source>
+        <target>Skydda nyhetsarkivet</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.1">
+        <source>Show news items to certain member groups only.</source>
+        <target>Visa bara nyhetsartiklarna för vissa medlemsgrupper.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.0">
+        <source>Allowed member groups</source>
+        <target>Tillåtna medlemsgrupper</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.1">
+        <source>These groups will be able to see the news items in this archive.</source>
+        <target>Här kan du välja vilka grupper som ska ha rätt att läsa nyhetsartiklarna.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.0">
+        <source>Revision date</source>
+        <target>Ändringsdatum</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum och tid för senaste ändringen.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title_legend">
+        <source>Title and redirect page</source>
+        <target>Titel och omdirigering</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments_legend">
+        <source>Comments</source>
+        <target>Kommentarer</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected_legend">
+        <source>Access protection</source>
+        <target>Åtkomstkydd</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>RSS/Atom-flöde</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_admin">
+        <source>System administrator</source>
+        <target>Systemadministratör</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_author">
+        <source>Author of the news item</source>
+        <target>Nyhetsartikelns författare</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_both">
+        <source>Author and system administrator</source>
+        <target>Författare och systemadministratör</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_teaser">
+        <source>News teasers</source>
+        <target>Nyhetsartiklarnas ingresser</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_text">
+        <source>Full articles</source>
+        <target>Nyhetsartiklarna i sin helhet</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.0">
+        <source>New archive</source>
+        <target>Nytt nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.1">
+        <source>Create a new archive</source>
+        <target>Skapa ett nytt nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.0">
+        <source>Archive details</source>
+        <target>Visa nyhetsarkivdetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.1">
+        <source>Show the details of archive ID %s</source>
+        <target>Visa detaljer för arkiv med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.0">
+        <source>Edit archive</source>
+        <target>Redigera nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.1">
+        <source>Edit archive ID %s</source>
+        <target>Redigera nyhetsarkiv med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.0">
+        <source>Edit archive</source>
+        <target>Redigera nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.1">
+        <source>Edit the archive settings</source>
+        <target>Redigera nyhetsarkivinställningarna</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.0">
+        <source>Duplicate archive</source>
+        <target>Kopiera nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.1">
+        <source>Duplicate archive ID %s</source>
+        <target>Kopiera nyhetsarkiv med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.0">
+        <source>Delete archive</source>
+        <target>Ta bort nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.1">
+        <source>Delete archive ID %s</source>
+        <target>Ta bort nyhetsarkiv med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.0">
+        <source>Comments</source>
+        <target>Kommentarer</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.1">
+        <source>Show comments of archive ID %s</source>
+        <target>Visa kommentarer för nyhetsarkiv med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.0">
+        <source>RSS feeds</source>
+        <target>RSS-flöden</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>Hantera RSS-flöden</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

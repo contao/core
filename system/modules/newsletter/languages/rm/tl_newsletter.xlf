@@ -1,0 +1,266 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter.php" source-language="en" target-language="rm">
+    <body>
+      <trans-unit id="tl_newsletter.subject.0">
+        <source>Subject</source>
+        <target>Object</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.subject.1">
+        <source>Please enter the newsletter subject.</source>
+        <target>Endatar l'object dal newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.alias.0">
+        <source>Newsletter alias</source>
+        <target>Alias dal newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.alias.1">
+        <source>The newsletter alias is a unique reference to the newsletter which can be called instead of its numeric ID.</source>
+        <target>L'alias dal newsletter è ina referenza unica che po vegnir utilisada empè da l'ID numerica.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.content.0">
+        <source>HTML content</source>
+        <target>Cuntegn da HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.content.1">
+        <source>Here you can enter the HTML content of the newsletter. Use the wildcard &lt;em&gt;##email##&lt;/em&gt; to insert the recipient's e-mail address.</source>
+        <target>Qua pudais vus endatar il cuntegn da HTML dal newsletter. Utilisar il tegnaplazza &lt;em&gt;##email##&lt;/em&gt; per inserir l'adressa dad e-mail dal destinatur.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text.0">
+        <source>Text content</source>
+        <target>Cuntegn da text</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text.1">
+        <source>Here you can enter the text content of the newsletter. Use the wildcard &lt;em&gt;##email##&lt;/em&gt; to insert the recipient's e-mail address.</source>
+        <target>Qua pudais vus endatar il cuntegn da text dal newsletter. Utilisar il tegnaplazza &lt;em&gt;##email##&lt;/em&gt; per inserir l'adressa dad e-mail dal destinatur.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.addFile.0">
+        <source>Add attachments</source>
+        <target>Agiuntar agiuntas</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.addFile.1">
+        <source>Attach one or more files to the newsletter.</source>
+        <target>Agiuntar al newsletter ina u pliras agiuntas.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.files.0">
+        <source>Attachments</source>
+        <target>Agiunta</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.files.1">
+        <source>Please choose the files to be attached from the files directory.</source>
+        <target>Tscherner las datotecas che duain vegnir agiuntadas.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template.0">
+        <source>E-mail template</source>
+        <target>Template dad e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template.1">
+        <source>Here you can choose the e-mail template.</source>
+        <target>Qua pudais vus tscherner il template per l'e-mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendText.0">
+        <source>Send as plain text</source>
+        <target>Trametter l'e-mail be sco text.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendText.1">
+        <source>Send the newsletter as plain text e-mail without the HTML content.</source>
+        <target>Trametter il newsletter be sco text senza cuntegn da HTML.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.externalImages.0">
+        <source>External images</source>
+        <target>Maletgs externs</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.externalImages.1">
+        <source>Do not embed images in HTML newsletters.</source>
+        <target>Betg integrar maletgs externs en newsletters da HTML.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.senderName.0">
+        <source>Sender name</source>
+        <target>Num dal speditur</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.senderName.1">
+        <source>Here you can enter the sender's name.</source>
+        <target>Qua pudais vus endatar il num dal speditur.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sender.0">
+        <source>Sender address</source>
+        <target>Adressa dal speditur</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sender.1">
+        <source>Here you can enter a custom sender address.</source>
+        <target>Qua pudais vus inditgar l'adressa dad e-mail dal speditur.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailsPerCycle.0">
+        <source>Mails per cycle</source>
+        <target>Mais per ciclus</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailsPerCycle.1">
+        <source>The sending process is split into several cycles to prevent the script from timing out.</source>
+        <target>Il process da trametter ils e-mails vegn dividì en differents ciclus per evitar in time-out dal script.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.timeout.0">
+        <source>Timeout in seconds</source>
+        <target>Time-out en secundas</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.timeout.1">
+        <source>Here you can modify the waiting time between each cycle to control the number of e-mails per minute.</source>
+        <target>Qua pudais vus modifitgar il temp da spetga tranter ils ciclus per controllar il numer dad e-mails per minuta.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.start.0">
+        <source>Offset</source>
+        <target>Offset</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.start.1">
+        <source>In case the sending process is interrupted, you can enter a numeric offset here to continue with a particular recipient. You can check how many mails have been sent in the &lt;em&gt;system/logs/newsletter_*.log&lt;/em&gt; file. E.g., if 120 mails have been sent, enter &quot;120&quot; to continue with the 121st recipient (counting starts at 0).</source>
+        <target>En cas ch'il process da trametter vegn interrut, pudais vus endatar qua in offset numeric per cuntinuar cun in destinatur particular. Vus pudais controllar quants e-mails ch'èn vegnids tramess en la datoteca &lt;em&gt;system/logs/newsletter_*.log&lt;/em&gt;. Sche p.ex. 120 e-mails èn vegnids tramess, endatai &quot;120&quot; per cuntinuar cun il 121avel destinatur (i vegn quintà davent da 0).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendPreviewTo.0">
+        <source>Send preview to</source>
+        <target>Trametter ina prevista a</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendPreviewTo.1">
+        <source>Send the preview of the newsletter to this e-mail address.</source>
+        <target>Trametter la prevista dal newsletter a questa adressa.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.title_legend">
+        <source>Title and subject</source>
+        <target>Titel ed object</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.html_legend">
+        <source>HTML content</source>
+        <target>Cuntegn da HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text_legend">
+        <source>Text content</source>
+        <target>Cuntegn da text</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.attachment_legend">
+        <source>Attachments</source>
+        <target>Agiunta</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template_legend">
+        <source>Template settings</source>
+        <target>Configuraziun da templates</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.expert_legend">
+        <source>Expert settings</source>
+        <target>Opziuns dad experts</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sent">
+        <source>Sent</source>
+        <target>Tramess</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sentOn">
+        <source>Sent on %s</source>
+        <target>Tramess ils %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.notSent">
+        <source>Not sent yet</source>
+        <target>Anc betg tramess</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailingDate">
+        <source>Mailing date</source>
+        <target>Data tramess</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.confirm">
+        <source>The newsletter has been sent to %s recipients.</source>
+        <target>Il newsletter è vegnì tramess a %s destinaturs.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.rejected">
+        <source>%s invalid e-mail address(es) has/have been disabled (see system log).</source>
+        <target>%s adressas dad e-mail nunvalidas èn vegnidas deactivadas (guardar il protocol dal sistem).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.error">
+        <source>There are no active subscribers to the channel.</source>
+        <target>I n'existan nagins abunents activs per quest chanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.from">
+        <source>From</source>
+        <target>Da</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.attachments">
+        <source>Attachments</source>
+        <target>Agiunta</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.preview">
+        <source>Send preview</source>
+        <target>Trametter prevista</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendConfirm">
+        <source>Do you really want to send the newsletter?</source>
+        <target>Vulais vus propi trametter il newsletter?</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.new.0">
+        <source>New newsletter</source>
+        <target>Nov newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.new.1">
+        <source>Create a new newsletter</source>
+        <target>Crear in nov newsletter.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.show.0">
+        <source>Newsletter details</source>
+        <target>Detagls dal newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.show.1">
+        <source>Show the details of newsletter ID %s</source>
+        <target>Mussar ils detagls dal newsletter cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.edit.0">
+        <source>Edit newsletter</source>
+        <target>Modifitgar il newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.edit.1">
+        <source>Edit newsletter ID %s</source>
+        <target>Modifitgar il newsletter cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.copy.0">
+        <source>Duplicate newsletter</source>
+        <target>Duplitgar il newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.copy.1">
+        <source>Duplicate newsletter ID %s</source>
+        <target>Duplitgar il newsletter cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.cut.0">
+        <source>Move newsletter</source>
+        <target>Spustar il newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.cut.1">
+        <source>Move newsletter ID %s</source>
+        <target>Spustar il newsletter cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.delete.0">
+        <source>Delete newsletter</source>
+        <target>Stizzar il newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.delete.1">
+        <source>Delete newsletter ID %s</source>
+        <target>Stizzar il newsletter cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.editheader.0">
+        <source>Edit channel</source>
+        <target>Modifitgar il chanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>Modifitgar las opziuns dal chanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.pasteafter.0">
+        <source>Paste into this channel</source>
+        <target>Encollar en quest chanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.pasteafter.1">
+        <source>Paste after newsletter ID %s</source>
+        <target>Encollar suenter il newsletter cun l'ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.send.0">
+        <source>Send newsletter</source>
+        <target>Trametter il newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.send.1">
+        <source>Send newsletter ID %s</source>
+        <target>Trametter il newsletter cun l'ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

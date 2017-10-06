@@ -1,0 +1,768 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_module.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_module.name.0">
+        <source>Title</source>
+        <target>Rubrik</target>
+      </trans-unit>
+      <trans-unit id="tl_module.name.1">
+        <source>Please enter the module title.</source>
+        <target>Ange ett namn för modulen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.0">
+        <source>Headline</source>
+        <target>Rubrik</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.1">
+        <source>Here you can add a headline to the module.</source>
+        <target>Om du anger en rubrik här så kommer den att visas som rubrik över modulens genererade innehåll.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.0">
+        <source>Module type</source>
+        <target>Modultyp</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.1">
+        <source>Please choose the type of module.</source>
+        <target>Välj modultyp.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.0">
+        <source>Start level</source>
+        <target>Startnivå</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.1">
+        <source>Enter a value greater than 0 to show only submenu items.</source>
+        <target>Ange startnivå för menyn. Välj 0 för att visa allt från högsta nivå och nedåt. Välj ett värde större än 0 för att enbart visa undermenynivåer.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.0">
+        <source>Stop level</source>
+        <target>Stopnivå</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.1">
+        <source>Enter a value greater than 0 to limit the nesting level of the menu.</source>
+        <target>Ange ett värde större än 0 för att begränsa hur många nivåer ner i menyn (efter satt Startnivå) som ska visas.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.0">
+        <source>Hard limit</source>
+        <target>Hård nivågräns</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.1">
+        <source>Never show any menu items beyond the stop level.</source>
+        <target>Om vald så visas inga menyposter efter angiven Stoppnivå, inte ens aktiva.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.0">
+        <source>Show protected items</source>
+        <target>Visa skyddade menyposter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.1">
+        <source>Show items that are usually only visible to authenticated users.</source>
+        <target>Visa även poster som normalt bara är synliga för medlemmar som är inloggade i Frontend.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.0">
+        <source>Set a reference page</source>
+        <target>Ange en startsida</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.1">
+        <source>Define a custom source or target page for the module.</source>
+        <target>Använd en egen startsida istället för hemsidans rootsida.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.0">
+        <source>Reference page</source>
+        <target>Referenssida</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.1">
+        <source>Please choose the reference page from the site structure.</source>
+        <target>Här kan du välja en alternativ rotsida att använda som rotnod.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.0">
+        <source>Navigation template</source>
+        <target>Navigeringsmall</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.1">
+        <source>Here you can select the navigation template.</source>
+        <target>Välj egen navigeringsmall om sådan finns (navigeringsmallar börjar med &lt;em&gt;nav_&lt;/em&gt;). Standardmallen heter &lt;em&gt;nav_default&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+        <target>Egen modulmall</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+        <target>Här kan du skriva över modulens standardmall.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.0">
+        <source>Pages</source>
+        <target>Målsidor</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.1">
+        <source>Please choose one or more pages from the site structure.</source>
+        <target>Välj målsidor för menyn.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.0">
+        <source>Show hidden items</source>
+        <target>Visa gömda menyposter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.1">
+        <source>Show items that are usually hidden in the navigation menu.</source>
+        <target>Visa även poster som normalt är gömda i navigationsmenyn.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.0">
+        <source>Custom label</source>
+        <target>Egen etikett</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.1">
+        <source>Here you can enter a custom label for the drop-down menu.</source>
+        <target>Här kan du skriva in en egen etikett för rullgardinsmenyn.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.0">
+        <source>Allow auto login</source>
+        <target>Tillåt automatisk inloggning</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.1">
+        <source>Allow members to log into the front end automatically.</source>
+        <target>Tillåt medlemmar att logga in automatiskt i frontend.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Omdirigera till</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking a link or submitting a form.</source>
+        <target>Denna inställning anger vilken sida en användare kommer att omdirigeras till vid en viss handling (t.ex. klickar på en länk eller godkänner ett formulär).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.0">
+        <source>Redirect to last page visited</source>
+        <target>Omdirigera till senaste besökta sidan</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.1">
+        <source>Redirect the user back to the last page visited instead of the redirect page.</source>
+        <target>Omdirigera användare till senaste besökta sidan efter inloggning / utloggning.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.0">
+        <source>Number of columns</source>
+        <target>Antal kolumner</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.1">
+        <source>Please choose the number of columns of the form.</source>
+        <target>Välj antal kolumner i formuläret.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.0">
+        <source>One column</source>
+        <target>En kolumn</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.1">
+        <source>Show the label above the input field.</source>
+        <target>Visa etiketten ovanför inmatningsfältet.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.0">
+        <source>Two columns</source>
+        <target>Två kolumner</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.1">
+        <source>Show the label on the left side of the input field.</source>
+        <target>Visa etiketten på vänster sida av inmatningsfältet.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.0">
+        <source>Editable fields</source>
+        <target>Redigerbara fält</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.1">
+        <source>Show these fields in the front end form.</source>
+        <target>Ange ett eller flera fält som ska vara redigerbara för medlemmen i frontend.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.0">
+        <source>Form template</source>
+        <target>Formulärmall</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.1">
+        <source>Here you can select the form template.</source>
+        <target>Välj en egen mall för formuläret. Standardmallen kallas &lt;em&gt;member_default&lt;/em&gt;. Namnet på egna mallar ska börja med &lt;em&gt;member_&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.0">
+        <source>Tableless layout</source>
+        <target>Tabellfri layout</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>Generera formuläret utan HTML-tabeller.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.0">
+        <source>Form</source>
+        <target>Formulär</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.1">
+        <source>Please select a form.</source>
+        <target>Välj ett formulär.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.0">
+        <source>Default query type</source>
+        <target>Förvald frågetyp</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.1">
+        <source>Please select the default query type.</source>
+        <target>Välj vilken frågetyp som ska vara förvald.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.0">
+        <source>Find all words</source>
+        <target>Sök på alla ord</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.1">
+        <source>Returns only pages that contain all keywords.</source>
+        <target>Returnera endast sidor som innehåller samtliga sökord.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.0">
+        <source>Find any word</source>
+        <target>Sök på något ord</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.1">
+        <source>Returns all pages that contain any of the keywords.</source>
+        <target>Returnerar alla sidor som innehåller något av sökorden.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.0">
+        <source>Fuzzy search</source>
+        <target>Fuzzy-sök</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.1">
+        <source>Will find &quot;Contao&quot; if you search for &quot;con&quot; (equal to a wildcard search).</source>
+        <target>Hittar &quot;Contao&quot; om du söker på &quot;con&quot; (vilket motsvarar en sökning med jokertecken).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.0">
+        <source>Simple form</source>
+        <target>Enkelt sökformulär</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.1">
+        <source>Contains a single input field only.</source>
+        <target>Innehåller endast ett enda inmatningsfält.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.0">
+        <source>Advanced form</source>
+        <target>Avancerat sökformulär</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.1">
+        <source>Contains an input field and a radio button menu to choose the query type.</source>
+        <target>Innehåller ett inmatningsfält och en radiomeny att välja frågetyp.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.0">
+        <source>Context range</source>
+        <target>Kontextområde</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.1">
+        <source>The number of characters on the left and right side of each keyword that are used as context.</source>
+        <target>Ange antal tecken till vänster och höger om varje sökord som ska användas i sammanfattningen av varje sökträff.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.0">
+        <source>Maximum context length</source>
+        <target>Maximal kontextlängd</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.1">
+        <source>Here you can limit the overall context length per result.</source>
+        <target>Ange den maximala längden på sammanfattningen av varje sökträff.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.0">
+        <source>Items per page</source>
+        <target>Antal poster per sida</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>Ange antal poster som ska visas per sida. Sätt till 0 för att inte använda paginering.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.0">
+        <source>Search form layout</source>
+        <target>Sökformulär-layout</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.1">
+        <source>Here you can select the search form layout.</source>
+        <target>Välj en sökformulär-layout.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.0">
+        <source>Search results template</source>
+        <target>Sökresultatsmalll</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.1">
+        <source>Here you can select the search results template.</source>
+        <target>Välj en egen mall för sökresultat. Den förvalda mallen kallas &lt;em&gt;search_default&lt;/em&gt;. Namnet på egna mallar ska börja med &lt;em&gt;search_&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.0">
+        <source>Column</source>
+        <target>Kolumn</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.1">
+        <source>Please choose the column whose articles you want to list.</source>
+        <target>Välj kolumnen (layoutsektionen) som innehåller de artiklar som ska listas.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.0">
+        <source>Skip items</source>
+        <target>Hoppa över artikel</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.1">
+        <source>Here you can define how many items will be skipped.</source>
+        <target>Här kan du ange hur många artiklar som kommer att hoppas över.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.0">
+        <source>Load the first item</source>
+        <target>Ladda första artikeln</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.1">
+        <source>Automatically redirect to the first item if none is selected.</source>
+        <target>Öppna automatiskt den första artikeln om ingen artikel är vald.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.0">
+        <source>Width and height</source>
+        <target>Bredd och höjd</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.1">
+        <source>Please enter the width and height in pixel.</source>
+        <target>Ange bredden och höjden i pixlar.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.0">
+        <source>Transparent movie</source>
+        <target>Transparent Flash-film</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.1">
+        <source>Make the Flash movie transparent (wmode = transparent).</source>
+        <target>Välj detta alternativ för att göra Flash-filen transparent (wmode = transparent). Notera att textfält och knappar i transparenta Flash-filmer inte fungerar korrekt i vissa webbläsare.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.0">
+        <source>FlashVars</source>
+        <target>Flash-variabler</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.1">
+        <source>Pass variables to the Flash movie (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;).</source>
+        <target>Här kan du skriva in variabler som kommer att överföras vidare till Flash-filmen (&lt;em&gt;var1=value1&amp;var2=value2&lt;/em&gt; o.s.v.).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.0">
+        <source>Flash player version</source>
+        <target>Flash-spelareversion</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.1">
+        <source>Please enter the required Flash player version (e.g. 6.0.12).</source>
+        <target>Ange versions- och buildkraven på Flash-spelaren (t.ex. om din Flash-film kräver minst Flash-spelare version 6.0.12, anges 6 och 12).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.0">
+        <source>Alternate content</source>
+        <target>Alternativt innehåll</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.1">
+        <source>The alternate content will be shown if the movie cannot be loaded. HTML tags are allowed.</source>
+        <target>Se till att det finns ett alternativt innehåll om visas om inte Flash-filmen kan laddas. HTML-taggar kan använas.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.0">
+        <source>Source</source>
+        <target>Källa</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.1">
+        <source>Whether to use a file on the server or point to an external URL.</source>
+        <target>Ange källan för filen; fil på den egna webbservern eller en extern URL.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.0">
+        <source>Source file</source>
+        <target>Källfil</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.1">
+        <source>Please select a file from the files directory.</source>
+        <target>Välj en fil från filarkivet.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.0">
+        <source>URL</source>
+        <target>URL</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.1">
+        <source>Please enter the URL (http://…) of the Flash movie.</source>
+        <target>Ange den fullständiga URL:en (inklusive http://...) till Flash-filmen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.0">
+        <source>Make interactive</source>
+        <target>Gör Flash-filmen interaktiv</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.1">
+        <source>Make the Flash movie interact with the browser (requires JavaScript).</source>
+        <target>Välj detta alternativ om din Flash-film interagerar med webbläsaren (kräver JavaScript).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.0">
+        <source>Flash movie ID</source>
+        <target>Flash-film ID</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.1">
+        <source>Please enter a unique Flash movie ID.</source>
+        <target>Ange ett unikt ID för Flash-filmen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.0">
+        <source>JavaScript _DoFSCommand(command, args) {</source>
+        <target>JavaScript _DoFSCommand(command, args) {</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.1">
+        <source>Please enter the JavaScript code.</source>
+        <target>Ange innehållet i JavaScriptets &lt;em&gt;_DoFSCommand()&lt;/em&gt; funktion. Variabel som innehåller kommandot heter &lt;em&gt;command&lt;/em&gt;, variabeln som innehåller argumenten heter &lt;em&gt;args&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>Visa i fullstorlek/nytt fönster</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>Öppna bilden i full storlek i en lightbox eller länken i ett nytt fönster.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.0">
+        <source>Image size</source>
+        <target>Bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Här kan du ställa in bildens dimensioner och omformateringsmetod.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.0">
+        <source>Show caption</source>
+        <target>Bildrubrik</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.1">
+        <source>Display the image name or caption below the image.</source>
+        <target>Markera detta alternativ för att visa bildnamnet under bilden.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.0">
+        <source>Source files</source>
+        <target>Källfiler</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.1">
+        <source>Please select one or more files from the files directory.</source>
+        <target>Välj en eller flera fil(er) från filarkivet.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.0">
+        <source>Sort order</source>
+        <target>Sorteringsordning</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>Sorteringsordning för posterna.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.0">
+        <source>HTML code</source>
+        <target>HTML-kod</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Ange din HTML-kod. Listan över tillåtna HTML-taggar kan redigeras i systeminställningarna.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.0">
+        <source>Cache timeout</source>
+        <target>Cache-timeout</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.1">
+        <source>Here you can define how long the RSS feed is being cached.</source>
+        <target>Här kan du definera den tidsperiod som RSS-strömmen är cachad.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.0">
+        <source>Feed URLs</source>
+        <target>URL:er för RSS-flöden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.1">
+        <source>Please enter the URL of one or more RSS feeds.</source>
+        <target>Ange URL:en till ett eller flera RSS-flöden.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.0">
+        <source>Feed template</source>
+        <target>RSS-mall</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.1">
+        <source>Here you can select the feed template.</source>
+        <target>Välj en RSS-mall.&lt;br /&gt;RSS-mallarnas namn startar med &lt;em&gt;rss_&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.0">
+        <source>Number of items</source>
+        <target>Antal artiklar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.1">
+        <source>Here you can limit the number of items. Set to 0 to show all.</source>
+        <target>Här kan du begränsa antalet artiklar. 0 = visa alla.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.0">
+        <source>Protect module</source>
+        <target>Skydda modulen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.1">
+        <source>Show the module to certain member groups only.</source>
+        <target>Visa modulen enbart för vissa medlemsgrupper.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.0">
+        <source>Allowed member groups</source>
+        <target>Tillåtna medlemsgrupper</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.1">
+        <source>These groups will be able to see the module.</source>
+        <target>Här kan du välja vilka grupper kommer att tillåtas att se modulen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.0">
+        <source>Show to guests only</source>
+        <target>Visa enbart för gäster</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.1">
+        <source>Hide the module if a member is logged in.</source>
+        <target>Göm modulen för inloggade medlemmar.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.0">
+        <source>CSS ID/class</source>
+        <target>Stilmall ID och klass</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Här kan du ange ett stilmalls-ID (CSS ID) och/eller en eller flera stilmallsklasser (CSS-klass). ID och klasser anges utan prefix (nummertecken # resp. punkt .).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.0">
+        <source>Space in front and after</source>
+        <target>Avstånd före och efter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.1">
+        <source>Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Ange mellanrummet före och efter artiklar i antalet pixlar. Du bör undvika att använda detta fält. Justera mellanrum med stilmallarna istället.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Avaktivera säkerhetsfrågan</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>Här kan du avaktivera säkerhetsfrågan (rekommenderas ej).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.0">
+        <source>Member groups</source>
+        <target>Medlemsgrupper</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.1">
+        <source>Here you can assign the user to one or more groups.</source>
+        <target>Tilldela användaren medlemskap i en eller flera användargrupper.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.0">
+        <source>Allow login</source>
+        <target>Tillåt inloggning</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.1">
+        <source>Allow the new user to log into the front end.</source>
+        <target>Om du väljer detta alternativ kommer medlemmen att kunna logga in med sitt användarnamn och lösenord.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.0">
+        <source>Skip username</source>
+        <target>Hoppa över användarnamn</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.1">
+        <source>Do not require the username to request a new password.</source>
+        <target>Kräv inte användarnamn för att begära ett nytt lösenord.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.0">
+        <source>Mode</source>
+        <target>Läge</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.1">
+        <source>Here you can define how to handle the deletion.</source>
+        <target>Här kan du definiera hur man hanterar borttagningen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.0">
+        <source>Create a home directory</source>
+        <target>Skapa hemmapp</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.1">
+        <source>Create a home directory from the registered username.</source>
+        <target>Välj detta alternativ för att automatiskt skapa en hemmapp i filarkivet utifrån medlemmens namn. Hemmappen används för lagring av medlemmens filer.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.0">
+        <source>Home directory path</source>
+        <target>Hemmappens föräldramapp</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.1">
+        <source>Please select the parent folder from the files directory.</source>
+        <target>Välj föräldramapp för hemmappen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.0">
+        <source>Send activation e-mail</source>
+        <target>Skicka aktiveringsmeddelande</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.1">
+        <source>Send an activation e-mail to the registered e-mail address.</source>
+        <target>Välj detta alternativ för att skicka ett kontoaktiveringsmeddelande via E-post till den registrerade medlemmen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.0">
+        <source>Confirmation page</source>
+        <target>Aktiveringssida</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.1">
+        <source>Please choose the page to which users will be redirected after the request has been completed.</source>
+        <target>Ange vilken sida medlemmen kommer att omdirigeras till efter att kontot har aktiverats.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.0">
+        <source>Activation message</source>
+        <target>Aktiveringsmeddelandetext</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any input field (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>Ange texten i aktiveringsmeddelandet. Du kan använda vilket inmatningsfält som helst eller wildcard (e.g. &lt;em&gt;##lastname##&lt;/em&gt;) likväl som &lt;em&gt;##domain##&lt;/em&gt; (aktuellt domännamn) och &lt;em&gt;##link##&lt;/em&gt; (aktiveringslänk).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.0">
+        <source>Password message</source>
+        <target>Bekräftelsemeddelandetext</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any user property (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>Ange texten i bekräftelsemeddelandet. Du kan använda vilket inmatningsfält som helst eller wildcard (e.g. &lt;em&gt;##lastname##&lt;/em&gt;) likväl som &lt;em&gt;##domain##&lt;/em&gt; (aktuellt domännamn) och &lt;em&gt;##link##&lt;/em&gt; (aktiveringslänk).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_legend">
+        <source>Title and type</source>
+        <target>Titel och typ</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nav_legend">
+        <source>Navigation settings</source>
+        <target>Navigationsinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reference_legend">
+        <source>Reference page</source>
+        <target>Referenssida</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirect_legend">
+        <source>Redirect settings</source>
+        <target>Omdirigeringsinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.template_legend">
+        <source>Template settings</source>
+        <target>Mallinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>Bildinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.config_legend">
+        <source>Module configuration</source>
+        <target>Modulkonfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_module.include_legend">
+        <source>Include settings</source>
+        <target>Inkluderingsinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source_legend">
+        <source>Files and folders</source>
+        <target>Filer och mappar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interact_legend">
+        <source>Interactive Flash movie</source>
+        <target>Interaktiv Flash-film</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html_legend">
+        <source>Text/HTML</source>
+        <target>Text/HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected_legend">
+        <source>Access protection</source>
+        <target>Åtkomstkydd</target>
+      </trans-unit>
+      <trans-unit id="tl_module.expert_legend">
+        <source>Expert settings</source>
+        <target>Expertinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.email_legend">
+        <source>E-mail settings</source>
+        <target>E-postinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.account_legend">
+        <source>Account settings</source>
+        <target>Kontoinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.0">
+        <source>Your registration on %s</source>
+        <target>Din registrering på %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.1">
+        <source>Thank you for your registration on ##domain##.
+
+Please click ##link## to complete your registration and to activate your account. If you did not request an account, please ignore this e-mail.
+</source>
+        <target>Tack för din registrering på ##domain##. Klicka på länken ##link## för att slutföra din registrering och aktivera ditt konto. Om du inte själv har registrerat något konto så ber vi dig att bortse från detta mail.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.0">
+        <source>Your password request on %s</source>
+        <target>Din lösenordsförfrågan på %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.1">
+        <source>You have requested a new password for ##domain##.
+
+Please click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.
+</source>
+        <target>Du har begärt ett nytt lösenord för ##domain##. Klicka på ##link## för att skapa ett nytt lösenord. Om du inte själv har begärt ett nytt lösenord så bör du kontakta administratören på hemsidan.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.internal">
+        <source>Internal file</source>
+        <target>Intern fil</target>
+      </trans-unit>
+      <trans-unit id="tl_module.external">
+        <source>External URL</source>
+        <target>Extern URL</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_deactivate">
+        <source>Deactivate account</source>
+        <target>Inaktivera konto</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_delete">
+        <source>Irrevocably delete account</source>
+        <target>Radera kontot permanent</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.0">
+        <source>Add module</source>
+        <target>Lägg till modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.1">
+        <source>Add a module</source>
+        <target>Lägg till en modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.0">
+        <source>Module details</source>
+        <target>Visa moduldetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.1">
+        <source>Show the details of module ID %s</source>
+        <target>Visa detaljer för modul med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.0">
+        <source>Edit module</source>
+        <target>Redigera modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.1">
+        <source>Edit module ID %s</source>
+        <target>Redigera modul med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.0">
+        <source>Move module</source>
+        <target>Flytta modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.1">
+        <source>Move module ID %s</source>
+        <target>Flytta modul med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.0">
+        <source>Duplicate module</source>
+        <target>Kopiera modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.1">
+        <source>Duplicate module ID %s</source>
+        <target>Kopiera modul med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.0">
+        <source>Delete module</source>
+        <target>Ta bort modul</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.1">
+        <source>Delete module ID %s</source>
+        <target>Ta bort modul med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.0">
+        <source>Edit theme</source>
+        <target>Redigera tema</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>Redigera temainställningarna</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.0">
+        <source>Paste here</source>
+        <target>Klistra in här</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.1">
+        <source>Paste after module ID %s</source>
+        <target>Klistra in efter modul med ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

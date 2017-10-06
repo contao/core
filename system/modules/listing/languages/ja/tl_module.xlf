@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/tl_module.php" source-language="en" target-language="ja">
+    <body>
+      <trans-unit id="tl_module.list_table.0">
+        <source>Table</source>
+        <target>表</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_table.1">
+        <source>Please choose the source table.</source>
+        <target>情報源とするテーブルを選択してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.0">
+        <source>Fields</source>
+        <target>フィールド</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.1">
+        <source>Please enter a comma separated list of the fields you want to list.</source>
+        <target>リストしたいフィールドをコンマで区切って入力してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.0">
+        <source>Condition</source>
+        <target>条件</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>結果をフィルターする条件(例えば、&lt;em&gt;published=1&lt;/em&gt;や&lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;)を入力します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.0">
+        <source>Searchable fields</source>
+        <target>検索できるフィールド</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.1">
+        <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
+        <target>検索できるようにしたいフィールドをコンマで区切って入力します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.0">
+        <source>Order by</source>
+        <target>順序</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.1">
+        <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
+        <target>結果を並べ替えに使用できるフィールドをコンマで区切って入力します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.0">
+        <source>Details page fields</source>
+        <target>詳細なページのフィールド</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.1">
+        <source>Enter a comma separated list of the fields you want to show on the details page. Leave blank to disable the feature.</source>
+        <target>詳細なページに表示したいフィールドをコンマで区切って入力してください。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.0">
+        <source>Details page condition</source>
+        <target>詳細なページの条件</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>結果をフィルターする条件(例えば、&lt;em&gt;published=1&lt;/em&gt;や&lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;)を入力します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.0">
+        <source>List template</source>
+        <target>リストのテンプレート</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.1">
+        <source>Here you can select the list template.</source>
+        <target>リストのテンプレートを選択します。</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.0">
+        <source>Details page template</source>
+        <target>詳細なページのテンプレート</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.1">
+        <source>Here you can select the details page template.</source>
+        <target>詳細なページのテンプレートを選択します。</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

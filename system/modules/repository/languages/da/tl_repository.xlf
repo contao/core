@@ -1,0 +1,642 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/repository/languages/en/tl_repository.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_repository.category.0">
+        <source>Category</source>
+        <target>Kategori</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.category.1">
+        <source>Please select the extension category.</source>
+        <target>Vælg venligst udvidelseskategorien.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.0">
+        <source>Copyright</source>
+        <target>Copyright</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.copyright.1">
+        <source>Here you can enter a copyright notice (e.g. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</source>
+        <target>Her kan du skrive en ophavsret notits (f.eks. © 2007,2008 Jerry Miller Webservices Inc).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.0">
+        <source>Description</source>
+        <target>Beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.description.1">
+        <source>These HTML tags are allowed: %s</source>
+        <target>Disse HTML tags er tilladt: %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.0">
+        <source>Extension</source>
+        <target>Udvidelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extension.1">
+        <source>Name of the extension.</source>
+        <target>Vælg venligst udvidelsesnavnet.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.0">
+        <source>Functionality</source>
+        <target>Funktionalitet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.functionality.1">
+        <source>Does the extension provide the expected functionality?</source>
+        <target>Tilbyder udvidelsen den forventede funktionalitet?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.0">
+        <source>License</source>
+        <target>Licens</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.license.1">
+        <source>Please enter a short license information. You may add full license information in a file LICENSE.txt.</source>
+        <target>Skriv venligst en kort licensinformation. Du kan tilføje den fulde licensinformation i filen LICENSE.txt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.0">
+        <source>Name</source>
+        <target>Navn og medietyper</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.name.1">
+        <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Udvidelses navne skal starte med a-z, A-Z or 0-9, hvor navne med små bogstaver foretrækkes. Yderligere, er tegnene _ og - tilladte i navnet.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.0">
+        <source>Popularity</source>
+        <target>Polaritet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.popularity.1">
+        <source>%s/%s (downloads/installs)</source>
+        <target>%s/%s (downloadede / installerede)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.0">
+        <source>Quality</source>
+        <target>Kvalitet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.quality.1">
+        <source>How robust is the extension and how painless is installation and maintenance?</source>
+        <target>Hvor robust er udvidelsen og hvor nem er installationen og vedligeholdelsen.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.0">
+        <source>Release date</source>
+        <target>Udgivelsesdato</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasedate.1">
+        <source>Enter the publishing date of this release in format %s</source>
+        <target>Skriv udgivelsesdatoen for denne udgave som ÅÅÅÅ-MM-DD.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.0">
+        <source>Version</source>
+        <target>Version</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.selversion.1">
+        <source>Please select the version</source>
+        <target>Vælg venligst versionen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.0">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.type.1">
+        <source>Please select the extension type.</source>
+        <target>Vælg venligst udvidelsestypen</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.0">
+        <source>Usability</source>
+        <target>Andvendelighed</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.usability.1">
+        <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>Lever udvidelsen op til Contao's standarder for brugervenlighed og tilgængelighed?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.0">
+        <source>Version</source>
+        <target>Version</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.version.1">
+        <source>Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</source>
+        <target>Versionnumre skal være i formatet n.n.n s, hvor n er et tal, og s er enten: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.0">
+        <source>License key</source>
+        <target>Licensnøgle</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickey.1">
+        <source>Enter the license key that you got from the extension vendor.</source>
+        <target>Skriv licensnøglen du har fået fra udvidelsens forhandler.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.0">
+        <source>Uninstall protection</source>
+        <target>Beskyttelse mod afinstallation</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstprotect.1">
+        <source>Protect extension against accidental uninstallation.</source>
+        <target>Beskyt udvidelsen mod utilsigtet afinstallation.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.0">
+        <source>Update protection</source>
+        <target>Beskyttelse mod opdatering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateprotect.1">
+        <source>Protect extension against accidental update.</source>
+        <target>Beskyt udvidelsen mod utilsigtet opdatering.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.author">
+        <source>Author</source>
+        <target>Forfatter</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.build">
+        <source>Build</source>
+        <target>Build</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.cancel">
+        <source>Cancel</source>
+        <target>Annullere</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.continue">
+        <source>Continue</source>
+        <target>Fortsæt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependencies">
+        <source>Dependencies of this extension</source>
+        <target>Afhængigheder for denne udvidelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependents">
+        <source>Other extensions depending on this one</source>
+        <target>Andre udvidelser der er afhængige af denne</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dependentsdel">
+        <source>The following extensions are dependent from &lt;em&gt;%s&lt;/em&gt; and may render broken:</source>
+        <target>Følgende udvidelser er afhængige af &lt;em&gt;%s&lt;/em&gt; og vil måske blive ugyldige.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.donate">
+        <source>Donate</source>
+        <target>Donér</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.downloads">
+        <source>Package downloads</source>
+        <target>Pakke downloads</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extensionnotfound">
+        <source>Extension not found.</source>
+        <target>Udvidelse ikke fundet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.forum">
+        <source>Forum</source>
+        <target>Forum</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installs">
+        <source>Online installs</source>
+        <target>Online installeringer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.langtrans">
+        <source>%s transl.</source>
+        <target>%s oversat.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.manual">
+        <source>Manual</source>
+        <target>Manual</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.no">
+        <source>no</source>
+        <target>nr.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.noextensionsfound">
+        <source>No matching extensions found.</source>
+        <target>Ingen udvidelser fundet.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.orderby">
+        <source>Order by</source>
+        <target>Sortér efter</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.otherlanguages">
+        <source>Other languages</source>
+        <target>Andre sprog</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.pageof">
+        <source>Page %s of %s</source>
+        <target>Side %s af %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ratingfmt">
+        <source>%.2f (%d votes)</source>
+        <target>%.2f (%d stemmer)</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.reldownloads">
+        <source>Release downloads</source>
+        <target>Udgivelse downloads</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.releasenotesfor">
+        <source>Release notes and change log for %s</source>
+        <target>Udgivelsesnoter og ændringslog for %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relfunctionality">
+        <source>Release functionality</source>
+        <target>Udgivelse funktionalitet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relinstalls">
+        <source>Release installs</source>
+        <target>Udgivelse installeret</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relquality">
+        <source>Release quality</source>
+        <target>Udgivelse kvalitet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relrating">
+        <source>Release rating</source>
+        <target>Udgivelse vurdering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relupdates">
+        <source>Release updates</source>
+        <target>Udgivelse opdateringer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.relusability">
+        <source>Release usability</source>
+        <target>Udgivelse anvendelighed</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.save">
+        <source>Save</source>
+        <target>Gem</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.shop">
+        <source>Shop</source>
+        <target>Butik</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showpicture">
+        <source>Show full size picture</source>
+        <target>Vis billede i fuld størrelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.state">
+        <source>State</source>
+        <target>Stat</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.tag">
+        <source>Tag</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.thumbnail">
+        <source>Thumbnail picture</source>
+        <target>Miniature billede</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totdownloads">
+        <source>Total downloads</source>
+        <target>Total downloadede</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totfunctionality">
+        <source>Total functionality</source>
+        <target>Total funktionalitet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totinstalls">
+        <source>Total installs</source>
+        <target>Total installerede</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totquality">
+        <source>Total quality</source>
+        <target>Total kvalitet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totrating">
+        <source>Total rating</source>
+        <target>Total vurdering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totupdates">
+        <source>Total updates</source>
+        <target>Total opdateringer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.totusability">
+        <source>Total usability</source>
+        <target>Total anvendelighed</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionfrom">
+        <source>Version from</source>
+        <target>Version fra</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versions">
+        <source>Other versions</source>
+        <target>Andre versioner</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.versionto">
+        <source>Version to</source>
+        <target>Version til</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.yes">
+        <source>yes</source>
+        <target>ja</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.action">
+        <source>Action</source>
+        <target>Handling</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsummary">
+        <source>Action summary</source>
+        <target>Handlings opsummering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionsuccess">
+        <source>Actions successful.</source>
+        <target>Handling udført.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.actionfailed">
+        <source>One or more actions failed.</source>
+        <target>En eller flere handlinger mislykkedes.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.apply">
+        <source>Apply</source>
+        <target>Anvend</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.byorder">
+        <source>By %s</source>
+        <target>Af %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.checkextension">
+        <source>Check extension</source>
+        <target>Kontroller udvidelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.dbuptodate">
+        <source>Database is up to date</source>
+        <target>Database er opdateret</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingdirs">
+        <source>Deleting directories</source>
+        <target>Slet biblioteket</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.deletingfiles">
+        <source>Deleting files</source>
+        <target>Slet filer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.editextension">
+        <source>Edit settings</source>
+        <target>Rediger indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.extinstrecntf">
+        <source>Extension install record not found</source>
+        <target>Udvidelsens installeringslog er ikke fundet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.errdldpkg">
+        <source>Download of package from repository failed</source>
+        <target>Download af pakken fra udvidelsesbanken mislykkedes.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.failed">
+        <source>failed</source>
+        <target>mislykkedes</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.fileerrwrite">
+        <source>Error writing file %s</source>
+        <target>Fejl ved skrivning til filen %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesdeleted">
+        <source>%s file(s) deleted</source>
+        <target>%s fil(er) slettet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesinstalled">
+        <source>%s file(s) installed</source>
+        <target>%s fil(er) installeret</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesunchanged">
+        <source>%s file(s) unchanged</source>
+        <target>%s fil(er) uændrede</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.filesupdated">
+        <source>%s file(s) updated</source>
+        <target>%s fil(er) opdaterede</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ftsearch">
+        <source>Fulltext search</source>
+        <target>Fuldtekst søgning</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.goback">
+        <source>Go back</source>
+        <target>Gå tilbage</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.install">
+        <source>Install</source>
+        <target>Installer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installextension">
+        <source>Install extension</source>
+        <target>Installer/opdater udvidels</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installingext">
+        <source>Install %s %s build %s</source>
+        <target>Installer %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.installlogtitle">
+        <source>File installation/update log</source>
+        <target>Fil installation/opdaterings log</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.lickeyrequired">
+        <source>This extension requires a license key. Please visit the vendor's shop to purchase one.</source>
+        <target>Denne udvidelse kræver en licensnøgle. Besøg venligst forhandlerens butik for at købe en.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.none">
+        <source>None</source>
+        <target>Ingen.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.notfound">
+        <source>not found</source>
+        <target>ikke fundet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.ok">
+        <source>OK</source>
+        <target>OK</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.okuninstextension">
+        <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
+        <target>OK at afinstallere &lt;em&gt;%s&lt;/em&gt; nu?</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showdetails">
+        <source>Show details</source>
+        <target>Vis detaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.stateshint">
+        <source>Check the states to be included.</source>
+        <target>Vælg de stadier der skal inkluderes.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.status">
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.success">
+        <source>success</source>
+        <target>Success</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.uninstallextension">
+        <source>Uninstall extension</source>
+        <target>Afinstaller udvidelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatedatabase">
+        <source>Update database</source>
+        <target>Opdater database</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextension">
+        <source>Update extension</source>
+        <target>Opdater udvidelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updateextensions">
+        <source>Update checked extensions</source>
+        <target>Opdater markerede udvidelser</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.update">
+        <source>Update</source>
+        <target>Opdatering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updates">
+        <source>Updates</source>
+        <target>Opdateringer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatehint">
+        <source>Check the states to be included at updates.</source>
+        <target>Vælg de stadier der skal inkluderes i opdateringer.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.updatingext">
+        <source>Update %s %s build %s</source>
+        <target>Opdater %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validate">
+        <source>Repair</source>
+        <target>Reparer</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.validatingext">
+        <source>Verify/repair %s %s build %s</source>
+        <target>Bekræft/reparer %s %s build %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForLabel">
+        <source>Approved for</source>
+        <target>Kompatibel med</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.approvedForText">
+        <source>Contao %s to %s</source>
+        <target>Contao %s til %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.missingSoapModule">
+        <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>
+        <target>SOAP extension ikke indlæst (konfigurer PHP med --enable-soap).</target>
+      </trans-unit>
+      <trans-unit id="tl_repository.showIncompatible">
+        <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Du ser lige nu kun udvidelser der er kompatible med den nuværende Contao version. Rediger back end indstillingerne for at udvide resultaterne til at vise alle udvidelser.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.uptodate">
+        <source>Up to date</source>
+        <target>Up-to-date.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapproved">
+        <source>Not approved for %s %s</source>
+        <target>Ikke godkendt for %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.notapprovedwith">
+        <source>Not approved with %s %s</source>
+        <target>Ikke godkendt med %s %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.shouldwork">
+        <source>Expected to be compatible with %s %s</source>
+        <target>Forventet at være kompatibel med %s %s</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.newversion">
+        <source>Version %s build %s available</source>
+        <target>Ny version %s build %s er tilgængelig.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.depmissing">
+        <source>Missing required extension %s</source>
+        <target>Mangler behøvet udvidelse %s.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extnotfound">
+        <source>Extension not found in repository</source>
+        <target>Udvidelse er ikke fundet i udvidelsesbanken.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.vernotfound">
+        <source>Installed version not found in repository</source>
+        <target>Installeret version er ikke fundet i udvidelsesbanken.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.extneedkey">
+        <source>License key required, install extension in advance</source>
+        <target>Licensnøgle er behøvet, installer udvidelse på forhånd.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_statext.errorinstall">
+        <source>Corrupted, update/repair required</source>
+        <target>Installationen mislykkedes, opdater/reparer.</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.free">
+        <source>Free</source>
+        <target>Gratis</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.private">
+        <source>Private</source>
+        <target>Privat</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_type_options.commercial">
+        <source>Commercial</source>
+        <target>Kommerciel</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.application">
+        <source>Application</source>
+        <target>Applikation</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.plugin">
+        <source>Plugin</source>
+        <target>Udvidelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.template">
+        <source>Theme</source>
+        <target>Tema</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.utility">
+        <source>Utility</source>
+        <target>Redskab</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.widget">
+        <source>Widget</source>
+        <target>Widget</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.translation">
+        <source>Translation</source>
+        <target>Oversættelse</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.bundle">
+        <source>Bundle</source>
+        <target>Bundt</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.other">
+        <source>Other</source>
+        <target>Andre</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_category_options.core">
+        <source>Core</source>
+        <target>Kerne</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.reldate">
+        <source>Releasedate</source>
+        <target>Udgivelsesdato</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.rating">
+        <source>Rating</source>
+        <target>Vurdering</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.popular">
+        <source>Popularity</source>
+        <target>Polaritet</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.name">
+        <source>Name</source>
+        <target>Navn og medietyper</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.title">
+        <source>Title</source>
+        <target>Overskrift</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_order_options.author">
+        <source>Author</source>
+        <target>Forfatter</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.alpha">
+        <source>Alpha</source>
+        <target>Alpha</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.beta">
+        <source>Beta</source>
+        <target>Beta</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.rc">
+        <source>RC</source>
+        <target>RC</target>
+      </trans-unit>
+      <trans-unit id="tl_repository_state_options.stable">
+        <source>Stable</source>
+        <target>Stabil</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

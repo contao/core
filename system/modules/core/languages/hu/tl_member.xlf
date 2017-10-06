@@ -1,0 +1,298 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_member.php" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="tl_member.firstname.0">
+        <source>First name</source>
+        <target>Keresztnév</target>
+      </trans-unit>
+      <trans-unit id="tl_member.firstname.1">
+        <source>Please enter the first name.</source>
+        <target>Adja meg a keresztnevet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.lastname.0">
+        <source>Last name</source>
+        <target>Vezetéknév</target>
+      </trans-unit>
+      <trans-unit id="tl_member.lastname.1">
+        <source>Please enter the last name.</source>
+        <target>Adja meg a vezetéknevet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.dateOfBirth.0">
+        <source>Date of birth</source>
+        <target>Születés ideje</target>
+      </trans-unit>
+      <trans-unit id="tl_member.dateOfBirth.1">
+        <source>Please enter the date of birth.</source>
+        <target>Adja meg a születési időt.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.gender.0">
+        <source>Gender</source>
+        <target>Neme</target>
+      </trans-unit>
+      <trans-unit id="tl_member.gender.1">
+        <source>Please choose the gender.</source>
+        <target>Válassza ki a nemet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.company.0">
+        <source>Company</source>
+        <target>Cég</target>
+      </trans-unit>
+      <trans-unit id="tl_member.company.1">
+        <source>Here you can enter a company name.</source>
+        <target>Itt adhatja meg a Cég nevet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.street.0">
+        <source>Street</source>
+        <target>Utca/házszám</target>
+      </trans-unit>
+      <trans-unit id="tl_member.street.1">
+        <source>Please enter the street name and number.</source>
+        <target>Adja meg az utca nevét és a házszámot.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.postal.0">
+        <source>Postal code</source>
+        <target>Irányítószám</target>
+      </trans-unit>
+      <trans-unit id="tl_member.postal.1">
+        <source>Please enter the postal code.</source>
+        <target>Adja meg az irányítószámot.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.city.0">
+        <source>City</source>
+        <target>Helység</target>
+      </trans-unit>
+      <trans-unit id="tl_member.city.1">
+        <source>Plase enter the name of the city.</source>
+        <target>Adja mega helység nevét.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.state.0">
+        <source>State</source>
+        <target>Megye</target>
+      </trans-unit>
+      <trans-unit id="tl_member.state.1">
+        <source>Plase enter the name of the state.</source>
+        <target>Adja meg a megye nevét.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.country.0">
+        <source>Country</source>
+        <target>Ország</target>
+      </trans-unit>
+      <trans-unit id="tl_member.country.1">
+        <source>Please select the country.</source>
+        <target>Válassza ki az országot.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.phone.0">
+        <source>Phone number</source>
+        <target>Telefonszám</target>
+      </trans-unit>
+      <trans-unit id="tl_member.phone.1">
+        <source>Please enter the phone number.</source>
+        <target>Adja meg a telefonszámot.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.mobile.0">
+        <source>Cell phone number</source>
+        <target>Mobil telefonszám</target>
+      </trans-unit>
+      <trans-unit id="tl_member.mobile.1">
+        <source>Please enter the cell phone number.</source>
+        <target>Adja meg a mobil telefonszámot.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.fax.0">
+        <source>Fax number</source>
+        <target>Fax szám</target>
+      </trans-unit>
+      <trans-unit id="tl_member.fax.1">
+        <source>Please enter the fax number.</source>
+        <target>Adja meg a fax számot.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.email.0">
+        <source>E-mail address</source>
+        <target>E-mail címek</target>
+      </trans-unit>
+      <trans-unit id="tl_member.email.1">
+        <source>Please enter a valid e-mail address.</source>
+        <target>Adjon meg egy érvényes e-mail címet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.website.0">
+        <source>Website</source>
+        <target>Weboldal</target>
+      </trans-unit>
+      <trans-unit id="tl_member.website.1">
+        <source>Here you can enter a web address.</source>
+        <target>Itt adhat meg egy web címet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.language.0">
+        <source>Language</source>
+        <target>Nyelv</target>
+      </trans-unit>
+      <trans-unit id="tl_member.language.1">
+        <source>Please select the language.</source>
+        <target>Válasszon nyelvet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups.0">
+        <source>Member groups</source>
+        <target>Tag csoportok</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups.1">
+        <source>Here you can assign the member to one or more groups.</source>
+        <target>Itt lehet a tagokat egy vagy több csoporthoz rendelni.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login.0">
+        <source>Allow login</source>
+        <target>Belépés engedélyezése</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login.1">
+        <source>Allow the member to log into the front end.</source>
+        <target>Engedélyezi a tag bejelentkezését a felhasználói felületen.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.username.0">
+        <source>Username</source>
+        <target>Felhasználó név</target>
+      </trans-unit>
+      <trans-unit id="tl_member.username.1">
+        <source>Please enter a unique username.</source>
+        <target>Adjon meg egy egyedi felhasználónevet.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.assignDir.0">
+        <source>Set home directory</source>
+        <target>Saját (home) mappa beállítása</target>
+      </trans-unit>
+      <trans-unit id="tl_member.assignDir.1">
+        <source>Define a home directory for the member.</source>
+        <target>A tag saját mappájának megadása.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homeDir.0">
+        <source>Home directory</source>
+        <target>Saját (home) könyvtár</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homeDir.1">
+        <source>Please select a folder from the files directory.</source>
+        <target>Válasszon ki egy mappát.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.disable.0">
+        <source>Deactivate</source>
+        <target>Deaktiválás</target>
+      </trans-unit>
+      <trans-unit id="tl_member.disable.1">
+        <source>Temporarily disable the account.</source>
+        <target>Ideiglenesen letiltja a fiókot.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.start.0">
+        <source>Activate on</source>
+        <target>Aktiválás kezdete</target>
+      </trans-unit>
+      <trans-unit id="tl_member.start.1">
+        <source>Automatically activate the account on this day.</source>
+        <target>Automatikusan aktiválja a fiókot ezen a napon</target>
+      </trans-unit>
+      <trans-unit id="tl_member.stop.0">
+        <source>Deactivate on</source>
+        <target>Deaktiválás kezdete</target>
+      </trans-unit>
+      <trans-unit id="tl_member.stop.1">
+        <source>Automatically deactivate the account on this day.</source>
+        <target>Automatikus deaktiválja a fiókot ezen a napon</target>
+      </trans-unit>
+      <trans-unit id="tl_member.personal_legend">
+        <source>Personal data</source>
+        <target>Személyes adatok</target>
+      </trans-unit>
+      <trans-unit id="tl_member.address_legend">
+        <source>Address details</source>
+        <target>Cím részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_member.contact_legend">
+        <source>Contact details</source>
+        <target>Kapcsolat részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups_legend">
+        <source>Member groups</source>
+        <target>Tag csoportok</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login_legend">
+        <source>Login details</source>
+        <target>Bejelentkezés részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homedir_legend">
+        <source>Home directory</source>
+        <target>Saját (home) könyvtár</target>
+      </trans-unit>
+      <trans-unit id="tl_member.account_legend">
+        <source>Account settings</source>
+        <target>Fiók beállítások</target>
+      </trans-unit>
+      <trans-unit id="tl_member.personalData">
+        <source>Personal data</source>
+        <target>Személyes adatok</target>
+      </trans-unit>
+      <trans-unit id="tl_member.addressDetails">
+        <source>Address details</source>
+        <target>Cím részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_member.contactDetails">
+        <source>Contact details</source>
+        <target>Kapcsolat részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_member.loginDetails">
+        <source>Login details</source>
+        <target>Bejelentkezés részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_member.new.0">
+        <source>New member</source>
+        <target>Új tag</target>
+      </trans-unit>
+      <trans-unit id="tl_member.new.1">
+        <source>Create a new member</source>
+        <target>Új tag létrehozása</target>
+      </trans-unit>
+      <trans-unit id="tl_member.show.0">
+        <source>Member details</source>
+        <target>Tag részletei</target>
+      </trans-unit>
+      <trans-unit id="tl_member.show.1">
+        <source>Show the details of member ID %s</source>
+        <target>Az ID %s tag részleteinek mutatása</target>
+      </trans-unit>
+      <trans-unit id="tl_member.edit.0">
+        <source>Edit member</source>
+        <target>Tag szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_member.edit.1">
+        <source>Edit member ID %s</source>
+        <target>Az ID %s tag szerkesztése</target>
+      </trans-unit>
+      <trans-unit id="tl_member.copy.0">
+        <source>Duplicate member</source>
+        <target>Tag duplázása</target>
+      </trans-unit>
+      <trans-unit id="tl_member.copy.1">
+        <source>Duplicate member ID %s</source>
+        <target>Az ID %s tag duplázása</target>
+      </trans-unit>
+      <trans-unit id="tl_member.delete.0">
+        <source>Delete member</source>
+        <target>Tag törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_member.delete.1">
+        <source>Delete member ID %s</source>
+        <target>Az ID %s tag törlése</target>
+      </trans-unit>
+      <trans-unit id="tl_member.toggle.0">
+        <source>Activate/deactivate member</source>
+        <target>Tag aktiválása/deaktiválása</target>
+      </trans-unit>
+      <trans-unit id="tl_member.toggle.1">
+        <source>Activate/deactivate member ID %s</source>
+        <target>Az ID %s tag aktiválása/deaktiválása</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.0">
+        <source>Front end preview</source>
+        <target>Felhasználói felület előnézete</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.1">
+        <source>Preview the front end as member ID %s</source>
+        <target>A felhasználói felület megtekintése mint: tag ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

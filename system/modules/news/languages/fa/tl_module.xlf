@@ -1,0 +1,118 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_module.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_module.news_archives.0">
+        <source>News archives</source>
+        <target>بایگانی‌های خبر</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_archives.1">
+        <source>Please select one or more news archives.</source>
+        <target>لطفا یک یا چند بایگانی خبر را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.0">
+        <source>Featured items</source>
+        <target>موارد ویژه</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_featured.1">
+        <source>Here you can choose how featured items are handled.</source>
+        <target>اینجا می‌توانید نحوه به کار بردن موردهای ویژه را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.0">
+        <source>No period selected</source>
+        <target>هیج بازه زمانی انتخاب نشده است</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_jumpToCurrent.1">
+        <source>Here you can define what to display if no period is selected.</source>
+        <target>اینجا می‌توانید حالتی را وقتی که بازه‌ای انتخاب نشده است باید نمایش داده شود را تعریف نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.0">
+        <source>News reader module</source>
+        <target>ماژول خبرخوان</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_readerModule.1">
+        <source>Automatically switch to the news reader if an item has been selected.</source>
+        <target>به صورت خودکار به خبرخوان تعویض خواهد شد اگر موردی انتخاب شده باشد.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.0">
+        <source>Meta fields</source>
+        <target>فیلدهای متا</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_metaFields.1">
+        <source>Here you can select the meta fields.</source>
+        <target>اینجا می‌توانید فیلدهایی متا را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.0">
+        <source>News template</source>
+        <target>قالب اخبار</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_template.1">
+        <source>Here you can select the news template.</source>
+        <target>اینجا می‌توانید قالب اخبار را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.0">
+        <source>Archive format</source>
+        <target>ساختار بایگانی</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_format.1">
+        <source>Here you can choose the news archive format.</source>
+        <target>اینجا می‌توانید ساختار بایگانی خبر را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.0">
+        <source>Week start day</source>
+        <target>روز شروع هفته</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>اینجا می‌توانید روز شروع هفته را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.0">
+        <source>Sort order</source>
+        <target>ترتیب مرتب‌سازی</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>اینجا می‌توانید ترتیب مرتب‌سازی را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.0">
+        <source>Show number of items</source>
+        <target>نمایش تعداد موارد</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_showQuantity.1">
+        <source>Show the number of news items of each month.</source>
+        <target>نمایش تعداد موارد خبری هر ماه.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_day">
+        <source>Day</source>
+        <target>روز</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_month">
+        <source>Month</source>
+        <target>ماه</target>
+      </trans-unit>
+      <trans-unit id="tl_module.news_year">
+        <source>Year</source>
+        <target>سال</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hide_module">
+        <source>Hide the module</source>
+        <target>پنهان کردن ماژول</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show_current">
+        <source>Jump to the current period</source>
+        <target>پریدن به دوره جاری</target>
+      </trans-unit>
+      <trans-unit id="tl_module.all_items">
+        <source>Show all news items</source>
+        <target>مشاهده تمامی موارد خبری</target>
+      </trans-unit>
+      <trans-unit id="tl_module.featured">
+        <source>Show featured news items only</source>
+        <target>فقط مشاهده موارد خبری ویژه</target>
+      </trans-unit>
+      <trans-unit id="tl_module.unfeatured">
+        <source>Skip featured news items</source>
+        <target>رد کردن موارد خبری ویژه</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

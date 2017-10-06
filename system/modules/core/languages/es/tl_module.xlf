@@ -1,0 +1,768 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_module.php" source-language="en" target-language="es">
+    <body>
+      <trans-unit id="tl_module.name.0">
+        <source>Title</source>
+        <target>Título</target>
+      </trans-unit>
+      <trans-unit id="tl_module.name.1">
+        <source>Please enter the module title.</source>
+        <target>Por favor introduce un nombre de módulo único.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.0">
+        <source>Headline</source>
+        <target>Titular</target>
+      </trans-unit>
+      <trans-unit id="tl_module.headline.1">
+        <source>Here you can add a headline to the module.</source>
+        <target>Si introduces un titular, será mostrado en la parte superior del módulo.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.0">
+        <source>Module type</source>
+        <target>Tipo de módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.type.1">
+        <source>Please choose the type of module.</source>
+        <target>Por favor selecciona el tipo de módulo actual.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.0">
+        <source>Start level</source>
+        <target>Nivel de inicio</target>
+      </trans-unit>
+      <trans-unit id="tl_module.levelOffset.1">
+        <source>Enter a value greater than 0 to show only submenu items.</source>
+        <target>Por favor define desde qué nivel serán visibles los elementos del menú. Introduce 0 o dejar en blanco para iniciar desde el nivel superior.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.0">
+        <source>Stop level</source>
+        <target>Elementos del menú visibles</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showLevel.1">
+        <source>Enter a value greater than 0 to limit the nesting level of the menu.</source>
+        <target>Por favor defines hasta qué nivel los elementos del menú serán visibles. Por ejemplo, selecciona 1 para mostrar solo los elementos del menú principal y los subelementos de la página activa. Escoge 0 para mostrar todos los elementos principales y subelementos.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.0">
+        <source>Hard limit</source>
+        <target>Límite forzado</target>
+      </trans-unit>
+      <trans-unit id="tl_module.hardLimit.1">
+        <source>Never show any menu items beyond the stop level.</source>
+        <target>No mostrar ningún elementos (ni los activos) a partir del nivel introducido.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.0">
+        <source>Show protected items</source>
+        <target>Mostrar elementos protegidos</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showProtected.1">
+        <source>Show items that are usually only visible to authenticated users.</source>
+        <target>Por defecto los elementos protegidos no son visibles a no ser que un usuario del front end este conectado. En cambio, si seleccionas esta opción, los elementos protegidos estarán siempre visibles.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.0">
+        <source>Set a reference page</source>
+        <target>Especificar página referencia</target>
+      </trans-unit>
+      <trans-unit id="tl_module.defineRoot.1">
+        <source>Define a custom source or target page for the module.</source>
+        <target>Especifica una página de referencia a ser utilizada como página fuente o de destino del módulo.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.0">
+        <source>Reference page</source>
+        <target>Página de referencia</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rootPage.1">
+        <source>Please choose the reference page from the site structure.</source>
+        <target>Puedes escoger una página de referencia que será utilizada como página fuente o de destino (por ejemplo una página de inicio alternativa)</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.0">
+        <source>Navigation template</source>
+        <target>Plantilla de navegación</target>
+      </trans-unit>
+      <trans-unit id="tl_module.navigationTpl.1">
+        <source>Here you can select the navigation template.</source>
+        <target>Por favor selecciona una plantilla de navegación (plantillas de navegación empiezan por &lt;em&gt;nav_&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+        <target>Personalizar plantilla de módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+        <target>Aquí puede sobreescribir la plantilla por defecto de módulo.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.0">
+        <source>Pages</source>
+        <target>Páginas</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pages.1">
+        <source>Please choose one or more pages from the site structure.</source>
+        <target>Por favor selecciona las páginas para el módulo quick link.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.0">
+        <source>Show hidden items</source>
+        <target>Mostrar elementos no visibles</target>
+      </trans-unit>
+      <trans-unit id="tl_module.showHidden.1">
+        <source>Show items that are usually hidden in the navigation menu.</source>
+        <target>Incluir los elementos que no son visibles en el menú de navegación.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.0">
+        <source>Custom label</source>
+        <target>Etiqueta personalizada</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customLabel.1">
+        <source>Here you can enter a custom label for the drop-down menu.</source>
+        <target>Aqui puedes introducir una etiqueta personalizada para ser utilizada en vez de &lt;em&gt;quicklink&lt;/em&gt; o &lt;em&gt;quick navigation&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.0">
+        <source>Allow auto login</source>
+        <target>Permitir el inicio de sesión automático</target>
+      </trans-unit>
+      <trans-unit id="tl_module.autologin.1">
+        <source>Allow members to log into the front end automatically.</source>
+        <target>Permitir a los miembros acceder al front end automáticamente.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Saltar a la página</target>
+      </trans-unit>
+      <trans-unit id="tl_module.jumpTo.1">
+        <source>Please choose the page to which visitors will be redirected when clicking a link or submitting a form.</source>
+        <target>Esta configuración define a qué pagina será redirigido un usuario tras cierta acción (por ejemplo, al hacer clic sobre un link o al enviar un formulario).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.0">
+        <source>Redirect to last page visited</source>
+        <target>Redirigir a la última página visitada</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirectBack.1">
+        <source>Redirect the user back to the last page visited instead of the redirect page.</source>
+        <target>Redirigir al usuario a la última página visitada en vez de la página de redirección.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.0">
+        <source>Number of columns</source>
+        <target>Número de columnas</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cols.1">
+        <source>Please choose the number of columns of the form.</source>
+        <target>Por favor selecciona el número de columnas del formulario.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.0">
+        <source>One column</source>
+        <target>Una columna</target>
+      </trans-unit>
+      <trans-unit id="tl_module.1cl.1">
+        <source>Show the label above the input field.</source>
+        <target>la etiqueta de cada campo de entrada se mostrará encima del campo de entrada.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.0">
+        <source>Two columns</source>
+        <target>Dos columnas</target>
+      </trans-unit>
+      <trans-unit id="tl_module.2cl.1">
+        <source>Show the label on the left side of the input field.</source>
+        <target>la etiqueta de cada campo de entrada se mostrará el lado izquierdo del campo de entrada.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.0">
+        <source>Editable fields</source>
+        <target>Campos editables</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editable.1">
+        <source>Show these fields in the front end form.</source>
+        <target>Por favor selecciona u o más campos que serán editables en el front end.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.0">
+        <source>Form template</source>
+        <target>Plantilla formulario</target>
+      </trans-unit>
+      <trans-unit id="tl_module.memberTpl.1">
+        <source>Here you can select the form template.</source>
+        <target>Por favor selecciona una plantilla de formulario. La plantilla por defecto se llama &lt;em&gt;member_default&lt;/em&gt;. Si quieres añadir tu propias plantillas, súbelas al directorio &lt;em&gt;templates&lt;/em&gt; (la extensión de archivo debe ser &lt;em&gt;tpl&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.0">
+        <source>Tableless layout</source>
+        <target>Disposición sin tablas</target>
+      </trans-unit>
+      <trans-unit id="tl_module.tableless.1">
+        <source>Render the form without HTML tables.</source>
+        <target>Generar el formulario sin utilizar tablas HTML.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.0">
+        <source>Form</source>
+        <target>Formulario</target>
+      </trans-unit>
+      <trans-unit id="tl_module.form.1">
+        <source>Please select a form.</source>
+        <target>Por favor selecciona un formulario.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.0">
+        <source>Default query type</source>
+        <target>Tipo de query por defecto</target>
+      </trans-unit>
+      <trans-unit id="tl_module.queryType.1">
+        <source>Please select the default query type.</source>
+        <target>Por favor selecciona el tipo de query por defecto.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.0">
+        <source>Find all words</source>
+        <target>Buscar todas las palabras</target>
+      </trans-unit>
+      <trans-unit id="tl_module.and.1">
+        <source>Returns only pages that contain all keywords.</source>
+        <target>El motor de búsqueda devuelve sólo las páginas que contengan todas las palabras clave.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.0">
+        <source>Find any word</source>
+        <target>Buscar cualquier palabra</target>
+      </trans-unit>
+      <trans-unit id="tl_module.or.1">
+        <source>Returns all pages that contain any of the keywords.</source>
+        <target>El motor de búsqueda devuelve todas las páginas que contenga al menos una palabra clave.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.0">
+        <source>Fuzzy search</source>
+        <target>Búsquea difusa</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fuzzy.1">
+        <source>Will find &quot;Contao&quot; if you search for &quot;con&quot; (equal to a wildcard search).</source>
+        <target>Incluirá en los resultados &quot;TYPOlight&quot; si se busca &quot;typo&quot; (similar a una búsqueda con comodines).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.0">
+        <source>Simple form</source>
+        <target>Simple</target>
+      </trans-unit>
+      <trans-unit id="tl_module.simple.1">
+        <source>Contains a single input field only.</source>
+        <target>Formulario de búsqueda simple, con un solo campo de entrada.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.0">
+        <source>Advanced form</source>
+        <target>Avanzado</target>
+      </trans-unit>
+      <trans-unit id="tl_module.advanced.1">
+        <source>Contains an input field and a radio button menu to choose the query type.</source>
+        <target>Formulario de búsqueda avanzado, permite la seleccionar el tipo de búsqueda dinámicamente.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.0">
+        <source>Context range</source>
+        <target>Rango contexto</target>
+      </trans-unit>
+      <trans-unit id="tl_module.contextLength.1">
+        <source>The number of characters on the left and right side of each keyword that are used as context.</source>
+        <target>Por favor introduce un número de caracteres en el lado izquierdo y derecho de cada palabra clave que serán utilizados como contexto.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.0">
+        <source>Maximum context length</source>
+        <target>Tamaño máximo contexto</target>
+      </trans-unit>
+      <trans-unit id="tl_module.totalLength.1">
+        <source>Here you can limit the overall context length per result.</source>
+        <target>Por favor introduce el tamaño máximo de contexto de cada resultado.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.0">
+        <source>Items per page</source>
+        <target>Elementos por página</target>
+      </trans-unit>
+      <trans-unit id="tl_module.perPage.1">
+        <source>The number of items per page. Set to 0 to disable pagination.</source>
+        <target>Por favor introduce el número de resultados por página (0 = deshabilitar paginación).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.0">
+        <source>Search form layout</source>
+        <target>Formulario de búsqueda</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchType.1">
+        <source>Here you can select the search form layout.</source>
+        <target>Por favor selecciona un formulario de búsqueda.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.0">
+        <source>Search results template</source>
+        <target>Plantilla de resultados de búsqueda</target>
+      </trans-unit>
+      <trans-unit id="tl_module.searchTpl.1">
+        <source>Here you can select the search results template.</source>
+        <target>Por favor selecciona una plantilla de resultados de búsqueda. La plantilla por defecto se llama &lt;em&gt;search_default&lt;/em&gt;. Si quieres añadir tu propias plantillas, sube las al directorio &lt;em&gt;templates&lt;/em&gt; (la extensión de archivo debe ser &lt;em&gt;tpl&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.0">
+        <source>Column</source>
+        <target>Columna</target>
+      </trans-unit>
+      <trans-unit id="tl_module.inColumn.1">
+        <source>Please choose the column whose articles you want to list.</source>
+        <target>Por favor selecciona la columna cuyos artículos quieres listar.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.0">
+        <source>Skip items</source>
+        <target>Saltar primer artículo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.skipFirst.1">
+        <source>Here you can define how many items will be skipped.</source>
+        <target>Selecciona esta opción para excluir el primer artículo de la lista de artículos.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.0">
+        <source>Load the first item</source>
+        <target>Cargar el primer elemento</target>
+      </trans-unit>
+      <trans-unit id="tl_module.loadFirst.1">
+        <source>Automatically redirect to the first item if none is selected.</source>
+        <target>Redirigir automáticamente al primer elemento si no se ha seleccionado otro.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.0">
+        <source>Width and height</source>
+        <target>Ancho y alto</target>
+      </trans-unit>
+      <trans-unit id="tl_module.size.1">
+        <source>Please enter the width and height in pixel.</source>
+        <target>Por favor introduce el ancho y alto en píxeles.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.0">
+        <source>Transparent movie</source>
+        <target>Película Flash transparente</target>
+      </trans-unit>
+      <trans-unit id="tl_module.transparent.1">
+        <source>Make the Flash movie transparent (wmode = transparent).</source>
+        <target>Selecciona esta opción para una película Flash con fondo transparente (wmode = transparent). Recuerda que algunos botones y campos de texto pueden no funcionar correctamente en algunos navegadores.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.0">
+        <source>FlashVars</source>
+        <target>FlashVars</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashvars.1">
+        <source>Pass variables to the Flash movie (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;).</source>
+        <target>Aquí puedes introducir algunas variables que se pasarán a la película Flash (&lt;em&gt;var1=valor1&amp;var2=valor2&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.0">
+        <source>Flash player version</source>
+        <target>Versión del reproductor Flash</target>
+      </trans-unit>
+      <trans-unit id="tl_module.version.1">
+        <source>Please enter the required Flash player version (e.g. 6.0.12).</source>
+        <target>Por favor introduce la versión requerida del reproductor Flash, número de versión completo (por ejemplo si tu película Flash requiere al menos el reproductor Flash 6.0.12.0, introduce 6 y 12).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.0">
+        <source>Alternate content</source>
+        <target>Contenido alternativo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.altContent.1">
+        <source>The alternate content will be shown if the movie cannot be loaded. HTML tags are allowed.</source>
+        <target>Por favor proporciona un contenido alternativo a mostrar en caso que la película Flash no se pueda cargar. HTML permitido.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.0">
+        <source>Source</source>
+        <target>Fuente</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source.1">
+        <source>Whether to use a file on the server or point to an external URL.</source>
+        <target>Por favor selecciona la fuente del elemento.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.0">
+        <source>Source file</source>
+        <target>Archivo fuente</target>
+      </trans-unit>
+      <trans-unit id="tl_module.singleSRC.1">
+        <source>Please select a file from the files directory.</source>
+        <target>Por favor selecciona un archivo de la carpeta de archivos.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.0">
+        <source>URL</source>
+        <target>URL</target>
+      </trans-unit>
+      <trans-unit id="tl_module.url.1">
+        <source>Please enter the URL (http://…) of the Flash movie.</source>
+        <target>Por favor introduce la URL completa, empezando con http://</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.0">
+        <source>Make interactive</source>
+        <target>Película Flash interactiva</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interactive.1">
+        <source>Make the Flash movie interact with the browser (requires JavaScript).</source>
+        <target>Escoge esta opción si tu película Flash interacciona con el navegador mediante JavaScript y la función Flash &lt;em&gt;fscommand()&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.0">
+        <source>Flash movie ID</source>
+        <target>ID película Flash</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashID.1">
+        <source>Please enter a unique Flash movie ID.</source>
+        <target>Por favor introduce una ID única para la película Flash.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.0">
+        <source>JavaScript _DoFSCommand(command, args) {</source>
+        <target>JavaScript _DoFSCommand(command, args) {</target>
+      </trans-unit>
+      <trans-unit id="tl_module.flashJS.1">
+        <source>Please enter the JavaScript code.</source>
+        <target>Por favor introduce el contenido de la función JavaScript &lt;em&gt;_DoFSCommand()&lt;/em&gt;. La variable que contiene el comando se llama &lt;em&gt;command&lt;/em&gt;, la variable que contiene los argumentos se llama &lt;em&gt;args&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.0">
+        <source>Full-size view/new window</source>
+        <target>Visualizar tamaño completo/nueva ventana</target>
+      </trans-unit>
+      <trans-unit id="tl_module.fullsize.1">
+        <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
+        <target>Abrir la imagen de tamaño completo en una lightbox o el enlace en una ventana de navegador nueva.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.0">
+        <source>Image size</source>
+        <target>tamaño de imagen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.imgSize.1">
+        <source>Here you can set the image dimensions and the resize mode.</source>
+        <target>Si introduce solo ancho o solo alto, la imagen se redimensionará proporcionalmente. Si introduces ambas medidas, la imagen se recortará si es necesario. Si dejas ambos campos en blanco, se utilizará el tamaño original de la imagen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.0">
+        <source>Show caption</source>
+        <target>Mostrar nombre de imagen en el pie</target>
+      </trans-unit>
+      <trans-unit id="tl_module.useCaption.1">
+        <source>Display the image name or caption below the image.</source>
+        <target>Si seleccionas esta opción, el nombre de la imagen se mostrará justo debajo de la misma.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.0">
+        <source>Source files</source>
+        <target>Archivos de fuentes</target>
+      </trans-unit>
+      <trans-unit id="tl_module.multiSRC.1">
+        <source>Please select one or more files from the files directory.</source>
+        <target>Por favor selecciona uno o más archivos de la carpeta de archivos.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.0">
+        <source>Sort order</source>
+        <target>Ordenamiento</target>
+      </trans-unit>
+      <trans-unit id="tl_module.orderSRC.1">
+        <source>The sort order of the items.</source>
+        <target>El orden de los artículos.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.0">
+        <source>HTML code</source>
+        <target>Código HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html.1">
+        <source>You can modify the list of allowed HTML tags in the back end settings.</source>
+        <target>Por favor introduce tu código HTML.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.0">
+        <source>Cache timeout</source>
+        <target>Cache timeout</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_cache.1">
+        <source>Here you can define how long the RSS feed is being cached.</source>
+        <target>Aqui puedes definir el periodo de tiempo durante el cual el feed RSS permanece en caché.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.0">
+        <source>Feed URLs</source>
+        <target>URL RSS feed</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_feed.1">
+        <source>Please enter the URL of one or more RSS feeds.</source>
+        <target>Por favor introduce la URL de donde importat los datos de RSS feed.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.0">
+        <source>Feed template</source>
+        <target>Plantilla de diseño</target>
+      </trans-unit>
+      <trans-unit id="tl_module.rss_template.1">
+        <source>Here you can select the feed template.</source>
+        <target>Por favor selecciona una plantilla de diseño. Puedes añadir diseños personalizados para RSS en la carpeta &lt;em&gt;templates&lt;/em&gt;. Los archivos de plantillas de RSS empieza por &lt;em&gt;rss_&lt;/em&gt; y requieren la extensión de archivo &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.0">
+        <source>Number of items</source>
+        <target>Número de items</target>
+      </trans-unit>
+      <trans-unit id="tl_module.numberOfItems.1">
+        <source>Here you can limit the number of items. Set to 0 to show all.</source>
+        <target>Aquí puedes limitar el número de items. Usa 0 para mostrar todos.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.0">
+        <source>Protect module</source>
+        <target>Proteger módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected.1">
+        <source>Show the module to certain member groups only.</source>
+        <target>Mostrar el módulo solo a ciertos grupos de miembros.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.0">
+        <source>Allowed member groups</source>
+        <target>Miembros de grupos permitidos</target>
+      </trans-unit>
+      <trans-unit id="tl_module.groups.1">
+        <source>These groups will be able to see the module.</source>
+        <target>Aquí puedes escoger a qué grupos les será permitido ver el módulo.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.0">
+        <source>Show to guests only</source>
+        <target>Mostrar sólo a los invitados</target>
+      </trans-unit>
+      <trans-unit id="tl_module.guests.1">
+        <source>Hide the module if a member is logged in.</source>
+        <target>Esconder el módulo a miembros registrados.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.0">
+        <source>CSS ID/class</source>
+        <target>ID de la hoja de estilo y clase</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cssID.1">
+        <source>Here you can set an ID and one or more classes.</source>
+        <target>Aquí puedes introducir una ID para la hoja de estilo (atributo id) y una o más clases de hoja de estilos (atributos clase) para poder dar formato al elemento del modulo utilizando CSS.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.0">
+        <source>Space in front and after</source>
+        <target>Espaciado delante y detrás</target>
+      </trans-unit>
+      <trans-unit id="tl_module.space.1">
+        <source>Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
+        <target>Por favor introduce en píxeles el espaciado delante y detrás del módulo.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Deshabilitar pregunta de seguridad</target>
+      </trans-unit>
+      <trans-unit id="tl_module.disableCaptcha.1">
+        <source>Here you can disable the security question (not recommended).</source>
+        <target>Aqui puedes deshabilitar la pregunta de seguridad (no es recomendado).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.0">
+        <source>Member groups</source>
+        <target>Grupos de miembros</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_groups.1">
+        <source>Here you can assign the user to one or more groups.</source>
+        <target>Cada usuario que no es un administrador hereda todos los permisos de un grupo de usuarios. Por ello, cada usuario debe ser miembro de al menos un grupo! Si un usuario es miembro de más de un grupo, se combinan los permisos entre ellos.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.0">
+        <source>Allow login</source>
+        <target>Permitir conexión</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_allowLogin.1">
+        <source>Allow the new user to log into the front end.</source>
+        <target>Si seleccionas esta opción, el nuevo usuario podrá conectarse con su nombre de usuario y contraseña.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.0">
+        <source>Skip username</source>
+        <target>Saltear nombre de usuario</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_skipName.1">
+        <source>Do not require the username to request a new password.</source>
+        <target>No se requiere un nombre de usuario para solicitar una nueva contraseña.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.0">
+        <source>Mode</source>
+        <target>Modalidad</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_close.1">
+        <source>Here you can define how to handle the deletion.</source>
+        <target>Permite definir cómo responder a las solicitudes de eliminación.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.0">
+        <source>Create a home directory</source>
+        <target>Crear directorio principal</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_assignDir.1">
+        <source>Create a home directory from the registered username.</source>
+        <target>Selecciona esta opción para crear automáticamente un directorio principal del nombre de usuario</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.0">
+        <source>Home directory path</source>
+        <target>Directorio principal</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_homeDir.1">
+        <source>Please select the parent folder from the files directory.</source>
+        <target>Por favor selecciona el directorio del que colgará el directorio principal del usuario.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.0">
+        <source>Send activation e-mail</source>
+        <target>Enviar e-mail de activación</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_activate.1">
+        <source>Send an activation e-mail to the registered e-mail address.</source>
+        <target>Selecciona esta opción para enviar un e-mail de activación de cuenta al usuario registrado</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.0">
+        <source>Confirmation page</source>
+        <target>Activación saltar a página</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_jumpTo.1">
+        <source>Please choose the page to which users will be redirected after the request has been completed.</source>
+        <target>Por favor selecciona la página a la que será redirigido el usuario cuando se active su cuenta.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.0">
+        <source>Activation message</source>
+        <target>E-mail de activación</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_text.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any input field (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>Por favor introduce el texto del e-mail de activación. Puedes utilizar cualquier campo de entrada como comodín (por ejemplo &lt;em&gt;##lastname##&lt;/em&gt;) y también &lt;em&gt;##domain##&lt;/em&gt; (nombre de dominio actual) y &lt;em&gt;##link##&lt;/em&gt; (enlace de activacion).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.0">
+        <source>Password message</source>
+        <target>E-mail de confirmación</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reg_password.1">
+        <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any user property (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
+        <target>Por favor introduce el texto del e-mail de confirmación. Puedes utilizar cualquier campo de entrada como comodín (por ejemplo &lt;em&gt;##lastname##&lt;/em&gt;) y también &lt;em&gt;##domain##&lt;/em&gt; (nombre de dominio actual) y &lt;em&gt;##link##&lt;/em&gt; (enlace de activacion).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.title_legend">
+        <source>Title and type</source>
+        <target>Título y tipo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nav_legend">
+        <source>Navigation settings</source>
+        <target>Ajustes de navegación</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reference_legend">
+        <source>Reference page</source>
+        <target>Página de referencia</target>
+      </trans-unit>
+      <trans-unit id="tl_module.redirect_legend">
+        <source>Redirect settings</source>
+        <target>Ajustes de redirección</target>
+      </trans-unit>
+      <trans-unit id="tl_module.template_legend">
+        <source>Template settings</source>
+        <target>Ajustes de plantilla</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>Opciones de la imagen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.config_legend">
+        <source>Module configuration</source>
+        <target>Configuración de módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.include_legend">
+        <source>Include settings</source>
+        <target>Ajustes de include</target>
+      </trans-unit>
+      <trans-unit id="tl_module.source_legend">
+        <source>Files and folders</source>
+        <target>Archivos y carpetas</target>
+      </trans-unit>
+      <trans-unit id="tl_module.interact_legend">
+        <source>Interactive Flash movie</source>
+        <target>Película flash interactiva</target>
+      </trans-unit>
+      <trans-unit id="tl_module.html_legend">
+        <source>Text/HTML</source>
+        <target>Texto/HTML</target>
+      </trans-unit>
+      <trans-unit id="tl_module.protected_legend">
+        <source>Access protection</source>
+        <target>Acceso protegido</target>
+      </trans-unit>
+      <trans-unit id="tl_module.expert_legend">
+        <source>Expert settings</source>
+        <target>Configuración avanzada</target>
+      </trans-unit>
+      <trans-unit id="tl_module.email_legend">
+        <source>E-mail settings</source>
+        <target>Ajustes del e-mail</target>
+      </trans-unit>
+      <trans-unit id="tl_module.account_legend">
+        <source>Account settings</source>
+        <target>Ajustes de cuenta</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.0">
+        <source>Your registration on %s</source>
+        <target>Tu registro el %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.emailText.1">
+        <source>Thank you for your registration on ##domain##.
+
+Please click ##link## to complete your registration and to activate your account. If you did not request an account, please ignore this e-mail.
+</source>
+        <target>Gracias por registrar en ##domain##. Por favor haga cli en ##link## para completar su registro y activar su cuenta. Ignore este e-mail si no hizo la petición de alta.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.0">
+        <source>Your password request on %s</source>
+        <target>La petición de contraseña en %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.passwordText.1">
+        <source>You have requested a new password for ##domain##.
+
+Please click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.
+</source>
+        <target>Ha pedido una contraseña nueva para ##domain##. Por favor haga clic ##link## para introducir su nuevo password. Si no ha pedido una contraseña nueva, por favor contacte con el administrador de esta web.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.internal">
+        <source>Internal file</source>
+        <target>archivo interno</target>
+      </trans-unit>
+      <trans-unit id="tl_module.external">
+        <source>External URL</source>
+        <target>URL externa</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_deactivate">
+        <source>Deactivate account</source>
+        <target>Desactivar cuenta</target>
+      </trans-unit>
+      <trans-unit id="tl_module.close_delete">
+        <source>Irrevocably delete account</source>
+        <target>Eliminar cuenta de manera permanente</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.0">
+        <source>Add module</source>
+        <target>Añadir módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.new.1">
+        <source>Add a module</source>
+        <target>Añadir un módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.0">
+        <source>Module details</source>
+        <target>Detalles del módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.show.1">
+        <source>Show the details of module ID %s</source>
+        <target>Muestra los detalles del módulo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.0">
+        <source>Edit module</source>
+        <target>Editar módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.edit.1">
+        <source>Edit module ID %s</source>
+        <target>Editar el módulo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.0">
+        <source>Move module</source>
+        <target>Mover módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cut.1">
+        <source>Move module ID %s</source>
+        <target>Mover módulo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.0">
+        <source>Duplicate module</source>
+        <target>Duplicar módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.copy.1">
+        <source>Duplicate module ID %s</source>
+        <target>Duplica el módulo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.0">
+        <source>Delete module</source>
+        <target>Eliminar módulo</target>
+      </trans-unit>
+      <trans-unit id="tl_module.delete.1">
+        <source>Delete module ID %s</source>
+        <target>Elimina el módulo con ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.0">
+        <source>Edit theme</source>
+        <target>Editar tema</target>
+      </trans-unit>
+      <trans-unit id="tl_module.editheader.1">
+        <source>Edit the theme settings</source>
+        <target>Editar configuración del tema</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.0">
+        <source>Paste here</source>
+        <target>Copiar aquí</target>
+      </trans-unit>
+      <trans-unit id="tl_module.pasteafter.1">
+        <source>Paste after module ID %s</source>
+        <target>Copiar después del módulo con ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

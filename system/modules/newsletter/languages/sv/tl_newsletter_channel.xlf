@@ -1,0 +1,142 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter_channel.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_newsletter_channel.title.0">
+        <source>Title</source>
+        <target>Rubrik</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title.1">
+        <source>Please enter the title of the channel.</source>
+        <target>Ange en titel på kanalen.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Omdirigera till</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.jumpTo.1">
+        <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>
+        <target>Välj den sida som innehåller nyhetsbrevsläsaren som besökare kommer att omdirigeras till när dom klickar på ett nyhetsbrev.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.0">
+        <source>Custom SMTP server</source>
+        <target>Egen SMTP-server</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.useSMTP.1">
+        <source>Use a custom SMTP server for sending newsletters.</source>
+        <target>Använd en egen SMTP-server för att skicka nyhetsbrev.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.0">
+        <source>SMTP hostname</source>
+        <target>SMTP-host</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpHost.1">
+        <source>Please enter the host name of the SMTP server.</source>
+        <target>Ange hostnamnet på din SMTP-server (standard är localhost).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.0">
+        <source>SMTP username</source>
+        <target>SMTP-användarnamn</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpUser.1">
+        <source>Here you can enter the SMTP username.</source>
+        <target>Om din SMTP-server kräver inloggning, ange användarnamnet här.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.0">
+        <source>SMTP password</source>
+        <target>SMTP-lösenord</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPass.1">
+        <source>Here you can enter the SMTP password.</source>
+        <target>Om din SMTP-server kräver inloggning, ange lösenordet här.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.0">
+        <source>SMTP encryption</source>
+        <target>SMTP-kryptering</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpEnc.1">
+        <source>Here you can choose an encryption method (SSL or TLS).</source>
+        <target>Här kan du välja en krypteringsmetod (SSL eller TLS).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.0">
+        <source>SMTP port number</source>
+        <target>SMTP-port</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtpPort.1">
+        <source>Please enter the port number of the SMTP server.</source>
+        <target>Ange porten på din SMTP-server (standard är 25 eller 465 för SSL).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.0">
+        <source>Revision date</source>
+        <target>Ändringsdatum</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum och tid för senaste ändringen.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.title_legend">
+        <source>Title and redirect</source>
+        <target>Titel och omdirigering</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.smtp_legend">
+        <source>SMTP configuration</source>
+        <target>SMTP-konfiguration</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.0">
+        <source>New channel</source>
+        <target>Ny nyhetskanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.new.1">
+        <source>Create a new channel</source>
+        <target>Skapa en ny nyhetskanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.0">
+        <source>Channel details</source>
+        <target>Visa nyhetskanaldetaljer</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.show.1">
+        <source>Show the details of channel ID %s</source>
+        <target>Visa detaljer för nyhetskanal med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.0">
+        <source>Edit channel</source>
+        <target>Redigera nyhetskanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.edit.1">
+        <source>Edit channel ID %s</source>
+        <target>Redigera nyhetskanal med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.0">
+        <source>Edit channel</source>
+        <target>Redigera nyhetskanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>Redigera nyhetskanalens inställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.0">
+        <source>Duplicate channel</source>
+        <target>Kopiera nyhetskanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.copy.1">
+        <source>Duplicate channel ID %s</source>
+        <target>Kopiera nyhetskanal med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.0">
+        <source>Delete channel</source>
+        <target>Ta bort nyhetskanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.delete.1">
+        <source>Delete channel ID %s</source>
+        <target>Ta bort nyhetskanal med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.0">
+        <source>Edit recipients</source>
+        <target>Redigera prenumeranter</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_channel.recipients.1">
+        <source>Edit the recipients of channel ID %s</source>
+        <target>Redigera prenumeranter för nyhetskanal med ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

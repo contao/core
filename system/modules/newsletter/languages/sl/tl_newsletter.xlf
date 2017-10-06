@@ -1,0 +1,266 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_newsletter.php" source-language="en" target-language="sl">
+    <body>
+      <trans-unit id="tl_newsletter.subject.0">
+        <source>Subject</source>
+        <target>Zadeva</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.subject.1">
+        <source>Please enter the newsletter subject.</source>
+        <target>Prosimo vpišite zadevo za vašo e-novico.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.alias.0">
+        <source>Newsletter alias</source>
+        <target>Nadomestno ime e-novice (alias).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.alias.1">
+        <source>The newsletter alias is a unique reference to the newsletter which can be called instead of its numeric ID.</source>
+        <target>Nadomestno ime e-novice (alias) je edinstvena referenca na e-novico, ki je lahko klicana namesto numerične številke ID.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.content.0">
+        <source>HTML content</source>
+        <target>HTML vsebina</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.content.1">
+        <source>Here you can enter the HTML content of the newsletter. Use the wildcard &lt;em&gt;##email##&lt;/em&gt; to insert the recipient's e-mail address.</source>
+        <target>Tukaj lahko vpišete HTML vsebino e-novice. Uporabite &quot;wildcard&quot; &lt;em&gt;##email##&lt;/em&gt; za vstavljanje prejemnikovega e-mail naslova.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text.0">
+        <source>Text content</source>
+        <target>Tekst vsebina</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text.1">
+        <source>Here you can enter the text content of the newsletter. Use the wildcard &lt;em&gt;##email##&lt;/em&gt; to insert the recipient's e-mail address.</source>
+        <target>Tukaj lahko vpišete tekstovno vsebino e-novice. Uporabite &quot;wildcard&quot; &lt;em&gt;##email##&lt;/em&gt; za vstavljanje prejemnikovega e-mail naslova.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.addFile.0">
+        <source>Add attachments</source>
+        <target>Dodaj priponko</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.addFile.1">
+        <source>Attach one or more files to the newsletter.</source>
+        <target>E-novici dodajte eno ali več datotek.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.files.0">
+        <source>Attachments</source>
+        <target>Priponke</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.files.1">
+        <source>Please choose the files to be attached from the files directory.</source>
+        <target>Prosimo izberite datoteke iz drevesne strukture, ki jih želite pripeti v e-novico.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template.0">
+        <source>E-mail template</source>
+        <target>Email predloga</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template.1">
+        <source>Here you can choose the e-mail template.</source>
+        <target>Tukaj lahko izberete e-mail predlogo.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendText.0">
+        <source>Send as plain text</source>
+        <target>Pošlji kot golo besedilo</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendText.1">
+        <source>Send the newsletter as plain text e-mail without the HTML content.</source>
+        <target>Pošljite e-novico kot golo besedilo brez HTML vsebine.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.externalImages.0">
+        <source>External images</source>
+        <target>Zunanje slike</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.externalImages.1">
+        <source>Do not embed images in HTML newsletters.</source>
+        <target>Ne vključuj slik HTML e-novice.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.senderName.0">
+        <source>Sender name</source>
+        <target>Pošiljateljevo ime</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.senderName.1">
+        <source>Here you can enter the sender's name.</source>
+        <target>Tukaj lahko vpišete pošiljateljevo ime.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sender.0">
+        <source>Sender address</source>
+        <target>Pošiljateljev naslov</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sender.1">
+        <source>Here you can enter a custom sender address.</source>
+        <target>Tukaj lahko vneste pošiljateljev e-mail. Če ne vnesete, bo uporabljen e-naslov administratorja.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailsPerCycle.0">
+        <source>Mails per cycle</source>
+        <target>E-sporočila na en cikel</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailsPerCycle.1">
+        <source>The sending process is split into several cycles to prevent the script from timing out.</source>
+        <target>Potek pošiljanja je deljen na več ciklov. S tem preprečimo skripti predolgo izvajanje in posledično prekinitev s strani strežnika.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.timeout.0">
+        <source>Timeout in seconds</source>
+        <target>Pavza v sekundah</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.timeout.1">
+        <source>Here you can modify the waiting time between each cycle to control the number of e-mails per minute.</source>
+        <target>Tukaj lahko določite čas čakanja med vsakim ciklom za kontrolo števila poslanih e-mailov na minuto.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.start.0">
+        <source>Offset</source>
+        <target>Začetek cikla</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.start.1">
+        <source>In case the sending process is interrupted, you can enter a numeric offset here to continue with a particular recipient. You can check how many mails have been sent in the &lt;em&gt;system/logs/newsletter_*.log&lt;/em&gt; file. E.g., if 120 mails have been sent, enter &quot;120&quot; to continue with the 121st recipient (counting starts at 0).</source>
+        <target>V primeru, da je bil postopek pošiljanja prekinjen, tu lahko vstavite številko cikla, s katerim želite nadaljevati. Štetje se začne z 0 za prvi cikel.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendPreviewTo.0">
+        <source>Send preview to</source>
+        <target>Pošlji predogled na</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendPreviewTo.1">
+        <source>Send the preview of the newsletter to this e-mail address.</source>
+        <target>Pošlji predogled e-novice na ta e-mail naslov.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.title_legend">
+        <source>Title and subject</source>
+        <target>Naslov in zadeva</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.html_legend">
+        <source>HTML content</source>
+        <target>HTML vsebina</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.text_legend">
+        <source>Text content</source>
+        <target>Tekst vsebina</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.attachment_legend">
+        <source>Attachments</source>
+        <target>Priponke</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.template_legend">
+        <source>Template settings</source>
+        <target>Nastavitve predloge</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.expert_legend">
+        <source>Expert settings</source>
+        <target>Napredne nastavitve</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sent">
+        <source>Sent</source>
+        <target>Poslano</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sentOn">
+        <source>Sent on %s</source>
+        <target>Poslano na %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.notSent">
+        <source>Not sent yet</source>
+        <target>Še ni poslano</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.mailingDate">
+        <source>Mailing date</source>
+        <target>Datum pošiljanja</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.confirm">
+        <source>The newsletter has been sent to %s recipients.</source>
+        <target>E-novica je bila poslana na %s prejemnikov.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.rejected">
+        <source>%s invalid e-mail address(es) has/have been disabled (see system log).</source>
+        <target>%s neveljaven(ih) e-mail naslov(ov) je bil(o) onemogočen(ih).</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.error">
+        <source>There are no active subscribers to the channel.</source>
+        <target>Trenutno ni aktivnih naročnikov na to vrsto e-novic.</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.from">
+        <source>From</source>
+        <target>Od</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.attachments">
+        <source>Attachments</source>
+        <target>Priponke</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.preview">
+        <source>Send preview</source>
+        <target>Pošlji predogled</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.sendConfirm">
+        <source>Do you really want to send the newsletter?</source>
+        <target>Res želite odposlati e-novico?</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.new.0">
+        <source>New newsletter</source>
+        <target>Nov časopis</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.new.1">
+        <source>Create a new newsletter</source>
+        <target>Ustvari novo e-novico</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.show.0">
+        <source>Newsletter details</source>
+        <target>Podrobnosti e-novice</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.show.1">
+        <source>Show the details of newsletter ID %s</source>
+        <target>Prikaži podrobnosti e-novice ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.edit.0">
+        <source>Edit newsletter</source>
+        <target>Uredi e-novico</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.edit.1">
+        <source>Edit newsletter ID %s</source>
+        <target>Uredi e-novico ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.copy.0">
+        <source>Duplicate newsletter</source>
+        <target>Kopiraj e-novico</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.copy.1">
+        <source>Duplicate newsletter ID %s</source>
+        <target>Kopiraj e-novico ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.cut.0">
+        <source>Move newsletter</source>
+        <target>Premakni e-novico</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.cut.1">
+        <source>Move newsletter ID %s</source>
+        <target>Premakni e-novico ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.delete.0">
+        <source>Delete newsletter</source>
+        <target>Izbriši e-novico</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.delete.1">
+        <source>Delete newsletter ID %s</source>
+        <target>Izbriši e-novico ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.editheader.0">
+        <source>Edit channel</source>
+        <target>Uredi vrsto e-novice</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.editheader.1">
+        <source>Edit the channel settings</source>
+        <target>Uredi nastavitve za vrsto e-novice</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.pasteafter.0">
+        <source>Paste into this channel</source>
+        <target>Prilepi v ta kanal</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.pasteafter.1">
+        <source>Paste after newsletter ID %s</source>
+        <target>Prilepi za e-novico ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.send.0">
+        <source>Send newsletter</source>
+        <target>Pošlji e-novico</target>
+      </trans-unit>
+      <trans-unit id="tl_newsletter.send.1">
+        <source>Send newsletter ID %s</source>
+        <target>Pošlji e-novico ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

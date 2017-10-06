@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_user.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_user.news.0">
+        <source>Allowed archives</source>
+        <target>Nyhetsarkiv</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news.1">
+        <source>Here you can grant access to one or more news archives.</source>
+        <target>Ange vilka nyhetsarkiv som användaren ska ha tillgång till.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.0">
+        <source>News permissions</source>
+        <target>Nyhetsrättigheter</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.1">
+        <source>Here you can define the news permissions.</source>
+        <target>Här kan du definiera användarens behörigheter vid hantering av nyheter.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>Tillåtna RSS-flöden</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.1">
+        <source>Here you can grant access to one or more news feeds.</source>
+        <target>Här kan du tilldela åtkomst till ett eller flera nyhetsflöden.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>RSS-flöden rättigheter</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.1">
+        <source>Here you can define the news feed permissions.</source>
+        <target>Här kan du tilldela åtkomst till nyhetsflöden.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news_legend">
+        <source>News permissions</source>
+        <target>Nyhetsrättigheter</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

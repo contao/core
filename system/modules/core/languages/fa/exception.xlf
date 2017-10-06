@@ -1,0 +1,170 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="XPT.error">
+        <source>An error occurred</source>
+        <target>خطاء رخ داد!</target>
+      </trans-unit>
+      <trans-unit id="XPT.matter">
+        <source>What's the matter?</source>
+        <target>موضوع چیست؟</target>
+      </trans-unit>
+      <trans-unit id="XPT.howToFix">
+        <source>How can I fix the issue?</source>
+        <target>چگونه می‌توانم موضوع را حل کنم؟</target>
+      </trans-unit>
+      <trans-unit id="XPT.more">
+        <source>Tell me more, please</source>
+        <target>لطفا، به من بیشتر بگو</target>
+      </trans-unit>
+      <trans-unit id="XPT.hint">
+        <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>برای سفارشی کردن این یادداشت، یک پرونده قالب سفارشی با نام &lt;em&gt;%s&lt;/em&gt; ایجاد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorOccurred">
+        <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>خطائی در هنگام اجاری این اسکریپت رخ داد. بعضی چیزها به درستی کار نمی‌کنند.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixOne">
+        <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>پرونده &lt;code&gt;system/logs/error.log&lt;/code&gt; را باز نمایید و پیغام خطای مرتبط (معمولا آخرین سطر) را جستجو نمایید. همچنین شما می‌توانید کد زیر را آخرین سطر پرونده تنظیمات محلی اضافه نموده و این برگه را دوباره بارگذاری نمایید:</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixTwo">
+        <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>با این حال، لطفا آگاه باشیدکه &lt;strong&gt;هرکسی&lt;/strong&gt; از این پس قادر به دیدن این پیغام‌های خطاء در وب‌سایت شما خواهد بود.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorExplain">
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>اجرای اسکریپت متوقف شد، زیرا بعضی چیزها به درستی کار نمی‌کنند. پیغام خطای اصلی با این پیغام برای دلایل امنیتی پنهان شده است و می‌تواند در پرونده &lt;code&gt;system/logs/error.log&lt;/code&gt; پیدا شود (بالا را ببینید). اگر شما این پیغام خطاء را درک نمی‌کنید یا نمی‌دانید چگونه مشکل را برطرف نمایید، &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;پرسش و پاسخ کانتائو&lt;/a&gt; را جستجو کنید یا از &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;برگه پشتیبانی کانتائو&lt;/a&gt; بازدید نمایید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.requestToken">
+        <source>Invalid request token</source>
+        <target>توکن درخواست نامعتبر</target>
+      </trans-unit>
+      <trans-unit id="XPT.invalidToken">
+        <source>The request token could not be verified.</source>
+        <target>توکن درخواستی نمی‌تواند تایید شود.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenRetry">
+        <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>لطفا &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;این پیوند&lt;/a&gt; را دوباره کلیک نمایید. از دکمه برگشت مرورگر استفاده نکنید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainOne">
+        <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>این خطا زمانی رخ می‌دهد که درخواست POSTی بدون توکن تصدیق شده معتبر وجود داشته باشد. در کانتائو 2.10، بررسی ارجاعی با سامانه توکن درخواستی جایگزین شده است. اگر این مشکل ادامه یابد، شما ممکن است از یک افزونه غیرسازگار استفاده می‌کنید یا نصب کانتائو را به درستی روزآمد نکرده‌اید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainTwo">
+        <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>برای اطلاعات بیشتر، &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;پرسش و پاسخ کانتائو&lt;/a&gt; را جستجو نمایید و یا &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;پشتیبانی کانتائو&lt;/a&gt; را مشاهده کنید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incomplete">
+        <source>Incomplete installation</source>
+        <target>نصب ناقص</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteInstallation">
+        <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>نصب تکمیل نشده است، بنابراین کانتائو به درستی کار نخواهد کرد.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixOne">
+        <source>Point your browser to the following URL:</source>
+        <target>با مرورگر خود را به نشانی وب زیر بروید:</target>
+      </trans-unit>
+      <trans-unit id="XPT.installPath">
+        <source>path-to-installation</source>
+        <target>مسیر-نصب</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixTwo">
+        <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>این شما را به ابزار نصب کانتائو برده و شما را در حین مراحل نصب راهنمایی خواهد کرد.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>لطفا برای اطلاعات بیشتر به &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;راهنمای کانتائو&lt;/a&gt; مراجعه نمایید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFound">
+        <source>Page not found</source>
+        <target>برگه پیدا نشد</target>
+      </trans-unit>
+      <trans-unit id="XPT.pageNotFound">
+        <source>The page you have requested does not exist under this domain.</source>
+        <target>برگه‌ای که شما درخواست کرده‌اید در این دامنه وجود ندارد.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFoundFix">
+        <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>رفتن به &lt;a href=&quot;%s&quot;&gt;مرحله بالاتر&lt;/a&gt; را سعی کنید و از تابع جستجو (در صورت وجود) برای پیدا کردن برگه‌ای که به دنبال آن هستید استفاده نمایید.شما همچنین ممکن است با &lt;a href=&quot;%s&quot;&gt;مدیر وب تماس بگیرید&lt;/a&gt; و به او اجازه دهید که بداند چیز نادرستی وجود دارد.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForward">
+        <source>Forward page not found</source>
+        <target>برگه‌ی  پیش پیدا نشد</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardPage">
+        <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>برنامه تنظیم شده است تا درخواست را به برگه دیگری ارجاع دهد، با این حال، برگه مقصد وجود ندارد یا هنوز منتشر نشده است.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardFix">
+        <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>این چیزی است که لازم است توسط مدیریت وب‌سایت درست شود. اگر شما یک بازدیدکننده هستید، کاری به جزء &lt;a href=&quot;%s&quot;&gt;تماس با مدیر وب&lt;/a&gt; و اجازه دادن به او تا بداند که چیز نادرستی اینجا وجود دارد، نمی‌توانید انجام دهید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRoot">
+        <source>No root page found</source>
+        <target>برگه‌ی ریشه پیدا نشد</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootPage">
+        <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>اینجا برگه ریشه تارنمایی که با زبان و/یا نام دامنه درخواستی مطابقت داشته باشد وجود ندارد.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootFix">
+        <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>اگر شما به صراحت زبانی را نهاده‌اید، سعی کنید و ببینید که شما بازگردانی شده‌اید. در غیر این صورت &lt;a href=&quot;%s&quot;&gt;با مدیر وب تماس بگیرید&lt;/a&gt;  و اجازه دهید که او بداند که اینجا چیز نادرستی وجود دارد.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayout">
+        <source>No layout specified</source>
+        <target>هیچ چیدمانی مشخص نشده است</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutSpecified">
+        <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>برگه‌ای که شما درخواست کرده‌اید هنور چیدمانی به آن اختصاص داده نشده است.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutFix">
+        <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>مطمئن شوید که شما برای برگه ریشه وب‌سایت در ساختار وب‌سایت یک چیدمان اختصاص داده‌اید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>برای اطلاعات بیشتر لطفا به &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;راهنمای کانتائو&lt;/a&gt; مراجعه نمایید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActive">
+        <source>No active pages found</source>
+        <target>برگه‌ی فعالی پیدا نشد </target>
+      </trans-unit>
+      <trans-unit id="XPT.noActivePages">
+        <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>درخواست شما به تارنمایی نگاشته شده است که هنوز دارای هیچ برگه منتشر شده‌ای نیست.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActiveFix">
+        <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>به احتمال زیاد، وب‌سایت همچنان در حال توسعه است و در چند روز آینده آنلاین خواهد بود. اگر هنوز شما فکر می‌کنید که چیز نادرسی وجود دارد، &lt;a href=&quot;%s&quot;&gt;با مدیر وب تماس بگیرید&lt;/a&gt; و به او اجازه دهید تا بداند.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbidden">
+        <source>Forbidden</source>
+        <target>ممنوع</target>
+      </trans-unit>
+      <trans-unit id="XPT.notAuthenticated">
+        <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>شما برای دسترسی به برگه درخواستی یا تایید نشده‌اید یا مجاز نیستید.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbiddenFix">
+        <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>اگر شما وارد نشده‌اید، سعی کنید و به دنبال فرم ورود بگردید. اگر فرم ورودی وجود ندارد یا اگر شما  هم اکنون وارد شده‌اید، &lt;a href=&quot;%s&quot;&gt;با مدیر وب تماس بگیرید&lt;/a&gt; و اجازه دهید تا او بداند که چیز نادرستی وجود دارد.</target>
+      </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>ما به زودی باز خواهیم گشت</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>این وب‌سایت در حال حاضر برای بروزرسانی غیرفعال می‌باشد. لطفا بعدا مراجعه نمایید.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

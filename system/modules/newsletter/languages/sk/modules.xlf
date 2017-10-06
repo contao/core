@@ -1,0 +1,54 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/modules.php" source-language="en" target-language="sk">
+    <body>
+      <trans-unit id="MOD.newsletter.0">
+        <source>Newsletters</source>
+        <target>Odoberanie správ</target>
+      </trans-unit>
+      <trans-unit id="MOD.newsletter.1">
+        <source>Manage subscriptions and send newsletters</source>
+        <target>Tento modul umožňuje spravovať odoberanie správ.</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_newsletter_recipients">
+        <source>Recipients</source>
+        <target>Príjemcovia</target>
+      </trans-unit>
+      <trans-unit id="FMD.newsletter">
+        <source>Newsletter</source>
+        <target>Odoberanie správ</target>
+      </trans-unit>
+      <trans-unit id="FMD.subscribe.0">
+        <source>Subscribe</source>
+        <target>Prihlásiť sa k odberu</target>
+      </trans-unit>
+      <trans-unit id="FMD.subscribe.1">
+        <source>Generates a form to subscribe to one or more channels</source>
+        <target>Tento modul umožňuje návštevníkom stránky prihlásiť sa na odoberanie niektorých kanálov.</target>
+      </trans-unit>
+      <trans-unit id="FMD.unsubscribe.0">
+        <source>Unsubscribe</source>
+        <target>Odhlásiť sa z odberu</target>
+      </trans-unit>
+      <trans-unit id="FMD.unsubscribe.1">
+        <source>Generates a form to unsubscribe from one or more channels</source>
+        <target>Tento modul umožňuje návštevníkom stránky odhlásiť sa z niektorých kanálov.</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.0">
+        <source>Newsletter list</source>
+        <target>Odoberanie správ - Zoznam</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_list.1">
+        <source>Adds a list of newsletters to the page</source>
+        <target>Tento modul zobrazí newsletter správy viacerých kanálov.</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.0">
+        <source>Newsletter reader</source>
+        <target>Odoberanie správ - Čítačka</target>
+      </trans-unit>
+      <trans-unit id="FMD.nl_reader.1">
+        <source>Shows the details of a newsletter</source>
+        <target>Tento modul ukáže jedenu správu z newslettera.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

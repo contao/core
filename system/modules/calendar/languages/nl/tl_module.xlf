@@ -1,0 +1,218 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_module.php" source-language="en" target-language="nl">
+    <body>
+      <trans-unit id="tl_module.cal_calendar.0">
+        <source>Calendars</source>
+        <target>Kalenders</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_calendar.1">
+        <source>Please select one or more calendars.</source>
+        <target>Kies een of meerdere kalenders.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.0">
+        <source>Shortened view</source>
+        <target>Verkorte notatie</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_noSpan.1">
+        <source>Show events only once even if they span multiple days.</source>
+        <target>Toont evenementen slechts eenmaal, ook als ze meerdere dagen overbruggen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.0">
+        <source>Week start day</source>
+        <target>Startdag van de week</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_startDay.1">
+        <source>Here you can choose the week start day.</source>
+        <target>Kies hier de eerste dag van de week.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.0">
+        <source>Event list format</source>
+        <target>Indeling evenementenlijst</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_format.1">
+        <source>Here you can choose the event list format.</source>
+        <target>Kies een indeling voor de evenementenlijst.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.0">
+        <source>Ignore URL parameters</source>
+        <target>Negeer URL parameters</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ignoreDynamic.1">
+        <source>Do not switch the time period based on the date/month/year URL parameters.</source>
+        <target>Schakel niet over op een tijdsperiode gebaseerd op de datum/maand/jaar URL parameters.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.0">
+        <source>Sort order</source>
+        <target>Sorteer volgorde</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_order.1">
+        <source>Here you can choose the sort order.</source>
+        <target>Hier kunt u de sorteervolgorde kiezen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.0">
+        <source>Event reader module</source>
+        <target>Evenementen lezer module</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_readerModule.1">
+        <source>Automatically switch to the event reader if an event has been selected.</source>
+        <target>Schakelt automatisch over naar de evenementen lezer als een gebeurtenis is geselecteerd.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.0">
+        <source>Number of events</source>
+        <target>Aantal evenementen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_limit.1">
+        <source>Here you can limit the number of events. Enter 0 to show all.</source>
+        <target>Voer het maximaal aantal evenementen in. Vul 0 in om alles te tonen.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.0">
+        <source>Event template</source>
+        <target>Evenementen template</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_template.1">
+        <source>Here you can select the event template.</source>
+        <target>Selecteer hier een evenementen template.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.0">
+        <source>Calendar template</source>
+        <target>Kalender template</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_ctemplate.1">
+        <source>Here you can select the calendar template.</source>
+        <target>Hier kunt u de kalender template selecteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.0">
+        <source>Show number of events</source>
+        <target>Toon aantal evenementen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_showQuantity.1">
+        <source>Show the number of events of each month in the menu.</source>
+        <target>Toon het aantal evenementen van elke maand in het menu.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_list">
+        <source>Event list</source>
+        <target>Evenementenlijst</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_day">
+        <source>Day</source>
+        <target>Dag</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_month">
+        <source>Month</source>
+        <target>Maand</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_year">
+        <source>Year</source>
+        <target>Jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_all">
+        <source>All events</source>
+        <target>Alle evenementen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_upcoming">
+        <source>Upcoming events</source>
+        <target>Aankomende evenementen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_7">
+        <source>+ 1 week</source>
+        <target>+ 1 week</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_14">
+        <source>+ 2 weeks</source>
+        <target>+ 2 weken</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_30">
+        <source>+ 1 month</source>
+        <target>+ 1 maand</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_90">
+        <source>+ 3 months</source>
+        <target>+ 3 maanden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_180">
+        <source>+ 6 months</source>
+        <target>+ 6 maanden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_365">
+        <source>+ 1 year</source>
+        <target>+ 1 jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_two">
+        <source>+ 2 years</source>
+        <target>+2 jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_month">
+        <source>of the current month</source>
+        <target>van de huidige maand</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_cur_year">
+        <source>of the current year</source>
+        <target>van het huidige jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_month">
+        <source>of the next month</source>
+        <target>van de volgende maand</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_next_year">
+        <source>of the next year</source>
+        <target>van het volgende jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.next_all">
+        <source>All upcoming events</source>
+        <target>Alle aankomende evenementen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.cal_past">
+        <source>Past events</source>
+        <target>Afgelopen evenementen</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_7">
+        <source>- 1 week</source>
+        <target>- 1 week</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_14">
+        <source>- 2 weeks</source>
+        <target>- 2 weken</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_30">
+        <source>- 1 month</source>
+        <target>- 1 maand</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_90">
+        <source>- 3 months</source>
+        <target>- 3 maanden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_180">
+        <source>- 6 months</source>
+        <target>- 6 maanden</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_365">
+        <source>- 1 year</source>
+        <target>- 1 jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_two">
+        <source>- 2 years</source>
+        <target>- 2 jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_month">
+        <source>of the current month</source>
+        <target>van de huidige maand</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_cur_year">
+        <source>of the current year</source>
+        <target>van het huidige jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_month">
+        <source>of the previous month</source>
+        <target>van de vorige maand</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_prev_year">
+        <source>of the previous year</source>
+        <target>van het vorige jaar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.past_all">
+        <source>All past events</source>
+        <target>Alle afgelopen evenementen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

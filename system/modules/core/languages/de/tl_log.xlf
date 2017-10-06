@@ -1,0 +1,94 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_log.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_log.tstamp.0">
+        <source>Date</source>
+        <target>Datum</target>
+      </trans-unit>
+      <trans-unit id="tl_log.tstamp.1">
+        <source>Date and time of the log entry</source>
+        <target>Datum und Uhrzeit des Eintrags</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.0">
+        <source>Origin</source>
+        <target>Ursprung</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.1">
+        <source>Back end or front end</source>
+        <target>Backend oder Frontend</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.0">
+        <source>Category</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.1">
+        <source>Category of the action</source>
+        <target>Kategorie der Aktion</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.0">
+        <source>User</source>
+        <target>Benutzer</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.1">
+        <source>Name of the authenticated user</source>
+        <target>Name des angemeldeten Benutzers</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.0">
+        <source>Details</source>
+        <target>Details</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.1">
+        <source>Details of the log entry</source>
+        <target>Details des Log-Eintrags</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.0">
+        <source>Function</source>
+        <target>Funktion</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.1">
+        <source>Name of the initiating function</source>
+        <target>Name der auslösenden Funktion</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.0">
+        <source>IP address</source>
+        <target>IP-Adresse</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.1">
+        <source>IP address of the user</source>
+        <target>IP-Adresse des Benutzers</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.0">
+        <source>Browser</source>
+        <target>Browser</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.1">
+        <source>Name of the user agent</source>
+        <target>Name des Browsers</target>
+      </trans-unit>
+      <trans-unit id="tl_log.BE">
+        <source>Back end</source>
+        <target>Backend</target>
+      </trans-unit>
+      <trans-unit id="tl_log.FE">
+        <source>Front end</source>
+        <target>Frontend</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.0">
+        <source>Show details</source>
+        <target>Anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.1">
+        <source>Show the details of entry ID %s</source>
+        <target>Den Eintrag ID %s anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.0">
+        <source>Delete</source>
+        <target>Löschen</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.1">
+        <source>Delete entry ID %s</source>
+        <target>Eintrag ID %s löschen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

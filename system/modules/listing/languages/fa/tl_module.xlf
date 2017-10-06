@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/listing/languages/en/tl_module.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_module.list_table.0">
+        <source>Table</source>
+        <target>جدول</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_table.1">
+        <source>Please choose the source table.</source>
+        <target>لطفا جدول منبع را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.0">
+        <source>Fields</source>
+        <target>فیلدها</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_fields.1">
+        <source>Please enter a comma separated list of the fields you want to list.</source>
+        <target>لطفا یک فهرست جدا شده توسط کاما از فیلدهایی که می خواهید فهرست شوند را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.0">
+        <source>Condition</source>
+        <target>شرط</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>اینجا می‌توانید شرطی را برای پالایش نتایج وارد نمایید (برای نمونه &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.0">
+        <source>Searchable fields</source>
+        <target>فیلدهای قابل جستجو</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_search.1">
+        <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
+        <target>اینجا می‌توانید فهرست جدا شده توسط کاما از فیلدهایی که می خواهید قابل جستجو باشند را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.0">
+        <source>Order by</source>
+        <target>مرتب سازی بر اساس</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_sort.1">
+        <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
+        <target>اینجا می‌توانید فهرست جدا شده توسط کاما از فیلدهایی که می خواهید نتایج بر اساس آن ها مرتب شوند را وارد نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.0">
+        <source>Details page fields</source>
+        <target>فیلدهای برگه جزئیات</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info.1">
+        <source>Enter a comma separated list of the fields you want to show on the details page. Leave blank to disable the feature.</source>
+        <target>فهرست جدا شده توسط کاما از فیلدهاییکه می خواهیددر برگه جزئیات نمایش داده شوند را وارد نمایید. برای غیرفعال کردن این ویژگی خالی نگه دارید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.0">
+        <source>Details page condition</source>
+        <target>شرط برگه جزئیات</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_where.1">
+        <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
+        <target>اینجا می‌توانید شرطی را برای پالایش نتایج وارد نمایید (برای نمونه &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.0">
+        <source>List template</source>
+        <target>قالب فهرست</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_layout.1">
+        <source>Here you can select the list template.</source>
+        <target>اینجا می‌توانید قابل فهرست را انتخاب نمایید.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.0">
+        <source>Details page template</source>
+        <target>قالب برگه جزئیات</target>
+      </trans-unit>
+      <trans-unit id="tl_module.list_info_layout.1">
+        <source>Here you can select the details page template.</source>
+        <target>اینجا می‌توانید قالب برگه جزئیات را انتخاب نمایید.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

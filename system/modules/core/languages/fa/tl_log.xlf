@@ -1,0 +1,94 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_log.php" source-language="en" target-language="fa">
+    <body>
+      <trans-unit id="tl_log.tstamp.0">
+        <source>Date</source>
+        <target>تاریخ</target>
+      </trans-unit>
+      <trans-unit id="tl_log.tstamp.1">
+        <source>Date and time of the log entry</source>
+        <target>تاریخ و ساعت ورودی گزارش</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.0">
+        <source>Origin</source>
+        <target>منشاء</target>
+      </trans-unit>
+      <trans-unit id="tl_log.source.1">
+        <source>Back end or front end</source>
+        <target>بخش مدیریت یا بخش کاربری</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.0">
+        <source>Category</source>
+        <target>دسته‌بندی</target>
+      </trans-unit>
+      <trans-unit id="tl_log.action.1">
+        <source>Category of the action</source>
+        <target>دسته‌بندی عمل</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.0">
+        <source>User</source>
+        <target>کاربر</target>
+      </trans-unit>
+      <trans-unit id="tl_log.username.1">
+        <source>Name of the authenticated user</source>
+        <target>نام کاربر تایید شده</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.0">
+        <source>Details</source>
+        <target>جزئیات</target>
+      </trans-unit>
+      <trans-unit id="tl_log.text.1">
+        <source>Details of the log entry</source>
+        <target>جزئیات ورودی گزارش</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.0">
+        <source>Function</source>
+        <target>کارکرد</target>
+      </trans-unit>
+      <trans-unit id="tl_log.func.1">
+        <source>Name of the initiating function</source>
+        <target>نام کارکرد شروع</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.0">
+        <source>IP address</source>
+        <target>نشانی آی‌پی</target>
+      </trans-unit>
+      <trans-unit id="tl_log.ip.1">
+        <source>IP address of the user</source>
+        <target>نشانی آی‌پی کاربر</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.0">
+        <source>Browser</source>
+        <target>مرورگر</target>
+      </trans-unit>
+      <trans-unit id="tl_log.browser.1">
+        <source>Name of the user agent</source>
+        <target>نام عامل کاربر</target>
+      </trans-unit>
+      <trans-unit id="tl_log.BE">
+        <source>Back end</source>
+        <target>بخش مدیریت</target>
+      </trans-unit>
+      <trans-unit id="tl_log.FE">
+        <source>Front end</source>
+        <target>بخش کاربری</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.0">
+        <source>Show details</source>
+        <target>نمایش جزئیات</target>
+      </trans-unit>
+      <trans-unit id="tl_log.show.1">
+        <source>Show the details of entry ID %s</source>
+        <target>نمایش جزئیات ورودی شناسه‌ی %s</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.0">
+        <source>Delete</source>
+        <target>حذف</target>
+      </trans-unit>
+      <trans-unit id="tl_log.delete.1">
+        <source>Delete entry ID %s</source>
+        <target>حذف ورودی شناسه‌ی %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

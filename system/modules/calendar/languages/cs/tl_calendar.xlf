@@ -1,0 +1,202 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/tl_calendar.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_calendar.title.0">
+        <source>Title</source>
+        <target>Titulek</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title.1">
+        <source>Please enter the calendar title.</source>
+        <target>Prosím zadejte název kalendáře</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Přesměrovat na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.jumpTo.1">
+        <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
+        <target>Prosím zvolte stránku, na kterou budou přesměrování návštěvníci po kliknutí na událost.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.0">
+        <source>Enable comments</source>
+        <target>Povolit komentáře</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.allowComments.1">
+        <source>Allow visitors to comment events.</source>
+        <target>Dovolí návštěvníkům komentovat události.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.0">
+        <source>Notify</source>
+        <target>Zaslat upozornění</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Zvolte prosím osobu, která dostane vyrozumění mailem, že byl přidán komentář.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.0">
+        <source>Sort order</source>
+        <target>Seřadit podle</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Podle výchozího nastavení budou komentáře řazeny vzestupně, tedy od nejstaršího po nejnovější.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.0">
+        <source>Comments per page</source>
+        <target>Počet komentářů na stránku</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Počet komentářů na stránku. Zadejte 0, abyste jste vypli zalamování stránky.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.0">
+        <source>Moderate comments</source>
+        <target>Moderovat komentáře</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Schvalování komentářů před jejich publikováním na webové stránce.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Povolit BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Umožnit návštěvníkům formátovat jejich komentáře pomocí BBCode.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Vyžadovat přihlášení pro přidávání komentářů</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Povolit přidávat komentáře jen přihlášeným uživatelům.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Vypnout bezpečnostní otázku.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Použít tuto volbu jen tehdy, pokud smí přidávat komentáře jen autorizovaní uživatelé. V jiném případě je doporučeno nechat bezpečnostní otázku zapnutou.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.0">
+        <source>Protect calendar</source>
+        <target>Chránit kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected.1">
+        <source>Show events to certain member groups only.</source>
+        <target>Zobrazit údalost pouze určitému členu skupiny.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.0">
+        <source>Allowed member groups</source>
+        <target>Povolené členské skupiny</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.groups.1">
+        <source>These groups will be able to see the events in this calendar.</source>
+        <target>Zde můžete vybrat skupiny, kterým bude povoleno vidět tuto událost.</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum změny</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum a čas poslední změny</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.title_legend">
+        <source>Title and redirect page</source>
+        <target>Název a přesměrování</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.comments_legend">
+        <source>Comments</source>
+        <target>Komentáře</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.protected_legend">
+        <source>Access protection</source>
+        <target>Chráněný přístup</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>Kanál RSS</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_admin">
+        <source>System administrator</source>
+        <target>Administrátor systému</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_author">
+        <source>Author of the event</source>
+        <target>Autor události</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.notify_both">
+        <source>Author and system administrator</source>
+        <target>Autor a administrátor systému</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_teaser">
+        <source>Event teasers</source>
+        <target>Ukázka událostí</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.source_text">
+        <source>Full articles</source>
+        <target>Plné znění</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.0">
+        <source>New calendar</source>
+        <target>Nový kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.new.1">
+        <source>Create a new calendar</source>
+        <target>Vytvořit nový kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.0">
+        <source>Calendar details</source>
+        <target>Zobrazit podrobnosti</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.show.1">
+        <source>Show the details of calendar ID %s</source>
+        <target>Zobrazit podrobnosti ke kalendáři ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.0">
+        <source>Edit calendar</source>
+        <target>Editovat kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.edit.1">
+        <source>Edit calendar ID %s</source>
+        <target>Editovat kalendář ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.0">
+        <source>Edit calendar</source>
+        <target>Editovat kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.editheader.1">
+        <source>Edit the calendar settings</source>
+        <target>Editovat tento kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.0">
+        <source>Duplicate calendar</source>
+        <target>Kopírovat kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.copy.1">
+        <source>Duplicate calendar ID %s</source>
+        <target>Kopírovat kalendář ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.0">
+        <source>Delete calendar</source>
+        <target>Smazat kalendář</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.delete.1">
+        <source>Delete calendar ID %s</source>
+        <target>Smazat kalendář ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.0">
+        <source>RSS feeds</source>
+        <target>Kanály RSS</target>
+      </trans-unit>
+      <trans-unit id="tl_calendar.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>Spravovat kanály RSS</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

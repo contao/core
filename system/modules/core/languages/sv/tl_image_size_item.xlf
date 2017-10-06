@@ -1,0 +1,122 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size_item.php" source-language="en" target-language="sv">
+    <body>
+      <trans-unit id="tl_image_size_item.media.0">
+        <source>Media query</source>
+        <target>Mediafrågor</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.media.1">
+        <source>Here you can define when to use the image size, e.g. &lt;em&gt;(max-width: 600px)&lt;/em&gt;.</source>
+        <target>Här kan du definiera när bildstorleken ska användas, t.ex. &lt;em&gt;(max-width: 600px)&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.invisible.0">
+        <source>Invisible</source>
+        <target>Osynlig</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.invisible.1">
+        <source>Do not use the image size definition.</source>
+        <target>Använd ej bildstorleksdefinitionen.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.0">
+        <source>Revision date</source>
+        <target>Ändringsdatum</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum och tid för senaste ändringen.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.title_legend">
+        <source>Image size settings</source>
+        <target>Bildstorleksinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.expert_legend">
+        <source>Expert settings</source>
+        <target>Expertinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.visibility_legend">
+        <source>Visibility</source>
+        <target>Synlighet</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.0">
+        <source>New image size media query</source>
+        <target>Ny mediafråga för bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.1">
+        <source>Create a new image size media query</source>
+        <target>Skapa en ny mediafråga för bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.0">
+        <source>Image size media query details</source>
+        <target>Detaljer för mediafråga för bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.1">
+        <source>Show the details of image size media query ID %s</source>
+        <target>Visa detaljer för mediafråga för bildstorlek med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.0">
+        <source>Edit image size media query</source>
+        <target>Redigera mediafråga för bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.1">
+        <source>Edit image size media query ID %s</source>
+        <target>Redigera mediafråga för bildstorlek med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.0">
+        <source>Move image size media query</source>
+        <target>Flytta mediafråga för bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.1">
+        <source>Move image size media query ID %s</source>
+        <target>Flytta mediafråga för bildstorlek med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.0">
+        <source>Duplicate image size media query</source>
+        <target>Kopiera mediafråga för bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.1">
+        <source>Duplicate image size media query ID %s</source>
+        <target>Kopiera mediafråga för bildstorlek med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.0">
+        <source>Delete image size media query</source>
+        <target>Radera mediafråga för bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.1">
+        <source>Delete image size media query ID %s</source>
+        <target>Radera mediafråga för bildstorlek med ID%s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.0">
+        <source>Edit image size</source>
+        <target>Redigera bildstorlek</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.1">
+        <source>Edit the image size settings</source>
+        <target>Redigera bildstorleksinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.0">
+        <source>Paste at the top</source>
+        <target>Klistra in efter rubriken</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.1">
+        <source>Paste after image size media query ID %s</source>
+        <target>Klistra in efter mediafråga för bildstorlek med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.0">
+        <source>Add new at the top</source>
+        <target>Skapa en ny formatdefinition i början</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.1">
+        <source>Add new after image size media query ID %s</source>
+        <target>Lägg till ny efter mediafråga för bildstorlek med ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.0">
+        <source>Toggle visibility</source>
+        <target>Växla synlighet</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.1">
+        <source>Toggle the visibility of image size media query ID %s</source>
+        <target>Växla synlighet för mediafråga för bildstorlek med ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

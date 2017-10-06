@@ -1,0 +1,54 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/modules.php" source-language="en" target-language="ru">
+    <body>
+      <trans-unit id="MOD.calendar.0">
+        <source>Events</source>
+        <target>События</target>
+      </trans-unit>
+      <trans-unit id="MOD.calendar.1">
+        <source>Manage events and display them in a calendar or event list</source>
+        <target>Управление событиями и отображение событий в календаре или списке событий</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_calendar_feed">
+        <source>Calendar feeds</source>
+        <target>RSS-каналы календаря</target>
+      </trans-unit>
+      <trans-unit id="FMD.events">
+        <source>Events</source>
+        <target>События</target>
+      </trans-unit>
+      <trans-unit id="FMD.calendar.0">
+        <source>Calendar</source>
+        <target>Календарь</target>
+      </trans-unit>
+      <trans-unit id="FMD.calendar.1">
+        <source>Adds a calendar to the page</source>
+        <target>Добавляет календарь на страницу</target>
+      </trans-unit>
+      <trans-unit id="FMD.eventlist.0">
+        <source>Event list</source>
+        <target>Список событий</target>
+      </trans-unit>
+      <trans-unit id="FMD.eventlist.1">
+        <source>Adds a list of events to the page</source>
+        <target>Добавляет список событий на страницу.</target>
+      </trans-unit>
+      <trans-unit id="FMD.eventreader.0">
+        <source>Event reader</source>
+        <target>Просмотрщик событий</target>
+      </trans-unit>
+      <trans-unit id="FMD.eventreader.1">
+        <source>Shows the details of an event</source>
+        <target>Показывает детали события</target>
+      </trans-unit>
+      <trans-unit id="FMD.eventmenu.0">
+        <source>Event list menu</source>
+        <target>Меню списка событий</target>
+      </trans-unit>
+      <trans-unit id="FMD.eventmenu.1">
+        <source>Generates a navigation menu to browse the event list</source>
+        <target>Создает меню навигации для просмотра списка событий</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

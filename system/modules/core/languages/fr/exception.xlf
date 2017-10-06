@@ -1,0 +1,170 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en" target-language="fr">
+    <body>
+      <trans-unit id="XPT.error">
+        <source>An error occurred</source>
+        <target>Une erreur s'est produite</target>
+      </trans-unit>
+      <trans-unit id="XPT.matter">
+        <source>What's the matter?</source>
+        <target>Quel est le problème ?</target>
+      </trans-unit>
+      <trans-unit id="XPT.howToFix">
+        <source>How can I fix the issue?</source>
+        <target>Comment puis-je résoudre ce problème ?</target>
+      </trans-unit>
+      <trans-unit id="XPT.more">
+        <source>Tell me more, please</source>
+        <target>Dites-m'en plus, s'il vous plaît.</target>
+      </trans-unit>
+      <trans-unit id="XPT.hint">
+        <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Pour personnaliser cette notice, créer un modèle personnalisé nommé &lt;em&gt;%s&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorOccurred">
+        <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>Une erreur s'est produite lors de l'exécution de ce script. Quelque chose ne fonctionne pas correctement.</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixOne">
+        <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>Ouvrez le fichier &lt;code&gt;system/logs/error.log&lt;/code&gt; et trouvez le message d'erreur associé (généralement le dernier). Vous pouvez également ajouter la ligne suivante dans le fichier de configuration locale et recharger cette page :</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorFixTwo">
+        <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
+        <target>Par contre, soyez conscient s'il vous plaît que &lt;strong&gt;n'importe qui&lt;/strong&gt; sera en mesure de voir les messages d'erreur sur votre site !</target>
+      </trans-unit>
+      <trans-unit id="XPT.errorExplain">
+        <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>L'exécution du script est interrompue, parce que quelque chose ne fonctionne pas correctement. Le message d'erreur actuel est caché par le présent avis pour des raisons de sécurité et peut être trouvé dans le fichier &lt;code&gt;system/logs/error.log&lt;/code&gt; (voir ci-dessus). Si vous ne comprenez pas le message d'erreur ou si vous ne savez pas comment résoudre le problème, veuillez consulter la &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;FAQ de Contao&lt;/a&gt; ou visitez la &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;page de support de Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.requestToken">
+        <source>Invalid request token</source>
+        <target>Demande de jetons invalide</target>
+      </trans-unit>
+      <trans-unit id="XPT.invalidToken">
+        <source>The request token could not be verified.</source>
+        <target>La demande de jetons n'a pas pu être vérifiée.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenRetry">
+        <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
+        <target>Veuillez s'il vous plaît &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;cliquer sur ce lien&lt;/a&gt; et réessayer. Ne pas utiliser le bouton &quot;retour&quot; de votre navigateur.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainOne">
+        <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
+        <target>Cette erreur se produit s'il y a une requête POST sans un jeton d'authentification valide. Dans Contao 2.10, le contrôle du référant a été remplacé par un système de demande de jetons. Si le problème persiste, vous utilisez peut-être une extension incompatible ou votre installation de Contao n'a pas été correctement mise à jour.</target>
+      </trans-unit>
+      <trans-unit id="XPT.tokenExplainTwo">
+        <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
+        <target>Pour plus d'information, veuillez consulter la &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;FAQ de Contao&lt;/a&gt; ou visiter la &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;page de support de Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incomplete">
+        <source>Incomplete installation</source>
+        <target>Installation incomplète</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteInstallation">
+        <source>The installation has not been completed, therefore Contao cannot work properly.</source>
+        <target>L'installation n'a pas été terminée, par conséquent Contao ne peut pas fonctionner correctement.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixOne">
+        <source>Point your browser to the following URL:</source>
+        <target>Dirigez votre navigateur vers l'URL suivante :</target>
+      </trans-unit>
+      <trans-unit id="XPT.installPath">
+        <source>path-to-installation</source>
+        <target>chemin-vers-installation</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteFixTwo">
+        <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>Cela ouvre l'outil d'installation de Contao, qui vous guidera à travers le processus d'installation.</target>
+      </trans-unit>
+      <trans-unit id="XPT.incompleteExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Pour plus d'information, veuillez s'il vous plaît vous référer au &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;manuel d'installation de Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFound">
+        <source>Page not found</source>
+        <target>Page non trouvée</target>
+      </trans-unit>
+      <trans-unit id="XPT.pageNotFound">
+        <source>The page you have requested does not exist under this domain.</source>
+        <target>La page que vous avez demandée n'existe pas sur ce domaine.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFoundFix">
+        <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Essayez &lt;a href=&quot;%s&quot;&gt;de vous diriger vers la page d’accueil&lt;/a&gt; et utilisez la fonction de recherche (si existant) pour trouver la page que vous recherchez. Vous pouvez également &lt;a href=&quot;%s&quot;&gt;contacter le webmaster&lt;/a&gt; et lui faire savoir que quelque chose ne fonctionne pas correctement.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForward">
+        <source>Forward page not found</source>
+        <target>Page de transmission non trouvée</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardPage">
+        <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>L'application a été configurée pour transmettre la demande à une autre page. Cependant, la page cible n'existe pas ou n'a pas été publiée.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardFix">
+        <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Il s'agit de quelque chose qui doit être fixé par l'administrateur du site internet. Si vous êtes un visiteur, il n'y a rien que vous puissiez faire, à l'exception de &lt;a href=&quot;%s&quot;&gt;contacter le webmaster&lt;/a&gt; afin de lui faire savoir que quelque chose ne fonctionne pas correctement.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRoot">
+        <source>No root page found</source>
+        <target>Aucune page racine trouvée</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootPage">
+        <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Il n'existe aucune page racine d'un nouveau site qui correspond à la langue demandée et/ou à un nom de domaine.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootFix">
+        <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Si vous avez défini explicitement une langue, essayez d'&lt;a href=&quot;%s&quot;&gt;aller au niveau supérieur&lt;/a&gt; et voyez si vous êtes redirigé. Sinon &lt;a href=&quot;%s&quot;&gt;contacter le webmestre&lt;/a&gt; et lui faire savoir qu'il y a un dysfonctionnement.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayout">
+        <source>No layout specified</source>
+        <target>Aucune présentation de page spécifiée</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutSpecified">
+        <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>La page que vous avez demandée n'a pas encore été associée à une présentation de page.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutFix">
+        <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Assurez-vous d'avoir attribué une présentation de page à chaque page racine d'un nouveau site dans la structure de site.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Pour plus d'information, veuillez s'il vous plaît vous référer au &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;manuel de Contao&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActive">
+        <source>No active pages found</source>
+        <target>Aucune page active trouvée</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActivePages">
+        <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Votre demande a été localisé sur un site qui ne contient pas encore de pages publiées.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActiveFix">
+        <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Il est probable que le site internet est encore en cours de développement et sera en ligne dans quelques jours. Si vous pensez toujours que quelque chose ne fonctionne pas correctement, &lt;a href=&quot;%s&quot;&gt;contacter le webmaster&lt;/a&gt; et faites-le lui savoir.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbidden">
+        <source>Forbidden</source>
+        <target>Accès interdit</target>
+      </trans-unit>
+      <trans-unit id="XPT.notAuthenticated">
+        <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Vous n'êtes pas authentifié, ou vous n'êtes pas autorisé à accéder à la page demandée.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbiddenFix">
+        <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Si vous n'êtes pas connecté, essayez &lt;a href=&quot;%s&quot;&gt;de vous diriger vers la page d’accueil&lt;/a&gt; et cherchez un formulaire de connexion. S'il n'y en a pas ou si vous êtes déjà connecté, &lt;a href=&quot;%s&quot;&gt;contactez le webmaster&lt;/a&gt; afin de l'informer que quelque chose ne fonctionne pas correctement.</target>
+      </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>Nous revenons tout de suite</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Le site est actuellement en maintenance. Veuillez s'il vous plaît y revenir plus tard.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

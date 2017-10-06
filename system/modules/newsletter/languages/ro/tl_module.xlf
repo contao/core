@@ -1,0 +1,78 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/newsletter/languages/en/tl_module.php" source-language="en" target-language="ro">
+    <body>
+      <trans-unit id="tl_module.newsletters.0">
+        <source>Subscribable newsletters</source>
+        <target>Canale de newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.newsletters.1">
+        <source>Show these channels in the front end form.</source>
+        <target>Alegeţi canalele la care poate subscrie utilizatorul la înregistrare.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.0">
+        <source>Channels</source>
+        <target>Canale</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_channels.1">
+        <source>Please select one or more channels.</source>
+        <target>Alegeţi unul sau mai multe canale.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.0">
+        <source>Hide channel menu</source>
+        <target>Fără selectare canal</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_hideChannels.1">
+        <source>Do not show the channel selection menu.</source>
+        <target>Nu se mai afişează meniul de canale.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.0">
+        <source>Subscription message</source>
+        <target>Email abonare</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_subscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
+        <target>Introduceţi textul email-ului de confirmare a abonării. Puteţi folosi &quot;wildcard-uri&quot; precum &lt;em&gt;##channel##&lt;/em&gt; (nume canal), &lt;em&gt;##domain##&lt;/em&gt; (nume domeniu curent) şi &lt;em&gt;##link##&lt;/em&gt; (link activare).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.0">
+        <source>Unsubscription message</source>
+        <target>Email dezabonare</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_unsubscribe.1">
+        <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names) and &lt;em&gt;##domain##&lt;/em&gt; (domain name).</source>
+        <target>Introduceţi textul email-ului de confirmare a dezabonării. Puteţi folosi &quot;wildcard-uri&quot; precum &lt;em&gt;##channel##&lt;/em&gt; (nume canal) şi &lt;em&gt;##domain##&lt;/em&gt; (nume domeniu curent).</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.0">
+        <source>Newsletter template</source>
+        <target>Şablon pentru newsletter</target>
+      </trans-unit>
+      <trans-unit id="tl_module.nl_template.1">
+        <source>Here you can select the newsletter template.</source>
+        <target>Alegeţi un şablon pentru newsletter. Puteţi adăuga un şablon în directorul &lt;em&gt;templates&lt;/em&gt;. Acesta trebuie să înceapă cu &lt;em&gt;nl_&lt;/em&gt; şi să aibă extensia &lt;em&gt;.tpl&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Abonarea dumneavoastră la %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_subscribe.1">
+        <source>You have subscribed to the following channels on ##domain##:
+
+##channels##
+
+Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
+</source>
+        <target>V-aţi abonat la ##channel## pe ##domain##. Vă rugăm accesaţi ##link## pentru a definitiva subscrierea dumneavoastră. Dacă nu aţi cerut personal această acţiune, puteţi să ignoraţi această notificare.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.0">
+        <source>Your subscription on %s</source>
+        <target>Abonarea dumneavoastră la %s</target>
+      </trans-unit>
+      <trans-unit id="tl_module.text_unsubscribe.1">
+        <source>You have unsubscribed from the following channels on ##domain##:
+
+##channels##
+</source>
+        <target>V-aţi dezabonat de la ##channel## pe ##domain##.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

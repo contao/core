@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/devtools/languages/en/tl_autoload.php" source-language="en" target-language="sr">
+    <body>
+      <trans-unit id="tl_autoload.headline">
+        <source>Automatically create the autoload.php files</source>
+        <target>Аутоматски креирај фајлове autoload.php</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.emptySelection">
+        <source>Please select at least one module!</source>
+        <target>Изаберите барем један модул!</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadExists">
+        <source>Module &quot;%s&quot; has an autoload.php file already. Do you want to override?</source>
+        <target>Модул &quot;%s&quot; је већ у фајлу autoload.php. Да ли желите да прегазите тренутно подешавање?</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.available">
+        <source>Available modules</source>
+        <target>Доступни модули</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplAvailable">
+        <source>Please select the modules you want to modify.</source>
+        <target>Изаберите модуле које желите уређивати.</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.override">
+        <source>Override existing files</source>
+        <target>Прегази постојеће фајлове</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplOverride">
+        <source>Override existing autoload.php files (use with care).</source>
+        <target>Прегази постојеће autoload.php фајлове (користити са опрезом).</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoload">
+        <source>Create the autoload files</source>
+        <target>Креирај &quot;autoload&quot; фајлове</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadConfirm">
+        <source>The autoload.php file of module &quot;%s&quot; has been written.</source>
+        <target>Фајл autoload.php модула &quot;%s&quot; је прегажен.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,298 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_member.php" source-language="en" target-language="sl">
+    <body>
+      <trans-unit id="tl_member.firstname.0">
+        <source>First name</source>
+        <target>Ime</target>
+      </trans-unit>
+      <trans-unit id="tl_member.firstname.1">
+        <source>Please enter the first name.</source>
+        <target>Vnesite ime.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.lastname.0">
+        <source>Last name</source>
+        <target>Priimek</target>
+      </trans-unit>
+      <trans-unit id="tl_member.lastname.1">
+        <source>Please enter the last name.</source>
+        <target>Vnesite priimek.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.dateOfBirth.0">
+        <source>Date of birth</source>
+        <target>Datum rojstva</target>
+      </trans-unit>
+      <trans-unit id="tl_member.dateOfBirth.1">
+        <source>Please enter the date of birth.</source>
+        <target>Vnesite datum rojstva.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.gender.0">
+        <source>Gender</source>
+        <target>Spol</target>
+      </trans-unit>
+      <trans-unit id="tl_member.gender.1">
+        <source>Please choose the gender.</source>
+        <target>Izberite spol.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.company.0">
+        <source>Company</source>
+        <target>Podjetje</target>
+      </trans-unit>
+      <trans-unit id="tl_member.company.1">
+        <source>Here you can enter a company name.</source>
+        <target>Vnesite podjetje.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.street.0">
+        <source>Street</source>
+        <target>Ulica</target>
+      </trans-unit>
+      <trans-unit id="tl_member.street.1">
+        <source>Please enter the street name and number.</source>
+        <target>Vnesite ulico in hišno številko.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.postal.0">
+        <source>Postal code</source>
+        <target>Poštna številka</target>
+      </trans-unit>
+      <trans-unit id="tl_member.postal.1">
+        <source>Please enter the postal code.</source>
+        <target>Vnesite poštno številko.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.city.0">
+        <source>City</source>
+        <target>Mesto</target>
+      </trans-unit>
+      <trans-unit id="tl_member.city.1">
+        <source>Plase enter the name of the city.</source>
+        <target>Vnesite mesto.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.state.0">
+        <source>State</source>
+        <target>Mesto</target>
+      </trans-unit>
+      <trans-unit id="tl_member.state.1">
+        <source>Plase enter the name of the state.</source>
+        <target>Vnesite mesto.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.country.0">
+        <source>Country</source>
+        <target>Država</target>
+      </trans-unit>
+      <trans-unit id="tl_member.country.1">
+        <source>Please select the country.</source>
+        <target>Izberite državo.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.phone.0">
+        <source>Phone number</source>
+        <target>Telefonska številka</target>
+      </trans-unit>
+      <trans-unit id="tl_member.phone.1">
+        <source>Please enter the phone number.</source>
+        <target>Vnesite telefonsko številko.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.mobile.0">
+        <source>Cell phone number</source>
+        <target>Mobilni telefon</target>
+      </trans-unit>
+      <trans-unit id="tl_member.mobile.1">
+        <source>Please enter the cell phone number.</source>
+        <target>Vnesite številko mobilnega telefona.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.fax.0">
+        <source>Fax number</source>
+        <target>Faks</target>
+      </trans-unit>
+      <trans-unit id="tl_member.fax.1">
+        <source>Please enter the fax number.</source>
+        <target>Vnesite številko faksa.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.email.0">
+        <source>E-mail address</source>
+        <target>Naslov elektronske pošte</target>
+      </trans-unit>
+      <trans-unit id="tl_member.email.1">
+        <source>Please enter a valid e-mail address.</source>
+        <target>Prosimo, vnesite veljaven e-naslov.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.website.0">
+        <source>Website</source>
+        <target>Spletna stran</target>
+      </trans-unit>
+      <trans-unit id="tl_member.website.1">
+        <source>Here you can enter a web address.</source>
+        <target>Tukaj lahko vnesete naslov vaše spletne strani.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.language.0">
+        <source>Language</source>
+        <target>Jezik</target>
+      </trans-unit>
+      <trans-unit id="tl_member.language.1">
+        <source>Please select the language.</source>
+        <target>Izberite jezik.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups.0">
+        <source>Member groups</source>
+        <target>Skupine članov</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups.1">
+        <source>Here you can assign the member to one or more groups.</source>
+        <target>Tu lahko uporabnika vključite v eno ali več skupin.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login.0">
+        <source>Allow login</source>
+        <target>Dovoli prijavo</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login.1">
+        <source>Allow the member to log into the front end.</source>
+        <target>Dovoli uporabniku, da se prijavi v ospredje (front end).</target>
+      </trans-unit>
+      <trans-unit id="tl_member.username.0">
+        <source>Username</source>
+        <target>Uporabniško ime</target>
+      </trans-unit>
+      <trans-unit id="tl_member.username.1">
+        <source>Please enter a unique username.</source>
+        <target>Prosimo, vnesite edinstveno uporabniško ime.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.assignDir.0">
+        <source>Set home directory</source>
+        <target>Določi mapo</target>
+      </trans-unit>
+      <trans-unit id="tl_member.assignDir.1">
+        <source>Define a home directory for the member.</source>
+        <target>Določi uporabnikovo domačo mapo.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homeDir.0">
+        <source>Home directory</source>
+        <target>Osebni direktorij</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homeDir.1">
+        <source>Please select a folder from the files directory.</source>
+        <target>Določi domačo mapo iz datotečnega imenika</target>
+      </trans-unit>
+      <trans-unit id="tl_member.disable.0">
+        <source>Deactivate</source>
+        <target>Onemogoči</target>
+      </trans-unit>
+      <trans-unit id="tl_member.disable.1">
+        <source>Temporarily disable the account.</source>
+        <target>Začasno onemogoči račun.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.start.0">
+        <source>Activate on</source>
+        <target>Omogoči na</target>
+      </trans-unit>
+      <trans-unit id="tl_member.start.1">
+        <source>Automatically activate the account on this day.</source>
+        <target>Samodejno omogoči račun na ta dan.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.stop.0">
+        <source>Deactivate on</source>
+        <target>Onemogoči na</target>
+      </trans-unit>
+      <trans-unit id="tl_member.stop.1">
+        <source>Automatically deactivate the account on this day.</source>
+        <target>Samodejno onemogoči račun na ta dan.</target>
+      </trans-unit>
+      <trans-unit id="tl_member.personal_legend">
+        <source>Personal data</source>
+        <target>Osebni podatki</target>
+      </trans-unit>
+      <trans-unit id="tl_member.address_legend">
+        <source>Address details</source>
+        <target>Naslov</target>
+      </trans-unit>
+      <trans-unit id="tl_member.contact_legend">
+        <source>Contact details</source>
+        <target>Kontaktni podatki</target>
+      </trans-unit>
+      <trans-unit id="tl_member.groups_legend">
+        <source>Member groups</source>
+        <target>Skupine članov</target>
+      </trans-unit>
+      <trans-unit id="tl_member.login_legend">
+        <source>Login details</source>
+        <target>Prijavni podatki</target>
+      </trans-unit>
+      <trans-unit id="tl_member.homedir_legend">
+        <source>Home directory</source>
+        <target>Osebni direktorij</target>
+      </trans-unit>
+      <trans-unit id="tl_member.account_legend">
+        <source>Account settings</source>
+        <target>Nastavitve računa</target>
+      </trans-unit>
+      <trans-unit id="tl_member.personalData">
+        <source>Personal data</source>
+        <target>Osebni podatki</target>
+      </trans-unit>
+      <trans-unit id="tl_member.addressDetails">
+        <source>Address details</source>
+        <target>Naslov</target>
+      </trans-unit>
+      <trans-unit id="tl_member.contactDetails">
+        <source>Contact details</source>
+        <target>Kontaktni podatki</target>
+      </trans-unit>
+      <trans-unit id="tl_member.loginDetails">
+        <source>Login details</source>
+        <target>Prijavni podatki</target>
+      </trans-unit>
+      <trans-unit id="tl_member.new.0">
+        <source>New member</source>
+        <target>Nov član</target>
+      </trans-unit>
+      <trans-unit id="tl_member.new.1">
+        <source>Create a new member</source>
+        <target>Ustvari novega člana</target>
+      </trans-unit>
+      <trans-unit id="tl_member.show.0">
+        <source>Member details</source>
+        <target>podrobnosti člana</target>
+      </trans-unit>
+      <trans-unit id="tl_member.show.1">
+        <source>Show the details of member ID %s</source>
+        <target>Prikaži podrobnosti člana ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.edit.0">
+        <source>Edit member</source>
+        <target>Uredi člana</target>
+      </trans-unit>
+      <trans-unit id="tl_member.edit.1">
+        <source>Edit member ID %s</source>
+        <target>Uredi člana ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.copy.0">
+        <source>Duplicate member</source>
+        <target>Kopiraj člana</target>
+      </trans-unit>
+      <trans-unit id="tl_member.copy.1">
+        <source>Duplicate member ID %s</source>
+        <target>Kopiraj člana ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.delete.0">
+        <source>Delete member</source>
+        <target>Izbriši člana</target>
+      </trans-unit>
+      <trans-unit id="tl_member.delete.1">
+        <source>Delete member ID %s</source>
+        <target>Izbriši člana ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.toggle.0">
+        <source>Activate/deactivate member</source>
+        <target>Omogoči/onemogoči člana</target>
+      </trans-unit>
+      <trans-unit id="tl_member.toggle.1">
+        <source>Activate/deactivate member ID %s</source>
+        <target>Omogoči/onemogoči člana z ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.0">
+        <source>Front end preview</source>
+        <target>Predogled</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.1">
+        <source>Preview the front end as member ID %s</source>
+        <target>Naredite predogled kot uporabnik ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

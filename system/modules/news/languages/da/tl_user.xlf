@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_user.php" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="tl_user.news.0">
+        <source>Allowed archives</source>
+        <target>Nyhedsarkiver</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news.1">
+        <source>Here you can grant access to one or more news archives.</source>
+        <target>Vælg venligst de nyhedsarkiver du vil aktivere for brugeren.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.0">
+        <source>News permissions</source>
+        <target>Nyhedstilladelser</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newp.1">
+        <source>Here you can define the news permissions.</source>
+        <target>Her kan du definere tilladelser for nyheder.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.0">
+        <source>Allowed RSS feeds</source>
+        <target>Tilladte RSS feeds</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeeds.1">
+        <source>Here you can grant access to one or more news feeds.</source>
+        <target>Har kan du give adgang til et eller flere nyheds feeds.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.0">
+        <source>RSS feed permissions</source>
+        <target>RSS feed tilladelser</target>
+      </trans-unit>
+      <trans-unit id="tl_user.newsfeedp.1">
+        <source>Here you can define the news feed permissions.</source>
+        <target>Har kan du angive tilladelser for nyheds feedet.</target>
+      </trans-unit>
+      <trans-unit id="tl_user.news_legend">
+        <source>News permissions</source>
+        <target>Nyhedstilladelser</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

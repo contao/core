@@ -1,0 +1,206 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_theme.php" source-language="en" target-language="cs">
+    <body>
+      <trans-unit id="tl_theme.name.0">
+        <source>Theme title</source>
+        <target>Název vzhledu</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.name.1">
+        <source>Please enter a unique theme title.</source>
+        <target>Uveďte prosím název vzhledu.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.0">
+        <source>Author</source>
+        <target>Autor</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.author.1">
+        <source>Please enter the name of the theme designer.</source>
+        <target>Uveďte prosím jméno osoby, která tento vzhled navrhla.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.0">
+        <source>Folders</source>
+        <target>Adresáře</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.folders.1">
+        <source>Please select the folders that belong to the theme from the files directory.</source>
+        <target>Vyberte prosím adresáře, které patří k tomuto vzhledu.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.0">
+        <source>Templates folder</source>
+        <target>Adresář předlohy</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates.1">
+        <source>Here you can select a templates folder that will be exported with the theme.</source>
+        <target>Zde můžete vybrat adresář předlohy, který bude exportovaný s daným vzhledem.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.0">
+        <source>Screenshot</source>
+        <target>Náhled</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.screenshot.1">
+        <source>Here you can choose a screenshot of the theme.</source>
+        <target>Zde můžete vybrat náhled vzhledu.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.0">
+        <source>Global variables</source>
+        <target>Globální proměnné</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars.1">
+        <source>Here you can define global variables for the style sheets of the theme (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
+        <target>Zde můžete nastavit globální proměnné pro kaskádovité styly vzhledu (např. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; nebo &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.0">
+        <source>Source files</source>
+        <target>Zdroj souborů</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.source.1">
+        <source>Here you can upload one or more .cto files to be imported.</source>
+        <target>Zvolte prosím jeden nebo více souborů končících na &quot;.cto&quot;.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.0">
+        <source>Revision date</source>
+        <target>Datum změny</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum a čas poslední změny</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.title_legend">
+        <source>Title and author</source>
+        <target>Název a autor</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.config_legend">
+        <source>Configuration</source>
+        <target>Nastavení</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.vars_legend">
+        <source>Global variables</source>
+        <target>Globální proměnné</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.theme_imported">
+        <source>Theme &quot;%s&quot; has been imported.</source>
+        <target>Vzhled &quot;%s&quot; byl importovaný.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.checking_theme">
+        <source>The theme data is being checked</source>
+        <target>Data vzhledu byla přidána.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_fields">
+        <source>Tables and fields</source>
+        <target>Tabulky a pole</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_field">
+        <source>The field &lt;strong&gt;%s&lt;/strong&gt; is missing in the database and will not be imported.</source>
+        <target>Pole &lt;strong&gt;%s&lt;/strong&gt; chybí v databázi, proto nebude imporotováno.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.tables_ok">
+        <source>The tables have been successfully checked.</source>
+        <target>Tabulka byla úspěšně</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.missing_xml">
+        <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
+        <target>Vzhled &quot;%s&quot; je poškozený a nemůže se importovat.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.custom_templates">
+        <source>Custom templates</source>
+        <target>Vlastní šablony</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.template_exists">
+        <source>The template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exists and will be overwritten.</source>
+        <target>Šablona &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; existuje a bude přepsána.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.templates_ok">
+        <source>No conflicts detected.</source>
+        <target>Nejsou zjištěny žádné konflikty.</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.0">
+        <source>Theme store</source>
+        <target>Obchod se vzhledy</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.store.1">
+        <source>Find more themes in the Contao theme store</source>
+        <target>Najít více vzhledů v obchodě se vzhledy pro CMS Contao</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.0">
+        <source>New theme</source>
+        <target>Nový vzhled</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.new.1">
+        <source>Create a new theme</source>
+        <target>Vytvořit nový vzhled</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.0">
+        <source>Theme details</source>
+        <target>Podrobnosti</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.show.1">
+        <source>Show the details of theme ID %s</source>
+        <target>Zobrazit podrobnosti k vzhledu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.0">
+        <source>Edit theme</source>
+        <target>Úprava vzhledu</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.edit.1">
+        <source>Edit theme ID %s</source>
+        <target>Úprava vzhledu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.0">
+        <source>Delete theme</source>
+        <target>Smazat vzhled</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.delete.1">
+        <source>Delete theme ID %s</source>
+        <target>Smazat vzhled ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.0">
+        <source>Style sheets</source>
+        <target>Kaskádovité styly</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.css.1">
+        <source>Edit the style sheets of theme ID %s</source>
+        <target>Úprava kaskádovitých stylů vzhledu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.0">
+        <source>Modules</source>
+        <target>Moduly</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.modules.1">
+        <source>Edit the front end modules of theme ID %s</source>
+        <target>Úprava frontendových modulů vzhledu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.0">
+        <source>Layouts</source>
+        <target>Rozvržení</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.layout.1">
+        <source>Edit the page layouts of theme ID %s</source>
+        <target>Úprava rozvržení stránek vzhledu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.0">
+        <source>Image sizes</source>
+        <target>Obrázkové rozměry</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.1">
+        <source>Edit the image sizes of theme ID %s</source>
+        <target>Upravit obrázkové rozměry vzhledu ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.0">
+        <source>Theme import</source>
+        <target>Importovat vzhled</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.importTheme.1">
+        <source>Import new themes</source>
+        <target>Import nových vzhledů</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.0">
+        <source>Export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.exportTheme.1">
+        <source>Export theme ID %s</source>
+        <target>Exportovat vzhled ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
