@@ -470,7 +470,7 @@ abstract class Model
 			}
 
 			// Update the row
-			$objDatabase->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+			$objDatabase->prepare("UPDATE " . static::$strTable . " %s WHERE " . \Database::quoteColumnName(static::$strPk) . "=?")
 						->set($arrSet)
 						->execute($intPk);
 
@@ -563,7 +563,7 @@ abstract class Model
 		}
 
 		// Delete the row
-		$intAffected = \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+		$intAffected = \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . \Database::quoteColumnName(static::$strPk) . "=?")
 											   ->execute($intPk)
 											   ->affectedRows;
 
@@ -624,7 +624,7 @@ abstract class Model
 		elseif ($arrRelation['type'] == 'hasMany' || $arrRelation['type'] == 'belongsToMany')
 		{
 			$arrValues = deserialize($this->$strKey, true);
-			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
+			$strField = $arrRelation['table'] . '.' . \Database::quoteColumnName($arrRelation['field']);
 
 			// Handle UUIDs (see #6525)
 			if ($strField == 'tl_files.uuid')
@@ -668,7 +668,7 @@ abstract class Model
 		}
 
 		// Reload the database record
-		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . \Database::quoteColumnName(static::$strPk) . "=?")
 									   ->execute($intPk);
 
 		$this->setRow($res->row());
