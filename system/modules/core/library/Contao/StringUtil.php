@@ -605,13 +605,13 @@ class StringUtil
 			$blnCurrent = $arrStack[count($arrStack) - 1];
 			$blnCurrentIf = $arrIfStack[count($arrIfStack) - 1];
 
-			if (strncmp($strTag, '{if', 3) === 0)
+			if (strncmp($strTag, '{if ', 4) === 0)
 			{
 				$blnExpression = $evaluateExpression(substr($strTag, 4, -1));
 				$arrStack[] = $blnCurrent && $blnExpression;
 				$arrIfStack[] = $blnExpression;
 			}
-			elseif (strncmp($strTag, '{elseif', 7) === 0)
+			elseif (strncmp($strTag, '{elseif ', 8) === 0)
 			{
 				$blnExpression = $evaluateExpression(substr($strTag, 8, -1));
 				array_pop($arrStack);
