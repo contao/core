@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.31 (2017-11-15)
+---------------------------
+
+### Fixed
+Prevent SQL injections in the back end search panel (see CVE-2017-16558).
+
+
 Version 3.5.30 (2017-10-06)
 ---------------------------
 

@@ -4943,22 +4943,32 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Store search value in the current session
 		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
 		{
-			$session['search'][$this->strTable]['value'] = '';
-			$session['search'][$this->strTable]['field'] = \Input::post('tl_field', true);
+			$strField = \Input::post('tl_field', true);
+			$strKeyword = ltrim(\Input::postRaw('tl_value'), '*');
+
+			if ($strField && !in_array($strField, $searchFields, true))
+			{
+				$strField = '';
+				$strKeyword = '';
+			}
 
 			// Make sure the regular expression is valid
-			if (\Input::postRaw('tl_value') != '')
+			if ($strField && $strKeyword)
 			{
 				try
 				{
-					$this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . \Input::post('tl_field', true) . " REGEXP ?")
+					$this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $strField . " REGEXP ?")
 								   ->limit(1)
-								   ->execute(\Input::postRaw('tl_value'));
-
-					$session['search'][$this->strTable]['value'] = \Input::postRaw('tl_value');
+								   ->execute($strKeyword);
 				}
-				catch (\Exception $e) {}
+				catch (\Exception $e)
+				{
+					$strKeyword = '';
+				}
 			}
+
+			$session['search'][$this->strTable]['field'] = $strField;
+			$session['search'][$this->strTable]['value'] = $strKeyword;
 
 			$this->Session->setData($session);
 		}
@@ -5060,7 +5070,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$strSort = \Input::post('tl_sort');
 
 			// Validate the user input (thanks to aulmn) (see #4971)
-			if (in_array($strSort, $sortingFields))
+			if (in_array($strSort, $sortingFields, true))
 			{
 				$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$strSort]['flag'], array(2, 4, 6, 8, 10, 12)) ? "$strSort DESC" : $strSort;
 				$this->Session->setData($session);
