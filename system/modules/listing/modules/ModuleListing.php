@@ -96,39 +96,42 @@ class ModuleListing extends \Module
 			return;
 		}
 
-
-		/**
-		 * Add the search menu
-		 */
+		// Add the search menu
 		$strWhere = '';
 		$varKeyword = '';
 		$strOptions = '';
+		$strSearch = \Input::get('search');
+		$strFor = \Input::get('for');
+		$arrFields = trimsplit(',', $this->list_fields);
+		$arrSearchFields = trimsplit(',', $this->list_search);
 
 		$this->Template->searchable = false;
-		$arrSearchFields = trimsplit(',', $this->list_search);
 
 		if (!empty($arrSearchFields) && is_array($arrSearchFields))
 		{
 			$this->Template->searchable = true;
 
-			if (\Input::get('search') && \Input::get('for'))
+			if ($strSearch && !in_array($strSearch, $arrSearchFields, true))
 			{
-				$varKeyword = '%' . \Input::get('for') . '%';
-				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . \Input::get('search') . " LIKE ?";
+				$strSearch = '';
+				$strFor = '';
+			}
+
+			if ($strSearch && $strFor)
+			{
+				$varKeyword = '%' . $strFor . '%';
+				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . $strSearch . " LIKE ?";
 			}
 
 			foreach ($arrSearchFields as $field)
 			{
-				$strOptions .= '  <option value="' . $field . '"' . (($field == \Input::get('search')) ? ' selected="selected"' : '') . '>' . (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0]) ? $label : $field) . '</option>' . "\n";
+				$strOptions .= '  <option value="' . $field . '"' . (($field == $strSearch) ? ' selected="selected"' : '') . '>' . (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0]) ? $label : $field) . '</option>' . "\n";
 			}
 		}
 
 		$this->Template->search_fields = $strOptions;
 
-
-		/**
-		 * Get the total number of records
-		 */
+		// Get the total number of records
 		$strQuery = "SELECT COUNT(*) AS count FROM " . $this->list_table;
 
 		if ($this->list_where)
@@ -136,16 +139,13 @@ class ModuleListing extends \Module
 			$strQuery .= " WHERE (" . $this->list_where . ")";
 		}
 
-		$strQuery .=  $strWhere;
+		$strQuery .= $strWhere;
 		$objTotal = $this->Database->prepare($strQuery)->execute($varKeyword);
 
-
-		/**
-		 * Validate the page count
-		 */
+		// Validate the page count
 		$id = 'page_l' . $this->id;
-		$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
-		$per_page = \Input::get('per_page') ?: $this->perPage;
+		$page = (\Input::get($id) !== null) ? (int) \Input::get($id) : 1;
+		$per_page = (int) \Input::get('per_page') ?: $this->perPage;
 
 		// Thanks to Hagen Klemp (see #4485)
 		if ($per_page > 0 && ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1)))
@@ -158,10 +158,7 @@ class ModuleListing extends \Module
 			$objHandler->generate($objPage->id);
 		}
 
-
-		/**
-		 * Get the selected records
-		 */
+		// Get the selected records
 		$strQuery = "SELECT " . $this->strPk . "," . $this->list_fields;
 
 		if ($this->list_info_where)
@@ -183,16 +180,30 @@ class ModuleListing extends \Module
 			return $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'datim';
 		};
 
-		// Order by
-		if (\Input::get('order_by'))
+		$order_by = \Input::get('order_by');
+
+		if ($order_by && !in_array($order_by, $arrFields, true))
 		{
-			if ($isInt(\Input::get('order_by')))
+			$order_by = '';
+		}
+
+		$sort = \Input::get('sort');
+
+		if ($sort && !in_array($sort, array('asc', 'desc')))
+		{
+			$sort = '';
+		}
+
+		// Order by
+		if ($order_by)
+		{
+			if ($isInt($order_by))
 			{
-				$strQuery .= " ORDER BY CAST(" . \Input::get('order_by') . " AS SIGNED) " . \Input::get('sort');
+				$strQuery .= " ORDER BY CAST(" . $order_by . " AS SIGNED) " . $sort;
 			}
 			else
 			{
-				$strQuery .= " ORDER BY " . \Input::get('order_by') . ' ' . \Input::get('sort');
+				$strQuery .= " ORDER BY " . $order_by . ' ' . $sort;
 			}
 		}
 		elseif ($this->list_sort)
@@ -210,9 +221,9 @@ class ModuleListing extends \Module
 		$objDataStmt = $this->Database->prepare($strQuery);
 
 		// Limit
-		if (\Input::get('per_page'))
+		if ($per_page)
 		{
-			$objDataStmt->limit(\Input::get('per_page'), (($page - 1) * $per_page));
+			$objDataStmt->limit($per_page, (($page - 1) * $per_page));
 		}
 		elseif ($this->perPage)
 		{
@@ -221,10 +232,7 @@ class ModuleListing extends \Module
 
 		$objData = $objDataStmt->execute($varKeyword);
 
-
-		/**
-		 * Prepare the URL
-		 */
+		// Prepare the URL
 		$strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 		$blnQuery = false;
 
@@ -240,13 +248,9 @@ class ModuleListing extends \Module
 		$this->Template->url = $strUrl;
 		$strVarConnector = ($blnQuery || \Config::get('disableAlias')) ? '&amp;' : '?';
 
-
-		/**
-		 * Prepare the data arrays
-		 */
+		// Prepare the data arrays
 		$arrTh = array();
 		$arrTd = array();
-		$arrFields = trimsplit(',', $this->list_fields);
 
 		// THEAD
 		for ($i=0, $c=count($arrFields); $i<$c; $i++)
@@ -262,10 +266,10 @@ class ModuleListing extends \Module
 			$strField = strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['label'][0]) ? $label : $arrFields[$i];
 
 			// Add a CSS class to the order_by column
-			if (\Input::get('order_by') == $arrFields[$i])
+			if ($order_by == $arrFields[$i])
 			{
-				$sort = (\Input::get('sort') == 'asc') ? 'desc' : 'asc';
-				$class = ' sorted ' . \Input::get('sort');
+				$sort = ($sort == 'asc') ? 'desc' : 'asc';
+				$class = ' sorted ' . $sort;
 			}
 
 			$arrTh[] = array
@@ -310,7 +314,7 @@ class ModuleListing extends \Module
 				$arrTd[$class][$k] = array
 				(
 					'raw' => $v,
-					'content' => ($value ? $value : '&nbsp;'),
+					'content' => $value ?: '&nbsp;',
 					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')),
 					'id' => $arrRows[$i][$this->strPk],
 					'field' => $k,
@@ -323,29 +327,23 @@ class ModuleListing extends \Module
 		$this->Template->thead = $arrTh;
 		$this->Template->tbody = $arrTd;
 
-
-		/**
-		 * Pagination
-		 */
+		// Pagination
 		$objPagination = new \Pagination($objTotal->count, $per_page, \Config::get('maxPaginationLinks'), $id);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 		$this->Template->total = $objTotal->count;
 
-
-		/**
-		 * Template variables
-		 */
+		// Template variables
 		$this->Template->action = \Environment::get('indexFreeRequest');
-		$this->Template->details = ($this->list_info != '') ? true : false;
+		$this->Template->details = (bool) $this->list_info;
 		$this->Template->search_label = specialchars($GLOBALS['TL_LANG']['MSC']['search']);
 		$this->Template->per_page_label = specialchars($GLOBALS['TL_LANG']['MSC']['list_perPage']);
 		$this->Template->fields_label = $GLOBALS['TL_LANG']['MSC']['all_fields'][0];
 		$this->Template->keywords_label = $GLOBALS['TL_LANG']['MSC']['keywords'];
-		$this->Template->search = \Input::get('search');
-		$this->Template->for = \Input::get('for');
-		$this->Template->order_by = \Input::get('order_by');
-		$this->Template->sort = \Input::get('sort');
+		$this->Template->search = $strSearch;
+		$this->Template->for = $strFor;
+		$this->Template->order_by = $order_by;
+		$this->Template->sort = $sort;
 		$this->Template->col_last = 'col_' . $j;
 	}
 

@@ -335,6 +335,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.1">
         <source>If the width of an image or movie exceeds this value, it will be adjusted automatically. Set to 0 to disable the limit.</source>
+        <target>Jeśli szerokość obrazka lub filmu przekroczy tą wartość, element zostanie automatycznie dostosowany. Wprowadź 0, aby wyłączyć limit.</target>
       </trans-unit>
       <trans-unit id="tl_settings.jpgQuality.0">
         <source>JPG thumbnail quality</source>
