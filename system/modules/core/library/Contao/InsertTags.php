@@ -1037,7 +1037,7 @@ class InsertTags extends \Controller
 						// Picture
 						else
 						{
-							$picture = \Picture::create($strFile, array(0, 0, $size))->getTemplateData();
+							$picture = \Picture::create($strFile, array($width, $height, $size))->getTemplateData();
 							$picture['alt'] = $alt;
 							$picture['class'] = $class;
 							$pictureTemplate = new \FrontendTemplate($strTemplate);
