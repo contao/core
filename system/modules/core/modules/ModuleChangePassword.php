@@ -148,7 +148,7 @@ class ModuleChangePassword extends \Module
 				{
 					if (\Encryption::test($objMember->password))
 					{
-						$blnAuthenticated = \Encryption::verify($objWidget->value, $objMember->password);
+						$blnAuthenticated = password_verify($objWidget->value, $objMember->password);
 					}
 					else
 					{
