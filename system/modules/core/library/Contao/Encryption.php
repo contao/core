@@ -201,10 +201,9 @@ class Encryption
 	 */
 	public static function test($strHash)
 	{
-		// We had SHA1, SHA256 and SHA512 before switching to password API compatible
-		// algorithms (first crypt() and later password_*()) so if it is was not one
-		// of the SHA algorithms, it is compatible.
-		return !(\in_array(\strlen($strHash), [40, 64, 128], true) && ctype_xdigit($strHash));
+		$info = password_get_info($strHash);
+
+		return 0 !== $info['algo'];
 	}
 
 
