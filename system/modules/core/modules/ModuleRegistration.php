@@ -209,7 +209,7 @@ class ModuleRegistration extends \Module
 				$varValue = $objWidget->value;
 
 				// Check whether the password matches the username
-				if ($objWidget instanceof \FormPassword && \Encryption::verify(\Input::post('username'), $varValue))
+				if ($objWidget instanceof \FormPassword && password_verify(\Input::post('username'), $varValue))
 				{
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
 				}

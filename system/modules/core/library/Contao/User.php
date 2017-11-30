@@ -381,7 +381,7 @@ abstract class User extends \System
 		// The password has been generated with crypt()
 		if (\Encryption::test($this->password))
 		{
-			$blnAuthenticated = \Encryption::verify(\Input::postUnsafeRaw('password'), $this->password);
+			$blnAuthenticated = password_verify(\Input::postUnsafeRaw('password'), $this->password);
 		}
 		else
 		{
@@ -391,7 +391,7 @@ abstract class User extends \System
 			// Store a SHA-512 encrpyted version of the password
 			if ($blnAuthenticated)
 			{
-				$this->password = \Encryption::hash(\Input::postUnsafeRaw('password'));
+				$this->password = password_hash(\Input::postUnsafeRaw('password'), PASSWORD_DEFAULT);
 			}
 		}
 

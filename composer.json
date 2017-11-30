@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.4.0",
+		"php": "^5.4|^7.0",
 		"leafo/scssphp": "^0.6",
 		"michelf/php-markdown": "^1.4",
 		"matthiasmullie/minify": "^1.3.35",
@@ -20,7 +20,8 @@
 		"swiftmailer/swiftmailer": "^5.4",
 		"tecnickcom/tcpdf": "^6.0",
 		"true/punycode": "^1.0",
-		"contao-components/compass": "^0.12"
+		"contao-components/compass": "^0.12",
+		"ircmaxell/password-compat": "^1.0"
 	},
 	"conflict": {
 		"swiftmailer/swiftmailer": "<5.4.5"

@@ -343,7 +343,7 @@ class BackendInstall extends \Backend
 		// The password has been generated with crypt()
 		if (\Encryption::test(\Config::get('installPassword')))
 		{
-			if (\Encryption::verify(\Input::postUnsafeRaw('password'), \Config::get('installPassword')))
+			if (password_verify(\Input::postUnsafeRaw('password'), \Config::get('installPassword')))
 			{
 				$this->setAuthCookie();
 				\Config::persist('installCount', 0);
@@ -358,8 +358,7 @@ class BackendInstall extends \Backend
 
 			if ($blnAuthenticated)
 			{
-				// Store a crypt() version of the password
-				$strPassword = \Encryption::hash(\Input::postUnsafeRaw('password'));
+				$strPassword = password_hash(\Input::postUnsafeRaw('password'), PASSWORD_DEFAULT);
 				\Config::persist('installPassword', $strPassword);
 
 				$this->setAuthCookie();
@@ -398,7 +397,7 @@ class BackendInstall extends \Backend
 		// Save the password
 		else
 		{
-			$strPassword = \Encryption::hash($strPassword);
+			$strPassword = password_hash($strPassword, PASSWORD_DEFAULT);
 			\Config::persist('installPassword', $strPassword);
 
 			$this->reload();
@@ -768,7 +767,7 @@ class BackendInstall extends \Backend
 				elseif (\Input::post('name') != '' && \Input::post('email', true) != '' && \Input::post('username', true) != '')
 				{
 					$time = time();
-					$strPassword = \Encryption::hash(\Input::postUnsafeRaw('pass'));
+					$strPassword = password_hash(\Input::postUnsafeRaw('pass'), PASSWORD_DEFAULT);
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, backendTheme, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(\Input::post('name'), \Input::post('email', true), \Input::post('username', true), $strPassword, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']), \Config::get('backendTheme'));

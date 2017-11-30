@@ -180,7 +180,6 @@ $GLOBALS['TL_CONFIG']['ftpPort'] = 21;
 $GLOBALS['TL_CONFIG']['encryptionKey']    = '';
 $GLOBALS['TL_CONFIG']['encryptionMode']   = 'cfb';
 $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
-$GLOBALS['TL_CONFIG']['bcryptCost']       = 10;
 
 
 /**
