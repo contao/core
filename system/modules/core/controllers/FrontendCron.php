@@ -148,6 +148,12 @@ class FrontendCron extends \Frontend
 			$return = false;
 		}
 
+		// Otherwise make sure cron.txt contains the correct lastrun-time
+		else
+		{
+			$this->updateCronTxt($objCron->value);
+		}
+
 		$this->Database->unlockTables();
 
 		return $return;
