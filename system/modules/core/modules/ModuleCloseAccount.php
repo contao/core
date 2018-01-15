@@ -84,15 +84,15 @@ class ModuleCloseAccount extends \Module
 			// Validate the password
 			if (!$objWidget->hasErrors())
 			{
-				// The password has been generated with crypt()
-				if (\Encryption::test($this->User->password))
+				// Handle old sha1() passwords with an optional salt
+				if (preg_match('/^[a-f0-9]{40}(:[a-f0-9]{23})?$/', $this->User->password))
 				{
-					$blnAuthenticated = \Encryption::verify($objWidget->value, $this->User->password);
+					list($strPassword, $strSalt) = explode(':', $this->User->password);
+					$blnAuthenticated = ($strPassword === sha1($strSalt . $objWidget->value));
 				}
 				else
 				{
-					list($strPassword, $strSalt) = explode(':', $this->User->password);
-					$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1($objWidget->value)) : ($strPassword === sha1($strSalt . $objWidget->value));
+					$blnAuthenticated = password_verify($objWidget->value, $this->User->password);
 				}
 
 				if (!$blnAuthenticated)

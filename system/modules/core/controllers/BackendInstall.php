@@ -340,33 +340,32 @@ class BackendInstall extends \Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
-		// The password has been generated with crypt()
-		if (\Encryption::test(\Config::get('installPassword')))
-		{
-			if (\Encryption::verify(\Input::postUnsafeRaw('password'), \Config::get('installPassword')))
-			{
-				$this->setAuthCookie();
-				\Config::persist('installCount', 0);
+		$blnNeedsRehash = true;
 
-				$this->reload();
-			}
+		// Handle old sha1() passwords with an optional salt
+		if (preg_match('/^[a-f0-9]{40}(:[a-f0-9]{23})?$/', \Config::get('installPassword')))
+		{
+			list($strPassword, $strSalt) = explode(':', \Config::get('installPassword'));
+			$blnAuthenticated = ($strPassword === sha1($strSalt . \Input::postUnsafeRaw('password')));
 		}
 		else
 		{
-			list($strPassword, $strSalt) = explode(':', \Config::get('installPassword'));
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postUnsafeRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postUnsafeRaw('password')));
+			$blnAuthenticated = password_verify(\Input::postUnsafeRaw('password'), \Config::get('installPassword'));
+			$blnNeedsRehash = password_needs_rehash(\Config::get('installPassword'), PASSWORD_DEFAULT);
+		}
 
-			if ($blnAuthenticated)
-			{
-				// Store a crypt() version of the password
-				$strPassword = \Encryption::hash(\Input::postUnsafeRaw('password'));
-				\Config::persist('installPassword', $strPassword);
+		// Re-hash the password if the algorithm has changed
+		if ($blnAuthenticated && $blnNeedsRehash)
+		{
+			\Config::persist('installPassword', password_hash(\Input::postUnsafeRaw('password'), PASSWORD_DEFAULT));
+		}
 
-				$this->setAuthCookie();
-				\Config::persist('installCount', 0);
+		if ($blnAuthenticated)
+		{
+			$this->setAuthCookie();
+			\Config::persist('installCount', 0);
 
-				$this->reload();
-			}
+			$this->reload();
 		}
 
 		// Increase the login count if we get here
@@ -398,7 +397,7 @@ class BackendInstall extends \Backend
 		// Save the password
 		else
 		{
-			$strPassword = \Encryption::hash($strPassword);
+			$strPassword = password_hash($strPassword, PASSWORD_DEFAULT);
 			\Config::persist('installPassword', $strPassword);
 
 			$this->reload();
@@ -768,7 +767,7 @@ class BackendInstall extends \Backend
 				elseif (\Input::post('name') != '' && \Input::post('email', true) != '' && \Input::post('username', true) != '')
 				{
 					$time = time();
-					$strPassword = \Encryption::hash(\Input::postUnsafeRaw('pass'));
+					$strPassword = password_hash(\Input::postUnsafeRaw('pass'), PASSWORD_DEFAULT);
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, backendTheme, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(\Input::post('name'), \Input::post('email', true), \Input::post('username', true), $strPassword, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']), \Config::get('backendTheme'));

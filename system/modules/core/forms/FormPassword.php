@@ -137,7 +137,7 @@ class FormPassword extends \Widget
 		{
 			$this->blnSubmitInput = true;
 
-			return \Encryption::hash($varInput);
+			return password_hash($varInput, PASSWORD_DEFAULT);
 		}
 
 		return '';

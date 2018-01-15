@@ -146,14 +146,15 @@ class ModuleChangePassword extends \Module
 				// Validate the old password
 				if ($strKey == 'oldPassword')
 				{
-					if (\Encryption::test($objMember->password))
+					// Handle old sha1() passwords with an optional salt
+					if (preg_match('/^[a-f0-9]{40}(:[a-f0-9]{23})?$/', $objMember->password))
 					{
-						$blnAuthenticated = \Encryption::verify($objWidget->value, $objMember->password);
+						list($strPassword, $strSalt) = explode(':', $objMember->password);
+						$blnAuthenticated = ($strPassword === sha1($strSalt . $objWidget->value));
 					}
 					else
 					{
-						list($strPassword, $strSalt) = explode(':', $objMember->password);
-						$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1($objWidget->value)) : ($strPassword === sha1($strSalt . $objWidget->value));
+						$blnAuthenticated = password_verify($objWidget->value, $objMember->password);
 					}
 
 					if (!$blnAuthenticated)

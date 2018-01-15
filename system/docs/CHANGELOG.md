@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.32 (2018-XX-XX)
+---------------------------
+
+### Fixed
+Backport the password algorithm changes from Contao 4 (see #8820).
+
+
 Version 3.5.31 (2017-11-15)
 ---------------------------
 
