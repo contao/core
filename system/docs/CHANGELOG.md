@@ -5,6 +5,9 @@ Version 3.5.32 (2018-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not remove old subscriptions not related to the channels (see #8824).
+
+### Fixed
 Backport the password algorithm changes from Contao 4 (see #8820).
 
 

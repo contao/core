@@ -241,7 +241,7 @@ class ModuleSubscribe extends \Module
 		}
 
 		// Remove old subscriptions that have not been activated yet
-		if (($objOld = \NewsletterRecipientsModel::findBy(array("email=? AND active=''"), $varInput)) !== null)
+		if (($objOld = \NewsletterRecipientsModel::findOldSubscriptionsByEmailAndPids($varInput, $arrChannels)) !== null)
 		{
 			while ($objOld->next())
 			{
