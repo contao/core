@@ -12,7 +12,7 @@
 define('TL_SCRIPT', 'contao/switch.php');
 
 // Initialize the system
-define('TL_MODE', 'FE');
+define('TL_MODE', 'BE');
 require dirname(__DIR__) . '/system/initialize.php';
 
 // Run the controller
