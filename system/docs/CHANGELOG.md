@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.33 (2018-XX-XX)
+---------------------------
+
+### Fixed
+Require ircmaxell/password-compat to remain compatible with PHP 5.4.
+
+
 Version 3.5.32 (2018-01-18)
 ---------------------------
 
