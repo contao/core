@@ -1,8 +1,11 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.5.32 (2018-XX-XX)
+Version 3.5.32 (2018-01-18)
 ---------------------------
+
+### Fixed
+Fix an XSS vulnerability in the newsletter module (see CVE-2018-5478).
 
 ### Fixed
 Do not remove old subscriptions not related to the channels (see #8824).
