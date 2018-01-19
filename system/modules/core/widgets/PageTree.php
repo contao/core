@@ -91,7 +91,7 @@ class PageTree extends \Widget
 			// Only proceed if the value has changed
 			if ($arrNew !== $this->{$this->orderField})
 			{
-				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->orderField}=? WHERE id=?")
+				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, ".\Database::quoteIdentifier($this->orderField)."=? WHERE id=?")
 							   ->execute(time(), serialize($arrNew), $this->activeRecord->id);
 
 				$this->objDca->createNewVersion = true; // see #6285
