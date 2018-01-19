@@ -396,7 +396,7 @@ abstract class Database
 	 */
 	public function isUniqueValue($strTable, $strField, $varValue, $intId=null)
 	{
-		$strQuery = "SELECT * FROM $strTable WHERE $strField=?";
+		$strQuery = "SELECT * FROM $strTable WHERE ".static::quoteIdentifier($strField)."=?";
 
 		if ($intId !== null)
 		{
@@ -590,6 +590,24 @@ abstract class Database
 	public function getUuid()
 	{
 		return $this->get_uuid();
+	}
+
+
+	/**
+	 * Quote an identifier if it is a reserved word
+	 *
+	 * @param string $strName
+	 *
+	 * @return string
+	 */
+	public static function quoteIdentifier($strName)
+	{
+		if (strtolower($strName) == 'rows')
+		{
+			$strName = '`'.$strName.'`';
+		}
+
+		return $strName;
 	}
 
 

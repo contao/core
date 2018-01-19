@@ -85,6 +85,8 @@ class Mysqli extends \Database
 	 */
 	protected function find_in_set($strKey, $varSet, $blnIsField=false)
 	{
+		$strKey = static::quoteIdentifier($strKey);
+
 		if ($blnIsField)
 		{
 			return "FIND_IN_SET(" . $strKey . ", " . $varSet . ")";

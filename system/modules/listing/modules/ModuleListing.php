@@ -120,7 +120,7 @@ class ModuleListing extends \Module
 			if ($strSearch && $strFor)
 			{
 				$varKeyword = '%' . $strFor . '%';
-				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . $strSearch . " LIKE ?";
+				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . \Database::quoteIdentifier($strSearch) . " LIKE ?";
 			}
 
 			foreach ($arrSearchFields as $field)
@@ -159,11 +159,11 @@ class ModuleListing extends \Module
 		}
 
 		// Get the selected records
-		$strQuery = "SELECT " . $this->strPk . "," . $this->list_fields;
+		$strQuery = "SELECT " . \Database::quoteIdentifier($this->strPk) . "," . implode(',', array_map('Database::quoteIdentifier', trimsplit(',', $this->list_fields)));
 
 		if ($this->list_info_where)
 		{
-			$strQuery .= ", (SELECT COUNT(*) FROM " . $this->list_table . " t2 WHERE t2." . $this->strPk . "=t1." . $this->strPk . " AND " . $this->list_info_where . ") AS _details";
+			$strQuery .= ", (SELECT COUNT(*) FROM " . $this->list_table . " t2 WHERE t2." . \Database::quoteIdentifier($this->strPk) . "=t1." . \Database::quoteIdentifier($this->strPk) . " AND " . $this->list_info_where . ") AS _details";
 		}
 
 		$strQuery .= " FROM " . $this->list_table . " t1";
@@ -203,7 +203,7 @@ class ModuleListing extends \Module
 			}
 			else
 			{
-				$strQuery .= " ORDER BY " . $order_by . ' ' . $sort;
+				$strQuery .= " ORDER BY " . \Database::quoteIdentifier($order_by) . ' ' . $sort;
 			}
 		}
 		elseif ($this->list_sort)
@@ -372,7 +372,7 @@ class ModuleListing extends \Module
 		$this->list_info = deserialize($this->list_info);
 		$this->list_info_where = $this->replaceInsertTags($this->list_info_where, false);
 
-		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? "(" . $this->list_info_where . ") AND " : "") . $this->strPk . "=?")
+		$objRecord = $this->Database->prepare("SELECT " . implode(',', array_map('Database::quoteIdentifier', trimsplit(',', $this->list_info))) . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? "(" . $this->list_info_where . ") AND " : "") . \Database::quoteIdentifier($this->strPk) . "=?")
 									->limit(1)
 									->execute($id);
 
