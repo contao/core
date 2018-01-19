@@ -5,6 +5,9 @@ Version 3.5.33 (2018-XX-XX)
 ---------------------------
 
 ### Fixed
+Also pass $this in the "customizeSearch" hook (see #8841).
+
+### Fixed
 Quote reserved words in database queries (see #8813).
 
 ### Fixed
