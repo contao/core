@@ -396,7 +396,7 @@ abstract class Database
 	 */
 	public function isUniqueValue($strTable, $strField, $varValue, $intId=null)
 	{
-		$strQuery = "SELECT * FROM $strTable WHERE ".static::quoteColumnName($strField)."=?";
+		$strQuery = "SELECT * FROM $strTable WHERE ".static::quoteIdentifier($strField)."=?";
 
 		if ($intId !== null)
 		{
@@ -594,33 +594,20 @@ abstract class Database
 
 
 	/**
-	 * Quote the column name if it a reserved word
+	 * Quote an identifier if it is a reserved word
 	 *
 	 * @param string $strName
 	 *
 	 * @return string
 	 */
-	public static function quoteColumnName($strName)
+	public static function quoteIdentifier($strName)
 	{
-		if (in_array(strtolower($strName), array('rows'), true))
+		if ($strName == 'rows')
 		{
 			$strName = '`'.$strName.'`';
 		}
 
 		return $strName;
-	}
-
-
-	/**
-	 * Quote a list of column names
-	 *
-	 * @param string[] $arrNames
-	 *
-	 * @return string[]
-	 */
-	public static function quoteColumnNames(array $arrNames)
-	{
-		return array_map(array(static::class, 'quoteColumnName'), $arrNames);
 	}
 
 

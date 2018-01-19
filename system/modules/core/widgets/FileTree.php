@@ -66,7 +66,7 @@ class FileTree extends \Widget
 			$this->strOrderName = $this->orderField . str_replace($this->strField, '', $this->strName);
 
 			// Retrieve the order value
-			$objRow = $this->Database->prepare("SELECT ".\Database::quoteColumnName($this->orderField)." FROM {$this->strTable} WHERE id=?")
+			$objRow = $this->Database->prepare("SELECT ".\Database::quoteIdentifier($this->orderField)." FROM {$this->strTable} WHERE id=?")
 									 ->limit(1)
 									 ->execute($this->activeRecord->id);
 

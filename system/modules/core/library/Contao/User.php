@@ -522,7 +522,7 @@ abstract class User extends \System
 	 */
 	public function findBy($strColumn, $varValue)
 	{
-		$objResult = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . \Database::quoteColumnName($strColumn) . "=?")
+		$objResult = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . \Database::quoteIdentifier($strColumn) . "=?")
 									->limit(1)
 									->execute($varValue);
 
