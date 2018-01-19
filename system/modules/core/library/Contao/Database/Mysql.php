@@ -95,7 +95,10 @@ class Mysql extends \Database
 	 */
 	protected function find_in_set($strKey, $varSet, $blnIsField=false)
 	{
-		$strKey = \Database::quoteIdentifier($strKey);
+		if (preg_match('/^[A-Za-z0-9_$]+$/', $strKey))
+		{
+			$strKey = static::quoteIdentifier($strKey);
+		}
 
 		if ($blnIsField)
 		{
