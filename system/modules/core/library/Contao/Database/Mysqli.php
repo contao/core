@@ -89,7 +89,7 @@ class Mysqli extends \Database
 
 		if ($blnIsField)
 		{
-			return "FIND_IN_SET(" . $strKey . ", " . $varSet . ")";
+			return "FIND_IN_SET(" . $strKey . ", " . static::quoteIdentifier($varSet) . ")";
 		}
 		else
 		{
