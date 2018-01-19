@@ -5,6 +5,9 @@ Version 3.5.33 (2018-XX-XX)
 ---------------------------
 
 ### Fixed
+Quote reserved words in database queries (see #8813).
+
+### Fixed
 Require ircmaxell/password-compat to remain compatible with PHP 5.4.
 
 
