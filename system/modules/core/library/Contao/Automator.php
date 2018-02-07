@@ -411,9 +411,7 @@ class Automator extends \System
 			// Add pages
 			foreach ($arrPages as $strUrl)
 			{
-				$strUrl = rawurlencode($strUrl);
-				$strUrl = str_replace(array('%2F', '%3F', '%3D', '%26', '%3A//'), array('/', '?', '=', '&', '://'), $strUrl);
-				$strUrl = ampersand($strUrl, true);
+				$strUrl = htmlspecialchars($strUrl, ENT_XML1, 'UTF-8');
 
 				$objFile->append('  <url><loc>' . $strUrl . '</loc></url>');
 			}
