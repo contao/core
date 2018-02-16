@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.34 (2018-XX-XX)
+---------------------------
+
+### Fixed
+Correctly encode the sitemap URLs (see #8849).
+
+
 Version 3.5.33 (2018-01-22)
 ---------------------------
 

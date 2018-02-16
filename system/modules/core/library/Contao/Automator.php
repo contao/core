@@ -411,8 +411,15 @@ class Automator extends \System
 			// Add pages
 			foreach ($arrPages as $strUrl)
 			{
-				$strUrl = rawurlencode($strUrl);
-				$strUrl = str_replace(array('%2F', '%3F', '%3D', '%26', '%3A//'), array('/', '?', '=', '&', '://'), $strUrl);
+				$strUrl = explode('/', $strUrl, 4);
+
+				if (isset($strUrl[3]))
+				{
+					$strUrl[3] = rawurlencode($strUrl[3]);
+					$strUrl[3] = str_replace(array('%2F', '%3F', '%3D', '%26', '%5B', '%5D', '%25'), array('/', '?', '=', '&', '[', ']', '%'), $strUrl[3]);
+				}
+
+				$strUrl = implode('/', $strUrl);
 				$strUrl = ampersand($strUrl, true);
 
 				$objFile->append('  <url><loc>' . $strUrl . '</loc></url>');
