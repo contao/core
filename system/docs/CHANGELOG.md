@@ -5,6 +5,9 @@ Version 3.5.34 (2018-XX-XX)
 ---------------------------
 
 ### Fixed
+Reset the autologin hash if the username or password changes (see #8843).
+
+### Fixed
 Correctly encode the sitemap URLs (see #8849).
 
 

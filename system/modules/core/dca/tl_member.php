@@ -322,6 +322,10 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'nullIfEmpty'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login'),
+			'save_callback' => array
+			(
+				array('tl_member', 'resetAutologin')
+			),
 			'sql'                     => "varchar(64) COLLATE utf8_bin NULL"
 		),
 		'password' => array
@@ -332,6 +336,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>Config::get('minPasswordLength'), 'feEditable'=>true, 'feGroup'=>'login'),
 			'save_callback' => array
 			(
+				array('tl_member', 'resetAutologin'),
 				array('tl_member', 'setNewPassword')
 			),
 			'sql'                     => "varchar(128) NOT NULL default ''"
@@ -536,7 +541,44 @@ class tl_member extends Backend
 	/**
 	 * Call the "setNewPassword" callback
 	 *
-	 * @param string $strPassword
+	 * @param string        $varValue
+	 * @param DataContainer $dc
+	 *
+	 * @return string
+	 */
+	public function resetAutologin($varValue, $dc)
+	{
+		// Return if a user edits their own account in the front end
+		if (TL_MODE == 'FE')
+		{
+			return $varValue;
+		}
+
+		// Return if there is no user (e.g. upon registration)
+		if (!$dc)
+		{
+			return $varValue;
+		}
+
+		$objUser = $this->Database->prepare("SELECT * FROM tl_member WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->id);
+
+		// Reset the autologin hash
+		if ($varValue != $objUser->{$dc->field})
+		{
+			$this->Database->prepare("UPDATE tl_member SET autologin=NULL WHERE id=?")
+						   ->execute($dc->id);
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Call the "setNewPassword" callback
+	 *
+	 * @param string                    $strPassword
 	 * @param DataContainer|MemberModel $user
 	 *
 	 * @return string
