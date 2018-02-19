@@ -368,9 +368,13 @@ class Folder extends \System
 	 * Return the MD5 hash of the folder
 	 *
 	 * @return string The MD5 has
+	 *
+	 * @deprecated Use Dbafs::getFolderHash() instead
 	 */
 	protected function getHash()
 	{
+		@trigger_error('Using Folder::getHash() has been deprecated and will no longer work in Contao 5.0. Use Dbafs::getFolderHash() instead.', E_USER_DEPRECATED);
+
 		$arrFiles = array();
 
 		/** @var \SplFileInfo[] $it */
