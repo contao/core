@@ -627,13 +627,12 @@ class Updater extends \Controller
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
-			$objFolder = new \Folder($strFolder);
 			$strUuid = $this->Database->getUuid();
 
-			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, hash) VALUES (?, ?, ?, ?, 'folder', ?, ?)")
-						   ->execute($pid, time(), $strUuid, basename($strFolder), $strFolder, $objFolder->hash);
-
 			$this->scanUploadFolder($strFolder, $strUuid);
+
+			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, hash) VALUES (?, ?, ?, ?, 'folder', ?, ?)")
+						   ->execute($pid, time(), $strUuid, basename($strFolder), $strFolder, \Dbafs::getFolderHash($strFolder));
 		}
 
 		// Files
