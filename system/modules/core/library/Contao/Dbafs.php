@@ -625,15 +625,17 @@ class Dbafs
 			}
 		}
 
-		// Update folder hashes from bottom up after all file hashes are set
-		foreach (array_reverse($arrFoldersToHash) as $strPath) {
+		// Update the folder hashes from bottom up after all file hashes are set
+		foreach (array_reverse($arrFoldersToHash) as $strPath)
+		{
 			$objModel = \FilesModel::findByPath($strPath);
 			$objModel->hash = static::getFolderHash($strPath);
 			$objModel->save();
 		}
 
 		// Compare the folders after all hashes are set
-		foreach (array_reverse($arrFoldersToCompare) as $objModel) {
+		foreach (array_reverse($arrFoldersToCompare) as $objModel)
+		{
 			// Check whether the MD5 hash has changed
 			$strHash = static::getFolderHash($objModel->path);
 			$strType = ($objModel->hash != $strHash) ? 'Changed' : 'Unchanged';
@@ -760,11 +762,12 @@ class Dbafs
 	public static function getFolderHash($strPath)
 	{
 		$strPath = str_replace(array('\\', '%', '_'), array('\\\\', '\\%', '\\_'), $strPath);
-		$arrHash = [];
+		$arrHash = array();
 
 		$objChildren = \Database::getInstance()
 			->prepare("SELECT hash, name FROM tl_files WHERE path LIKE ? AND path NOT LIKE ? ORDER BY name")
-			->execute($strPath.'/%', $strPath.'/%/%');
+			->execute($strPath.'/%', $strPath.'/%/%')
+		;
 
 		if ($objChildren !== null)
 		{
