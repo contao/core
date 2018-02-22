@@ -868,7 +868,7 @@ class BackendInstall extends \Backend
 		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->pageOffset = \Input::cookie('BE_PAGE_OFFSET');
+		$this->Template->pageOffset = (int) \Input::cookie('BE_PAGE_OFFSET');
 		$this->Template->action = ampersand(\Environment::get('request'));
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['tl_install']['installTool'][0]);

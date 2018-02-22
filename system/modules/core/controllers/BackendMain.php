@@ -217,7 +217,7 @@ class BackendMain extends \Backend
 		$this->Template->account = $GLOBALS['TL_LANG']['MOD']['login'][1];
 		$this->Template->preview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
 		$this->Template->previewTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fePreviewTitle']);
-		$this->Template->pageOffset = \Input::cookie('BE_PAGE_OFFSET');
+		$this->Template->pageOffset = (int) \Input::cookie('BE_PAGE_OFFSET');
 		$this->Template->logout = $GLOBALS['TL_LANG']['MSC']['logoutBT'];
 		$this->Template->logoutTitle = specialchars($GLOBALS['TL_LANG']['MSC']['logoutBTTitle']);
 		$this->Template->backendModules = $GLOBALS['TL_LANG']['MSC']['backendModules'];
