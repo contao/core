@@ -5,6 +5,9 @@ Version 3.5.34 (2018-XX-XX)
 ---------------------------
 
 ### Fixed
+Improve the folder hashing performance (see #8856).
+
+### Fixed
 Reset the autologin hash if the username or password changes (see #8843).
 
 ### Fixed

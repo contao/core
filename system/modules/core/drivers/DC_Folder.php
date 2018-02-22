@@ -2227,7 +2227,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </div>
 
 <div class="tl_submit_container">
-  <a href="'.$this->getReferer(true).'" class="tl_submit" style="display:inline-block">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+  <a href="'.$this->getReferer(true).'" class="tl_submit" style="display:inline-block">'.$GLOBALS['TL_LANG']['MSC']['continue'].'</a>
 </div>
 ';
 

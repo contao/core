@@ -196,7 +196,7 @@ class Dbafs
 			}
 		}
 
-		// Update folder hashes from bottom up after all file hashes are set
+		// Update the folder hashes from bottom up after all file hashes are set
 		foreach (array_reverse($arrPaths) as $strPath)
 		{
 			if (is_dir(TL_ROOT . '/' . $strPath))
@@ -751,6 +751,7 @@ class Dbafs
 		// Return the path to the log file
 		return $strLog;
 	}
+
 
 	/**
 	 * Get the folder hash from the databse by combining the hashes of all children
