@@ -5,6 +5,9 @@ Version 3.5.34 (2018-XX-XX)
 ---------------------------
 
 ### Fixed
+Check the registry for table prefixed queries (see contao/core-bundle#1161).
+
+### Fixed
 Improve the folder hashing performance (see #8856).
 
 ### Fixed

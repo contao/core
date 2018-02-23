@@ -1052,14 +1052,20 @@ abstract class Model
 		{
 			$arrColumn = (array) $arrOptions['column'];
 
-			if (count($arrColumn) == 1 && ($arrColumn[0] == static::$strPk || in_array($arrColumn[0], static::getUniqueFields())))
+			if (\count($arrColumn) == 1)
 			{
-				$varKey = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
-				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varKey, $arrColumn[0]);
+				// Support table prefixes
+				$arrColumn[0] = preg_replace('/^' . preg_quote(static::getTable(), '/') . '\./', '', $arrColumn[0]);
 
-				if ($objModel !== null)
+				if ($arrColumn[0] == static::$strPk || \in_array($arrColumn[0], static::getUniqueFields()))
 				{
-					return $objModel;
+					$varKey = \is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
+					$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varKey, $arrColumn[0]);
+
+					if ($objModel !== null)
+					{
+						return $objModel;
+					}
 				}
 			}
 		}
