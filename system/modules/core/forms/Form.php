@@ -238,7 +238,16 @@ class Form extends \Hybrid
 					$arrLabels[$objWidget->name] = $this->replaceInsertTags($objWidget->label); // see #4268
 				}
 
-				$this->Template->fields .= $objWidget->parse();
+				if(is_array($objWidget)) {
+					foreach($objWidget as $objWidgetSingle) {
+					    $this->Template->fields .= $objWidgetSingle->parse();
+					}
+				}
+				else
+				{
+					//var_dump($objWidget);
+					$this->Template->fields .= $objWidget->parse();
+				}
 				++$row;
 			}
 		}
