@@ -2,7 +2,7 @@
 	"name": "contao/core",
 	"type": "project",
 	"description": "Contao Open Source CMS",
-	"license": "LGPL-3.0+",
+	"license": "LGPL-3.0-or-later",
 	"authors": [
 		{
 			"name": "Leo Feyer",
@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.4.0",
+		"php": "^5.4|^7.0",
 		"contao-components/compass": "^0.12",
 		"ircmaxell/password-compat": "^1.0",
 		"leafo/scssphp": "^0.6",
