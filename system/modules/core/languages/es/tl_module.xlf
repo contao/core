@@ -23,7 +23,6 @@
       </trans-unit>
       <trans-unit id="tl_module.type.1">
         <source>Please choose the type of module.</source>
-        <target>Por favor selecciona el tipo de módulo actual.</target>
       </trans-unit>
       <trans-unit id="tl_module.levelOffset.0">
         <source>Start level</source>
@@ -375,7 +374,6 @@
       </trans-unit>
       <trans-unit id="tl_module.interactive.1">
         <source>Make the Flash movie interact with the browser (requires JavaScript).</source>
-        <target>Escoge esta opción si tu película Flash interacciona con el navegador mediante JavaScript y la función Flash &lt;em&gt;fscommand()&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_module.flashID.0">
         <source>Flash movie ID</source>
@@ -443,7 +441,6 @@
       </trans-unit>
       <trans-unit id="tl_module.rss_cache.0">
         <source>Cache timeout</source>
-        <target>Cache timeout</target>
       </trans-unit>
       <trans-unit id="tl_module.rss_cache.1">
         <source>Here you can define how long the RSS feed is being cached.</source>

@@ -538,7 +538,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.0">
         <source>Default access rights</source>
-        <target>Oletus käyttöoikeudet</target>
+        <target>Oletuskäyttöoikeudet</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.1">
         <source>Please assign the default access rights for pages and articles.</source>
@@ -618,7 +618,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.chmod_legend">
         <source>Default access rights</source>
-        <target>Oletus käyttöoikeudet</target>
+        <target>Oletuskäyttöoikeudet</target>
       </trans-unit>
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>

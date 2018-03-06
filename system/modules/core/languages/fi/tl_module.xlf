@@ -79,7 +79,6 @@
       </trans-unit>
       <trans-unit id="tl_module.navigationTpl.1">
         <source>Here you can select the navigation template.</source>
-        <target>Tässä voit valita valikolle mallipohjan.</target>
       </trans-unit>
       <trans-unit id="tl_module.customTpl.0">
         <source>Custom module template</source>
@@ -151,7 +150,6 @@
       </trans-unit>
       <trans-unit id="tl_module.1cl.1">
         <source>Show the label above the input field.</source>
-        <target>Näyttää nimikkeen syötekentän yläpuolella.</target>
       </trans-unit>
       <trans-unit id="tl_module.2cl.0">
         <source>Two columns</source>
@@ -195,7 +193,6 @@
       </trans-unit>
       <trans-unit id="tl_module.queryType.0">
         <source>Default query type</source>
-        <target>Oletuspyyntötyyppi</target>
       </trans-unit>
       <trans-unit id="tl_module.queryType.1">
         <source>Please select the default query type.</source>
@@ -267,11 +264,9 @@
       </trans-unit>
       <trans-unit id="tl_module.searchType.0">
         <source>Search form layout</source>
-        <target>Hakulomakkeen asettelu</target>
       </trans-unit>
       <trans-unit id="tl_module.searchType.1">
         <source>Here you can select the search form layout.</source>
-        <target>Tässä voit valita hakulomakkeelle asettelun.</target>
       </trans-unit>
       <trans-unit id="tl_module.searchTpl.0">
         <source>Search results template</source>
@@ -295,7 +290,6 @@
       </trans-unit>
       <trans-unit id="tl_module.skipFirst.1">
         <source>Here you can define how many items will be skipped.</source>
-        <target>Tässä voit määritellä kuinka monta hypätään yli</target>
       </trans-unit>
       <trans-unit id="tl_module.loadFirst.0">
         <source>Load the first item</source>
@@ -323,7 +317,6 @@
       </trans-unit>
       <trans-unit id="tl_module.flashvars.0">
         <source>FlashVars</source>
-        <target>FlashVars</target>
       </trans-unit>
       <trans-unit id="tl_module.flashvars.1">
         <source>Pass variables to the Flash movie (&lt;em&gt;var1=value1&amp;amp;var2=value2&lt;/em&gt;).</source>
@@ -359,7 +352,6 @@
       </trans-unit>
       <trans-unit id="tl_module.singleSRC.1">
         <source>Please select a file from the files directory.</source>
-        <target>Ole hyvä ja valitse tiedosto.</target>
       </trans-unit>
       <trans-unit id="tl_module.url.0">
         <source>URL</source>
@@ -367,11 +359,9 @@
       </trans-unit>
       <trans-unit id="tl_module.url.1">
         <source>Please enter the URL (http://…) of the Flash movie.</source>
-        <target>Ole hyvä ja anna Flash-videon URL (http://...).</target>
       </trans-unit>
       <trans-unit id="tl_module.interactive.0">
         <source>Make interactive</source>
-        <target>Tee interaktiiviseksi</target>
       </trans-unit>
       <trans-unit id="tl_module.interactive.1">
         <source>Make the Flash movie interact with the browser (requires JavaScript).</source>
@@ -458,7 +448,6 @@
       </trans-unit>
       <trans-unit id="tl_module.rss_template.0">
         <source>Feed template</source>
-        <target>Syötteen mallipohja</target>
       </trans-unit>
       <trans-unit id="tl_module.rss_template.1">
         <source>Here you can select the feed template.</source>
@@ -490,7 +479,6 @@
       </trans-unit>
       <trans-unit id="tl_module.guests.0">
         <source>Show to guests only</source>
-        <target>Näytä vain vierailijoille</target>
       </trans-unit>
       <trans-unit id="tl_module.guests.1">
         <source>Hide the module if a member is logged in.</source>
@@ -518,11 +506,9 @@
       </trans-unit>
       <trans-unit id="tl_module.disableCaptcha.1">
         <source>Here you can disable the security question (not recommended).</source>
-        <target>Tässä voit ottaa turvakysymyksen pois käytöstä (ei suositella).</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_groups.0">
         <source>Member groups</source>
-        <target>Jäsenryhmät</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_groups.1">
         <source>Here you can assign the user to one or more groups.</source>
@@ -542,7 +528,6 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_skipName.1">
         <source>Do not require the username to request a new password.</source>
-        <target>Älä vaadi käyttäjätunnuksen antamista uutta salasanaa pyydettäessä.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_close.0">
         <source>Mode</source>
@@ -554,11 +539,9 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_assignDir.0">
         <source>Create a home directory</source>
-        <target>Luo kotikansio</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_assignDir.1">
         <source>Create a home directory from the registered username.</source>
-        <target>Luo kotikansio rekisteröidyn käyttäjänimen perusteella.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_homeDir.0">
         <source>Home directory path</source>
@@ -638,7 +621,6 @@
       </trans-unit>
       <trans-unit id="tl_module.interact_legend">
         <source>Interactive Flash movie</source>
-        <target>Iteraktiivinen Flash-video</target>
       </trans-unit>
       <trans-unit id="tl_module.html_legend">
         <source>Text/HTML</source>
@@ -658,7 +640,6 @@
       </trans-unit>
       <trans-unit id="tl_module.account_legend">
         <source>Account settings</source>
-        <target>Tilin asetukset</target>
       </trans-unit>
       <trans-unit id="tl_module.emailText.0">
         <source>Your registration on %s</source>
@@ -677,7 +658,6 @@ Ole hyvä ja klikkaa tästä ##link## suorittaaksesi loppuun rekisteröitymisesi
       </trans-unit>
       <trans-unit id="tl_module.passwordText.0">
         <source>Your password request on %s</source>
-        <target>Salasanapyyntösi sivustolla %s</target>
       </trans-unit>
       <trans-unit id="tl_module.passwordText.1">
         <source>You have requested a new password for ##domain##.
@@ -739,7 +719,6 @@ Ole hyvä ja klikkaa tätä linkkiä ##link## vaihtaaksesi salasanasi. Jos et py
       </trans-unit>
       <trans-unit id="tl_module.copy.0">
         <source>Duplicate module</source>
-        <target>Kopioi moduuli</target>
       </trans-unit>
       <trans-unit id="tl_module.copy.1">
         <source>Duplicate module ID %s</source>
@@ -751,7 +730,6 @@ Ole hyvä ja klikkaa tätä linkkiä ##link## vaihtaaksesi salasanasi. Jos et py
       </trans-unit>
       <trans-unit id="tl_module.delete.1">
         <source>Delete module ID %s</source>
-        <target>Poista moduuli ID %s</target>
       </trans-unit>
       <trans-unit id="tl_module.editheader.0">
         <source>Edit theme</source>
@@ -759,7 +737,6 @@ Ole hyvä ja klikkaa tätä linkkiä ##link## vaihtaaksesi salasanasi. Jos et py
       </trans-unit>
       <trans-unit id="tl_module.editheader.1">
         <source>Edit the theme settings</source>
-        <target>Muokkaa teeman asetuksia</target>
       </trans-unit>
       <trans-unit id="tl_module.pasteafter.0">
         <source>Paste here</source>

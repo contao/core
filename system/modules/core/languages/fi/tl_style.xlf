@@ -151,6 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
         <source>Margin, padding, align, vertical-align, text-align and white-space.</source>
+        <target>Marginaali, sisämarginaali, tasaus, pystysuuntainen tasaus, tekstin tasaus ja rivitys.</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -162,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_style.padding.0">
         <source>Padding</source>
-        <target>Sisämarginaal</target>
+        <target>Sisämarginaali</target>
       </trans-unit>
       <trans-unit id="tl_style.padding.1">
         <source>Here you can enter the top, right, bottom and left padding.</source>
@@ -194,7 +195,7 @@
       </trans-unit>
       <trans-unit id="tl_style.whitespace.0">
         <source>White-space</source>
-        <target>White-space</target>
+        <target>Rivitys</target>
       </trans-unit>
       <trans-unit id="tl_style.whitespace.1">
         <source>Here you can define how white-space inside an element is handled.</source>

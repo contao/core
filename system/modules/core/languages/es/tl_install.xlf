@@ -81,14 +81,6 @@
         <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
         <target>Si importó el sitio de ejemplo, el nombre de usuario administrador es &lt;strong&gt;k.jones&lt;/strong&gt; y su contraseña es &lt;strong&gt;kevinjones&lt;/strong&gt;. Consulte el sitio de ejemplo para más información.</target>
       </trans-unit>
-      <trans-unit id="tl_install.repository.0">
-        <source>Extension repository</source>
-        <target>Repositorio de extensiones</target>
-      </trans-unit>
-      <trans-unit id="tl_install.repository.1">
-        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
-        <target>Actualmente estamos testeando una nueva versión de la extensión del repositorio, que utiliza Composer para administrar los paquetes. Por favor instale el cliente de Composer para participar en el testeo beta.</target>
-      </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
         <target>¡Enhorabuena!</target>
@@ -272,18 +264,6 @@
       <trans-unit id="tl_install.adminSave">
         <source>Create admin account</source>
         <target>Crear cuenta de administrador</target>
-      </trans-unit>
-      <trans-unit id="tl_install.repositoryDefault">
-        <source>You are using the default extension repository.</source>
-        <target>Está utilizando la extensión por defecto del repositorio.</target>
-      </trans-unit>
-      <trans-unit id="tl_install.repositoryComposer">
-        <source>You are using the Composer based extension repository.</source>
-        <target>Está utilizando la extensión del repositorio basada en Composer.</target>
-      </trans-unit>
-      <trans-unit id="tl_install.repositoryInstall">
-        <source>Install the Composer client</source>
-        <target>Instale el cliente Composer</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>
