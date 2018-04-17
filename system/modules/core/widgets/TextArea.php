@@ -85,6 +85,10 @@ class TextArea extends \Widget
 				parent::__set($strKey, $varValue);
 				break;
 
+			case 'placeholder':
+				$this->arrAttributes['placeholder'] = $varValue;
+				break;
+
 			case 'rows':
 				$this->intRows = $varValue;
 				break;
