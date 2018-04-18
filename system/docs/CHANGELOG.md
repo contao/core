@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.35 (2018-04-18)
+---------------------------
+
+### Fixed
+Fix an XSS vulnerability in the system log (see CVE-2018-10125).
+
+
 Version 3.5.34 (2018-03-06)
 ---------------------------
 

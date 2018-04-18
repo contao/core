@@ -562,7 +562,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$return .= '
   <tr>
     <td'.$class.'><span class="tl_label">'.$label.': </span></td>
-    <td'.$class.'>'.$row[$i].'</td>
+    <td'.$class.'>'.specialchars($row[$i]).'</td>
   </tr>';
 		}
 
