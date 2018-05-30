@@ -254,6 +254,24 @@ class Comments extends \Frontend
 			'options'   => array(1=>$GLOBALS['TL_LANG']['MSC']['com_notify'])
 		);
 
+		// HOOK: add custom fields
+		if (isset($GLOBALS['TL_HOOKS']['compileCommentForm']) && \is_array($GLOBALS['TL_HOOKS']['compileCommentForm']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['compileCommentForm'] as $callback)
+			{
+				$arrFields = call_user_func(
+					[System::importStatic($callback[0]), $callback[1]],
+					$arrFields,
+					$objTemplate,
+					$objConfig,
+					$strSource,
+					$intParent,
+					$varNotifies,
+					$this
+				);
+			}
+		}
+
 		$doNotSubmit = false;
 		$arrWidgets = array();
 		$strFormId = 'com_'. $strSource .'_'. $intParent;
