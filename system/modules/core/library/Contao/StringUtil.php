@@ -431,7 +431,7 @@ class StringUtil
 		);
 
 		$strString = preg_replace(array_keys($arrPregReplace), $arrPregReplace, $strString);
-		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
+		$strString = str_ireplace(array_keys($arrStrReplace), $arrStrReplace, $strString);
 
 		return $strString;
 	}
@@ -464,7 +464,7 @@ class StringUtil
 		);
 
 		$strString = preg_replace(array_keys($arrPregReplace), $arrPregReplace, $strString);
-		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
+		$strString = str_ireplace(array_keys($arrStrReplace), $arrStrReplace, $strString);
 
 		return $strString;
 	}
