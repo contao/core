@@ -2579,7 +2579,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check for valid file types
 		if (!empty($this->arrValidFileTypes) && is_file(TL_ROOT . '/' . $strFile))
 		{
-			$fileinfo = preg_replace('/.*\.(.*)$/ui', '$1', $strFile);
+			$fileinfo = preg_replace('/.*\.(.*)$/u', '$1', $strFile);
 
 			if (!in_array(strtolower($fileinfo), $this->arrValidFileTypes))
 			{

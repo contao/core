@@ -198,7 +198,7 @@ abstract class Statement
 		{
 			$strQuery = sprintf('(%s) VALUES (%s)',
 								implode(', ', array_map('Database::quoteIdentifier', array_keys($arrParams))),
-								str_replace('%', '%%', implode(', ', array_values($arrParams))));
+								str_replace('%', '%%', implode(', ', $arrParams)));
 		}
 		// UPDATE
 		elseif (strncasecmp($this->strQuery, 'UPDATE', 6) === 0)

@@ -1390,7 +1390,7 @@ abstract class Widget extends \BaseTemplate
 		}
 
 		// Add Ajax event
-		if ($arrData['inputType'] == 'checkbox' && is_array($GLOBALS['TL_DCA'][$strTable]['subpalettes']) && in_array($strField, array_keys($GLOBALS['TL_DCA'][$strTable]['subpalettes'])) && $arrData['eval']['submitOnChange'])
+		if ($arrData['inputType'] == 'checkbox' && is_array($GLOBALS['TL_DCA'][$strTable]['subpalettes']) && array_key_exists($strField, $GLOBALS['TL_DCA'][$strTable]['subpalettes']) && $arrData['eval']['submitOnChange'])
 		{
 			$arrAttributes['onclick'] = "AjaxRequest.toggleSubpalette(this, 'sub_".$strName."', '".$strField."')";
 		}

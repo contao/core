@@ -47,7 +47,7 @@ abstract class Controller extends \System
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
 		$arrAllowed = trimsplit(',', strtolower(\Config::get('templateFiles')));
-		array_push($arrAllowed, 'html5'); // see #3398
+		$arrAllowed[] = 'html5'; // see #3398
 
 		if (!in_array($strFormat, $arrAllowed))
 		{
@@ -888,7 +888,7 @@ abstract class Controller extends \System
 
 		$arrReplace['[[TL_HEAD]]'] = $strScripts;
 
-		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
+		return str_replace(array_keys($arrReplace), $arrReplace, $strBuffer);
 	}
 
 
@@ -1263,7 +1263,7 @@ abstract class Controller extends \System
 	public static function sendFileToBrowser($strFile)
 	{
 		// Make sure there are no attempts to hack the file system
-		if (preg_match('@^\.+@i', $strFile) || preg_match('@\.+/@i', $strFile) || preg_match('@(://)+@i', $strFile))
+		if (preg_match('@^\.+@', $strFile) || preg_match('@\.+/@', $strFile) || preg_match('@(://)+@', $strFile))
 		{
 			header('HTTP/1.1 404 Not Found');
 			die('Invalid file name');

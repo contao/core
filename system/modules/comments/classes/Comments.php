@@ -514,7 +514,7 @@ class Comments extends \Frontend
 			'@</div></p>@'     => '</div>'     // Do not nest DIVs inside paragraphs
 		);
 
-		return preg_replace(array_keys($arrReplace), array_values($arrReplace), $strComment);
+		return preg_replace(array_keys($arrReplace), $arrReplace, $strComment);
 	}
 
 

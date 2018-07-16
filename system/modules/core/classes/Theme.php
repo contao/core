@@ -422,7 +422,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if (!in_array($table, array_keys($arrLocks)))
+				if (!array_key_exists($table, $arrLocks))
 				{
 					continue;
 				}
@@ -452,7 +452,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if (!in_array($table, array_keys($arrLocks)))
+				if (!array_key_exists($table, $arrLocks))
 				{
 					continue;
 				}
@@ -1186,7 +1186,7 @@ class Theme extends \Backend
 		}
 
 		$arrAllowed = trimsplit(',', strtolower(\Config::get('templateFiles')));
-		array_push($arrAllowed, 'sql'); // see #7048
+		$arrAllowed[] = 'sql'; // see #7048
 
 		// Add all template files to the archive
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)
