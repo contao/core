@@ -973,7 +973,7 @@ class StyleSheets extends \Backend
 		// Replace global variables
 		if (strpos($return, '$') !== false && !empty($vars))
 		{
-			$return = str_replace(array_keys($vars), array_values($vars), $return);
+			$return = str_replace(array_keys($vars), $vars, $return);
 		}
 
 		// Replace insert tags (see #5512)
@@ -1047,7 +1047,7 @@ class StyleSheets extends \Backend
 			}
 			else
 			{
-				$color = str_replace(array_keys($vars), array_values($vars), $color);
+				$color = str_replace(array_keys($vars), $vars, $color);
 			}
 		}
 

@@ -182,7 +182,7 @@ if (!isset($_SESSION['TL_LANGUAGE']))
 {
 	// Check the user languages
 	$langs = Environment::get('httpAcceptLanguage');
-	array_push($langs, 'en'); // see #6533
+	$langs[] = 'en'; // see #6533
 
 	foreach ($langs as $lang)
 	{

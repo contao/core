@@ -118,7 +118,7 @@ class FileTree extends \Widget
 		}
 		else
 		{
-			$arrValue = array_filter(explode(',', $varInput));
+			$arrValue = array_values(array_filter(explode(',', $varInput)));
 
 			return $this->multiple ? array_map('StringUtil::uuidToBin', $arrValue) : \StringUtil::uuidToBin($arrValue[0]);
 		}

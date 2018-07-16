@@ -873,7 +873,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			foreach ($objRow->row() as $k=>$v)
 			{
-				if (in_array($k, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields'])))
+				if (array_key_exists($k, $GLOBALS['TL_DCA'][$this->strTable]['fields']))
 				{
 					// Never copy passwords
 					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'password')

@@ -612,7 +612,7 @@ function utf8_str_split($str)
 			$key .= $str[$i];
 		}
 
-		array_push($array, $key);
+		$array[] = $key;
 	}
 
 	return $array;

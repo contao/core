@@ -430,7 +430,7 @@ class StringUtil
 			' target="_blank"' => ' onclick="return !window.open(this.href)"'
 		);
 
-		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
+		$strString = preg_replace(array_keys($arrPregReplace), $arrPregReplace, $strString);
 		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
 
 		return $strString;
@@ -463,7 +463,7 @@ class StringUtil
 			' onclick="window.open(this.href); return false;"' => ' target="_blank"'
 		);
 
-		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
+		$strString = preg_replace(array_keys($arrPregReplace), $arrPregReplace, $strString);
 		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
 
 		return $strString;

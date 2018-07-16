@@ -62,7 +62,7 @@ class BackendPopup extends \Backend
 		}
 
 		// Make sure there are no attempts to hack the file system
-		if (preg_match('@^\.+@i', $this->strFile) || preg_match('@\.+/@i', $this->strFile) || preg_match('@(://)+@i', $this->strFile))
+		if (preg_match('@^\.+@', $this->strFile) || preg_match('@\.+/@', $this->strFile) || preg_match('@(://)+@', $this->strFile))
 		{
 			die('Invalid file name');
 		}
