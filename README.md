@@ -1,74 +1,15 @@
 Contao Open Source CMS
 ======================
 
-**This repository holds the source code for version 3.5 of Contao and doesn’t receive bug fixes anymore.**  
-**Please take a look at [contao/core-bundle][10] instead.**
+This repository contains the source code of Contao 3.
 
-Contao is an Open Source PHP Content Management System for people who want a
-professional website that is easy to maintain. Visit the [project website][1]
-for more information.
+Contao 3.5 is currently in the "security fixes only" phase of its [long term
+support cycle][1] and **does not receive bug fixes anymore** unless they fix a
+security vulnerability. It will reach its end of life in May 2019.
 
+The source code of Contao 4 is maintained in several bundles that you can find
+in the [Contao organization][2] on GitHub. Please use the issue tracker of the
+respective bundle to report issues in Contao.
 
-System requirements
--------------------
-
- * Web server
- * PHP 5.4.0+ with GDlib, DOM, Phar and SOAP
- * MySQL 5.0.3+
-
-
-Installation
-------------
-
-See the [installation chapter][2] of the user's manual.
-
-
-Documentation
--------------
-
- * [User's manual][3]
- * [Change log][4]
- * [API changes][5]
- * [Community wiki][6]
-
-
-License
--------
-
-Contao is licensed under the terms of the LGPLv3. The full license text is
-available in the [`system/docs`][7] folder.
-
-Note that the LGPL incorporates the terms and conditions of the GPL, therefore
-both licenses are included there. This, however, does not imply that Contao is
-dual licensed under both the GPL and the LGPL.
-
-
-Getting support
----------------
-
-Visit the [support page][8] to learn about the available support options.
-
-
-Installing from Git
--------------------
-
-We are using [Composer][9] to manage third-party scripts, so after you have
-cloned the repository, make sure to install the vendor libraries:
-
-```
-git clone https://github.com/contao/core.git
-cd core
-php composer.phar install --prefer-dist
-```
-
-
-[1]: https://contao.org
-[2]: https://docs.contao.org/books/manual/current/en/01-installation/installing-contao.html
-[3]: https://docs.contao.org/books/manual/current/
-[4]: system/docs/CHANGELOG.md
-[5]: system/docs/UPGRADE.md
-[6]: http://contaowiki.org
-[7]: system/docs
-[8]: https://contao.org/support.html
-[9]: https://getcomposer.org
-[10]: https://github.com/contao/core-bundle
+[1]: https://contao.org/en/release-plan.html
+[2]: https://github.com/contao
