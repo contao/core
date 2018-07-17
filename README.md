@@ -1,6 +1,9 @@
 Contao Open Source CMS
 ======================
 
+**This repository holds the source code for version 3.5 of Contao and doesn’t receive bug fixes anymore.**  
+**Please take a look at [contao/core-bundle][10] instead.**
+
 Contao is an Open Source PHP Content Management System for people who want a
 professional website that is easy to maintain. Visit the [project website][1]
 for more information.
@@ -68,3 +71,4 @@ php composer.phar install --prefer-dist
 [7]: system/docs
 [8]: https://contao.org/support.html
 [9]: https://getcomposer.org
+[10]: https://github.com/contao/core-bundle
