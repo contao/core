@@ -1,14 +1,11 @@
-This repository does not receive bug fixes anymore!
+⚠ THIS IS THE WRONG REPOSITORY!
 
-Please use the issue tracker of the respective Contao 4 bundle instead:
+Contao 3 does not receive bug fixes or new features anymore!
 
-* https://github.com/contao/core-bundle/issues
-* https://github.com/contao/calendar-bundle/issues
-* https://github.com/contao/comments-bundle/issues
-* https://github.com/contao/faq-bundle/issues
-* https://github.com/contao/installation-bundle/issues
-* https://github.com/contao/listing-bundle/issues
-* https://github.com/contao/manager-bundle/issues
-* https://github.com/contao/news-bundle/issues
-* https://github.com/contao/newsletter-bundle/issues
-* https://github.com/contao/managed-edition/issues
+Please open an issue here instead: https://github.com/contao/contao
+
+If you have found a security issue in Contao, please send the details to security [at] contao.org and do not disclose it publicly until we can provide a fix for it.
+
+More information: https://contao.org/en/support.html#security
+
+Thank you for your help!
