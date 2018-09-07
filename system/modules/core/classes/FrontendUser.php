@@ -14,9 +14,8 @@ namespace Contao;
 /**
  * Provide methods to manage front end users.
  *
- * @property array   $allGroups
- * @property string  $loginPage
- * @property boolean $blnRecordExists
+ * @property array  $allGroups
+ * @property string $loginPage
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
@@ -241,12 +240,9 @@ class FrontendUser extends \User
 		}
 
 		// Reset the auto login data
-		if ($this->blnRecordExists)
-		{
-			$this->autologin = null;
-			$this->createdOn = 0;
-			$this->save();
-		}
+		$this->autologin = null;
+		$this->createdOn = 0;
+		$this->save();
 
 		// Remove the auto login cookie
 		$this->setCookie('FE_AUTO_LOGIN', $this->autologin, (time() - 86400), null, null, false, true);

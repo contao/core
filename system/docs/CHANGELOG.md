@@ -5,6 +5,9 @@ Version 3.5.36 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly reset the autologin data upon logout (#8868).
+
+### Fixed
 Remove support for deprecated user password hashes (see #8889).
 
 
