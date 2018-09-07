@@ -378,19 +378,8 @@ abstract class User extends \System
 			return false;
 		}
 
-		$blnNeedsRehash = true;
-
-		// Handle old sha1() passwords with an optional salt
-		if (preg_match('/^[a-f0-9]{40}(:[a-f0-9]{23})?$/', $this->password))
-		{
-			list($strPassword, $strSalt) = explode(':', $this->password);
-			$blnAuthenticated = ($strPassword === sha1($strSalt . \Input::postUnsafeRaw('password')));
-		}
-		else
-		{
-			$blnAuthenticated = password_verify(\Input::postUnsafeRaw('password'), $this->password);
-			$blnNeedsRehash = password_needs_rehash($this->password, PASSWORD_DEFAULT);
-		}
+		$blnAuthenticated = password_verify(\Input::postUnsafeRaw('password'), $this->password);
+		$blnNeedsRehash = password_needs_rehash($this->password, PASSWORD_DEFAULT);
 
 		// Re-hash the password if the algorithm has changed
 		if ($blnAuthenticated && $blnNeedsRehash)

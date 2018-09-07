@@ -340,19 +340,8 @@ class BackendInstall extends \Backend
 		$_SESSION['TL_INSTALL_AUTH'] = '';
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
-		$blnNeedsRehash = true;
-
-		// Handle old sha1() passwords with an optional salt
-		if (preg_match('/^[a-f0-9]{40}(:[a-f0-9]{23})?$/', \Config::get('installPassword')))
-		{
-			list($strPassword, $strSalt) = explode(':', \Config::get('installPassword'));
-			$blnAuthenticated = ($strPassword === sha1($strSalt . \Input::postUnsafeRaw('password')));
-		}
-		else
-		{
-			$blnAuthenticated = password_verify(\Input::postUnsafeRaw('password'), \Config::get('installPassword'));
-			$blnNeedsRehash = password_needs_rehash(\Config::get('installPassword'), PASSWORD_DEFAULT);
-		}
+		$blnAuthenticated = password_verify(\Input::postUnsafeRaw('password'), \Config::get('installPassword'));
+		$blnNeedsRehash = password_needs_rehash(\Config::get('installPassword'), PASSWORD_DEFAULT);
 
 		// Re-hash the password if the algorithm has changed
 		if ($blnAuthenticated && $blnNeedsRehash)

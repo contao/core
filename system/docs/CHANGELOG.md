@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.36 (XXXX-XX-XX)
+---------------------------
+
+### Fixed
+Remove support for deprecated user password hashes (see #8889).
+
+
 Version 3.5.35 (2018-04-18)
 ---------------------------
 
