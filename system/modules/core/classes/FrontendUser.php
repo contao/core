@@ -161,7 +161,7 @@ class FrontendUser extends \User
 		if (\Config::get('autologin') > 0 && ($strCookie = \Input::cookie('FE_AUTO_LOGIN')) != '')
 		{
 			// Try to find the user by his auto login cookie
-			if ($this->findBy('autologin', $strCookie) !== false)
+			if ($this->findBy('autologin', hash_hmac('sha256', $strCookie, \Config::get('encryptionKey'))) !== false)
 			{
 				// Check the auto login period
 				if ($this->createdOn >= (time() - \Config::get('autologin')))
@@ -216,7 +216,7 @@ class FrontendUser extends \User
 			$strToken = md5(uniqid(mt_rand(), true));
 
 			$this->createdOn = $time;
-			$this->autologin = $strToken;
+			$this->autologin = hash_hmac('sha256', $strToken, \Config::get('encryptionKey'));
 			$this->save();
 
 			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + \Config::get('autologin')), null, null, false, true);

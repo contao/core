@@ -424,7 +424,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		(
 			'default'                 => null,
 			'eval'                    => array('doNotCopy'=>true),
-			'sql'                     => "varchar(32) NULL"
+			'sql'                     => "varchar(64) NULL"
 		),
 		'createdOn' => array
 		(
