@@ -5,6 +5,9 @@ Version 3.5.36 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Prevent arbitrary code execution through .phar files (see CVE-2018-17057).
+
+### Fixed
 Correctly reset the autologin data upon logout (#8868).
 
 ### Fixed
