@@ -15,6 +15,7 @@
       </trans-unit>
       <trans-unit id="MSC.cal_timeSeparator">
         <source>–</source>
+        <target>–</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>

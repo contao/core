@@ -166,6 +166,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.0">
         <source>Responsive layout</source>
+        <target>Odzivni dizajn (RWD)</target>
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
@@ -198,6 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
         <source>External style sheets</source>
+        <target>Zunanje slogovne predloge</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add external CSS, SCSS or LESS files from the file system.</source>
@@ -450,6 +452,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.j_local">
         <source>Local file</source>
+        <target>Krajevna datoteka</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>CDN (code.jquery.com)</source>
@@ -464,6 +467,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.moo_local">
         <source>Local file</source>
+        <target>Krajevna datoteka</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
         <source>CDN (googleapis.com)</source>

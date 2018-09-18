@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
-        <target>Il token da dumonda na pudeva betg vegnir verifitgà.</target>
+        <target>Impussibel da verifitgar il token da dumonda.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
-        <target>La pagina che ti has dumandà n'exista betg u na pudeva betg vegnir chattada sin questa domain.</target>
+        <target>La pagina dumandada n'exista betg sin questa domain.</target>
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>

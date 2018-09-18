@@ -127,6 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_image_size.editheader.1">
         <source>Edit the image size settings</source>
+        <target>Uredi nastavitve velikosti slik</target>
       </trans-unit>
       <trans-unit id="tl_image_size.cut.0">
         <source>Move image size</source>
