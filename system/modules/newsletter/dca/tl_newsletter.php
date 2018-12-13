@@ -310,7 +310,11 @@ class tl_newsletter extends Backend
 		{
 			case 'paste':
 			case 'select':
-				// Allow
+				if (!in_array($id, $root))
+				{
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
 				break;
 
 			case 'create':

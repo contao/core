@@ -559,7 +559,12 @@ class tl_calendar_events extends Backend
 		switch (Input::get('act'))
 		{
 			case 'paste':
-				// Allow
+			case 'select':
+				if (!in_array($id, $root))
+				{
+					$this->log('Not enough permissions to access calendar ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
 				break;
 
 			case 'create':
@@ -600,7 +605,6 @@ class tl_calendar_events extends Backend
 				}
 				break;
 
-			case 'select':
 			case 'editAll':
 			case 'deleteAll':
 			case 'overrideAll':

@@ -886,11 +886,8 @@ class tl_content extends Backend
 		// Check the current action
 		switch (Input::get('act'))
 		{
-			case 'paste':
-				// Allow
-				break;
-
 			case '': // empty
+			case 'paste':
 			case 'create':
 			case 'select':
 				// Check access to the article

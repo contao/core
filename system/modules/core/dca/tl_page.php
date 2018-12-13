@@ -667,7 +667,16 @@ class tl_page extends Backend
 		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = intval(Config::get('defaultGroup') ?: $this->User->groups[0]);
 
 		// Restrict the page tree
-		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
+		if (empty($this->User->pagemounts) || !\is_array($this->User->pagemounts))
+		{
+			$root = array(0);
+		}
+		else
+		{
+			$root = $this->User->pagemounts;
+		}
+
+		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $root;
 
 		// Set allowed page IDs (edit multiple)
 		if (is_array($session['CURRENT']['IDS']))

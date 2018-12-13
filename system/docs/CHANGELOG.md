@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.37 (2018-12-XX)
+---------------------------
+
+### Fixed
+Prevent information disclosure in the back end (see CVE-2018-20028).
+
+
 Version 3.5.36 (2018-09-18)
 ---------------------------
 
