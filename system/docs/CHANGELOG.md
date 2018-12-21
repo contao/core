@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.38 (2018-12-XX)
+---------------------------
+
+### Fixed
+Correctly check the permission to move child records as non-admin user.
+
+
 Version 3.5.37 (2018-12-13)
 ---------------------------
 

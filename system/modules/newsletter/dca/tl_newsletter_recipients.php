@@ -246,7 +246,7 @@ class tl_newsletter_recipients extends Backend
 		{
 			case 'paste':
 			case 'select':
-				if (!in_array($id, $root))
+				if (!in_array(CURRENT_ID, $root)) // check CURRENT_ID here (see #247)
 				{
 					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
