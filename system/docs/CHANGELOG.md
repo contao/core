@@ -1,7 +1,7 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.5.39 (2019-04-XX)
+Version 3.5.39 (2019-04-09)
 ---------------------------
 
 ### Fixed
