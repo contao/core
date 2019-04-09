@@ -608,6 +608,10 @@ class tl_member extends Backend
 			}
 		}
 
+		// Invalidate the user sessions if the password changes
+		$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=? AND sessionID!=?")
+					   ->execute($user->id, session_id());
+
 		return $strPassword;
 	}
 

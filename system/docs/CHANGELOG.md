@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.39 (2019-04-XX)
+---------------------------
+
+### Fixed
+Invalidate the user sessions if a password changes (see CVE-2019-10641).
+
+
 Version 3.5.38 (2018-12-21)
 ---------------------------
 
