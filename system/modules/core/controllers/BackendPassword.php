@@ -83,16 +83,19 @@ class BackendPassword extends \Backend
 					// Trigger the save_callback
 					if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback']))
 					{
+						$dc = new \DC_Table('tl_user');
+						$dc->id = $this->User->id;
+
 						foreach ($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback'] as $callback)
 						{
 							if (is_array($callback))
 							{
 								$this->import($callback[0]);
-								$pw = $this->{$callback[0]}->{$callback[1]}($pw);
+								$pw = $this->{$callback[0]}->{$callback[1]}($pw, $dc);
 							}
 							elseif (is_callable($callback))
 							{
-								$pw = $callback($pw);
+								$pw = $callback($pw, $dc);
 							}
 						}
 					}

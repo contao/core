@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.40 (2019-04-10)
+---------------------------
+
+### Fixed
+Fix the save callback in the back end password module (see #429).
+
+
 Version 3.5.39 (2019-04-09)
 ---------------------------
 

@@ -17,6 +17,7 @@ define('REPOSITORY_SOAPCACHE', true);
 
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
+		'30050409,30050409;'.	// 3.5.40
 		'30050399,30050399;'.	// 3.5.39
 		'30050389,30050389;'.	// 3.5.38
 		'30050379,30050379;'.	// 3.5.37
