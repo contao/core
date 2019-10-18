@@ -12,6 +12,7 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. $GLOBALS['TL_ASSETS']['MEDIA
     window.addEvent('domready', function() {
       $$('a[rel^=lightbox]').mediabox({
         /* Put custom options here */
+        counterText: '(<?php printf($GLOBALS['TL_LANG']['MSC']['imageOf'],'{x}','{y}') ?>)'
       }, null, function(el) {
         var rel0 = this.rel.replace(/[[]|]/gi,' ');
         var relsize = rel0.split(' ');

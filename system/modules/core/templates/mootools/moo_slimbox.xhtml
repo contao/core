@@ -14,6 +14,7 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/slimbox/' . $GLOBALS['TL_ASSETS']['SLIMB
         return el.rel && el.rel.test(/^lightbox/i);
       }).slimbox({
         // Put custom options here
+        counterText: '(<?php printf($this->$GLOBALS['TL_LANG']['MSC']['imageOf'],'{x}','{y}') ?>)'
       }, null, function(el) {
         return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
       });

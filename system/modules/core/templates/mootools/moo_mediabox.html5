@@ -11,6 +11,7 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. $GLOBALS['TL_ASSETS']['MEDIA
     window.addEvent('domready', function() {
       $$('a[data-lightbox]').mediabox({
         // Put custom options here
+        counterText: '(<?php printf($GLOBALS['TL_LANG']['MSC']['imageOf'],'{x}','{y}') ?>)'
       }, function(el) {
         return [el.href, el.title, el.getAttribute('data-lightbox')];
       }, function(el) {

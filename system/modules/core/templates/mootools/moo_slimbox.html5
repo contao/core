@@ -13,6 +13,7 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/slimbox/' . $GLOBALS['TL_ASSETS']['SLIMB
         return el.getAttribute('data-lightbox') != null;
       }).slimbox({
         // Put custom options here
+        counterText: '(<?php printf($this->$GLOBALS['TL_LANG']['MSC']['imageOf'],'{x}','{y}') ?>)'
       }, null, function(el) {
         var attr = this.getAttribute('data-lightbox');
         return (this == el) || (attr && el.getAttribute('data-lightbox').match(attr));
