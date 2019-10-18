@@ -441,6 +441,20 @@ class Image
 			return $this;
 		}
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getImageCacheName']) && is_array($GLOBALS['TL_HOOKS']['getImageCacheName']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getImageCacheName'] as $callback)
+			{
+				$return = \System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $strCacheKey, $objFile);
+
+				if (is_string($return))
+				{
+					$strCacheName = $return;
+				}
+			}
+		}
+
 		// Check whether the image exists already
 		if (!\Config::get('debugMode'))
 		{
