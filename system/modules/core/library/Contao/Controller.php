@@ -536,15 +536,6 @@ abstract class Controller extends \System
 		$objElement = new \Form($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['getForm']) && is_array($GLOBALS['TL_HOOKS']['getForm']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
-			{
-				$strBuffer = static::importStatic($callback[0])->{$callback[1]}($objRow, $strBuffer, $objElement);
-			}
-		}
-
 		return $strBuffer;
 	}
 
